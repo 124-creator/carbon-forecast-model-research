@@ -22,3 +22,11 @@ Complete a finite data and direct-neighbour feasibility review; select one main 
 
 ## Privacy and upstream rights
 Private repository does not waive third-party permissions. Do not commit credentials, email correspondence, signed URLs, old models, or restricted raw datasets. Non-OA publication does not imply secret code or exemption from reproducibility requirements.
+
+## Executed evidence (2026-10-12)
+- `reports/20261012/gdea_data_audit.json`: fresh parse of three existing official-response snapshots; 2839 records, byte receipts checked, yearly aggregate data diagnostics. Daily prices are not uploaded; close/status semantics and redistribution permission remain unresolved.
+- `reports/20261012/synthetic_objective_probe.json`: constructed mathematical counterexample, not market predictions, training or performance improvement.
+- `reports/20261012/RESEARCH_DECISION_ZH.md`: bounded method hypothesis, data barriers, comparisons, stopping rules and Pro handoff. This supersedes the initial broad candidate for the next feasibility review, not a certified novelty claim.
+- `tools/research_probe.py`, `tests/test_probe.py`: executable stdlib audit and maturity/objective checks; run `python -B -m unittest discover -s tests -v`.
+
+Local audit invocation: `python -B tools/research_probe.py --local-root LOCAL_SNAPSHOT_DIRECTORY --receipt LOCAL_SOURCE_RECEIPT_JSON --out reports/20261012`. Obtain originals lawfully; the executable compares exact bytes against the supplied source receipts. No model training has occurred. No old experimental results are used.
