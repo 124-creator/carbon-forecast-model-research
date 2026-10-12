@@ -1,5 +1,7 @@
 # Carbon forecasting model research
 
+Current reader entry: `START_HERE_PRO_ZH.md`. The expanded package now contains 5 original workbooks and 6 freshly parsed CSV series, including one author-level carbon-price series and five potential external-variable series. It does not contain official exchange daily-price panels or new market forecasting results. See `metadata/published_data_manifest.json` for exact source grades, hashes, attributions and limitations. Earlier no-data statements below describe initialization, not the current expanded package.
+
 Private independent research project. This is not a continuation of the submitted auction-association paper. The preceding manuscript is frozen at 124-creator/-123 release emec-submitted-v10.1-20261012; subsequent editorial requests are handled separately.
 
 ## Objective
