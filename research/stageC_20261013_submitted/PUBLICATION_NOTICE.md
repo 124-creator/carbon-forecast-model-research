@@ -1,0 +1,7 @@
+# 此归档的发布边界
+
+本目录是用户提交的Stage C实验材料的删减归档，不是完整225文件ZIP。137份原文件保持字节不变；88份涉及逐日行情或逐观测预测档案的文件未发布。具体清单、原因和哈希见../stageC_20261013_review/SUBMITTED_PACKAGE_PUBLICATION_SCOPE.json。
+
+原README、DATA_NOTICE、REPORT和delivery_manifest保留为历史提交材料，不能把其完整包重放说明或所有passed字段当作本地已经执行的独立复现。没有raw_private行情和outputs/predictions档案时，不可直接运行重放来声称复现完成；不要绕过来源许可自动下载。
+
+本地独立核对的是81组调参选择及16行历史检验汇总，见../stageC_20261013_review/INDEPENDENT_SCORE_RECHECK.json和INDEPENDENT_REVIEW_ZH.md；本地没有再训练。原始完整包仍由用户保留。本次候选失败，归档不代表批准下一模型、新颖性或正式市场身份。

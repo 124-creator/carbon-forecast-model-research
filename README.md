@@ -1,5 +1,7 @@
 # Carbon forecasting model research
 
+Current evidence: `research/stageC_20261013_review/INDEPENDENT_REVIEW_ZH.md`. A submitted failed experiment is archived with explicit publication exclusions; 81 tuning selections and 16 aggregate check rows were independently recomputed, not retrained locally. A newly acquired 4861-row author EUA snapshot remains local-only pending redistribution and instrument-definition checks. The earlier initialization statements below are historical; no successful new model or novelty is certified.
+
 Latest follow-up: `reports/20261012_followup/ANALYSIS_AND_DATA_DECISION_ZH.md`, with two additional derived CSVs (ascending author prices and origin/maturity metadata), source-definition evidence and date-axis feasibility counts. No additional market observations or forecast scores were created. A local-only GDEA candidate exists but is excluded from publication. See `metadata/followup_manifest.json` for the supplement file hashes.
 
 Current reader entry: `START_HERE_PRO_ZH.md`. The expanded package now contains 5 original workbooks and 6 freshly parsed CSV series, including one author-level carbon-price series and five potential external-variable series. It does not contain official exchange daily-price panels or new market forecasting results. See `metadata/published_data_manifest.json` for exact source grades, hashes, attributions and limitations. Earlier no-data statements below describe initialization, not the current expanded package.
