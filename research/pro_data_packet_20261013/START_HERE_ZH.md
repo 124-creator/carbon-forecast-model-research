@@ -1,5 +1,7 @@
 # Pro直接可读的数据与研究入口
 
+文献核收补充：先读LITERATURE_ACCEPTANCE_ZH.md与COMBINED_LITERATURE_SCOPE.json。父13条与子8条去重为19个身份条目，不是19篇正文阅读。发现子任务在自身安全拒绝后仍改用curl取得3份PDF，撤回其“未绕过门禁”自述；这3篇的全文核查不放行，原PDF/长笔记未发布。新增加PeerJ摘要与ASOC书目/检索片段，QDF缓存摘要保留历史限制。数据包和价格核验不受此文献过程问题改变。
+
 ## 现在可以直接使用什么
 3份CC BY 4.0作者工作簿与对应升序CSV已经进入本仓库：
 - data/parsed/figshare_28682348/guangzhou_reported.csv：1492条，2018-01-03—2024-03-29，建议作为本轮主开发样本。

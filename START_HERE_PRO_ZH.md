@@ -1,5 +1,7 @@
 # 网页端Pro入口：数据驱动的方法创新分析
 
+文献补充已核收：research/pro_data_packet_20261013/LITERATURE_ACCEPTANCE_ZH.md。综合台账19个身份条目，正文阅读/过程门禁另行分级；3份子任务PDF获取流程不能放行，不使用其“未绕过”自述作通过证明。原父13条与三市场完整数据仍在，价格无需Pro另行下载。
+
 当前第一入口：research/pro_data_packet_20261013/START_HERE_ZH.md。三份CC BY作者原始工作簿和三份CSV现已放入data/raw与data/parsed/figshare_28682348；Pro直接读取，无须再次自行下载。广州1492条与官方GDEA同日期endPrice全部数值一致，保留sheet误名；湖北有4价差及23个未匹配日期，EU产品语义未认证。当前父文献台账13条，其中2篇核读出版社存入摘要，其余书目；不声称全文调研完成。旧阶段入口和主张以下保留为历史，最新哈希权威是metadata/PRO_PACKET_PUBLICATION_MANIFEST.json。
 
 当前优先入口：research/stageC_20261013_review/INDEPENDENT_REVIEW_ZH.md。用户提交的Stage C已归档为137份原文件加发布说明，88份原始/逐观测数据成员未再分发；81组调参选择及16行检验汇总已本地独立重算一致，但没有本地再训练。该候选明确失败。新增EUA作者数据4861条已实际下载本机，来源/哈希/年度审计公开，原始价格因许可证未确认不在仓库。先读交叉数据差异与稳定估计建议，不直接启动下一轮神经模型网格。
