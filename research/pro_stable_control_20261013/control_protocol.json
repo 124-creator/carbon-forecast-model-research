@@ -1,0 +1,25 @@
+{
+  "protocol": "StageD-minimal-stable-estimation-v1",
+  "source_commit": "fddf3e691083463b0f08ecac09b9998d435d8654",
+  "freeze_order": "written before any new synthetic score",
+  "horizons": [1,5,20],
+  "seeds": [100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119],
+  "n": 1800,
+  "training_end_exclusive": 600,
+  "tuning_end_exclusive": 1000,
+  "evaluation_origin_end_exclusive": 1780,
+  "processes": {
+    "null": {"rho": 0.0,"q": 1.0,"r": 0.0},
+    "signal": {"rho": 0.65,"q": 0.15,"r": 0.85},
+    "weak": {"rho": 0.95,"q": 0.8,"r": 0.2}
+  },
+  "rho_grid": [0,0.25,0.5,0.75,0.9,0.97],
+  "q_fraction_grid": [0.02,0.1,0.25,0.5,0.8],
+  "include_exact_RW": true,
+  "ridge_lags": [5,20],
+  "ridge_penalty_average_loss": [0.0001,0.001,0.01,0.1,1,10],
+  "gate": {"lowdim_null_ratio_max": 1.02,"lowdim_signal_ratio_max":0.95,"oracle_gain_recovered_min":0.5},
+  "oracle_information": "Known generating parameters, price observations only; no latent states supplied",
+  "estimators": "Gaussian scalar Kalman bank; profile likelihood for variance, no latent-state supervision, no neural models",
+  "market_gate": "No new historical segment scored. Only if low-dimensional synthetic gate passes may one rule be defined and tested."
+}
