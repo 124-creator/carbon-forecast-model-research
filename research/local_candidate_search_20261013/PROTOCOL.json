@@ -1,0 +1,19 @@
+{
+  "start_local": "2026-10-13T15:59:29.512373",
+  "budget_seconds": 1200,
+  "candidate": "learned tanh directions with exact ridge multi-output head",
+  "objective": "sum_h d_h ||Y_h-Phi(theta) W_h||^2 + lambda sum_h d_h ||W_h||^2 + rho ||theta||^2",
+  "gate": "First derive equivalence to same-capacity MLP/variable projection and fixed-feature primal-dual ridge. Reject model novelty if only exact output-layer elimination differs.",
+  "verification_only": "Random synthetic arrays with fixed theta; solve only linear head. No nonlinear candidate fitting after failed gate.",
+  "test_seed": 20261013,
+  "verification_shapes": [83, 5, 7, 4],
+  "lambda": 0.3,
+  "absolute_tolerance": 1e-8,
+  "comparison_if_gate_passes": ["fixed same features ridge", "same-capacity tanh MLP same objective", "linear ridge", "low-dimensional MLE", "random walk"],
+  "training_allowed_only_after_gate": true,
+  "market_years_after_2021": "do not open",
+  "data_download": false,
+  "archives": "Not needed when novelty gate rejects; no extraction or old weights loaded",
+  "git": "No commit, no push, no modifications outside new output directory",
+  "alternative": "Distinguish learning a noise-aware conditional transition operator from merely iterating a learned conditional mean; compare direct horizon regressions and stochastic Koopman/operator-learning priors before naming a model."
+}
