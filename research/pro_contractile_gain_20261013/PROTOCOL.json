@@ -1,0 +1,72 @@
+{
+  "stage": "E",
+  "source_commit": "fddf3e691083463b0f08ecac09b9998d435d8654",
+  "prior_stage_commit": "f78a9a659b03b70d92ca0e97664ea08b12d8eab6",
+  "scientific_status": "untested_single_hypothesis",
+  "hypothesis": "A three-parameter observable-reference-driven contractive innovation gain can adapt scalar transient filtering without state labels and improve prediction beyond constant-gain and magnitude-only adaptation.",
+  "model": {
+    "reference_bank": "exact RW plus rho=[0,.25,.5,.75,.9,.97] x permanent_variance_fraction=[.02,.1,.25,.5,.8]; unchanged Stage D scalar Kalman recursion",
+    "reference_selection": "past 240 one-step innovation profile likelihood; refit every 20 observation steps",
+    "features": "c_t=(1,tanh(e0_t*e0_(t-1)/(3*s0^2)),tanh(e0_t^2/(3*s0^2))); e0 is the separate selected reference filter's innovation; s0 is initial-training RMS price increment",
+    "gain": "Kmax=(.995-rho)/(1-rho); K_t=Kmax*sigmoid(logit(K0_t/Kmax)+beta dot c_t); exact RW reference forces K_t=0",
+    "recursion": "z_t=(rho+(1-rho)*K_t)*z_(t-1)+K_t*(p_t-p_(t-1)); z_0=0",
+    "forecast": "p_t+(rho^h-1)*z_t, h in [1,5,20] observed steps",
+    "learning": "mean normalized squared multihorizon error over last 240 complete mature origins plus lambda*sum(beta^2); labels must satisfy origin+20<=fit_time; rerun current reference on the fitting prefix without rewriting previously issued forecasts",
+    "beta_bounds": [-3,3],
+    "lambda_grid": [0.01,0.1,1.0],
+    "solver": "L-BFGS-B, analytic forward sensitivities, at most 80 iterations and 120 objective calls per start, two fixed starts: zero and -0.5 in active coordinates; best finite training objective including beta=0",
+    "fallback": "on nonfinite or infeasible fit return beta=0; retain optimizer status and fallback counts",
+    "contraction_claim": "For a fixed parameter/reference schedule and identical observable reference features, transient state initialization differences contract by at most .995 per update. This is not economic-state identification, optimizer global optimality, or future prediction superiority."
+  },
+  "same_core_comparisons": {
+    "CORE_ML": "unmodified selected reference",
+    "GAIN_CONSTANT": "beta_0 only; same three lambda values, fit times, loss and starts",
+    "GAIN_MAGNITUDE": "beta_0,beta_2 only; same budget",
+    "GAIN_CONTEXT": "beta_0,beta_1,beta_2; sole new candidate",
+    "LOSS_ONESTEP": "fixed-configuration diagnostic only if candidate passes minimum controls; same mature-origin support, only h=1 in training loss",
+    "NO_REFERENCE_CONTEXT": "fixed-configuration diagnostic only if candidate passes; use raw increments in gate context instead of reference innovations"
+  },
+  "synthetic": {
+    "n": 1400,
+    "seeds": [200,201,202,203,204,205,206,207,208,209],
+    "initial_train_end_exclusive": 500,
+    "tuning_origins": [500,880],
+    "evaluation_origins": [900,1380],
+    "processes": {
+      "null": {"rho": 0.0,"q": 1.0,"r": 0.0},
+      "signal": {"rho": 0.65,"q": 0.15,"r": 0.85},
+      "weak": {"rho": 0.95,"q": 0.8,"r": 0.2},
+      "switch": {"rho": 0.65,"q_regimes": [0.08,0.85],"r": "1-q","switch_probability": 0.01,"initial_regime": 0}
+    },
+    "observation_contract": "estimators see prices only; constant-process oracle knows parameters but filters prices; switch oracle also knows current generating covariance regime and is explicitly privileged, not a deployable baseline",
+    "baselines": "RW, known-parameter price-filtering oracle, 8 Ridge configurations (L=5/20, lambda=.001/.01/.1/1), CORE_ML and matched constant/magnitude gains",
+    "minimum_gate": "CORE_ML null mean relative MSE<=1.03, signal<=.96; candidate null<=1.03, signal<=.96, weak<=1.05; finite forecasts; actual fallbacks<=1% of fits",
+    "mechanism_gate": "candidate switch mean relative MSE at least 1% lower than both matched constant and matched magnitude-only gains, with >=6/10 paired seed wins against each; otherwise stop before any market fitting",
+    "scope": "minimum finite controls, not a broad simulation theorem; selected hyperparameters per trajectory use tuning only; seed-averaged loss is not forecast ensembling"
+  },
+  "conditional_market_plan": {
+    "execution_gate": "synthetic minimum and mechanism gates both pass",
+    "source": "existing data/parsed/figshare_28682348/guangzhou_reported.csv; verify all three CSV hashes; do not redownload prices",
+    "cutoff": "2021-12-31",
+    "initial_train": "2018-2019",
+    "tuning": "2020-2021, each year only origins with all targets in same year",
+    "validation_2022": "not automatic; do not score in this run",
+    "historical_2023_2024": "never score in this run",
+    "secondary_markets": "Hubei/EU audit only, no scores",
+    "strong_baselines": "RW; drift windows120/240/480; Ridge L5/20 x lambda .001/.01/.1/1; HistGradientBoosting leaves7/15 x learning_rate .05/.1 x window240/480, 80 rounds and no random early stopping; Stage D CORE_ML windows120/240/480; same-core constant/magnitude/context gains",
+    "Cstar": "best tuning noncandidate from the complete predeclared pool, including simple constant and magnitude gain learners",
+    "gate": "candidate >=2% relative reduction in primary score vs RW and Cstar, >=1% vs strongest same-core comparator, no year worse than RW by >5%; otherwise stop without opening later dates",
+    "primary_score": "equal-year equal-horizon mean MSE ratios to RW; also save RMSE/MAE by horizon/year",
+    "uncertainty": "paired moving blocks within each year, lengths20/40/60, 2000 draws; all models/horizons jointly sampled; tuning-selected intervals explicitly non-confirmatory"
+  },
+  "equivalence_tests": [
+    "beta=0 exactly reproduces reference",
+    "zero nonconstant coefficients yields linear time-varying gain, and steady reference gain yields ordinary linear ARMA-shaped filter",
+    "candidate generally violates input superposition; this rules out fixed linear filters, not general gated recurrent models",
+    "state-feedback Jacobian bound holds only because reference context is separate",
+    "compare against direct constant-gain learning and magnitude-only robust gain before attributing improvement to serial context",
+    "learned Kalman gains and multistep prediction-error fitting are existing concepts; no first-proposal or completed novelty claim"
+  ],
+  "information_restrictions": ["no source_excel_row features","no source_date_kind features","no future prices in fitting","no latent-state labels","no price deletion/smoothing/imputation","do not call source observation dates verified session calendars","do not reopen old blocked PDFs or claim metadata as full text"],
+  "delivery": "new branch only, no main merge; save code, complete configuration results, forecast arrays, optimizer and test logs, literature levels and stop decision, including negative outcomes"
+}
