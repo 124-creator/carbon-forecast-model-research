@@ -1,0 +1,7 @@
+# 作者LMS-AutoTSF共同协议本地基线
+
+真实先取得作者README、models/LMSAutoTSF.py及layers/StandardNorm.py，再本契约；commit41e4fa1c1d0db6780aa76ccd528c97052f1ddc00。API license404，未确认再分发许可，vendor本地研究不得Git推送。README声称2026EAAI论文，仅作者仓库陈述不等于出版日期/全文核验。没有执行作者训练脚本，已直接核完整两核心文件：无网络、读文件或pickle操作。源码原样保存，不修作者模型。
+
+使用既有GRU训练协议、同950截至2021前缀、两seed17/29和12刷新块。base.fit只替换Model工厂，训练率.003/AdamW.001/clip1/200最大epoch/patience20与purged验证不改。作者参数seq_len60/pred_len20/enc_in1/d_model16/dropout0/channel_independence1/use_norm1，4多尺度原样。输入60差分训练sd标准化后cumsum重建60个相对价格水平，作者预测减最后输入价格得到20个净变化。不存在未来分解，FFT仅当时输入窗口；每窗口RevIN为作者已有部件，不改成全数据标准化。使用真实同输入信息但不同编码形式，不能称所有内部预处理一致。
+
+24fits，所有451起点主h1/5/20等year评分，全部loss日志。代表初始seed17 future459扰动真实refit与截至458推理一致；数值NPZallow_pickleFalse。normal/O独立评分与预算成熟性检查。最大正式fit预算600秒，逐块存盘，停止条件超预算报未完成。不选seed或参数，不以dev调整。LMS是已发表/作者声明方法基线，不是本项目模型创新，不训练V2/置信版本，不冒称完整论文复现。此结果只决定是否为这份固定实现继续投入，无独立测试/发表资格。
