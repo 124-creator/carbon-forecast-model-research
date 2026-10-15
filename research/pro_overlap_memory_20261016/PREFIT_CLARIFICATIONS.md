@@ -1,0 +1,9 @@
+# Pre-fit implementation clarifications
+
+No new market fit or market score has been produced at this point. Twenty mathematical/implementation tests have passed locally; a two-epoch fit on a fixed random synthetic fixture was used only to check finite gradients and outputs, not to claim forecast performance.
+
+1. In the parametric FULL head, h denotes GRU(x)_last - GRU(zero_window)_last, matching the ordinary FULL baseline used in prior stages. The retrieval metric uses the raw GRU(x)_last along with q. All five retrieval arms and FULL use exactly the same common initialization. This resolves the shorthand in PROTOCOL.md; there is no change based on market results.
+2. Retrieval models allocate 1412 parameters: existing FULL 1232 + metric 160 + horizon gates 20. The matched FULL object also allocates the 180 retrieval parameters to preserve exact common initialization, but never uses them in its forward map; they have no data gradients. Do not call effective capacities equal. The ordinary GRU has 1252 parameters.
+3. Covariance pertains to normalized label-interval incidence in a working independent-increment model, not an independently estimated actual carbon residual covariance. Variable local scaling and reference-model errors can violate that working model. Signed GLS weights are permitted, with diagnostics saved.
+4. No source-row, spreadsheet-date-type, calendar-date or age feature is supplied to the neural metric. Canonical observation positions are used only to enforce maturity and calculate label-support intersections.
+5. A container HTTP attempt to copy the already committed protocol failed due to DNS; it did not affect the input data, protocol commitment or experiments. Protocol identity is the Git commit 2920978de2401d33f659b91d05445df9efde6174, not an invented local download receipt.
