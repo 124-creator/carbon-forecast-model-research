@@ -1,0 +1,70 @@
+name: Pro causal score full replay 20261015
+on:
+  push:
+    branches: ['research/pro-causal-score-20261015']
+    paths: ['.github/workflows/pro-causal-score-20261015.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.5'
+      - name: Install pinned CPU dependencies
+        run: python -m pip install -r research/pro_causal_score_20261015/requirements.txt
+      - name: Verify pre-fit protocol commitment and execute fixed experiment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          r=Path('research/pro_causal_score_20261015')
+          d=json.loads((r/'FROZEN_PROTOCOL.json').read_text())
+          got=hashlib.sha256((r/'PROTOCOL.md').read_bytes()).hexdigest()
+          if got!=d['full_protocol_sha256']: raise RuntimeError('Protocol commitment mismatch')
+          print('Protocol commitment verified',got)
+          PY
+          python -u research/pro_causal_score_20261015/run_all.py --out research/pro_causal_score_20261015/results_remote --workers 2 2>&1 | tee stageL_remote.log
+      - name: Persist full arrays, parameters and logs in research branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os,hashlib
+          from pathlib import Path
+          root=Path('research/pro_causal_score_20261015')
+          receipt={'workflow_run_id':int(os.environ['GITHUB_RUN_ID']),'executed_commit':os.environ['GITHUB_SHA'],'execution_complete':True,'numeric_comparison_with_local':'pending explicit comparison; do not infer equality from job success'}
+          (root/'REMOTE_EXECUTION.json').write_text(json.dumps(receipt,indent=2))
+          (root/'remote_execution.log').write_bytes(Path('stageL_remote.log').read_bytes())
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -c local-stageL-archive
+          git add -f research/pro_causal_score_20261015/results_remote research/pro_causal_score_20261015/REMOTE_EXECUTION.json research/pro_causal_score_20261015/remote_execution.log
+          git commit -m 'Archive complete Stage L parameters, predictions and training records [skip ci]'
+          git fetch origin research/pro-causal-score-20261015
+          git rebase origin/research/pro-causal-score-20261015
+          git push origin HEAD:research/pro-causal-score-20261015
+      - name: Upload full experiment artifact and failure diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pro-causal-score-complete-20261015
+          path: |
+            research/pro_causal_score_20261015/
+            stageL_remote.log
+          include-hidden-files: true
+          retention-days: 14
