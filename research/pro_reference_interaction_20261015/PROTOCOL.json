@@ -1,0 +1,57 @@
+{
+  "stage": "I",
+  "source_commit": "c024f140e28753bcec47f82b44300787b7f35c6b",
+  "status": "UNTESTED_ONE_CANDIDATE",
+  "question": "Can an anchored mixed-difference recurrent correction learn joint dependence between recent history and a causal low-dimensional reference state, improving beyond ordinary residual learning, additive state effects, an unrestricted hybrid and simple forecast combinations?",
+  "novelty_status": "Not established. Statistical-neural hybrids, structured interactions and anchored decompositions are existing ideas; only this specific predictive architecture and finite-sample effect are under test. No economic-state identification or future-risk guarantee.",
+  "data": {
+    "path": "data/parsed/figshare_28682348/guangzhou_reported.csv",
+    "records": 950,
+    "last_date": "2021-12-31",
+    "prefix_bytes": 29204,
+    "prefix_sha256": "1366ca4814dcdb8aa43296eb64768d1336d6f0fc9088648d6d7ccdbe43318070",
+    "read_policy": "Read exactly header plus 950 terminated rows without requesting row 951; no full-file hash; retain prices and dates unchanged. No new download, exogenous input, source-row or Excel-format feature.",
+    "scope": "Author frozen snapshot; not certified historical real-time vintage. Development 2020-2021 repeatedly exposed; never access 2022-2024 or Hubei/EU in this run."
+  },
+  "reference": {
+    "bank": "Exact RW plus rho in [0,.25,.5,.75,.9,.97] crossed with q in [.02,.1,.25,.5,.8], r=1-q, scalar Kalman recursion from Stage D reimplemented and independently checked",
+    "state_update": "Each observation; states zero-initialized, transient variance r/(1-rho^2). Only past/current prices; stored issued predictions immutable.",
+    "selection": "First at origin60 then every20 observed steps, minimize profile innovation likelihood over preceding W observations excluding current; ties lowest bank index. W=240 candidate anchor, W=120/480 independent strong reference controls.",
+    "forecast": "b[o,h]=(rho_selected^h-1)*z_selected[o], h=1..20; exact RW gives zero",
+    "state_features": "q_o=[tanh(z_selected[o]/s_T), rho_selected*(1-q_selected), 1-q_selected]; RW feature is exactly zero. s_T is training-only raw increment standard deviation; no latent-state supervision."
+  },
+  "candidate": {
+    "name": "MIXED: reference-anchored mixed-difference GRU (working name)",
+    "encoder": "GRU(1,16), input60 normalized raw increments; u=GRU(x)_last-GRU(zeros)_last",
+    "shared_readout": "a=Uu, c=Vq; U:8x16,V:8x3,bias:8,O:20x8 with no output bias. Allocated parameters1232.",
+    "correction": "O*(tanh(a+c+b)-tanh(a+b)-tanh(c+b)+tanh(b))",
+    "price_forecast": "p_o + reference_b[o,h] + s_T*correction[h]",
+    "training": "Raw20-horizon standardized price-change MSE plus lambda*mean(correction^2). AdamW lr.003, weight_decay.001, full batch, clip gradient norm1, at most160 epochs, internal validation patience20 including epoch0. Output O initialized exactly0; other parameters same-seed identical across matched modes. Save checkpoint by unpenalized internal validation MSE.",
+    "lambda_grid": [0,1,10],
+    "seeds": [17,29,41,53],
+    "limitations": "Anchored zero main effects are not L2 statistical orthogonality with dependent inputs. If reference selects RW, MIXED cannot depart from RW at that origin. This restriction must be reported, not hidden."
+  },
+  "matched_modes": {
+    "RESIDUAL": "O*(tanh(a+b)-tanh(b)); ignores q; same allocated tensor structure but V inactive",
+    "ADDITIVE": "O*(tanh(a+b)+tanh(c+b)-2*tanh(b))",
+    "FULL": "O*(tanh(a+c+b)-tanh(b))",
+    "MIXED": "Sole candidate; FULL=ADDITIVE+MIXED for identical parameters, not identical fitted estimates"
+  },
+  "time_and_budget": {
+    "origins": "451 fixed common origins, origin459..929 with all20 target observations in same year; 224 in2020,227 in2021",
+    "fit": "12 refreshes at459+40*k; all training labels origin+20<T. Most recent<=480 complete origins. Last60 for internal validation, purge20 origins before it; scale from remaining training subset only.",
+    "neural_fits": "4 matched modes x3 lambda x4 seeds x12 refreshes=576 fits. Ordinary GRU16/20 direct head, same support/scale/lr/patience/epochs and4 seeds=48 fits. No grid expansion after scores.",
+    "accounting": "Same optimization ceilings not equal FLOPs. MIXED has extra readout evaluations and zero-history encoder pass. Record actual epochs, CPU time, parameters, selected checkpoint and maturity boundaries.",
+    "controls": "RW; three reference windows120/240/480; local drift120/240/480; Ridge lag5/20 x penalty.01/.1/1/10; HistGradientBoosting leaves7/15 x lr.05/.1,80 rounds,no random validation early stop; linear residual regression on the same reference q; fixed .5 combination of fresh reference and fresh GRU, plus sequential past-only scalar combination. Retain all configurations.",
+    "online_accuracy_control": "Fresh ordinary GRU first-fit initialization, daily AdamW1e-4 full-parameter update on uniquely matured (origin,horizon) labels; four seeds; ordinary periodic/online prediction mean and past-mature-error weight. No reuse of old checkpoints. Higher compute disclosed."
+  },
+  "decision": {
+    "primary": "Mean over two years and h1/5/20 of price MSE/RW MSE. Neural score averages4 seed losses, separately report4-seed prediction ensembles. Frozen Cstar chosen from declared noncandidate pool including matched modes and simple ensembles with comparisons separated by resource regime.",
+    "mechanism": "Selected MIXED must improve mean-seed primary score>=1% versus both best ADDITIVE and FULL, and win>=3/4 paired seeds against each; versus fixed anchor>=1%; no year worse than RW by>5%. Otherwise STOP; do not relabel another arm as new candidate.",
+    "accuracy": "Candidate4-seed forecast ensemble must improve>=1% versus best declared same-or-lower fitted-network-count ensemble; eight-network fast/slow accuracy benchmark reported separately, not mislabeled budget matched. Thresholds are project decisions, not journal requirements.",
+    "uncertainty": "Paired within-year moving blocks20/40/60,2000 draws, all horizons/models jointly resampled. Selected development intervals explicitly not confirmatory or corrected for cross-round selection.",
+    "exposure": "No holdout promotion. No later-period access even on a positive development gate; independent confirmation requires separate future approval and source contract."
+  },
+  "tests": ["prefix boundary", "reference vs independent2D Kalman", "future perturbation prefix invariance", "target maturity and purge", "training-only scale", "identical paired initialization", "FULL=ADDITIVE+MIXED fixed parameters", "zero-history and zero-reference anchors", "affine readout mixed difference zero", "mixed derivative finite-difference", "zero output returns reference", "same-state additive baseline limitation", "numeric weights only, no pickle", "full arrays independently rescored"],
+  "publication": "New private research branch; no main merge. Push complete new executable source, frozen protocol, all configuration outcomes, optimizer and fit logs, numeric predictions and weights, source reading ledger and stop decision. No third-party PDF, credentials or restricted dataset. GitHub workflow may reproduce and commit generated numerical outputs to this same research directory only."
+}
