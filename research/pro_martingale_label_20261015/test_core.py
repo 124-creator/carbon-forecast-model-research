@@ -9,7 +9,7 @@ class Checks(unittest.TestCase):
  def setUp(self):
   core.configure();self.rng=np.random.default_rng(211);self.c=np.array([-4.,-2.,-.5,0.,.5,2.,4.])
  def test_generator_mass(self):np.testing.assert_allclose(core.generator(self.c).sum(1),0,atol=1e-14)
- def test_generator_moment(self):np.testing.assert_allclose(core.generator(self.c)@self.c,self.c*0,atol=1e-14)
+ def test_generator_moment(self):np.testing.assert_allclose(core.generator(self.c)@self.c,0,atol=1e-14)
  def test_offdiagonal(self):
   q=core.generator(self.c);q-=np.diag(q.diagonal());self.assertTrue((q>=0).all())
  def test_absorbing_boundaries(self):np.testing.assert_array_equal(core.generator(self.c)[[0,-1]],np.zeros((2,len(self.c))))
