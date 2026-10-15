@@ -35,7 +35,7 @@ class Checks(unittest.TestCase):
   self.assertGreater(float((a.encode(x,m,v)-a.encode(x,m,v*0)).abs().max()),1e-5)
  def test_bounded_hidden(self):
   x,m,v,_,_=self.args(5,120);a=core.make_model('INTEGRATED',17)
-  self.assertLessEqual(float(a.encode(x,m,v).abs().max()),1.)
+  self.assertLessEqual(float(a.encode(x*100,m*100,v).abs().max()),1.)
  def test_zero_head_reference(self):
   args=self.args();a=core.make_model('INTEGRATED',17);p,c=a(*args)
   torch.testing.assert_close(p,args[-1],rtol=0,atol=0);self.assertEqual(float(c.abs().max()),0.)
