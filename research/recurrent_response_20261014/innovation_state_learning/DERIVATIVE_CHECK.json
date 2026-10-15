@@ -1,0 +1,50 @@
+{
+  "scope": "Synthetic arithmetic/derivative feasibility only; no market performance or novelty claim",
+  "code": "import json, torch\nfrom train_innovation import configure\nfrom innovation_model import InnovationNet, affine_scan\nconfigure();torch.manual_seed(43)\na=(torch.randn(5,3,3)*.05).requires_grad_();b=torch.randn(5,3,requires_grad=True)\nscan_ok=torch.autograd.gradcheck(affine_scan,(a,b),eps=1e-6,atol=1e-5,rtol=1e-4)\nm=InnovationNet('innovation_shift');m.B.data.normal_(0,.1)\nx=torch.randn(17);q=torch.randn(18,3);base=torch.zeros(18,20)\nloss=m(x,q,base).square().mean();loss.backward();rows=[]\nfor name,index in [('B',(0,0)),('B',(8,3)),('U.weight',(0,0)),('encoder.weight_ih_l0',(1,0))]:\n p=dict(m.named_parameters())[name];analytic=float(p.grad[index]);original=float(p[index]);values=[]\n for sign in (1,-1):\n  with torch.no_grad():p[index]=original+sign*1e-6;values.append(float(m(x,q,base).square().mean()))\n with torch.no_grad():p[index]=original\n numeric=(values[0]-values[1])/2e-6\n rows.append(dict(parameter=name,index=index,analytic=analytic,numeric=numeric,absolute_error=abs(analytic-numeric)))\nreport=dict(affine_scan_gradcheck=bool(scan_ok),model_weight_finite_differences=rows,max_abs_error=max(r['absolute_error'] for r in rows))\nif not scan_ok or report['max_abs_error']>1e-5:raise ValueError('derivative check failed')\nprint(json.dumps(report))\n",
+  "returned": {
+    "affine_scan_gradcheck": true,
+    "model_weight_finite_differences": [
+      {
+        "parameter": "B",
+        "index": [
+          0,
+          0
+        ],
+        "analytic": -0.0028046323718445942,
+        "numeric": -0.0028046323718305954,
+        "absolute_error": 1.3998784770263839e-14
+      },
+      {
+        "parameter": "B",
+        "index": [
+          8,
+          3
+        ],
+        "analytic": -0.0019786558303747964,
+        "numeric": -0.0019786558304356675,
+        "absolute_error": 6.087101309115717e-14
+      },
+      {
+        "parameter": "U.weight",
+        "index": [
+          0,
+          0
+        ],
+        "analytic": -5.3775077290995934e-06,
+        "numeric": -5.37750768393741e-06,
+        "absolute_error": 4.5162183149834775e-14
+      },
+      {
+        "parameter": "encoder.weight_ih_l0",
+        "index": [
+          1,
+          0
+        ],
+        "analytic": -3.6611793527601693e-07,
+        "numeric": -3.661179432540296e-07,
+        "absolute_error": 7.978012641896004e-15
+      }
+    ],
+    "max_abs_error": 6.087101309115717e-14
+  }
+}

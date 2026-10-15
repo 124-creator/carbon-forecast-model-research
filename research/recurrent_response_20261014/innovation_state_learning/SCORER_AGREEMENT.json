@@ -1,0 +1,9 @@
+{
+  "code": "import json, numpy as np\nfrom experiment_io import HERE,load_prefix,summarize\nfrom verify_innovation import replay_incomplete\nr=replay_incomplete();p,d,_=load_prefix();all_o=np.arange(459,930);eligible=d[all_o].astype('U4')==d[all_o+20].astype('U4');o=all_o[eligible]\ny=np.array([p[t+1:t+21]-p[t] for t in o]);years=d[o].astype('U4');errors=[]\nfor mode,ind in r['scores'].items():\n seeds=(17,) if mode=='constant_shift' else (17,29);arrays=[]\n for seed in seeds:\n  with np.load(HERE/'local_only'/f'{mode}_s{seed}.npz',allow_pickle=False) as z:arrays.append(z['prediction'][eligible])\n prod=summarize(np.stack(arrays),y,years)\n errors.extend(abs(ind[k]-prod[k]) for k in ('score','ensemble'))\n errors.extend(abs(a-b) for a,b in zip(ind['seeds'],prod['seeds']))\n errors.extend(abs(a['ratio']-b['ratio']) for a,b in zip(ind['cells'],prod['cells']))\n errors.extend(abs(ind['annual'][yr]-prod['annual'][yr]) for yr in ('2020','2021'))\nreport=dict(scope='Post-stop comparison of two scorer implementations on complete trajectories only; not a complete-run producer report',scalar_comparisons=len(errors),max_abs_error=max(errors),verified=max(errors)<1e-12)\nif not report['verified']:raise ValueError('scorer disagreement')\nprint(json.dumps(report))\n",
+  "returned": {
+    "scope": "Post-stop comparison of two scorer implementations on complete trajectories only; not a complete-run producer report",
+    "scalar_comparisons": 71,
+    "max_abs_error": 1.3322676295501878e-15,
+    "verified": true
+  }
+}

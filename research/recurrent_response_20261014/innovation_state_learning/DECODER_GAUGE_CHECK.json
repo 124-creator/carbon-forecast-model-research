@@ -1,0 +1,7 @@
+{
+  "scope": "Fixed cumulative decoder alone is a coordinate choice for invertible decoders, not model novelty. Restrictive transition/gain design must carry any contribution.",
+  "code": "import numpy as np; rng=np.random.default_rng(7); C=rng.normal(size=(20,20))+5*np.eye(20); D=np.tril(np.ones((20,20))); A=rng.normal(size=(20,20))/10; K=rng.normal(size=20); h=rng.normal(size=20); T=np.linalg.solve(D,C); z=T@h; Az=T@A@np.linalg.inv(T); Kz=T@K; u=.37; print('decoder_gauge_output_error',np.max(np.abs(C@h-D@z))); print('decoder_gauge_transition_error',np.max(np.abs(T@(A@h+K*u)-(Az@z+Kz*u))))",
+  "returncode": 0,
+  "stdout": "decoder_gauge_output_error 7.105427357601002e-15\ndecoder_gauge_transition_error 2.469136006766348e-13\n",
+  "stderr": ""
+}
