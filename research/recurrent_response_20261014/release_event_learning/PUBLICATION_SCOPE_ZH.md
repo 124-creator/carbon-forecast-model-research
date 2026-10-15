@@ -1,0 +1,9 @@
+# 公开交付边界
+
+公开自编源码、固定协议、来源URL/长度/摘要、环境版本、测试日志、输入核验汇总、完整方案汇总评分与不完整收据。排除local_only、原始HTML、逐条煤价、价格输入副本、逐点预测和模型参数；不复制审阅过的第三方仓库源码或论文全文。
+
+IMPLEMENTATION_SOURCE_RECEIPTS.json仅是固定作者仓库对象的静态阅读收据，不是这些作者模型的执行、复现、许可认证或全文查新通过记录。ACCESS_LIMITS.json保留实际访问范围和失败。
+
+数据预处理可由prepare_inputs.py在明确授权的两个来源目录和冻结source-map下重建。原始HTML与本地source-map不在公开包，不能声称任意公开克隆可独立重建本实验的外生原料。作者碳价数据的许可与归因由仓库既有ATTRIBUTION.md管理，不以本目录重新授权交易所原件。
+
+旧SCORE_NORMAL/OPTIMIZED本地保留；本次公开的权威评分为SCORE_FINAL_NORMAL/OPTIMIZED，包含严格有界读取修复。未完成标志始终保留，不发布虚假COMPLETE或已通过创新声明。
