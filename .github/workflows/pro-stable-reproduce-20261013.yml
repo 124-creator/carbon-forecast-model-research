@@ -1,0 +1,35 @@
+name: Pro stable estimator replay 20261013
+on:
+  push:
+    branches: [research/pro-stable-control-20261013]
+    paths:
+      - '.github/workflows/pro-stable-reproduce-20261013.yml'
+      - 'research/pro_stable_control_20261013/*.py'
+      - 'research/pro_stable_control_20261013/*_protocol.json'
+      - 'research/pro_stable_control_20261013/requirements.txt'
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install numerical dependencies
+        run: python -m pip install -r research/pro_stable_control_20261013/requirements.txt
+      - name: Replay frozen experiment on existing repository prices only
+        run: python research/pro_stable_control_20261013/run_all.py --root . --out "$RUNNER_TEMP/stageD_results"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pro-stable-results-20261013
+          path: ${{ runner.temp }}/stageD_results/
+          retention-days: 14
+          if-no-files-found: warn

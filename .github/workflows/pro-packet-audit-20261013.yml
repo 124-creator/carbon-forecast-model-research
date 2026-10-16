@@ -1,0 +1,52 @@
+name: Pro packet integrity audit 20261013
+on:
+  push:
+    branches: [research/pro-stable-control-20261013]
+    paths: [.github/workflows/pro-packet-audit-20261013.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify existing packet and make private working bundle
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, pathlib, zipfile
+          root = pathlib.Path('.')
+          packet = root / 'research/pro_data_packet_20261013'
+          manifest = json.loads((packet / 'DATA_PACKET_MANIFEST.json').read_text())
+          results = []
+          paths = []
+          for item in manifest['files']:
+              path = root / item['path']
+              body = path.read_bytes()
+              digest = hashlib.sha256(body).hexdigest()
+              if len(body) != item['bytes'] or digest != item['sha256']:
+                  raise RuntimeError('Integrity mismatch: ' + item['path'])
+              result = dict(path=item['path'], bytes=len(body), sha256=digest)
+              if item['kind'] == 'derived_csv':
+                  with path.open(newline='', encoding='utf-8-sig') as fh:
+                      rows = list(csv.DictReader(fh))
+                  if len(rows) != item['rows']:
+                      raise RuntimeError('Row mismatch: ' + item['path'])
+                  result.update(rows=len(rows), columns=list(rows[0]), date_min=rows[0]['date'], date_max=rows[-1]['date'])
+                  paths.append(path)
+              results.append(result)
+          out = root / 'packet_audit_artifact'
+          out.mkdir(exist_ok=True)
+          (out/'audit.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
+          paths += list(packet.glob('*.json')) + list(packet.glob('*.md')) + list(packet.glob('*.py'))
+          with zipfile.ZipFile(out/'existing_packet.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for path in paths:
+                  z.write(path,str(path))
+          print(json.dumps(results,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pro-existing-packet-20261013
+          path: packet_audit_artifact/
+          retention-days: 7
+          if-no-files-found: error
