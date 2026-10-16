@@ -1,0 +1,74 @@
+name: Pro reference interaction full replay 20261015
+on:
+  push:
+    branches: [research/pro-reference-interaction-20261015]
+    paths:
+      - research/pro_reference_interaction_20261015/REQUEST_REPLAY.txt
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: pro-reference-interaction-20261015
+  cancel-in-progress: false
+jobs:
+  replay:
+    if: github.ref == 'refs/heads/research/pro-reference-interaction-20261015'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      PYTHONUNBUFFERED: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install pinned numerical CPU dependencies
+        run: |
+          python -m pip install -r research/pro_reference_interaction_20261015/requirements.txt
+          python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+      - name: Reproduce the fixed experiment on the existing approved prefix
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -u research/pro_reference_interaction_20261015/run_all.py --out research/pro_reference_interaction_20261015/results --workers 2 2>&1 | tee stageI_remote_execution.log
+      - name: Record receipt and preserve complete generated results in Git
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp stageI_remote_execution.log research/pro_reference_interaction_20261015/results/REMOTE_EXECUTION.log
+          python - <<'PY'
+          import hashlib,json,os,platform
+          from pathlib import Path
+          r=Path('research/pro_reference_interaction_20261015/results')
+          result=json.loads((r/'RESULTS.json').read_text())
+          receipt={'executed_commit':os.environ['GITHUB_SHA'],'run_id':int(os.environ['GITHUB_RUN_ID']),
+                   'run_attempt':int(os.environ['GITHUB_RUN_ATTEMPT']),'branch':os.environ['GITHUB_REF_NAME'],
+                   'platform':platform.platform(),'scientific_status':result['scientific_status'],
+                   'scope':'Full GitHub runner replay; not external scientific replication or independent holdout'}
+          (r/'REMOTE_EXECUTION.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          files=[{'path':str(p.relative_to(r)),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+                 for p in sorted(r.rglob('*')) if p.is_file() and p.name!='RESULT_MANIFEST.json']
+          (r/'RESULT_MANIFEST.json').write_text(json.dumps({'files':files,'scope':'Complete remote results, manifest excludes itself'},indent=2)+'\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- research/pro_reference_interaction_20261015/results
+          git commit -m 'Archive complete Stage I replay arrays, parameters, training logs and audit [skip ci]'
+          git push origin HEAD:refs/heads/research/pro-reference-interaction-20261015
+      - name: Upload complete experiment snapshot and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pro-reference-interaction-complete-20261015
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            research/pro_reference_interaction_20261015/
+            stageI_remote_execution.log
+            !research/pro_reference_interaction_20261015/__pycache__/**
