@@ -1,0 +1,60 @@
+{
+  "created_utc": "2026-10-17T15:58:31.878056+00:00",
+  "status": "PASS_SOURCE_ONLY_CLI_PATH_REVIEW",
+  "scope": "Static documentation/source-interface review only; no training, no independent-scoring rerun, no prediction NPZ reads",
+  "original_issue": "Fresh run writes fresh_run/results and fresh_run/local_only; old audit example incorrectly mixed results/D1 and new_run/local_only/D1.",
+  "corrections": [
+    "Both documents now use identical fresh_run results/private arguments.",
+    "Document that D1 is never appended automatically.",
+    "Add aggregate-only export and summarize commands using fresh_run/results/RESULTS.json.",
+    "Prepare fresh_export/provenance before current exporter writes its receipt.",
+    "Describe 1065 series-origin combinations as deduplicated, not statistically independent."
+  ],
+  "fresh_layout": {
+    "public": "fresh_run/results",
+    "private": "fresh_run/local_only",
+    "npz": "fresh_run/local_only/<market>/<family>.npz",
+    "aggregate": "fresh_run/results/RESULTS.json",
+    "audit": "fresh_run/results/INDEPENDENT_D1_AUDIT.json",
+    "export": "fresh_export",
+    "summary": "fresh_export/results/REPORT_SUMMARY.json"
+  },
+  "document_changes": [
+    {
+      "path": "REPRODUCE_ZH.md",
+      "before_sha256": "c2dd8dee2982741e5a642b4d28d554796ae73454e28ff703a1ee6a4abb1d80ea",
+      "after_sha256": "54c5d63613823f60ad8e5db834d3ca4afe33579032b6ce4ee3ac554ae85a7467"
+    },
+    {
+      "path": "INDEPENDENT_AUDIT_ZH.md",
+      "before_sha256": "38a4ec06794211b92e06bd990a16a1a4727f60c3ac6f9c0c7ec9d33c5039985a",
+      "after_sha256": "4514cb9dd4abda44363032ee50c237ac1eac4c9ded78040b57c63f48ffb5e987"
+    }
+  ],
+  "source_interfaces": {
+    "source/run.py": {
+      "sha256": "9fb8d3719d1e9e2fe69cc4ff6b6e59c3aa3a945fa54fbddabd6fd9acdea76e05",
+      "documented_flags_match": true
+    },
+    "source/independent_results.py": {
+      "sha256": "0c62112f357f0cbd8eeb7dfb2884d47d85e4cfe534929a98389dac10c5248b9a",
+      "documented_flags_match": true
+    },
+    "source/export_results.py": {
+      "sha256": "a23098b18ac31b59a9c8a124e86b1ec3cad0570be19d7bc8cc22276fffc80e2a",
+      "documented_flags_match": true
+    },
+    "source/summarize_report.py": {
+      "sha256": "33ea5035008dc96467d415964b383f03a3d27451b2629ed04d2d321300ae39ee",
+      "documented_flags_match": true
+    }
+  },
+  "frozen_protocol_source_files_verified_unchanged": 13,
+  "original_independent_audit_sha256": "c52cca0f1cbee84d221b90ed5e6b29749b88b463436014bbfb4f3a684f853d13",
+  "original_independent_audit_unchanged": true,
+  "market_fits": 0,
+  "scoring_reruns": 0,
+  "prediction_npz_reads": 0,
+  "source_price_csv_reads": 0,
+  "confirmation_reads": 0
+}

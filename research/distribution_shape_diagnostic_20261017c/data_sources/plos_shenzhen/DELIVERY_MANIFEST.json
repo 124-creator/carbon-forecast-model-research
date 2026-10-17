@@ -1,0 +1,114 @@
+{
+  "schema": "public-data-discovery-delivery-v1",
+  "created_utc": "2026-10-17T15:49:22.910382+00:00",
+  "public_allowlist": [
+    {
+      "path": "reproduce_plos_supplement.py",
+      "bytes": 8521,
+      "sha256": "b55d4731986fa27c3172dd01a6daad8ab24c628f14bf5d8bd0b73d78dfac40a9"
+    },
+    {
+      "path": "DATA_DISCOVERY_ZH.md",
+      "bytes": 13094,
+      "sha256": "d06583a9bd78ead3cd638b4a8ac23efec1ed7476522a3d33a69113b01be74793"
+    },
+    {
+      "path": "DATA_DISCOVERY_MANIFEST.json",
+      "bytes": 13392,
+      "sha256": "eeff0468c95797abc10485b68e87cddc146444216b32409937a608f73441e079"
+    },
+    {
+      "path": "SOURCE_ACCESS_LOG.json",
+      "bytes": 10584,
+      "sha256": "6956ed66428f2f7dadd3a4cbeb58ecda6fb73aef6cd4f133c2843066a5758c6b"
+    },
+    {
+      "path": "DOWNLOAD_HISTORY.json",
+      "bytes": 1202,
+      "sha256": "9f7db54a99fd2f0288b048312bc7ec1ee4e1431096026409a3c1b379c530c76a"
+    },
+    {
+      "path": "REPRODUCIBLE_MECHANICAL_CHECK.json",
+      "bytes": 3184,
+      "sha256": "4ccfd773acb31a78fada04fcdcaee7220d6b7a7ca6d72e09a01e90733b1f8065"
+    }
+  ],
+  "excluded_material": [
+    "Original or truncated XLS workbook",
+    "Third-party article HTML/PDF",
+    "Raw download headers and signed redirect query strings",
+    "Real price CSV",
+    "Any market fit results",
+    "Any confirmation file"
+  ],
+  "entrypoint": "reproduce_plos_supplement.py",
+  "entrypoint_operations": {
+    "download": "Explicit single normal public request; exact SHA required.",
+    "inspect": "Headers/dates/numeric-cell eligibility and counts only.",
+    "extract": "Separate explicit command, not executed in discovery; only date/price columns."
+  },
+  "validation": {
+    "scope": "Static JSON/Python parse, metadata arithmetic and artifact identity only; this command did not open raw workbooks, market files or remote resources.",
+    "checks": [
+      {
+        "check": "reproduce_plos_supplement.py_parse_and_exists",
+        "pass": true
+      },
+      {
+        "check": "DATA_DISCOVERY_ZH.md_parse_and_exists",
+        "pass": true
+      },
+      {
+        "check": "DATA_DISCOVERY_MANIFEST.json_parse_and_exists",
+        "pass": true
+      },
+      {
+        "check": "SOURCE_ACCESS_LOG.json_parse_and_exists",
+        "pass": true
+      },
+      {
+        "check": "DOWNLOAD_HISTORY.json_parse_and_exists",
+        "pass": true
+      },
+      {
+        "check": "REPRODUCIBLE_MECHANICAL_CHECK.json_parse_and_exists",
+        "pass": true
+      },
+      {
+        "check": "mechanical_counts_and_no_export",
+        "pass": true
+      },
+      {
+        "check": "frozen_statistics_unchanged",
+        "pass": true
+      }
+    ],
+    "status": "PASS"
+  },
+  "source_workbook_expected_sha256": "90c49501afa9beb7370c4409084a28729daa4904a7e7e5de310d0f6bd7a3ba10",
+  "new_market_fits": 0,
+  "old_confirmation_file_reads": 0,
+  "price_csv_exports": 0,
+  "data_sources_are_post_freeze_auxiliary_not_runtime_inputs": true,
+  "statistics_runtime_sha256_unchanged": "0b04f619461a937ef0adeb290153f08db03a3366daa6821d78c8cb26802c1a07",
+  "updated_utc": "2026-10-17T16:03:43.156972+00:00",
+  "documentation_revision": 2,
+  "revision_history": [
+    {
+      "utc": "2026-10-17T16:03:43.156972+00:00",
+      "previous_delivery_manifest_sha256": "d56fa459f0ea1405530a1104ff62fa0f567a36f5f522970b122a9cfd71f832f1",
+      "previous_artifact_sha256": {
+        "DATA_DISCOVERY_ZH.md": "2469d45394f266db5b8ceb309353a9f5acc9bb61029ea871704526ef5cf2650e",
+        "DATA_DISCOVERY_MANIFEST.json": "2d6143a16376f6917e78a72cafe777d11c06e63012a48c5e93049ca20cbdb34b",
+        "DELIVERY_MANIFEST.json": "d56fa459f0ea1405530a1104ff62fa0f567a36f5f522970b122a9cfd71f832f1"
+      },
+      "change": "Only Wiley article HTTP 403 vs unresolved attachment InternalError wording and metadata; no new downloads, extraction, tests, fits or frozen-source changes.",
+      "unchanged_artifact_sha256": {
+        "reproduce_plos_supplement.py": "b55d4731986fa27c3172dd01a6daad8ab24c628f14bf5d8bd0b73d78dfac40a9",
+        "REPRODUCIBLE_MECHANICAL_CHECK.json": "4ccfd773acb31a78fada04fcdcaee7220d6b7a7ca6d72e09a01e90733b1f8065",
+        "SOURCE_ACCESS_LOG.json": "6956ed66428f2f7dadd3a4cbeb58ecda6fb73aef6cd4f133c2843066a5758c6b",
+        "DOWNLOAD_HISTORY.json": "9f7db54a99fd2f0288b048312bc7ec1ee4e1431096026409a3c1b379c530c76a"
+      }
+    }
+  ]
+}
