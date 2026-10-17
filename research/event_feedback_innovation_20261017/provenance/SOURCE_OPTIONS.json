@@ -1,0 +1,225 @@
+{
+  "created_utc": "2026-10-17T09:45:54.105838+00:00",
+  "purpose": "Public data source metadata before price acquisition",
+  "preferred_source": "EEX_EUA_PRIMARY_AUCTIONS",
+  "market_data_files_downloaded": false,
+  "market_model_fits": 0,
+  "sources": [
+    {
+      "id": "EEX_EUA_PRIMARY_AUCTIONS",
+      "rank": 1,
+      "source_kind": "original exchange publication",
+      "metadata_url": "https://www.eex.com/en/market-data/market-data-hub/environmentals/eex-eua-primary-auction-spot-download",
+      "source_url": "https://www.eex.com/en/markets/environmentals/eu-ets1-eu-ets2-auctions/eu-ets1-auctions",
+      "definition_url": "https://www.eex.com/en/markets/environmentals/eu-ets1-eu-ets2-auctions/eu-ets1-auctions/auction-design",
+      "source_ref_ids": [
+        "turn127view1",
+        "turn129view2",
+        "turn132view1",
+        "turn136view0"
+      ],
+      "data_url": "https://www.eex.com/fileadmin/EEX/Downloads/Markets/Environmentals/EUA_Emission_Spot_Primary_Market_Auction_Report/Archive_Reports/emission-spot-primary-market-auction-report-2012-2025-data.zip",
+      "market": "EU ETS1",
+      "instrument": "EUA spot primary auction; keep separate from EUAA/ETS2/secondary futures",
+      "target": "uniform auction clearing price",
+      "target_unit": "EUR per EUA (1 tonne CO2 equivalent)",
+      "delivery": "T+1",
+      "metadata_year_range": [
+        2012,
+        2025
+      ],
+      "exact_first_and_last_dates": null,
+      "record_count": null,
+      "record_count_reason": "No row count in checked catalogue; archive body intentionally unopened",
+      "frequency": "auction events, not a filled daily close series",
+      "expected_fields_from_indexed_old_official_spec": [
+        "Auction date",
+        "Time [UTC]",
+        "Auction name",
+        "Contract",
+        "Status",
+        "Auction clearing price [EUR/tCO2]",
+        "Auction volume [tCO2]",
+        "Total volume of bids submitted [tCO2]",
+        "Number of bids submitted",
+        "Cover ratio",
+        "Total number of bidders",
+        "Number of successful bidders"
+      ],
+      "old_field_spec_url": "https://www.eex.com/fileadmin/EEX/Downloads/Market_Data/EEX_Group_DataSource/sFTP_Server/eex-market-data-sftp-xlsx--interface-specification-en-data.pdf",
+      "old_field_spec_ref_ids": [
+        "turn131search13",
+        "turn136search12",
+        "turn134view0"
+      ],
+      "old_field_spec_current_fetch_status": 404,
+      "current_workbook_headers_verified": false,
+      "head_check": {
+        "status": 200,
+        "bytes": 784392,
+        "last_modified": "Wed, 07 Jan 2026 09:39:38 GMT",
+        "body_bytes_read": 0,
+        "sha256": null
+      },
+      "license": "EEX copyright; express single-copy personal noncommercial download provision; no blanket redistribution license",
+      "license_url": "https://www.eex.com/en/disclaimer",
+      "license_ref_ids": [
+        "turn131view1"
+      ],
+      "license_action": "Preserve source notices; do not default to publishing raw data in GitHub",
+      "current_2026_file_url": "https://public.eex-group.com/eex/eua-auction-report/emission-spot-primary-market-auction-report-2026-data.xlsx",
+      "current_2026_file_requested": false,
+      "proposed_scope_not_yet_root_freeze": {
+        "development": "2013-01-01..2023-12-31",
+        "development_validation": "2024-01-01..2024-12-31",
+        "sealed_confirmation": "2025-01-01..2025-12-31",
+        "exclude_years": [
+          2012,
+          2026
+        ],
+        "contract_include": "EUA only",
+        "same_day_auctions": "retain date/time/name/contract; no averaging"
+      },
+      "limitations": [
+        "Cancelled auctions require explicit status rule; never fill as zero price",
+        "No new ZIP SHA256 until post-freeze acquisition",
+        "Lagged results only; contemporaneous bids/cover ratio unavailable before auction",
+        "Future calendar features require publication-version evidence"
+      ]
+    },
+    {
+      "id": "UK_ETS_AUTHORITY_AUCTION_TABLES",
+      "rank": 2,
+      "source_kind": "official government publication",
+      "metadata_url": "https://www.gov.uk/government/collections/functioning-of-the-uk-carbon-market",
+      "source_ref_ids": [
+        "turn137view1",
+        "turn137view0",
+        "turn134search5",
+        "turn132search5"
+      ],
+      "available_report_years": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "target": "UKA primary auction clearing price",
+      "target_unit": "GBP per UKA",
+      "frequency": "fortnightly auction events",
+      "start_of_scheme_auction_metadata": "2021-05-19",
+      "exact_first_and_last_dates": null,
+      "known_annual_record_counts": {
+        "2023": {
+          "count": 25,
+          "evidence_level": "official government report search index; no price table opened"
+        }
+      },
+      "total_record_count": null,
+      "pdf_2024_url": "https://assets.publishing.service.gov.uk/media/68ee0df182670806f9d5e00f/report-on-the-functioning-of-the-UK-carbon-market-for-2024.pdf",
+      "pdf_2023_url": "https://assets.publishing.service.gov.uk/media/673b8ccffc572967fe66a9ca/functioning-of-uk-carbon-market-report-2023.pdf",
+      "pdf_2024_metadata": {
+        "published": "2025-10-14",
+        "pages": 19,
+        "approximate_size_kb": 375,
+        "sha256": null
+      },
+      "reported_fields": [
+        "Auction date",
+        "Auctioned allowances",
+        "Auction clearing price"
+      ],
+      "license": "GOV.UK page OGL v3 except where stated; PDF third-party exceptions not yet checked",
+      "license_url": "https://www.gov.uk/government/publications/functioning-of-the-uk-carbon-market-2024",
+      "ice_result_url": "https://www.ice.com/report/278",
+      "ice_result_page_opened": false,
+      "pdf_prices_opened": false,
+      "limitations": [
+        "Small event count",
+        "PDF table extraction needed after freeze",
+        "2024 aggregate price range and two dates incidentally appeared in search",
+        "No 2025 government report found in checked official collection"
+      ]
+    },
+    {
+      "id": "MENDELEY_GMSXTCRFGT_V2",
+      "rank": 3,
+      "source_kind": "author research dataset",
+      "doi": "10.17632/gmsxtcrfgt.2",
+      "metadata_url": "https://data.mendeley.com/datasets/gmsxtcrfgt/2",
+      "source_ref_ids": [
+        "turn118view2",
+        "turn115search3"
+      ],
+      "authors": [
+        "Yiwei Zhang",
+        "Xuejiao Ma",
+        "Qichuan Jiang"
+      ],
+      "published": "2026-01-26",
+      "market": "EU ETS",
+      "instrument": "December-expiry EUA futures Dec08..Dec20",
+      "target": "daily settlement prices",
+      "definition": "Calendar-year selection of corresponding December-delivery contract, described by authors",
+      "provider_chain": "Wind, from ECX/ICE listings",
+      "date_range_as_author_metadata": [
+        "2008-12-01",
+        "2020-12-31"
+      ],
+      "record_count": null,
+      "exact_column_names": null,
+      "currency_not_explicitly_verified": true,
+      "listed_file": "DATA+CODE.rar",
+      "approximate_size_kb": 144,
+      "file_sha256": null,
+      "download_url_not_verified": true,
+      "license": "CC BY 4.0 depositor declaration",
+      "metadata_api_access_status": 403,
+      "file_api_access_status": 403,
+      "price_file_requested": false,
+      "limitations": [
+        "Metadata API and file list denied; no retry",
+        "Post-December-expiry handling unspecified",
+        "No observed row count or missing-date rule",
+        "Not an official exchange close series"
+      ]
+    }
+  ],
+  "china_candidates_with_incomplete_metadata": [
+    {
+      "doi": "10.17632/g56r5bn92t.1",
+      "url": "https://data.mendeley.com/datasets/g56r5bn92t/1",
+      "ref_ids": [
+        "turn113view0"
+      ],
+      "description": "Shenzhen and China national",
+      "author": "Wen Zhang",
+      "published": "2024-11-12",
+      "license": "CC BY 4.0",
+      "row_count": null,
+      "date_range": null,
+      "price_field_definition": null,
+      "metadata_and_file_list_http_status": 403,
+      "price_downloaded": false
+    },
+    {
+      "doi": "10.17632/fsdf4f4yv5.2",
+      "url": "https://data.mendeley.com/datasets/fsdf4f4yv5/2",
+      "ref_ids": [
+        "turn113view1",
+        "turn112search2"
+      ],
+      "author": "Anlei Wei",
+      "published": "2024-04-18",
+      "license": "CC BY 4.0",
+      "approximate_zip_kb": 665,
+      "row_count": null,
+      "date_range": null,
+      "price_field_definition": null,
+      "metadata_and_file_list_http_status": 403,
+      "price_downloaded": false,
+      "paper_doi": "10.1016/j.jenvman.2024.120131",
+      "paper_page_http_status": 403
+    }
+  ]
+}

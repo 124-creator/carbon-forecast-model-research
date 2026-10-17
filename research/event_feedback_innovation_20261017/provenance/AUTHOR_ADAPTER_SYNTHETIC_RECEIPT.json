@@ -1,0 +1,173 @@
+{
+  "status": "PASS",
+  "market_data_reads": 0,
+  "market_fits": 0,
+  "data": "deterministic synthetic random walk only",
+  "checks": [
+    "original_test_step_vs_causal_buffers_predictions",
+    "original_test_step_vs_causal_buffers_parameter_updates",
+    "single_and_multiple_td_ages",
+    "issued_forecasts_immutable",
+    "teacher_frozen_in_actual_fast_method",
+    "raw_pseudo_hook_identity",
+    "future_suffix_length_rejected",
+    "application_L21_H20_forward_shape"
+  ],
+  "adapter_sha256": "330e8bd8667f72c1baaaf844759577c8cf028330aa007be319a16bd46ea428b0",
+  "comparisons": [
+    {
+      "ages": [
+        1
+      ],
+      "events": 30,
+      "max_prediction_difference": 0.0,
+      "max_parameter_difference": 0.0,
+      "receipt": {
+        "author_commit": "11cebd980a1f77ef0e1db9ac313dbfe6d37984e9",
+        "author_file_sha256": {
+          "src/models/blocks/trendDecomposition.py": "0e35d9ed7ffb85457bc8bd23d32754b1f18bad965f223f6f5691d094b5801ad1",
+          "src/models/DLinear.py": "7a9fd83e1869f3a7442b70ececab9d94512e8045c7eebd1568255ed96123060a",
+          "src/models/MLP.py": "e47c57117371c55fe797a6896a6ce88f7ba7181a46deb8d689ade4a902819827",
+          "src/trainers/trainerBaseERTD.py": "5e2176a9bc8a38da98e21d2f74b19256736946c080009238766ff1c97e338712",
+          "src/trainers/w_student/trainerBaseFramework.py": "5afbe664f3704f94a40213c9f9d7ff282d1c32ad1a257f841916a60db625b711",
+          "src/trainers/w_student/trainerFramework_ERTDRes.py": "3861902dc76de9ee4f309b54e59537411a379e7c12f88e294034991bf3309d20"
+        },
+        "source_classes": [
+          "models.DLinear.Model",
+          "models.MLP.Model",
+          "trainers.w_student.trainerFramework_ERTDRes.Exp_TS2VecSupervised"
+        ],
+        "original_methods_executed": [
+          "DLinear.forward",
+          "MLP.forward",
+          "_process_one_batch",
+          "backward_lossFT",
+          "backward_lossT_test",
+          "backward_lossT_train",
+          "backward_tdlossFT",
+          "er",
+          "get_final_output",
+          "td",
+          "test_step",
+          "train_step"
+        ],
+        "method_count_basis": "entry calls and actual optimizer gradient steps; source control flow inspected",
+        "execution_scope": "unchanged author core through own causal interface; not complete benchmark driver",
+        "optimizer_calls": {
+          "teacher_train": {
+            "calls": 1,
+            "nonempty_gradient_steps": 1
+          },
+          "student_train": {
+            "calls": 1,
+            "nonempty_gradient_steps": 1
+          },
+          "teacher_slow": {
+            "calls": 23,
+            "nonempty_gradient_steps": 23
+          },
+          "student_slow": {
+            "calls": 23,
+            "nonempty_gradient_steps": 23
+          },
+          "teacher_fast": {
+            "calls": 29,
+            "nonempty_gradient_steps": 0
+          },
+          "student_fast": {
+            "calls": 29,
+            "nonempty_gradient_steps": 29
+          }
+        },
+        "parameters": 645,
+        "dtype": "torch.float64",
+        "start_origin": 18,
+        "last_origin": 47,
+        "issued_forecasts": 30,
+        "pretrain_batches": 1,
+        "prediction_calls": 0,
+        "online_events": 30,
+        "pseudo_hook_installed": false
+      }
+    },
+    {
+      "ages": [
+        1,
+        2,
+        4
+      ],
+      "events": 30,
+      "max_prediction_difference": 0.0,
+      "max_parameter_difference": 0.0,
+      "receipt": {
+        "author_commit": "11cebd980a1f77ef0e1db9ac313dbfe6d37984e9",
+        "author_file_sha256": {
+          "src/models/blocks/trendDecomposition.py": "0e35d9ed7ffb85457bc8bd23d32754b1f18bad965f223f6f5691d094b5801ad1",
+          "src/models/DLinear.py": "7a9fd83e1869f3a7442b70ececab9d94512e8045c7eebd1568255ed96123060a",
+          "src/models/MLP.py": "e47c57117371c55fe797a6896a6ce88f7ba7181a46deb8d689ade4a902819827",
+          "src/trainers/trainerBaseERTD.py": "5e2176a9bc8a38da98e21d2f74b19256736946c080009238766ff1c97e338712",
+          "src/trainers/w_student/trainerBaseFramework.py": "5afbe664f3704f94a40213c9f9d7ff282d1c32ad1a257f841916a60db625b711",
+          "src/trainers/w_student/trainerFramework_ERTDRes.py": "3861902dc76de9ee4f309b54e59537411a379e7c12f88e294034991bf3309d20"
+        },
+        "source_classes": [
+          "models.DLinear.Model",
+          "models.MLP.Model",
+          "trainers.w_student.trainerFramework_ERTDRes.Exp_TS2VecSupervised"
+        ],
+        "original_methods_executed": [
+          "DLinear.forward",
+          "MLP.forward",
+          "_process_one_batch",
+          "backward_lossFT",
+          "backward_lossT_test",
+          "backward_lossT_train",
+          "backward_tdlossFT",
+          "er",
+          "get_final_output",
+          "td",
+          "test_step",
+          "train_step"
+        ],
+        "method_count_basis": "entry calls and actual optimizer gradient steps; source control flow inspected",
+        "execution_scope": "unchanged author core through own causal interface; not complete benchmark driver",
+        "optimizer_calls": {
+          "teacher_train": {
+            "calls": 1,
+            "nonempty_gradient_steps": 1
+          },
+          "student_train": {
+            "calls": 1,
+            "nonempty_gradient_steps": 1
+          },
+          "teacher_slow": {
+            "calls": 23,
+            "nonempty_gradient_steps": 23
+          },
+          "student_slow": {
+            "calls": 23,
+            "nonempty_gradient_steps": 23
+          },
+          "teacher_fast": {
+            "calls": 26,
+            "nonempty_gradient_steps": 0
+          },
+          "student_fast": {
+            "calls": 26,
+            "nonempty_gradient_steps": 26
+          }
+        },
+        "parameters": 645,
+        "dtype": "torch.float64",
+        "start_origin": 18,
+        "last_origin": 47,
+        "issued_forecasts": 30,
+        "pretrain_batches": 1,
+        "prediction_calls": 0,
+        "online_events": 30,
+        "pseudo_hook_installed": false
+      }
+    }
+  ],
+  "canonical_parameter_count": 2164,
+  "execution_limit": "Own dtype/driver/scaling interface; source methods and model forwards unchanged. No author benchmark run."
+}

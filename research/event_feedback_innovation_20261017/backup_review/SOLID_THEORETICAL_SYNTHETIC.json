@@ -1,0 +1,127 @@
+{
+  "status": "PASS",
+  "created_utc": "2026-10-17T10:33:40.768769+00:00",
+  "numpy_version": "2.5.4",
+  "script_sha256": "f1af56175981cb54472b30f2fe42dd9bee3a650f3ec681be6928ef6dd4ecd3d7",
+  "kernel_equivalence": {
+    "samples": 9,
+    "head_features_including_bias": 6,
+    "horizon": 20,
+    "author_style_unnormalized_one_step_max_error": 5.551115123125783e-17,
+    "repeated_fixed_gradient_equals_step_multiplier": true,
+    "actual_sequential_steps": 4,
+    "actual_multistep_spectral_kernel_max_error": 3.3306690738754696e-16,
+    "repeated_fixed_vs_actual_multistep_difference": 0.005352618573821355,
+    "proximal_head_ridge_kernel_max_error": 7.771561172376096e-16,
+    "affine_normalization_matrix_kernel_max_error": 5.551115123125783e-17,
+    "restriction": "Exact for a head affine in its adapted parameters with fixed features, normalization and selected weights. Joint nonlinear feature updates are outside the equivalence."
+  },
+  "pure_variance": {
+    "gaussian_cases": [
+      {
+        "context_standard_deviations": [
+          1.0,
+          3.0
+        ],
+        "conditional_means": [
+          0.0,
+          0.0
+        ],
+        "gaussian_KL_score": 0.25541281188299536,
+        "exact_true_MI_upper_bound": 0.6931471805599453,
+        "gaussian_score_exceeds_true_MI_upper_bound": false,
+        "Bayes_conditional_mean_correction": 0.0
+      },
+      {
+        "context_standard_deviations": [
+          1.0,
+          100.0
+        ],
+        "conditional_means": [
+          0.0,
+          0.0
+        ],
+        "gaussian_KL_score": 1.9560615002142399,
+        "exact_true_MI_upper_bound": 0.6931471805599453,
+        "gaussian_score_exceeds_true_MI_upper_bound": true,
+        "Bayes_conditional_mean_correction": 0.0
+      }
+    ],
+    "exact_discrete_pure_variance_MI": 0.6931471805599453,
+    "exact_discrete_conditional_mean_energy": 0.0,
+    "finite_sample_local_ridge_intercept": {
+      "training_samples_per_context": 10,
+      "ridge_penalty": 1.0,
+      "base_Bayes_MSE": 5.0,
+      "expected_added_MSE": 0.125,
+      "adapted_expected_MSE": 5.125
+    },
+    "restriction": "A variance-sensitive distribution diagnostic is not evidence of reducible squared-error conditional-mean bias. Gaussian-to-Gaussian KL is not generally the exact mutual information of a Gaussian mixture."
+  },
+  "context_distance_counterexample": {
+    "historical_context_values": [
+      -2.0,
+      -1.0,
+      0.0,
+      1.0,
+      2.0
+    ],
+    "same_contexts_next_regime": [
+      -2.0,
+      -1.0,
+      0.0,
+      1.0,
+      2.0
+    ],
+    "historical_conditional_means": [
+      -2.0,
+      -1.0,
+      0.0,
+      1.0,
+      2.0
+    ],
+    "next_regime_conditional_means": [
+      2.0,
+      1.0,
+      -0.0,
+      -1.0,
+      -2.0
+    ],
+    "query": 1.0,
+    "nearest_context_distance": 0.0,
+    "old_map_nearest_prediction": 1.0,
+    "new_map_conditional_mean": -1.0,
+    "squared_error_despite_zero_input_distance": 4.0,
+    "restriction": "Identical input distributions and zero nearest-neighbor distance do not identify an unobserved change in the conditional future map."
+  },
+  "H20_delayed_identification": {
+    "H": 20,
+    "current_origin": 60,
+    "latest_fully_mature_origin": 40,
+    "mature_origin_count": 21,
+    "visible_history_identical": true,
+    "all_fully_mature_labels_identical": true,
+    "current_input_identical": true,
+    "future_H_conditional_means": [
+      -2.0,
+      2.0
+    ],
+    "minimax_average_excess_squared_error_lower_bound": 4.0,
+    "newly_mature_origin_after_one_new_quote": 41,
+    "newly_mature_vector_contains_latest_quote": true,
+    "next_quote_can_begin_to_distinguish_worlds": true,
+    "restriction": "At the current issue the two futures are observationally indistinguishable. This is a no-assumption limit on every forecaster, not a theorem that SOLID alone fails, and not a claim that H20 causes 20 steps with no new information."
+  },
+  "context_mean_blindspot": {
+    "context_only_residual_mean_energy": 0.0,
+    "conditional_mean_signal_given_input_and_context": 1.0,
+    "restriction": "A context-only mean gate may miss slope changes. Estimating E[R|X,C] is ordinary residual regression and requires a new learning rule/evidence before any novelty claim."
+  },
+  "market_file_reads": 0,
+  "market_model_reads": 0,
+  "market_fits": 0,
+  "author_model_execution": false,
+  "synthetic_neural_fits": 0,
+  "serialization_note": "Initial execution passed algebra checks but JSON rejected a NumPy Boolean; cast to Python bool, with no mathematical or model change.",
+  "decision": "No new algorithm supported by these observations. Keep SOLID as an established-method applicability benchmark; do not restart residual-utility memory, horizon competition or renamed standard gates."
+}
