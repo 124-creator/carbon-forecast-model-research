@@ -1,0 +1,64 @@
+name: Pro posterior cell full replay 20261015
+on:
+  push:
+    branches: [research/pro-posterior-cell-20261015]
+    paths:
+      - '.github/workflows/pro-posterior-cell-20261015.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: pro-posterior-cell-20261015
+  cancel-in-progress: false
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      PYTHONHASHSEED: '0'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/pro-posterior-cell-20261015
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.5'
+      - name: Install pinned standalone CPU dependencies
+        run: |
+          python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0
+          python -m pip install --disable-pip-version-check torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+      - name: Execute fixed protocol using existing approved prefix only
+        run: |
+          python -B research/pro_posterior_cell_20261015/run_all.py --out research/pro_posterior_cell_20261015/results_remote --workers 3
+      - name: Archive all generated numeric materials in this research branch
+        run: |
+          python - <<'PY'
+          import os,json,hashlib
+          from pathlib import Path
+          root=Path('research/pro_posterior_cell_20261015/results_remote')
+          receipt={'workflow_run_id':os.environ['GITHUB_RUN_ID'],'executed_commit':os.environ['GITHUB_SHA'],'scope':'Fresh full execution, not independent scientific confirmation; compare with local first separately','prefix_only':True}
+          (root/'REMOTE_EXECUTION.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          entries=[]
+          for p in sorted(root.rglob('*')):
+              if p.is_file() and p.name!='RESULT_MANIFEST.json':
+                  entries.append({'path':str(p.relative_to(root)),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
+          (root/'RESULT_MANIFEST.json').write_text(json.dumps({'files':entries,'scope':'all remote results except this manifest'},indent=2)+'\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f research/pro_posterior_cell_20261015/results_remote
+          git commit -m 'Archive full Stage J arrays, trained parameters and logs [skip ci]'
+          git pull --rebase origin research/pro-posterior-cell-20261015
+          git push origin HEAD:refs/heads/research/pro-posterior-cell-20261015
+      - name: Upload full experiment artifact and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pro-posterior-cell-complete-20261015
+          path: research/pro_posterior_cell_20261015/
+          retention-days: 14
+          include-hidden-files: false
