@@ -1,0 +1,38 @@
+{
+  "created_utc": "2026-10-17T13:37:31.817786+00:00",
+  "status": "COMPLETE_WITH_CONDITIONAL_RESEARCH_HYPOTHESIS",
+  "scope": "Independent phase2 learning/clock review, restricted to old public source/development aggregates and explicitly authorized offline pretraining JSON logs",
+  "files_sha256": {
+    "LEARNING_AND_CLOCK_REVIEW_ZH.md": "390067fccd870bd97d782b426c18b377dec79b5c9ad41e2d454423ac155f48d9",
+    "AUTHORIZED_LOG_DIAGNOSTIC.json": "39182d31f103b3a4d12f179b9518580350910699f82c8f97780d9bc3979d45ad",
+    "RISK_CLOCK_SYNTHETIC.json": "ab2cd2dca60dbd2111c142ba4bc064d6192c5ffa9372608bfe42e599c10abb71",
+    "summarize_authorized_logs.py": "1792dd779cd191f23a4d7a9bfa4a48231b29421bac6feaa694058d1747ed7aca",
+    "risk_clock_synthetic.py": "1f14e106e5126651eb160a32d1b1a821cad4f15dc4e083b335d1baa2606a7e16"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "dependencies": "Python standard library only; no NumPy, torch, trainer, or optimizer imported by audit scripts"
+  },
+  "activity": {
+    "authorized_offline_json_logs": 20,
+    "market_quote_csv_reads": 0,
+    "npz_or_weight_reads": 0,
+    "confirmation_score_reads": 0,
+    "market_fits": 0,
+    "optimizer_steps": 0,
+    "old_file_writes": 0,
+    "synthetic_checks": 236
+  },
+  "main_findings": [
+    "Twenty RRC pretraining fits ran; ten selected epoch0. Four of ten selected joint checkpoints retain the original zero head and random encoder.",
+    "All twenty final recorded teacher/student total objectives are below their first recorded objective; no gradient clipping or epoch40 cap occurred. This does not establish absence or presence of market signal.",
+    "RRC checkpoint choice used teacher+student validation, while SOLID reused only teacher; do not label this independently optimized teacher selection.",
+    "Origin-specific scale-normalized MSE and raw price relative MSE weight origins differently. Ordinary WLS is the required strong baseline, not an innovation.",
+    "The two synthetic worlds have identical (X,z) laws but opposite raw-risk-optimal constant predictions -15/17 and +15/17.",
+    "Finite-state conditional Markov reward characteristic-function propagation is standard Markov additive algebra, exact only for its specified propagated state.",
+    "The single retained model hypothesis concerns joint observed signed rewards on the original quote clock; predictable activity alone cannot imply point-forecast gain."
+  ],
+  "next_step_boundary": "One frozen pre2021 support/age/conditional-signed-mean diagnostic may inform the root-run bounded experiment. No such market diagnostic was executed by this agent. No prior failed model or confirmation conclusion is changed.",
+  "publication_claim": "No algorithm novelty or predictive superiority established by this review.",
+  "relative_document_links_exist": true
+}

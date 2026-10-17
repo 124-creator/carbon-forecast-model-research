@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-17 13:35:31 UTC",
+  "type": "Design specification only; not executable data preparation or a frozen fitting protocol.",
+  "forecast_unit": "h-th future observed target quote (h in {1,5,20}); q is current observed target quote date.",
+  "observations_available": {
+    "own_target": "date <= q",
+    "every_other_series": "date < q",
+    "same_day_other_series": "Always excluded",
+    "no_prior_donor": "Mask absent; do not replace age with zero or create an observation",
+    "last_donor_age": "calendar_day_difference(q, max donor date < q)"
+  },
+  "daily_state_order": [
+    "Start each date q from shared history containing only source events dated <q.",
+    "For a forecast of target A on q, create its target view and assimilate only own A quote dated q.",
+    "Emit every required event-horizon prediction from that target view without knowing future event times.",
+    "Other targets on q use their own analogous views from the pre-date state.",
+    "Only after all target forecasts for q are defined may q events join shared history for later dates."
+  ],
+  "normalization": "Fit only on training inputs admitted by this same information rule; no full-file mean, scale, missingness or calendar summary.",
+  "training_label_maturity": "Every component of a training H20 label must be realized before its training cutoff; applicable support/purge details require a new frozen experiment protocol.",
+  "target_time_warning": "Sampling a continuous forecast at the realized future event date is a different estimand from issuing an event-index H20 vector at q unless those future dates were demonstrably known and separately authorized.",
+  "publication_vintage_limit": "Strict date filtering does not authenticate original publication timestamps, revisions or time zones.",
+  "future_synthetic_checks_not_run": [
+    "Changing any same-day or future donor value does not alter target q prediction.",
+    "Within-day donor row permutation does not change admissible inputs.",
+    "Duplicate source identity is not assimilated twice.",
+    "No prior donor produces explicit missingness.",
+    "No future target observation date appears in the feature record.",
+    "Every training vector uses fully mature labels and training-only scaling."
+  ]
+}
+

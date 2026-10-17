@@ -1,0 +1,187 @@
+{
+  "created_utc": "2026-10-17T13:56:20.354402+00:00",
+  "status": "DESIGN BEFORE FORMAL MARKET EXECUTION; executable hashes frozen after independent audit",
+  "parent_commit": "b953fb52c9e2b1f02fdf4f4c7d9eb9b574455aeb",
+  "new_candidate": "SMP: context-conditioned finite signed/zero-age Markov reward mean propagation trained on multi-horizon price risk",
+  "novelty_boundary": "Structural hypothesis only. Markov reward recurrence, signed hurdle/exponential marks, GRU, weighted least squares and auxiliary likelihood are established components. No originality or publication claim without strong empirical attribution.",
+  "prior_stopped_candidates_not_reopened": [
+    "RRC",
+    "SOLID adaptation",
+    "BCM"
+  ],
+  "markets": [
+    {
+      "name": "EEX_EUA_T3PA",
+      "path": "/workspace/scratch/b31c5edbd0de/scratch/next_data_20261017/local_only/eex_prepared/development/EEX_EUA_T3PA_daily_development.csv",
+      "sha256": "5a0c7580edebc2a7a5e66d7487568f6d99a8e08cca0785676c2aaeccad7db6bb",
+      "with_auction": true
+    },
+    {
+      "name": "GUANGZHOU",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/GUANGZHOU_development.csv",
+      "sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+      "with_auction": false
+    },
+    {
+      "name": "HUBEI",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/HUBEI_development.csv",
+      "sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+      "with_auction": false
+    },
+    {
+      "name": "SHANGHAI",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/SHANGHAI_D4_development.csv",
+      "sha256": "425424353bb3ac09e3d96b291680b4179e86f180da626a5d19e5c1e58ed960a1",
+      "with_auction": false
+    },
+    {
+      "name": "EU_REPORTED",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/EU_REPORTED_development.csv",
+      "sha256": "ca7c192380897076ef57516a11ea2ccefda6ba92ab9823d9aa8f2bb281cefedc",
+      "with_auction": false
+    }
+  ],
+  "data_end_exclusive": "2024-01-01",
+  "data_exposure": "The five development files were previously used; 2022 and 2023 are not untouched tests. EEX2024/2025 remain unopened for model use. Shanghai confirmation was previously exposed.",
+  "series_dependence": "EEX and EU_REPORTED are related EU ETS targets, not independent markets; no IID market or seed significance inference.",
+  "candidate_input": "20 shared history tokens; past60-increment origin RMS; full-prefix last nonzero sign and capped age; training-prefix fixed statistics; observed past calendar gaps and EEX historical auction covariates. No future quotation dates or actual future covariates.",
+  "training": "Separate annual model per series. Only labels strictly before year-start cutoff; last80 mature origins validation; remove training origins whose fullH20 label reaches validation origin. No model updates during evaluation year.",
+  "model": "GRU32 frozen current context inside each forecast, 9 sign-age states, age cap2, softmax q0/q-/q+, softplus b-/b+ +1e-4, zero age advances, nonzero resets sign and age0, exact20-step expectation",
+  "model_support": "Point forecasts of cumulative observed net price change, not transaction arrivals. State3/4 are nominal general states usually unreachable at actual t>=60.",
+  "neural_families": [
+    "smp_full",
+    "smp_no_clock",
+    "smp_no_sign",
+    "smp_pooled_mark",
+    "smp_iid_state",
+    "smp_one_step",
+    "smp_no_aux",
+    "gru_native",
+    "gru_normalized",
+    "gru_aux",
+    "lstm_native",
+    "patchtst_native"
+  ],
+  "shrink_candidates": [
+    0.0,
+    0.1
+  ],
+  "ridge_alpha_candidates": [
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "primary_baseline_families": [
+    "gru_native",
+    "gru_normalized",
+    "gru_aux",
+    "lstm_native",
+    "patchtst_native",
+    "ridge",
+    "ridge_val",
+    "markov_mle"
+  ],
+  "supplemental_baseline": "Existing project causal state-space reference uses its predefined filter/window/selection rule and longer history; reported separately, not a same-information ablation.",
+  "patchtst_adapter": "Unchanged author core 204c21efe0b39603ad6e2ca640ef5896646ab1a9; all shared channels, RevIN=False, C-to-1 supervised readout, d_model16/one block/two heads/patch5 stride5. This is an author-core task adaptation, not an author benchmark reproduction.",
+  "D1_seeds": [
+    17
+  ],
+  "D2_seeds": [
+    17,
+    29,
+    43
+  ],
+  "D1_year": 2022,
+  "D2_year": 2023,
+  "validation_size": 80,
+  "L": 20,
+  "H": 20,
+  "score_horizons": [
+    1,
+    5,
+    20
+  ],
+  "score": "Equal average across five series and h1/5/20 of raw-price MSE / same-cell RW_MSE. Average per-seed risks before series average; seeds are not additional observations.",
+  "max_epochs": 50,
+  "patience": 10,
+  "batch_size": 128,
+  "min_delta": 1e-06,
+  "epoch_zero_eligible": true,
+  "learning_rates": {
+    "recurrent": 0.003,
+    "patchtst": 0.001
+  },
+  "weight_decay": 0.001,
+  "gradient_clip": 1.0,
+  "auxiliary_hurdle_weight": 0.05,
+  "native_loss": "mean_t,h((s_t*m_t,h-delta_t,h)^2 / V_train,h) + alpha*mean_t,h((s_t*m_t,h)^2/V_train,h); V_train,h=mean_train(delta_h^2), fixed training floor. one_step takes h1 only; GRU_normalized mean((m-y)^2/h)+alpha*mean(m^2/h).",
+  "auxiliary_controls": "All SMP except no_aux and the directGRUaux use exactly the same .05 one-step hurdle NLL and raw 1e-10 event mask. DirectGRUaux has unconstrained 20-step head; no_aux isolates extra likelihood.",
+  "head_initialization": "Every neural predictor starts at exact RW point means; SMP/GRUaux q0 from training zero frequency clip[.001,.95], equal negative/positive probabilities and common training normalized absolute mark mean.",
+  "D1_exact_job_counts": {
+    "neural": 120,
+    "ridge": 25,
+    "markov_mle": 5,
+    "project_reference": 5,
+    "rw": 5
+  },
+  "D2_max_job_counts": {
+    "neural": 345,
+    "ridge": 25,
+    "markov_mle": 5,
+    "project_reference": 5,
+    "rw": 5
+  },
+  "D2_job_generation": "For each family, union of its D1-selected shrink and SMPfull D1-selected shrink; 5series x3seeds. No same-config duplicate fits. All5ridge values for train-validation-selected reference plus fixed D1-global ridge. Statistical predictions are not rerun for seeds.",
+  "D1_baseline_max_ratio": 1.02,
+  "D2_rw_max_score": 0.99,
+  "D1_gate": [
+    "full<1",
+    "full<same-alpha iid",
+    "full<same-alpha one_step",
+    "full<=1.02*best D1-selected non-SMP baseline"
+  ],
+  "D2_point_gate": [
+    "full<=.99",
+    "full<all D1-selected primary baselines in2023",
+    "EEX full<1",
+    "full<same-alpha iid",
+    "full<same-alpha one_step",
+    "at least3series full<1",
+    "at least2of3seeds overall full<1"
+  ],
+  "gate_interpretation": "Prespecified resource/evidence gates, not universal publication thresholds. Stop fixed candidate if gate fails; retain every result; do not rescue by new alpha/seed/objective/benchmark choices.",
+  "uncertainty": {
+    "method": "Joint calendar circular moving-block bootstrap; same sampled day weights for all series; average seed squared errors first; recompute each cell denominator inside every replicate",
+    "primary_block_calendar_days": 28,
+    "sensitivity_block_days": [
+      14,
+      56
+    ],
+    "replicates": 2000,
+    "seed": 314159,
+    "comparisons": [
+      "SMP vs RW",
+      "SMP vs D1 fixed best non-SMP baseline"
+    ],
+    "interval": "percentile95% per difference; require both upper97.5 percentiles<0 for additional confirmation resources",
+    "development_not_confirmatory": true
+  },
+  "confirmation_access": false,
+  "confirmation_rule": "Only after D2 point gate + independent full metric audit + both prespecified block-interval upper bounds<0; freeze separate exact C model/data/fit count protocol first. No C discovery, selection or numerical access in this source.",
+  "cpu_processes": 2,
+  "threads_per_process": 1,
+  "dtype": "float64",
+  "device": "CPU",
+  "D1_deadline_seconds": 2700,
+  "D2_deadline_seconds": 7200,
+  "failed_fit_policy": "Every attempt remains in ledger; nonfinite and incomplete runs ineligible. No automatic retry or result-dependent source edits. A real implementation defect requires a recorded protocol revision and independent review, never silent overwriting.",
+  "timing_evidence": {
+    "path": "results/TIMING.json",
+    "sha256": "132877783b5e0738aa23af2bf973cd57330a88b30d6b6ac6d86c45b7dbffc19b",
+    "market_fits": 0,
+    "fixed_synthetic_fits": 3
+  },
+  "publication": "Public source/protocol/hash/aggregate errors; all per-origin quotes/forecasts/scales/model weights local_only. No raw EEX redistribution."
+}
