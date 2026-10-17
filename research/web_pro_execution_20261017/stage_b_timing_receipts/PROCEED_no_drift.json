@@ -1,0 +1,190 @@
+{
+  "arm": "PROCEED_no_drift",
+  "author_commit": "0a8646199f6dcbf5346f933508b33c5e35b5708b",
+  "cut": 459,
+  "seed": 113,
+  "train_n": 299,
+  "validation_n": 60,
+  "pool_start": 60,
+  "train_first_origin": 60,
+  "train_max_origin": 358,
+  "train_max_target": 378,
+  "validation_first_origin": 379,
+  "validation_max_target": 458,
+  "input_global_mean": 18.00077591973244,
+  "input_global_sd": 3.4126791866104975,
+  "fair_support_increment_scale": 0.5935723560455379,
+  "normalization_fit_source": "raw[train] input windows only; one mean/std",
+  "target": "20 standardized future price levels",
+  "validation": "frozen parameters; per-origin mature context; all 20 normalized outputs MSE",
+  "pretraining_recent_batch": "previous shuffled training minibatch; zeros initially",
+  "sampler": "separate torch.Generator seeded identically across arms",
+  "parameter_count": 2324,
+  "initial_parameter_audit": {
+    "backbone_weights": {
+      "names": [
+        "backbone.Linear.weight"
+      ],
+      "parameter_count": 400,
+      "trainable_count": 400,
+      "sha256": "d7df78ce8637823b96ac9555137668954036c6bc9cd440c01e715ba7455fcbd0"
+    },
+    "backbone_bias": {
+      "names": [
+        "backbone.Linear.bias"
+      ],
+      "parameter_count": 20,
+      "trainable_count": 0,
+      "sha256": "5e1b308b87dfa0f9735c1c185471b63a7d53faa4e3dc842c661faa0ea4f3f0eb"
+    },
+    "dynamic_adapter": {
+      "names": [
+        "generator.bottlenecks.Linear_60.biases.0",
+        "generator.bottlenecks.Linear_60.weights.1",
+        "generator.bottlenecks.Linear_60.weights.0.weight",
+        "mlp1.1.weight",
+        "mlp1.1.bias",
+        "mlp1.3.weight",
+        "mlp1.3.bias",
+        "mlp2.1.weight",
+        "mlp2.1.bias",
+        "mlp2.3.weight",
+        "mlp2.3.bias"
+      ],
+      "parameter_count": 1844,
+      "trainable_count": 1844,
+      "sha256": "d5b92b03f0f42b69ea48e5520090d6f9c22c59590d4b0560cce25912e4b643cb"
+    },
+    "fixed_adapter_bias": {
+      "names": [
+        "generator.bottlenecks.Linear_60.biases.1"
+      ],
+      "parameter_count": 60,
+      "trainable_count": 60,
+      "sha256": "f031588ed20ba3e606310add919c438afa40b662cdc0edaedd3ac07041b7ac79"
+    }
+  },
+  "selected_pretraining_parameter_audit": {
+    "backbone_weights": {
+      "names": [
+        "backbone.Linear.weight"
+      ],
+      "parameter_count": 400,
+      "trainable_count": 400,
+      "sha256": "84044079b7639e5d7f07a460b3f9c465f1d2614aef832ec66492d348dd7f1a36",
+      "initial_sha256": "d7df78ce8637823b96ac9555137668954036c6bc9cd440c01e715ba7455fcbd0",
+      "maximum_absolute_change": 0.07690785717284351,
+      "bitwise_unchanged": false
+    },
+    "backbone_bias": {
+      "names": [
+        "backbone.Linear.bias"
+      ],
+      "parameter_count": 20,
+      "trainable_count": 0,
+      "sha256": "5e1b308b87dfa0f9735c1c185471b63a7d53faa4e3dc842c661faa0ea4f3f0eb",
+      "initial_sha256": "5e1b308b87dfa0f9735c1c185471b63a7d53faa4e3dc842c661faa0ea4f3f0eb",
+      "maximum_absolute_change": 0.0,
+      "bitwise_unchanged": true
+    },
+    "dynamic_adapter": {
+      "names": [
+        "generator.bottlenecks.Linear_60.biases.0",
+        "generator.bottlenecks.Linear_60.weights.1",
+        "generator.bottlenecks.Linear_60.weights.0.weight",
+        "mlp1.1.weight",
+        "mlp1.1.bias",
+        "mlp1.3.weight",
+        "mlp1.3.bias",
+        "mlp2.1.weight",
+        "mlp2.1.bias",
+        "mlp2.3.weight",
+        "mlp2.3.bias"
+      ],
+      "parameter_count": 1844,
+      "trainable_count": 1844,
+      "sha256": "1ae63a742e061eb9bffbaf8e67eb772c9a695c2946af737574034edb3a260a4a",
+      "initial_sha256": "d5b92b03f0f42b69ea48e5520090d6f9c22c59590d4b0560cce25912e4b643cb",
+      "maximum_absolute_change": 0.08186735150289991,
+      "bitwise_unchanged": false
+    },
+    "fixed_adapter_bias": {
+      "names": [
+        "generator.bottlenecks.Linear_60.biases.1"
+      ],
+      "parameter_count": 60,
+      "trainable_count": 60,
+      "sha256": "b9eb90844171eff2caa25a77830f54e8c25b424371bcba74fe279c94eb8a418f",
+      "initial_sha256": "f031588ed20ba3e606310add919c438afa40b662cdc0edaedd3ac07041b7ac79",
+      "maximum_absolute_change": 0.08151880000618425,
+      "bitwise_unchanged": false
+    }
+  },
+  "parameters_with_nonzero_gradient_in_any_attempted_pretraining_batch": [
+    "backbone.Linear.weight",
+    "generator.bottlenecks.Linear_60.biases.0",
+    "generator.bottlenecks.Linear_60.biases.1",
+    "generator.bottlenecks.Linear_60.weights.1"
+  ],
+  "state_sha256": "593dfdf7bc5446f0bb977f65ae1064e4581fdac4119fbffc1909262ce89c3ed8",
+  "epochs": 3,
+  "selected_epoch": 3,
+  "initial_validation": 0.10269016269217553,
+  "best_validation": 0.03777119276584151,
+  "validation_primary": 0.8427454101455312,
+  "seconds": 0.17996416200003296,
+  "trace": [
+    [
+      1,
+      0.1273540981509431,
+      0.05839794443595913,
+      0.17208451816259793
+    ],
+    [
+      2,
+      0.09338676324079576,
+      0.04256214761233322,
+      0.0978802515626004
+    ],
+    [
+      3,
+      0.07963186776274067,
+      0.03777119276584151,
+      0.06732871559599321
+    ]
+  ],
+  "trace_columns": [
+    "epoch",
+    "training_batch_weighted_mean_MSE",
+    "frozen_validation_MSE",
+    "maximum_unclipped_batch_gradient_norm"
+  ],
+  "optimizer": {
+    "name": "Adam",
+    "lr": 0.003,
+    "batch_size": 32,
+    "max_epochs": 3,
+    "patience": 12,
+    "minimum_validation_improvement": 1e-06,
+    "weight_decay": 0.0,
+    "gradient_clipping": false
+  },
+  "config": {
+    "seq_len": 20,
+    "pred_len": 20,
+    "enc_in": 1,
+    "individual": false,
+    "freeze": false,
+    "concept_dim": 16,
+    "bottleneck_dim": 4,
+    "act": "sigmoid",
+    "individual_generator": false,
+    "ema": 0.0,
+    "tune_mode": "down_up",
+    "merge_weights": true,
+    "do_predict": true,
+    "wo_clip": false
+  },
+  "no_drift": true,
+  "historical_predictions_or_weights_used": false
+}

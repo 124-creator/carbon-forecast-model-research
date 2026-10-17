@@ -1,0 +1,160 @@
+{
+  "arm": "NLinear_OGD",
+  "author_commit": "0a8646199f6dcbf5346f933508b33c5e35b5708b",
+  "cut": 459,
+  "seed": 113,
+  "train_n": 299,
+  "validation_n": 60,
+  "pool_start": 60,
+  "train_first_origin": 60,
+  "train_max_origin": 358,
+  "train_max_target": 378,
+  "validation_first_origin": 379,
+  "validation_max_target": 458,
+  "input_global_mean": 18.00077591973244,
+  "input_global_sd": 3.4126791866104975,
+  "fair_support_increment_scale": 0.5935723560455379,
+  "normalization_fit_source": "raw[train] input windows only; one mean/std",
+  "target": "20 standardized future price levels",
+  "validation": "frozen parameters; per-origin mature context; all 20 normalized outputs MSE",
+  "pretraining_recent_batch": "previous shuffled training minibatch; zeros initially",
+  "sampler": "separate torch.Generator seeded identically across arms",
+  "parameter_count": 420,
+  "initial_parameter_audit": {
+    "backbone_weights": {
+      "names": [
+        "Linear.weight"
+      ],
+      "parameter_count": 400,
+      "trainable_count": 400,
+      "sha256": "8c14757a5a0ecfe4afe8859a4a544fda20184e60f97d81f4b919c6f86281f125"
+    },
+    "backbone_bias": {
+      "names": [
+        "Linear.bias"
+      ],
+      "parameter_count": 20,
+      "trainable_count": 20,
+      "sha256": "8c2272b6fe89413db22a02d6664037cf13a1a84e8ef4e67a38ae376ba0330c05"
+    },
+    "dynamic_adapter": {
+      "names": [],
+      "parameter_count": 0,
+      "trainable_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "fixed_adapter_bias": {
+      "names": [],
+      "parameter_count": 0,
+      "trainable_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "selected_pretraining_parameter_audit": {
+    "backbone_weights": {
+      "names": [
+        "Linear.weight"
+      ],
+      "parameter_count": 400,
+      "trainable_count": 400,
+      "sha256": "fcbb7cc021c498ab22ad0101610d172bb917e5af239dccf629607bfcc2bb7001",
+      "initial_sha256": "8c14757a5a0ecfe4afe8859a4a544fda20184e60f97d81f4b919c6f86281f125",
+      "maximum_absolute_change": 0.07912720780751915,
+      "bitwise_unchanged": false
+    },
+    "backbone_bias": {
+      "names": [
+        "Linear.bias"
+      ],
+      "parameter_count": 20,
+      "trainable_count": 20,
+      "sha256": "ac5833910ad63d83822f06ffcb7f162f4761ac0e51350634ba9b99562a357493",
+      "initial_sha256": "8c2272b6fe89413db22a02d6664037cf13a1a84e8ef4e67a38ae376ba0330c05",
+      "maximum_absolute_change": 0.08768539499098169,
+      "bitwise_unchanged": false
+    },
+    "dynamic_adapter": {
+      "names": [],
+      "parameter_count": 0,
+      "trainable_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "initial_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "maximum_absolute_change": 0.0,
+      "bitwise_unchanged": true
+    },
+    "fixed_adapter_bias": {
+      "names": [],
+      "parameter_count": 0,
+      "trainable_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "initial_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "maximum_absolute_change": 0.0,
+      "bitwise_unchanged": true
+    }
+  },
+  "parameters_with_nonzero_gradient_in_any_attempted_pretraining_batch": [
+    "Linear.bias",
+    "Linear.weight"
+  ],
+  "state_sha256": "ce595fb70d185928b7118d4a5c86f32b404dcd0c8a4064c24c0fbb03a9615aab",
+  "epochs": 3,
+  "selected_epoch": 3,
+  "initial_validation": 0.10269016269217553,
+  "best_validation": 0.04784623691877916,
+  "validation_primary": 1.1052658702728315,
+  "seconds": 2.9501519140012533,
+  "trace": [
+    [
+      1,
+      0.1353859070784222,
+      0.07182896009898983,
+      0.1510411011424531
+    ],
+    [
+      2,
+      0.10909398696032034,
+      0.05584155088242599,
+      0.10252857072711472
+    ],
+    [
+      3,
+      0.09400091286341662,
+      0.04784623691877916,
+      0.08308717969177296
+    ]
+  ],
+  "trace_columns": [
+    "epoch",
+    "training_batch_weighted_mean_MSE",
+    "frozen_validation_MSE",
+    "maximum_unclipped_batch_gradient_norm"
+  ],
+  "optimizer": {
+    "name": "Adam",
+    "lr": 0.003,
+    "batch_size": 32,
+    "max_epochs": 3,
+    "patience": 12,
+    "minimum_validation_improvement": 1e-06,
+    "weight_decay": 0.0,
+    "gradient_clipping": false
+  },
+  "config": {
+    "seq_len": 20,
+    "pred_len": 20,
+    "enc_in": 1,
+    "individual": false,
+    "freeze": false,
+    "concept_dim": 16,
+    "bottleneck_dim": 4,
+    "act": "sigmoid",
+    "individual_generator": false,
+    "ema": 0.0,
+    "tune_mode": "down_up",
+    "merge_weights": true,
+    "do_predict": true,
+    "wo_clip": false
+  },
+  "no_drift": false,
+  "historical_predictions_or_weights_used": false
+}

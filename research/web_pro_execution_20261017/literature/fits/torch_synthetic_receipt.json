@@ -1,0 +1,153 @@
+{
+  "scope": "synthetic forward/algebra checks only; no training or market observations",
+  "source_repo": "https://github.com/VEWOXIC/FITS",
+  "source_commit": "d040bb015b6299da26d879b90dd19c80fb72c160",
+  "source_commit_date": "2025-06-04T13:16:38Z",
+  "source_license": "Apache-2.0",
+  "source_requirements_torch": "2.7.0",
+  "actual_torch": "2.3.1+cpu",
+  "python": "3.12.14",
+  "dependency_note": "Actual runtime differs from current author pin; sufficient for the stated shape/algebra checks, not a reproduction result.",
+  "patch": "Only functional change: irfft(..., n=self.seq_len+self.pred_len, dim=1). Original source untouched.",
+  "shape_cases": [
+    {
+      "L": 20,
+      "H": 1,
+      "original_length": 20,
+      "patched_length": 21,
+      "expected_length": 21,
+      "even_length_max_abs_difference": null
+    },
+    {
+      "L": 20,
+      "H": 5,
+      "original_length": 24,
+      "patched_length": 25,
+      "expected_length": 25,
+      "even_length_max_abs_difference": null
+    },
+    {
+      "L": 20,
+      "H": 20,
+      "original_length": 40,
+      "patched_length": 40,
+      "expected_length": 40,
+      "even_length_max_abs_difference": 0.0
+    },
+    {
+      "L": 21,
+      "H": 1,
+      "original_length": 22,
+      "patched_length": 22,
+      "expected_length": 22,
+      "even_length_max_abs_difference": 0.0
+    },
+    {
+      "L": 21,
+      "H": 5,
+      "original_length": 26,
+      "patched_length": 26,
+      "expected_length": 26,
+      "even_length_max_abs_difference": 0.0
+    },
+    {
+      "L": 21,
+      "H": 20,
+      "original_length": 40,
+      "patched_length": 41,
+      "expected_length": 41,
+      "even_length_max_abs_difference": null
+    },
+    {
+      "L": 60,
+      "H": 1,
+      "original_length": 60,
+      "patched_length": 61,
+      "expected_length": 61,
+      "even_length_max_abs_difference": null
+    },
+    {
+      "L": 60,
+      "H": 5,
+      "original_length": 64,
+      "patched_length": 65,
+      "expected_length": 65,
+      "even_length_max_abs_difference": null
+    },
+    {
+      "L": 60,
+      "H": 20,
+      "original_length": 80,
+      "patched_length": 80,
+      "expected_length": 80,
+      "even_length_max_abs_difference": 0.0
+    }
+  ],
+  "backcast_plus_forecast_loss_shape": {
+    "original": {
+      "status": "RuntimeError",
+      "reason": "The size of tensor a (24) must match the size of tensor b (25) at non-singleton dimension 1"
+    },
+    "patched": {
+      "status": "finite",
+      "loss": 67.58759307861328
+    }
+  },
+  "high_frequency_collision": {
+    "definition": "L=20, K=4, x_plus[t]=30+2*(-1)^t, x_minus[t]=30-2*(-1)^t",
+    "current_price_difference": 4.0,
+    "cases": [
+      {
+        "model": "original",
+        "seed": 0,
+        "forecast_max_abs_difference": 0.0
+      },
+      {
+        "model": "patched",
+        "seed": 0,
+        "forecast_max_abs_difference": 0.0
+      },
+      {
+        "model": "original",
+        "seed": 17,
+        "forecast_max_abs_difference": 0.0
+      },
+      {
+        "model": "patched",
+        "seed": 17,
+        "forecast_max_abs_difference": 0.0
+      },
+      {
+        "model": "original",
+        "seed": 42,
+        "forecast_max_abs_difference": 0.0
+      },
+      {
+        "model": "patched",
+        "seed": 42,
+        "forecast_max_abs_difference": 0.0
+      }
+    ]
+  },
+  "normalization_equivalence_max_abs_error": 3.814697265625e-06,
+  "invalid_default_cutoff": {
+    "L": 20,
+    "H": 5,
+    "K": 12,
+    "status": "RuntimeError",
+    "reason": "mat1 and mat2 shapes cannot be multiplied (1x11 and 12x15)"
+  },
+  "sha256": {
+    "official/LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "official/data_provider/data_factory.py": "3fbe2e862623bcc65c436341171a98c5b2b8a4536b23cc6693f7fa11fcebf15c",
+    "official/exp/exp_main_F.py": "85b70f874fa9a6ec1a40cf617ef4bc5ac340f36d214272a5286e2a5718d8db43",
+    "official/models/FITS.py": "11c28af651bada1ba3e1e19c1cec1e835cc4b974d75da27df7b84d322096c90c",
+    "official/models/NLinear.py": "df021fc5cae9d5eeca95da3c5a85353ac95113f5caee57c667080ba5d598a926",
+    "official/models/Real_FITS.py": "9ec30dbae573311258327ff963527357f8206c49ab2d871f9538f5f0ad220b97",
+    "official/requirements.txt": "5848e2ca4f6ed7aed213359c733dccf58f0a3e04aecb5562d9d945d8e9d317af",
+    "official/run_longExp_F.py": "f7f14594aa049d68b25b640b4f869a5414af55d6d0f69890a005e6d8688161dc",
+    "official/scripts/FITS/etth1_best.sh": "0e63c9b20a099e89e3c75e69d37d54085bd4f11c660a31a79dcebc0a1f12c516",
+    "patched/FITS_lengthfix.py": "c6d39c8bfce394790b38739f159a1533cf6212f9cba5c3a00de40a0180305586"
+  },
+  "status": "PASS: all asserted synthetic properties verified"
+}
