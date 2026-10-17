@@ -1,0 +1,2413 @@
+{
+  "created_utc": "2026-10-17T13:46:10.335714+00:00",
+  "status": "PASS",
+  "model_path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/structural_innovation_20261017b/source/smp_model.py",
+  "model_sha256": "c6f8bbd75a0a4ae025eabd1e31d6bdab1170569c154b9cc16b464172b01512c5",
+  "audit_script_sha256": "f87e441c5938cbed8e23aefbbe867c84aad793c3b9bad8c9fd0fc1e9fcb11c28",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.4",
+    "torch": "2.3.1+cpu",
+    "torch_default_dtype": "torch.float64",
+    "threads": 1
+  },
+  "check_count": 479,
+  "numerical_values_compared": 3140,
+  "maximum_absolute_errors": {
+    "matrix_forward": 1.7763568394002505e-15,
+    "enumeration_forward": 6.661338147750939e-16,
+    "stochastic_kernel": 2.220446049250313e-16,
+    "independent_propagation_gradient": 4.7504500333417354e-11,
+    "initialization": 1.1102230246251565e-16,
+    "network_forward": 4.440892098500626e-16,
+    "network_gradient": 1.3386225461431422e-10,
+    "ablation_behavior": 1.2212453270876722e-15,
+    "nll": 0.0,
+    "nll_gradient": 0.0
+  },
+  "variants": [
+    {
+      "variant": "full",
+      "synthetic_input_channels": 7,
+      "hidden_size": 32,
+      "q_free_groups": 9,
+      "b_free_groups": 9,
+      "encoder_parameters": 3936,
+      "head_parameters": 1485,
+      "total_parameters": 5421,
+      "post_perturb_module_gradient_norms": {
+        "encoder": 0.5790892830466952,
+        "q_head": 0.9654603125862236,
+        "b_head": 0.701141456322155
+      },
+      "synthetic_nominal_head_row_coverage": {
+        "q_head": 27,
+        "b_head": 18
+      }
+    },
+    {
+      "variant": "no_clock",
+      "synthetic_input_channels": 7,
+      "hidden_size": 32,
+      "q_free_groups": 3,
+      "b_free_groups": 3,
+      "encoder_parameters": 3936,
+      "head_parameters": 495,
+      "total_parameters": 4431,
+      "post_perturb_module_gradient_norms": {
+        "encoder": 0.6926781631367568,
+        "q_head": 1.5579273708527634,
+        "b_head": 0.9003697364310099
+      },
+      "synthetic_nominal_head_row_coverage": {
+        "q_head": 9,
+        "b_head": 6
+      }
+    },
+    {
+      "variant": "no_sign",
+      "synthetic_input_channels": 7,
+      "hidden_size": 32,
+      "q_free_groups": 3,
+      "b_free_groups": 3,
+      "encoder_parameters": 3936,
+      "head_parameters": 495,
+      "total_parameters": 4431,
+      "post_perturb_module_gradient_norms": {
+        "encoder": 0.6701631984006149,
+        "q_head": 1.2725308500883776,
+        "b_head": 0.8157428678977697
+      },
+      "synthetic_nominal_head_row_coverage": {
+        "q_head": 9,
+        "b_head": 6
+      }
+    },
+    {
+      "variant": "pooled_mark",
+      "synthetic_input_channels": 7,
+      "hidden_size": 32,
+      "q_free_groups": 9,
+      "b_free_groups": 1,
+      "encoder_parameters": 3936,
+      "head_parameters": 957,
+      "total_parameters": 4893,
+      "post_perturb_module_gradient_norms": {
+        "encoder": 0.8019375304711953,
+        "q_head": 0.9817727444621478,
+        "b_head": 1.4637946526408556
+      },
+      "synthetic_nominal_head_row_coverage": {
+        "q_head": 27,
+        "b_head": 2
+      }
+    },
+    {
+      "variant": "iid_state",
+      "synthetic_input_channels": 7,
+      "hidden_size": 32,
+      "q_free_groups": 1,
+      "b_free_groups": 1,
+      "encoder_parameters": 3936,
+      "head_parameters": 165,
+      "total_parameters": 4101,
+      "post_perturb_module_gradient_norms": {
+        "encoder": 0.9300055107987114,
+        "q_head": 2.396629059954776,
+        "b_head": 1.5160784933781972
+      },
+      "synthetic_nominal_head_row_coverage": {
+        "q_head": 3,
+        "b_head": 2
+      }
+    },
+    {
+      "variant": "one_step",
+      "synthetic_input_channels": 7,
+      "hidden_size": 32,
+      "q_free_groups": 9,
+      "b_free_groups": 9,
+      "encoder_parameters": 3936,
+      "head_parameters": 1485,
+      "total_parameters": 5421,
+      "post_perturb_module_gradient_norms": {
+        "encoder": 0.5790892830466952,
+        "q_head": 0.9654603125862236,
+        "b_head": 0.701141456322155
+      },
+      "synthetic_nominal_head_row_coverage": {
+        "q_head": 27,
+        "b_head": 18
+      }
+    }
+  ],
+  "propagation_finite_difference_checks": [
+    {
+      "parameter": "logits",
+      "index": [
+        0,
+        4,
+        0
+      ],
+      "autograd": 0.0,
+      "finite_difference": 0.0
+    },
+    {
+      "parameter": "logits",
+      "index": [
+        0,
+        5,
+        0
+      ],
+      "autograd": 0.0,
+      "finite_difference": 0.0
+    },
+    {
+      "parameter": "logits",
+      "index": [
+        0,
+        6,
+        2
+      ],
+      "autograd": 0.07957277696356599,
+      "finite_difference": 0.07957277697173692
+    },
+    {
+      "parameter": "logits",
+      "index": [
+        1,
+        0,
+        2
+      ],
+      "autograd": 0.08105614066567028,
+      "finite_difference": 0.08105614062239863
+    },
+    {
+      "parameter": "logits",
+      "index": [
+        1,
+        6,
+        1
+      ],
+      "autograd": -0.09049425985396464,
+      "finite_difference": -0.09049425982177173
+    },
+    {
+      "parameter": "logits",
+      "index": [
+        1,
+        6,
+        2
+      ],
+      "autograd": 0.1296604857866776,
+      "finite_difference": 0.1296604858341821
+    },
+    {
+      "parameter": "logits",
+      "index": [
+        7,
+        6,
+        1
+      ],
+      "autograd": -0.06625924801505896,
+      "finite_difference": -0.06625924801884064
+    },
+    {
+      "parameter": "logits",
+      "index": [
+        8,
+        0,
+        1
+      ],
+      "autograd": -0.07565792468324747,
+      "finite_difference": -0.0756579246960487
+    },
+    {
+      "parameter": "marks",
+      "index": [
+        0,
+        3,
+        0
+      ],
+      "autograd": 0.0,
+      "finite_difference": 0.0
+    },
+    {
+      "parameter": "marks",
+      "index": [
+        0,
+        3,
+        1
+      ],
+      "autograd": 0.0,
+      "finite_difference": 0.0
+    },
+    {
+      "parameter": "marks",
+      "index": [
+        0,
+        6,
+        1
+      ],
+      "autograd": 0.06623550259620205,
+      "finite_difference": 0.06623550261389277
+    },
+    {
+      "parameter": "marks",
+      "index": [
+        1,
+        6,
+        1
+      ],
+      "autograd": 0.12565402590840916,
+      "finite_difference": 0.12565402593076036
+    },
+    {
+      "parameter": "marks",
+      "index": [
+        2,
+        6,
+        0
+      ],
+      "autograd": -0.04018435530369871,
+      "finite_difference": -0.04018435530855902
+    },
+    {
+      "parameter": "marks",
+      "index": [
+        7,
+        0,
+        1
+      ],
+      "autograd": 0.050076157970657564,
+      "finite_difference": 0.050076157959849654
+    },
+    {
+      "parameter": "marks",
+      "index": [
+        7,
+        6,
+        0
+      ],
+      "autograd": -0.059135958168213335,
+      "finite_difference": -0.059135958161565805
+    },
+    {
+      "parameter": "marks",
+      "index": [
+        8,
+        0,
+        0
+      ],
+      "autograd": -0.06679006018712362,
+      "finite_difference": -0.06679006016654943
+    }
+  ],
+  "network_finite_difference_checks": [
+    {
+      "variant": "full",
+      "parameter": "encoder.bias_ih_l0",
+      "index": [
+        73
+      ],
+      "autograd": -0.22062422345849955,
+      "finite_difference": -0.22062422355695332
+    },
+    {
+      "variant": "full",
+      "parameter": "q_head.bias",
+      "index": [
+        20
+      ],
+      "autograd": 0.3984654776043582,
+      "finite_difference": 0.39846547753019657
+    },
+    {
+      "variant": "full",
+      "parameter": "b_head.bias",
+      "index": [
+        1
+      ],
+      "autograd": 0.30552284239395844,
+      "finite_difference": 0.3055228423864964
+    },
+    {
+      "variant": "no_clock",
+      "parameter": "encoder.bias_ih_l0",
+      "index": [
+        75
+      ],
+      "autograd": 0.23807834139705153,
+      "finite_difference": 0.23807834144407014
+    },
+    {
+      "variant": "no_clock",
+      "parameter": "q_head.bias",
+      "index": [
+        1
+      ],
+      "autograd": -0.8219050504498203,
+      "finite_difference": -0.8219050504007508
+    },
+    {
+      "variant": "no_clock",
+      "parameter": "b_head.bias",
+      "index": [
+        0
+      ],
+      "autograd": -0.48272722849252403,
+      "finite_difference": -0.48272722852349403
+    },
+    {
+      "variant": "no_sign",
+      "parameter": "encoder.bias_ih_l0",
+      "index": [
+        68
+      ],
+      "autograd": 0.22854644412385092,
+      "finite_difference": 0.22854644407543923
+    },
+    {
+      "variant": "no_sign",
+      "parameter": "q_head.bias",
+      "index": [
+        2
+      ],
+      "autograd": 0.6045191049653234,
+      "finite_difference": 0.6045191048853482
+    },
+    {
+      "variant": "no_sign",
+      "parameter": "b_head.bias",
+      "index": [
+        0
+      ],
+      "autograd": -0.3808965686919247,
+      "finite_difference": -0.3808965687163157
+    },
+    {
+      "variant": "pooled_mark",
+      "parameter": "encoder.bias_ih_l0",
+      "index": [
+        75
+      ],
+      "autograd": 0.28452729632798734,
+      "finite_difference": 0.2845272963555856
+    },
+    {
+      "variant": "pooled_mark",
+      "parameter": "q_head.bias",
+      "index": [
+        19
+      ],
+      "autograd": -0.37965547432194824,
+      "finite_difference": -0.37965547431545454
+    },
+    {
+      "variant": "pooled_mark",
+      "parameter": "b_head.bias",
+      "index": [
+        1
+      ],
+      "autograd": 0.9170816457838717,
+      "finite_difference": 0.9170816458112241
+    },
+    {
+      "variant": "iid_state",
+      "parameter": "encoder.bias_ih_l0",
+      "index": [
+        84
+      ],
+      "autograd": -0.3696018288561257,
+      "finite_difference": -0.36960182898948535
+    },
+    {
+      "variant": "iid_state",
+      "parameter": "q_head.bias",
+      "index": [
+        2
+      ],
+      "autograd": 1.4745883801187936,
+      "finite_difference": 1.4745883799849313
+    },
+    {
+      "variant": "iid_state",
+      "parameter": "b_head.bias",
+      "index": [
+        1
+      ],
+      "autograd": 0.9564240183443533,
+      "finite_difference": 0.9564240183584927
+    },
+    {
+      "variant": "one_step",
+      "parameter": "encoder.bias_ih_l0",
+      "index": [
+        73
+      ],
+      "autograd": -0.22062422345849955,
+      "finite_difference": -0.22062422355695332
+    },
+    {
+      "variant": "one_step",
+      "parameter": "q_head.bias",
+      "index": [
+        20
+      ],
+      "autograd": 0.3984654776043582,
+      "finite_difference": 0.39846547753019657
+    },
+    {
+      "variant": "one_step",
+      "parameter": "b_head.bias",
+      "index": [
+        1
+      ],
+      "autograd": 0.30552284239395844,
+      "finite_difference": 0.3055228423864964
+    }
+  ],
+  "check_records": [
+    {
+      "name": "generic H20 propagator vs independent augmented matrix shape",
+      "status": "PASS"
+    },
+    {
+      "name": "generic H20 propagator vs independent augmented matrix values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state0 H1 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state0 H1 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state0 H2 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state0 H2 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state0 H3 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state0 H3 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state0 H4 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state0 H4 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state0 H5 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state0 H5 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general case0 transition row sums shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general case0 transition row sums values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state1 H1 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state1 H1 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state1 H2 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state1 H2 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state1 H3 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state1 H3 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state1 H4 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state1 H4 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state1 H5 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state1 H5 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general case1 transition row sums shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general case1 transition row sums values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state2 H1 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state2 H1 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state2 H2 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state2 H2 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state2 H3 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state2 H3 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state2 H4 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state2 H4 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state2 H5 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state2 H5 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general case2 transition row sums shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general case2 transition row sums values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state3 H1 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state3 H1 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state3 H2 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state3 H2 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state3 H3 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state3 H3 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state3 H4 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state3 H4 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state3 H5 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state3 H5 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general case3 transition row sums shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general case3 transition row sums values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state4 H1 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state4 H1 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state4 H2 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state4 H2 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state4 H3 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state4 H3 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state4 H4 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state4 H4 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state4 H5 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state4 H5 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general case4 transition row sums shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general case4 transition row sums values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state5 H1 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state5 H1 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state5 H2 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state5 H2 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state5 H3 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state5 H3 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state5 H4 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state5 H4 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state5 H5 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state5 H5 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general case5 transition row sums shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general case5 transition row sums values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state6 H1 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state6 H1 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state6 H2 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state6 H2 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state6 H3 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state6 H3 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state6 H4 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state6 H4 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state6 H5 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state6 H5 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general case6 transition row sums shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general case6 transition row sums values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state7 H1 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state7 H1 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state7 H2 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state7 H2 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state7 H3 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state7 H3 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state7 H4 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state7 H4 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state7 H5 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state7 H5 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general case7 transition row sums shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general case7 transition row sums values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state8 H1 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state8 H1 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state8 H2 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state8 H2 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state8 H3 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state8 H3 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state8 H4 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state8 H4 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general state8 H5 exhaustive event-path mean shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general state8 H5 exhaustive event-path mean values",
+      "status": "PASS"
+    },
+    {
+      "name": "general case8 transition row sums shape",
+      "status": "PASS"
+    },
+    {
+      "name": "general case8 transition row sums values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(0), np.int64(4), np.int64(0)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(0), np.int64(4), np.int64(0)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(0), np.int64(5), np.int64(0)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(0), np.int64(5), np.int64(0)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(0), np.int64(6), np.int64(2)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(0), np.int64(6), np.int64(2)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(1), np.int64(0), np.int64(2)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(1), np.int64(0), np.int64(2)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(1), np.int64(6), np.int64(1)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(1), np.int64(6), np.int64(1)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(1), np.int64(6), np.int64(2)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(1), np.int64(6), np.int64(2)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(7), np.int64(6), np.int64(1)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(7), np.int64(6), np.int64(1)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(8), np.int64(0), np.int64(1)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference logits(np.int64(8), np.int64(0), np.int64(1)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(0), np.int64(3), np.int64(0)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(0), np.int64(3), np.int64(0)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(0), np.int64(3), np.int64(1)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(0), np.int64(3), np.int64(1)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(0), np.int64(6), np.int64(1)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(0), np.int64(6), np.int64(1)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(1), np.int64(6), np.int64(1)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(1), np.int64(6), np.int64(1)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(2), np.int64(6), np.int64(0)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(2), np.int64(6), np.int64(0)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(7), np.int64(0), np.int64(1)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(7), np.int64(0), np.int64(1)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(7), np.int64(6), np.int64(0)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(7), np.int64(6), np.int64(0)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(8), np.int64(0), np.int64(0)) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "independent matrix finite difference marks(np.int64(8), np.int64(0), np.int64(0)) values",
+      "status": "PASS"
+    },
+    {
+      "name": "full declared free group counts",
+      "status": "PASS"
+    },
+    {
+      "name": "full actual allocated encoder count",
+      "status": "PASS"
+    },
+    {
+      "name": "full actual allocated head count",
+      "status": "PASS"
+    },
+    {
+      "name": "full exact RW initial forecast",
+      "status": "PASS"
+    },
+    {
+      "name": "full initial positive mark means shape",
+      "status": "PASS"
+    },
+    {
+      "name": "full initial positive mark means values",
+      "status": "PASS"
+    },
+    {
+      "name": "full initial encoder data gradient is exactly zero",
+      "status": "PASS"
+    },
+    {
+      "name": "full initial head data gradient is nonzero",
+      "status": "PASS"
+    },
+    {
+      "name": "full actual network output vs matrix oracle shape",
+      "status": "PASS"
+    },
+    {
+      "name": "full actual network output vs matrix oracle values",
+      "status": "PASS"
+    },
+    {
+      "name": "full q groups differ after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "full b groups differ after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "full every module has nonzero finite post-perturb gradient",
+      "status": "PASS"
+    },
+    {
+      "name": "full all nominal head output rows influence general-state synthetic task q_head",
+      "status": "PASS"
+    },
+    {
+      "name": "full all nominal head output rows influence general-state synthetic task b_head",
+      "status": "PASS"
+    },
+    {
+      "name": "full network finite difference encoder.bias_ih_l0(np.int64(73),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "full network finite difference encoder.bias_ih_l0(np.int64(73),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "full network finite difference q_head.bias(np.int64(20),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "full network finite difference q_head.bias(np.int64(20),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "full network finite difference b_head.bias(np.int64(1),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "full network finite difference b_head.bias(np.int64(1),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "full constant prefix state5 finite after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "full constant prefix gradients finite",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock declared free group counts",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual allocated encoder count",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual allocated head count",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock exact RW initial forecast",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock initial positive mark means shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock initial positive mark means values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock initial encoder data gradient is exactly zero",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock initial head data gradient is nonzero",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual network output vs matrix oracle shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual network output vs matrix oracle values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual q tie 0,1",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual b tie 0,1",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual q tie 0,2",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual b tie 0,2",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual q tie 1,2",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual b tie 1,2",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual q tie 3,4",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual b tie 3,4",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual q tie 3,5",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual b tie 3,5",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual q tie 4,5",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual b tie 4,5",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual q tie 6,7",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual b tie 6,7",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual q tie 6,8",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual b tie 6,8",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual q tie 7,8",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock actual b tie 7,8",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock q groups differ after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock b groups differ after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock same context sign-1 full forecast age invariance shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock same context sign-1 full forecast age invariance values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock same context sign0 full forecast age invariance shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock same context sign0 full forecast age invariance values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock same context sign1 full forecast age invariance shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock same context sign1 full forecast age invariance values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock every module has nonzero finite post-perturb gradient",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock all nominal head output rows influence general-state synthetic task q_head",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock all nominal head output rows influence general-state synthetic task b_head",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock network finite difference encoder.bias_ih_l0(np.int64(75),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock network finite difference encoder.bias_ih_l0(np.int64(75),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock network finite difference q_head.bias(np.int64(1),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock network finite difference q_head.bias(np.int64(1),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock network finite difference b_head.bias(np.int64(0),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock network finite difference b_head.bias(np.int64(0),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock constant prefix state5 finite after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "no_clock constant prefix gradients finite",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign declared free group counts",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual allocated encoder count",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual allocated head count",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign exact RW initial forecast",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign initial positive mark means shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign initial positive mark means values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign initial encoder data gradient is exactly zero",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign initial head data gradient is nonzero",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual network output vs matrix oracle shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual network output vs matrix oracle values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual q tie 0,3",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual b tie 0,3",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual q tie 0,6",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual b tie 0,6",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual q tie 1,4",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual b tie 1,4",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual q tie 1,7",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual b tie 1,7",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual q tie 2,5",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual b tie 2,5",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual q tie 2,8",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual b tie 2,8",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual q tie 3,6",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual b tie 3,6",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual q tie 4,7",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual b tie 4,7",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual q tie 5,8",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign actual b tie 5,8",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign q groups differ after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign b groups differ after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign same context age0 full forecast sign invariance shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign same context age0 full forecast sign invariance values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign same context age1 full forecast sign invariance shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign same context age1 full forecast sign invariance values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign same context age2 full forecast sign invariance shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign same context age2 full forecast sign invariance values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign every module has nonzero finite post-perturb gradient",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign all nominal head output rows influence general-state synthetic task q_head",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign all nominal head output rows influence general-state synthetic task b_head",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign network finite difference encoder.bias_ih_l0(np.int64(68),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign network finite difference encoder.bias_ih_l0(np.int64(68),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign network finite difference q_head.bias(np.int64(2),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign network finite difference q_head.bias(np.int64(2),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign network finite difference b_head.bias(np.int64(0),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign network finite difference b_head.bias(np.int64(0),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign constant prefix state5 finite after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "no_sign constant prefix gradients finite",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark declared free group counts",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual allocated encoder count",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual allocated head count",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark exact RW initial forecast",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark initial positive mark means shape",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark initial positive mark means values",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark initial encoder data gradient is exactly zero",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark initial head data gradient is nonzero",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual network output vs matrix oracle shape",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual network output vs matrix oracle values",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 0,1",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 0,2",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 0,3",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 0,4",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 0,5",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 0,6",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 0,7",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 0,8",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 1,2",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 1,3",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 1,4",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 1,5",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 1,6",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 1,7",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 1,8",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 2,3",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 2,4",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 2,5",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 2,6",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 2,7",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 2,8",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 3,4",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 3,5",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 3,6",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 3,7",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 3,8",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 4,5",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 4,6",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 4,7",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 4,8",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 5,6",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 5,7",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 5,8",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 6,7",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 6,8",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark actual b tie 7,8",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark q groups differ after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark b groups differ after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark every module has nonzero finite post-perturb gradient",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark all nominal head output rows influence general-state synthetic task q_head",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark all nominal head output rows influence general-state synthetic task b_head",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark network finite difference encoder.bias_ih_l0(np.int64(75),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark network finite difference encoder.bias_ih_l0(np.int64(75),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark network finite difference q_head.bias(np.int64(19),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark network finite difference q_head.bias(np.int64(19),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark network finite difference b_head.bias(np.int64(1),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark network finite difference b_head.bias(np.int64(1),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark constant prefix state5 finite after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "pooled_mark constant prefix gradients finite",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state declared free group counts",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual allocated encoder count",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual allocated head count",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state exact RW initial forecast",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state initial positive mark means shape",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state initial positive mark means values",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state initial encoder data gradient is exactly zero",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state initial head data gradient is nonzero",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual network output vs matrix oracle shape",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual network output vs matrix oracle values",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 0,1",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 0,1",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 0,2",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 0,2",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 0,3",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 0,3",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 0,4",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 0,4",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 0,5",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 0,5",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 0,6",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 0,6",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 0,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 0,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 0,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 0,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 1,2",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 1,2",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 1,3",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 1,3",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 1,4",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 1,4",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 1,5",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 1,5",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 1,6",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 1,6",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 1,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 1,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 1,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 1,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 2,3",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 2,3",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 2,4",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 2,4",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 2,5",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 2,5",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 2,6",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 2,6",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 2,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 2,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 2,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 2,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 3,4",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 3,4",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 3,5",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 3,5",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 3,6",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 3,6",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 3,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 3,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 3,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 3,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 4,5",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 4,5",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 4,6",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 4,6",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 4,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 4,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 4,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 4,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 5,6",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 5,6",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 5,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 5,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 5,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 5,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 6,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 6,7",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 6,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 6,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual q tie 7,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state actual b tie 7,8",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state q groups differ after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state b groups differ after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state all initial states equivalent shape",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state all initial states equivalent values",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state exact H times single-step expected reward shape",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state exact H times single-step expected reward values",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state every module has nonzero finite post-perturb gradient",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state all nominal head output rows influence general-state synthetic task q_head",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state all nominal head output rows influence general-state synthetic task b_head",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state network finite difference encoder.bias_ih_l0(np.int64(84),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state network finite difference encoder.bias_ih_l0(np.int64(84),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state network finite difference q_head.bias(np.int64(2),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state network finite difference q_head.bias(np.int64(2),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state network finite difference b_head.bias(np.int64(1),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state network finite difference b_head.bias(np.int64(1),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state constant prefix state5 finite after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "iid_state constant prefix gradients finite",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step declared free group counts",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step actual allocated encoder count",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step actual allocated head count",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step exact RW initial forecast",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step initial positive mark means shape",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step initial positive mark means values",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step initial encoder data gradient is exactly zero",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step initial head data gradient is nonzero",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step actual network output vs matrix oracle shape",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step actual network output vs matrix oracle values",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step q groups differ after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step b groups differ after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step and full exact forward identity at same parameters",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step every module has nonzero finite post-perturb gradient",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step all nominal head output rows influence general-state synthetic task q_head",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step all nominal head output rows influence general-state synthetic task b_head",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step network finite difference encoder.bias_ih_l0(np.int64(73),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step network finite difference encoder.bias_ih_l0(np.int64(73),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step network finite difference q_head.bias(np.int64(20),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step network finite difference q_head.bias(np.int64(20),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step network finite difference b_head.bias(np.int64(1),) shape",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step network finite difference b_head.bias(np.int64(1),) values",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step constant prefix state5 finite after perturbation",
+      "status": "PASS"
+    },
+    {
+      "name": "one_step constant prefix gradients finite",
+      "status": "PASS"
+    },
+    {
+      "name": "hurdle NLL manual values and explicit tiny-event exclusion shape",
+      "status": "PASS"
+    },
+    {
+      "name": "hurdle NLL manual values and explicit tiny-event exclusion values",
+      "status": "PASS"
+    },
+    {
+      "name": "hurdle NLL mean reduction shape",
+      "status": "PASS"
+    },
+    {
+      "name": "hurdle NLL mean reduction values",
+      "status": "PASS"
+    },
+    {
+      "name": "hurdle NLL sum reduction shape",
+      "status": "PASS"
+    },
+    {
+      "name": "hurdle NLL sum reduction values",
+      "status": "PASS"
+    },
+    {
+      "name": "NLL q derivative independent formula shape",
+      "status": "PASS"
+    },
+    {
+      "name": "NLL q derivative independent formula values",
+      "status": "PASS"
+    },
+    {
+      "name": "NLL b derivative independent formula shape",
+      "status": "PASS"
+    },
+    {
+      "name": "NLL b derivative independent formula values",
+      "status": "PASS"
+    },
+    {
+      "name": "stable NLL retains log-softmax despite probability underflow shape",
+      "status": "PASS"
+    },
+    {
+      "name": "stable NLL retains log-softmax despite probability underflow values",
+      "status": "PASS"
+    },
+    {
+      "name": "extreme NLL gradients finite",
+      "status": "PASS"
+    },
+    {
+      "name": "initialization clips q0 explicitly",
+      "status": "PASS"
+    },
+    {
+      "name": "initialization floors empty/nonpositive mark statistic explicitly",
+      "status": "PASS"
+    },
+    {
+      "name": "head initialization leaves GRU state unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "floor/clip initialization still gives exact RW for all states",
+      "status": "PASS"
+    },
+    {
+      "name": "reject floating state",
+      "status": "PASS"
+    },
+    {
+      "name": "reject boolean state",
+      "status": "PASS"
+    },
+    {
+      "name": "reject state9",
+      "status": "PASS"
+    },
+    {
+      "name": "reject negative state",
+      "status": "PASS"
+    },
+    {
+      "name": "reject wrong q shape",
+      "status": "PASS"
+    },
+    {
+      "name": "reject wrong b batch",
+      "status": "PASS"
+    },
+    {
+      "name": "reject fractional horizon",
+      "status": "PASS"
+    },
+    {
+      "name": "reject horizon0",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bool horizon",
+      "status": "PASS"
+    },
+    {
+      "name": "reject a true event with zero sign",
+      "status": "PASS"
+    },
+    {
+      "name": "reject mismatched event mask",
+      "status": "PASS"
+    },
+    {
+      "name": "reject unknown variant",
+      "status": "PASS"
+    },
+    {
+      "name": "empty general prefix state3",
+      "status": "PASS"
+    },
+    {
+      "name": "single-zero general prefix state4",
+      "status": "PASS"
+    },
+    {
+      "name": "long constant prefix state5",
+      "status": "PASS"
+    },
+    {
+      "name": "long zero run retains previously observed negative sign",
+      "status": "PASS"
+    },
+    {
+      "name": "long zero run retains previously observed positive sign",
+      "status": "PASS"
+    },
+    {
+      "name": "negative event resets to0",
+      "status": "PASS"
+    },
+    {
+      "name": "positive event resets to6",
+      "status": "PASS"
+    },
+    {
+      "name": "prefix-state oracle invariant to unseen suffix",
+      "status": "PASS"
+    },
+    {
+      "name": "market-length-prefix states form closed transition support",
+      "status": "PASS"
+    }
+  ],
+  "initialization_floor_clip_example": {
+    "requested_q0": 1.0,
+    "applied_q0": 0.95,
+    "requested_mean_abs_nonzero": 0.0,
+    "applied_mean_abs_nonzero": 0.00010001
+  },
+  "activity": {
+    "market_data_reads": 0,
+    "confirmation_reads": 0,
+    "weight_or_prediction_file_reads": 0,
+    "market_fits": 0,
+    "optimizer_instances": 0,
+    "optimizer_steps": 0,
+    "old_file_writes": 0
+  },
+  "scope_limits": [
+    "Synthetic fixtures include all nine general API states. Market-length prefixes normally reach only states 0,1,2,5,6,7,8; nominal rows3/4 are not evidence of actual market capacity.",
+    "no_clock/no_sign tie future source-state groups at fixed current context. They do not remove age/sign information from the current x/context.",
+    "one_step is exactly full forward architecture. The runner must independently establish that only its h1 objective is used.",
+    "The source computes an exact expected reward in its specified finite state model with current GRU context fixed. This is standard Markov reward mathematics, not a novelty certificate.",
+    "The independent prefix-state oracle validates the required definition. Actual feature extraction, source availability, label maturity, sample pairing, and raw-price risk weighting require the later runner/data audit.",
+    "The model accepts a caller-supplied input tensor and state; there is no market or future label access in the model module. It cannot certify that a caller constructed those inputs causally.",
+    "Direct propagate_mean callers own q/b validity; the source does not silently renormalize arbitrary supplied probabilities.",
+    "No market predictive performance or statistical superiority was assessed."
+  ]
+}
