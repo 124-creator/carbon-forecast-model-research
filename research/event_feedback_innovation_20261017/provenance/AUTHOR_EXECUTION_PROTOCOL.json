@@ -1,0 +1,53 @@
+{
+  "created_utc": "2026-10-17T10:02:20.751920+00:00",
+  "phase": "published_author_execution_anchor",
+  "author_commit": "11cebd980a1f77ef0e1db9ac313dbfe6d37984e9",
+  "adapter_sha256": "330e8bd8667f72c1baaaf844759577c8cf028330aa007be319a16bd46ea428b0",
+  "data_path": "/workspace/scratch/b31c5edbd0de/scratch/next_data_20261017/local_only/eex_prepared/development/EEX_EUA_T3PA_daily_development.csv",
+  "data_sha256": "5a0c7580edebc2a7a5e66d7487568f6d99a8e08cca0785676c2aaeccad7db6bb",
+  "confirmation_access": false,
+  "model": "Unchanged author DLinear + Identity MLP16 depth3 and original DSOF core via tested causal adapter",
+  "context": 21,
+  "horizon": 20,
+  "td_k": [
+    1
+  ],
+  "replay_size": 300,
+  "replay_batch": 32,
+  "gamma": 0.9,
+  "optimizer": "Exact author Exchange/DLinear_MLP defaults in adapter, no performance-directed tuning",
+  "dtype": "float64",
+  "cpu_processes": 1,
+  "threads": 1,
+  "offline_cutoff": "2021-01-01",
+  "validation": "Last 80 fully mature origins strictly before cutoff, train last label strictly before first validation origin",
+  "scaler": "Scalar mean/std of original observed training-only price prefix ending before validation first origin; never validation or online suffix statistics",
+  "pilot": {
+    "count": 1,
+    "seed": 997,
+    "offline_epochs": 3,
+    "online_observations": 80,
+    "report": "Runtime, finite output, steps and shape only; no model selection or published forecast score"
+  },
+  "formal": {
+    "count": 1,
+    "seed": 17,
+    "max_epochs": 40,
+    "patience": 8,
+    "epoch_zero_eligible": true,
+    "offline_batch_size": 64,
+    "selection": "Validation mean of h1/h5/h20 native-price MSE/RW_MSE",
+    "online_start": "2021-01-01",
+    "online_end_exclusive": "2024-01-01",
+    "scored_years": [
+      2022,
+      2023
+    ],
+    "score_origins": "Same-year complete H20 future, all methods paired later only if identical origin/protocol",
+    "primary_score": "Equal year and h1/h5/h20 native-price MSE/RW_MSE",
+    "purpose": "Actually execute published original model and learning paths on real development data; execution anchor, not authors complete benchmark reproduction and not sole strength-matched comparator"
+  },
+  "deadline_utc": "2026-10-17T10:40:00+00:00",
+  "stop_rule": "No retries or rescue hyperparameters after nonfinite result or deadline; preserve all records",
+  "storage": "Raw inputs, per-origin forecasts/targets and checkpoints local_only due EEX data terms; publish own code, metadata and aggregate metrics only"
+}

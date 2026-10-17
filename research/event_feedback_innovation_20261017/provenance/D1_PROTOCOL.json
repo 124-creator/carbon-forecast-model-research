@@ -1,0 +1,371 @@
+{
+  "created_utc": "2026-10-17T10:14:35.401993+00:00",
+  "phase": "D1 finite model development, selection and advancement gate",
+  "study_root": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/event_feedback_innovation_20261017",
+  "source_sha256": {
+    "source/rrc_core.py": "0ee05e9ad74062d7d5467e7a89efc601931be59c5737d2dea90cc9c9182c20d5",
+    "source/check_rrc.py": "58b5ec004a74efe6a7748f947052ff860b8a9639ec6d4d5a407ac590e47d6c42",
+    "source/run_rrc_development.py": "1a456be38e08e9dc26487d64986e6bb912cc95ea2424d519b07a24d7a65dd89f"
+  },
+  "markets": [
+    {
+      "name": "EEX_EUA_T3PA",
+      "path": "/workspace/scratch/b31c5edbd0de/scratch/next_data_20261017/local_only/eex_prepared/development/EEX_EUA_T3PA_daily_development.csv",
+      "sha256": "5a0c7580edebc2a7a5e66d7487568f6d99a8e08cca0785676c2aaeccad7db6bb",
+      "with_auction": true
+    },
+    {
+      "name": "GUANGZHOU",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/GUANGZHOU_development.csv",
+      "sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+      "with_auction": false
+    },
+    {
+      "name": "HUBEI",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/HUBEI_development.csv",
+      "sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+      "with_auction": false
+    },
+    {
+      "name": "SHANGHAI",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/SHANGHAI_D4_development.csv",
+      "sha256": "425424353bb3ac09e3d96b291680b4179e86f180da626a5d19e5c1e58ed960a1",
+      "with_auction": false
+    },
+    {
+      "name": "EU_REPORTED",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/EU_REPORTED_development.csv",
+      "sha256": "ca7c192380897076ef57516a11ea2ccefda6ba92ab9823d9aa8f2bb281cefedc",
+      "with_auction": false
+    }
+  ],
+  "series_are_not_five_independent_markets": "EEX auction and EU_REPORTED are two price targets connected to the same EU ETS; no independent-series significance inference will be claimed.",
+  "data_end_exclusive": "2024-01-01",
+  "online_start": "2021-01-01",
+  "warmup_year": 2021,
+  "scored_years": [
+    2022,
+    2023
+  ],
+  "selection_year": 2022,
+  "advancement_year": 2023,
+  "confirmation_access": false,
+  "seeds": [
+    17,
+    29
+  ],
+  "cpu_processes": 2,
+  "threads_per_process": 1,
+  "dtype": "float64",
+  "L": 20,
+  "H": 20,
+  "score_horizons": [
+    1,
+    5,
+    20
+  ],
+  "pretrain_shrink": [
+    0.1,
+    1.0
+  ],
+  "max_epochs": 40,
+  "patience": 8,
+  "validation_size": 80,
+  "epoch_zero_eligible": true,
+  "pretrain_selection": "Per-series, per-seed minimum pre-2021 validation native-price h1/h5/h20 equal mean MSE/RW_MSE, ties prefer larger shrink; common selected teacher/student states for all interventions.",
+  "pretrain_lr": 0.003,
+  "teacher_lr": 0.0001,
+  "student_learning_rates": [
+    0.0003,
+    0.001
+  ],
+  "replay_size": 128,
+  "replay_batch": 16,
+  "gamma": 0.9,
+  "td_k": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "calibration_window": 128,
+  "calibration_min_events": 32,
+  "calibration_refit_every": 5,
+  "calibration_initialization": "Empty archive and zero correction; only genuinely issued subsequent predictions with fully mature H20 labels enter fitting.",
+  "calibration_record_weight": "Each unique current-teacher issuance has total weight 1. Its five age views share that weight. Expanded views and seed replicas are not new independent observations.",
+  "calibrators": [
+    {
+      "id": "full_a0p01",
+      "mode": "full",
+      "alpha": 0.01,
+      "old_target": false
+    },
+    {
+      "id": "full_a0p1",
+      "mode": "full",
+      "alpha": 0.1,
+      "old_target": false
+    },
+    {
+      "id": "linear_a0p01",
+      "mode": "linear",
+      "alpha": 0.01,
+      "old_target": false
+    },
+    {
+      "id": "linear_a0p1",
+      "mode": "linear",
+      "alpha": 0.1,
+      "old_target": false
+    },
+    {
+      "id": "no_prefix_a0p01",
+      "mode": "no_prefix",
+      "alpha": 0.01,
+      "old_target": false
+    },
+    {
+      "id": "no_prefix_a0p1",
+      "mode": "no_prefix",
+      "alpha": 0.1,
+      "old_target": false
+    },
+    {
+      "id": "intercept_a0p01",
+      "mode": "intercept",
+      "alpha": 0.01,
+      "old_target": false
+    },
+    {
+      "id": "intercept_a0p1",
+      "mode": "intercept",
+      "alpha": 0.1,
+      "old_target": false
+    },
+    {
+      "id": "old_target_a0p1",
+      "mode": "full",
+      "alpha": 0.1,
+      "old_target": true
+    }
+  ],
+  "student_configs": [
+    {
+      "id": "er_lr0p0003",
+      "family": "er",
+      "variant": "er",
+      "lr": 0.0003
+    },
+    {
+      "id": "masked_lr0p0003",
+      "family": "masked",
+      "variant": "masked",
+      "lr": 0.0003
+    },
+    {
+      "id": "dsof_lr0p0003",
+      "family": "dsof",
+      "variant": "dsof",
+      "lr": 0.0003
+    },
+    {
+      "id": "self_td_lr0p0003",
+      "family": "self_td",
+      "variant": "self_td",
+      "lr": 0.0003
+    },
+    {
+      "id": "full_a0p01_lr0p0003",
+      "family": "rrc",
+      "variant": "rrc",
+      "lr": 0.0003,
+      "calibrator": "full_a0p01"
+    },
+    {
+      "id": "full_a0p1_lr0p0003",
+      "family": "rrc",
+      "variant": "rrc",
+      "lr": 0.0003,
+      "calibrator": "full_a0p1"
+    },
+    {
+      "id": "linear_a0p01_lr0p0003",
+      "family": "rrc",
+      "variant": "rrc",
+      "lr": 0.0003,
+      "calibrator": "linear_a0p01"
+    },
+    {
+      "id": "linear_a0p1_lr0p0003",
+      "family": "rrc",
+      "variant": "rrc",
+      "lr": 0.0003,
+      "calibrator": "linear_a0p1"
+    },
+    {
+      "id": "no_prefix_a0p01_lr0p0003",
+      "family": "no_prefix",
+      "variant": "rrc",
+      "lr": 0.0003,
+      "calibrator": "no_prefix_a0p01"
+    },
+    {
+      "id": "no_prefix_a0p1_lr0p0003",
+      "family": "no_prefix",
+      "variant": "rrc",
+      "lr": 0.0003,
+      "calibrator": "no_prefix_a0p1"
+    },
+    {
+      "id": "intercept_a0p01_lr0p0003",
+      "family": "intercept",
+      "variant": "rrc",
+      "lr": 0.0003,
+      "calibrator": "intercept_a0p01"
+    },
+    {
+      "id": "intercept_a0p1_lr0p0003",
+      "family": "intercept",
+      "variant": "rrc",
+      "lr": 0.0003,
+      "calibrator": "intercept_a0p1"
+    },
+    {
+      "id": "old_target_a0p1_lr0p0003",
+      "family": "old_target",
+      "variant": "rrc",
+      "lr": 0.0003,
+      "calibrator": "old_target_a0p1"
+    },
+    {
+      "id": "er_lr0p001",
+      "family": "er",
+      "variant": "er",
+      "lr": 0.001
+    },
+    {
+      "id": "masked_lr0p001",
+      "family": "masked",
+      "variant": "masked",
+      "lr": 0.001
+    },
+    {
+      "id": "dsof_lr0p001",
+      "family": "dsof",
+      "variant": "dsof",
+      "lr": 0.001
+    },
+    {
+      "id": "self_td_lr0p001",
+      "family": "self_td",
+      "variant": "self_td",
+      "lr": 0.001
+    },
+    {
+      "id": "full_a0p01_lr0p001",
+      "family": "rrc",
+      "variant": "rrc",
+      "lr": 0.001,
+      "calibrator": "full_a0p01"
+    },
+    {
+      "id": "full_a0p1_lr0p001",
+      "family": "rrc",
+      "variant": "rrc",
+      "lr": 0.001,
+      "calibrator": "full_a0p1"
+    },
+    {
+      "id": "linear_a0p01_lr0p001",
+      "family": "rrc",
+      "variant": "rrc",
+      "lr": 0.001,
+      "calibrator": "linear_a0p01"
+    },
+    {
+      "id": "linear_a0p1_lr0p001",
+      "family": "rrc",
+      "variant": "rrc",
+      "lr": 0.001,
+      "calibrator": "linear_a0p1"
+    },
+    {
+      "id": "no_prefix_a0p01_lr0p001",
+      "family": "no_prefix",
+      "variant": "rrc",
+      "lr": 0.001,
+      "calibrator": "no_prefix_a0p01"
+    },
+    {
+      "id": "no_prefix_a0p1_lr0p001",
+      "family": "no_prefix",
+      "variant": "rrc",
+      "lr": 0.001,
+      "calibrator": "no_prefix_a0p1"
+    },
+    {
+      "id": "intercept_a0p01_lr0p001",
+      "family": "intercept",
+      "variant": "rrc",
+      "lr": 0.001,
+      "calibrator": "intercept_a0p01"
+    },
+    {
+      "id": "intercept_a0p1_lr0p001",
+      "family": "intercept",
+      "variant": "rrc",
+      "lr": 0.001,
+      "calibrator": "intercept_a0p1"
+    },
+    {
+      "id": "old_target_a0p1_lr0p001",
+      "family": "old_target",
+      "variant": "rrc",
+      "lr": 0.001,
+      "calibrator": "old_target_a0p1"
+    }
+  ],
+  "counts": {
+    "joint_teacher_student_offline_fits": 20,
+    "selected_teacher_online_streams": 10,
+    "student_online_streams": 260,
+    "ridge_calibration_online_streams": 90,
+    "jobs": 10,
+    "timing_fits_separate": 2,
+    "published_author_formal_anchor_separate": 1,
+    "confirmation_fits": 0,
+    "price_series": 5,
+    "underlying_market_systems": 4
+  },
+  "runtime_basis": {
+    "pilot_seed": 998,
+    "offline_3_epoch_seconds": 1.2164854399998148,
+    "teacher_80_events_seconds": 0.36538433999885456,
+    "calibrator_80_events_seconds": 0.022368830999766942,
+    "student_80_events_seconds": 0.1425001860006887,
+    "nominal_two_process_estimate_minutes": 6,
+    "conservative_budget_minutes": 40
+  },
+  "deadline_utc": "2026-10-17T10:55:00+00:00",
+  "stop_rule": "No failed-fit retry or performance-directed addition. Stop fixed candidate if the prespecified advancement gate fails. Preserve every planned result that completed. Deadline or nonfinite stops affected work and is disclosed.",
+  "selection_rules": {
+    "averaging": "MSE/RW_MSE first within series-year-horizon-seed; equal arithmetic average over three horizons, two seeds and five series. Do not average forecasts across seeds before scoring.",
+    "rrc_family": "Select minimum 2022 score among full or additive-linear revision calibrators, alpha in {0.01,0.1}, student lr in {0.0003,0.001}; eight finite candidates. Interaction is an ablation, not an assumed novelty.",
+    "baseline_family": "Independently select 2022-minimum configuration in each family er, masked, dsof, self_td, static_gru, static_teacher_student, online_gru and rw. Select strongest family using 2022 only.",
+    "ablations": "Independently select 2022-minimum no_prefix, intercept and output_only configurations. Also report alpha/lr matched ablations, additive-linear vs interaction, and old-target sanity.",
+    "ties": "Config id ascending for exact score ties.",
+    "no_2023_reselection": true
+  },
+  "advancement_gate": {
+    "primary": "Selected RRC must have 2023 equal-series/horizon/seed score at least 1% lower than the strongest baseline selected using 2022 only, and below 1 (RW).",
+    "breadth": "Selected RRC 2023 score lower than that baseline in at least 3 of the 5 series, counting EEX/EU dependence explicitly as a limitation.",
+    "mechanism": "2023 selected RRC score must be strictly lower than independently 2022-selected no_prefix and output_only by at least 0.0001 absolute score. Beating erroneous old-target alone has no evidential value.",
+    "EEX_relevance": "EEX 2023 selected RRC score below 1 and below matched DSOF selected with 2022 only.",
+    "finite": "No nonfinite candidate outcomes or hidden retries.",
+    "threshold_status": "Practical prespecified research advancement heuristic, not a journal publication standard or a statistical significance guarantee."
+  },
+  "publication_boundary": "This development phase cannot certify publication. New EEX2024/25 confirmation opens only after a passing gate, separately frozen final parameters/estimands and independent code audit.",
+  "storage": "All raw/derived quotes, per-origin predictions and numerical training arrays remain local_only. Publish aggregate research metrics, code and provenance.",
+  "synthetic_test_fixture_correction": "Initial check_rrc run requested origin440 labels through449 although H20 needs460; guard correctly rejected. Fixture changed to420 before any market timing or formal fit; source core unchanged."
+}

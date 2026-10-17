@@ -1,0 +1,36 @@
+{
+  "created_utc": "2026-10-17T10:00:40.902358+00:00",
+  "scope_sha256": "05fef41b2a591f0570cef37f1aa34b24e48c7d9a105eb819a1603275a88b650f",
+  "addendum_sha256": "13368f9e7dc0d33ae68d5d12c5611c7e4336a96c06f61656158fe43d7eb23e97",
+  "source_archive_sha256": "c3ff6ffaaf348cbd17f61d4726fdbd45a7ead089a0006568a490dd63bb080231",
+  "source_code_sha256": {
+    "prepare_eex_data.py": "75c2c393ba794891608d53e6c1fb11f12ce3b60a774268b02841004d1910b650",
+    "inspect_eex_source.py": "2715b0ff191786108c81bfbb6a3019cd61df40ad83124cf1b057704cce99fe80",
+    "check_eex_preparation.py": "bc1a31538ff47b79b0af99a6311ce40cec2187ce7cb72adda32455730e74eeb5"
+  },
+  "synthetic_receipt_sha256": "1594be5ce22f9a4cea4fc0c17b4d78ee54a9c41cd159f24e53bbe3d6780d52ce",
+  "source_scope": "T3PA only, 2012-2023 development; 2024 and 2025 confirmation; 2026 excluded",
+  "covariate_authorization": "Parent /root message received after addendum: retain historical auction volume/total bid volume/cover ratio/bidder counts. Sum auction/bid volumes; cover=sum bids/sum auction volume; bidder counts use auction-volume-weighted averages for multiple same-day auctions, never a unique-person total. Preserve missing markers; no zero fill.",
+  "daily_rules": {
+    "price": "sum(price*auction_volume)/sum(auction_volume)",
+    "auction_volume": "sum(final reported auction volume of included components)",
+    "total_bid_volume": "sum(Total Amount of Bids); missing if any included component missing",
+    "cover_ratio": "sum(total_bid_volume)/sum(auction_volume), not an average of rounded source cover ratios",
+    "bidder_count": "sum(Total Number of Bidders*auction_volume)/sum(auction_volume); missing if any component missing",
+    "successful_bidder_count": "same weighted average of Number of Successful Bidders; missing if any component missing",
+    "auction_names": "unique literal official Auction Name labels, sorted; all source auctions are EEX. These are auction-program labels, not separate exchange venues.",
+    "rounding": "source finite numbers via Decimal(str(cell)); calculations at 50 decimal digits; write plain decimal strings without discretionary price rounding",
+    "duplicates": "date/time/auction_name/contract; exact duplicate result fields dedup, conflicting identity fails",
+    "no_future_features": "No future calendar, volume, bids, clearing results or gaps constructed; each covariate is the result known after its own auction."
+  },
+  "mechanical_audit_only": true,
+  "market_fit": false,
+  "no_numeric_confirmation_output": true,
+  "private_raw_and_derived_data": true,
+  "environment": {
+    "python": "3.12.14",
+    "xlrd": "2.0.1",
+    "openpyxl": "3.1.5"
+  },
+  "read_timeline": "Schema audit occurred after pre-price source scope. Inclusion addendum and this protocol precede first prepared daily series. No model tuning/scoring has occurred."
+}
