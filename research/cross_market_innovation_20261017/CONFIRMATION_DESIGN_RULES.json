@@ -1,0 +1,50 @@
+{
+  "created_utc": "2026-10-17T07:34:34.925810+00:00",
+  "frozen_before_D2_completion": true,
+  "numeric_confirmation_prices_read_by_root": false,
+  "confirmation_scoring_before_this_plan": false,
+  "cohort": "SHANGHAI_D4 author-reported close, 2024 and 2025; source frozen before download",
+  "raw_observations": 261,
+  "confirmation_source_sha256": "5ef3c7664023027f844c6476b40a24c2906d100a35a2415a3d1b4b27ae57ccfc",
+  "candidate_selection": "minimum equal-cell development mean across seeds17,29,43 for pooled KCM hidden32 shrink1 lambda in[1,100], uncapped only; ties prefer lambda1",
+  "baseline_selection": "minimum development full-view score among pooled priceGRU16/shrink.1 (3 seeds), pooled LSTM32/shrink1 (3 seeds), local priceGRU16/shrink1 (3 seeds), D2-best common PatchTST width/shrink config (seed17), D1-best pooled ridge (seed17), RW, original statistical reference. No per-market hyperparameter cherry-picking.",
+  "selection_scores_are_development_not_confirmation": true,
+  "final_seeds": [
+    17,
+    29,
+    43
+  ],
+  "calendar_training_cutoffs": [
+    "2024-01-01",
+    "2025-01-01"
+  ],
+  "all_hyperparameters_and_seed_set_fixed_before_first_confirmation_score": true,
+  "prequential_note": "2025 may train on matured Shanghai2024 observations by frozen calendar rule. 2024 scores never alter configurations, cutoffs, or training rules; other 3 markets remain the<=2023 development files.",
+  "forecast_history_vertices": 21,
+  "observation_horizons": [
+    1,
+    5,
+    20
+  ],
+  "complete_same_calendar_year_H20": true,
+  "primary_effect": "equal-year/horizon average (candidate seed-mean squared loss - baseline seed-mean squared loss)/RW-MSE; not seed-ensemble predictions",
+  "primary_comparisons": [
+    "candidate_vs_development_selected_best_baseline",
+    "candidate_vs_matched_augmentation"
+  ],
+  "primary_inference": "stratified-by-year paired circular moving-block bootstrap, primary block40observations,10000resamples,seed20261019; same indices across all models/seeds/horizons; recalculate RW denominator each draw",
+  "sensitivity_block_lengths": [
+    20,
+    60
+  ],
+  "one_sided_p": "centered bootstrap null of no improvement; Holm correction over two prespecified primary comparisons",
+  "intervals": [
+    "95% marginal",
+    "97.5% marginal for conservative two-comparison coverage"
+  ],
+  "positive_evidence_requires": "both primary effects negative and Holm-adjusted p<.05 at block40; all chosen baselines and mechanistic ablations disclosed. This statistical condition is necessary evidence, not a journal acceptance guarantee or sufficient proof of novelty.",
+  "no_test_driven_repairs": true,
+  "D2_strength100_is_additional_development_sensitivity_not_original_hypothesis": true,
+  "other_data": "Other author2024 suffixes remain development. LNCEA and ScienceDBprocessedmeans not silently merged into primaryclose pool.",
+  "limitations": "Single new confirmation market/source; incomplete observedquote calendar; non-overlap or resampling never guarantees stationarity or independence."
+}

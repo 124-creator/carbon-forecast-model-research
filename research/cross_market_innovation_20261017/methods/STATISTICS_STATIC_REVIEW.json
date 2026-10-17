@@ -1,0 +1,23 @@
+{
+  "scope": "Independent static mathematical/code review only; no data or prediction arrays opened",
+  "source": "scratch/design_audit_20261017/statistics.py",
+  "sha256": "c0003775786ad89aead6a9007d3bf28dc7b01aa647df5be6eaece7b91d4bcd81",
+  "reviewed_by": "literature_fits",
+  "review_type": "static inspection; no execution of inferential code",
+  "result": "No material implementation inconsistency found for stated fixed-loss bootstrap estimand",
+  "checks": [
+    "Average squared losses across fixed seeds before origin aggregation; not seed-ensemble MSE",
+    "Year and horizon equal weighting; common observed and bootstrap RW denominators",
+    "Paired circular block indices shared across models, seeds and horizons within each year",
+    "Centered lower-tail one-sided p for negative candidate-minus-comparator effect",
+    "Basic bootstrap interval with reversed empirical quantiles",
+    "Two-test Holm monotonic adjusted p and separate Bonferroni two-sided interval labeling",
+    "Undefined bootstrap denominators trigger NOT_ESTIMABLE without dropped draws or epsilon",
+    "Upstream H20 same-calendar-year verification is explicitly required and not falsely claimed here"
+  ],
+  "report_qualification": "Weak dependence alone is insufficient for arbitrary within-year drift; explain appropriate stationarity/local-stationarity conditions. Existing code already disclaims arbitrary drift and cross-year training-estimation dependence.",
+  "files_modified": [],
+  "market_files_read": 0,
+  "market_fits": 0,
+  "optimizer_steps": 0
+}

@@ -1,0 +1,185 @@
+{
+  "prepared_utc": "2026-10-17T07:02:43.367033+00:00",
+  "scope_path": "INDEPENDENT_SOURCE_SCOPE.json",
+  "scope_sha256": "59e3e8cdce9e60d744f6b914dcec555c034952db0cf12ecf02aec35d1afae639",
+  "parser_path": "prepare_independent_data.py",
+  "parser_sha256": "46787c107d6f1198c158071c947bef20688dbb3b456581fbe3dba13d62d9f8b4",
+  "series": [
+    {
+      "series_id": "SHANGHAI_D4",
+      "filename": "mendeley_d4_carbon.xlsx",
+      "sha256": "41592d944375b3109010c151d9b1c103fb906d608afcbfd529d7381f18896697",
+      "bytes": 66625,
+      "headers": [
+        "TradingDate",
+        "CityName",
+        "收盘价",
+        "碳配额"
+      ],
+      "target_column": 2,
+      "output_target": "price",
+      "target_definition": "Author workbook column 收盘价, all CityName values 上海; reported closing-price target, not independently certified official close.",
+      "positive_required": true,
+      "doi": "10.17632/d4bv52fgmd.1",
+      "landing_url": "https://data.mendeley.com/datasets/d4bv52fgmd/1",
+      "download_url": "https://data.mendeley.com/public-files/datasets/d4bv52fgmd/files/4935504f-cf2d-45c0-add4-d6c20d667a45/file_downloaded",
+      "archive_member": "data/碳价格与配额.xlsx",
+      "source_side_processing": "Not documented by the downloaded README or landing description. No assertion of no historical filling/cleaning. We make no additional price changes.",
+      "primary_candidate": true,
+      "license": "CC BY 4.0 (depositor declaration)",
+      "observed_records": 1768,
+      "date_min": "2013-12-19",
+      "date_max": "2025-09-25",
+      "blank_spreadsheet_rows_skipped": 0,
+      "blank_rows_are_not_missing_price_observations": true,
+      "duplicate_dates": 0,
+      "invalid_target_rows": 0,
+      "experimental_records": 1768,
+      "dates_2026_or_later_excluded": 0,
+      "transformations": [
+        "date ISO formatting",
+        "ascending sort",
+        "select author target column"
+      ],
+      "extra_price_transformations": [],
+      "price_unit_independently_verified": false,
+      "daily_calendar_completeness_verified": false,
+      "previous_project_model_use_found": false,
+      "previous_project_model_use_audit_scope": "Fixed GitHub tree/manifests and targeted prior experiment reports, not a mathematical proof of absence.",
+      "partitions": {
+        "development": {
+          "path": "local_only/development/SHANGHAI_D4.csv",
+          "columns": [
+            "date",
+            "price",
+            "source_row"
+          ],
+          "records": 1507,
+          "date_min": "2013-12-19",
+          "date_max": "2023-12-29",
+          "year_counts": {
+            "2013": 9,
+            "2014": 169,
+            "2015": 149,
+            "2016": 111,
+            "2017": 166,
+            "2018": 142,
+            "2019": 142,
+            "2020": 161,
+            "2021": 47,
+            "2022": 215,
+            "2023": 196
+          },
+          "bytes": 30443,
+          "sha256": "425424353bb3ac09e3d96b291680b4179e86f180da626a5d19e5c1e58ed960a1"
+        },
+        "confirmation_sealed": {
+          "path": "local_only/confirmation_sealed/SHANGHAI_D4.csv",
+          "columns": [
+            "date",
+            "price",
+            "source_row"
+          ],
+          "records": 261,
+          "date_min": "2024-01-15",
+          "date_max": "2025-09-25",
+          "year_counts": {
+            "2024": 163,
+            "2025": 98
+          },
+          "bytes": 5519,
+          "sha256": "5ef3c7664023027f844c6476b40a24c2906d100a35a2415a3d1b4b27ae57ccfc"
+        }
+      }
+    },
+    {
+      "series_id": "CEA_LIAO_LOG",
+      "filename": "mendeley_5s_processed.xlsx",
+      "sha256": "f6d9be7c2e4bb4463cd123936882bbca79626312a7f4a718804cd217816b0c06",
+      "bytes": 109902,
+      "headers": [
+        "交易日期Idxtrd01",
+        "LNCEA",
+        "LNVOLUME",
+        "LNCSI300",
+        "LNEL300",
+        "LNEUA",
+        "LNCOAL",
+        "LNOIL",
+        "LNGAS",
+        "LNELCO2"
+      ],
+      "target_column": 1,
+      "output_target": "ln_price",
+      "target_definition": "Author-supplied LNCEA numerical values; log-labeled national carbon series. No inverse transform or claim of original unrounded price.",
+      "positive_required": false,
+      "doi": "10.17632/5skvz8sgrz.1",
+      "landing_url": "https://data.mendeley.com/datasets/5skvz8sgrz/1",
+      "download_url": "https://data.mendeley.com/public-files/datasets/5skvz8sgrz/files/5cb129aa-e29b-4b8f-a3bb-dc3fafb3ffa8/file_downloaded",
+      "archive_member": null,
+      "source_side_processing": "Filename Processed data.xlsx and LN-prefixed columns establish transformed author data. Original price precision, vintage/composite identity, and filling protocol remain unverified.",
+      "primary_candidate": false,
+      "license": "CC BY 4.0 (depositor declaration)",
+      "observed_records": 760,
+      "date_min": "2021-07-16",
+      "date_max": "2024-08-30",
+      "blank_spreadsheet_rows_skipped": 41,
+      "blank_rows_are_not_missing_price_observations": true,
+      "duplicate_dates": 0,
+      "invalid_target_rows": 0,
+      "experimental_records": 760,
+      "dates_2026_or_later_excluded": 0,
+      "transformations": [
+        "date ISO formatting",
+        "ascending sort",
+        "select author target column"
+      ],
+      "extra_price_transformations": [],
+      "price_unit_independently_verified": false,
+      "daily_calendar_completeness_verified": false,
+      "previous_project_model_use_found": false,
+      "previous_project_model_use_audit_scope": "Fixed GitHub tree/manifests and targeted prior experiment reports, not a mathematical proof of absence.",
+      "partitions": {
+        "development": {
+          "path": "local_only/development/CEA_LIAO_LOG.csv",
+          "columns": [
+            "date",
+            "ln_price",
+            "source_row"
+          ],
+          "records": 598,
+          "date_min": "2021-07-16",
+          "date_max": "2023-12-29",
+          "year_counts": {
+            "2021": 114,
+            "2022": 242,
+            "2023": 242
+          },
+          "bytes": 18982,
+          "sha256": "c543944d390e8c484adc219e0827c44108242999c96e50ecd6ef2e4b60ab89e8"
+        },
+        "confirmation_sealed": {
+          "path": "local_only/confirmation_sealed/CEA_LIAO_LOG.csv",
+          "columns": [
+            "date",
+            "ln_price",
+            "source_row"
+          ],
+          "records": 162,
+          "date_min": "2024-01-02",
+          "date_max": "2024-08-30",
+          "year_counts": {
+            "2024": 162
+          },
+          "bytes": 5201,
+          "sha256": "eb2ab533a70996651492978df904bfd99b35b09f89a7ba940c6194e18688cf2b"
+        }
+      }
+    }
+  ],
+  "model_fit": false,
+  "returns_or_price_statistics": false,
+  "confirmation_values_printed": false,
+  "source_row_is_provenance_only_not_a_feature": true,
+  "warning": "The 760-row LNCEA archive is separate from level-price primary candidates. Do not pool log values into the price field."
+}
