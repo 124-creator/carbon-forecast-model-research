@@ -1,0 +1,111 @@
+{
+  "status": "PASS",
+  "completed_utc": "2026-10-17T15:47:10.125659+00:00",
+  "claim": "The exact fixed DiscreteDistribution.rps function is not a proper score on the general class of finite laws. This is a function/version counterexample, not an assertion about every DeepNPTS version or the paper benchmark.",
+  "repository": "https://github.com/awslabs/gluonts",
+  "commit": "d60556ca71167a3ec1ea807b491dd982d1de2112",
+  "license": "Apache-2.0",
+  "upstream_path": "src/gluonts/torch/distributions/discrete_distribution.py",
+  "function": "DiscreteDistribution.rps",
+  "sha256": "5e0ae9f8b4815c035ae08e63e273a0a8af9bcfae93886635f7fd4a34a48892d8",
+  "git_blob_sha": "32fe342e06e048dd8775a00c84afc018cf1e81c8",
+  "source_bytes": 6430,
+  "script_sha256": "2b5886d50517cc8e90e1109178884f6ef925c74d343ed84d8254fcbd3af163c0",
+  "truth": {
+    "atoms": [
+      -1,
+      1
+    ],
+    "probabilities": [
+      0.5,
+      0.5
+    ]
+  },
+  "forecast": {
+    "atoms": [
+      -1,
+      1
+    ],
+    "probabilities": "[p,1-p], 0<p<1"
+  },
+  "identities": {
+    "author_expected_loss": "p/2",
+    "author_expected_derivative": "1/2",
+    "exact_crps_expected_loss": "p^2+(1-p)^2"
+  },
+  "grid_cases": [
+    {
+      "probability_at_minus_one": 0.05,
+      "author_rps_at_minus_one": 0.0,
+      "author_rps_at_plus_one": 0.05,
+      "expected_author_rps": 0.025,
+      "expected_author_rps_derivative": 0.5,
+      "expected_exact_crps": 0.905
+    },
+    {
+      "probability_at_minus_one": 0.1,
+      "author_rps_at_minus_one": 0.0,
+      "author_rps_at_plus_one": 0.1,
+      "expected_author_rps": 0.05,
+      "expected_author_rps_derivative": 0.5,
+      "expected_exact_crps": 0.8200000000000001
+    },
+    {
+      "probability_at_minus_one": 0.25,
+      "author_rps_at_minus_one": 0.0,
+      "author_rps_at_plus_one": 0.25,
+      "expected_author_rps": 0.125,
+      "expected_author_rps_derivative": 0.5,
+      "expected_exact_crps": 0.625
+    },
+    {
+      "probability_at_minus_one": 0.5,
+      "author_rps_at_minus_one": 0.0,
+      "author_rps_at_plus_one": 0.5,
+      "expected_author_rps": 0.25,
+      "expected_author_rps_derivative": 0.5,
+      "expected_exact_crps": 0.5
+    },
+    {
+      "probability_at_minus_one": 0.75,
+      "author_rps_at_minus_one": 0.0,
+      "author_rps_at_plus_one": 0.75,
+      "expected_author_rps": 0.375,
+      "expected_author_rps_derivative": 0.5,
+      "expected_exact_crps": 0.625
+    },
+    {
+      "probability_at_minus_one": 0.9,
+      "author_rps_at_minus_one": 0.0,
+      "author_rps_at_plus_one": 0.9,
+      "expected_author_rps": 0.45,
+      "expected_author_rps_derivative": 0.5,
+      "expected_exact_crps": 0.8200000000000001
+    },
+    {
+      "probability_at_minus_one": 0.95,
+      "author_rps_at_minus_one": 0.0,
+      "author_rps_at_plus_one": 0.95,
+      "expected_author_rps": 0.475,
+      "expected_author_rps_derivative": 0.5,
+      "expected_exact_crps": 0.9049999999999998
+    }
+  ],
+  "checks": 37,
+  "maximum_abs_error": 2.220446049250313e-16,
+  "runtime": {
+    "numpy": "2.5.4",
+    "torch": "2.3.1+cpu"
+  },
+  "market_reads": 0,
+  "confirmation_reads": 0,
+  "market_fits": 0,
+  "optimizer_steps": 0,
+  "network_requests": 0,
+  "limits": [
+    "The fixed-support counterexample is not the same parameter family as the study weighted-zero-mean/unit-variance31-atom adapter.",
+    "It therefore does not predict the task-adapted arms numerical ranking; both actual training arms and independent proper scoring are still required.",
+    "Replacing this score by the established exact CRPS is not new forecasting methodology.",
+    "The original source and the frozen running study have not been edited."
+  ]
+}
