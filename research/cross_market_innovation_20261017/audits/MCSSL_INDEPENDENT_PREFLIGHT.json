@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "scope": "untrained synthetic sampling and information boundary only",
+  "market_reads": 0,
+  "market_fits": 0,
+  "optimizer_steps": 0,
+  "source_sha256": "b0bc057afa0118ce95ade91270e52cc0072ca427063926ecba25f36ba038b426",
+  "numpy_version": "2.5.4",
+  "torch_version": "2.3.1+cpu",
+  "model_parameters": 19733,
+  "markets": 4,
+  "allowed_key_reads": [
+    "market",
+    "short",
+    "short_mask",
+    "sparse",
+    "sparse_mask"
+  ],
+  "q_parameters_unchanged": true,
+  "q_gradients_absent": true,
+  "maximum_retained_price_error": 8.881784197001252e-16,
+  "checks": [
+    {
+      "view": "short",
+      "retained_price_max_error": 4.440892098500626e-16,
+      "synthetic_untrained_two_completion_mse": 1.5392705839769152e-06,
+      "sampled_paths_coarsen_back_to_input": true,
+      "receipt": {
+        "view": "short",
+        "shape": [
+          8,
+          20,
+          3
+        ],
+        "real_missing_price_read": false,
+        "real_missing_date_read": false,
+        "future_target_read": false,
+        "date_completion": "coarse-only linear bridge or observed-mean-gap backwards extrapolation",
+        "date_values_are_synthetic": true,
+        "noise_scale": 0.25,
+        "max_retained_price_error": 0.0,
+        "minimum_generated_day_gap": 1.0
+      }
+    },
+    {
+      "view": "sparse",
+      "retained_price_max_error": 8.881784197001252e-16,
+      "synthetic_untrained_two_completion_mse": 2.071952411581991e-06,
+      "sampled_paths_coarsen_back_to_input": true,
+      "receipt": {
+        "view": "sparse",
+        "shape": [
+          8,
+          20,
+          3
+        ],
+        "real_missing_price_read": false,
+        "real_missing_date_read": false,
+        "future_target_read": false,
+        "date_completion": "coarse-only linear bridge or observed-mean-gap backwards extrapolation",
+        "date_values_are_synthetic": true,
+        "noise_scale": 0.25,
+        "max_retained_price_error": 0.0,
+        "minimum_generated_day_gap": 1.0
+      }
+    }
+  ],
+  "limitation": "Positive diversity of an untrained q does not establish trained conditional-law quality; MSE training can suppress its noise dependence."
+}

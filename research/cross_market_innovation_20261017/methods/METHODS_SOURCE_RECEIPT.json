@@ -1,0 +1,206 @@
+{
+  "date": "2026-10-17",
+  "purpose": "Publication-style methods and related-work draft; exact D1/D2 code and development summary only",
+  "working_name": "分块条件矩 GRU（BCM-GRU）",
+  "code_family": "kcm",
+  "source_files": [
+    {
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/d2_source/data_core.py",
+      "sha256": "66d6c308792331cd4146a3deabbc668bea59eca336ad55fee52ce89b9c97b368"
+    },
+    {
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/d2_source/information_model.py",
+      "sha256": "efe1de4d3f7e36b72771c7f9bc6d0d01008b5a3d0c02c180d65d5972389caf33"
+    },
+    {
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/d2_source/fit_core.py",
+      "sha256": "1b4616244731ec69a1a614a3fa30b245f12f46388a89fd111a29ee520d0a3f44"
+    },
+    {
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/d2_source/mcssl_control.py",
+      "sha256": "b0bc057afa0118ce95ade91270e52cc0072ca427063926ecba25f36ba038b426"
+    },
+    {
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/d2_source/mcssl_fit.py",
+      "sha256": "f9dae4645a44434e3d059c2871b09720d24276d071d31e549acfeab404a029b0"
+    },
+    {
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/D1_PRE_RUN.json",
+      "sha256": "4c1a31662959c951548b19c068cf6e8f33d7ab9b86fbe519203575f4a3e593ba"
+    },
+    {
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/D2_PRE_RUN.json",
+      "sha256": "62e08b11471f065fa248deffd1d3b095794aebbf631e6bc304ed302e79eac3ff"
+    },
+    {
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/DEVELOPMENT_AGGREGATE.json",
+      "sha256": "b9bc2ff3102b5e16d821b12bc18d55d1e7a50b825196618735bd878994a83ea9"
+    },
+    {
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/provenance/DEVELOPMENT_REGISTRY.json",
+      "sha256": "6ae3d9229c04adb947f17e8beaf58450afbe92a9851a73deb6c121d959e56178"
+    },
+    {
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/source/statistical_reference.py",
+      "sha256": "d2e7e086199cb056067a39db10d8a6ef6f3ab34f198169b7c9e006b87065a580"
+    }
+  ],
+  "parameter_count_check": {
+    "method": "fresh instantiation of frozen SharedInformationGRU(input_size=7, hidden_size=32, horizon=20); named_parameters and state_dict sums checked; no forward fit",
+    "parameters": {
+      "gru.weight_ih_l0": {
+        "shape": [
+          96,
+          7
+        ],
+        "numel": 672
+      },
+      "gru.weight_hh_l0": {
+        "shape": [
+          96,
+          32
+        ],
+        "numel": 3072
+      },
+      "gru.bias_ih_l0": {
+        "shape": [
+          96
+        ],
+        "numel": 96
+      },
+      "gru.bias_hh_l0": {
+        "shape": [
+          96
+        ],
+        "numel": 96
+      },
+      "head.weight": {
+        "shape": [
+          20,
+          32
+        ],
+        "numel": 640
+      },
+      "head.bias": {
+        "shape": [
+          20
+        ],
+        "numel": 20
+      }
+    },
+    "parameter_total": 4596,
+    "state_dict_numel": 4596,
+    "all_parameters_trainable": true
+  },
+  "market_identity": [
+    "GUANGZHOU",
+    "HUBEI",
+    "EU_REPORTED",
+    "SHANGHAI_D4"
+  ],
+  "claims_checked": [
+    "D1/D2 main data/model/fitter logic identical; data_core D2 change corrects market-ID docstring only",
+    "full21/shortlast11/sparse0,2,...,20 price vertices; re-difference after selection",
+    "train market RMS excludes validation and labels after final training input origin",
+    "all eligible training support; 80 validation origins; 20-origin label purge",
+    "7 neural channels, raw3-only flattened60 fixed kernel inputs",
+    "pair count denominator; within market/view |origin_i-origin_j|>40; group/h positive part",
+    "full/coarse supervision and output shrink equally weighted; head L2 coefficient0.01/20",
+    "AdamW GRUwd0.001/headwd0, lr0.003, clip1, max60/patience12/tol1e-6/epoch0eligible",
+    "MCSSL separately fitted500steps perq; 9 q fits4500steps; control not author benchmark reproduction",
+    "D1 141 and D2 158 predictor fits; already-existing seed17 results reused, not re-fitted",
+    "Current empirical novelty not validated; unblocked slightly better in declared development aggregate",
+    "No affirmative abstract or invented confirmation outcome",
+    "Price-only pooled GRU/LSTM use 1 price +4 market-ID channels; pooled ridge uses60 raw features +4 IDs, no additional intercept",
+    "Existing statistical reference uses the full observed price prefix; 31 fixed candidate pairs, selection from index60 every20 observations using up to240 preceding errors",
+    "gru_stat_price is a residual correction to the statistical reference; its shrink penalty is on that correction, not total forecast relative to RW",
+    "Searchsorted cutoff defaults to sequence length if no observed date reaches the cutoff; minimum_origin_separation is an eligibility threshold, not necessarily an observed distance"
+  ],
+  "literature_core_refs": {
+    "MCSSL": {
+      "url": "https://arxiv.org/html/2605.11846v1",
+      "tool_refs": [
+        "turn103view0",
+        "turn107view4"
+      ],
+      "status": "2026 preprint; no verified venue publication"
+    },
+    "KCM": {
+      "url": "https://proceedings.mlr.press/v124/muandet20a/muandet20a.pdf",
+      "tool_refs": [
+        "turn104view0"
+      ],
+      "read": "assumptions and Sections3 relevant statements; not every proof"
+    },
+    "KMMR": {
+      "url": "https://arxiv.org/abs/2010.07684",
+      "tool_refs": [
+        "turn107view0"
+      ],
+      "read": "author abstract/version/acceptance metadata"
+    },
+    "PatchTST": {
+      "url": "https://arxiv.org/html/2211.14730v2",
+      "tool_refs": [
+        "turn104view2",
+        "turn107view2"
+      ],
+      "commit": "204c21efe0b39603ad6e2ca640ef5896646ab1a9",
+      "license": "Apache-2.0"
+    },
+    "robust_convex_optimization": {
+      "url": "https://www2.isye.gatech.edu/~nemirovs/robmp.pdf",
+      "doi": "10.1287/moor.23.4.769",
+      "metadata_ref": "turn108search2"
+    },
+    "project_statistical_reference": {
+      "url": "https://github.com/124-creator/carbon-forecast-model-research/blob/1c67e562e721dd82fff4e4143b97a798a1cf44fa/research/recurrent_response_20261014/fair_recurrent_tuning_20261016/fair_core.py",
+      "commit": "1c67e562e721dd82fff4e4143b97a798a1cf44fa",
+      "source_git_blob": "ab4ded1b48845c2c1bc8d972dd655441a0c6b984",
+      "read": "local frozen exact-function copy and causal convenience wrappers, no price data access"
+    }
+  },
+  "development_aggregate_read": true,
+  "raw_market_files_read": 0,
+  "confirmation_price_files_read": 0,
+  "confirmation_prediction_or_metric_files_read": 0,
+  "market_fits": 0,
+  "optimizer_steps": 0,
+  "main_frozen_source_modifications": false,
+  "artifacts": [
+    {
+      "path": "METHODS_ZH.md",
+      "bytes": 31832,
+      "sha256": "49e769a3090337d39bc8e3d8a5237b6e0379b9538959e8694df9e6d6c03620b8",
+      "format_checks": {
+        "display_math_delimiters_balanced": true,
+        "inline_math_delimiters_balanced": true,
+        "code_fences_balanced": true,
+        "heading_content_blank_lines": true
+      }
+    },
+    {
+      "path": "RELATED_WORK_ZH.md",
+      "bytes": 23337,
+      "sha256": "4fbc1487e40626292219fa0899febb5296e0639666c15eeea604e1c3f1bf698a",
+      "format_checks": {
+        "display_math_delimiters_balanced": true,
+        "inline_math_delimiters_balanced": true,
+        "code_fences_balanced": true,
+        "heading_content_blank_lines": true
+      }
+    }
+  ],
+  "independent_narrow_review": {
+    "reviewer": "/root/audit_and_learning",
+    "scope": [
+      "METHODS equations14-18 against frozen fit_core",
+      "ordered pair normalization and per-market/per-horizon positive part",
+      "support exclusion",
+      "4596 parameter count"
+    ],
+    "result": "No material error; two optional boundary clarifications adopted",
+    "confirmation_results_shared": false,
+    "baseline_spec_supplement": "author source read and added after this narrow review; not represented as independently reviewed"
+  }
+}

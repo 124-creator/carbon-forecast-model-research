@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "scope": "independent synthetic formulas and input boundaries only",
+  "market_reads": 0,
+  "market_fits": 0,
+  "optimizer_steps": 0,
+  "model_sha256": "efe1de4d3f7e36b72771c7f9bc6d0d01008b5a3d0c02c180d65d5972389caf33",
+  "data_core_sha256": "158afb8217299c1e26287fa37db203a38d045d8ba4e53d6d97db64e240239d07",
+  "audit_script_sha256": "8e3ef65e96df7fe33600f20d0961f832fff848e0396446ffe49cd6122b70ded2",
+  "numpy_version": "2.5.4",
+  "torch_version": "2.3.1+cpu",
+  "numerical_comparisons": 23,
+  "maximum_absolute_error": 4.440892098500626e-16,
+  "exact_pair_counts": [
+    8,
+    16,
+    0
+  ],
+  "prediction_gradients_independently_verified": true,
+  "kernel_feature_gradients_detached": true,
+  "nested_views": {
+    "full": {
+      "valid_tokens": 20,
+      "full_input_measurable": true,
+      "deleted_price_invariance": true
+    },
+    "short": {
+      "valid_tokens": 10,
+      "full_input_measurable": true,
+      "deleted_price_invariance": true
+    },
+    "sparse": {
+      "valid_tokens": 10,
+      "full_input_measurable": true,
+      "deleted_price_invariance": true
+    }
+  },
+  "explicit_mask_with_market_onehot": true,
+  "rectification_batch_dependence": {
+    "full_batch": 0.0,
+    "same_sign_half_batches": 1.0,
+    "opposite_sign_half_batches": 0.0,
+    "implication": "The training objective depends on batch composition and size."
+  },
+  "market_information_counterexample": {
+    "prob_z_matches_market": 0.75,
+    "pooled_coarse_bayes": 0.0,
+    "pooled_fine_bayes": "0.5 * Z",
+    "conditional_difference_by_market": {
+      "-1": -0.25,
+      "+1": 0.25
+    },
+    "fix": "Include known market ID in BOTH fine and coarse information sets."
+  },
+  "limitations": [
+    "This is not a market forecasting result.",
+    "The training runner and final sampler need separate review.",
+    "Nonoverlap is not independence; this receipt proves neither consistency nor novelty."
+  ]
+}

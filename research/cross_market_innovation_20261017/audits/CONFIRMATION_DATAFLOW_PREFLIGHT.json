@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "scope": "synthetic C dataflow only; init/run and market loaders not called",
+  "audit_utc": "2026-10-17T07:41:56.832831+00:00",
+  "source_sha256": {
+    "run_confirmation.py": "e888e68dfe752cfdb790eafce783343f1c19ce44768367a32e96b50d83cf401a",
+    "data_core.py": "66d6c308792331cd4146a3deabbc668bea59eca336ad55fee52ce89b9c97b368",
+    "run_d2.py": "c566e2e7a4eb6ed8da6acc3844478bdfcdba9f0ee71c3cae79ba5405adccb57e",
+    "statistical_reference.py": "d2e7e086199cb056067a39db10d8a6ef6f3ab34f198169b7c9e006b87065a580"
+  },
+  "synthetic_cases": [
+    {
+      "cutoff": "2024-01-01",
+      "sh_training_end": 487,
+      "eval_origins": 102,
+      "local_market_id": 0,
+      "pooled_market_id": 3,
+      "future_training_and_validation_difference": 0.0,
+      "first_forecast_future_input_difference": 0.0
+    },
+    {
+      "cutoff": "2025-01-01",
+      "sh_training_end": 609,
+      "eval_origins": 102,
+      "local_market_id": 0,
+      "pooled_market_id": 3,
+      "future_training_and_validation_difference": 0.0,
+      "first_forecast_future_input_difference": 0.0
+    }
+  ],
+  "elementwise_comparisons": 1568454,
+  "market_file_reads": 0,
+  "confirmation_file_reads": 0,
+  "model_fits": 0,
+  "optimizer_steps": 0,
+  "observed_confirmation_started": false,
+  "static_findings": [
+    "Shared Shanghai evaluation restores four-market vocabulary and ID=3 only after local levels/statistical anchors are attached.",
+    "Both annual cutoffs use only fully mature training and validation labels; 2025 uses 2024 labels only through the frozen refresh rule.",
+    "The complete task list and selected configurations must still be frozen and hashed before run opens sealed prices."
+  ]
+}
