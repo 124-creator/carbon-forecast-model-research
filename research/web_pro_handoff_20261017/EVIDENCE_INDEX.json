@@ -1,0 +1,455 @@
+{
+  "scientific_base_commit": "26b4f403c566ee44e5af79cdcfc5b83bc21bd27b",
+  "publication_ready_model": false,
+  "handoff_invoked_web_pro": false,
+  "new_supervised_market_fits_in_this_handoff": 0,
+  "data": {
+    "public_prefix": "data/guangzhou_approved_prefix_950.csv",
+    "zip_path": "data/parsed/figshare_28682348/guangzhou_reported.csv",
+    "records": 950,
+    "first_date": "2018-01-03",
+    "last_date": "2021-12-31",
+    "bytes": 29204,
+    "sha256": "1366ca4814dcdb8aa43296eb64768d1336d6f0fc9088648d6d7ccdbe43318070",
+    "next_byte_requested": false,
+    "license": "CC BY 4.0, depositor declaration with source-grade limitations; see DATA_ATTRIBUTION.md",
+    "depositor": "Yingying Fan (2025)",
+    "doi": "10.6084/m9.figshare.28682348.v1",
+    "source_columns": [
+      "date",
+      "author_reported_price",
+      "source_excel_row",
+      "source_date_kind"
+    ],
+    "provenance_only_columns": [
+      "source_excel_row",
+      "source_date_kind"
+    ]
+  },
+  "stages": [
+    {
+      "id": "fair",
+      "report": "research/recurrent_response_20261014/fair_recurrent_tuning_20261016/REPORT_ZH.md",
+      "commit": "67357835294d146f3ba9cff0823e56fb9ea26954",
+      "role": "strong backbone bounded-search diagnostic, not new method",
+      "table_rows": [
+        [
+          "完整GRU＋全期限联合输出",
+          "0.891592864",
+          "0.921935338",
+          "c04"
+        ],
+        [
+          "相同GRU＋解析输出",
+          "0.900362978",
+          "0.936135223",
+          "c01"
+        ],
+        [
+          "相同GRU＋固定六节点输出",
+          "0.892545107",
+          "0.922494094",
+          "c04"
+        ],
+        [
+          "完整LSTM＋全期限联合输出",
+          "0.905345118",
+          "0.917713122",
+          "c04"
+        ]
+      ]
+    },
+    {
+      "id": "hsc",
+      "report": "research/recurrent_response_20261014/horizon_scale_competition_20261016/REPORT_ZH.md",
+      "commit": "9245acff91c4253c9bfb6d43b45b069fab66bca7",
+      "verdict": "fixed candidate not promoted; 133 original plus 59 separately frozen supplement",
+      "table_rows": [
+        [
+          "完整GRU",
+          "0.921938011",
+          "0.863652578",
+          "0.980223444",
+          "0.933122964",
+          "0.910753058"
+        ],
+        [
+          "完整LSTM",
+          "0.917715843",
+          "0.840392649",
+          "0.995039037",
+          "0.928284109",
+          "0.907147577"
+        ],
+        [
+          "多尺度均匀平均",
+          "0.936645674",
+          "0.863385652",
+          "1.009905696",
+          "0.928019264",
+          "0.945272084"
+        ],
+        [
+          "期限门控，不加竞争",
+          "0.932241150",
+          "0.854508956",
+          "1.009973343",
+          "0.929397885",
+          "0.935084414"
+        ],
+        [
+          "竞争，但不分期限门控",
+          "0.936574826",
+          "0.863237878",
+          "1.009911775",
+          "0.928145922",
+          "0.945003731"
+        ],
+        [
+          "期限条件竞争：主候选",
+          "0.931696456",
+          "0.853419793",
+          "1.009973119",
+          "0.928583709",
+          "0.934809204"
+        ]
+      ]
+    },
+    {
+      "id": "rum",
+      "report": "research/recurrent_response_20261014/residual_utility_memory_20261017/REPORT_ZH.md",
+      "commit": "de7840f2b06f541b89160cde86dd3656b41e8026",
+      "verdict": "utility supervision did not beat fresh GRU or same-architecture no-utility control",
+      "table_rows": [
+        [
+          "完整GRU，无记忆",
+          "0.885312432",
+          "0.799037256",
+          "0.971587607",
+          "0.883729802",
+          "0.886895062"
+        ],
+        [
+          "固定相关性残差记忆",
+          "0.885733266",
+          "0.801307761",
+          "0.970158771",
+          "0.884791502",
+          "0.886675030"
+        ],
+        [
+          "学习型记忆，不加效用监督",
+          "0.884469378",
+          "0.798208514",
+          "0.970730242",
+          "0.883764898",
+          "0.885173858"
+        ],
+        [
+          "效用监督记忆：候选",
+          "0.885317940",
+          "0.800938175",
+          "0.969697705",
+          "0.885878221",
+          "0.884757659"
+        ]
+      ]
+    },
+    {
+      "id": "hd",
+      "report": "research/recurrent_response_20261014/hindsight_diagnostic_20261017/REPORT_ZH.md",
+      "commit": "26b4f403c566ee44e5af79cdcfc5b83bc21bd27b",
+      "verdict": "exposed finite-grid hindsight diagnosis, not novel method",
+      "formal_fits": 192,
+      "trained_configs": 96,
+      "score_origins": 451,
+      "selections": {
+        "hindsight_static": {
+          "id": "c003",
+          "score": 0.9138619946970724
+        },
+        "hindsight_year_ids": [
+          "c025",
+          "c002"
+        ],
+        "hindsight_year_score": 0.8964585734046892,
+        "hindsight_cell_ids": [
+          [
+            "stat",
+            "c025",
+            "c025"
+          ],
+          [
+            "c062",
+            "c002",
+            "c030"
+          ]
+        ],
+        "hindsight_cell_score": 0.8727133540707256,
+        "prior_validation_ids": [
+          "c028",
+          "c030"
+        ],
+        "prior_validation_score": 1.0203741624182203,
+        "transfer_2020_winner_to_2021": {
+          "id": "c025",
+          "score": 0.9669493703897613
+        },
+        "reverse_2021_winner_to_2020": {
+          "id": "c002",
+          "score": 1.0732663313057051
+        },
+        "unexposed_test": false,
+        "global_optimum_established": false,
+        "selection_scope": "Limited frozen candidate set; hindsight bounds are not deployable forecast rules",
+        "pointwise_oracle_score": 0.3558435091568772,
+        "pointwise_oracle_cells": [
+          [
+            0.23917591587699216,
+            0.18139665802982782,
+            0.3459773791127769
+          ],
+          [
+            0.40436556055824696,
+            0.38319665914696915,
+            0.5809488822164499
+          ]
+        ],
+        "pointwise_oracle_is_deployable": false
+      },
+      "best_by_family": {
+        "ridge": {
+          "id": "c065",
+          "config": {
+            "id": "c065",
+            "family": "ridge",
+            "group": "price",
+            "length": 20,
+            "anchor": "stat",
+            "shrink": 0.0,
+            "alpha": 1.0,
+            "slice": "linear_control"
+          },
+          "score": 0.9689664030763576,
+          "annual": {
+            "2020": 0.9752241743874702,
+            "2021": 0.9627086317652448
+          },
+          "cells": [
+            [
+              0.8525156389339749,
+              0.9809337826164679,
+              1.0922231016119681
+            ],
+            [
+              0.9905002503516157,
+              0.9573698453556679,
+              0.9402557995884508
+            ]
+          ],
+          "prior_validation": [
+            0.7570718298235305,
+            0.6709163551825307
+          ]
+        },
+        "gru": {
+          "id": "c003",
+          "config": {
+            "id": "c003",
+            "family": "gru",
+            "group": "price",
+            "length": 20,
+            "anchor": "stat",
+            "shrink": 1.0,
+            "hidden": 16,
+            "lr": 0.003,
+            "weight_decay": 0.001,
+            "slice": "factorial"
+          },
+          "score": 0.9138619946970724,
+          "annual": {
+            "2020": 0.8652479033030112,
+            "2021": 0.9624760860911338
+          },
+          "cells": [
+            [
+              0.8397794971725117,
+              0.8706030520746053,
+              0.8853611606619167
+            ],
+            [
+              0.9985060317621951,
+              0.9539609470680317,
+              0.9349612794431742
+            ]
+          ],
+          "prior_validation": [
+            0.6549510775953221,
+            0.686903124946692
+          ]
+        },
+        "lstm": {
+          "id": "c025",
+          "config": {
+            "id": "c025",
+            "family": "lstm",
+            "group": "price",
+            "length": 20,
+            "anchor": "rw",
+            "shrink": 1.0,
+            "hidden": 16,
+            "lr": 0.003,
+            "weight_decay": 0.001,
+            "slice": "factorial"
+          },
+          "score": 0.9160589229384937,
+          "annual": {
+            "2020": 0.8651684754872259,
+            "2021": 0.9669493703897613
+          },
+          "cells": [
+            [
+              0.9231667042214378,
+              0.8418344717731258,
+              0.8305042504671143
+            ],
+            [
+              0.9725165679021319,
+              0.9769991506973092,
+              0.9513323925698428
+            ]
+          ],
+          "prior_validation": [
+            0.7169966335926569,
+            0.7738544268388474
+          ]
+        },
+        "reference": {
+          "id": "stat",
+          "config": {
+            "id": "stat",
+            "family": "reference",
+            "group": "reference",
+            "anchor": "stat"
+          },
+          "score": 0.9512831004028871,
+          "annual": {
+            "2020": 0.8914374204220649,
+            "2021": 1.0111287803837097
+          },
+          "cells": [
+            [
+              0.8270356956631516,
+              0.9105949757613985,
+              0.9366815898416446
+            ],
+            [
+              1.0165061158198914,
+              1.0076762940945794,
+              1.0092039312366576
+            ]
+          ],
+          "prior_validation": [
+            0.8826588231672634,
+            0.7294413267340932
+          ]
+        }
+      }
+    }
+  ],
+  "latest_verification": {
+    "passed": true,
+    "formal_fits": 192,
+    "trained_configs": 96,
+    "controls": 2,
+    "score_origins": 451,
+    "numeric_comparisons": 3885,
+    "max_absolute_difference": 1.4210854715202004e-14,
+    "selected_config": "c003",
+    "selected_score": 0.9138619946970724,
+    "unexposed_test": false,
+    "scope": "Independent approved-original label/scaler/score/selection replay, not model retraining, causal diagnosis or novelty certification"
+  },
+  "latest_aggregate_checks": {
+    "passed": true,
+    "numeric_comparisons": 1142,
+    "max_absolute_difference": 5.551115123125783e-17,
+    "csv_rows": 98,
+    "matched_comparisons": [
+      {
+        "factor": "family",
+        "comparison": "gru->lstm",
+        "pairs": 24,
+        "right_better": 21
+      },
+      {
+        "factor": "group",
+        "comparison": "calendar->dynamics",
+        "pairs": 16,
+        "right_better": 10
+      },
+      {
+        "factor": "group",
+        "comparison": "calendar->price",
+        "pairs": 16,
+        "right_better": 16
+      },
+      {
+        "factor": "group",
+        "comparison": "dynamics->price",
+        "pairs": 16,
+        "right_better": 16
+      },
+      {
+        "factor": "length",
+        "comparison": "20->60",
+        "pairs": 24,
+        "right_better": 12
+      },
+      {
+        "factor": "anchor",
+        "comparison": "rw->stat",
+        "pairs": 24,
+        "right_better": 22
+      },
+      {
+        "factor": "shrink",
+        "comparison": "0.0->1.0",
+        "pairs": 24,
+        "right_better": 24
+      }
+    ],
+    "scope": "Independent public aggregate consistency recheck, not fresh model fitting or causal attribution"
+  },
+  "environment_historical": {
+    "python": "3.11.15",
+    "numpy": "1.26.4",
+    "torch": "2.3.1+cpu",
+    "cuda": false,
+    "dtype": "float64",
+    "math_threads": 1
+  },
+  "frozen_source_sha256": {
+    "hd_core.py": "a55bafbb9c479ea4a57515fec39f85587a176a894e85068906f1f84194192f70",
+    "hd_fit.py": "5d91807bfcb5ab3863e440d322bd1f1d649eecee024c524fbcc07694c4dd4bc2",
+    "hd_run.py": "e878b4ff4455542d475046de4932319db908589bd7bf00d62d192abc7de2da8f",
+    "hd_analysis.py": "cbbfaf4dc0a0ba9e0448fb4f5b4e61032c894abc9b52d5a1a72b97a618967f71",
+    "hd_verify.py": "25f2d17776902ea7567cc1a6a32f786251982400d54fac5f0f2ff9950ebbb13d",
+    "test_hd.py": "0bb615dc8a8afed297f11634ff95050e0cb8b1408051235577d8cc10a8e6712c",
+    "PROTOCOL.md": "a518d0c08fe487b709ec06a08cca330f08284893d5e08af74c5fc5ebe7d05a63",
+    "TIMING.json": "d1f1d37a5635a4f80aee6eb38a1d49cf3dc2d3442ed73d9d7ec062981ba39b28",
+    "../fair_recurrent_tuning_20261016/fair_core.py": "20359991e4b3b4357466314fbc463f46e0f33dcffaa15dccac064f1a68b2f0b9",
+    "../fair_recurrent_tuning_20261016/fair_data.py": "dd98e633f6076d2b9719aa039cb271d85344667d46994a65e30eca9b4f7664ab"
+  },
+  "private_saved_forecasts_included": false,
+  "legacy_saved_prediction_replay_is_standalone": false,
+  "can_generate_new_predictions": "Conditional on actual Python/numpy/torch execution rights; no webpage runtime is assumed",
+  "literature_limits": [
+    "RAFT/SARAF were statically inspected at pinned code only, not locally rerun",
+    "PFRP/FreshCast are search-level neighbors, not full-method novelty clearance",
+    "CarbonTimer method target was safety-blocked; do not retry through aliases",
+    "Recent CarbonTimer and ESWA snippets do not establish new full-method access",
+    "Premature access-certification records were withdrawn; a filename or citation-ledger success is not retrieval evidence"
+  ],
+  "next_work": "At most three genuinely distinct candidates, choose one main and one backup, ground a full method and necessary data, implement/run only with actual available tools; do not revive failed fixed rules by renaming"
+}
