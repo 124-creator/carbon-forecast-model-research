@@ -1,0 +1,34 @@
+{
+  "purpose": "Synthetic execution and information-flow audit only; no forecasting success claim",
+  "real_market_fits": 0,
+  "total_synthetic_fit_calls_executed": 16,
+  "epochs_per_fit": 10,
+  "optimizer_steps_per_fit": 150,
+  "total_optimizer_steps": 2400,
+  "seed": 717,
+  "learning_rate": 0.001,
+  "model_selection": false,
+  "required_finite_sample_gain_assertion": false,
+  "first_run": {
+    "definition": "Persistent signal uses r[t+1]=0.003*z[t]+0.01*epsilon[t+1]. Negative control initially used r=0.01*epsilon and P=50*exp(cumulative r), which is a log-price martingale but not an exact price martingale.",
+    "status": "All eight execution checks passed; negative-control terminology was corrected before market fitting.",
+    "provenance": "Descriptive ratios below transcribed from the captured first-run stdout; no reconstruction or new training was used to recover them.",
+    "fits": [
+      {"regime": "persistent", "family": "summary_state", "mse_ratio_to_rw": [0.9268294078330102, 0.7675950250721238, 0.728619153502361]},
+      {"regime": "persistent", "family": "state_price", "mse_ratio_to_rw": [0.9272288434154085, 0.7684232715188047, 0.7285669319344557]},
+      {"regime": "persistent", "family": "gru_full", "mse_ratio_to_rw": [0.9204801395465644, 0.7456022041724081, 0.7561108156624113]},
+      {"regime": "persistent", "family": "gru_price", "mse_ratio_to_rw": [0.9598112778471454, 0.8694095177017266, 0.8214287749929002]},
+      {"regime": "zero_log_drift", "family": "summary_state", "mse_ratio_to_rw": [1.0040114688117645, 1.0268789237689067, 1.2404787483983557]},
+      {"regime": "zero_log_drift", "family": "state_price", "mse_ratio_to_rw": [1.0037562719869153, 1.0257000387302215, 1.2382156765127668]},
+      {"regime": "zero_log_drift", "family": "gru_full", "mse_ratio_to_rw": [1.0032683330890857, 1.020752934262248, 1.2169985211795513]},
+      {"regime": "zero_log_drift", "family": "gru_price", "mse_ratio_to_rw": [1.0034459722575186, 1.0194593301300776, 1.1150686847011002]}
+    ]
+  },
+  "second_run": {
+    "definition": "Negative-control log returns have the fixed correction -0.5*0.01^2, so E[P[t+1] | history]=P[t]. All model settings and the persistent generator remain unchanged.",
+    "status": "All eight execution checks passed. Entire preflight script was rerun, including the four unchanged persistent fits.",
+    "receipt": "pipeline_review.json",
+    "justification": "Correct the mathematical definition of the declared price martingale; no model setting or success threshold was changed in response to scores."
+  },
+  "separation_from_main_experiment": "These 16 preflight fit calls are excluded from the 84 neural selection and 126 final-construction tasks planned for the real-market study."
+}
