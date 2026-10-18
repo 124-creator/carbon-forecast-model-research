@@ -1,0 +1,99 @@
+{
+  "study": "auction_clearing_calendar_corrected_20261018",
+  "stage": "Development bug-correction rerun; original scores exposed; all architecture, loss, split, tuning, seeds and gates unchanged",
+  "new_model": "SDMC",
+  "hypothesis": "Marginalizing a random demand measure with restricted supply access improves price forecasting beyond the same information and marginal volume supervision in a direct distribution model.",
+  "horizons": [
+    1,
+    5,
+    20
+  ],
+  "horizon_unit": "events in the complete calendar vintage known at issue time",
+  "evaluation_issue_years": [
+    2021,
+    2022,
+    2023
+  ],
+  "fold_rule": "For evaluation year Y: tune on examples with issue year Y-1 and target_date < Y-01-01; initial training targets < (Y-1)-01-01; then refit using all matured targets < Y-01-01 for the selected epoch count. Evaluate forecasts issued in Y; model weights remain fixed within Y. Histories update only as observed.",
+  "history_length": 20,
+  "hidden_width": 32,
+  "components": 3,
+  "price_knots": 17,
+  "tuning_seed": 17,
+  "refit_seeds": [
+    17,
+    29,
+    43
+  ],
+  "learning_rates": [
+    0.001,
+    0.003
+  ],
+  "max_epochs": 50,
+  "minimum_epochs": 8,
+  "early_stopping_patience": 8,
+  "batch_size": 128,
+  "weight_decay": 0.0001,
+  "gradient_clip": 1.0,
+  "torch_threads": 2,
+  "training_price_loss": "MSE in a common origin-volatility and known-gap normalization",
+  "crps_weight": 0.2,
+  "future_bid_marginal_nll_weight": 0.02,
+  "future_bid_role": "label only; never input; missing/cancelled price is never replaced by zero",
+  "neural_models": [
+    "SDMC",
+    "SDMC_single",
+    "SDMC_no_supply",
+    "SDMC_plugin",
+    "DirectMT",
+    "GRU_full",
+    "GRU_price",
+    "MLP_full"
+  ],
+  "classical_models": [
+    "RW",
+    "LastBidMedian",
+    "Ridge",
+    "HistGB"
+  ],
+  "ridge_alphas": [
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    1000.0
+  ],
+  "histgb_max_leaf_nodes": [
+    15,
+    31
+  ],
+  "histgb_learning_rate": 0.05,
+  "histgb_max_iter": 200,
+  "histgb_min_samples_leaf": 20,
+  "histgb_l2_regularization": 1.0,
+  "point_baseline_distribution": "Per-horizon empirical quantiles of validation standardized residuals, centered to mean zero; 101 equal-weight atoms. No holdout temperature fitting. RW also reports a causal FHS sensitivity separately if run.",
+  "primary_estimator": "Equal-weight ensemble of all three refit seeds, including a mixture of their price distributions. Classical forecasts have one deterministic fit.",
+  "primary_metric": "Arithmetic mean of price MSE / same-origin RW MSE over 3 issue years x 3 horizons, equal cell weight",
+  "selection_metric": "Same equal-horizon price MSE / RW MSE on the preceding validation year, no test-driven selection",
+  "secondary_metrics": [
+    "MAE",
+    "CRPS relative to validation-calibrated RW distribution",
+    "80pct interval coverage and width",
+    "marginal bid NLL",
+    "mechanical failure diagnostics"
+  ],
+  "uncertainty": "Paired moving-block bootstrap on chronological issue dates, all horizons and platforms at a date kept together; 20-origin blocks, 2000 draws, fixed seed 20261018. Seeds do not count as independent market samples.",
+  "advancement_gates": {
+    "MSE_vs_RW": "aggregate ratio <= 0.98",
+    "MSE_vs_best_matched_predictor": "at least 2 percent lower than best aggregate DirectMT, GRU_full, MLP_full, Ridge or HistGB",
+    "mean_demand_integration": "at least 1 percent lower MSE than SDMC_plugin",
+    "supply_operator": "at least 1 percent lower MSE than SDMC_no_supply",
+    "stability": "MSE beats RW in at least 6 of 9 year-horizon cells and no year aggregate exceeds RW by over 10 percent",
+    "uncertainty": "95 percent paired block-bootstrap upper bound for aggregate MSE ratio against best matched predictor is below 1"
+  },
+  "confirmation": "Only if all development gates pass: freeze final implementation, hyperparameter/refit rule, baselines and analysis, then access EEX 2024-2025 once. No changes using confirmation scores. Otherwise leave it unopened for scoring.",
+  "cancellation": "Only 3 development cancellations, and secondary-market rejection is confidential. Gamma failure probabilities concern B<S only. No claim of calibrated actual cancellation forecasting or identified censoring. Global observed cancellation frequency is a diagnostic baseline.",
+  "novelty_boundary": "Gamma measures, differentiable clearing, probability forecasts, auxiliary losses, positive residual parameterizations and as-of alignment are not individually new. The candidate contribution is the constrained, partially supervised random-demand clearing combination; it is falsified if matched direct or operator ablations absorb its gain.",
+  "implementation_repairs": "Numerical bugs may be corrected with an explicit amendment and complete affected rerun; old failed artifacts are retained. No silent score-driven architecture or loss changes.",
+  "input_amendment": "Apply contemporaneous 2019-12-12 CAP *** footnote: defer 373000 EUA per marked event. Fixed source identity; no outcome-dependent selection; see parent correction audit."
+}

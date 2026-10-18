@@ -1,0 +1,50 @@
+{
+  "all_development_gates_pass": false,
+  "decision": "STOP_LEAVE_CONFIRMATION_UNSCORED",
+  "best_matched_comparator_fixed_from_original_sample": "GRU_full",
+  "matched_candidates_in_fixed_tie_order": [
+    "DirectMT",
+    "GRU_full",
+    "MLP_full",
+    "Ridge",
+    "HistGB"
+  ],
+  "checks": {
+    "MSE_vs_RW": {
+      "value": 1.2257532169168006,
+      "criterion": "R_SDMC <= 0.98",
+      "pass": false
+    },
+    "MSE_vs_best_matched_predictor": {
+      "value": 1.2189128163478684,
+      "comparator": "GRU_full",
+      "criterion": "R_SDMC / R_best_matched <= 0.98",
+      "pass": false
+    },
+    "mean_demand_integration": {
+      "value": 0.9217117156022094,
+      "criterion": "R_SDMC / R_plugin <= 0.99",
+      "pass": true
+    },
+    "supply_operator": {
+      "value": 1.1759282013746626,
+      "criterion": "R_SDMC / R_no_supply <= 0.99",
+      "pass": false
+    },
+    "stability": {
+      "cells_beating_RW": 1,
+      "worst_year_R": 1.5625873527637466,
+      "criterion": "At least 6/9 cells strictly beat RW and every year R <= 1.10",
+      "pass": false
+    },
+    "uncertainty": {
+      "comparator": "GRU_full",
+      "lower_95": 1.1520237156512625,
+      "upper_95": 1.318286437609956,
+      "criterion": "Paired percentile 95% upper bound of R_SDMC/R_fixed_best < 1",
+      "pass": false
+    }
+  },
+  "confirmation_access_performed_by_this_script": false,
+  "no_score_driven_model_selection_or_training_change": true
+}

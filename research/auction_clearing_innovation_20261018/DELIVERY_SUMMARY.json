@@ -1,0 +1,441 @@
+{
+  "research_date": "2026-10-18",
+  "status": "COMPLETED_DEVELOPMENT_RESEARCH_NOT_READY_FOR_POSITIVE_METHOD_CLAIM",
+  "primary_definition": "Equal mean of 9 year x horizon MSE_model/MSE_RW cells; ensemble predictions first",
+  "population_per_model": {
+    "unique_issue_dates": 652,
+    "issued_forecasts": 1933,
+    "price_scored_forecasts": 1927
+  },
+  "actual_fits": {
+    "neural": 345,
+    "classical_learned": 81,
+    "total": 426
+  },
+  "formal_forecast_npz": 243,
+  "validation_neural_npz_excluded": 138,
+  "confirmation_scored": false,
+  "stages": {
+    "original": {
+      "freeze_id": "SDMC_20261018T060248Z",
+      "freeze_sha256": "0030a5fdfaa75399a7845d4d9cfe215b49067e1779078dae553c6cc70b005530",
+      "aggregate": [
+        {
+          "model": "RW",
+          "primary_equal_cell_mse_ratio_to_rw": "1",
+          "secondary_equal_cell_crps_ratio_to_rw": "1",
+          "equal_cell_interval80_coverage": "0.80465146325637649",
+          "cells_beating_rw_mse": "0"
+        },
+        {
+          "model": "LastBidMedian",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0146342603640743",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0056341704352425",
+          "equal_cell_interval80_coverage": "0.80805685690461426",
+          "cells_beating_rw_mse": "4"
+        },
+        {
+          "model": "Ridge",
+          "primary_equal_cell_mse_ratio_to_rw": "1.1827649754393328",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0559586670817689",
+          "equal_cell_interval80_coverage": "0.79859674777688794",
+          "cells_beating_rw_mse": "1"
+        },
+        {
+          "model": "HistGB",
+          "primary_equal_cell_mse_ratio_to_rw": "1.4204234177656387",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.1436963132530829",
+          "equal_cell_interval80_coverage": "0.72285857490289729",
+          "cells_beating_rw_mse": "0"
+        },
+        {
+          "model": "SDMC",
+          "primary_equal_cell_mse_ratio_to_rw": "1.2212966813646977",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.1433085525167348",
+          "equal_cell_interval80_coverage": "0.60579509457471081",
+          "cells_beating_rw_mse": "1"
+        },
+        {
+          "model": "SDMC_single",
+          "primary_equal_cell_mse_ratio_to_rw": "1.2469669565329591",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.1688502927659035",
+          "equal_cell_interval80_coverage": "0.5690460447882395",
+          "cells_beating_rw_mse": "3"
+        },
+        {
+          "model": "SDMC_no_supply",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0418899424059771",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0477545011220251",
+          "equal_cell_interval80_coverage": "0.88476866092528639",
+          "cells_beating_rw_mse": "3"
+        },
+        {
+          "model": "SDMC_plugin",
+          "primary_equal_cell_mse_ratio_to_rw": "1.3487009135471262",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.2734252410661195",
+          "equal_cell_interval80_coverage": "0.48064835731291278",
+          "cells_beating_rw_mse": "0"
+        },
+        {
+          "model": "DirectMT",
+          "primary_equal_cell_mse_ratio_to_rw": "1.1093526837947865",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0929071044833538",
+          "equal_cell_interval80_coverage": "0.75317130347160488",
+          "cells_beating_rw_mse": "0"
+        },
+        {
+          "model": "GRU_full",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0055245795206",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0035668213649931",
+          "equal_cell_interval80_coverage": "0.80311713602740098",
+          "cells_beating_rw_mse": "3"
+        },
+        {
+          "model": "GRU_price",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0261469723082288",
+          "secondary_equal_cell_crps_ratio_to_rw": "0.99071448277239604",
+          "equal_cell_interval80_coverage": "0.80297039729964348",
+          "cells_beating_rw_mse": "4"
+        },
+        {
+          "model": "MLP_full",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0866246303197189",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0356839960795128",
+          "equal_cell_interval80_coverage": "0.79968989519095146",
+          "cells_beating_rw_mse": "0"
+        }
+      ],
+      "gates": {
+        "all_development_gates_pass": false,
+        "decision": "STOP_LEAVE_CONFIRMATION_UNSCORED",
+        "best_matched_comparator_fixed_from_original_sample": "GRU_full",
+        "matched_candidates_in_fixed_tie_order": [
+          "DirectMT",
+          "GRU_full",
+          "MLP_full",
+          "Ridge",
+          "HistGB"
+        ],
+        "checks": {
+          "MSE_vs_RW": {
+            "value": 1.2212966813646977,
+            "criterion": "R_SDMC <= 0.98",
+            "pass": false
+          },
+          "MSE_vs_best_matched_predictor": {
+            "value": 1.214586601102253,
+            "comparator": "GRU_full",
+            "criterion": "R_SDMC / R_best_matched <= 0.98",
+            "pass": false
+          },
+          "mean_demand_integration": {
+            "value": 0.9055355928785195,
+            "criterion": "R_SDMC / R_plugin <= 0.99",
+            "pass": true
+          },
+          "supply_operator": {
+            "value": 1.1721935606216016,
+            "criterion": "R_SDMC / R_no_supply <= 0.99",
+            "pass": false
+          },
+          "stability": {
+            "cells_beating_RW": 1,
+            "worst_year_R": 1.5308875840221814,
+            "criterion": "At least 6/9 cells strictly beat RW and every year R <= 1.10",
+            "pass": false
+          },
+          "uncertainty": {
+            "comparator": "GRU_full",
+            "lower_95": 1.151509107999148,
+            "upper_95": 1.3182989215376757,
+            "criterion": "Paired percentile 95% upper bound of R_SDMC/R_fixed_best < 1",
+            "pass": false
+          }
+        },
+        "confirmation_access_performed_by_this_script": false,
+        "no_score_driven_model_selection_or_training_change": true
+      },
+      "aggregate_source_sha256": "85771e6b8259296629b67a89b8c9f6585c6a5181e11bbbcb09aaf8faa78470b2"
+    },
+    "corrected": {
+      "freeze_id": "SDMC_CORRECTED_20261018T065521Z",
+      "freeze_sha256": "a219303d4680f3db5e74709184191d0f02fb16e1ddc02fc8c23a031c962d3db8",
+      "aggregate": [
+        {
+          "model": "RW",
+          "primary_equal_cell_mse_ratio_to_rw": "1",
+          "secondary_equal_cell_crps_ratio_to_rw": "1",
+          "equal_cell_interval80_coverage": "0.80465146325637649",
+          "cells_beating_rw_mse": "0"
+        },
+        {
+          "model": "LastBidMedian",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0146342603640743",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0056341704352425",
+          "equal_cell_interval80_coverage": "0.80805685690461426",
+          "cells_beating_rw_mse": "4"
+        },
+        {
+          "model": "Ridge",
+          "primary_equal_cell_mse_ratio_to_rw": "1.1870524977945773",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0576299835072045",
+          "equal_cell_interval80_coverage": "0.80066964562443366",
+          "cells_beating_rw_mse": "1"
+        },
+        {
+          "model": "HistGB",
+          "primary_equal_cell_mse_ratio_to_rw": "1.3940317110473213",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.1345839970731371",
+          "equal_cell_interval80_coverage": "0.72700279121010458",
+          "cells_beating_rw_mse": "0"
+        },
+        {
+          "model": "SDMC",
+          "primary_equal_cell_mse_ratio_to_rw": "1.2257532169168006",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.1521153275973477",
+          "equal_cell_interval80_coverage": "0.58409560869530019",
+          "cells_beating_rw_mse": "1"
+        },
+        {
+          "model": "SDMC_single",
+          "primary_equal_cell_mse_ratio_to_rw": "1.2628037251328219",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.1841834529331534",
+          "equal_cell_interval80_coverage": "0.54314694792154916",
+          "cells_beating_rw_mse": "3"
+        },
+        {
+          "model": "SDMC_no_supply",
+          "primary_equal_cell_mse_ratio_to_rw": "1.04237079737002",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0478703184406839",
+          "equal_cell_interval80_coverage": "0.88526691702892368",
+          "cells_beating_rw_mse": "3"
+        },
+        {
+          "model": "SDMC_plugin",
+          "primary_equal_cell_mse_ratio_to_rw": "1.3298661568123202",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.253748886819833",
+          "equal_cell_interval80_coverage": "0.50346646087518543",
+          "cells_beating_rw_mse": "0"
+        },
+        {
+          "model": "DirectMT",
+          "primary_equal_cell_mse_ratio_to_rw": "1.1092230887283374",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0928155955583942",
+          "equal_cell_interval80_coverage": "0.75465185027715909",
+          "cells_beating_rw_mse": "0"
+        },
+        {
+          "model": "GRU_full",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0056118866560346",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.003604389196868",
+          "equal_cell_interval80_coverage": "0.80311713602740098",
+          "cells_beating_rw_mse": "3"
+        },
+        {
+          "model": "GRU_price",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0863492468072464",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0192178048197273",
+          "equal_cell_interval80_coverage": "0.79204414805563705",
+          "cells_beating_rw_mse": "3"
+        },
+        {
+          "model": "MLP_full",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0881349647210401",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0363724828922665",
+          "equal_cell_interval80_coverage": "0.80018590689772562",
+          "cells_beating_rw_mse": "0"
+        }
+      ],
+      "gates": {
+        "all_development_gates_pass": false,
+        "decision": "STOP_LEAVE_CONFIRMATION_UNSCORED",
+        "best_matched_comparator_fixed_from_original_sample": "GRU_full",
+        "matched_candidates_in_fixed_tie_order": [
+          "DirectMT",
+          "GRU_full",
+          "MLP_full",
+          "Ridge",
+          "HistGB"
+        ],
+        "checks": {
+          "MSE_vs_RW": {
+            "value": 1.2257532169168006,
+            "criterion": "R_SDMC <= 0.98",
+            "pass": false
+          },
+          "MSE_vs_best_matched_predictor": {
+            "value": 1.2189128163478684,
+            "comparator": "GRU_full",
+            "criterion": "R_SDMC / R_best_matched <= 0.98",
+            "pass": false
+          },
+          "mean_demand_integration": {
+            "value": 0.9217117156022094,
+            "criterion": "R_SDMC / R_plugin <= 0.99",
+            "pass": true
+          },
+          "supply_operator": {
+            "value": 1.1759282013746626,
+            "criterion": "R_SDMC / R_no_supply <= 0.99",
+            "pass": false
+          },
+          "stability": {
+            "cells_beating_RW": 1,
+            "worst_year_R": 1.5625873527637466,
+            "criterion": "At least 6/9 cells strictly beat RW and every year R <= 1.10",
+            "pass": false
+          },
+          "uncertainty": {
+            "comparator": "GRU_full",
+            "lower_95": 1.1520237156512625,
+            "upper_95": 1.318286437609956,
+            "criterion": "Paired percentile 95% upper bound of R_SDMC/R_fixed_best < 1",
+            "pass": false
+          }
+        },
+        "confirmation_access_performed_by_this_script": false,
+        "no_score_driven_model_selection_or_training_change": true
+      },
+      "aggregate_source_sha256": "91dc693834f78aaeefa6a64ac24a2da0b81730cad465436b542d27e58d98a695"
+    },
+    "fdmc": {
+      "freeze_id": "FDMC_20261018T070000Z",
+      "freeze_sha256": "327c96fb050e60b86cb58dfcf23c47ca971ddfe910201687cf1c54f7f8917a62",
+      "aggregate": [
+        {
+          "model": "RW",
+          "primary_equal_cell_mse_ratio_to_rw": "1",
+          "secondary_equal_cell_crps_ratio_to_rw": "1",
+          "equal_cell_interval80_coverage": "0.80465146325637649",
+          "cells_beating_rw_mse": "0"
+        },
+        {
+          "model": "LastBidMedian",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0146342603640743",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0056341704352425",
+          "equal_cell_interval80_coverage": "0.80805685690461426",
+          "cells_beating_rw_mse": "4"
+        },
+        {
+          "model": "Ridge",
+          "primary_equal_cell_mse_ratio_to_rw": "1.2359300959197466",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0789366603566792",
+          "equal_cell_interval80_coverage": "0.79074289248655938",
+          "cells_beating_rw_mse": "1"
+        },
+        {
+          "model": "HistGB",
+          "primary_equal_cell_mse_ratio_to_rw": "1.4882194030235292",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.1903306342081614",
+          "equal_cell_interval80_coverage": "0.69682300687081311",
+          "cells_beating_rw_mse": "0"
+        },
+        {
+          "model": "FDMC",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0049854342691813",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0062024078001532",
+          "equal_cell_interval80_coverage": "0.81540797135571097",
+          "cells_beating_rw_mse": "5"
+        },
+        {
+          "model": "FDMC_no_supply",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0106928340159123",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0094303148109951",
+          "equal_cell_interval80_coverage": "0.81595057446063057",
+          "cells_beating_rw_mse": "3"
+        },
+        {
+          "model": "FDMC_plugin",
+          "primary_equal_cell_mse_ratio_to_rw": "1.0054555099751181",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0060521424974105",
+          "equal_cell_interval80_coverage": "0.81333112815737252",
+          "cells_beating_rw_mse": "5"
+        },
+        {
+          "model": "FactorDirect",
+          "primary_equal_cell_mse_ratio_to_rw": "1.008563556732337",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0084808213105532",
+          "equal_cell_interval80_coverage": "0.8185664079175855",
+          "cells_beating_rw_mse": "3"
+        },
+        {
+          "model": "FDMC_unseparated",
+          "primary_equal_cell_mse_ratio_to_rw": "1.1104722750325993",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0627535783962361",
+          "equal_cell_interval80_coverage": "0.83258162743828257",
+          "cells_beating_rw_mse": "3"
+        },
+        {
+          "model": "GRU_full",
+          "primary_equal_cell_mse_ratio_to_rw": "1.008175708103962",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0040232918103458",
+          "equal_cell_interval80_coverage": "0.80623990596631445",
+          "cells_beating_rw_mse": "3"
+        },
+        {
+          "model": "MLP_full",
+          "primary_equal_cell_mse_ratio_to_rw": "1.152993822964635",
+          "secondary_equal_cell_crps_ratio_to_rw": "1.0638161319103827",
+          "equal_cell_interval80_coverage": "0.79162761425750539",
+          "cells_beating_rw_mse": "0"
+        }
+      ],
+      "gates": {
+        "all_development_gates_pass": false,
+        "decision": "STOP_LEAVE_CONFIRMATION_UNSCORED",
+        "best_matched_comparator_fixed_from_original_sample": "GRU_full",
+        "matched_candidates_in_fixed_tie_order": [
+          "FactorDirect",
+          "GRU_full",
+          "MLP_full",
+          "Ridge",
+          "HistGB"
+        ],
+        "checks": {
+          "MSE_vs_RW": {
+            "value": 1.0049854342691813,
+            "criterion": "R_FDMC <= 0.98",
+            "pass": false
+          },
+          "MSE_vs_best_matched_predictor": {
+            "value": 0.996835597397223,
+            "comparator": "GRU_full",
+            "criterion": "R_FDMC / R_best_matched <= 0.98",
+            "pass": false
+          },
+          "mean_demand_integration": {
+            "value": 0.999532474882008,
+            "criterion": "R_FDMC / R_plugin <= 0.99",
+            "pass": false
+          },
+          "supply_operator": {
+            "value": 0.9943529828701239,
+            "criterion": "R_FDMC / R_no_supply <= 0.99",
+            "pass": false
+          },
+          "stability": {
+            "cells_beating_RW": 5,
+            "worst_year_R": 1.0253501595247845,
+            "criterion": "At least 6/9 cells strictly beat RW and every year R <= 1.10",
+            "pass": false
+          },
+          "uncertainty": {
+            "comparator": "GRU_full",
+            "lower_95": 0.9912906988476905,
+            "upper_95": 1.0043583171479666,
+            "criterion": "Paired percentile 95% upper bound of R_FDMC/R_fixed_best < 1",
+            "pass": false
+          },
+          "scale_separation": {
+            "value": 0.905007226983383,
+            "criterion": "R_FDMC / R_FDMC_unseparated < 1; additional mechanistic gate",
+            "pass": true
+          }
+        },
+        "confirmation_access_performed_by_this_script": false,
+        "no_score_driven_model_selection_or_training_change": true
+      },
+      "aggregate_source_sha256": "0d8e99f0936d18c43a0941c202dbb208dea8583a3779fcf37953da6299800008"
+    }
+  }
+}
