@@ -1,0 +1,875 @@
+{
+  "job": "EEX_EUA_T3PA_b400_local_gru_s29",
+  "status": "COMPLETE",
+  "model": "local_gru",
+  "target": "EEX_EUA_T3PA",
+  "budget": 400,
+  "seed": 29,
+  "started_utc": "2026-10-18T02:55:04.519591+00:00",
+  "completed_utc": "2026-10-18T02:55:05.315869+00:00",
+  "wall_seconds": 0.7962722560005204,
+  "data_receipt": {
+    "target": "EEX_EUA_T3PA",
+    "target_sha256": "5a0c7580edebc2a7a5e66d7487568f6d99a8e08cca0785676c2aaeccad7db6bb",
+    "year": 2022,
+    "budget": 400,
+    "budget_interpretation": "retained supervised origin windows;100 is nested and spans the same role endpoints as400; causal full past quote histories remain available; not a cold-start or independent-label count",
+    "roles": {
+      "support": {
+        "n": 240,
+        "first_origin": 1367,
+        "last_origin": 1606,
+        "first_date": "2019-11-04",
+        "last_date": "2021-02-02",
+        "last_label_date": "2021-03-02"
+      },
+      "meta": {
+        "n": 80,
+        "first_origin": 1627,
+        "last_origin": 1706,
+        "first_date": "2021-03-03",
+        "last_date": "2021-07-01",
+        "last_label_date": "2021-07-29"
+      },
+      "val": {
+        "n": 80,
+        "first_origin": 1727,
+        "last_origin": 1806,
+        "first_date": "2021-07-30",
+        "last_date": "2021-11-22",
+        "last_label_date": "2021-12-20"
+      },
+      "test": {
+        "n": 193,
+        "first_origin": 1827,
+        "last_origin": 2019,
+        "first_date": "2022-01-10",
+        "last_date": "2022-11-17",
+        "last_label_date": "2022-12-19"
+      }
+    },
+    "source_cutoff_exclusive": "2021-03-03",
+    "sources": {
+      "GUANGZHOU": {
+        "n": 660,
+        "sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+        "first_origin": 60,
+        "last_origin": 719,
+        "first_date": "2018-05-07",
+        "last_label_date": "2021-03-02"
+      },
+      "HUBEI": {
+        "n": 650,
+        "sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+        "first_origin": 60,
+        "last_origin": 709,
+        "first_date": "2018-04-04",
+        "last_label_date": "2021-03-02"
+      },
+      "SHANGHAI": {
+        "n": 990,
+        "sha256": "425424353bb3ac09e3d96b291680b4179e86f180da626a5d19e5c1e58ed960a1",
+        "first_origin": 60,
+        "last_origin": 1049,
+        "first_date": "2014-03-28",
+        "last_label_date": "2021-02-26"
+      }
+    },
+    "excluded_sources": [
+      {
+        "name": "EU_REPORTED",
+        "reason": "related EU ETS series excluded as mutual transfer sources"
+      }
+    ],
+    "H": 20,
+    "L": 20,
+    "initial_volatility": "first60 raw increments; common causal EWMA .94 thereafter",
+    "new_shenzhen_used": false,
+    "confirmation_used": false,
+    "episode_schedule_sha256": "abeb643b2c59a16f2cfff44f78095cef852dfd967aa98282228cf8d911a8e81b",
+    "episode_seed": 17018
+  },
+  "evaluation": {
+    "score": 1.5014718638910634,
+    "horizons": [
+      {
+        "h": 1,
+        "mse": 7.957079964491909,
+        "rw_mse": 7.616201554404143,
+        "rmse": 2.8208296588932678,
+        "relative_mse": 1.0447570101254278,
+        "mae": 1.9754448945336174
+      },
+      {
+        "h": 5,
+        "mse": 54.5708548318892,
+        "rw_mse": 44.763551813471494,
+        "rmse": 7.387208866134029,
+        "relative_mse": 1.219091261106457,
+        "mae": 5.525935794842532
+      },
+      {
+        "h": 20,
+        "mse": 274.2438193836845,
+        "rw_mse": 122.39927668393786,
+        "rmse": 16.560308553396116,
+        "relative_mse": 2.240567320441305,
+        "mae": 13.300764099544693
+      }
+    ],
+    "n_origins": 193,
+    "all20_relative_mse": [
+      1.0447570101254278,
+      1.0875534659116743,
+      1.112482102173273,
+      1.190800398933604,
+      1.219091261106457,
+      1.2526145188313125,
+      1.286202431581093,
+      1.348322709129881,
+      1.4621598595883374,
+      1.5288407148763847,
+      1.6025958876080935,
+      1.6478943565916147,
+      1.713880927842858,
+      1.77402152727207,
+      1.826869697218608,
+      1.8689025645594628,
+      1.9889442645499449,
+      2.0723740763813074,
+      2.1382041262902387,
+      2.240567320441305
+    ]
+  },
+  "validation": {
+    "score": 0.8234802756593272,
+    "horizons": [
+      {
+        "h": 1,
+        "mse": 1.7234273125088895,
+        "rw_mse": 1.743752499999999,
+        "rmse": 1.3127937052366185,
+        "relative_mse": 0.9883439952108402,
+        "mae": 1.0568734822861405
+      },
+      {
+        "h": 5,
+        "mse": 7.393190078093812,
+        "rw_mse": 8.494752499999995,
+        "rmse": 2.719042125104687,
+        "relative_mse": 0.8703243653177436,
+        "mae": 2.2023789380189127
+      },
+      {
+        "h": 20,
+        "mse": 52.6664019169228,
+        "rw_mse": 86.08821875000001,
+        "rmse": 7.257162111798441,
+        "relative_mse": 0.6117724664493979,
+        "mae": 5.736494638515676
+      }
+    ],
+    "n_origins": 80,
+    "all20_relative_mse": [
+      0.9883439952108402,
+      0.9918121221055634,
+      0.9611026269919796,
+      0.9179123721584312,
+      0.8703243653177436,
+      0.8549129608467143,
+      0.8405324577544063,
+      0.8119443901015148,
+      0.7827665670677622,
+      0.7630976994785068,
+      0.7305615360318785,
+      0.6975426937238971,
+      0.6608692132629228,
+      0.6424617156142226,
+      0.6170390744724,
+      0.605582697330814,
+      0.6090018609283012,
+      0.6021934594045574,
+      0.60029651336491,
+      0.6117724664493979
+    ]
+  },
+  "fit_receipt": {
+    "family": "local_gru",
+    "seed": 29,
+    "target": "EEX_EUA_T3PA",
+    "config": {
+      "lr": 0.003,
+      "weight_decay": 0.0001,
+      "max_steps": 600,
+      "batch_size": 64,
+      "validation_every": 10,
+      "patience": 10,
+      "min_delta": 1e-06,
+      "sampler_seed": 17018
+    },
+    "architecture": "GRU(input3,hidden16,one_layer) plus independent Linear16_to20 per market",
+    "novelty": "standard strong supervised baseline; no innovation claim",
+    "dtype": "torch.float64",
+    "device": "cpu",
+    "torch_threads": 1,
+    "torch_version": "2.3.1+cpu",
+    "numpy_version": "2.5.4",
+    "target_supervision": "support plus meta, legally inside the retained target budget; validation excluded",
+    "target_support_count": 240,
+    "target_meta_count": 80,
+    "target_training_count": 320,
+    "validation_count": 80,
+    "source_counts": {},
+    "source_cutoff": "2021-03-03",
+    "source_pool": "entire fixed caller-approved source pool, no later crop",
+    "training_loss": "full20 mean squared scaled increment error",
+    "market_loss_weights": {
+      "EEX_EUA_T3PA": 1.0
+    },
+    "selection_score": "equal h1,h5,h20 raw-price MSE divided by same-cell validation RW MSE",
+    "zero_head_initialization": true,
+    "initial_predictions_equal_rw": true,
+    "initial_state_sha256": "ec5d2491893df53a268dc5fc300b5d4093e25c4448fd8665622887d47eeb88f0",
+    "initial_encoder_hash": "c89775d15051fc303c6e75f4fff3923f15ee9407b1520987e8b3ffde7c2e2679",
+    "last_state_sha256": "0dba2a7ade5c59ddcdd291d1831747a93042656e073fff1b49a6d40e758e230e",
+    "selected_state_sha256": "ffce227eab733e97e2e5886a2c8d9daabbc15aa6d939349ee1774b5041bdeebd",
+    "steps_completed": 220,
+    "validation_calls": 23,
+    "best_step": 120,
+    "best_validation_score": 0.8234802756593272,
+    "stop_reason": "early_stop_patience",
+    "test_forward_calls": 1,
+    "test_labels_accessed": false,
+    "sampler": "independent target/source NumPy streams; no replacement within a batch when enough origins",
+    "sampler_seeds": {
+      "EEX_EUA_T3PA": 17018
+    },
+    "sampled_indices_sha256": {
+      "EEX_EUA_T3PA": "fe88c384b9682e8d63ff9e98f4f5ab184f66b7fac2b82df3cd630f446b0ba46e"
+    },
+    "parameter_count": 1348,
+    "elapsed_seconds": 0.787361200000305
+  },
+  "validation_traces": [
+    {
+      "step": 0,
+      "validation": {
+        "score": 1.0,
+        "raw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "selected": true,
+      "training_loss": null
+    },
+    {
+      "step": 10,
+      "training_loss": 1.8204409269809656,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.8204409269809656
+      },
+      "validation": {
+        "score": 0.9250951717468384,
+        "raw_mse_h1_h5_h20": [
+          1.7205110786348328,
+          7.714259118942705,
+          75.80010692861056
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9866716054226926,
+          0.9081205272246259,
+          0.8804933825931966
+        ]
+      },
+      "selected": true,
+      "consecutive_nonimproving_validation_checks": 0
+    },
+    {
+      "step": 20,
+      "training_loss": 1.2352540673828618,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.2352540673828618
+      },
+      "validation": {
+        "score": 0.8602795413164741,
+        "raw_mse_h1_h5_h20": [
+          1.7094350232983413,
+          7.4117914935842135,
+          62.67263217939526
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9803197548381105,
+          0.8725141189910145,
+          0.7280047501202974
+        ]
+      },
+      "selected": true,
+      "consecutive_nonimproving_validation_checks": 0
+    },
+    {
+      "step": 30,
+      "training_loss": 2.1815493845036493,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 2.1815493845036493
+      },
+      "validation": {
+        "score": 0.8418595296755137,
+        "raw_mse_h1_h5_h20": [
+          1.7088656638787907,
+          7.413610618583415,
+          57.92506767834915
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9799932409437645,
+          0.8727282659010276,
+          0.6728570821817491
+        ]
+      },
+      "selected": true,
+      "consecutive_nonimproving_validation_checks": 0
+    },
+    {
+      "step": 40,
+      "training_loss": 1.712660328694178,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.712660328694178
+      },
+      "validation": {
+        "score": 0.8608269728311949,
+        "raw_mse_h1_h5_h20": [
+          1.725830901811868,
+          7.488854924024719,
+          61.22357523919637
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9897223957022967,
+          0.8815860054809982,
+          0.7111725173102895
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 1
+    },
+    {
+      "step": 50,
+      "training_loss": 1.5344244917861847,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.5344244917861847
+      },
+      "validation": {
+        "score": 0.8439559817263648,
+        "raw_mse_h1_h5_h20": [
+          1.710896410636947,
+          7.4294349727168365,
+          58.20588169008615
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.981157825228608,
+          0.8745911046515882,
+          0.6761190152988982
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 2
+    },
+    {
+      "step": 60,
+      "training_loss": 2.2094392075546017,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 2.2094392075546017
+      },
+      "validation": {
+        "score": 0.8423048751642456,
+        "raw_mse_h1_h5_h20": [
+          1.7139884743735323,
+          7.46912035024585,
+          57.224622714406394
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9829310492019557,
+          0.8792628567160555,
+          0.6647207195747257
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 3
+    },
+    {
+      "step": 70,
+      "training_loss": 1.5403470770917287,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.5403470770917287
+      },
+      "validation": {
+        "score": 0.8323429139249297,
+        "raw_mse_h1_h5_h20": [
+          1.7130832119625587,
+          7.535451687072192,
+          54.02427210365006
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9824119030439009,
+          0.8870713640064495,
+          0.6275454747244384
+        ]
+      },
+      "selected": true,
+      "consecutive_nonimproving_validation_checks": 0
+    },
+    {
+      "step": 80,
+      "training_loss": 1.173044002468902,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.173044002468902
+      },
+      "validation": {
+        "score": 0.8313892493675219,
+        "raw_mse_h1_h5_h20": [
+          1.7156036246343505,
+          7.410626623818478,
+          54.91855511039988
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9838572989196297,
+          0.8723769908326914,
+          0.6379334583502446
+        ]
+      },
+      "selected": true,
+      "consecutive_nonimproving_validation_checks": 0
+    },
+    {
+      "step": 90,
+      "training_loss": 1.6068348543193494,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.6068348543193494
+      },
+      "validation": {
+        "score": 0.8455916515278566,
+        "raw_mse_h1_h5_h20": [
+          1.7156982191432033,
+          7.916249704468375,
+          53.45773656901141
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9839115465888676,
+          0.9318988051115532,
+          0.6209646028831489
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 1
+    },
+    {
+      "step": 100,
+      "training_loss": 1.3528362090861847,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.3528362090861847
+      },
+      "validation": {
+        "score": 0.8294066789353857,
+        "raw_mse_h1_h5_h20": [
+          1.7250101216215448,
+          7.445035792721518,
+          53.59342079932428
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9892516980601007,
+          0.8764276290240971,
+          0.6225407097219592
+        ]
+      },
+      "selected": true,
+      "consecutive_nonimproving_validation_checks": 0
+    },
+    {
+      "step": 110,
+      "training_loss": 1.3964511525445873,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.3964511525445873
+      },
+      "validation": {
+        "score": 0.8357126437234367,
+        "raw_mse_h1_h5_h20": [
+          1.7513641826006485,
+          7.591425738658603,
+          52.437384347111944
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          1.004365116380134,
+          0.8936606144391619,
+          0.6091122003510142
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 1
+    },
+    {
+      "step": 120,
+      "training_loss": 1.3534931935717307,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.3534931935717307
+      },
+      "validation": {
+        "score": 0.8234802756593272,
+        "raw_mse_h1_h5_h20": [
+          1.7234273125088895,
+          7.393190078093812,
+          52.6664019169228
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9883439952108402,
+          0.8703243653177436,
+          0.6117724664493979
+        ]
+      },
+      "selected": true,
+      "consecutive_nonimproving_validation_checks": 0
+    },
+    {
+      "step": 130,
+      "training_loss": 1.3615864520217738,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.3615864520217738
+      },
+      "validation": {
+        "score": 0.823778386297251,
+        "raw_mse_h1_h5_h20": [
+          1.7184600059830903,
+          7.293007500572157,
+          54.00390539102477
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9854953647281317,
+          0.8585308989958402,
+          0.6273088951677812
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 1
+    },
+    {
+      "step": 140,
+      "training_loss": 1.0060257736895388,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.0060257736895388
+      },
+      "validation": {
+        "score": 0.8313200267650794,
+        "raw_mse_h1_h5_h20": [
+          1.7377740373187769,
+          7.339914311385071,
+          54.52275331880686
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9965714958509181,
+          0.8640527562615951,
+          0.6333358281827252
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 2
+    },
+    {
+      "step": 150,
+      "training_loss": 1.6270939212535285,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.6270939212535285
+      },
+      "validation": {
+        "score": 0.8484164809419008,
+        "raw_mse_h1_h5_h20": [
+          1.7196377305532713,
+          7.404608253619321,
+          59.17791722073597
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9861707613627922,
+          0.87166850989706,
+          0.6874101715658505
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 3
+    },
+    {
+      "step": 160,
+      "training_loss": 1.0188393232198178,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.0188393232198178
+      },
+      "validation": {
+        "score": 0.8430235552665648,
+        "raw_mse_h1_h5_h20": [
+          1.7270170170750903,
+          7.370649619834022,
+          57.76494969007432
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9904026041970356,
+          0.8676709085796233,
+          0.6709971530230355
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 4
+    },
+    {
+      "step": 170,
+      "training_loss": 1.5618273543006684,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.5618273543006684
+      },
+      "validation": {
+        "score": 0.8601911023153587,
+        "raw_mse_h1_h5_h20": [
+          1.7360361500906354,
+          7.5492340407493375,
+          59.94362517456818
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9955748594428604,
+          0.8886938190075981,
+          0.6963046284956171
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 5
+    },
+    {
+      "step": 180,
+      "training_loss": 1.4493265806135276,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.4493265806135276
+      },
+      "validation": {
+        "score": 0.8596686553130768,
+        "raw_mse_h1_h5_h20": [
+          1.7354050493253415,
+          7.474092286365861,
+          60.60136046033149
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9952129383759121,
+          0.8798481517108198,
+          0.7039448758524985
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 6
+    },
+    {
+      "step": 190,
+      "training_loss": 1.3400583183433339,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.3400583183433339
+      },
+      "validation": {
+        "score": 0.8639557306176546,
+        "raw_mse_h1_h5_h20": [
+          1.7155782463478098,
+          7.623762721041724,
+          61.17059776085144
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9838427450844147,
+          0.89746731538579,
+          0.7105571313827589
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 7
+    },
+    {
+      "step": 200,
+      "training_loss": 1.2717692162125824,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.2717692162125824
+      },
+      "validation": {
+        "score": 0.8456269008703146,
+        "raw_mse_h1_h5_h20": [
+          1.7072757584933853,
+          7.401813337583879,
+          59.096096340365705
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9790814685532415,
+          0.8713394931263604,
+          0.686459740931342
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 8
+    },
+    {
+      "step": 210,
+      "training_loss": 1.0730283509736163,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.0730283509736163
+      },
+      "validation": {
+        "score": 0.8714820737876156,
+        "raw_mse_h1_h5_h20": [
+          1.7218388420838227,
+          7.645464731001771,
+          62.58536931217019
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9874330457354605,
+          0.9000220702135554,
+          0.7269911054138308
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 9
+    },
+    {
+      "step": 220,
+      "training_loss": 1.2355348448268486,
+      "per_market_training_mse": {
+        "EEX_EUA_T3PA": 1.2355348448268486
+      },
+      "validation": {
+        "score": 0.8700371292330686,
+        "raw_mse_h1_h5_h20": [
+          1.7286469376404034,
+          7.61457171771801,
+          62.18915732746709
+        ],
+        "rw_mse_h1_h5_h20": [
+          1.743752499999999,
+          8.494752499999995,
+          86.08821875000001
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9913373243280824,
+          0.89638535292441,
+          0.7223887104467136
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 10
+    }
+  ],
+  "private_prediction_sha256": "920d52a249e5451eccb786f1776e52a0368803432c04cdccb53836062bf7e8b7",
+  "private_state_sha256": "576a62f8b2f35049449baeb7f8d7fd0e2b0fa7a1f2649cbe72b74d9c626f751e",
+  "private_full_trace_sha256": "4adc4f0a8f924b8157270706b70b9243f15168b2d5ea6e18db0f3286ebb42c36"
+}

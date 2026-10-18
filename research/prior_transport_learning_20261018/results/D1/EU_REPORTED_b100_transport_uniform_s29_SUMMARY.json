@@ -1,0 +1,727 @@
+{
+  "job": "EU_REPORTED_b100_transport_uniform_s29",
+  "status": "COMPLETE",
+  "model": "transport_uniform",
+  "target": "EU_REPORTED",
+  "budget": 100,
+  "seed": 29,
+  "started_utc": "2026-10-18T02:58:31.785221+00:00",
+  "completed_utc": "2026-10-18T02:58:32.233904+00:00",
+  "wall_seconds": 0.44868099199993594,
+  "data_receipt": {
+    "target": "EU_REPORTED",
+    "target_sha256": "ca7c192380897076ef57516a11ea2ccefda6ba92ab9823d9aa8f2bb281cefedc",
+    "year": 2022,
+    "budget": 100,
+    "budget_interpretation": "retained supervised origin windows;100 is nested and spans the same role endpoints as400; causal full past quote histories remain available; not a cold-start or independent-label count",
+    "roles": {
+      "support": {
+        "n": 60,
+        "first_origin": 539,
+        "last_origin": 778,
+        "first_date": "2020-03-24",
+        "last_date": "2021-02-25",
+        "last_label_date": "2021-03-25"
+      },
+      "meta": {
+        "n": 20,
+        "first_origin": 799,
+        "last_origin": 878,
+        "first_date": "2021-03-26",
+        "last_date": "2021-07-16",
+        "last_label_date": "2021-08-13"
+      },
+      "val": {
+        "n": 20,
+        "first_origin": 899,
+        "last_origin": 978,
+        "first_date": "2021-08-16",
+        "last_date": "2021-12-03",
+        "last_label_date": "2021-12-31"
+      },
+      "test": {
+        "n": 238,
+        "first_origin": 999,
+        "last_origin": 1236,
+        "first_date": "2022-01-03",
+        "last_date": "2022-12-01",
+        "last_label_date": "2022-12-30"
+      }
+    },
+    "source_cutoff_exclusive": "2021-03-26",
+    "sources": {
+      "GUANGZHOU": {
+        "n": 677,
+        "sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+        "first_origin": 60,
+        "last_origin": 736,
+        "first_date": "2018-05-07",
+        "last_label_date": "2021-03-25"
+      },
+      "HUBEI": {
+        "n": 667,
+        "sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+        "first_origin": 60,
+        "last_origin": 726,
+        "first_date": "2018-04-04",
+        "last_label_date": "2021-03-25"
+      },
+      "SHANGHAI": {
+        "n": 994,
+        "sha256": "425424353bb3ac09e3d96b291680b4179e86f180da626a5d19e5c1e58ed960a1",
+        "first_origin": 60,
+        "last_origin": 1053,
+        "first_date": "2014-03-28",
+        "last_label_date": "2021-03-23"
+      }
+    },
+    "excluded_sources": [
+      {
+        "name": "EEX_EUA_T3PA",
+        "reason": "related EU ETS series excluded as mutual transfer sources"
+      }
+    ],
+    "H": 20,
+    "L": 20,
+    "initial_volatility": "first60 raw increments; common causal EWMA .94 thereafter",
+    "new_shenzhen_used": false,
+    "confirmation_used": false,
+    "episode_schedule_sha256": "9bf769b7f56621fd2dbcca5b51e25b3c1b8b7ad6e21b88de01aac9f0dd4f93b7",
+    "episode_seed": 17018
+  },
+  "evaluation": {
+    "score": 1.2215824147361483,
+    "horizons": [
+      {
+        "h": 1,
+        "mse": 7.090700311762364,
+        "rw_mse": 6.852355462184877,
+        "rmse": 2.6628368916932117,
+        "relative_mse": 1.034782907993143,
+        "mae": 1.8958340415047736
+      },
+      {
+        "h": 5,
+        "mse": 41.87123074703866,
+        "rw_mse": 38.24394537815127,
+        "rmse": 6.470798308326311,
+        "relative_mse": 1.0948460032829055,
+        "mae": 4.722653088320683
+      },
+      {
+        "h": 20,
+        "mse": 170.91446297666988,
+        "rw_mse": 111.33634411764702,
+        "rmse": 13.073425831688873,
+        "relative_mse": 1.535118332932396,
+        "mae": 10.125136890138391
+      }
+    ],
+    "n_origins": 238,
+    "all20_relative_mse": [
+      1.034782907993143,
+      1.019861952202035,
+      1.108134278487876,
+      1.0665871716005424,
+      1.0948460032829055,
+      1.0614937926006067,
+      1.1374699113077988,
+      1.161012544346607,
+      1.1637227942445885,
+      1.167407128467614,
+      1.2109288398152707,
+      1.2553616787564355,
+      1.2096008554159778,
+      1.2849404742629063,
+      1.322527714926523,
+      1.3697586446988823,
+      1.3789604464957714,
+      1.389790752276022,
+      1.4661106276790563,
+      1.535118332932396
+    ]
+  },
+  "validation": {
+    "score": 0.7140564257983518,
+    "horizons": [
+      {
+        "h": 1,
+        "mse": 2.4774613290333973,
+        "rw_mse": 3.0677199999999973,
+        "rmse": 1.5739953395843957,
+        "relative_mse": 0.8075904349267207,
+        "mae": 1.259956571375438
+      },
+      {
+        "h": 5,
+        "mse": 11.09109119828383,
+        "rw_mse": 14.906735000000008,
+        "rmse": 3.3303289924996644,
+        "relative_mse": 0.7440322242452035,
+        "mae": 2.9637185225682274
+      },
+      {
+        "h": 20,
+        "mse": 59.12233255929533,
+        "rw_mse": 100.11459,
+        "rmse": 7.68910479570251,
+        "relative_mse": 0.5905466182231314,
+        "mae": 5.979581570605772
+      }
+    ],
+    "n_origins": 20,
+    "all20_relative_mse": [
+      0.8075904349267207,
+      0.9035269623146698,
+      0.8261106147273082,
+      0.8154092850775888,
+      0.7440322242452035,
+      0.740905980284857,
+      0.7305935649888579,
+      0.6240100303169199,
+      0.6869956734516945,
+      0.7140757685222267,
+      0.6783694582024049,
+      0.5815565749036896,
+      0.6827682480696662,
+      0.6755771109706225,
+      0.6343101582398318,
+      0.6058381051965376,
+      0.6272036909956427,
+      0.5958289459853287,
+      0.571399517746021,
+      0.5905466182231314
+    ]
+  },
+  "fit_receipt": {
+    "model_name": "transport_uniform",
+    "head_control": null,
+    "seed": 29,
+    "eligible": true,
+    "status": "early_stopping",
+    "failure": null,
+    "steps": 100,
+    "selected_step": 0,
+    "selected_validation_score": 0.7140564257983519,
+    "seconds": 0.43562190500051656,
+    "initial_encoder_hash": "686aa88eba903983668dcd619441e72e0f690926b68aadc727cb9a8a53f022cc",
+    "initial_state_hash": "966e9e86ed1ba3664e02ba9554ecfdcd9e9d362133855030b0164948e80036c8",
+    "source_names": [
+      "GUANGZHOU",
+      "HUBEI",
+      "SHANGHAI"
+    ],
+    "source_ridge_backend": "author_kernel.author_ridge",
+    "author_ridge_calls": 300,
+    "source_ridge_calls_expected_completed_steps": 300,
+    "covariance_calibration": null,
+    "encoder_parameters": 2216,
+    "feature_dimension": 8,
+    "horizon": 20,
+    "gradient_clipping": false,
+    "theta_lr": 0.01,
+    "meta_lr": 0.1,
+    "lambda0": 0.1,
+    "max_steps": 600,
+    "val_interval": 10,
+    "patience": 10,
+    "min_delta": 1e-06,
+    "base_target_precision_is_fixed_during_gradient": true,
+    "test_forward_calls": 1,
+    "test_target_values_used_in_fit": false,
+    "prediction_units": "predictions and val_predictions are normalized caller y units; raw_predictions multiply sigma exactly once",
+    "scope": "Own paired learning protocol; source may execute audited author ridge numerical kernel only",
+    "selected_state_hash": "eae13570ae4a623b97fd296ca9821f15ba6886a2bdaca10d7404e074ff84c0ff"
+  },
+  "validation_traces": [
+    {
+      "step": 0,
+      "validation_score": 0.7140564257983519,
+      "validation_horizon_ratios": [
+        0.8075904349267211,
+        0.7440322242452037,
+        0.5905466182231313
+      ],
+      "selected": true,
+      "source_weights": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      "seconds": 0.002961865999168367
+    },
+    {
+      "step": 10,
+      "target_profile_objective": 0.7300041445393131,
+      "source_query_losses": {
+        "GUANGZHOU": 0.3567365135627115,
+        "HUBEI": 0.11217607205691413,
+        "SHANGHAI": 0.48603590567892996
+      },
+      "source_gradient_norms": {
+        "GUANGZHOU": 0.46625833781903697,
+        "HUBEI": 0.06378629692384319,
+        "SHANGHAI": 0.23213194163235873
+      },
+      "target_gradient_norm": 0.4901186436190394,
+      "combined_gradient_norm": 0.5004009115901225,
+      "meta_objective_before_logit_update": null,
+      "meta_gradient_norm": null,
+      "source_weights": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      "null_weight": 0.5,
+      "precision_min_eigenvalue": 0.08649048668546495,
+      "precision_max_eigenvalue": 0.16740459730773194,
+      "precision_trace": 0.8528824494578379,
+      "diagonal_log_precision": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation_score": 0.7167915165750257,
+      "selected": false,
+      "seconds": 0.042219224998916616,
+      "transport_relative_residual": 0.003282197166324874,
+      "transport_old_feature_condition": 8.687901150573843,
+      "validation_horizon_ratios": [
+        0.8116914759516468,
+        0.7442876042824218,
+        0.5943954694910085
+      ]
+    },
+    {
+      "step": 20,
+      "target_profile_objective": 0.7273679563672905,
+      "source_query_losses": {
+        "GUANGZHOU": 0.13914106912878038,
+        "HUBEI": 5.079809322087104,
+        "SHANGHAI": 0.38294536550212044
+      },
+      "source_gradient_norms": {
+        "GUANGZHOU": 0.1341099530654337,
+        "HUBEI": 0.3040356520128042,
+        "SHANGHAI": 0.1607913428645251
+      },
+      "target_gradient_norm": 0.4296698478287455,
+      "combined_gradient_norm": 0.41592310928439535,
+      "meta_objective_before_logit_update": null,
+      "meta_gradient_norm": null,
+      "source_weights": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      "null_weight": 0.5,
+      "precision_min_eigenvalue": 0.07792629744800401,
+      "precision_max_eigenvalue": 0.2429627747917817,
+      "precision_trace": 0.91373749344965,
+      "diagonal_log_precision": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation_score": 0.7195246877187177,
+      "selected": false,
+      "seconds": 0.07681458499973814,
+      "transport_relative_residual": 0.002036765081795005,
+      "transport_old_feature_condition": 10.154085556097614,
+      "validation_horizon_ratios": [
+        0.8141205672010644,
+        0.7460099106218882,
+        0.5984435853332006
+      ]
+    },
+    {
+      "step": 30,
+      "target_profile_objective": 0.7257604753117441,
+      "source_query_losses": {
+        "GUANGZHOU": 0.504939793648882,
+        "HUBEI": 4.07290001181974,
+        "SHANGHAI": 0.9097269204309878
+      },
+      "source_gradient_norms": {
+        "GUANGZHOU": 0.509443843381749,
+        "HUBEI": 0.5295152289968025,
+        "SHANGHAI": 0.9038126372226297
+      },
+      "target_gradient_norm": 0.39173513489597633,
+      "combined_gradient_norm": 0.4378057185600539,
+      "meta_objective_before_logit_update": null,
+      "meta_gradient_norm": null,
+      "source_weights": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      "null_weight": 0.5,
+      "precision_min_eigenvalue": 0.06993603366236639,
+      "precision_max_eigenvalue": 0.33168428244979264,
+      "precision_trace": 0.9906984557003462,
+      "diagonal_log_precision": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation_score": 0.7223717166184963,
+      "selected": false,
+      "seconds": 0.12251766900044458,
+      "transport_relative_residual": 0.001673315145139653,
+      "transport_old_feature_condition": 11.75312955078175,
+      "validation_horizon_ratios": [
+        0.8167435377485623,
+        0.7477779198791508,
+        0.6025936922277758
+      ]
+    },
+    {
+      "step": 40,
+      "target_profile_objective": 0.7245147183142335,
+      "source_query_losses": {
+        "GUANGZHOU": 0.3240107692452356,
+        "HUBEI": 1.6296133631962824,
+        "SHANGHAI": 2.496146039343549
+      },
+      "source_gradient_norms": {
+        "GUANGZHOU": 0.5593643978178494,
+        "HUBEI": 0.5810906451803811,
+        "SHANGHAI": 27.426445624770817
+      },
+      "target_gradient_norm": 0.3689515198611365,
+      "combined_gradient_norm": 4.638747536804645,
+      "meta_objective_before_logit_update": null,
+      "meta_gradient_norm": null,
+      "source_weights": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      "null_weight": 0.5,
+      "precision_min_eigenvalue": 0.061051508593529105,
+      "precision_max_eigenvalue": 0.4103992019441256,
+      "precision_trace": 1.0684578930813093,
+      "diagonal_log_precision": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation_score": 0.7273204696744568,
+      "selected": false,
+      "seconds": 0.16861342300035176,
+      "transport_relative_residual": 0.013419510832026454,
+      "transport_old_feature_condition": 13.120082084552614,
+      "validation_horizon_ratios": [
+        0.8205763181559362,
+        0.7529748008059542,
+        0.60841029006148
+      ]
+    },
+    {
+      "step": 50,
+      "target_profile_objective": 0.7227987987084752,
+      "source_query_losses": {
+        "GUANGZHOU": 0.380986572904123,
+        "HUBEI": 0.13504840429539192,
+        "SHANGHAI": 3.252269767442594
+      },
+      "source_gradient_norms": {
+        "GUANGZHOU": 0.6812851824542698,
+        "HUBEI": 0.20073245035012577,
+        "SHANGHAI": 2.0614877731395556
+      },
+      "target_gradient_norm": 0.3467554963378705,
+      "combined_gradient_norm": 0.44231351900493576,
+      "meta_objective_before_logit_update": null,
+      "meta_gradient_norm": null,
+      "source_weights": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      "null_weight": 0.5,
+      "precision_min_eigenvalue": 0.05593780403371178,
+      "precision_max_eigenvalue": 0.5017217420284751,
+      "precision_trace": 1.1554426815917076,
+      "diagonal_log_precision": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation_score": 0.7296477440524131,
+      "selected": false,
+      "seconds": 0.21447546099989268,
+      "transport_relative_residual": 0.0016022688202474435,
+      "transport_old_feature_condition": 14.294701788096516,
+      "validation_horizon_ratios": [
+        0.8220027034414948,
+        0.7551630883166428,
+        0.6117774403991014
+      ]
+    },
+    {
+      "step": 60,
+      "target_profile_objective": 0.7216333014113558,
+      "source_query_losses": {
+        "GUANGZHOU": 0.21275399541545123,
+        "HUBEI": 1.4077224358606042,
+        "SHANGHAI": 1.1898907627328879
+      },
+      "source_gradient_norms": {
+        "GUANGZHOU": 0.2665693626677329,
+        "HUBEI": 0.2852782405456567,
+        "SHANGHAI": 17.503559177398543
+      },
+      "target_gradient_norm": 0.33692973085551325,
+      "combined_gradient_norm": 2.963856003932313,
+      "meta_objective_before_logit_update": null,
+      "meta_gradient_norm": null,
+      "source_weights": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      "null_weight": 0.5,
+      "precision_min_eigenvalue": 0.05192356666302446,
+      "precision_max_eigenvalue": 0.5678430361540702,
+      "precision_trace": 1.224427172131693,
+      "diagonal_log_precision": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation_score": 0.7322500546977161,
+      "selected": false,
+      "seconds": 0.2599927999999636,
+      "transport_relative_residual": 0.007140868364020725,
+      "transport_old_feature_condition": 15.322662601698001,
+      "validation_horizon_ratios": [
+        0.8237811657184382,
+        0.7583363703041284,
+        0.6146326280705816
+      ]
+    },
+    {
+      "step": 70,
+      "target_profile_objective": 0.7206203434184638,
+      "source_query_losses": {
+        "GUANGZHOU": 0.17958395463731597,
+        "HUBEI": 0.15190132264180534,
+        "SHANGHAI": 0.9478267373918982
+      },
+      "source_gradient_norms": {
+        "GUANGZHOU": 0.09358763355813315,
+        "HUBEI": 0.10712255016069748,
+        "SHANGHAI": 0.21959828096086015
+      },
+      "target_gradient_norm": 0.3294562417265154,
+      "combined_gradient_norm": 0.33570227178920403,
+      "meta_objective_before_logit_update": null,
+      "meta_gradient_norm": null,
+      "source_weights": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      "null_weight": 0.5,
+      "precision_min_eigenvalue": 0.05013730789307978,
+      "precision_max_eigenvalue": 0.6541993373492694,
+      "precision_trace": 1.3050706941306132,
+      "diagonal_log_precision": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation_score": 0.7328914450302265,
+      "selected": false,
+      "seconds": 0.3050776700001734,
+      "transport_relative_residual": 0.0009647847761098576,
+      "transport_old_feature_condition": 16.314595346735132,
+      "validation_horizon_ratios": [
+        0.8243375773295366,
+        0.7588818004572137,
+        0.6154549573039295
+      ]
+    },
+    {
+      "step": 80,
+      "target_profile_objective": 0.720008533047554,
+      "source_query_losses": {
+        "GUANGZHOU": 0.7422564436188106,
+        "HUBEI": 0.4345853444932347,
+        "SHANGHAI": 0.5396096640525929
+      },
+      "source_gradient_norms": {
+        "GUANGZHOU": 0.34030964942236724,
+        "HUBEI": 0.09079649956021307,
+        "SHANGHAI": 1.7596247638407752
+      },
+      "target_gradient_norm": 0.3293692558978532,
+      "combined_gradient_norm": 0.44029202381115606,
+      "meta_objective_before_logit_update": null,
+      "meta_gradient_norm": null,
+      "source_weights": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      "null_weight": 0.5,
+      "precision_min_eigenvalue": 0.04877231118815317,
+      "precision_max_eigenvalue": 0.7305072694493671,
+      "precision_trace": 1.377514323826098,
+      "diagonal_log_precision": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation_score": 0.7332081380641197,
+      "selected": false,
+      "seconds": 0.3464065349999146,
+      "transport_relative_residual": 0.0009348999494519722,
+      "transport_old_feature_condition": 17.31759205403526,
+      "validation_horizon_ratios": [
+        0.8244781340120659,
+        0.7591720215237244,
+        0.6159742586565686
+      ]
+    },
+    {
+      "step": 90,
+      "target_profile_objective": 0.7194596708201076,
+      "source_query_losses": {
+        "GUANGZHOU": 2.596596239007451,
+        "HUBEI": 4.938862647929517,
+        "SHANGHAI": 0.0749955842460149
+      },
+      "source_gradient_norms": {
+        "GUANGZHOU": 0.9953323538004621,
+        "HUBEI": 0.28704616862395566,
+        "SHANGHAI": 0.06358022357725915
+      },
+      "target_gradient_norm": 0.3284627814598816,
+      "combined_gradient_norm": 0.36136052293705345,
+      "meta_objective_before_logit_update": null,
+      "meta_gradient_norm": null,
+      "source_weights": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      "null_weight": 0.5,
+      "precision_min_eigenvalue": 0.046442963877069206,
+      "precision_max_eigenvalue": 0.8178343765536424,
+      "precision_trace": 1.4619530607659526,
+      "diagonal_log_precision": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation_score": 0.7343618846085672,
+      "selected": false,
+      "seconds": 0.3892934069990588,
+      "transport_relative_residual": 0.0009771470884120963,
+      "transport_old_feature_condition": 18.35176378810346,
+      "validation_horizon_ratios": [
+        0.8253671630384566,
+        0.7607660154701814,
+        0.6169524753170638
+      ]
+    },
+    {
+      "step": 100,
+      "target_profile_objective": 0.7187359795702465,
+      "source_query_losses": {
+        "GUANGZHOU": 0.5755147303553101,
+        "HUBEI": 0.5928307942043499,
+        "SHANGHAI": 0.3797594807834609
+      },
+      "source_gradient_norms": {
+        "GUANGZHOU": 0.2561651120353519,
+        "HUBEI": 4.265899630404954,
+        "SHANGHAI": 0.1316334525611882
+      },
+      "target_gradient_norm": 0.32922776588810143,
+      "combined_gradient_norm": 0.722355957584884,
+      "meta_objective_before_logit_update": null,
+      "meta_gradient_norm": null,
+      "source_weights": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      "null_weight": 0.5,
+      "precision_min_eigenvalue": 0.044421992502006256,
+      "precision_max_eigenvalue": 0.9089479329174217,
+      "precision_trace": 1.55098718437219,
+      "diagonal_log_precision": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation_score": 0.7359665005368935,
+      "selected": false,
+      "seconds": 0.4343612419997953,
+      "transport_relative_residual": 0.0017998678236799063,
+      "transport_old_feature_condition": 19.49461642344733,
+      "validation_horizon_ratios": [
+        0.825831144405191,
+        0.7636252728700248,
+        0.6184430843354642
+      ]
+    }
+  ],
+  "private_prediction_sha256": "9a08fd9812151fcf03ee0f023e7fbcbb502366872645b9ca13f5f87da0f3cf42",
+  "private_state_sha256": "d5ab5a518601b273e5cb237d69b755116b952191b06bfa0d22f770677bd298eb",
+  "private_full_trace_sha256": "2a4b99306b51f261656fcf0ca1d0374b9035f0549824167fdeb1e2b389d3405e"
+}
