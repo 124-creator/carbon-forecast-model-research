@@ -25,6 +25,7 @@ import json
 import math
 import os
 from pathlib import Path
+import subprocess
 import sys
 from typing import Any
 
@@ -88,7 +89,9 @@ def close(a: Any, b: Any, message: str, rtol: float = 2e-12, atol: float = 1e-10
 
 
 def outside_git(path: Path) -> None:
-    require(not any((p / ".git").exists() for p in (path, *path.parents)),
+    probe = subprocess.run(["git", "-C", str(path), "rev-parse", "--show-toplevel"],
+                           capture_output=True, text=True, timeout=10, check=False)
+    require(probe.returncode != 0,
             f"Observation/forecast inputs must stay outside a Git worktree: {path}")
 
 
@@ -235,6 +238,17 @@ def metric_row(source: str, fold: str, horizon: int, family: str, estimate: str,
             "mse_ratio_to_rw": mse / rw_mse}
 
 
+def seed_mean(values: list[np.ndarray]) -> np.ndarray:
+    """Equal arithmetic mean with exact preservation of identical forecasts.
+
+    Centering avoids roundoff from summing three identical origin prices and
+    dividing by three. A zero-epoch RW forecast must remain exactly RW.
+    """
+    stacked = np.stack(values, axis=0)
+    reference = stacked[0]
+    return reference + np.mean(stacked - reference[None], axis=0)
+
+
 def read_fold(source: Source, name: str, start: int, end: int, run_root: Path,
               fingerprint: str) -> tuple[Fold, list[dict], list[dict], dict]:
     folder = run_root / source.name / name
@@ -249,6 +263,8 @@ def read_fold(source: Source, name: str, start: int, end: int, run_root: Path,
     require(all(np.isfinite(value) and value >= 0 for value in scores.values()),
             f"Invalid baseline validation score: {source.name}/{name}")
     close(scores[selected], min(scores.values()), "Selected baseline does not minimize validation MSE")
+    expected_selected = min(POINT_CONTROLS, key=lambda family: (scores[family], family))
+    require(selected == expected_selected, "Validation baseline violates the fixed exact-tie name ordering")
 
     origins = np.arange(start, end, dtype=np.int64)
     truth = source.labels(origins)
@@ -330,7 +346,7 @@ def read_fold(source: Source, name: str, start: int, end: int, run_root: Path,
                              "model_sha256": metadata.get("model_sha256"),
                              "metadata_sha256": digest(path.with_suffix(".json")),
                              "nonpositive_point_predictions": int(np.count_nonzero(mean <= 0))})
-        ensemble = np.mean(np.stack(seed_means, axis=0), axis=0)
+        ensemble = seed_mean(seed_means)
         means.append(ensemble)
         for j, horizon in enumerate(HORIZONS):
             metric_rows.append(metric_row(source.name, name, horizon, family, "mean_ensemble", "ensemble",
@@ -503,10 +519,14 @@ def self_test() -> None:
     close(boot[:, 1, :] / boot[:, 0, :], np.full((100, 1), 2.0), "Bound model bootstrap pairing")
     close(boot[:, 2, :] / boot[:, 0, :], np.full((100, 1), 4.0), "Bound horizon bootstrap pairing")
     # Averaging seed means precedes squaring: opposing errors cancel.
-    ensemble = np.mean(np.array([[1.0, 3.0], [3.0, 1.0]]), axis=0)
+    ensemble = seed_mean([np.array([1.0, 3.0]), np.array([3.0, 1.0])])
     close((ensemble - 2.0)**2, np.zeros(2), "Mean ensemble must precede MSE")
+    identical = np.array([0.1, 3.3, 102.81])
+    require(np.array_equal(seed_mean([identical] * 3), identical),
+            "Identical seed forecasts must remain exactly identical")
     print(json.dumps({"self_test": "PASS", "checks": ["future_window_and_uncontained_price",
-                      "finite_energy_v", "paired_moving_blocks", "ensemble_before_mse"]}))
+                      "finite_energy_v", "paired_moving_blocks", "ensemble_before_mse",
+                      "identical_seed_forecast_preservation"]}))
 
 
 def main() -> int:
