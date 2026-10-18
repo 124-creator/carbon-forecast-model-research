@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-10-18",
+  "status": "DESIGN_REQUIREMENTS_ONLY_NO_EXPERIMENT_AUTHORIZATION",
+  "single_research_need": "固定富源、仅减少目标监督支持，检验在目标读出充分适配后共享表示是否降低目标风险并保留市场响应差异。",
+  "historical_non_repetition": [
+    {
+      "id": "BCM_POOLING",
+      "already_tested": "pooled GRU+shared head+market ID+market-equal weighting",
+      "must_not_claim_as_new": true
+    },
+    {
+      "id": "BCM_VIEWS",
+      "already_tested": "full/coarse augmentation and blocked conditional moments",
+      "must_not_restart_as_new": true
+    },
+    {
+      "id": "H_BILEVEL",
+      "already_tested": "one-step temporal support-to-forward-block differentiable meta objective",
+      "must_compare_when_applicable": true
+    },
+    {
+      "id": "O_PROFILE_GAIN",
+      "already_tested": "differentiable ridge and positive forward-gain spectral projection",
+      "must_compare_when_applicable": true
+    },
+    {
+      "id": "HSC_RUM_SOLID",
+      "already_tested": "horizon competition, utility memory, query-wise mature-neighbor head update",
+      "must_not_restart_with_gate_rename": true
+    },
+    {
+      "id": "RRC",
+      "already_tested": "prequential revision-residual calibration into teacher/student TD",
+      "must_not_restart_as_new": true
+    }
+  ],
+  "proposed_robust_gate_assessment": {
+    "proposal": "mean forward effect minus block deletion instability; share only under target scarcity",
+    "decision": "NO_GO_AS_ORIGINAL_MECHANISM",
+    "reason": "standard empirical transfer-benefit stability penalty/confidence selection, closely related to Stage O and first-order gradient matching",
+    "exact_identity_to_stage_o_claimed": false
+  },
+  "checks": [
+    {
+      "id": "SCOPE_01",
+      "phase": "before_freeze",
+      "assertion": "All paths are an explicit allowlist; no old confirmation file or confirmation score is read.",
+      "evidence": [
+        "INPUT_ALLOWLIST.json",
+        "source_sha256"
+      ]
+    },
+    {
+      "id": "BUDGET_01",
+      "phase": "before_freeze",
+      "assertion": "Declare supervised-window-budget diagnostic OR genuinely short target history; do not merge claims.",
+      "evidence": [
+        "PROTOCOL.json:target_scarcity_definition"
+      ]
+    },
+    {
+      "id": "BUDGET_02",
+      "phase": "before_fit",
+      "assertion": "Record unique target origin sets for inner/support, meta, earlystop, tuning and their union, including calendar and H20 target endpoints.",
+      "evidence": [
+        "SUPPORT_MANIFEST.json",
+        "target_label_budget_counts"
+      ]
+    },
+    {
+      "id": "BUDGET_03",
+      "phase": "before_fit",
+      "assertion": "Source support/labels/scaler/sampling rule/weight remain identical across target budgets; smaller target support is nested and covers matched dates.",
+      "evidence": [
+        "support_hashes",
+        "source_rule_hash",
+        "nested_support_check"
+      ]
+    },
+    {
+      "id": "CAUSAL_01",
+      "phase": "synthetic_and_static",
+      "assertion": "For each allowed source or target label, its target date precedes the declared information cutoff; source row indices cannot replace a common calendar cutoff.",
+      "evidence": [
+        "maturity_boundary_receipt"
+      ]
+    },
+    {
+      "id": "CAUSAL_02",
+      "phase": "synthetic_and_static",
+      "assertion": "Fit/meta/validation separation is checked using target endpoints, with explicit overlap/purge policy; future labels never affect issued predictions.",
+      "evidence": [
+        "purge_receipt",
+        "future_poisoning_scope"
+      ]
+    },
+    {
+      "id": "TYPE_01",
+      "phase": "before_freeze",
+      "assertion": "Parameter sharing is separated from contemporaneous cross-market input fusion; any added inputs require separate causal timing and ablation.",
+      "evidence": [
+        "model_information_set",
+        "input_schema"
+      ]
+    },
+    {
+      "id": "FAIR_01",
+      "phase": "before_fit",
+      "assertion": "Paired arms share price-risk objective, scale convention, output anchor/shrink, head/encoder initialization rules, validation support and sampler.",
+      "evidence": [
+        "paired_config_diff",
+        "initial_state_hashes",
+        "sampler_seed"
+      ]
+    },
+    {
+      "id": "FAIR_02",
+      "phase": "before_freeze",
+      "assertion": "Extra inner steps, exact head solves, pretraining and meta access are counted; no claim that exact profile adds zero optimization cost.",
+      "evidence": [
+        "job_budget",
+        "solve_counts",
+        "elapsed_seconds"
+      ]
+    },
+    {
+      "id": "CONTROL_01",
+      "phase": "before_freeze",
+      "assertion": "Include local strong baseline, RW/stat/ridge anchors, pooled market-ID model and ordinary shared encoder/local heads, with duplicate controls removed.",
+      "evidence": [
+        "CONTROL_MAP.json"
+      ]
+    },
+    {
+      "id": "CONTROL_02",
+      "phase": "before_freeze_if_profile",
+      "assertion": "Include one-step, sufficiently converged multistep head adaptation and exact ridge/profile on matched supports; specify convergence criterion in advance.",
+      "evidence": [
+        "profile_neighbour_controls",
+        "head_solver_tolerance"
+      ]
+    },
+    {
+      "id": "CONTROL_03",
+      "phase": "before_freeze",
+      "assertion": "A matched mechanism-off version isolates the new operator; conventional source-pretrain/target-adapt is required when representation-transfer claims depend on it.",
+      "evidence": [
+        "mechanism_ablation"
+      ]
+    },
+    {
+      "id": "SYNTH_01",
+      "phase": "before_market_fit",
+      "assertion": "A same-X/opposite-response synthetic world preserves target-local mapping; a shared-response world permits variance benefit; duplicated sources are not treated as independent sample evidence.",
+      "evidence": [
+        "synthetic_receipt"
+      ],
+      "scope_note": "Requirements only; no such test was executed in this audit."
+    },
+    {
+      "id": "INFERENCE_01",
+      "phase": "before_result_read",
+      "assertion": "Predeclare target/market/horizon weighting and selection gates; overlapping horizons, related markets and seeds are not independent observations.",
+      "evidence": [
+        "SELECTION_RULES.json",
+        "dependence_statement"
+      ]
+    },
+    {
+      "id": "CLAIM_01",
+      "phase": "report",
+      "assertion": "If converged multistep matches exact profile, attribute differences to approximation/optimization quality; do not claim novel mathematics.",
+      "evidence": [
+        "matched_results",
+        "novelty_scope"
+      ]
+    },
+    {
+      "id": "CLAIM_02",
+      "phase": "report",
+      "assertion": "Repeatedly exposed development years are not renamed as independent confirmation; old STOP conclusions remain unchanged.",
+      "evidence": [
+        "EXPOSURE_LEDGER.json",
+        "prior_stop_links"
+      ]
+    }
+  ],
+  "forbidden_actions_in_this_audit": {
+    "market_file_reads": 0,
+    "prediction_array_reads": 0,
+    "checkpoint_reads": 0,
+    "confirmation_file_reads": 0,
+    "confirmation_score_reads": 0,
+    "model_fits": 0,
+    "optimizer_steps": 0,
+    "old_file_mutations": 0
+  },
+  "synthetic_work_done": "Symbolic derivation only; no numerical solver, synthetic optimizer or market training was run."
+}
+

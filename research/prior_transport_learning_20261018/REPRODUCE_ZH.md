@@ -1,0 +1,156 @@
+# 先验运输学习：便携复现说明
+
+本说明复现本目录已经冻结的 2022 年开发实验。入口保留原方法、协议和 11 个运行文件的字节，只把批准的数据与源码复制到使用者指定的新目录。`prepare` 不拟合模型；`run` 是单独、显式的正式训练动作。
+
+原协议为 [PROTOCOL.json](provenance/PROTOCOL.json)，SHA-256：`204534271be271dd010e2978980d155c71a0ce28699b03bfbaa6bae76148b657`。任务为 5 条序列 × 2 个目标监督预算 ×（11 个神经模型 × 3 个种子 + ridge + RW），共 350 条预测流。其中 330 个是神经拟合；ridge 的候选线性求解、RW 预测、每次源任务求解和元梯度都不应另称独立神经拟合。结果解释及是否停止以本轮主报告和冻结门槛为准，不能因重放而修改门槛。
+
+## 1. 取得源码与运行环境
+
+从本轮完整仓库检出，或解压本轮交付 ZIP，在含有 `research/` 的目录执行。ZIP 带有父提交已公开的 32 个必要依赖，原相对路径保持不变：4 份开发 CSV、26 个 EEX 获取/解析/来源文件、2 份数据归属说明。它不是包含父提交全部历史文件的完整仓库镜像；GitHub 的新增提交保留父树全部 2,138 个文件 blob。
+
+```bash
+export REPO_ROOT="$(pwd -P)"
+export REPO_PARENT="$(dirname "$REPO_ROOT")"
+export STUDY_REL="research/prior_transport_learning_20261018"
+```
+
+正式环境记录见协议：CPython 3.12.14、Linux CPU、NumPy 2.5.4、Torch 2.3.1+cpu。运行器使用 float64、确定性算法、禁用 MKLDNN、两个进程且每进程一个 Torch 线程。不同硬件或底层线性代数库不保证逐位相同结果，应保留新环境和数值核验收据。
+
+可以使用已经备好的该环境，也可以在独立环境安装。以下命令假定 `python3.12` 指向 3.12.14；先用 `python3.12 --version` 核对。它不会安装或切换 Python 解释器本身。
+
+```bash
+python3.12 --version
+python3.12 -m venv "$REPO_PARENT/carbon_prior_env"
+. "$REPO_PARENT/carbon_prior_env/bin/activate"
+python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.3.1+cpu'
+python -m pip install -r "$REPO_ROOT/$STUDY_REL/requirements.txt"
+```
+
+`requirements.txt` 固定直接的实验依赖。Torch 的普通安装依赖由包元数据处理；这不是对所有操作系统依赖的完整锁定文件。作者原始 R2D2 的 `environment.yml` 仅保留为历史实现证据，不用于安装现代运行环境，也不要求 CUDA、MXNet 或 Auto-Lambda 软件。离线环境可以使用预先取得的匹配 wheel，以 `--no-index --find-links /path/to/wheelhouse` 安装同一要求。本轮交付准备没有重复安装依赖。
+
+## 2. EEX 报价保持本地
+
+本包不附 EEX 原始拍卖 ZIP、逐场或日聚合价格、确认报价、逐起点预测、目标或模型权重。准备入口只接受此前固定的 **EEX 开发 CSV**：
+
+`EEX_EUA_T3PA_daily_development.csv`，SHA-256：`5a0c7580edebc2a7a5e66d7487568f6d99a8e08cca0785676c2aaeccad7db6bb`。
+
+如果已经有该文件，直接设置路径。若需要从公开官方来源取得，使用父研究保留的 [EEX 复现入口](../event_feedback_innovation_20261017/data_reproduction/reproduce_eex_data.py) 及 [EEX 数据方法](../event_feedback_innovation_20261017/data_reproduction/EEX_DATA_METHODS_ZH.md)：
+
+```bash
+python -m pip install -r "$REPO_ROOT/research/event_feedback_innovation_20261017/data_reproduction/requirements-eex.txt"
+python -B "$REPO_ROOT/research/event_feedback_innovation_20261017/data_reproduction/reproduce_eex_data.py" check
+python -B "$REPO_ROOT/research/event_feedback_innovation_20261017/data_reproduction/reproduce_eex_data.py" prepare \
+  --output "$REPO_PARENT/eex_local_replay" --download
+export EEX_DEV="$REPO_PARENT/eex_local_replay/local_only/prepared/development/EEX_EUA_T3PA_daily_development.csv"
+```
+
+已有固定官方 ZIP 时，把 `--download` 换成 `--archive-local /absolute/path/to/eex_primary_auction_2012_2025.zip`。EEX 入口核对固定原始字节及解析产物；源站不可访问或字节已变时会停止，不能自动采用新版本或换代理。其本地解析也会机械分出历史的 2024、2025 封存文件，不展示其价格、不拟合模型。本轮学习入口只接收上面的开发文件，不接收或读取这些封存分区。遵守 EEX 的使用条款；不要把新工作区的 `local_only/` 上传仓库。
+
+## 3. 只检查源码和路径
+
+以下 `check` 核对本轮源码、方法、协议、复现索引及父依赖的存在。它不读取 CSV 内容、正式结果、检查点或确认数据，不联网，不拟合。
+
+```bash
+python -B "$REPO_ROOT/$STUDY_REL/source/prepare_reproduction.py" check \
+  --source-dir "$REPO_ROOT"
+```
+
+准备入口的历史版本另外经过 32 项合成文件检查，涵盖固定字节复制、旧结果排除、路径穿越/符号链接、哈希不符、已有目录与重复启动拒绝。见 [准备检查收据](audits/REPRODUCTION_PREPARATION_CHECK.json)；该收据没有读取真实市场 CSV 或结果，也没有执行子训练进程。检查代码是 [check_reproduction.py](source/check_reproduction.py)。它证明该历史版本的复制/保护行为，不证明实际市场重训已经在使用者环境完成，也不替代对后续辅助文件版本的检查。
+
+源清单见 [REPRODUCTION_SOURCES.json](provenance/REPRODUCTION_SOURCES.json)，父文件身份见 [REPRODUCTION_PARENT_DEPENDENCIES.json](provenance/REPRODUCTION_PARENT_DEPENDENCIES.json)。正式 `prepare` 会进一步核对 4 份父 CSV 的 SHA-256、全部父依赖的 Git blob 身份和外部 EEX 开发 SHA-256。哈希证明与本次固定字节一致，不能替代对交付来源本身的信任。
+
+本次续接修正的是**交付辅助索引和复现说明**：旧索引完整保存在 [ORIGINAL_REPRODUCTION_SOURCES.json](provenance/recovery/ORIGINAL_REPRODUCTION_SOURCES.json)，原审核收据继续对应其记载的历史字节。更新后的索引记录现有准备助手的实际身份，并补齐 `source/analyze_mechanism.py`，使自动生成的可选机制分析命令有对应源码。11 个冻结运行文件、实验前方法和正式协议均保持原字节；这不是重新登记或改写训练前协议。本次新核验只执行源码 `check`、数据身份 `dry-run` 和隔离复制 `prepare`，详见 [续接交付核对](audits/recovery_delivery/DELIVERY_REVIEW_ZH.md)。没有重新安装依赖、运行市场训练或读取封存确认文件。
+
+## 4. 准备新的隔离工作区
+
+目标目录必须尚不存在，且位于源检出/解压目录之外。使用上文由 `pwd -P` 和 `dirname` 形成的规范化绝对路径；准备入口拒绝包含 `..` 的输出路径，即使该路径在文件系统中能够解析。先 dry-run 可验证输入身份而不创建文件。`EEX_DEV` 应指向第 2 节的实际本地开发文件。
+
+```bash
+export REPLAY_ROOT="$REPO_PARENT/carbon_prior_replay"
+python -B "$REPO_ROOT/$STUDY_REL/source/prepare_reproduction.py" prepare \
+  --source-dir "$REPO_ROOT" --output "$REPLAY_ROOT" --eex-dev "$EEX_DEV" --dry-run
+python -B "$REPO_ROOT/$STUDY_REL/source/prepare_reproduction.py" prepare \
+  --source-dir "$REPO_ROOT" --output "$REPLAY_ROOT" --eex-dev "$EEX_DEV"
+cd "$REPLAY_ROOT/$STUDY_REL"
+```
+
+新布局保持生产 `data.py` 与 `run.py` 的原相对路径，无须改写源代码或重新生成模型参数/协议哈希。EEX 开发副本放在 `REPLAY_ROOT/local_only/inputs/`；4 份公开 CSV 保持父 `research/cross_market_innovation_20261017/data/` 路径。新目录自动生成 `.gitignore`、工作区身份收据及 JSON 格式的命令列表 `REPRODUCTION_COMMANDS.json`。命令列表在新工作区根生成，使用本地实际绝对路径。
+
+原始训练结果和权重不会复制。历史的事前审核/合成收据保存到新 study 的 `historical/pre_run_evidence/` 下；协议、方法与 `PRE_FIT_SCOPE.json` 保持原始字节和原相对位置。历史收据描述原运行，不是新工作区已经通过的验证。后续合成程序写本地新的收据，不覆盖历史存档。`check/prepare` 面向未改动的交付源；完成重跑后的可变工作区不应再冒充该原始交付源。
+
+## 5. 合成检查、准备数据与正式运行
+
+以下前三条使用程序生成的人工序列或随机矩阵，不读取市场价格。smoke 覆盖 11 个神经模型的有限步数和禁止访问测试结果的接口；timing 只对一个合成 transport 情形计时。它们会写新 study 的 `provenance/SYNTHETIC_SMOKE.json` 和 `SYNTHETIC_TIMING.json`。
+
+```bash
+python -B source/independent_data.py --output audits/INDEPENDENT_DATA_AUDIT.json
+python -B source/synthetic_run.py smoke
+python -B source/synthetic_run.py timing
+```
+
+随后可以生成实际数据支持/因果特征的准备收据。此步读批准的开发 CSV，构造预定支持，不拟合价格模型。
+
+```bash
+python -B source/run.py prepare \
+  --eex-dev "$REPLAY_ROOT/local_only/inputs/EEX_EUA_T3PA_daily_development.csv" \
+  --private-dir "$REPLAY_ROOT/local_only/D1"
+```
+
+正式训练单独执行：
+
+```bash
+python -B source/prepare_reproduction.py run --workspace "$REPLAY_ROOT"
+```
+
+这个辅助命令再次核对冻结运行文件，要求 `results/D1` 和 `REPLAY_ROOT/local_only/D1` 都不存在，先留下 `MARKET_RUN_LAUNCHED.json`，然后调用原 `source/run.py run`。训练过程、批次、模型、超参数、提前停止、种子和资源门槛均来自原源码和协议。中断/失败保留原现场，没有自动重试或静默续跑；本入口不按成绩决定追加实验。
+
+本次显式设定的公开输出为 **`results/D1`**，私有输出为 **`REPLAY_ROOT/local_only/D1`**。原运行器不会在参数后自动再加 `D1`。完整原命令等价于：
+
+```bash
+python -B source/run.py run \
+  --eex-dev "$REPLAY_ROOT/local_only/inputs/EEX_EUA_T3PA_daily_development.csv" \
+  --protocol provenance/PROTOCOL.json --year 2022 \
+  --public-dir results/D1 --private-dir "$REPLAY_ROOT/local_only/D1"
+```
+
+这条展开式只用于说明原 CLI；与包装入口二选一执行一次。推荐包装入口，因为它额外保护已有私有目录和中断标记。
+
+## 6. 汇总和独立验分
+
+原 `run` 完成时已经自动生成 `AGGREGATE.json`。需要重新从公开的逐任务汇总计算同一个聚合时，原命令如下；`--private-dir` 在该模式仍是 argparse 必填项，汇总逻辑不读取该目录。
+
+```bash
+python -B source/run.py summarize \
+  --public-dir results/D1 --private-dir "$REPLAY_ROOT/local_only/D1"
+```
+
+独立核验使用新运行实际 NPZ，不读取价格 CSV 或权重，不导入生产数据、训练、评分模块，不重新拟合：
+
+```bash
+python -B source/independent_results.py \
+  --protocol provenance/PROTOCOL.json \
+  --public-dir results/D1 --private-dir "$REPLAY_ROOT/local_only/D1" \
+  --output-dir audits/D1_independent
+```
+
+产物包括 `INDEPENDENT_METRIC_AUDIT.json`、`INDEPENDENT_SELECTION.json`、逐任务计数及全部 20 期/种子均值的聚合单元 CSV。这些 CSV 是误差单元，没有逐日价格或逐起点预测。独立程序检验 NPZ 身份、共同评价支持、数值评分、检查点选择收据、种子风险先平均与固定资源门槛；它不从原 CSV 重新推导所有标签，也不从权重重放模型前向。这些边界应与单独的因果数据和运行器审核一起解释。
+
+只下载公开交付包而没有自行重跑或持有本次私有预测时，可以阅读已公开聚合和审核收据，不能从公开误差表重新生成所有私有预测或冒称已独立验分。新运行必须留下自己的收据，不能继承原报告的 PASS 或原结论作为本地执行结果。
+
+## 7. 可选的聚合表与科学图导出
+
+独立验分完成后，[analyze_results.py](source/analyze_results.py) 读取新 study 的 `results/D1/*_SUMMARY.json` 和 `audits/D1_independent/INDEPENDENT_SEED_AVERAGED_CELLS.csv`。这两个路径与上面命令完全一致。它只做聚合描述和图形导出，不读取私有预测、不拟合、不重新选择模型或修改门槛。
+
+```bash
+python -B source/analyze_results.py --study "$REPLAY_ROOT/$STUDY_REL" --no-plots
+python -m pip install -r requirements-figures.txt
+MPLCONFIGDIR=/tmp/carbon_prior_mpl python -B source/analyze_results.py --study "$REPLAY_ROOT/$STUDY_REL"
+```
+
+表和摘要写到新 study 的 `results/D1/analysis/`，静态 SVG、PNG、PDF 写到新 study 的 `figures/`。此处的重复导出只覆盖新工作区的这些衍生产物；不运行市场训练。图中的种子离散度描述相同报价上的初始化敏感性，不是市场抽样置信区间。
+
+## 8. 作者实现与许可范围
+
+本轮公开保留 R2D2 的五个 MIT 原始文件及来源清单；[author_kernel.py](source/author_kernel.py) 读取其中未改写的 `rr_standard/rr_woodbury` AST 函数，用单独的现代 CPU 求解 shim 执行数值核。它不是作者图像分类数据、CNN、CUDA 驱动或整套论文 benchmark 的重现。
+
+Deep Factors 作为完整文献近邻，只保留本方说明、固定链接和字节身份；不需要其 MXNet 软件。Auto-Lambda 核心具有单独的非转让许可，本包不附其作者源码、LICENSE 全文、论文 PDF 或提取文本，也没有将本方匹配控制称为 Auto-Lambda 作者软件的原样运行。详见 [文献说明](methods/literature/AUTOLAMBDA_REVIEW_ZH.md) 与 [R2D2 接入范围](methods/literature/R2D2_COMPATIBILITY_ZH.md)。
