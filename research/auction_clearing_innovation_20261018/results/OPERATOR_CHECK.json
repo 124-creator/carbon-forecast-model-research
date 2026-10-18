@@ -1,0 +1,420 @@
+{
+  "overall_status": "PASS",
+  "clearing_models_sha256": "cce2c5d197e1dc7227f9b3d980479668d6b6aab633673a9c21d45361d8672a80",
+  "model_file_unchanged_during_check": true,
+  "verification_script_sha256": "e2a765c73e07a6317170c2df929acbf29eaa269c658bdd60a20af2a67e3d0c01",
+  "versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "torch": "2.5.1+cpu"
+  },
+  "torch_threads": 2,
+  "rng_seed_base": 2026101821,
+  "gamma_simulations_single": 300000,
+  "gamma_simulations_mixture": 300000,
+  "scope": {
+    "synthetic_only": true,
+    "market_rows_read": 0,
+    "confirmation_rows_read": 0,
+    "optimizer_steps": 0,
+    "real_training_runs": 0
+  },
+  "checks": {
+    "gamma_normalization_and_scipy": {
+      "status": "PASS",
+      "shape": [
+        12,
+        3,
+        17
+      ],
+      "checks": {
+        "torch.float64": {
+          "max_normalization_error": 1.1102230246251565e-16,
+          "max_scipy_error": 3.6235542344442706e-10,
+          "tolerance": 1e-08
+        },
+        "torch.float32": {
+          "max_normalization_error": 1.1102230246251565e-16,
+          "max_scipy_error": 2.09030569076063e-07,
+          "tolerance": 2e-06
+        }
+      }
+    },
+    "strict_three_bid_boundary": {
+      "status": "PASS",
+      "prices": [
+        10.0,
+        20.0,
+        30.0
+      ],
+      "volumes": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "cases": [
+        {
+          "supply": 1.0,
+          "expected_clearing_price": 30.0,
+          "price_masses": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "failure": 0.0
+        },
+        {
+          "supply": 2.0,
+          "expected_clearing_price": 20.0,
+          "price_masses": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "failure": 0.0
+        },
+        {
+          "supply": 3.0,
+          "expected_clearing_price": 10.0,
+          "price_masses": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "failure": 0.0
+        },
+        {
+          "supply": 3.1,
+          "expected_clearing_price": null,
+          "price_masses": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "failure": 1.0
+        }
+      ],
+      "scope": "Direct deterministic descending clearing plus production tail-index structure under substituted deterministic CDF. The Gamma model itself is continuous."
+    },
+    "single_gamma_monte_carlo": {
+      "status": "PASS",
+      "max_absolute_probability_error": 0.00109891276544119,
+      "max_fraction_of_fixed_allowance": 0.23578576615960498,
+      "observed": [
+        0.07147666666666666,
+        0.15872,
+        0.23599666666666666,
+        0.17520333333333332,
+        0.35860333333333333
+      ],
+      "formula": [
+        0.07206916168201405,
+        0.15921291361681988,
+        0.23489775390122547,
+        0.1742330631277489,
+        0.3595871076721917
+      ],
+      "draws": 300000,
+      "criterion": "Each cell: abs error <= 6*sqrt(p*(1-p)/n)+5/n; fixed before simulation."
+    },
+    "mixed_gamma_monte_carlo_and_conditioning": {
+      "status": "PASS",
+      "unconditional": {
+        "max_absolute_probability_error": 0.0006100259197277108,
+        "max_fraction_of_fixed_allowance": 0.3921030996647989,
+        "observed": [
+          0.00308,
+          0.005163333333333333,
+          0.00556,
+          0.0032966666666666665,
+          0.06719333333333333,
+          0.025696666666666666,
+          0.00581,
+          0.0009566666666666666,
+          0.01489,
+          0.053136666666666665,
+          0.06807666666666666,
+          0.005316666666666667,
+          0.7418233333333333
+        ],
+        "formula": [
+          0.0032378835883705892,
+          0.005334242172498142,
+          0.005459261563536766,
+          0.003558989654624471,
+          0.06658330741360562,
+          0.02531252730749921,
+          0.005980258322881157,
+          0.0009674296236598427,
+          0.014820449328956292,
+          0.05286986893893332,
+          0.06816648907626392,
+          0.005512988257044464,
+          0.7421963047521263
+        ],
+        "draws": 300000,
+        "criterion": "Each cell: abs error <= 6*sqrt(p*(1-p)/n)+5/n; fixed before simulation."
+      },
+      "conditional": {
+        "max_absolute_probability_error": 0.0019897153989696936,
+        "max_fraction_of_fixed_allowance": 0.4015358508839712,
+        "observed": [
+          0.011929815501013519,
+          0.01999922533665578,
+          0.021535640969362065,
+          0.012769034123920314,
+          0.2602610615470027,
+          0.0995313286767459,
+          0.022503970149639136,
+          0.003705472996526926,
+          0.057673685977302366,
+          0.20581513950395725,
+          0.263682491317315,
+          0.020593133900559047
+        ],
+        "formula": [
+          0.012559492544346273,
+          0.020691100518824453,
+          0.02117604077896471,
+          0.013805037399493302,
+          0.258271346148033,
+          0.09818527730241282,
+          0.023196945711469505,
+          0.003752582455149357,
+          0.057487342509604786,
+          0.20507801056963074,
+          0.26441238171827997,
+          0.02138444234379116
+        ],
+        "draws": 77453,
+        "criterion": "Each cell: abs error <= 6*sqrt(p*(1-p)/n)+5/n; fixed before simulation."
+      },
+      "component_success_posterior": [
+        0.06823167124162874,
+        0.3834061516170647,
+        0.5483621771413066
+      ],
+      "prior_component_mix": [
+        0.55,
+        0.3,
+        0.15
+      ],
+      "L1_wrong_conditioning_order_gap": 0.9635366575167427,
+      "L1_empirical_to_wrong_conditioning": 0.9675325681380967,
+      "network_weight_max_error": 1.6653345369377348e-16
+    },
+    "reference_center_rw": {
+      "status": "PASS",
+      "condition": "meanB/lastB=1, planned S=last S, location=0; positive log-price grid normalized by reference exponential moment; all synthetic cases retained; law is conditional on mechanical success.",
+      "relative_scale_values": [
+        0.002,
+        0.005,
+        0.02,
+        0.05,
+        0.1
+      ],
+      "precision_note": "Small relative_scale magnifies float32 residual-unit roundoff; both normalized and relative-price errors are checked.",
+      "checks": {
+        "torch.float64": {
+          "max_absolute_normalized_mean": 3.25434124093249e-15,
+          "tolerance": 2e-11,
+          "max_relative_price_mean_error": 2.5049406993105095e-16
+        },
+        "torch.float32": {
+          "max_absolute_normalized_mean": 1.1129985821867194e-14,
+          "tolerance": 0.0001,
+          "max_relative_price_mean_error": 2.130240460242575e-16
+        }
+      }
+    },
+    "gamma_shape_gradient": {
+      "status": "PASS",
+      "points": 80,
+      "shape_range": [
+        1e-05,
+        40.0
+      ],
+      "x_range": [
+        1e-05,
+        160.0
+      ],
+      "max_absolute_shape_error": 0.00016176977995296937,
+      "max_relative_shape_error_where_reference_above_1e_minus5": 9.36642945267151e-05,
+      "max_fraction_of_fixed_allowance": 0.014526328860631961,
+      "fine_vs_finer_scipy_max_difference": 5.014507331591034e-08,
+      "torch64_fine_vs_scipy_finer_max_difference": 2.5165055261844316e-08,
+      "worst_allowance_case": {
+        "shape": 0.2,
+        "x": 1e-05,
+        "actual": -1.222455311198304,
+        "fine_reference": -1.2224195061362233
+      },
+      "criterion": "All 80 shape derivatives: abs error <= 2e-5 + .002*abs(reference); x derivative rtol 2e-11, atol 1e-10.",
+      "limitation": "Checked first derivatives on a finite operational/stress grid; no claim of exact shape AD or higher-order gradients."
+    },
+    "atom_crps_quadratic_definition": {
+      "status": "PASS",
+      "cases": 9,
+      "atoms_per_case": 13,
+      "unsorted_unequal_grid": true,
+      "duplicate_atoms": true,
+      "point_mass_case": true,
+      "max_absolute_error": 4.440892098500626e-16
+    },
+    "mode_dimensions_and_finiteness": {
+      "status": "PASS",
+      "modes": {
+        "stochastic": {
+          "mean_shape": [
+            4
+          ],
+          "atom_shape": [
+            4,
+            21
+          ],
+          "weight_shape": [
+            4,
+            21
+          ],
+          "synthetic_first_backward_finite": true,
+          "optimizer_steps": 0
+        },
+        "direct": {
+          "mean_shape": [
+            4
+          ],
+          "atom_shape": [
+            4,
+            21
+          ],
+          "weight_shape": [
+            4,
+            21
+          ],
+          "synthetic_first_backward_finite": true,
+          "optimizer_steps": 0
+        },
+        "plugin": {
+          "mean_shape": [
+            4
+          ],
+          "atom_shape": [
+            4,
+            3
+          ],
+          "weight_shape": [
+            4,
+            3
+          ],
+          "synthetic_first_backward_finite": true,
+          "optimizer_steps": 0
+        },
+        "no_supply": {
+          "mean_shape": [
+            4
+          ],
+          "atom_shape": [
+            4,
+            21
+          ],
+          "weight_shape": [
+            4,
+            21
+          ],
+          "synthetic_first_backward_finite": true,
+          "optimizer_steps": 0
+        }
+      },
+      "plugin_scope": "Plugin is the explicitly smooth inverse of mean demand with stochastic success weights; not exact discrete deterministic clearing."
+    },
+    "missing_bid_mask_finite_backward": {
+      "status": "PASS",
+      "cases": [
+        {
+          "dtype": "torch.float64",
+          "all_bid_labels_missing": false,
+          "finite_loss": true,
+          "all_parameter_gradients_finite": true,
+          "optimizer_steps": 0
+        },
+        {
+          "dtype": "torch.float64",
+          "all_bid_labels_missing": true,
+          "finite_loss": true,
+          "all_parameter_gradients_finite": true,
+          "optimizer_steps": 0
+        },
+        {
+          "dtype": "torch.float32",
+          "all_bid_labels_missing": false,
+          "finite_loss": true,
+          "all_parameter_gradients_finite": true,
+          "optimizer_steps": 0
+        },
+        {
+          "dtype": "torch.float32",
+          "all_bid_labels_missing": true,
+          "finite_loss": true,
+          "all_parameter_gradients_finite": true,
+          "optimizer_steps": 0
+        }
+      ],
+      "initial_failure_receipt": "results/MISSING_BID_MASK_INITIAL.json",
+      "remediation": "Replace unavailable B labels with a finite dummy through where(has_bid, label, 1) BEFORE evaluating Gamma log density; then mask loss.",
+      "scope": "Synthetic missing-label boundary. Discovered and corrected before real training or market performance scoring."
+    },
+    "gamma_survival_shape_gradient": {
+      "status": "PASS",
+      "points": 81,
+      "max_absolute_shape_error": 0.00016176972064219086,
+      "max_relative_shape_error_resolved": 0.001484692693923863,
+      "fine_vs_finer_scipy_max_difference": 1.6653345369377348e-11,
+      "torch64_fine_vs_scipy_finer_max_difference": 2.064393278544685e-08,
+      "tiny_tail_case": {
+        "shape": 40.0,
+        "x": 400.0,
+        "survival": 3.143297267321495e-119,
+        "actual_shape_derivative": 7.296659668072294e-119,
+        "fine_reference": 7.28584243104584e-119,
+        "relative_error": 0.001484692693923863
+      },
+      "criterion": "Same 80-point grid plus the requested tiny-tail point; absolute 2e-5+.002*|reference| and relative .002 where derivative is resolved (including small SF tails)."
+    },
+    "tiny_tail_nonzero_conditional_weights": {
+      "status": "PASS",
+      "requested_case": {
+        "supply_over_lastB": 3.0,
+        "concentration": 40.0,
+        "meanB_over_lastB": 0.3
+      },
+      "checks": {
+        "torch.float64": {
+          "success_mass": 3.143297267321495e-119,
+          "network_weight_sum": 1.0,
+          "synthetic_crps": 4.233630111363757,
+          "first_backward_finite": true
+        },
+        "torch.float32": {
+          "success_mass": 3.1433838673170304e-119,
+          "network_weight_sum": 0.9999999999999999,
+          "synthetic_crps": 4.233630284585431,
+          "first_backward_finite": true
+        }
+      },
+      "interpretation": "Failure can round to 1; price weights must still normalize direct float64 survival masses, never 1-failure."
+    }
+  },
+  "elapsed_seconds": 0.2282378330019128,
+  "current_operator_form": "Upper Gamma survival differences; float64 masses retained through mixture conditioning.",
+  "initial_attempt": {
+    "receipt": "results/OPERATOR_CHECK_INITIAL.json",
+    "retained": true,
+    "reason_for_repeat": "Initial old two-column synthetic base no longer matched the updated three-column positive-price interface. Initial float64 CDF tolerance 2e-11 was stricter than the verified torch kernel accuracy; root set 1e-8 float64 and 2e-6 float32 before rerun.",
+    "mpmath70_worst_point_check": {
+      "shape": 25.00486062035667,
+      "x": 25.82209242451278,
+      "torch_absolute_error": 3.6235521467764525e-10,
+      "scipy_absolute_error": 4.223332811711944e-17
+    }
+  }
+}
