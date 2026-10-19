@@ -1,0 +1,190 @@
+{
+  "status": "PASS",
+  "decision": "PASS_RECOVERY_QUALIFICATION",
+  "audit": "Independent recovery pipeline and original-failure-fixture audit",
+  "completed_utc": "2026-10-19T07:58:07.817225+00:00",
+  "source_hashes": {
+    "source/geometry_filter.py": "a6602b273f10fcba6f1862153bd93453d6b7212a4a10d36611d6aa5a44caad66",
+    "source/run_synthetic.py": "4ac6a99a415ffa50ddec266faee42c5037aedd8f8cfb3d1b988ea5872bf84b8f",
+    "provenance/SYNTHETIC_PROTOCOL.json": "b5c6b2ac088d7c82ee765ecc8064d3322e07512a798c20fc26743b0cbea85676",
+    "methods/GEOMETRY_DERIVATION_ZH.md": "edfe561e254d86056c7b0bd49424ae243ccb96e365186f21ad8e7dc8e315c58c"
+  },
+  "audit_script_sha256": "d569bc54edb2660ab0c090aed67e37e64aa97a3006401e07d7b96d5a2046e684",
+  "scope": "Frozen design review, unchanged original numerical audits, archived numerical failure, artificial gates",
+  "original_audit_reruns": {
+    "INDEPENDENT_CORE_AUDIT_RECOVERY.json": {
+      "sha256": "37cd82accf61c850e6874874fa40c08ac1a947ad3fd47e50ef4fc4ff3c0010da",
+      "status": "PASS"
+    },
+    "RUNNER_PREFIT_AUDIT_RECOVERY.json": {
+      "sha256": "5165b0888f1397877174e4e927a724c104ca15ac637f96479f90c3b94eb3ddb9",
+      "status": "PASS"
+    }
+  },
+  "checks": {
+    "provenance": {
+      "status": "PASS",
+      "archived_freeze_sha256": "40c8758f9ad3b39fa6e0eb61b49d273a517c247548ee2a38d63b70c3dd79a0fd",
+      "archived_frozen_files_verified": 10,
+      "unchanged_current_scientific_inputs": [
+        "source/run_synthetic.py",
+        "provenance/SYNTHETIC_PROTOCOL.json",
+        "methods/GEOMETRY_DERIVATION_ZH.md",
+        "audits/independent_core_audit.py",
+        "audits/independent_runner_audit.py",
+        "audits/INDEPENDENT_CORE_AUDIT.json",
+        "audits/RUNNER_PREFIT_AUDIT.json",
+        "literature/DIRECT_NEIGHBORS_ZH.md",
+        "literature/PRIOR_MECHANISM_MAP_ZH.md"
+      ],
+      "only_changed_function": "update_crps_kl",
+      "module_constants_and_other_definitions_unchanged": true,
+      "solver_tolerance": 1e-12,
+      "newton_iteration_budget": 100,
+      "failed_attempt_completed_validation_configuration_streams": 840,
+      "failed_attempt_completed_scenarios": 0,
+      "failed_attempt_test_streams": 0,
+      "no_archived_selection_or_test_score_file": true
+    },
+    "original_failure_fixture": {
+      "status": "PASS",
+      "diagnostic_sha256": "4bc675b07129ba3d2219fc7304739948e392f21df46bd2d63aa43ce8b0163530",
+      "fixture_rows": 140,
+      "zero_step_rows": 20,
+      "independent_primal_root_cases": 120,
+      "original_failure_reproduced": true,
+      "original_exception": "CRPS+KL Newton budget exceeded; dual residual=1.48e-12",
+      "new_core_numerical_receipt": {
+        "algorithm": "equivalent_strongly_convex_dual_newton",
+        "line_search_merit": "half_squared_dual_gradient_norm",
+        "rows": 140,
+        "zero_step_identity_rows": 20,
+        "tolerance": 1e-12,
+        "max_iter_budget": 100,
+        "max_iterations": 7,
+        "max_kkt_residual": 2.8660407380698416e-13,
+        "max_dual_gradient_residual": 8.388567618311527e-13,
+        "total_backtracking_halvings": 1,
+        "converged": true,
+        "gram_factorization_max_error": 3.469446951953614e-17,
+        "max_simplex_equality_residual": 6.661338147750939e-16,
+        "min_probability": 6.9948737637684285e-16
+      },
+      "independent_equations": "Three original primal log-odds KKT equations, no core dual factors",
+      "maximum_probability_error": 4.622413563026839e-13,
+      "maximum_original_objective_error": 2.220446049250313e-13,
+      "maximum_original_primal_kkt": 2.868261184119092e-13,
+      "maximum_independent_root_residual": 6.483702463810914e-14,
+      "original_failed_rows": [
+        {
+          "row": 108,
+          "original_primal_kkt": 1.1657341758564144e-15,
+          "independent_probability_error": 5.551115123125783e-17,
+          "independent_objective_error": 5.551115123125783e-16
+        }
+      ],
+      "formal_validation_scores_computed": 0,
+      "formal_test_streams": 0
+    },
+    "gate_and_counts": {
+      "status": "PASS",
+      "fixture_types": "Artificial score tables only",
+      "passing_fixture": true,
+      "failing_gate_fixtures": [
+        {
+          "fixture": "gain",
+          "required_failure": "positive_expected_gain_at_least_one_percent",
+          "observed_failed_checks": [
+            "positive_expected_gain_at_least_one_percent"
+          ]
+        },
+        {
+          "fixture": "interval",
+          "required_failure": "positive_expected_seed_interval_upper_negative",
+          "observed_failed_checks": [
+            "positive_expected_seed_interval_upper_negative"
+          ]
+        },
+        {
+          "fixture": "current",
+          "required_failure": "positive_each_beats_current_cdf",
+          "observed_failed_checks": [
+            "positive_each_beats_current_cdf"
+          ]
+        },
+        {
+          "fixture": "rotated",
+          "required_failure": "positive_beats_rotated_metric",
+          "observed_failed_checks": [
+            "positive_beats_rotated_metric"
+          ]
+        },
+        {
+          "fixture": "empirical",
+          "required_failure": "positive_empirical_gain",
+          "observed_failed_checks": [
+            "positive_empirical_gain"
+          ]
+        },
+        {
+          "fixture": "clean",
+          "required_failure": "clean_noninferiority_half_percent",
+          "observed_failed_checks": [
+            "clean_noninferiority_half_percent"
+          ]
+        },
+        {
+          "fixture": "numerical",
+          "required_failure": "numerical_and_causal_checks",
+          "observed_failed_checks": [
+            "numerical_and_causal_checks"
+          ]
+        }
+      ],
+      "strict_equality_rejected_for_current_and_rotated_controls": true,
+      "formal_runner_called": false,
+      "market_data_reads": 0,
+      "maturity": {
+        "last_validation_label": 659,
+        "first_test_origin_after_observation": 659,
+        "first_test_future_label": 660,
+        "last_test_label": 1702
+      },
+      "declared_full_run_counts_not_completed_by_this_audit": {
+        "validation_configuration_streams": 5600,
+        "selected_family_streams": 800,
+        "selected_test_streams_including_nominal_bayes": 880,
+        "unique_scenario_seed_sequences": 80,
+        "independent_seeds": 20,
+        "synthetic_observations": 136240,
+        "validation_recursive_updates": 3690400,
+        "selected_test_recursive_updates_including_nominal_bayes": 901120,
+        "neural_fits": 0,
+        "emission_or_transition_parameter_fits": 0
+      }
+    }
+  },
+  "formal_validation_scores_computed": 0,
+  "formal_test_streams": 0,
+  "market_data_reads": 0,
+  "publication_ready": false,
+  "blocking_scientific_protocol_errors_found": [],
+  "required_before_formal_restart": [
+    "Create a new source freeze referencing the recovered core and new audit receipts; preserve prior freeze and failed attempt.",
+    "Use a new run record and execute the unchanged finite protocol from the start."
+  ],
+  "required_before_any_market_continuation": [
+    "Complete all four scenarios and retain every planned validation trial and selected stream.",
+    "Independently replay all saved test updates, original-objective KKT, scores, choices, counts and gate.",
+    "Treat runner numerical_and_causal_checks as execution-stage status only; independent audit completion is a separate required release receipt.",
+    "Continue only if every originally frozen scientific gate and final independent audit passes."
+  ],
+  "interpretive_limits": [
+    "No test- or oracle-based selection was found in the reviewed source; this is code/provenance evidence, not proof of all unrecorded historical actions.",
+    "The first forecast is issued after y659, so it is valid to select with a validation label maturing at y659.",
+    "The current learned object is a filtering update, with known transition/emission parameters; no neural fitting is performed.",
+    "Both positive scenarios share random draws within each seed; only 20 seeds are independent.",
+    "The fixed contamination-scale Bayes control is intentionally misspecified in the moderate-shock scenario.",
+    "Passing the finite gate does not establish model originality, market accuracy or publication readiness."
+  ]
+}

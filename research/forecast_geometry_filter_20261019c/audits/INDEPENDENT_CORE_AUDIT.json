@@ -1,0 +1,166 @@
+{
+  "status": "PASS",
+  "created_utc": "2026-10-19T07:25:08.541099+00:00",
+  "audit": "Independent mathematical and numerical core qualification",
+  "source_hashes": {
+    "source/geometry_filter.py": "f7eda57315d038478cc85d2755eb08b41a98d345b10a30335c1c57f02c9fce85",
+    "source/run_synthetic.py": "4ac6a99a415ffa50ddec266faee42c5037aedd8f8cfb3d1b988ea5872bf84b8f",
+    "provenance/SYNTHETIC_PROTOCOL.json": "b5c6b2ac088d7c82ee765ecc8064d3322e07512a798c20fc26743b0cbea85676"
+  },
+  "audit_script_sha256": "8cd3e65f9151f9bfae124e43a60ae92fe87a175b94936aa536cb14cd284fd62f",
+  "synthetic_fixture_seed": 20261019,
+  "market_data_reads": 0,
+  "benchmark_validation_trials": 0,
+  "benchmark_test_streams": 0,
+  "elapsed_seconds": 0.8163926919951336,
+  "checks": {
+    "future_dp_against_path_enumeration": {
+      "status": "PASS",
+      "transition_fixtures": 3,
+      "horizons": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "cases": 15,
+      "max_mass_error": 4.440892098500626e-16,
+      "max_normalized_variance_error": 4.440892098500626e-16,
+      "mass_tolerance": 2e-13,
+      "variance_tolerance": 3e-14
+    },
+    "crps_and_gram_against_cdf_quadrature": {
+      "status": "PASS",
+      "cases": 16,
+      "laws": [
+        "current",
+        "h1",
+        "h5",
+        "h20"
+      ],
+      "max_crps_absolute_error": 3.1086244689504383e-15,
+      "crps_tolerance": 2e-09,
+      "max_gram_absolute_error": 3.122502256758253e-17,
+      "gram_tolerance": 2e-10
+    },
+    "geometry_degeneracy_and_invariance": {
+      "status": "PASS",
+      "k2_max_normalized_matrix_error": 0.0,
+      "duplicate_state_normalization_error": 3.469446951953614e-17,
+      "normalization_pair_distance_identity_error": 6.938893903907228e-18,
+      "duplicate_state_chi_square_error": 0.0,
+      "duplicate_state_forecast_penalty_error": 1.734723475976807e-18,
+      "rotation_spectrum_error": 2.220446049250313e-15,
+      "rotation_normalization_error": 2.220446049250313e-16,
+      "iid_future_metric_max_abs": 0.0,
+      "factor_swap_relabeling_error": 5.551115123125783e-17
+    },
+    "qp_against_independent_slsqp": {
+      "status": "PASS",
+      "cases": 336,
+      "metrics": [
+        "future",
+        "current",
+        "variance",
+        "euclid",
+        "rotated",
+        "chi_square_only",
+        "future_ratio_preserving"
+      ],
+      "independent_solver": "SLSQP on original simplex and optional linear ratio constraint",
+      "independent_solver_failures": [],
+      "max_scaled_objective_gap": 2.572898491481901e-13,
+      "objective_tolerance": 2e-09,
+      "max_probability_gap": 1.6831750606072227e-06,
+      "probability_tolerance": 3e-05,
+      "max_core_kkt_residual": 3.524291969370097e-12,
+      "kkt_tolerance": 2e-08,
+      "max_recorded_feasibility_repair": 0.0,
+      "max_ratio_constraint_residual": 1.3877787807814457e-17,
+      "worst_probability_fixture": {
+        "metric": "variance",
+        "y": -8.0,
+        "eta": 0.001,
+        "scaled_objective_gap": 2.572898491481901e-13,
+        "probability_gap": 1.6831750606072227e-06,
+        "core_kkt": 3.0109248427834245e-13
+      },
+      "worst_objective_fixture": {
+        "metric": "variance",
+        "y": -8.0,
+        "eta": 0.001,
+        "scaled_objective_gap": 2.572898491481901e-13,
+        "probability_gap": 1.6831750606072227e-06,
+        "core_kkt": 3.0109248427834245e-13
+      }
+    },
+    "native_crps_kl_against_primal_log_odds_root": {
+      "status": "PASS",
+      "cases": 48,
+      "independent_solver": "HYBR root of three original primal KKT log-odds equations; no core dual/factorization",
+      "max_probability_gap": 7.360778653264788e-13,
+      "probability_tolerance": 2e-08,
+      "max_original_objective_gap": 2.2293278334473143e-13,
+      "objective_tolerance": 2e-09,
+      "max_original_kkt_residual": 2.5413005033669833e-13,
+      "kkt_tolerance": 2e-08,
+      "max_independent_equation_residual": 6.039613253960852e-14,
+      "equation_tolerance": 2e-09
+    },
+    "identical_emission_odds_and_zero_step": {
+      "status": "PASS",
+      "max_cross_product_odds_residual": 4.163336342344337e-17,
+      "odds_tolerance": 2e-13,
+      "zero_step_exact_identity_families": 4,
+      "minimum_next_prior_over_simplex_vertices": 0.00675
+    },
+    "oracle_expected_scores_and_causal_indexing": {
+      "status": "PASS",
+      "path_enumerated_oracle_cases": 8,
+      "horizons": [
+        1,
+        5
+      ],
+      "max_expected_crps_error": 7.771561172376096e-16,
+      "max_true_entropy_error": 5.551115123125783e-16,
+      "cdf_integration_tolerance": 2e-09,
+      "max_bayes_regret_identity_error": 5.0306980803327406e-17,
+      "max_explicit_future_slice_error": 0.0,
+      "validation_label_maturity_index": 659,
+      "first_test_forecast_origin": 659,
+      "declared_validation_trials": 5600,
+      "declared_selected_streams": 800,
+      "selection_scope_review": "Source-reviewed: within-family and composite selectors use only empirical validation scores; their frozen JSON is written before oracle states or test scores are calculated. This numeric script does not run any validation or test filter stream."
+    }
+  },
+  "failure": null,
+  "numerical_counters_during_audit": {
+    "qp_update_calls": 341,
+    "qp_update_rows": 421,
+    "qp_zero_step_identity_rows": 34,
+    "qp_simplex_solve_calls": 339,
+    "qp_solved_rows": 387,
+    "qp_full_face_fast_rows": 234,
+    "qp_enumerated_rows": 153,
+    "qp_negative_preclip_coordinates": 0,
+    "qp_negative_preclip_rows": 0,
+    "qp_renormalized_rows": 0,
+    "qp_repaired_coordinates": 0,
+    "qp_repaired_rows": 0,
+    "qp_max_negative_preclip_abs": 0.0,
+    "qp_max_sum_error_after_clip_before_normalization": 0.0,
+    "qp_max_abs_repair": 0.0,
+    "kl_update_calls": 52,
+    "kl_update_rows": 116,
+    "kl_zero_step_identity_rows": 17,
+    "kl_optimized_rows": 99,
+    "kl_converged_rows": 99,
+    "kl_newton_iterations": 189,
+    "kl_max_iterations_used": 5,
+    "kl_line_search_halvings": 3,
+    "qp_feasibility_tolerance": 5e-12,
+    "coordinate_scope": "chosen optimization coordinates: 4 ordinary, 3 ratio-preserving",
+    "scope": "process-local since the most recent explicit reset"
+  }
+}

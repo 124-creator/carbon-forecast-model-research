@@ -1,0 +1,232 @@
+{
+  "study": "forecast_geometry_filter_20261019c",
+  "version": "1.1",
+  "status_at_creation": "DESIGN_BEFORE_IMPLEMENTATION_AND_SYNTHETIC_RESULTS",
+  "research_question": "Does penalizing a latent filtering update in the geometry of its future cumulative forecast CDF improve robustness beyond current-CDF, probability-space, variance-only and standard robust filtering controls?",
+  "claim_boundary": "A task-specific metric inside established implicit/proper-score filtering, not a new optimizer, scoring rule or certified original method. This finite synthetic qualification cannot establish carbon-market effectiveness or publication readiness.",
+  "prior_study": "conditional_persistence_20261019b",
+  "prior_local_commit": "90b9fd6f2c7cfa72bf68049f58d585df997d48b9",
+  "data": "Generated synthetic sequences only. No market data are authorized by this protocol, and no 2024+ confirmation values are opened.",
+  "reference_model": {
+    "states": 4,
+    "ordering": "slow factor first, fast factor second; Kronecker transition",
+    "slow_reset_persistence": 0.97,
+    "fast_reset_persistence": 0.1,
+    "stationary_probabilities": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "emission_variances": [
+      0.16,
+      0.64,
+      0.64,
+      2.56
+    ],
+    "emission_means": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "future_timing": "q_t describes the state after observing y_t. Each future step transitions once before emitting its return.",
+    "horizons": [
+      1,
+      5,
+      20
+    ],
+    "normalization": "All observed future cumulative returns and predictive distributions are divided by sqrt(h). The reference stationary core daily variance is 1; no method-specific scoring denominator is used.",
+    "rollout_prior": "All methods start from the same pi and use the same nominal P. Thereafter each method has its own recursive p_t=q_{t-1} P. The true oracle recurses independently with the true model."
+  },
+  "candidate": {
+    "name": "future_cdf",
+    "current_loss": "Exact CRPS of the current four-state zero-mean Gaussian emission mixture",
+    "update": "argmin over simplex q: current_CRPS(q,y) + ((q-p)^T G (q-p) + 0.01 sum_i (q_i-p_i)^2/p_i)/eta",
+    "metric": "G is the centered CDF squared-distance Gram of the equal-weight h5/h20 future cumulative-return distributions conditional on the current state.",
+    "metric_normalization": "Divide each nonzero candidate/control Gram by trace((diag(pi)-pi pi^T) G). A zero Gram remains exactly zero.",
+    "zero_eta": "Return p exactly, without an optimization call.",
+    "posterior_boundary": "This is a predictive decision update. It may change the odds of the two states having identical current emissions; it is not claimed to identify those states from new evidence. A ratio-preserving ablation is mandatory."
+  },
+  "families": [
+    "future_cdf",
+    "current_cdf",
+    "future_variance",
+    "probability_euclidean",
+    "rotated_future_cdf",
+    "chi_square_only",
+    "crps_kl",
+    "tempered_bayes",
+    "contaminated_bayes",
+    "future_cdf_ratio_preserving"
+  ],
+  "controls": {
+    "current_cdf": "Same current loss and chi-square ridge; metric from current emission CDFs.",
+    "future_variance": "Same update; metric from the centered conditional future variances at h5/h20, equal weighted.",
+    "probability_euclidean": "Same update; centered Euclidean metric with the same stationary normalization.",
+    "chi_square_only": "Same CRPS, G=0 and chi-square coefficient 1 instead of 0.01.",
+    "crps_kl": "Exact convex minimization of current CRPS + KL(q||p)/eta, not component-score Gibbs weights.",
+    "tempered_bayes": "q proportional to p times the nominal Gaussian emission likelihood raised to beta.",
+    "contaminated_bayes": "Likelihood (1-epsilon) N(0,v_i) + epsilon N(0,v_i+16); epsilon selected from the declared grid. Like the other eligible controls it forecasts with the same nominal future mixture family.",
+    "future_cdf_ratio_preserving": "Same future geometry QP plus q[1]/p[1]=q[2]/p[2], implemented by an exact three-coordinate reduction.",
+    "fixed_prior": "No observation update; stationary forecast. A separate deterministic reference, not an additional fit.",
+    "bayes": "beta=1 nominal Bayes, reported separately from the grid-selected tempered family.",
+    "true_oracle": "Exact filtering and future observed-return distributions under the known simulated DGP, including future contamination. Not a feasible learned baseline and not included in hyperparameter or family selection.",
+    "rotated_future_cdf": "Same future metric eigenvalues, trace normalization, current loss and chi-square ridge. Reflect its orientation with R=I-2 uu^T, u=(1,2,4,-7)/sqrt(70); u is orthogonal to ones. This isolates orientation from general anisotropic shrinkage."
+  },
+  "grids": {
+    "eta": [
+      0,
+      0.001,
+      0.01,
+      0.1,
+      1,
+      10,
+      100
+    ],
+    "beta": [
+      0,
+      0.1,
+      0.3,
+      0.6,
+      1,
+      1.5,
+      2
+    ],
+    "epsilon": [
+      0,
+      0.005,
+      0.01,
+      0.025,
+      0.05,
+      0.1,
+      0.2
+    ]
+  },
+  "scenarios": [
+    {
+      "name": "clean_correct",
+      "slow_persistence": 0.97,
+      "fast_persistence": 0.1,
+      "contamination_probability": 0,
+      "additive_shock_sd": 0,
+      "role": "Correct-specification oracle and no-free-lunch control"
+    },
+    {
+      "name": "rare_large_shocks",
+      "slow_persistence": 0.97,
+      "fast_persistence": 0.1,
+      "contamination_probability": 0.05,
+      "additive_shock_sd": 4,
+      "role": "Prespecified positive robustness scenario"
+    },
+    {
+      "name": "frequent_moderate_shocks",
+      "slow_persistence": 0.97,
+      "fast_persistence": 0.1,
+      "contamination_probability": 0.1,
+      "additive_shock_sd": 2,
+      "role": "Prespecified positive robustness scenario with a different shock scale"
+    },
+    {
+      "name": "wrong_transition_geometry",
+      "slow_persistence": 0.6,
+      "fast_persistence": 0.1,
+      "contamination_probability": 0,
+      "additive_shock_sd": 0,
+      "role": "Misspecified dynamics control; no universal robustness guarantee is assumed"
+    }
+  ],
+  "simulation": {
+    "seeds": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011,
+      1012,
+      1013,
+      1014,
+      1015,
+      1016,
+      1017,
+      1018,
+      1019
+    ],
+    "independent_sequence_seeds": 20,
+    "burn_observations": 128,
+    "validation_origins": 512,
+    "validation_start_index": 128,
+    "validation_last_index": 639,
+    "last_validation_label_index": 659,
+    "test_start_index": 659,
+    "test_origins": 1024,
+    "test_last_index": 1682,
+    "last_test_label_index": 1702,
+    "total_observations_per_scenario_seed": 1703,
+    "maturity": "All validation labels mature by the first test origin. Filter states evolve causally through the gap; hyperparameters are fixed before test forecasts.",
+    "common_randomness": "Within each seed, the same uniform and normal draws are reused across scenarios to support paired stress comparisons; methods use identical observations within a scenario.",
+    "neural_or_emission_parameter_fits": 0,
+    "evaluated_validation_filter_trials": 5600,
+    "selected_family_streams": 800
+  },
+  "selection": {
+    "criterion": "Mean empirical exact CRPS over all 512 validation origins and h1/h5/h20 equally",
+    "tie_break": "First grid entry attaining the exact minimum; no tolerance or rounded comparisons",
+    "competitor_selector": "Choose the lowest validation score among current_cdf, future_variance, probability_euclidean, rotated_future_cdf, chi_square_only, crps_kl, tempered_bayes and contaminated_bayes after their within-family selections. The ratio-preserving ablation is not in this composite selector.",
+    "test_tuning": false
+  },
+  "evaluation": {
+    "primary_horizons": [
+      5,
+      20
+    ],
+    "primary_mechanism_metric": "Exact DGP-conditional expected future observed-return CRPS, averaging horizons and test origins. The oracle distribution is used only for evaluation, never for model or hyperparameter selection.",
+    "secondary_metrics": [
+      "empirical CRPS on the actually simulated observed future sums",
+      "excess CRPS over the exact true oracle",
+      "h1 CRPS",
+      "current emission-equivalent state log-odds changes",
+      "selected hyperparameter and runtime",
+      "In clean_correct, describe expected CRPS on test origins whose true slow state changed during the last five observed steps, including the origin; this diagnoses delayed response to genuine state changes and is never used in selection"
+    ],
+    "contamination_target": "Predict and score future observed returns including future shocks; do not replace labels with the latent clean returns. Eligible models retain a common nominal future family, so stress scenarios explicitly include forecast-family misspecification.",
+    "aggregation": "For each scenario and independent seed, mean the h5/h20 score; compare candidate/control minus 1; positive scenarios are averaged equally within each seed and then across the 20 seeds.",
+    "uncertainty": "Paired bootstrap of the 20 independent simulation seeds, resampling both positive scenarios together; 9999 resamples, seed 20261019. This is simulation uncertainty, not a market-series confidence interval."
+  },
+  "continuation_gate": {
+    "meaning": "Internal resource allocation, not a universal publication threshold",
+    "all_required": [
+      "Positive-scenario mean expected CRPS ratio minus one versus the validation-selected competitor <= -0.01",
+      "Upper endpoint of the paired seed bootstrap 95% interval for that contrast < 0",
+      "Candidate beats current_cdf on mean expected CRPS separately in each positive scenario",
+      "Candidate beats rotated_future_cdf on mean expected CRPS across both positive scenarios",
+      "Candidate beats the validation-selected competitor on mean empirical CRPS across both positive scenarios",
+      "Clean-correct expected CRPS ratio minus one versus the validation-selected competitor <= 0.005",
+      "All numerical, mass, causal indexing and oracle nonnegative excess-risk checks pass at their original tolerances"
+    ],
+    "if_pass": "Specify and freeze one market experiment with identical information and explicit current-state filtering controls before any new market score; this does not by itself establish originality.",
+    "if_fail": "Close this fixed geometry candidate and its grid. Do not alter persistence, states, shock severity, loss weights, grids, seeds or gate to seek a favorable result. Preserve all synthetic scenarios and comparisons; no market or 2024+ confirmation fitting follows under this protocol."
+  },
+  "implementation_audit": {
+    "required": [
+      "Gaussian mixture CRPS versus numerical CDF integration",
+      "future reward DP versus small-h state enumeration",
+      "simplex QP KKT residual and independent convex optimizer",
+      "CRPS plus KL optimizer KKT residual",
+      "K=2 normalized-geometry scalar equivalence",
+      "current identical-emission odds preservation for Bayes and ratio-constrained QP",
+      "exact DGP oracle expected CRPS versus independent integration on finite fixtures",
+      "validation/test target maturity and no preselection use of test metrics"
+    ],
+    "implementation_changes": "Arithmetic or interface errors may be fixed before formal execution with a recorded source freeze and review. Any post-start correction must preserve failed receipts and explicitly disclose whether rerunning is necessary. No performance-driven model edits are allowed."
+  },
+  "prefit_design_correction": "Before any simulation or performance result, independent mathematical review found that swapping the slow/fast factors with symmetric emission variances is a mere hidden-state relabeling. The misspecified-dynamics control therefore uses true slow persistence .6 and fast .1 instead. The original idea and the reason for this correction are disclosed; no observed scores motivated it."
+}

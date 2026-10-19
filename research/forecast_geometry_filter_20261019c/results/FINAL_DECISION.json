@@ -1,0 +1,148 @@
+{
+  "study": "forecast_geometry_filter_20261019c",
+  "decision": "STOP_FIXED_GEOMETRY_CANDIDATE",
+  "original_gate_unchanged": true,
+  "original_gate": {
+    "decision": "STOP_FIXED_GEOMETRY_CANDIDATE",
+    "all_passed": false,
+    "checks": {
+      "positive_expected_gain_at_least_one_percent": {
+        "value": 0.000820773178621495,
+        "rule": "value <= -0.01",
+        "passed": false
+      },
+      "positive_expected_seed_interval_upper_negative": {
+        "value": 0.0014287011455153939,
+        "rule": "value < 0",
+        "passed": false
+      },
+      "positive_each_beats_current_cdf": {
+        "values": {
+          "rare_large_shocks": -0.004850720190818003,
+          "frequent_moderate_shocks": -0.004178457472045804
+        },
+        "rule": "each value < 0",
+        "passed": true
+      },
+      "positive_beats_rotated_metric": {
+        "value": -0.0013999192974669978,
+        "rule": "value < 0",
+        "passed": true
+      },
+      "positive_empirical_gain": {
+        "value": 0.0006394483068678069,
+        "rule": "value < 0",
+        "passed": false
+      },
+      "clean_noninferiority_half_percent": {
+        "value": 0.0006100357969796522,
+        "rule": "value <= 0.005",
+        "passed": true
+      },
+      "numerical_and_causal_checks": {
+        "value": "Required before and during execution; final independent replay remains separately required",
+        "passed": true
+      }
+    },
+    "failed_checks": [
+      "positive_expected_gain_at_least_one_percent",
+      "positive_expected_seed_interval_upper_negative",
+      "positive_empirical_gain"
+    ],
+    "publication_ready": false,
+    "interpretation": "Finite synthetic method qualification only; no market validity, novelty clearance or universal robustness follows."
+  },
+  "postrun_independent_audits_complete": true,
+  "passed_gate_count": 4,
+  "failed_gate_count": 3,
+  "expected_primary_comparison": {
+    "stratum": "positive_scenarios_equal_weight",
+    "candidate": "future_cdf",
+    "control": "validation_selected_competitor",
+    "metric": "expected_primary",
+    "scenario_seed_cells": 40,
+    "independent_seeds": 20,
+    "mean_relative_minus_one": 0.000820773178621495,
+    "bootstrap95_lower": 0.00022619283924525573,
+    "bootstrap95_upper": 0.0014287011455153939,
+    "strict_better_cells": 13,
+    "exact_tie_cells": 0,
+    "strict_worse_cells": 27,
+    "seed_relative_values": [
+      0.001863679101071436,
+      -0.00023230316583083832,
+      0.0023703748111628675,
+      0.0031435801247873263,
+      0.00021375884770624687,
+      0.0013661789300083438,
+      -0.0012492259813204898,
+      0.002436691884576736,
+      -0.00047127034647709287,
+      -0.0003999341926033684,
+      0.0018892096966325322,
+      0.0003399414399709033,
+      -0.00047675163902000106,
+      0.0005246985452989072,
+      0.0029597513511244733,
+      -0.0006456009342782898,
+      0.0018491232638221389,
+      0.0007440191587445577,
+      0.0016696627015414522,
+      -0.0014801200244879409
+    ]
+  },
+  "empirical_primary_comparison": {
+    "stratum": "positive_scenarios_equal_weight",
+    "candidate": "future_cdf",
+    "control": "validation_selected_competitor",
+    "metric": "empirical_primary",
+    "scenario_seed_cells": 40,
+    "independent_seeds": 20,
+    "mean_relative_minus_one": 0.0006394483068678069,
+    "bootstrap95_lower": -9.827464403548965e-06,
+    "bootstrap95_upper": 0.0012965269338281555,
+    "strict_better_cells": 12,
+    "exact_tie_cells": 0,
+    "strict_worse_cells": 28,
+    "seed_relative_values": [
+      0.0014779929611391518,
+      0.0022853116611155633,
+      0.003537599910856115,
+      0.0006701405815865424,
+      0.0002474622935002557,
+      -0.0005004384632373848,
+      -0.0033013421817580935,
+      0.001382280215553533,
+      0.00037797296739749964,
+      -0.00040434574411823965,
+      0.0032885466408495434,
+      0.0008865784517056996,
+      0.0004488283895213163,
+      0.0013203493282806233,
+      -4.367491100309984e-05,
+      0.000770875639140467,
+      0.0010389198840414782,
+      -0.0013634510527322785,
+      0.0014359418442002614,
+      -0.0007665822786828147
+    ]
+  },
+  "oracle_headroom_posthoc": {
+    "file": "ORACLE_HEADROOM_POSTHOC.json",
+    "maximum_gain_fraction": 0.0055936143208408255,
+    "one_percent_gate_design_limitation_disclosed": true,
+    "gate_not_revised": true
+  },
+  "stop_evidence_independent_of_one_percent_gate": [
+    "Expected CRPS is worse than the validation-selected control; nominal paired-seed interval is above zero.",
+    "Full future CDF does not beat future-variance geometry or tempered Bayes.",
+    "Empirical mean improvement condition fails; its interval crosses zero."
+  ],
+  "market_continuation_authorized_by_gate": false,
+  "publication_ready": false,
+  "novelty_certified": false,
+  "market_validity_established": false,
+  "actual_neural_fits": 0,
+  "actual_emission_or_transition_parameter_fits": 0,
+  "new_market_data_or_confirmation_evaluations": 0
+}
