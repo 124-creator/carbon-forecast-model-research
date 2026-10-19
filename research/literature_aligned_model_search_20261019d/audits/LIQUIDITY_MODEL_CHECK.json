@@ -1,0 +1,235 @@
+{
+  "stage": "New development extension after partial v1 results; synthetic implementation checks only",
+  "environment": {
+    "python": "/tmp/carbon-research-env/bin/python",
+    "python_version": "3.12.14",
+    "numpy": "2.3.5",
+    "torch": "2.14.1+cpu"
+  },
+  "source_sha256": {
+    "innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e",
+    "liquidity_models.py": "91dd66c0b33b8d75100e37cc382f01be44021ae538f6cbbedddda7f9b9386e0b"
+  },
+  "checks": {
+    "capacity_and_initialization": {
+      "parameters": {
+        "liquidity_full": 11,
+        "liquidity_readout": 11,
+        "shock_size_only": 9,
+        "liquidity_unconstrained": 11,
+        "constant_allocation": 7
+      },
+      "constrained_vs_unconstrained_initial_gap": 0.0,
+      "full_vs_readout_initial_gap": 0.07749369430048897,
+      "full_vs_constant_initial_gap": 0.054275399881633324,
+      "output_shape": [
+        6,
+        20
+      ],
+      "note": "Full/readout share initial parameters, not initial forecasts; no unused MLP remains"
+    },
+    "independent_forward_mask_and_prefix": {
+      "liquidity_full": {
+        "errors": {
+          "forecast": 8.326672684688674e-17,
+          "state": 1.1102230246251565e-16,
+          "reconstruction": 1.887379141862766e-15,
+          "observed_price_conservation": 5.329070518200751e-15
+        },
+        "invalid_volume_placeholder_gap": 0.0,
+        "future_feature_prefix_gap": 0.0
+      },
+      "liquidity_readout": {
+        "errors": {
+          "forecast": 5.551115123125783e-17,
+          "state": 5.551115123125783e-17,
+          "reconstruction": 1.887379141862766e-15,
+          "observed_price_conservation": 4.440892098500626e-15
+        },
+        "invalid_volume_placeholder_gap": 0.0,
+        "future_feature_prefix_gap": 0.0
+      },
+      "shock_size_only": {
+        "errors": {
+          "forecast": 1.1102230246251565e-16,
+          "state": 1.1102230246251565e-16,
+          "reconstruction": 1.7763568394002505e-15,
+          "observed_price_conservation": 8.881784197001252e-15
+        },
+        "invalid_volume_placeholder_gap": 0.0,
+        "future_feature_prefix_gap": 0.0
+      },
+      "liquidity_unconstrained": {
+        "errors": {
+          "forecast": 8.326672684688674e-17,
+          "state": 1.1102230246251565e-16,
+          "reconstruction": 1.887379141862766e-15,
+          "observed_price_conservation": 5.329070518200751e-15
+        },
+        "invalid_volume_placeholder_gap": 0.0,
+        "future_feature_prefix_gap": 0.0
+      },
+      "constant_allocation": {
+        "errors": {
+          "forecast": 5.551115123125783e-17,
+          "state": 5.551115123125783e-17,
+          "reconstruction": 1.887379141862766e-15,
+          "observed_price_conservation": 4.440892098500626e-15
+        },
+        "invalid_volume_placeholder_gap": 0.0,
+        "future_feature_prefix_gap": 0.0
+      }
+    },
+    "specified_sign_hypotheses": {
+      "total_transitory_mass_small_shock_low_volume": 0.14587186757014098,
+      "total_transitory_mass_large_shock_low_volume": 0.1779835057042206,
+      "total_transitory_mass_large_shock_high_volume": 0.09140617703364992,
+      "unconstrained_negative_gamma_example": [
+        -0.899999995806455,
+        -0.899999995806455
+      ],
+      "unconstrained_negative_delta_example": [
+        -0.899999995806455,
+        -0.899999995806455
+      ],
+      "shock_only_volume_gap": 0.0,
+      "interpretation": "Tests the imposed hypothesis, not its empirical truth or individual-mode monotonicity"
+    },
+    "directional_gradients": {
+      "liquidity_full:raw_rates": {
+        "autograd": -0.012077709306171665,
+        "finite_difference": -0.012077709388158553,
+        "absolute_error": 8.1986887764951e-11
+      },
+      "liquidity_full:beta": {
+        "autograd": -0.010084597110228972,
+        "finite_difference": -0.010084597101833737,
+        "absolute_error": 8.395235895353181e-12
+      },
+      "liquidity_full:base_logits": {
+        "autograd": 0.006035793285769916,
+        "finite_difference": 0.006035793309600024,
+        "absolute_error": 2.3830108025757468e-11
+      },
+      "liquidity_full:gate.gamma_raw": {
+        "autograd": -0.00457956694375974,
+        "finite_difference": -0.0045795669478820855,
+        "absolute_error": 4.122345693968743e-12
+      },
+      "liquidity_full:gate.delta_raw": {
+        "autograd": 0.0017839763534829717,
+        "finite_difference": 0.0017839763555294041,
+        "absolute_error": 2.0464324679281276e-12
+      },
+      "liquidity_unconstrained:raw_rates": {
+        "autograd": 0.006597174290518374,
+        "finite_difference": 0.006597174362354963,
+        "absolute_error": 7.183658876086518e-11
+      },
+      "liquidity_unconstrained:beta": {
+        "autograd": 0.0032314446210705916,
+        "finite_difference": 0.003231444500872982,
+        "absolute_error": 1.2019760967790782e-10
+      },
+      "liquidity_unconstrained:base_logits": {
+        "autograd": 0.013599222160188303,
+        "finite_difference": 0.013599222137283817,
+        "absolute_error": 2.2904485599828384e-11
+      },
+      "liquidity_unconstrained:gate.gamma_raw": {
+        "autograd": -0.015070386465960369,
+        "finite_difference": -0.015070386494286936,
+        "absolute_error": 2.8326566786640583e-11
+      },
+      "liquidity_unconstrained:gate.delta_raw": {
+        "autograd": 0.03602171261213764,
+        "finite_difference": 0.03602171255723263,
+        "absolute_error": 5.490500415428201e-11
+      }
+    },
+    "gradient_training_smoke": {
+      "synthetic_smoke_fits": 4,
+      "total_optimizer_steps": 40,
+      "formal_market_fits": 0,
+      "gain_gate": "none",
+      "labels": "Fixed independent random future cumulative changes; this is not a performance experiment",
+      "variants": {
+        "liquidity_full": {
+          "optimizer_steps": 10,
+          "initial_mse": 15.994041320980902,
+          "final_mse": 15.891880574029303,
+          "maximum_gradient_norm": {
+            "raw_rates": 0.028095366607339925,
+            "beta": 0.49134635920324754,
+            "base_logits": 0.2729797824647832,
+            "gate.gamma_raw": 0.05667811162809694,
+            "gate.delta_raw": 0.006655525505035055
+          },
+          "maximum_parameter_change": {
+            "raw_rates": 0.09905624750884945,
+            "beta": 0.10000611122510239,
+            "base_logits": 0.09892440643725475,
+            "gate.gamma_raw": 0.09864042367885739,
+            "gate.delta_raw": 0.1000320493133664
+          }
+        },
+        "liquidity_readout": {
+          "optimizer_steps": 10,
+          "initial_mse": 15.967621212348353,
+          "final_mse": 15.877079449245468,
+          "maximum_gradient_norm": {
+            "raw_rates": 0.02255161960719508,
+            "beta": 0.4548980977244412,
+            "base_logits": 0.2526757427667504,
+            "gate.gamma_raw": 0.034475018397936485,
+            "gate.delta_raw": 0.004172240900973925
+          },
+          "maximum_parameter_change": {
+            "raw_rates": 0.09912467734541397,
+            "beta": 0.09934199084458112,
+            "base_logits": 0.09894261181040553,
+            "gate.gamma_raw": 0.0989588880729948,
+            "gate.delta_raw": 0.09933810629022499
+          }
+        },
+        "shock_size_only": {
+          "optimizer_steps": 10,
+          "initial_mse": 15.999329003837033,
+          "final_mse": 15.895148576857297,
+          "maximum_gradient_norm": {
+            "raw_rates": 0.030250783604991196,
+            "beta": 0.5197460776159288,
+            "base_logits": 0.2763754375437132,
+            "gate.gamma_raw": 0.05669317875977876
+          },
+          "maximum_parameter_change": {
+            "raw_rates": 0.0991515768232325,
+            "beta": 0.10001544714162867,
+            "base_logits": 0.09886323320175494,
+            "gate.gamma_raw": 0.09860243488392673
+          }
+        },
+        "liquidity_unconstrained": {
+          "optimizer_steps": 10,
+          "initial_mse": 15.994041320980902,
+          "final_mse": 15.834334990354654,
+          "maximum_gradient_norm": {
+            "raw_rates": 0.028095366607339925,
+            "beta": 0.49134635920324754,
+            "base_logits": 0.2729797824647832,
+            "gate.gamma_raw": 0.5955923872426339,
+            "gate.delta_raw": 0.08763548626187295
+          },
+          "maximum_parameter_change": {
+            "raw_rates": 0.09684374649783534,
+            "beta": 0.1000605361296343,
+            "base_logits": 0.09810401573449479,
+            "gate.gamma_raw": 0.09824295050367571,
+            "gate.delta_raw": 0.10045732551462061
+          }
+        }
+      }
+    }
+  },
+  "status": "PASS"
+}
