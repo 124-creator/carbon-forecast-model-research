@@ -1,0 +1,70 @@
+{
+  "status": "PASS_STATIC_NO_FIT",
+  "reviewed_utc": "2026-10-19T10:09:37.026094+00:00",
+  "reviewer_role": "independent static/statistical auditor, not supplementary model implementer",
+  "scope": "Read-only source/API/information-boundary review; no market preparation, model fitting, checkpoint loading, or outcome measurement in this preflight.",
+  "new_market_fits_by_reviewer": 0,
+  "source_sha256": {
+    "run_model_search.py": "26347433fe6416298e4969da618cbba291999f3a66131172bc8f2e510f3633bf",
+    "innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e",
+    "run_liquidity_extension.py": "95665858a1945b00bba6d6233022c34c0a58993899ccadda8c895f64ffe69807",
+    "liquidity_models.py": "91dd66c0b33b8d75100e37cc382f01be44021ae538f6cbbedddda7f9b9386e0b",
+    "run_new_market_replication.py": "8c617a714bb0b47d117b213de9d299c3bd6a534c8211c28c8d039d454df12e56",
+    "run_swewt_gru_comparison.py": "0b3395f547fad792c6880a9d25819c6e326ab48ef733240ad690e4833b63218d",
+    "literature_diagnostic.py": "e9053bfd34bce9e60c67c0590245271ccecaaf0bcf009a1e715be9abe7ada2e5"
+  },
+  "reference_v3_protocol_sha256": "a688676a492d2abfbe69fc219e99f96e7c0f7b4b319b88fbd0730b4a1037da08",
+  "prior_v1_v3_core_sources_match_frozen_protocol": true,
+  "source_matches_implementer_synthetic_receipt": true,
+  "static_checks": {
+    "decomposition_window": "Only price[t-63:t+1] passed to fixed N=3 EWT1D; last 17 component rows retained.",
+    "decomposition_settings": {
+      "log": 0,
+      "detect": "locmax",
+      "completion": 1,
+      "reg": "average",
+      "lengthFilter": 10,
+      "sigmaFilter": 5
+    },
+    "feature_centering": "Known origin price p[t] subtracted from raw level and first low band; no future target used.",
+    "normalization": "Unchanged V3 initial training-prefix target RMS for four price channels; unchanged original transforms for five auxiliary channels.",
+    "auxiliary_alignment": "Exactly the last 17 rows of the existing V3 normalized 64-by-6 window, columns 1:6.",
+    "target_split_and_purge": "prepare_swewt calls original prepare_replication; origins, masks, H1/5/20 labels, train scales and train horizon second moments are preserved.",
+    "model_channels": {
+      "swewt_gru_price": 4,
+      "swewt_gru_full": 9
+    },
+    "nominal_parameters": {
+      "swewt_gru_price": 4308,
+      "swewt_gru_full": 4788
+    },
+    "potential_data_active_parameters_at_supervised_horizons": {
+      "swewt_gru_price": 3747,
+      "swewt_gru_full": 4227
+    },
+    "selection": "Common neural_job uses each model actual forward for validation; seed 17 selects learning rate and epoch; fresh seeds 17/29/43 refit selected fixed epoch count.",
+    "epoch_zero": "Zero output head gives zero price changes, i.e. RW; epoch 0 remains eligible and explicitly reported.",
+    "workers": "Process-local preparation/model hooks are installed in main and worker initializer; frozen disk sources are not modified.",
+    "freeze": "Reference V3 core hashes checked; own runner/helper/EWT module identity recorded; nested original data manifest compared with reference."
+  },
+  "required_interpretation": [
+    "Added after at least partial V3 Beijing scores were inspected; separate descriptive supplement, outside the original V3 statistical comparison family.",
+    "A controlled multi-step adaptation of the published SWEWT-GRU structure, not author-code or numerical reproduction.",
+    "Fixed window64/N3, GRU32/direct H1/5/20 outputs, origin-centering/RMS, two learning rates/80 epochs/three seeds and full exogenous inputs differ from the original one-step tuned protocol.",
+    "The full arm receives 17 auxiliary tokens, shorter than the original V3 GRU/LSTM 64 auxiliary tokens; token-derived volume reference can extend earlier than these 17 records.",
+    "Within-window EWT coefficients may depend on later positions in the same observed window, all at or before issuance t; origin-level information availability is the appropriate boundary.",
+    "Subtracting p[t] is a valid known-origin centering operation; do not claim a general exact translation-equivariance theorem for adaptive EWT boundary selection.",
+    "ScienceDB author-cleaned transaction-mean target and historical non-vintage EIA/current reported-volume assumptions remain inherited from V3."
+  ],
+  "implementer_synthetic_receipt": {
+    "path": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/audits/SWEWT_GRU_SYNTHETIC_CHECK.json",
+    "sha256": "70a0629b97295fe79a39c8f44ef4d8de00362ed0f8963fac0f9e83178e93b5fd",
+    "status": "PASS_SYNTHETIC_NO_FIT",
+    "review_scope": "Receipt read and source hashes checked; synthetic checks executed by implementer, not independently repeated by this reviewer.",
+    "future_perturbation_past_origins_feature_max_abs_gap": 0.0,
+    "new_market_fits": 0,
+    "optimizer_steps": 0
+  },
+  "nonblocking_reproducibility_note": "Exact equality of the nested V3 manifest also compares stored absolute source paths. To use a relocated data root, regenerate the reference V3 run at the same relocated paths rather than treating an archived manifest with old absolute paths as portable input.",
+  "blocking_findings": []
+}
