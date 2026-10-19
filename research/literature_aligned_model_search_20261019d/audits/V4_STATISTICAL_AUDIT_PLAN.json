@@ -1,0 +1,262 @@
+{
+  "title": "官方天津较近时期固定尾段：候选选择之后的事前统计分析方案",
+  "status": "FINAL_PRE_OUTPUT_SPECIFICATION_READY_FOR_RUN_FREEZE",
+  "created_utc": "2026-10-19T10:30:45.520032+00:00",
+  "stage": "official_tianjin_later_period_replication_after_candidate_selection_from_v1_v2_v3_and_swewt_results",
+  "design_timing": "allocation_readout is selected as this new stage primary after inspecting prior V1/V2/V3 and SWEWT supplement results, before any model prediction/performance output for the newly acquired official 2023-2026 tail. This does not rename the old V3 primary or make this model design globally preregistered.",
+  "plan_author_has_read_official_tail_forecasts_or_scores": false,
+  "execution_binding": "The new runner protocol must bind this exact plan SHA before any model fitting, store its own output path/source hashes, and verify the plan SHA again on completion. Runner/output paths are recorded there rather than filled into this immutable analysis plan later.",
+  "market": "TIANJIN_OFFICIAL_MEAN",
+  "fold_label": "fixed602020; any legacy year field is a fold identifier, not a calendar year",
+  "target_definition": "Official TJEA daily total transaction mean price CNY/tonne, with total volume tonnes and turnover CNY, taken from the first TJEA table; not cumulative values, not listing-only values and not closing price.",
+  "data_identity": {
+    "official_page_url": "https://www.chinatcx.com.cn/tshq",
+    "source_type": "ordinary public Body.js linked by the official page; acquired and parsed without execution by the data audit",
+    "raw_path_at_freeze": "/tmp/carbon-next-market-data-20261019d/tianjin_body.js",
+    "raw_sha256": "c3e4c075832f6e5087cf416adecbae9d3c1b61859a6ad09fdf84294197393238",
+    "raw_bytes": 7288971,
+    "prepared_path_at_freeze": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv",
+    "prepared_sha256": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a",
+    "prepared_bytes": 34757,
+    "qc_receipt_path_at_freeze": "/tmp/carbon-next-market-data-20261019d/TIANJIN_CANONICAL_AND_SPLIT_QC.json",
+    "qc_receipt_sha256": "797d712f71a6828c0fc5958aa38444740082f61ed45159bccfcedfe392e36f9c",
+    "columns": [
+      "date",
+      "price",
+      "volume_tons",
+      "turnover_yuan"
+    ],
+    "rows": 1077,
+    "date_range": [
+      "2013-12-26",
+      "2026-09-30"
+    ],
+    "sorting_and_filtering": "All 1077 TJEA daily-total rows retained, unique dates sorted ascending; no deletion, filling, interpolation, outlier replacement or target recomputation.",
+    "published_price_rounding": "Retain official published two-decimal price. Max abs(price-turnover/volume) is approximately 0.005000000000002558; do not require the old ScienceDB exact-mean identity or replace price by turnover/volume.",
+    "old_source_disagreement": "The old 457 ScienceDB Tianjin dates are available in the official history but 178 records have source-value differences under the data audit rule. These differences do not trigger deletion or outcome-based selection. The new tail has no old-date overlap.",
+    "vintage_scope": "Current public historical snapshot, not certified per-day historical vintages. The point-in-time availability assumption is current reported price/volume known after the origin report."
+  },
+  "launch_date_gate": {
+    "status": "PASS_INDEPENDENT_CANONICAL_QC_BEFORE_FORECASTS",
+    "required_tail_partition_start_strictly_after": "2017-12-31",
+    "observed_tail_partition_start": "2023-04-19",
+    "independent_old_source_date_checks": [
+      {
+        "market": "BEIJING_MEAN",
+        "source_sha256": "952a69168d396cce3bbd54a5704f861cc459f67e9e121434fd7672e86bf18ed3",
+        "old_source_last_date": "2017-12-29",
+        "new_tail_vs_all_old_source_date_intersection_count": 0
+      },
+      {
+        "market": "TIANJIN_MEAN",
+        "source_sha256": "c35e24f047d903f1d1f68513e87900891a89314b0fb91100d57390c34bc27dda",
+        "old_source_last_date": "2017-06-30",
+        "new_tail_vs_all_old_source_date_intersection_count": 0
+      },
+      {
+        "market": "CHONGQING_MEAN",
+        "source_sha256": "0782976147c5e6948a494f34990331e58b2815dcef946fb1fad1ff3fef632e67",
+        "old_source_last_date": "2017-12-29",
+        "new_tail_vs_all_old_source_date_intersection_count": 0
+      }
+    ],
+    "enforcement": "Do not start the new stage if prepared identity changes, the tail starts on/before2017-12-31, or any new tail source date overlaps old V3 source dates. Resolve a changed source before fitting; do not move boundaries after outcomes.",
+    "raw_qc_is_not_blindness": "Data values were acquired and quality-checked before fitting; only the new-tail model-performance evaluation is held for this fixed stage."
+  },
+  "candidate_primary": "allocation_readout",
+  "candidate_secondary": "liquidity_full",
+  "five_contrasts_one_joint_family": [
+    {
+      "id": "primary_readout_vs_rw",
+      "role": "primary",
+      "candidate": "allocation_readout",
+      "comparator": "rw"
+    },
+    {
+      "id": "primary_readout_vs_constant",
+      "role": "primary",
+      "candidate": "allocation_readout",
+      "comparator": "allocation_constant"
+    },
+    {
+      "id": "primary_readout_vs_swewt_full",
+      "role": "primary",
+      "candidate": "allocation_readout",
+      "comparator": "swewt_gru_full"
+    },
+    {
+      "id": "secondary_full_vs_rw",
+      "role": "secondary",
+      "candidate": "liquidity_full",
+      "comparator": "rw"
+    },
+    {
+      "id": "secondary_full_vs_shock_size",
+      "role": "secondary",
+      "candidate": "liquidity_full",
+      "comparator": "shock_size_only"
+    }
+  ],
+  "neural_families": [
+    "liquidity_full",
+    "liquidity_readout",
+    "shock_size_only",
+    "liquidity_unconstrained",
+    "allocation_constant",
+    "allocation_readout",
+    "gru",
+    "lstm",
+    "swewt_gru_price",
+    "swewt_gru_full"
+  ],
+  "classical_families": [
+    "rw",
+    "drift",
+    "ridge_price",
+    "ridge_full",
+    "hgb_full"
+  ],
+  "expected_outputs": {
+    "neural_family_jobs": 10,
+    "classical_families": 5,
+    "prediction_npz_files": 15,
+    "neural_tasks": 50,
+    "selection_tasks": 20,
+    "refit_tasks": 30
+  },
+  "other_models": "Report every fixed family by horizon and overall. Models outside the five contrasts provide descriptive context, with no new post-result significance comparisons.",
+  "strong_baseline_selection": {
+    "pool_tie_order": [
+      "rw",
+      "drift",
+      "ridge_price",
+      "ridge_full",
+      "hgb_full",
+      "gru",
+      "lstm"
+    ],
+    "rule": "Choose minimum validation loss with exact ties in stated order. Keep SWEWTfull as its own fixed primary comparator. Report the selected strong baseline as additional context, not a substitute for any of the five declared contrasts.",
+    "no_test_selection": true
+  },
+  "split": {
+    "boundary_rule": "A=floor(.6*N); B=A+floor(.2*N), preserving sequential60/20/20; not floor(.8*N).",
+    "row_boundaries": [
+      0,
+      646,
+      861,
+      1077
+    ],
+    "lookback": 64,
+    "horizons_observation_steps": [
+      1,
+      5,
+      20
+    ],
+    "origin_set": "t=64,...,N-21; issue after observing row t; target p[t+h]-p[t]. Horizons count observed transaction records, not calendar days.",
+    "train": "t+20<A",
+    "validation": "t>=A and t+20<B",
+    "final_refit": "t+20<B",
+    "test": "t>=B and t+20<N; all horizons use the same origins",
+    "counts": {
+      "train": 562,
+      "val": 195,
+      "final": 777,
+      "test": 196
+    },
+    "origin_ranges": {
+      "train": [
+        64,
+        625
+      ],
+      "val": [
+        646,
+        840
+      ],
+      "final": [
+        64,
+        840
+      ],
+      "test": [
+        861,
+        1056
+      ]
+    },
+    "raw_train_date_range": [
+      "2013-12-26",
+      "2020-10-22"
+    ],
+    "raw_validation_date_range": [
+      "2020-10-23",
+      "2023-04-18"
+    ],
+    "raw_test_partition_date_range": [
+      "2023-04-19",
+      "2026-09-30"
+    ],
+    "mature_test_origin_date_range": [
+      "2023-04-19",
+      "2026-07-02"
+    ],
+    "last_test_label_date": "2026-09-30"
+  },
+  "training_and_information": {
+    "reuse_frozen_methods": "Preserve existing architectures, model-native initialization, two LRs .003/.01, weighted H1/H5/H20 loss, fixed original-training-prefix RMS and horizon second moments; no budget adaptation to new-tail outcomes.",
+    "selection": "Seed17 validates each model actual own forward; max80 epochs/min15/patience12 with improvement threshold1e-7; epoch0 eligible and disclosed; exact selected-loss LR tie broken by LR value.",
+    "refit": "Fresh seeds17/29/43, each trained over the matured train+validation prefix for the selected fixed epoch count; no further validation/test epoch choice.",
+    "optimization": "Existing AdamW, weight_decay1e-4, gradient clipping5, batch128; record actual epochs, positive-gradient counts and parameter-change receipts, including zero-epoch refits.",
+    "exogenous": "Same three EIA energy series with backward as-of date at least14 calendar days before each target record; historical public snapshot is not vintage-certified.",
+    "volume": "Current log1p total volume minus prior60observed-record median, divided by prior std floored.25, clipped[-5,5], >=10 prior observations; price/volume are assumed known after origin report.",
+    "readout_information": "Retain the original allocation_readout/constant price+energy information views; neither is silently changed to take volume.",
+    "swewt": "Reuse fixed past64price EWT N3, last17 raw+band rows, GRU32, 4/9input arms with same last17auxiliary rule and two-LR/80epoch/three-seed budget. Not numerical author reproduction.",
+    "source_caveat": "Official price uses the published rounded value; no monthly ScienceDB outlier rule is newly applied to this series."
+  },
+  "estimand": {
+    "horizon_risk": "R_mh = mean_i(mean_s((prediction_m,s,i,h-target_i,h)^2)) / mean_i(target_i,h^2), same test origins for both numerator and RW denominator.",
+    "single_market_primary": "Equal mean of R_mh over H1/H5/H20 for this Tianjin tail. No cross-market macro or market-population estimand.",
+    "paired_effect": "D(candidate,comparator)=R_comparator-R_candidate; positive means candidate improvement in RW risk units. Multiply by100 only when explicitly calling them RW percentage points.",
+    "relative_descriptive_effect": "Also report1-R_candidate/R_comparator with its comparator-specific denominator; do not confuse it with RW percentage points.",
+    "seeds": "Average seed squared errors at each origin before resampling. Seeds are algorithmic repeats, not independent time observations or markets.",
+    "secondary_ensemble": "Average forecasts first only for a separately labelled three-seed ensemble secondary metric.",
+    "native": "Report native MSE, both mean seed RMSE and sqrt(mean seed MSE) with labels, and MAE by horizon."
+  },
+  "bootstrap": {
+    "method": "Circular moving blocks of observed forecast origins; uniform starts, blocks wrap modulo n, concatenate ceil(n/L) blocks and truncate to n. Same multiplicities for all models, all horizons and RW within each replicate.",
+    "primary_block_length_observed_origins": 20,
+    "sensitivity_block_length_observed_origins": 40,
+    "replications_per_length": 50000,
+    "rng_seed": 20261019,
+    "rng_schedule": "Initialize one numpy default_rng(20261019), process length20 first and length40 second; no seed search.",
+    "replicate_statistic": "Recompute model/RW ratio per horizon in every replicate, then average three horizons and subtract paired risks.",
+    "marginal_95_quantiles": [
+      0.025,
+      0.975
+    ],
+    "five_contrast_individual_99_quantiles": [
+      0.005,
+      0.995
+    ],
+    "multiplicity": "Three primary-readout contrasts and two secondary-full contrasts form one family of five. Five individual99% percentile intervals give an approximate simultaneous95% family set by Bonferroni at primary block20. No extra horizon tests are added.",
+    "sensitivity": "Display length40 results in full; it is sensitivity to dependence length, not a second chance to choose significance. Primary interpretation uses the preassigned length20, no post-result favorable-length choice.",
+    "zero_denominator": "If any empirical resample has nonpositive/nonfinite RW denominator at any horizon, flag the affected length interval unavailable rather than silently omit such draws.",
+    "short_dependence_limit": "196origins permit about9 complete disjoint20-origin blocks or4 disjoint40-origin blocks; these are rough counts, not formal effective sample estimates. Irregular transaction records and H20 overlap limit evidence.",
+    "uncertainty_scope": "Conditional on frozen fitted models, validation choices, the acquired official snapshot and this fixed split. Does not correct the earlier model-development search globally or identify training uncertainty beyond shown seeds.",
+    "no_bootstrap_fraction_as_pvalue_or_posterior": true
+  },
+  "conclusions": {
+    "no_arbitrary_percentage_threshold": true,
+    "retain_candidate_identities": "allocation_readout remains this new stage primary and liquidity_full remains secondary regardless of results. Old V3 identities and results remain unchanged.",
+    "reading": "Assess effect sizes, horizon direction, interval width, comparisons with constant and published-structure baseline, and seed variation together. An interval crossing zero is inconclusive rather than proof of no practical value.",
+    "single_market_limit": "At most evidence of later-period replication for this official Tianjin source/target and this specified prediction experiment. A single market cannot confirm all carbon markets or establish causal shock allocation.",
+    "selection_history": "Explicitly state primary selection after prior V3/SWEWT outcomes and before this new-tail forecast evaluation; do not claim original all-stage preregistration.",
+    "parameterization_limit": "Preserve softplus constrained vs affine unconstrained local-update-scale caveat and distinguish initialization/prior performance from learned improvement."
+  },
+  "integrity_checks": [
+    "Freeze this plan SHA and all runner/model/helper sources in the new run protocol before fitting, recheck at completion.",
+    "Independently verify source identities, positive/finite data, dates, split and exact no-old-tail-date-overlap gate without selecting on forecasts.",
+    "Retain published rounded mean target; verify exact model targets p[t+h]-p[t], matched origins and H20 boundary maturity.",
+    "Reconstruct scales, weighted loss, EIA14day alignment and prior60volume reference; no new test-fitted preprocessing.",
+    "Require all15NPZ files and all50neural receipts; check checkpoint byte hashes, actual logged gradient steps and epoch0.",
+    "Recompute seed-average and separately ensemble errors from NPZ; retain all15families and all horizons.",
+    "Run exactly the five planned contrasts at both declared block lengths after completion; preserve unfavorable results."
+  ]
+}
