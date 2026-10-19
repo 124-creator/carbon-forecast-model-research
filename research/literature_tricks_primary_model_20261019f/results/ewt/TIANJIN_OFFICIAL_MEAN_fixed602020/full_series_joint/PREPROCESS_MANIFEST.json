@@ -1,0 +1,87 @@
+{
+  "setting": "full_series_joint",
+  "subsets": {
+    "train": {
+      "count": 562,
+      "origin_range": [
+        64,
+        625
+      ],
+      "feature_price_endpoint": 1076,
+      "information_scope": "retrospective_full_sequence; includes prices after issuance",
+      "input_sha256": "a1de888803726aab011c9bdbaa46af9807c303049ad59704a7e949605c1779d7",
+      "native_target_sha256": "01d143822b2dd0e4c1e4e796950b23929652324e09e988e35f9fabed9d8c0a46"
+    },
+    "val": {
+      "count": 195,
+      "origin_range": [
+        646,
+        840
+      ],
+      "feature_price_endpoint": 1076,
+      "information_scope": "retrospective_full_sequence; includes prices after issuance",
+      "input_sha256": "e911009df502de2bd3a19b5e0e01f056c803f9434c886c2cfbfb27b9ef9164b5",
+      "native_target_sha256": "16d3edf302c52c0306238b103eebc530dbc829fe480d5ea979464fe22432a1ae"
+    },
+    "final": {
+      "count": 777,
+      "origin_range": [
+        64,
+        840
+      ],
+      "feature_price_endpoint": 1076,
+      "information_scope": "retrospective_full_sequence; includes prices after issuance",
+      "input_sha256": "f0aa63c6708211bc6f6cbcb674d590044eea33b1a36941471f299e3a8caf876a",
+      "native_target_sha256": "8e824b7744ac486799d0b4dc1d1c4fc4e92cb8454bf833468065ee7efbe132dd"
+    },
+    "test": {
+      "count": 196,
+      "origin_range": [
+        861,
+        1056
+      ],
+      "feature_price_endpoint": 1076,
+      "information_scope": "retrospective_full_sequence; includes prices after issuance",
+      "input_sha256": "0f190b4e842d048a4b951d7de591a58e53c1eb82a2fd61fd61d9ea7bcb2c43bb",
+      "native_target_sha256": "546bb32eb7daac257b0596b33e36622bf18c7c1d7777a1d5c82a36415b50a30a"
+    }
+  },
+  "input_columns": [
+    "raw_change_over_fixed_train_rms",
+    "volume_surprise",
+    "volume_valid",
+    "analysis_band0_change_over_fixed_train_rms",
+    "analysis_band1_change_over_fixed_train_rms",
+    "analysis_band2_change_over_fixed_train_rms"
+  ],
+  "raw_plus_all_analysis_channels": true,
+  "raw_reference_uses_zero_padding_for_embedding_check_only": false,
+  "gate_uses_raw_current_shock_and_volume": true,
+  "target": "unchanged published native-price cumulative changes at H1/H5/H20",
+  "normalization": "unchanged original training-prefix RMS and target second moments",
+  "ewt_options": {
+    "N": 3,
+    "log": 0,
+    "detect": "locmax",
+    "completion": 1,
+    "reg": "average",
+    "lengthFilter": 10,
+    "sigmaFilter": 5
+  },
+  "analysis_bands": [
+    0,
+    1,
+    2
+  ],
+  "inverse_or_synthesis_used": false,
+  "subband_deletion": false,
+  "analysis_features_not_additive_price_reconstruction": true,
+  "no_denoised_origin_anchor": true,
+  "future_target_denoising": false,
+  "train_final_inputs_may_differ": false,
+  "market": "TIANJIN_OFFICIAL_MEAN",
+  "role": "development",
+  "cache_path": "/tmp/carbon-primary-model-tricks-runs-20261019f/ewt/_private_preprocess/TIANJIN_OFFICIAL_MEAN_full_series_joint.npz",
+  "cache_sha256": "2abf3732900ea1403db6f90b1ecc75ad785d8d87de905cf11a004ed77ff693a5",
+  "canonical_sha256": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a"
+}

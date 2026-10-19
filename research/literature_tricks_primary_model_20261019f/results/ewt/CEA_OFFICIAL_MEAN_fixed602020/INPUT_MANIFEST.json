@@ -1,0 +1,89 @@
+{
+  "market": "CEA_OFFICIAL_MEAN",
+  "role": "development",
+  "fold": "fixed602020",
+  "target": "Published CEA daily TOTAL transaction mean in yuan per tonne; not closing price or listing-only mean",
+  "row_boundaries": [
+    0,
+    750,
+    1000,
+    1251
+  ],
+  "counts": {
+    "train": 666,
+    "val": 230,
+    "final": 916,
+    "test": 231
+  },
+  "origin_ranges": {
+    "train": [
+      64,
+      729
+    ],
+    "val": [
+      750,
+      979
+    ],
+    "final": [
+      64,
+      979
+    ],
+    "test": [
+      1000,
+      1230
+    ]
+  },
+  "raw_date_range": [
+    "2021-07-16",
+    "2026-09-30"
+  ],
+  "first_train_origin": "2021-10-25",
+  "last_train_label": "2024-08-16",
+  "first_validation_origin": "2024-08-19",
+  "last_validation_label": "2025-09-11",
+  "first_test_origin": "2025-09-12",
+  "last_test_origin": "2026-09-01",
+  "last_test_label": "2026-09-30",
+  "training_rms": [
+    4.583739487607653
+  ],
+  "train_target_second_moment": [
+    22.67713183183186,
+    25.91302477477477,
+    37.883000750750725
+  ],
+  "sources": [
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "file": "/tmp/carbon-signed-response-data-20261019e/CEA_OFFICIAL_MEAN.csv",
+      "sha256": "f9f0e09b7500b2bdb4ec8b16c61d5d5fa2b64de63a24c0cf7bd1d269aa2be75d",
+      "role": "development",
+      "source_url": "https://www.chinatcx.com.cn/tshq",
+      "price_definition": "Published CEA daily TOTAL transaction mean in yuan per tonne; not closing price or listing-only mean",
+      "source_processing": "All 1251 rows from the official main CEA table retained; date sort and numeric thousands separator removal only. No row deletion, deduplication, time filling, price recomputation or splice.",
+      "source_vintage": "Current public historical snapshot; daily publication vintages unverified. Original stage-e and max320 sensitivity scores now fully exposed; stage f is development.",
+      "license": "No explicit redistribution license identified; raw rows and per-origin arrays remain private. Public reconstruction code and provenance remain available.",
+      "historical_input_role": "development",
+      "stage_f_exposure": "Both tails previously scored in stage e; all new settings are development",
+      "path": "/tmp/carbon-signed-response-data-20261019e/CEA_OFFICIAL_MEAN.csv"
+    }
+  ],
+  "price_retained_without_turnover_division": true,
+  "observed_price_turnover_ratio_max_gap_qc_only": 0.0049999999999954525,
+  "maximum_record_gap_calendar_days": 13,
+  "input_columns": [
+    "change_over_fixed_train_rms",
+    "volume_surprise",
+    "volume_valid"
+  ],
+  "energy_inputs": false,
+  "volume": {
+    "valid_rows": 1251,
+    "usable_context_rows": 1241,
+    "normalization": "current log1p volume minus prior60 target-record valid-log-volume median, divided by prior std floored .25, clipped[-5,5], >=10 valid past records",
+    "information": "origin price and volume observed after origin report; no future context; turnover not an input",
+    "missing": "0 surprise plus 0 valid mask; genuine observed zero volume is valid",
+    "model_usage": "only current origin context enters gates; historical price window64; current volume reference uses prior60 records"
+  },
+  "source_vintage": "Current public historical snapshot; daily publication vintages unverified. Original stage-e and max320 sensitivity scores now fully exposed; stage f is development."
+}

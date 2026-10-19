@@ -1,0 +1,295 @@
+{
+  "stage": "literature_tricks_primary_model_20261019f",
+  "created_unix": 1792421444.5418696,
+  "source_sha256": {
+    "signed_response_enhancements.py": "aaa18c088a1f9961542935dbdd27f6159dcc4bdc4c4dde41d81da9c6c73cde80",
+    "run_primary_model_tricks.py": "da5a7127feabcb207117667d92c05fe547d73cf66b72e0ee22ff7f1a69a319d0"
+  },
+  "dependency_sha256": {
+    "stage_e": {
+      "signed_response_models.py": "5ceb7f04c567be32f1a399cbf01dafdfc6894d3840a158b6faae4153f09eb2f8",
+      "run_signed_response_search.py": "905da0ca33607799b1ca63d9efe6710df173ec33c5c44e137071e024906d990c",
+      "run_neural_references.py": "489249eb417e54611123da2b1508f946f416c7f5813124e2ddd2eedfe8b63b11",
+      "run_budget_sensitivity.py": "c353e5d386bf96ed8a9a4d048cffe152de08d9303a0e2551c2df755e51fb606b"
+    },
+    "stage_d": {
+      "run_model_search.py": "26347433fe6416298e4969da618cbba291999f3a66131172bc8f2e510f3633bf",
+      "innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e",
+      "run_liquidity_extension.py": "95665858a1945b00bba6d6233022c34c0a58993899ccadda8c895f64ffe69807",
+      "liquidity_models.py": "91dd66c0b33b8d75100e37cc382f01be44021ae538f6cbbedddda7f9b9386e0b",
+      "run_new_market_replication.py": "8c617a714bb0b47d117b213de9d299c3bd6a534c8211c28c8d039d454df12e56",
+      "literature_diagnostic.py": "e9053bfd34bce9e60c67c0590245271ccecaaf0bcf009a1e715be9abe7ada2e5",
+      "run_swewt_gru_comparison.py": "0b3395f547fad792c6880a9d25819c6e326ab48ef733240ad690e4833b63218d",
+      "run_official_tianjin_extension.py": "2b47055caf840d7fe572365760a8a602edff844df7dc23dc2caf99717fc77e24"
+    },
+    "ewtpy": {
+      "package": "ewtpy",
+      "version": "0.2",
+      "source_path": "/tmp/carbon-forecast-20261019d-deps/ewtpy/ewtpy.py",
+      "source_sha256": "35cb4532ae35a41867ee1411cb61a33165f7eebab3ebf70a58b47c74c6e6a289"
+    },
+    "raw_export_receipt_sha256": "2e715b5c35deb917f60c89bd38e85300c92ae9968b3139f9372e412066f0bc4b"
+  },
+  "plan": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_tricks_primary_model_20261019f/audits/EXPERIMENT_PLAN_BEFORE_RUN.json",
+  "plan_sha256": "78893370f6862b1295ba9cfcc5e71fc89776944aeae39346de788a4e09cc8880",
+  "datasets": [
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "file": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv",
+      "sha256": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a",
+      "role": "development",
+      "source_url": "https://www.chinatcx.com.cn/tshq",
+      "price_definition": "Official TJEA daily total published two-decimal transaction mean, CNY/tonne; not closing price",
+      "source_processing": "All 1077 official canonical daily-total records retained. Published prices preserved exactly; no row deletion, time filling, turnover-based price recomputation or splice.",
+      "source_vintage": "Current public historical snapshot; per-day publication vintages unverified. Evaluation tail scored in stages d and e and is fully exposed development.",
+      "license": "No redistribution license established; canonical rows and per-origin arrays remain private",
+      "historical_input_role": "development",
+      "stage_f_exposure": "Both tails previously scored in stage e; all new settings are development"
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "file": "/tmp/carbon-signed-response-data-20261019e/CEA_OFFICIAL_MEAN.csv",
+      "sha256": "f9f0e09b7500b2bdb4ec8b16c61d5d5fa2b64de63a24c0cf7bd1d269aa2be75d",
+      "role": "development",
+      "source_url": "https://www.chinatcx.com.cn/tshq",
+      "price_definition": "Published CEA daily TOTAL transaction mean in yuan per tonne; not closing price or listing-only mean",
+      "source_processing": "All 1251 rows from the official main CEA table retained; date sort and numeric thousands separator removal only. No row deletion, deduplication, time filling, price recomputation or splice.",
+      "source_vintage": "Current public historical snapshot; daily publication vintages unverified. Original stage-e and max320 sensitivity scores now fully exposed; stage f is development.",
+      "license": "No explicit redistribution license identified; raw rows and per-origin arrays remain private. Public reconstruction code and provenance remain available.",
+      "historical_input_role": "development",
+      "stage_f_exposure": "Both tails previously scored in stage e; all new settings are development"
+    }
+  ],
+  "scientific_configuration": {
+    "settings": [
+      "raw",
+      "window_past",
+      "train_joint_test_window",
+      "full_series_joint"
+    ],
+    "new_fitted_settings": [
+      "window_past",
+      "train_joint_test_window",
+      "full_series_joint"
+    ],
+    "response_families": [
+      "signed_context_response",
+      "static_response",
+      "amplitude_context",
+      "signed_shock_only"
+    ],
+    "matched_classical": [
+      "ridge_price"
+    ],
+    "raw_reuse": "stage-e320 four response families; original stage-e price Ridge and RW",
+    "primary_family": "signed_context_response",
+    "horizons": [
+      1,
+      5,
+      20
+    ],
+    "history_changes": 64,
+    "price_support": 65,
+    "ewt_options": {
+      "N": 3,
+      "log": 0,
+      "detect": "locmax",
+      "completion": 1,
+      "reg": "average",
+      "lengthFilter": 10,
+      "sigmaFilter": 5
+    },
+    "analysis_bands": [
+      0,
+      1,
+      2
+    ],
+    "front_end": "raw changes plus differences of all3 EWT analysis coefficient channels; no reconstruction or band deletion",
+    "state_bank": "four channels each with the same two history rates and the same future gate",
+    "fitted_scalar_counts": {
+      "signed_context_response": 15,
+      "static_response": 11,
+      "amplitude_context": 15,
+      "signed_shock_only": 13
+    },
+    "shared_readout": "one drift plus8 signed response coefficients; 9 linear coefficients",
+    "gate_inputs": "unchanged raw current log1p_abs_normalized_change and volume_surprise_times_valid",
+    "prediction_anchor": "observed unfiltered origin price; no denoised anchor offset",
+    "training_targets": "unfiltered official H1/H5/H20 cumulative price changes",
+    "normalization": "unchanged initial-train RMS and target second moments",
+    "split": "original60/20/20 masks; commonH20 maturity separation; no dropped origins",
+    "joint_selection_price_end": "a-1",
+    "joint_final_price_end": "b-1",
+    "joint_validation_and_test": "per-origin65-price window",
+    "full_series_scope": "allN prices once; separately labeled retrospective benchmark",
+    "learning_rates": [
+      0.003,
+      0.01
+    ],
+    "mean_ridge_alphas": [
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "price_ridge_sum_alphas": [
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0,
+      10000.0,
+      100000.0
+    ],
+    "fit_config": {
+      "learning_rate": 0.01,
+      "alpha": 0.001,
+      "maximum_epochs": 320,
+      "minimum_epochs": 15,
+      "patience": 12,
+      "selection_tolerance": 1e-07,
+      "gradient_clip": 5.0
+    },
+    "selection_rule": "minimum validation loss; alpha, learning_rate, selected_epoch ties; original epoch tolerance",
+    "price_ridge_input": "last20 raw changes plus last20 changes from each of3 EWT analysis channels;80 features; training-only StandardScaler; free3h heads with intercept",
+    "new_response_selection_fits": 384,
+    "new_response_refits": 24,
+    "new_ridge_selection_fits": 48,
+    "new_ridge_refits": 6,
+    "new_fit_tasks": 462,
+    "new_prediction_sets": 30,
+    "reused_prediction_sets": 12,
+    "random_seed_repetitions": 0,
+    "initial_dynamics_diagnostic_head_solves": 24,
+    "data_sha256": {
+      "TIANJIN_OFFICIAL_MEAN": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a",
+      "CEA_OFFICIAL_MEAN": "f9f0e09b7500b2bdb4ec8b16c61d5d5fa2b64de63a24c0cf7bd1d269aa2be75d"
+    },
+    "all_markets_role": "development"
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "torch": "2.14.1+cpu",
+    "sklearn": "1.8.0",
+    "precision": "float64 for all new response calculations; frozen legacy model float32",
+    "torch_threads_per_worker": 1
+  },
+  "reused_raw_records": [
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "family": "signed_context_response",
+      "source_group": "budget320",
+      "summary_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/TIANJIN_OFFICIAL_MEAN_fixed602020/signed_context_response/SUMMARY.json",
+      "summary_sha256": "18574357dcb691c178b3a08fbe1db58d1421386c99f7181ec89706056000639b",
+      "prediction_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/TIANJIN_OFFICIAL_MEAN_fixed602020/signed_context_response/predictions.npz",
+      "prediction_sha256": "2fade7ba76a36851ac0a019b1cb010fdc28319a97d0d5540b42dc7ceb4ee6243"
+    },
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "family": "static_response",
+      "source_group": "budget320",
+      "summary_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/TIANJIN_OFFICIAL_MEAN_fixed602020/static_response/SUMMARY.json",
+      "summary_sha256": "73a4f2f74f10800a179ecf2361b3c1980041af6eacf8c589034fb98ff27d8c89",
+      "prediction_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/TIANJIN_OFFICIAL_MEAN_fixed602020/static_response/predictions.npz",
+      "prediction_sha256": "08112357458ea92e7925164c712c47a4c244d600dc45b2f8a2738662e90a75a0"
+    },
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "family": "amplitude_context",
+      "source_group": "budget320",
+      "summary_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/TIANJIN_OFFICIAL_MEAN_fixed602020/amplitude_context/SUMMARY.json",
+      "summary_sha256": "175ed50a769afb1c974d3f65a8760f4a0a56f0b17540f71fc02c925589aed70e",
+      "prediction_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/TIANJIN_OFFICIAL_MEAN_fixed602020/amplitude_context/predictions.npz",
+      "prediction_sha256": "8e15f9ba6df6b9c332e65495ac3a3a097979b8966ad5a6bc0f92ad0d7c81aa1c"
+    },
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "family": "signed_shock_only",
+      "source_group": "budget320",
+      "summary_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/TIANJIN_OFFICIAL_MEAN_fixed602020/signed_shock_only/SUMMARY.json",
+      "summary_sha256": "59d1efaa723e69ec9da3bf66d526d3a22b9dbf6f6bdebc93553ee6ac7995d499",
+      "prediction_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/TIANJIN_OFFICIAL_MEAN_fixed602020/signed_shock_only/predictions.npz",
+      "prediction_sha256": "d7b37a7f10a6ba27f4dccbb912f2d2361c0706a7cfba9073445d6420019fd018"
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "family": "signed_context_response",
+      "source_group": "budget320",
+      "summary_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/CEA_OFFICIAL_MEAN_fixed602020/signed_context_response/SUMMARY.json",
+      "summary_sha256": "2579921b5c103d64dac0a5d7d2e701f67d8a185ca3064f27024fbdc13817df4a",
+      "prediction_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/CEA_OFFICIAL_MEAN_fixed602020/signed_context_response/predictions.npz",
+      "prediction_sha256": "cbcb0da9d2b07405b34a9538c08905e2b330ee3ed5e003aabeff6cecf9381484"
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "family": "static_response",
+      "source_group": "budget320",
+      "summary_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/CEA_OFFICIAL_MEAN_fixed602020/static_response/SUMMARY.json",
+      "summary_sha256": "5b07e98eb2dd971fc67a7d2afb281a93893ed85ff3f5b0b4e82df800b4dec4dc",
+      "prediction_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/CEA_OFFICIAL_MEAN_fixed602020/static_response/predictions.npz",
+      "prediction_sha256": "fbdec3af420dc14a9859b81c81f825501241edfb3af7c474f4f7a257bfc28ab1"
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "family": "amplitude_context",
+      "source_group": "budget320",
+      "summary_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/CEA_OFFICIAL_MEAN_fixed602020/amplitude_context/SUMMARY.json",
+      "summary_sha256": "43e91c3c3c37bba0ca9af797318711f58ecc40425f9108fc2226ebacd0fb4ff2",
+      "prediction_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/CEA_OFFICIAL_MEAN_fixed602020/amplitude_context/predictions.npz",
+      "prediction_sha256": "651a23ddeb80be86737fd81d9aad11b4e794ef5ec6d1fa1c1d3bf6b0147e93ee"
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "family": "signed_shock_only",
+      "source_group": "budget320",
+      "summary_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/CEA_OFFICIAL_MEAN_fixed602020/signed_shock_only/SUMMARY.json",
+      "summary_sha256": "1533aa7b1ddf7df4df72d35e0613854a520ea2175956cd7a827c437952da674f",
+      "prediction_path": "/tmp/carbon-signed-response-runs-20261019e/budget320/CEA_OFFICIAL_MEAN_fixed602020/signed_shock_only/predictions.npz",
+      "prediction_sha256": "fe1ba5fd6fa22c59505b3958539cd1c46878a474249ee62d7a95688c28149901"
+    },
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "family": "ridge_price",
+      "source_group": "core",
+      "summary_path": "/tmp/carbon-signed-response-runs-20261019e/core/TIANJIN_OFFICIAL_MEAN_fixed602020/ridge_price/SUMMARY.json",
+      "summary_sha256": "ce76e29f13efd47946cf155b9e26298367221bdff41d4ea0559fbf892fda6faa",
+      "prediction_path": "/tmp/carbon-signed-response-runs-20261019e/core/TIANJIN_OFFICIAL_MEAN_fixed602020/ridge_price/predictions.npz",
+      "prediction_sha256": "85b57c758f803da1734e9a9a8e4e60d40fe8ad24245cb51c093a518bf9a68544"
+    },
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "family": "rw",
+      "source_group": "core",
+      "summary_path": "/tmp/carbon-signed-response-runs-20261019e/core/TIANJIN_OFFICIAL_MEAN_fixed602020/rw/SUMMARY.json",
+      "summary_sha256": "7042bb380fed29612322dc459ffe81db2fa2f8b6705938cfb776a31373c35b36",
+      "prediction_path": "/tmp/carbon-signed-response-runs-20261019e/core/TIANJIN_OFFICIAL_MEAN_fixed602020/rw/predictions.npz",
+      "prediction_sha256": "0dd070120739ec14456a193c0710665f37d1716345440118817b67fb4c13d1f3"
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "family": "ridge_price",
+      "source_group": "core",
+      "summary_path": "/tmp/carbon-signed-response-runs-20261019e/core/CEA_OFFICIAL_MEAN_fixed602020/ridge_price/SUMMARY.json",
+      "summary_sha256": "f3c2d6e91a9a1629f28e1d372c4a7f42197769f4c964ef9f67365936c90a3728",
+      "prediction_path": "/tmp/carbon-signed-response-runs-20261019e/core/CEA_OFFICIAL_MEAN_fixed602020/ridge_price/predictions.npz",
+      "prediction_sha256": "246c009a97e0918a85337b39ac5dbd71373e79844fd79a5457da2c545793e5da"
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "family": "rw",
+      "source_group": "core",
+      "summary_path": "/tmp/carbon-signed-response-runs-20261019e/core/CEA_OFFICIAL_MEAN_fixed602020/rw/SUMMARY.json",
+      "summary_sha256": "e33cd9b7c0b89f89f1df0017423b1d76e61a9027dfbe993c8b240086e6f7e75e",
+      "prediction_path": "/tmp/carbon-signed-response-runs-20261019e/core/CEA_OFFICIAL_MEAN_fixed602020/rw/predictions.npz",
+      "prediction_sha256": "e3d98ec6638bda57b48351423dba50165a0ebea9164c21bacf9fc19055f21e75"
+    }
+  ],
+  "authorization_scope": "Frozen same-primary-model enhancement experiment; all new scores are exposed development"
+}
