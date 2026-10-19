@@ -14,6 +14,8 @@
 
 研究分支：`research/literature-aligned-model-search-20261019d`。
 
+已交付的草稿：[PR #25](https://github.com/124-creator/carbon-forecast-model-research/pull/25)。完整实验内容在远端已读回并与本地内容树一致；[交付收据](provenance/DELIVERY_RECEIPT.json)记录已核验的内容提交、报告/裁决 blob 身份与 PR 状态。收据及本段属于之后追加的交付元数据，不重写实验或主次选择。
+
 该分支叠放于前一研究分支 `research/forecast-geometry-filter-20261019c`（旧 Draft PR24），不修改或合并旧 PR。新研究目录之外的旧文件保持原内容。
 
 ## 3. 五批结果与主次身份
