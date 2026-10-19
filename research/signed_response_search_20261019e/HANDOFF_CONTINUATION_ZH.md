@@ -56,4 +56,6 @@ CEA 官方转载主表：1,251 行，231 个共同评价原点。此前原值/QC
 - 分支：`research/signed-response-search-20261019e`。
 - 远端对应：`provenance/LOCAL_REMOTE_FREEZE_MAPPING.json`；最终交付回执另列实际 PR、head 和内容树。
 
+已推送并创建 [Draft PR26](https://github.com/124-creator/carbon-forecast-model-research/pull/26)。完整结果的本地提交为 `015c9b3d891eb56ad3c6c5a078d43ef3ac4189da`，远端提交为 `d999f26db91d8b581b14aa42292d7db4782afaf4`，内容树均为 `f9b34244e027d3e5607b05284c8d1d0936e3aeee`；REPORT、FINAL_DECISION、REPRODUCE 的远端内容和 Git blob 身份也已读回核对。交付元数据及此链接随后另行提交，实际最新 head 应读取 PR/分支，不能把内容提交 SHA 直接当成永远不变的 head。详见 `provenance/GITHUB_DELIVERY_RECEIPT.json`。
+
 远端镜像在拟合之后，本地 commit SHA 与远端 commit SHA 可以不同，必须通过同内容 tree 比对。不得把本地 SHA 当作 GitHub head，也不得称后续远端上传是拟合前外部预注册。仅创建草稿 PR，不合并旧 PR25 或本轮草稿。

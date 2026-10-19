@@ -4,6 +4,8 @@
 
 Read [the full Chinese report](REPORT_ZH.md), [reproduction instructions](REPRODUCE_ZH.md), and [continuation handoff](HANDOFF_CONTINUATION_ZH.md). Machine-readable conclusions are in [FINAL_DECISION.json](FINAL_DECISION.json).
 
+GitHub delivery: [Draft PR26](https://github.com/124-creator/carbon-forecast-model-research/pull/26), stacked on the stage-d branch. The complete results content was pushed as [d999f26](https://github.com/124-creator/carbon-forecast-model-research/commit/d999f26db91d8b581b14aa42292d7db4782afaf4) and read back with an exact local/remote tree match. [Delivery receipt](provenance/GITHUB_DELIVERY_RECEIPT.json) records the immutable content identity; later metadata-only commits can advance the live PR head.
+
 ## Completed experiments
 
 | Scope | Fits | Positive optimizer updates | Market–model prediction sets |
