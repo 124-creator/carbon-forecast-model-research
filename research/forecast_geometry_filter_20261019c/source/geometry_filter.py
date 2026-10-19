@@ -550,6 +550,13 @@ def update_crps_kl(
     Its Hessian is I+2*eta*L'Cov(q)L, always positive definite. This avoids
     ill-conditioning from tiny primal q at large eta. The receipt checks
     the original CRPS+KL KKT equation using the unmodified distance matrix.
+
+    Backtracking uses the stationary-equation merit .5*||gradient||**2.
+    For the unchanged Newton direction H*d=-gradient, its directional
+    derivative is -||gradient||**2. Because H is positive definite, a
+    stationary point of this merit is exactly the original dual minimizer.
+    This avoids subtracting rounded objective values when the genuine
+    Newton decrease is far below binary64 precision near the solution.
     """
     prior, yy, steps, scalar = _prepare_inputs(p, y, eta)
     if not np.isfinite(tolerance) or tolerance <= 0 or max_iter < 1:
@@ -562,6 +569,7 @@ def update_crps_kl(
     NUMERICAL_COUNTERS["kl_optimized_rows"] += int(used.size)
     receipt: dict[str, Any] = {
         "algorithm": "equivalent_strongly_convex_dual_newton",
+        "line_search_merit": "half_squared_dual_gradient_norm",
         "rows": int(len(prior)), "zero_step_identity_rows": int((steps == 0.0).sum()),
         "tolerance": float(tolerance), "max_iter_budget": int(max_iter),
         "max_iterations": 0, "max_kkt_residual": 0.0,
@@ -581,7 +589,7 @@ def update_crps_kl(
         counts = np.zeros(len(used), dtype=int)
         total_halvings = 0
         for _ in range(max_iter):
-            value, qq = _dual_value(u, logp, c, ee)
+            _, qq = _dual_value(u, logp, c, ee)
             means = qq @ _L2
             gradient = u - means
             unfinished = np.flatnonzero(np.max(np.abs(gradient), axis=1) > tolerance)
@@ -593,16 +601,17 @@ def update_crps_kl(
             hessian = (np.eye(_L2.shape[1])[None, :, :]
                        + ee[unfinished, None, None] * covariance)
             direction = -np.linalg.solve(hessian, grad_a[..., None])[..., 0]
-            slope = np.sum(grad_a * direction, axis=1)
+            squared_residual = np.sum(grad_a * grad_a, axis=1)
             alpha = np.ones(len(unfinished))
-            old_u, old_value = u[unfinished].copy(), value[unfinished]
+            old_u = u[unfinished].copy()
             for _line in range(50):
                 trial_u = old_u + alpha[:, None] * direction
-                trial_value, _ = _dual_value(
+                _, trial_q = _dual_value(
                     trial_u, logp[unfinished], c[unfinished], ee[unfinished]
                 )
-                roundoff_allowance = 8.0 * np.finfo(float).eps * (1.0 + np.abs(old_value))
-                accepted = trial_value <= old_value + 1e-4 * alpha * slope + roundoff_allowance
+                trial_gradient = trial_u - trial_q @ _L2
+                trial_squared_residual = np.sum(trial_gradient * trial_gradient, axis=1)
+                accepted = trial_squared_residual <= (1.0 - 2e-4 * alpha) * squared_residual
                 if np.all(accepted):
                     break
                 alpha[~accepted] *= 0.5
