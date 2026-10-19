@@ -1,0 +1,40 @@
+{
+  "status": "fixed_before_any_new_phase_f_market_fit_or_forecast_score",
+  "role": "exposed development, conditional resampling description; no new confirmatory claim",
+  "markets": ["TIANJIN_OFFICIAL_MEAN", "CEA_OFFICIAL_MEAN"],
+  "horizons": [1, 5, 20],
+  "primary_family": "signed_context_response",
+  "primary_metric": "Q=mean_h(MSE_model_h/MSE_RW_h), equal horizon weights; lower is better",
+  "reported_native_metrics": ["MSE", "RMSE", "MAE"],
+  "effect": "100*(Q_reference-Q_main), positive favors main; normalized RW percentage points, not RMSE percentage change",
+  "relative_improvement_percent": "100*(1-Q_main/Q_reference), separately labeled",
+  "bootstrap": {
+    "method": "paired circular moving-block bootstrap over common observed-record origins",
+    "draws": 50000,
+    "block_lengths_in_order": [20, 40],
+    "seeds": {"TIANJIN_OFFICIAL_MEAN": 2026101903, "CEA_OFFICIAL_MEAN": 2026101904},
+    "random_stream": "one numpy default_rng per market; block20 then40; common sampled indices for every model and horizon",
+    "replicate": "sample ceil(n/block_length) starting origins uniformly, append modulo-n consecutive blocks, truncate to n",
+    "rw_denominator": "recompute separately for each horizon within each draw",
+    "zero_rw_draw": "record invalid count and exclude only that invalid draw; never replace denominator silently",
+    "pointwise_interval": [0.025, 0.975],
+    "comparison_families": {
+      "enhancement_5": {
+        "comparisons": ["window_past main vs raw320 main", "train_joint_test_window main vs raw320 main", "full_series_joint main vs raw320 main", "dense_path main vs raw320 main", "validation_selected_matured_readout main vs raw320 main"],
+        "family_size": 5,
+        "bonferroni_quantiles": [0.005, 0.995]
+      },
+      "mechanism_15": {
+        "settings": ["window_past", "train_joint_test_window", "full_series_joint", "dense_path", "validation_selected_matured_readout"],
+        "comparators_per_setting": ["static_response", "amplitude_context", "signed_shock_only"],
+        "family_size": 15,
+        "bonferroni_quantiles": [0.0016666666666666668, 0.9983333333333333]
+      }
+    },
+    "secondary": "same-EWT Ridge comparisons and RW comparisons report pointwise intervals only, outside the two declared families",
+    "adaptation_strategy": "each family's primary online strategy chosen solely on validation; fixed within resampling; all five strategy point scores retained",
+    "scope": "per-market conditional intervals; no joint across-market coverage, no new p-values, no claim to adjust for the broader already-exposed research search"
+  },
+  "analysis_source": "Analysis implementation may be written after fits but must implement this frozen plan; source and numerical replay receipt will be published.",
+  "decision": "Report measured main-model improvement and matched mechanism increment separately. No invented universal publication percentage threshold. Full-series effects retain their complete-sequence information label."
+}
