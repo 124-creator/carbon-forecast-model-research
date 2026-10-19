@@ -1,0 +1,90 @@
+{
+  "created_unix": 1792411335.9375005,
+  "stage": "e_prespecified_neural_references",
+  "datasets": [
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "file": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv",
+      "sha256": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a",
+      "role": "development",
+      "source_url": "https://www.chinatcx.com.cn/tshq",
+      "price_definition": "Official TJEA daily total published two-decimal transaction mean, CNY/tonne; not close",
+      "source_processing": "All1077 official canonical daily-total records retained; price preserved without recomputing turnover/volume; no model-based cleaning",
+      "source_vintage": "Current public historical snapshot; per-day publication vintages unverified. Stage d already scored this tail; fully exposed development in stage e.",
+      "license": "No redistribution license established; canonical rows remain private"
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "file": "/tmp/carbon-signed-response-data-20261019e/CEA_OFFICIAL_MEAN.csv",
+      "sha256": "f9f0e09b7500b2bdb4ec8b16c61d5d5fa2b64de63a24c0cf7bd1d269aa2be75d",
+      "role": "confirmation",
+      "source_url": "https://www.chinatcx.com.cn/tshq",
+      "price_definition": "Published daily TOTAL transaction mean in yuan per tonne, retained exactly as reported; not closing price or listing-only mean",
+      "source_processing": "Take every row from main CEA table index4; sort dates ascending and strip numeric thousands separators only. No row deletion, no deduplication, no date fill, no price recomputation, no splice.",
+      "source_vintage": "Current public historical snapshot; daily publication vintages unverified. Raw source values were previously read/QC; repository evidence found no prior CEA forecast scoring. Confirmation is limited to this fixed stage-e scoring design.",
+      "license": "No explicit redistribution license identified; raw and per-date CSV remain local-only. Public source/QC metadata and reconstruction script."
+    }
+  ],
+  "source_sha256": {
+    "signed_response_models.py": "5ceb7f04c567be32f1a399cbf01dafdfc6894d3840a158b6faae4153f09eb2f8",
+    "run_signed_response_search.py": "905da0ca33607799b1ca63d9efe6710df173ec33c5c44e137071e024906d990c",
+    "run_neural_references.py": "489249eb417e54611123da2b1508f946f416c7f5813124e2ddd2eedfe8b63b11"
+  },
+  "statistical_plan_sha256": "b6f33c9c328f37f9a283275d6cc36e4e48153bc3322d45e2b8deb74e3d1d987c",
+  "paper_doi": "10.3390/en17174358",
+  "classification": "controlled multistep adaptation, not author numerical reproduction",
+  "families": [
+    "raw_gru",
+    "swewt_gru"
+  ],
+  "learning_rates": [
+    0.003,
+    0.01
+  ],
+  "selection_seed": 17,
+  "refit_seeds": [
+    17,
+    29,
+    43
+  ],
+  "max_epochs": 80,
+  "min_epochs": 15,
+  "patience": 12,
+  "batch_size": 128,
+  "horizons": [
+    1,
+    5,
+    20
+  ],
+  "optimizer": "AdamW, weight_decay1e-4, gradient_clip5",
+  "early_stop_tolerance": 1e-07,
+  "input": {
+    "raw_gru": "64 price-change/volume-surprise/valid tokens",
+    "swewt_gru": "64 observed price levels separately EWT3; last17 raw-origin, low-origin, band2, band3 plus volume-surprise/valid"
+  },
+  "ewt": {
+    "N": 3,
+    "log": 0,
+    "detect": "locmax",
+    "completion": 1,
+    "reg": "average",
+    "lengthFilter": 10,
+    "sigmaFilter": 5
+  },
+  "heads": "Three zero-initialized heads, all supervised H1/5/20; same normalized target loss as core",
+  "departures_from_paper": [
+    "Different markets and 60/20/20 chronological split",
+    "Three horizons and volume context",
+    "Fixed window64 and mode3, GRU32; two learning rates and max80 instead of published TPE10 and max1000",
+    "Origin centering and train-prefix RMS rather than paper minmax"
+  ],
+  "planned_selection_fits": 8,
+  "planned_final_fits": 12,
+  "dependencies": {
+    "ewtpy_version": "0.2",
+    "ewtpy_source_sha256": "35cb4532ae35a41867ee1411cb61a33165f7eebab3ebf70a58b47c74c6e6a289",
+    "ewtpy_source": "/tmp/carbon-forecast-20261019d-deps/ewtpy/ewtpy.py",
+    "numpy": "2.3.5",
+    "torch": "2.14.1+cpu"
+  }
+}

@@ -1,0 +1,394 @@
+{
+  "status": "PASS_NO_MARKET_FIT_NO_SCORE",
+  "market_fit_count": 0,
+  "validation_or_test_model_scores": 0,
+  "source_sha256": {
+    "signed_response_models.py": "b57913080af9289b51b9bbce6cb84c67ee01d3c654afb3ed68ac195deb77f8ca",
+    "run_signed_response_search.py": "03c5e226d3e4fee34883e3b0fd75dd79c7526886c7b2082f3664ab59bd2981b8"
+  },
+  "old_frozen_source_sha256": {
+    "run_model_search.py": "26347433fe6416298e4969da618cbba291999f3a66131172bc8f2e510f3633bf",
+    "innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e",
+    "run_liquidity_extension.py": "95665858a1945b00bba6d6233022c34c0a58993899ccadda8c895f64ffe69807",
+    "liquidity_models.py": "91dd66c0b33b8d75100e37cc382f01be44021ae538f6cbbedddda7f9b9386e0b",
+    "run_new_market_replication.py": "8c617a714bb0b47d117b213de9d299c3bd6a534c8211c28c8d039d454df12e56",
+    "literature_diagnostic.py": "e9053bfd34bce9e60c67c0590245271ccecaaf0bcf009a1e715be9abe7ada2e5",
+    "run_swewt_gru_comparison.py": "0b3395f547fad792c6880a9d25819c6e326ab48ef733240ad690e4833b63218d",
+    "run_official_tianjin_extension.py": "2b47055caf840d7fe572365760a8a602edff844df7dc23dc2caf99717fc77e24"
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "torch": "2.14.1+cpu",
+    "sklearn": "1.8.0",
+    "precision": "float64 for all new response calculations; frozen legacy model float32",
+    "torch_threads_per_worker": 1
+  },
+  "datasets": [
+    {
+      "input_manifest": {
+        "market": "TIANJIN_OFFICIAL_MEAN",
+        "role": "development",
+        "fold": "fixed602020",
+        "target": "Official TJEA daily total published two-decimal transaction mean, CNY/tonne; not close",
+        "row_boundaries": [
+          0,
+          646,
+          861,
+          1077
+        ],
+        "counts": {
+          "train": 562,
+          "val": 195,
+          "final": 777,
+          "test": 196
+        },
+        "origin_ranges": {
+          "train": [
+            64,
+            625
+          ],
+          "val": [
+            646,
+            840
+          ],
+          "final": [
+            64,
+            840
+          ],
+          "test": [
+            861,
+            1056
+          ]
+        },
+        "raw_date_range": [
+          "2013-12-26",
+          "2026-09-30"
+        ],
+        "first_train_origin": "2014-04-03",
+        "last_train_label": "2020-10-22",
+        "first_validation_origin": "2020-10-23",
+        "last_validation_label": "2023-04-18",
+        "first_test_origin": "2023-04-19",
+        "last_test_origin": "2026-07-02",
+        "last_test_label": "2026-09-30",
+        "training_rms": [
+          1.3139645907468107
+        ],
+        "train_target_second_moment": [
+          1.621859964412811,
+          6.993383096085417,
+          22.16738167259787
+        ],
+        "sources": [
+          {
+            "market": "TIANJIN_OFFICIAL_MEAN",
+            "file": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv",
+            "sha256": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a",
+            "role": "development",
+            "source_url": "https://www.chinatcx.com.cn/tshq",
+            "price_definition": "Official TJEA daily total published two-decimal transaction mean, CNY/tonne; not close",
+            "source_processing": "All1077 official canonical daily-total records retained; price preserved without recomputing turnover/volume; no model-based cleaning",
+            "source_vintage": "Current public historical snapshot; per-day publication vintages unverified. Stage d already scored this tail; fully exposed development in stage e.",
+            "license": "No redistribution license established; canonical rows remain private",
+            "path": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv"
+          }
+        ],
+        "price_retained_without_turnover_division": true,
+        "observed_price_turnover_ratio_max_gap_qc_only": 0.005000000000002558,
+        "maximum_record_gap_calendar_days": 319,
+        "input_columns": [
+          "change_over_fixed_train_rms",
+          "volume_surprise",
+          "volume_valid"
+        ],
+        "energy_inputs": false,
+        "volume": {
+          "valid_rows": 1077,
+          "usable_context_rows": 1067,
+          "normalization": "current log1p volume minus prior60 target-record valid-log-volume median, divided by prior std floored .25, clipped[-5,5], >=10 valid past records",
+          "information": "origin price and volume observed after origin report; no future context; turnover not an input",
+          "missing": "0 surprise plus 0 valid mask; genuine observed zero volume is valid",
+          "model_usage": "only current origin context enters gates; historical price window64; current volume reference uses prior60 records"
+        },
+        "source_vintage": "Current public historical snapshot; per-day publication vintages unverified. Stage d already scored this tail; fully exposed development in stage e."
+      },
+      "forward_checks": {
+        "fixed_response": {
+          "prediction_shape": [
+            3,
+            3
+          ],
+          "basis_shape": [
+            3,
+            3,
+            3
+          ],
+          "nonlinear_optimizer_parameters": 0,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 3
+        },
+        "static_response": {
+          "prediction_shape": [
+            3,
+            3
+          ],
+          "basis_shape": [
+            3,
+            3,
+            3
+          ],
+          "nonlinear_optimizer_parameters": 2,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 5
+        },
+        "amplitude_context": {
+          "prediction_shape": [
+            3,
+            3
+          ],
+          "basis_shape": [
+            3,
+            3,
+            3
+          ],
+          "nonlinear_optimizer_parameters": 6,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 9
+        },
+        "signed_context_response": {
+          "prediction_shape": [
+            3,
+            3
+          ],
+          "basis_shape": [
+            3,
+            3,
+            3
+          ],
+          "nonlinear_optimizer_parameters": 6,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 9
+        },
+        "free_horizon_context": {
+          "prediction_shape": [
+            3,
+            3
+          ],
+          "basis_shape": [
+            3,
+            3,
+            9
+          ],
+          "nonlinear_optimizer_parameters": 6,
+          "exactly_fitted_linear_coefficients": 9,
+          "total_fitted_scalars": 15
+        },
+        "signed_shock_only": {
+          "prediction_shape": [
+            3,
+            3
+          ],
+          "basis_shape": [
+            3,
+            3,
+            3
+          ],
+          "nonlinear_optimizer_parameters": 4,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 7
+        }
+      },
+      "legacy_shape": [
+        3,
+        3
+      ],
+      "future_perturbation_prefix_gap": 0.0,
+      "full_amplitude_zero_gate_basis_equal": true,
+      "ridge_interaction_feature_count": 62
+    },
+    {
+      "input_manifest": {
+        "market": "CEA_OFFICIAL_MEAN",
+        "role": "confirmation",
+        "fold": "fixed602020",
+        "target": "Official national CEA daily total published two-decimal transaction mean, CNY/tonne; not listed-trade close",
+        "row_boundaries": [
+          0,
+          750,
+          1000,
+          1251
+        ],
+        "counts": {
+          "train": 666,
+          "val": 230,
+          "final": 916,
+          "test": 231
+        },
+        "origin_ranges": {
+          "train": [
+            64,
+            729
+          ],
+          "val": [
+            750,
+            979
+          ],
+          "final": [
+            64,
+            979
+          ],
+          "test": [
+            1000,
+            1230
+          ]
+        },
+        "raw_date_range": [
+          "2021-07-16",
+          "2026-09-30"
+        ],
+        "first_train_origin": "2021-10-25",
+        "last_train_label": "2024-08-16",
+        "first_validation_origin": "2024-08-19",
+        "last_validation_label": "2025-09-11",
+        "first_test_origin": "2025-09-12",
+        "last_test_origin": "2026-09-01",
+        "last_test_label": "2026-09-30",
+        "training_rms": [
+          4.583739487607653
+        ],
+        "train_target_second_moment": [
+          22.67713183183186,
+          25.91302477477477,
+          37.883000750750725
+        ],
+        "sources": [
+          {
+            "market": "CEA_OFFICIAL_MEAN",
+            "file": "/tmp/carbon-signed-response-data-20261019e/CEA_OFFICIAL_MEAN.csv",
+            "sha256": "f9f0e09b7500b2bdb4ec8b16c61d5d5fa2b64de63a24c0cf7bd1d269aa2be75d",
+            "role": "confirmation",
+            "source_url": "https://www.chinatcx.com.cn/tshq",
+            "price_definition": "Official national CEA daily total published two-decimal transaction mean, CNY/tonne; not listed-trade close",
+            "source_processing": "Official Body.js national CEA main table;1251 canonical dates retained under separately documented source QC; published price preserved without recomputing turnover/volume",
+            "source_vintage": "Current public historical snapshot; daily publication vintages unverified. Raw source values were previously read/QC; repository evidence found no prior CEA forecast scoring. Confirmation is limited to this fixed stage-e scoring design.",
+            "license": "No redistribution license established; canonical rows remain private",
+            "path": "/tmp/carbon-signed-response-data-20261019e/CEA_OFFICIAL_MEAN.csv"
+          }
+        ],
+        "price_retained_without_turnover_division": true,
+        "observed_price_turnover_ratio_max_gap_qc_only": 0.0049999999999954525,
+        "maximum_record_gap_calendar_days": 13,
+        "input_columns": [
+          "change_over_fixed_train_rms",
+          "volume_surprise",
+          "volume_valid"
+        ],
+        "energy_inputs": false,
+        "volume": {
+          "valid_rows": 1251,
+          "usable_context_rows": 1241,
+          "normalization": "current log1p volume minus prior60 target-record valid-log-volume median, divided by prior std floored .25, clipped[-5,5], >=10 valid past records",
+          "information": "origin price and volume observed after origin report; no future context; turnover not an input",
+          "missing": "0 surprise plus 0 valid mask; genuine observed zero volume is valid",
+          "model_usage": "only current origin context enters gates; historical price window64; current volume reference uses prior60 records"
+        },
+        "source_vintage": "Current public historical snapshot; daily publication vintages unverified. Raw source values were previously read/QC; repository evidence found no prior CEA forecast scoring. Confirmation is limited to this fixed stage-e scoring design."
+      },
+      "forward_checks": {
+        "fixed_response": {
+          "prediction_shape": [
+            3,
+            3
+          ],
+          "basis_shape": [
+            3,
+            3,
+            3
+          ],
+          "nonlinear_optimizer_parameters": 0,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 3
+        },
+        "static_response": {
+          "prediction_shape": [
+            3,
+            3
+          ],
+          "basis_shape": [
+            3,
+            3,
+            3
+          ],
+          "nonlinear_optimizer_parameters": 2,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 5
+        },
+        "amplitude_context": {
+          "prediction_shape": [
+            3,
+            3
+          ],
+          "basis_shape": [
+            3,
+            3,
+            3
+          ],
+          "nonlinear_optimizer_parameters": 6,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 9
+        },
+        "signed_context_response": {
+          "prediction_shape": [
+            3,
+            3
+          ],
+          "basis_shape": [
+            3,
+            3,
+            3
+          ],
+          "nonlinear_optimizer_parameters": 6,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 9
+        },
+        "free_horizon_context": {
+          "prediction_shape": [
+            3,
+            3
+          ],
+          "basis_shape": [
+            3,
+            3,
+            9
+          ],
+          "nonlinear_optimizer_parameters": 6,
+          "exactly_fitted_linear_coefficients": 9,
+          "total_fitted_scalars": 15
+        },
+        "signed_shock_only": {
+          "prediction_shape": [
+            3,
+            3
+          ],
+          "basis_shape": [
+            3,
+            3,
+            3
+          ],
+          "nonlinear_optimizer_parameters": 4,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 7
+        }
+      },
+      "legacy_shape": [
+        3,
+        3
+      ],
+      "future_perturbation_prefix_gap": 0.0,
+      "full_amplitude_zero_gate_basis_equal": true,
+      "ridge_interaction_feature_count": 62
+    }
+  ]
+}
