@@ -1,0 +1,2495 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-19T04:41:04.595958+00:00",
+  "script_sha256": "9b71d032bd6c401622b9f0b0e4d23b1ee9bf303d58540b90564d9506ab49f164",
+  "prepared_cells": 13,
+  "expected_cells": 13,
+  "receipts": [
+    {
+      "schema_version": 1,
+      "cell": "EUA_LONG_2021",
+      "market": "EUA_LONG",
+      "year": 2021,
+      "source": {
+        "market": "EUA_LONG",
+        "filename": "EUA_LONG_development.csv",
+        "rows": 2839,
+        "sha256": "142f391305c482eb3bd58dcf8df477db90cf54402495527749a53e126cdf0e7f",
+        "first_date": "2013-01-02",
+        "last_date": "2023-12-29",
+        "bytes": 71995,
+        "date_guard_before_price_conversion": true,
+        "source_hash_verified_before_price_conversion": true,
+        "rows_deleted_or_imputed": 0,
+        "exposure_group": "Previously trained/validated/scored development data; not independent confirmation."
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 1917,
+      "train_label_end_date": "2020-06-09",
+      "roles": {
+        "train": {
+          "count": 1859,
+          "first_origin": 39,
+          "last_origin": 1897,
+          "first_date": "2013-02-26",
+          "last_date": "2020-05-12",
+          "origin_calendar_span_days": 2632,
+          "first_feature_index": 20,
+          "first_feature_date": "2013-01-30",
+          "last_feature_index": 1897,
+          "last_feature_date": "2020-05-12",
+          "last_label_index": 1917,
+          "last_label_date": "2020-06-09",
+          "by_horizon": {
+            "1": {
+              "count": 1859,
+              "first_target_index": 40,
+              "last_target_index": 1898,
+              "first_target_date": "2013-02-27",
+              "last_target_date": "2020-05-13"
+            },
+            "5": {
+              "count": 1859,
+              "first_target_index": 44,
+              "last_target_index": 1902,
+              "first_target_date": "2013-03-05",
+              "last_target_date": "2020-05-19"
+            },
+            "20": {
+              "count": 1859,
+              "first_target_index": 59,
+              "last_target_index": 1917,
+              "first_target_date": "2013-03-26",
+              "last_target_date": "2020-06-09"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 1918,
+          "last_origin": 2043,
+          "first_date": "2020-06-10",
+          "last_date": "2020-12-02",
+          "origin_calendar_span_days": 175,
+          "first_feature_index": 1899,
+          "first_feature_date": "2020-05-14",
+          "last_feature_index": 2043,
+          "last_feature_date": "2020-12-02",
+          "last_label_index": 2063,
+          "last_label_date": "2020-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 1919,
+              "last_target_index": 2044,
+              "first_target_date": "2020-06-11",
+              "last_target_date": "2020-12-03"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 1923,
+              "last_target_index": 2048,
+              "first_target_date": "2020-06-17",
+              "last_target_date": "2020-12-09"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 1938,
+              "last_target_index": 2063,
+              "first_target_date": "2020-07-08",
+              "last_target_date": "2020-12-31"
+            }
+          }
+        },
+        "test": {
+          "count": 239,
+          "first_origin": 2064,
+          "last_origin": 2302,
+          "first_date": "2021-01-04",
+          "last_date": "2021-12-03",
+          "origin_calendar_span_days": 333,
+          "first_feature_index": 2045,
+          "first_feature_date": "2020-12-04",
+          "last_feature_index": 2302,
+          "last_feature_date": "2021-12-03",
+          "last_label_index": 2322,
+          "last_label_date": "2021-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 239,
+              "first_target_index": 2065,
+              "last_target_index": 2303,
+              "first_target_date": "2021-01-05",
+              "last_target_date": "2021-12-06"
+            },
+            "5": {
+              "count": 239,
+              "first_target_index": 2069,
+              "last_target_index": 2307,
+              "first_target_date": "2021-01-11",
+              "last_target_date": "2021-12-10"
+            },
+            "20": {
+              "count": 239,
+              "first_target_index": 2084,
+              "last_target_index": 2322,
+              "first_target_date": "2021-02-01",
+              "last_target_date": "2021-12-31"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 1917,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          1897
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 1917,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "ed9e2737d854fbcfd11b1b447345a1356611138e4673342c8eeedea70d76d357",
+      "prepared_bytes": 589898
+    },
+    {
+      "schema_version": 1,
+      "cell": "EUA_LONG_2022",
+      "market": "EUA_LONG",
+      "year": 2022,
+      "source": {
+        "market": "EUA_LONG",
+        "filename": "EUA_LONG_development.csv",
+        "rows": 2839,
+        "sha256": "142f391305c482eb3bd58dcf8df477db90cf54402495527749a53e126cdf0e7f",
+        "first_date": "2013-01-02",
+        "last_date": "2023-12-29",
+        "bytes": 71995,
+        "date_guard_before_price_conversion": true,
+        "source_hash_verified_before_price_conversion": true,
+        "rows_deleted_or_imputed": 0,
+        "exposure_group": "Previously trained/validated/scored development data; not independent confirmation."
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 2176,
+      "train_label_end_date": "2021-06-10",
+      "roles": {
+        "train": {
+          "count": 2118,
+          "first_origin": 39,
+          "last_origin": 2156,
+          "first_date": "2013-02-26",
+          "last_date": "2021-05-13",
+          "origin_calendar_span_days": 2998,
+          "first_feature_index": 20,
+          "first_feature_date": "2013-01-30",
+          "last_feature_index": 2156,
+          "last_feature_date": "2021-05-13",
+          "last_label_index": 2176,
+          "last_label_date": "2021-06-10",
+          "by_horizon": {
+            "1": {
+              "count": 2118,
+              "first_target_index": 40,
+              "last_target_index": 2157,
+              "first_target_date": "2013-02-27",
+              "last_target_date": "2021-05-14"
+            },
+            "5": {
+              "count": 2118,
+              "first_target_index": 44,
+              "last_target_index": 2161,
+              "first_target_date": "2013-03-05",
+              "last_target_date": "2021-05-20"
+            },
+            "20": {
+              "count": 2118,
+              "first_target_index": 59,
+              "last_target_index": 2176,
+              "first_target_date": "2013-03-26",
+              "last_target_date": "2021-06-10"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 2177,
+          "last_origin": 2302,
+          "first_date": "2021-06-11",
+          "last_date": "2021-12-03",
+          "origin_calendar_span_days": 175,
+          "first_feature_index": 2158,
+          "first_feature_date": "2021-05-17",
+          "last_feature_index": 2302,
+          "last_feature_date": "2021-12-03",
+          "last_label_index": 2322,
+          "last_label_date": "2021-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 2178,
+              "last_target_index": 2303,
+              "first_target_date": "2021-06-14",
+              "last_target_date": "2021-12-06"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 2182,
+              "last_target_index": 2307,
+              "first_target_date": "2021-06-18",
+              "last_target_date": "2021-12-10"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 2197,
+              "last_target_index": 2322,
+              "first_target_date": "2021-07-09",
+              "last_target_date": "2021-12-31"
+            }
+          }
+        },
+        "test": {
+          "count": 238,
+          "first_origin": 2323,
+          "last_origin": 2560,
+          "first_date": "2022-01-03",
+          "last_date": "2022-12-01",
+          "origin_calendar_span_days": 332,
+          "first_feature_index": 2304,
+          "first_feature_date": "2021-12-07",
+          "last_feature_index": 2560,
+          "last_feature_date": "2022-12-01",
+          "last_label_index": 2580,
+          "last_label_date": "2022-12-30",
+          "by_horizon": {
+            "1": {
+              "count": 238,
+              "first_target_index": 2324,
+              "last_target_index": 2561,
+              "first_target_date": "2022-01-04",
+              "last_target_date": "2022-12-02"
+            },
+            "5": {
+              "count": 238,
+              "first_target_index": 2328,
+              "last_target_index": 2565,
+              "first_target_date": "2022-01-10",
+              "last_target_date": "2022-12-08"
+            },
+            "20": {
+              "count": 238,
+              "first_target_index": 2343,
+              "last_target_index": 2580,
+              "first_target_date": "2022-01-31",
+              "last_target_date": "2022-12-30"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 2176,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          2156
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 2176,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "9812f6a425132c5496a24a68f9abe57497473477e563a333284a515fb02a714d",
+      "prepared_bytes": 655594
+    },
+    {
+      "schema_version": 1,
+      "cell": "EUA_LONG_2023",
+      "market": "EUA_LONG",
+      "year": 2023,
+      "source": {
+        "market": "EUA_LONG",
+        "filename": "EUA_LONG_development.csv",
+        "rows": 2839,
+        "sha256": "142f391305c482eb3bd58dcf8df477db90cf54402495527749a53e126cdf0e7f",
+        "first_date": "2013-01-02",
+        "last_date": "2023-12-29",
+        "bytes": 71995,
+        "date_guard_before_price_conversion": true,
+        "source_hash_verified_before_price_conversion": true,
+        "rows_deleted_or_imputed": 0,
+        "exposure_group": "Previously trained/validated/scored development data; not independent confirmation."
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 2434,
+      "train_label_end_date": "2022-06-08",
+      "roles": {
+        "train": {
+          "count": 2376,
+          "first_origin": 39,
+          "last_origin": 2414,
+          "first_date": "2013-02-26",
+          "last_date": "2022-05-11",
+          "origin_calendar_span_days": 3361,
+          "first_feature_index": 20,
+          "first_feature_date": "2013-01-30",
+          "last_feature_index": 2414,
+          "last_feature_date": "2022-05-11",
+          "last_label_index": 2434,
+          "last_label_date": "2022-06-08",
+          "by_horizon": {
+            "1": {
+              "count": 2376,
+              "first_target_index": 40,
+              "last_target_index": 2415,
+              "first_target_date": "2013-02-27",
+              "last_target_date": "2022-05-12"
+            },
+            "5": {
+              "count": 2376,
+              "first_target_index": 44,
+              "last_target_index": 2419,
+              "first_target_date": "2013-03-05",
+              "last_target_date": "2022-05-18"
+            },
+            "20": {
+              "count": 2376,
+              "first_target_index": 59,
+              "last_target_index": 2434,
+              "first_target_date": "2013-03-26",
+              "last_target_date": "2022-06-08"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 2435,
+          "last_origin": 2560,
+          "first_date": "2022-06-09",
+          "last_date": "2022-12-01",
+          "origin_calendar_span_days": 175,
+          "first_feature_index": 2416,
+          "first_feature_date": "2022-05-13",
+          "last_feature_index": 2560,
+          "last_feature_date": "2022-12-01",
+          "last_label_index": 2580,
+          "last_label_date": "2022-12-30",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 2436,
+              "last_target_index": 2561,
+              "first_target_date": "2022-06-10",
+              "last_target_date": "2022-12-02"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 2440,
+              "last_target_index": 2565,
+              "first_target_date": "2022-06-16",
+              "last_target_date": "2022-12-08"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 2455,
+              "last_target_index": 2580,
+              "first_target_date": "2022-07-07",
+              "last_target_date": "2022-12-30"
+            }
+          }
+        },
+        "test": {
+          "count": 238,
+          "first_origin": 2581,
+          "last_origin": 2818,
+          "first_date": "2023-01-02",
+          "last_date": "2023-11-30",
+          "origin_calendar_span_days": 332,
+          "first_feature_index": 2562,
+          "first_feature_date": "2022-12-05",
+          "last_feature_index": 2818,
+          "last_feature_date": "2023-11-30",
+          "last_label_index": 2838,
+          "last_label_date": "2023-12-29",
+          "by_horizon": {
+            "1": {
+              "count": 238,
+              "first_target_index": 2582,
+              "last_target_index": 2819,
+              "first_target_date": "2023-01-03",
+              "last_target_date": "2023-12-01"
+            },
+            "5": {
+              "count": 238,
+              "first_target_index": 2586,
+              "last_target_index": 2823,
+              "first_target_date": "2023-01-09",
+              "last_target_date": "2023-12-07"
+            },
+            "20": {
+              "count": 238,
+              "first_target_index": 2601,
+              "last_target_index": 2838,
+              "first_target_date": "2023-01-30",
+              "last_target_date": "2023-12-29"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 2434,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          2414
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 2434,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "122f88c64e4553ebbc939e5178770634a92bcf4cddb62f823e02adbaaca775a8",
+      "prepared_bytes": 720846
+    },
+    {
+      "schema_version": 1,
+      "cell": "GUANGZHOU_2021",
+      "market": "GUANGZHOU",
+      "year": 2021,
+      "source": {
+        "market": "GUANGZHOU",
+        "filename": "GUANGZHOU_development.csv",
+        "rows": 1434,
+        "sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+        "first_date": "2018-01-03",
+        "last_date": "2023-12-29",
+        "bytes": 43143,
+        "date_guard_before_price_conversion": true,
+        "source_hash_verified_before_price_conversion": true,
+        "rows_deleted_or_imputed": 0,
+        "exposure_group": "Previously trained/validated/scored development data; not independent confirmation."
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 556,
+      "train_label_end_date": "2020-06-08",
+      "roles": {
+        "train": {
+          "count": 498,
+          "first_origin": 39,
+          "last_origin": 536,
+          "first_date": "2018-03-30",
+          "last_date": "2020-05-11",
+          "origin_calendar_span_days": 773,
+          "first_feature_index": 20,
+          "first_feature_date": "2018-02-27",
+          "last_feature_index": 536,
+          "last_feature_date": "2020-05-11",
+          "last_label_index": 556,
+          "last_label_date": "2020-06-08",
+          "by_horizon": {
+            "1": {
+              "count": 498,
+              "first_target_index": 40,
+              "last_target_index": 537,
+              "first_target_date": "2018-04-02",
+              "last_target_date": "2020-05-12"
+            },
+            "5": {
+              "count": 498,
+              "first_target_index": 44,
+              "last_target_index": 541,
+              "first_target_date": "2018-04-11",
+              "last_target_date": "2020-05-18"
+            },
+            "20": {
+              "count": 498,
+              "first_target_index": 59,
+              "last_target_index": 556,
+              "first_target_date": "2018-05-04",
+              "last_target_date": "2020-06-08"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 557,
+          "last_origin": 682,
+          "first_date": "2020-06-09",
+          "last_date": "2020-12-03",
+          "origin_calendar_span_days": 177,
+          "first_feature_index": 538,
+          "first_feature_date": "2020-05-13",
+          "last_feature_index": 682,
+          "last_feature_date": "2020-12-03",
+          "last_label_index": 702,
+          "last_label_date": "2020-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 558,
+              "last_target_index": 683,
+              "first_target_date": "2020-06-10",
+              "last_target_date": "2020-12-04"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 562,
+              "last_target_index": 687,
+              "first_target_date": "2020-06-16",
+              "last_target_date": "2020-12-10"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 577,
+              "last_target_index": 702,
+              "first_target_date": "2020-07-09",
+              "last_target_date": "2020-12-31"
+            }
+          }
+        },
+        "test": {
+          "count": 227,
+          "first_origin": 703,
+          "last_origin": 929,
+          "first_date": "2021-01-04",
+          "last_date": "2021-12-03",
+          "origin_calendar_span_days": 333,
+          "first_feature_index": 684,
+          "first_feature_date": "2020-12-07",
+          "last_feature_index": 929,
+          "last_feature_date": "2021-12-03",
+          "last_label_index": 949,
+          "last_label_date": "2021-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 227,
+              "first_target_index": 704,
+              "last_target_index": 930,
+              "first_target_date": "2021-01-05",
+              "last_target_date": "2021-12-06"
+            },
+            "5": {
+              "count": 227,
+              "first_target_index": 708,
+              "last_target_index": 934,
+              "first_target_date": "2021-01-11",
+              "last_target_date": "2021-12-10"
+            },
+            "20": {
+              "count": 227,
+              "first_target_index": 723,
+              "last_target_index": 949,
+              "first_target_date": "2021-02-01",
+              "last_target_date": "2021-12-31"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 556,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          536
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 556,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "622309ff2026b50036f47d23f0c551f77c8112e8f832e00ecbf172ce9c076ad1",
+      "prepared_bytes": 237717
+    },
+    {
+      "schema_version": 1,
+      "cell": "GUANGZHOU_2022",
+      "market": "GUANGZHOU",
+      "year": 2022,
+      "source": {
+        "market": "GUANGZHOU",
+        "filename": "GUANGZHOU_development.csv",
+        "rows": 1434,
+        "sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+        "first_date": "2018-01-03",
+        "last_date": "2023-12-29",
+        "bytes": 43143,
+        "date_guard_before_price_conversion": true,
+        "source_hash_verified_before_price_conversion": true,
+        "rows_deleted_or_imputed": 0,
+        "exposure_group": "Previously trained/validated/scored development data; not independent confirmation."
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 803,
+      "train_label_end_date": "2021-06-04",
+      "roles": {
+        "train": {
+          "count": 745,
+          "first_origin": 39,
+          "last_origin": 783,
+          "first_date": "2018-03-30",
+          "last_date": "2021-05-07",
+          "origin_calendar_span_days": 1134,
+          "first_feature_index": 20,
+          "first_feature_date": "2018-02-27",
+          "last_feature_index": 783,
+          "last_feature_date": "2021-05-07",
+          "last_label_index": 803,
+          "last_label_date": "2021-06-04",
+          "by_horizon": {
+            "1": {
+              "count": 745,
+              "first_target_index": 40,
+              "last_target_index": 784,
+              "first_target_date": "2018-04-02",
+              "last_target_date": "2021-05-10"
+            },
+            "5": {
+              "count": 745,
+              "first_target_index": 44,
+              "last_target_index": 788,
+              "first_target_date": "2018-04-11",
+              "last_target_date": "2021-05-14"
+            },
+            "20": {
+              "count": 745,
+              "first_target_index": 59,
+              "last_target_index": 803,
+              "first_target_date": "2018-05-04",
+              "last_target_date": "2021-06-04"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 804,
+          "last_origin": 929,
+          "first_date": "2021-06-07",
+          "last_date": "2021-12-03",
+          "origin_calendar_span_days": 179,
+          "first_feature_index": 785,
+          "first_feature_date": "2021-05-11",
+          "last_feature_index": 929,
+          "last_feature_date": "2021-12-03",
+          "last_label_index": 949,
+          "last_label_date": "2021-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 805,
+              "last_target_index": 930,
+              "first_target_date": "2021-06-08",
+              "last_target_date": "2021-12-06"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 809,
+              "last_target_index": 934,
+              "first_target_date": "2021-06-15",
+              "last_target_date": "2021-12-10"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 824,
+              "last_target_index": 949,
+              "first_target_date": "2021-07-06",
+              "last_target_date": "2021-12-31"
+            }
+          }
+        },
+        "test": {
+          "count": 222,
+          "first_origin": 950,
+          "last_origin": 1171,
+          "first_date": "2022-01-04",
+          "last_date": "2022-12-02",
+          "origin_calendar_span_days": 332,
+          "first_feature_index": 931,
+          "first_feature_date": "2021-12-07",
+          "last_feature_index": 1171,
+          "last_feature_date": "2022-12-02",
+          "last_label_index": 1191,
+          "last_label_date": "2022-12-30",
+          "by_horizon": {
+            "1": {
+              "count": 222,
+              "first_target_index": 951,
+              "last_target_index": 1172,
+              "first_target_date": "2022-01-05",
+              "last_target_date": "2022-12-05"
+            },
+            "5": {
+              "count": 222,
+              "first_target_index": 955,
+              "last_target_index": 1176,
+              "first_target_date": "2022-01-11",
+              "last_target_date": "2022-12-09"
+            },
+            "20": {
+              "count": 222,
+              "first_target_index": 970,
+              "last_target_index": 1191,
+              "first_target_date": "2022-02-08",
+              "last_target_date": "2022-12-30"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 803,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          783
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 803,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "2b9ecac888b65c85945408fe3f6763f6286a396e6e0d2676d47dadaba45f528c",
+      "prepared_bytes": 298298
+    },
+    {
+      "schema_version": 1,
+      "cell": "GUANGZHOU_2023",
+      "market": "GUANGZHOU",
+      "year": 2023,
+      "source": {
+        "market": "GUANGZHOU",
+        "filename": "GUANGZHOU_development.csv",
+        "rows": 1434,
+        "sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+        "first_date": "2018-01-03",
+        "last_date": "2023-12-29",
+        "bytes": 43143,
+        "date_guard_before_price_conversion": true,
+        "source_hash_verified_before_price_conversion": true,
+        "rows_deleted_or_imputed": 0,
+        "exposure_group": "Previously trained/validated/scored development data; not independent confirmation."
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 1045,
+      "train_label_end_date": "2022-05-31",
+      "roles": {
+        "train": {
+          "count": 987,
+          "first_origin": 39,
+          "last_origin": 1025,
+          "first_date": "2018-03-30",
+          "last_date": "2022-04-28",
+          "origin_calendar_span_days": 1490,
+          "first_feature_index": 20,
+          "first_feature_date": "2018-02-27",
+          "last_feature_index": 1025,
+          "last_feature_date": "2022-04-28",
+          "last_label_index": 1045,
+          "last_label_date": "2022-05-31",
+          "by_horizon": {
+            "1": {
+              "count": 987,
+              "first_target_index": 40,
+              "last_target_index": 1026,
+              "first_target_date": "2018-04-02",
+              "last_target_date": "2022-04-29"
+            },
+            "5": {
+              "count": 987,
+              "first_target_index": 44,
+              "last_target_index": 1030,
+              "first_target_date": "2018-04-11",
+              "last_target_date": "2022-05-10"
+            },
+            "20": {
+              "count": 987,
+              "first_target_index": 59,
+              "last_target_index": 1045,
+              "first_target_date": "2018-05-04",
+              "last_target_date": "2022-05-31"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 1046,
+          "last_origin": 1171,
+          "first_date": "2022-06-01",
+          "last_date": "2022-12-02",
+          "origin_calendar_span_days": 184,
+          "first_feature_index": 1027,
+          "first_feature_date": "2022-05-05",
+          "last_feature_index": 1171,
+          "last_feature_date": "2022-12-02",
+          "last_label_index": 1191,
+          "last_label_date": "2022-12-30",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 1047,
+              "last_target_index": 1172,
+              "first_target_date": "2022-06-02",
+              "last_target_date": "2022-12-05"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 1051,
+              "last_target_index": 1176,
+              "first_target_date": "2022-06-09",
+              "last_target_date": "2022-12-09"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 1066,
+              "last_target_index": 1191,
+              "first_target_date": "2022-06-30",
+              "last_target_date": "2022-12-30"
+            }
+          }
+        },
+        "test": {
+          "count": 222,
+          "first_origin": 1192,
+          "last_origin": 1413,
+          "first_date": "2023-01-03",
+          "last_date": "2023-12-01",
+          "origin_calendar_span_days": 332,
+          "first_feature_index": 1173,
+          "first_feature_date": "2022-12-06",
+          "last_feature_index": 1413,
+          "last_feature_date": "2023-12-01",
+          "last_label_index": 1433,
+          "last_label_date": "2023-12-29",
+          "by_horizon": {
+            "1": {
+              "count": 222,
+              "first_target_index": 1193,
+              "last_target_index": 1414,
+              "first_target_date": "2023-01-04",
+              "last_target_date": "2023-12-04"
+            },
+            "5": {
+              "count": 222,
+              "first_target_index": 1197,
+              "last_target_index": 1418,
+              "first_target_date": "2023-01-10",
+              "last_target_date": "2023-12-08"
+            },
+            "20": {
+              "count": 222,
+              "first_target_index": 1212,
+              "last_target_index": 1433,
+              "first_target_date": "2023-02-07",
+              "last_target_date": "2023-12-29"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 1045,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          1025
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 1045,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "6b18f55b26276d3c81434fd70b23a37a8aeac7b33acf6a7742c36a642d97fdec",
+      "prepared_bytes": 359495
+    },
+    {
+      "schema_version": 1,
+      "cell": "HUBEI_2021",
+      "market": "HUBEI",
+      "year": 2021,
+      "source": {
+        "market": "HUBEI",
+        "filename": "HUBEI_development.csv",
+        "rows": 1408,
+        "sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+        "first_date": "2018-01-02",
+        "last_date": "2023-12-29",
+        "bytes": 42173,
+        "date_guard_before_price_conversion": true,
+        "source_hash_verified_before_price_conversion": true,
+        "rows_deleted_or_imputed": 0,
+        "exposure_group": "Previously trained/validated/scored development data; not independent confirmation."
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 547,
+      "train_label_end_date": "2020-05-29",
+      "roles": {
+        "train": {
+          "count": 489,
+          "first_origin": 39,
+          "last_origin": 527,
+          "first_date": "2018-03-05",
+          "last_date": "2020-04-28",
+          "origin_calendar_span_days": 785,
+          "first_feature_index": 20,
+          "first_feature_date": "2018-01-30",
+          "last_feature_index": 527,
+          "last_feature_date": "2020-04-28",
+          "last_label_index": 547,
+          "last_label_date": "2020-05-29",
+          "by_horizon": {
+            "1": {
+              "count": 489,
+              "first_target_index": 40,
+              "last_target_index": 528,
+              "first_target_date": "2018-03-06",
+              "last_target_date": "2020-04-29"
+            },
+            "5": {
+              "count": 489,
+              "first_target_index": 44,
+              "last_target_index": 532,
+              "first_target_date": "2018-03-12",
+              "last_target_date": "2020-05-08"
+            },
+            "20": {
+              "count": 489,
+              "first_target_index": 59,
+              "last_target_index": 547,
+              "first_target_date": "2018-04-03",
+              "last_target_date": "2020-05-29"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 548,
+          "last_origin": 673,
+          "first_date": "2020-06-01",
+          "last_date": "2020-12-03",
+          "origin_calendar_span_days": 185,
+          "first_feature_index": 529,
+          "first_feature_date": "2020-04-30",
+          "last_feature_index": 673,
+          "last_feature_date": "2020-12-03",
+          "last_label_index": 693,
+          "last_label_date": "2020-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 549,
+              "last_target_index": 674,
+              "first_target_date": "2020-06-02",
+              "last_target_date": "2020-12-04"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 553,
+              "last_target_index": 678,
+              "first_target_date": "2020-06-08",
+              "last_target_date": "2020-12-10"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 568,
+              "last_target_index": 693,
+              "first_target_date": "2020-07-01",
+              "last_target_date": "2020-12-31"
+            }
+          }
+        },
+        "test": {
+          "count": 222,
+          "first_origin": 694,
+          "last_origin": 915,
+          "first_date": "2021-01-04",
+          "last_date": "2021-12-03",
+          "origin_calendar_span_days": 333,
+          "first_feature_index": 675,
+          "first_feature_date": "2020-12-07",
+          "last_feature_index": 915,
+          "last_feature_date": "2021-12-03",
+          "last_label_index": 935,
+          "last_label_date": "2021-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 222,
+              "first_target_index": 695,
+              "last_target_index": 916,
+              "first_target_date": "2021-01-05",
+              "last_target_date": "2021-12-06"
+            },
+            "5": {
+              "count": 222,
+              "first_target_index": 699,
+              "last_target_index": 920,
+              "first_target_date": "2021-01-11",
+              "last_target_date": "2021-12-10"
+            },
+            "20": {
+              "count": 222,
+              "first_target_index": 714,
+              "last_target_index": 935,
+              "first_target_date": "2021-02-01",
+              "last_target_date": "2021-12-31"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 547,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          527
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 547,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "e0bc694af24c18eb04b4faa4e89a6721d0ad244a18b708eddc08b605ea166e36",
+      "prepared_bytes": 234755
+    },
+    {
+      "schema_version": 1,
+      "cell": "HUBEI_2022",
+      "market": "HUBEI",
+      "year": 2022,
+      "source": {
+        "market": "HUBEI",
+        "filename": "HUBEI_development.csv",
+        "rows": 1408,
+        "sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+        "first_date": "2018-01-02",
+        "last_date": "2023-12-29",
+        "bytes": 42173,
+        "date_guard_before_price_conversion": true,
+        "source_hash_verified_before_price_conversion": true,
+        "rows_deleted_or_imputed": 0,
+        "exposure_group": "Previously trained/validated/scored development data; not independent confirmation."
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 789,
+      "train_label_end_date": "2021-05-31",
+      "roles": {
+        "train": {
+          "count": 731,
+          "first_origin": 39,
+          "last_origin": 769,
+          "first_date": "2018-03-05",
+          "last_date": "2021-04-28",
+          "origin_calendar_span_days": 1150,
+          "first_feature_index": 20,
+          "first_feature_date": "2018-01-30",
+          "last_feature_index": 769,
+          "last_feature_date": "2021-04-28",
+          "last_label_index": 789,
+          "last_label_date": "2021-05-31",
+          "by_horizon": {
+            "1": {
+              "count": 731,
+              "first_target_index": 40,
+              "last_target_index": 770,
+              "first_target_date": "2018-03-06",
+              "last_target_date": "2021-04-29"
+            },
+            "5": {
+              "count": 731,
+              "first_target_index": 44,
+              "last_target_index": 774,
+              "first_target_date": "2018-03-12",
+              "last_target_date": "2021-05-10"
+            },
+            "20": {
+              "count": 731,
+              "first_target_index": 59,
+              "last_target_index": 789,
+              "first_target_date": "2018-04-03",
+              "last_target_date": "2021-05-31"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 790,
+          "last_origin": 915,
+          "first_date": "2021-06-01",
+          "last_date": "2021-12-03",
+          "origin_calendar_span_days": 185,
+          "first_feature_index": 771,
+          "first_feature_date": "2021-04-30",
+          "last_feature_index": 915,
+          "last_feature_date": "2021-12-03",
+          "last_label_index": 935,
+          "last_label_date": "2021-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 791,
+              "last_target_index": 916,
+              "first_target_date": "2021-06-02",
+              "last_target_date": "2021-12-06"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 795,
+              "last_target_index": 920,
+              "first_target_date": "2021-06-08",
+              "last_target_date": "2021-12-10"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 810,
+              "last_target_index": 935,
+              "first_target_date": "2021-06-30",
+              "last_target_date": "2021-12-31"
+            }
+          }
+        },
+        "test": {
+          "count": 217,
+          "first_origin": 936,
+          "last_origin": 1152,
+          "first_date": "2022-01-04",
+          "last_date": "2022-12-02",
+          "origin_calendar_span_days": 332,
+          "first_feature_index": 917,
+          "first_feature_date": "2021-12-07",
+          "last_feature_index": 1152,
+          "last_feature_date": "2022-12-02",
+          "last_label_index": 1172,
+          "last_label_date": "2022-12-30",
+          "by_horizon": {
+            "1": {
+              "count": 217,
+              "first_target_index": 937,
+              "last_target_index": 1153,
+              "first_target_date": "2022-01-05",
+              "last_target_date": "2022-12-05"
+            },
+            "5": {
+              "count": 217,
+              "first_target_index": 941,
+              "last_target_index": 1157,
+              "first_target_date": "2022-01-11",
+              "last_target_date": "2022-12-09"
+            },
+            "20": {
+              "count": 217,
+              "first_target_index": 956,
+              "last_target_index": 1172,
+              "first_target_date": "2022-02-08",
+              "last_target_date": "2022-12-30"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 789,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          769
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 789,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "961e5f42e55d3255e5bba306fe39ee55cddbe64d33acd754ab1afb41c94e605f",
+      "prepared_bytes": 292003
+    },
+    {
+      "schema_version": 1,
+      "cell": "HUBEI_2023",
+      "market": "HUBEI",
+      "year": 2023,
+      "source": {
+        "market": "HUBEI",
+        "filename": "HUBEI_development.csv",
+        "rows": 1408,
+        "sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+        "first_date": "2018-01-02",
+        "last_date": "2023-12-29",
+        "bytes": 42173,
+        "date_guard_before_price_conversion": true,
+        "source_hash_verified_before_price_conversion": true,
+        "rows_deleted_or_imputed": 0,
+        "exposure_group": "Previously trained/validated/scored development data; not independent confirmation."
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 1026,
+      "train_label_end_date": "2022-05-31",
+      "roles": {
+        "train": {
+          "count": 968,
+          "first_origin": 39,
+          "last_origin": 1006,
+          "first_date": "2018-03-05",
+          "last_date": "2022-04-28",
+          "origin_calendar_span_days": 1515,
+          "first_feature_index": 20,
+          "first_feature_date": "2018-01-30",
+          "last_feature_index": 1006,
+          "last_feature_date": "2022-04-28",
+          "last_label_index": 1026,
+          "last_label_date": "2022-05-31",
+          "by_horizon": {
+            "1": {
+              "count": 968,
+              "first_target_index": 40,
+              "last_target_index": 1007,
+              "first_target_date": "2018-03-06",
+              "last_target_date": "2022-04-29"
+            },
+            "5": {
+              "count": 968,
+              "first_target_index": 44,
+              "last_target_index": 1011,
+              "first_target_date": "2018-03-12",
+              "last_target_date": "2022-05-10"
+            },
+            "20": {
+              "count": 968,
+              "first_target_index": 59,
+              "last_target_index": 1026,
+              "first_target_date": "2018-04-03",
+              "last_target_date": "2022-05-31"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 1027,
+          "last_origin": 1152,
+          "first_date": "2022-06-01",
+          "last_date": "2022-12-02",
+          "origin_calendar_span_days": 184,
+          "first_feature_index": 1008,
+          "first_feature_date": "2022-05-05",
+          "last_feature_index": 1152,
+          "last_feature_date": "2022-12-02",
+          "last_label_index": 1172,
+          "last_label_date": "2022-12-30",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 1028,
+              "last_target_index": 1153,
+              "first_target_date": "2022-06-02",
+              "last_target_date": "2022-12-05"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 1032,
+              "last_target_index": 1157,
+              "first_target_date": "2022-06-09",
+              "last_target_date": "2022-12-09"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 1047,
+              "last_target_index": 1172,
+              "first_target_date": "2022-06-30",
+              "last_target_date": "2022-12-30"
+            }
+          }
+        },
+        "test": {
+          "count": 215,
+          "first_origin": 1173,
+          "last_origin": 1387,
+          "first_date": "2023-01-03",
+          "last_date": "2023-12-01",
+          "origin_calendar_span_days": 332,
+          "first_feature_index": 1154,
+          "first_feature_date": "2022-12-06",
+          "last_feature_index": 1387,
+          "last_feature_date": "2023-12-01",
+          "last_label_index": 1407,
+          "last_label_date": "2023-12-29",
+          "by_horizon": {
+            "1": {
+              "count": 215,
+              "first_target_index": 1174,
+              "last_target_index": 1388,
+              "first_target_date": "2023-01-04",
+              "last_target_date": "2023-12-04"
+            },
+            "5": {
+              "count": 215,
+              "first_target_index": 1178,
+              "last_target_index": 1392,
+              "first_target_date": "2023-01-10",
+              "last_target_date": "2023-12-08"
+            },
+            "20": {
+              "count": 215,
+              "first_target_index": 1193,
+              "last_target_index": 1407,
+              "first_target_date": "2023-02-07",
+              "last_target_date": "2023-12-29"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 1026,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          1006
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 1026,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "0d524b6958e4d6051866fda1019fdfd6214dd02f726fc9654e43ebc923463d51",
+      "prepared_bytes": 349756
+    },
+    {
+      "schema_version": 1,
+      "cell": "SHANGHAI_2022",
+      "market": "SHANGHAI",
+      "year": 2022,
+      "source": {
+        "market": "SHANGHAI",
+        "filename": "SHANGHAI_development.csv",
+        "rows": 1507,
+        "sha256": "425424353bb3ac09e3d96b291680b4179e86f180da626a5d19e5c1e58ed960a1",
+        "first_date": "2013-12-19",
+        "last_date": "2023-12-29",
+        "bytes": 30443,
+        "date_guard_before_price_conversion": true,
+        "source_hash_verified_before_price_conversion": true,
+        "rows_deleted_or_imputed": 0,
+        "exposure_group": "Previously trained/validated/scored development data; not independent confirmation."
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 949,
+      "train_label_end_date": "2020-06-08",
+      "roles": {
+        "train": {
+          "count": 891,
+          "first_origin": 39,
+          "last_origin": 929,
+          "first_date": "2014-02-21",
+          "last_date": "2020-04-24",
+          "origin_calendar_span_days": 2254,
+          "first_feature_index": 20,
+          "first_feature_date": "2014-01-17",
+          "last_feature_index": 929,
+          "last_feature_date": "2020-04-24",
+          "last_label_index": 949,
+          "last_label_date": "2020-06-08",
+          "by_horizon": {
+            "1": {
+              "count": 891,
+              "first_target_index": 40,
+              "last_target_index": 930,
+              "first_target_date": "2014-02-24",
+              "last_target_date": "2020-04-27"
+            },
+            "5": {
+              "count": 891,
+              "first_target_index": 44,
+              "last_target_index": 934,
+              "first_target_date": "2014-03-03",
+              "last_target_date": "2020-05-12"
+            },
+            "20": {
+              "count": 891,
+              "first_target_index": 59,
+              "last_target_index": 949,
+              "first_target_date": "2014-03-27",
+              "last_target_date": "2020-06-08"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 950,
+          "last_origin": 1075,
+          "first_date": "2020-06-09",
+          "last_date": "2021-11-29",
+          "origin_calendar_span_days": 538,
+          "first_feature_index": 931,
+          "first_feature_date": "2020-04-28",
+          "last_feature_index": 1075,
+          "last_feature_date": "2021-11-29",
+          "last_label_index": 1095,
+          "last_label_date": "2021-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 951,
+              "last_target_index": 1076,
+              "first_target_date": "2020-06-10",
+              "last_target_date": "2021-11-30"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 955,
+              "last_target_index": 1080,
+              "first_target_date": "2020-06-17",
+              "last_target_date": "2021-12-06"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 970,
+              "last_target_index": 1095,
+              "first_target_date": "2020-08-03",
+              "last_target_date": "2021-12-31"
+            }
+          }
+        },
+        "test": {
+          "count": 195,
+          "first_origin": 1096,
+          "last_origin": 1290,
+          "first_date": "2022-01-04",
+          "last_date": "2022-12-01",
+          "origin_calendar_span_days": 331,
+          "first_feature_index": 1077,
+          "first_feature_date": "2021-12-01",
+          "last_feature_index": 1290,
+          "last_feature_date": "2022-12-01",
+          "last_label_index": 1310,
+          "last_label_date": "2022-12-30",
+          "by_horizon": {
+            "1": {
+              "count": 195,
+              "first_target_index": 1097,
+              "last_target_index": 1291,
+              "first_target_date": "2022-01-05",
+              "last_target_date": "2022-12-02"
+            },
+            "5": {
+              "count": 195,
+              "first_target_index": 1101,
+              "last_target_index": 1295,
+              "first_target_date": "2022-01-11",
+              "last_target_date": "2022-12-08"
+            },
+            "20": {
+              "count": 195,
+              "first_target_index": 1116,
+              "last_target_index": 1310,
+              "first_target_date": "2022-02-15",
+              "last_target_date": "2022-12-30"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 949,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          929
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 949,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "18affd310ad79617f1e81394e0a2ae45a15ad2df1d42a4fde68f4f9019d7842c",
+      "prepared_bytes": 304402
+    },
+    {
+      "schema_version": 1,
+      "cell": "SHANGHAI_2023",
+      "market": "SHANGHAI",
+      "year": 2023,
+      "source": {
+        "market": "SHANGHAI",
+        "filename": "SHANGHAI_development.csv",
+        "rows": 1507,
+        "sha256": "425424353bb3ac09e3d96b291680b4179e86f180da626a5d19e5c1e58ed960a1",
+        "first_date": "2013-12-19",
+        "last_date": "2023-12-29",
+        "bytes": 30443,
+        "date_guard_before_price_conversion": true,
+        "source_hash_verified_before_price_conversion": true,
+        "rows_deleted_or_imputed": 0,
+        "exposure_group": "Previously trained/validated/scored development data; not independent confirmation."
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 1164,
+      "train_label_end_date": "2022-05-17",
+      "roles": {
+        "train": {
+          "count": 1106,
+          "first_origin": 39,
+          "last_origin": 1144,
+          "first_date": "2014-02-21",
+          "last_date": "2022-03-31",
+          "origin_calendar_span_days": 2960,
+          "first_feature_index": 20,
+          "first_feature_date": "2014-01-17",
+          "last_feature_index": 1144,
+          "last_feature_date": "2022-03-31",
+          "last_label_index": 1164,
+          "last_label_date": "2022-05-17",
+          "by_horizon": {
+            "1": {
+              "count": 1106,
+              "first_target_index": 40,
+              "last_target_index": 1145,
+              "first_target_date": "2014-02-24",
+              "last_target_date": "2022-04-06"
+            },
+            "5": {
+              "count": 1106,
+              "first_target_index": 44,
+              "last_target_index": 1149,
+              "first_target_date": "2014-03-03",
+              "last_target_date": "2022-04-13"
+            },
+            "20": {
+              "count": 1106,
+              "first_target_index": 59,
+              "last_target_index": 1164,
+              "first_target_date": "2014-03-27",
+              "last_target_date": "2022-05-17"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 1165,
+          "last_origin": 1290,
+          "first_date": "2022-05-18",
+          "last_date": "2022-12-01",
+          "origin_calendar_span_days": 197,
+          "first_feature_index": 1146,
+          "first_feature_date": "2022-04-07",
+          "last_feature_index": 1290,
+          "last_feature_date": "2022-12-01",
+          "last_label_index": 1310,
+          "last_label_date": "2022-12-30",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 1166,
+              "last_target_index": 1291,
+              "first_target_date": "2022-05-19",
+              "last_target_date": "2022-12-02"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 1170,
+              "last_target_index": 1295,
+              "first_target_date": "2022-05-25",
+              "last_target_date": "2022-12-08"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 1185,
+              "last_target_index": 1310,
+              "first_target_date": "2022-06-20",
+              "last_target_date": "2022-12-30"
+            }
+          }
+        },
+        "test": {
+          "count": 176,
+          "first_origin": 1311,
+          "last_origin": 1486,
+          "first_date": "2023-01-10",
+          "last_date": "2023-11-20",
+          "origin_calendar_span_days": 314,
+          "first_feature_index": 1292,
+          "first_feature_date": "2022-12-05",
+          "last_feature_index": 1486,
+          "last_feature_date": "2023-11-20",
+          "last_label_index": 1506,
+          "last_label_date": "2023-12-29",
+          "by_horizon": {
+            "1": {
+              "count": 176,
+              "first_target_index": 1312,
+              "last_target_index": 1487,
+              "first_target_date": "2023-01-11",
+              "last_target_date": "2023-11-21"
+            },
+            "5": {
+              "count": 176,
+              "first_target_index": 1316,
+              "last_target_index": 1491,
+              "first_target_date": "2023-01-18",
+              "last_target_date": "2023-11-27"
+            },
+            "20": {
+              "count": 176,
+              "first_target_index": 1331,
+              "last_target_index": 1506,
+              "first_target_date": "2023-02-24",
+              "last_target_date": "2023-12-29"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 1164,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          1144
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 1164,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "8b5310657ba53a3a2afcad525dced0e9a91793d5bbc8143b0e25fa541cbebad6",
+      "prepared_bytes": 350063
+    },
+    {
+      "schema_version": 1,
+      "cell": "SHENZHEN_PLOS_2020",
+      "market": "SHENZHEN_PLOS",
+      "year": 2020,
+      "source": {
+        "market": "SHENZHEN_PLOS",
+        "filename": "plos_0296105_s001.xls",
+        "sha256": "90c49501afa9beb7370c4409084a28729daa4904a7e7e5de310d0f6bd7a3ba10",
+        "bytes": 13625856,
+        "rows": 1857,
+        "first_date": "2013-08-05",
+        "last_date": "2021-12-31",
+        "year_counts": {
+          "2013": 89,
+          "2014": 233,
+          "2015": 236,
+          "2016": 223,
+          "2017": 219,
+          "2018": 225,
+          "2019": 225,
+          "2020": 201,
+          "2021": 206
+        },
+        "article_doi": "10.1371/journal.pone.0296105",
+        "supplement_url": "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0296105.s001",
+        "raw_workbook_hash_verified_before_decoding": true,
+        "date_guard_before_explicit_price_row_access": true,
+        "library_decoding_caveat": "xlrd worksheet decoding may include 2022 cells; this is not a never-decoded claim.",
+        "allowed_array_period": "through 2021-12-31 inclusive",
+        "later_dated_rows_excluded_before_price_row_access": 59,
+        "included_period_dated_missing_or_nonnumeric_rows_excluded": 375,
+        "invalid_date_rows_excluded": 2,
+        "nonpositive_finite_included_quotes": 0,
+        "positive_price_domain_verified": true,
+        "missing_rule": "Original numeric cell type and finite value required; no imputation or string-number conversion.",
+        "source_prices_rounded_shifted_or_filled": false,
+        "technical_indicators_used": false,
+        "exposure_group": "First model scoring of this author source in 2020/2021; older mechanical price-cell checks already exist.",
+        "frozen_market_protocol": {
+          "filename": "MARKET_PROTOCOL.json",
+          "sha256": "f2ac9d5aac5a8bbc7d6f7a785e943e307b903d2fc3ab56cc8484b9e1375adc9d",
+          "expected_frozen_identity_verified_before_workbook_open": true
+        }
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 1303,
+      "train_label_end_date": "2019-05-07",
+      "roles": {
+        "train": {
+          "count": 1245,
+          "first_origin": 39,
+          "last_origin": 1283,
+          "first_date": "2013-10-18",
+          "last_date": "2019-04-03",
+          "origin_calendar_span_days": 1993,
+          "first_feature_index": 20,
+          "first_feature_date": "2013-09-17",
+          "last_feature_index": 1283,
+          "last_feature_date": "2019-04-03",
+          "last_label_index": 1303,
+          "last_label_date": "2019-05-07",
+          "by_horizon": {
+            "1": {
+              "count": 1245,
+              "first_target_index": 40,
+              "last_target_index": 1284,
+              "first_target_date": "2013-10-21",
+              "last_target_date": "2019-04-04"
+            },
+            "5": {
+              "count": 1245,
+              "first_target_index": 44,
+              "last_target_index": 1288,
+              "first_target_date": "2013-10-25",
+              "last_target_date": "2019-04-11"
+            },
+            "20": {
+              "count": 1245,
+              "first_target_index": 59,
+              "last_target_index": 1303,
+              "first_target_date": "2013-11-19",
+              "last_target_date": "2019-05-07"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 1304,
+          "last_origin": 1429,
+          "first_date": "2019-05-08",
+          "last_date": "2019-11-20",
+          "origin_calendar_span_days": 196,
+          "first_feature_index": 1285,
+          "first_feature_date": "2019-04-08",
+          "last_feature_index": 1429,
+          "last_feature_date": "2019-11-20",
+          "last_label_index": 1449,
+          "last_label_date": "2019-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 1305,
+              "last_target_index": 1430,
+              "first_target_date": "2019-05-09",
+              "last_target_date": "2019-11-21"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 1309,
+              "last_target_index": 1434,
+              "first_target_date": "2019-05-15",
+              "last_target_date": "2019-11-29"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 1324,
+              "last_target_index": 1449,
+              "first_target_date": "2019-06-06",
+              "last_target_date": "2019-12-31"
+            }
+          }
+        },
+        "test": {
+          "count": 181,
+          "first_origin": 1450,
+          "last_origin": 1630,
+          "first_date": "2020-01-02",
+          "last_date": "2020-12-02",
+          "origin_calendar_span_days": 335,
+          "first_feature_index": 1431,
+          "first_feature_date": "2019-11-22",
+          "last_feature_index": 1630,
+          "last_feature_date": "2020-12-02",
+          "last_label_index": 1650,
+          "last_label_date": "2020-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 181,
+              "first_target_index": 1451,
+              "last_target_index": 1631,
+              "first_target_date": "2020-01-03",
+              "last_target_date": "2020-12-03"
+            },
+            "5": {
+              "count": 181,
+              "first_target_index": 1455,
+              "last_target_index": 1635,
+              "first_target_date": "2020-01-09",
+              "last_target_date": "2020-12-09"
+            },
+            "20": {
+              "count": 181,
+              "first_target_index": 1470,
+              "last_target_index": 1650,
+              "first_target_date": "2020-02-14",
+              "last_target_date": "2020-12-31"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 1303,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          1283
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 1303,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "e93cbbf6013e2a969712e350c1e538356f00a1a934dfe69e54750c4d46e5a74d",
+      "prepared_bytes": 381322
+    },
+    {
+      "schema_version": 1,
+      "cell": "SHENZHEN_PLOS_2021",
+      "market": "SHENZHEN_PLOS",
+      "year": 2021,
+      "source": {
+        "market": "SHENZHEN_PLOS",
+        "filename": "plos_0296105_s001.xls",
+        "sha256": "90c49501afa9beb7370c4409084a28729daa4904a7e7e5de310d0f6bd7a3ba10",
+        "bytes": 13625856,
+        "rows": 1857,
+        "first_date": "2013-08-05",
+        "last_date": "2021-12-31",
+        "year_counts": {
+          "2013": 89,
+          "2014": 233,
+          "2015": 236,
+          "2016": 223,
+          "2017": 219,
+          "2018": 225,
+          "2019": 225,
+          "2020": 201,
+          "2021": 206
+        },
+        "article_doi": "10.1371/journal.pone.0296105",
+        "supplement_url": "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0296105.s001",
+        "raw_workbook_hash_verified_before_decoding": true,
+        "date_guard_before_explicit_price_row_access": true,
+        "library_decoding_caveat": "xlrd worksheet decoding may include 2022 cells; this is not a never-decoded claim.",
+        "allowed_array_period": "through 2021-12-31 inclusive",
+        "later_dated_rows_excluded_before_price_row_access": 59,
+        "included_period_dated_missing_or_nonnumeric_rows_excluded": 375,
+        "invalid_date_rows_excluded": 2,
+        "nonpositive_finite_included_quotes": 0,
+        "positive_price_domain_verified": true,
+        "missing_rule": "Original numeric cell type and finite value required; no imputation or string-number conversion.",
+        "source_prices_rounded_shifted_or_filled": false,
+        "technical_indicators_used": false,
+        "exposure_group": "First model scoring of this author source in 2020/2021; older mechanical price-cell checks already exist.",
+        "frozen_market_protocol": {
+          "filename": "MARKET_PROTOCOL.json",
+          "sha256": "f2ac9d5aac5a8bbc7d6f7a785e943e307b903d2fc3ab56cc8484b9e1375adc9d",
+          "expected_frozen_identity_verified_before_workbook_open": true
+        }
+      },
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "split_max_horizon": 20,
+      "train_label_end": 1504,
+      "train_label_end_date": "2020-05-28",
+      "roles": {
+        "train": {
+          "count": 1446,
+          "first_origin": 39,
+          "last_origin": 1484,
+          "first_date": "2013-10-18",
+          "last_date": "2020-03-27",
+          "origin_calendar_span_days": 2352,
+          "first_feature_index": 20,
+          "first_feature_date": "2013-09-17",
+          "last_feature_index": 1484,
+          "last_feature_date": "2020-03-27",
+          "last_label_index": 1504,
+          "last_label_date": "2020-05-28",
+          "by_horizon": {
+            "1": {
+              "count": 1446,
+              "first_target_index": 40,
+              "last_target_index": 1485,
+              "first_target_date": "2013-10-21",
+              "last_target_date": "2020-04-01"
+            },
+            "5": {
+              "count": 1446,
+              "first_target_index": 44,
+              "last_target_index": 1489,
+              "first_target_date": "2013-10-25",
+              "last_target_date": "2020-04-28"
+            },
+            "20": {
+              "count": 1446,
+              "first_target_index": 59,
+              "last_target_index": 1504,
+              "first_target_date": "2013-11-19",
+              "last_target_date": "2020-05-28"
+            }
+          }
+        },
+        "validation": {
+          "count": 126,
+          "first_origin": 1505,
+          "last_origin": 1630,
+          "first_date": "2020-05-29",
+          "last_date": "2020-12-02",
+          "origin_calendar_span_days": 187,
+          "first_feature_index": 1486,
+          "first_feature_date": "2020-04-08",
+          "last_feature_index": 1630,
+          "last_feature_date": "2020-12-02",
+          "last_label_index": 1650,
+          "last_label_date": "2020-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 126,
+              "first_target_index": 1506,
+              "last_target_index": 1631,
+              "first_target_date": "2020-06-01",
+              "last_target_date": "2020-12-03"
+            },
+            "5": {
+              "count": 126,
+              "first_target_index": 1510,
+              "last_target_index": 1635,
+              "first_target_date": "2020-06-05",
+              "last_target_date": "2020-12-09"
+            },
+            "20": {
+              "count": 126,
+              "first_target_index": 1525,
+              "last_target_index": 1650,
+              "first_target_date": "2020-06-30",
+              "last_target_date": "2020-12-31"
+            }
+          }
+        },
+        "test": {
+          "count": 186,
+          "first_origin": 1651,
+          "last_origin": 1836,
+          "first_date": "2021-01-04",
+          "last_date": "2021-11-30",
+          "origin_calendar_span_days": 330,
+          "first_feature_index": 1632,
+          "first_feature_date": "2020-12-04",
+          "last_feature_index": 1836,
+          "last_feature_date": "2021-11-30",
+          "last_label_index": 1856,
+          "last_label_date": "2021-12-31",
+          "by_horizon": {
+            "1": {
+              "count": 186,
+              "first_target_index": 1652,
+              "last_target_index": 1837,
+              "first_target_date": "2021-01-05",
+              "last_target_date": "2021-12-01"
+            },
+            "5": {
+              "count": 186,
+              "first_target_index": 1656,
+              "last_target_index": 1841,
+              "first_target_date": "2021-01-11",
+              "last_target_date": "2021-12-07"
+            },
+            "20": {
+              "count": 186,
+              "first_target_index": 1671,
+              "last_target_index": 1856,
+              "first_target_date": "2021-02-02",
+              "last_target_date": "2021-12-31"
+            }
+          }
+        }
+      },
+      "maturity": {
+        "train_target_before_first_validation_origin": true,
+        "validation_target_before_first_test_origin": true,
+        "common_test_origins_and_h20_endpoints_in_year": true
+      },
+      "preprocessing": {
+        "feature_rows": 20,
+        "feature_names": [
+          "log_return / current_causal_daily_scale",
+          "log_current_causal_daily_scale",
+          "log1p_calendar_gap_days"
+        ],
+        "first_origin": 39,
+        "earliest_used_feature_index": 20,
+        "history_note": "40 quotes through first origin 39; actual network feature tensor has 20 rows, indices 20..39. EWMA uses the causal prefix.",
+        "ewma_decay": 0.94,
+        "ewma_prefix": "At t=1..20 mean(r[1:t+1]^2); t>=21 uses recursive EWMA; r[0]=0 sentinel excluded.",
+        "floor_fit_first_return_index": 1,
+        "floor_fit_last_return_index": 1504,
+        "floor_rule": "max(1e-8, .1*median(abs(training-prefix daily returns)))",
+        "feature_moments_fit_origins": [
+          39,
+          1484
+        ],
+        "feature_sd_floor": 1e-05,
+        "fitted_moments_only_in_private_npz": true,
+        "future_normalization": "Each increment / origin daily scale; horizon endpoint / (origin daily scale * sqrt(h))"
+      },
+      "gas_interface": {
+        "all_returns_index0": "zero sentinel, not a measured observation",
+        "target_process": "x_t^h = sum(all_returns[t-h+1:t+1]), t>=h",
+        "fit_target_end_inclusive": 1504,
+        "fit_target_start_inclusive_by_horizon": {
+          "1": 1,
+          "5": 5,
+          "20": 20
+        },
+        "filter_maturity": "At forecast origin o, only target-process observations with maturity t<=o may update filter state."
+      },
+      "model_fits": 0,
+      "price_based_row_changes": 0,
+      "reserved_price_access": false,
+      "release_policy": "NPZ private/local only; receipt has no price, return, feature, factor, or point-prediction values.",
+      "prepared_sha256": "25941c31b01d2256c6f7d3616c3007ad8e47092d72b5dc81e7d0547195f494bb",
+      "prepared_bytes": 432450
+    }
+  ],
+  "exclusions": [
+    {
+      "cell": "SHANGHAI_2021",
+      "reason": "Pre-existing whole-year exclusion: 47 reported quotes, sparse/gapped year."
+    }
+  ],
+  "new_shenzhen": {
+    "doi": "10.1371/journal.pone.0296105",
+    "supplement_url": "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0296105.s001",
+    "sha256": "90c49501afa9beb7370c4409084a28729daa4904a7e7e5de310d0f6bd7a3ba10",
+    "finite_numeric_quotes_in_old_mechanical_receipt": 1893,
+    "first_date": "2013-08-05",
+    "last_date": "2022-03-11",
+    "candidate_year_counts": {
+      "2020": 201,
+      "2021": 206
+    },
+    "positive_price_domain_verified": true,
+    "price_access_status": "CONDITIONAL: explicit workbook plus frozen market-protocol identity required after synthetic gate.",
+    "excluded_year": "2022: incomplete calendar year; no subperiod selection.",
+    "exposure": "Old mechanical finite-value checks exist; 2020/2021 have no documented prior model scoring in this project.",
+    "status_this_run": "PREPARED_THROUGH_2021"
+  },
+  "shenzhen_workbook_requested": true,
+  "shenzhen_source_exclusion": null,
+  "model_fits": 0,
+  "reserved_price_access": false
+}

@@ -1,0 +1,62 @@
+{
+  "stage": "implementation details fixed before any market persistence static or neural fit",
+  "created_utc": "2026-10-19T04:55:39.283518+00:00",
+  "protocol_unchanged": true,
+  "planned_neural_fits": 312,
+  "planned_static_fits": 39,
+  "numeric_precision": {
+    "encoder_and_linear_logit_head": "float32",
+    "probability_transforms_exact_DP_density_and_losses": "float64",
+    "scoring": "float64 exact Gaussian and lognormal mixture formulae, no Monte Carlo price scoring"
+  },
+  "static_optimizer_budget": {
+    "restarts": 0,
+    "finite_valid_nonconverged_result": "Retain the prescribed fixed-budget optimizer result with success, status, nfev, nit, fun and initial fun disclosed. This does not mean optimizer convergence. No alternative method or data-dependent extra budget.",
+    "invalid_result": "Reject nonfinite parameters, scores or invalid probability/state paths; no replacement forecast."
+  },
+  "implementation_smoke": {
+    "receipt": "audits/PERSISTENCE_IMPLEMENTATION_SMOKE.json",
+    "synthetic_paths": 32,
+    "architectures": 8,
+    "gradient_steps": 16,
+    "market_fits": 0,
+    "static_fits": 0,
+    "source_identity": "Original smoke receipt preserves the hashes actually executed. Later changes are input guards, output archive compactness and precision wording; no change to the training mathematics.",
+    "later_zero_gradient_interface_check": "Implementer checked eight architectures: compact training f/rho equal full prediction exactly; zero additional optimizer steps and no market reads. This check is not called an independent audit."
+  },
+  "private_artifacts": {
+    "training": "All 41 epoch logs, selected checkpoint, selected f/rho and indices/dates. Complete train densities can be reconstructed from checkpoint and prepared arrays; do not duplicate them or compute redundant training price metrics.",
+    "validation_and_test": "Full per-origin mixture weights, zero means, component standard deviations, f/rho, targets and all metrics.",
+    "optimizer_states": "Selected optimizer and final optimizer are separately labeled; final optimizer is not paired with selected model weights."
+  },
+  "source_sha256": {
+    "source/persistence_market.py": "47de57b450e1e0e89ab7b4b8c061e681f9e17dca270a07807af9cc8969db0016",
+    "source/run_persistence_market.py": "6aadf66adef6cdd7f193000ad09c472c1b4069a86ccad997d90fa63bb7fd480a",
+    "source/persistence.py": "4c7dfa7a941089d9b21f54508dbff3b7446a8ec9af90a524fcd65d12ca5a92eb",
+    "source/mixture_metrics.py": "6c8e69fad2bd07cecdfbbd67a2189b79f2a85678102dc1f167bc97968bee241d",
+    "data_sources/prepare_data.py": "9b71d032bd6c401622b9f0b0e4d23b1ee9bf303d58540b90564d9506ab49f164",
+    "provenance/MARKET_PROTOCOL.json": "f2ac9d5aac5a8bbc7d6f7a785e943e307b903d2fc3ab56cc8484b9e1375adc9d"
+  },
+  "execution_shards": [
+    [
+      "EUA_LONG_2023",
+      "GUANGZHOU_2021",
+      "HUBEI_2021",
+      "SHANGHAI_2022",
+      "SHENZHEN_PLOS_2020"
+    ],
+    [
+      "EUA_LONG_2022",
+      "GUANGZHOU_2022",
+      "HUBEI_2022",
+      "SHENZHEN_PLOS_2021"
+    ],
+    [
+      "EUA_LONG_2021",
+      "GUANGZHOU_2023",
+      "HUBEI_2023",
+      "SHANGHAI_2023"
+    ]
+  ],
+  "sharding": "Three disjoint process shards, one Torch/BLAS thread each. Identical fixed per-job training budgets and per-panel data; no adaptive reassignment of market selection."
+}
