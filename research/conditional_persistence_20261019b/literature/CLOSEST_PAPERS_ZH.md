@@ -35,6 +35,7 @@
 | **Yang, Du & Aslett, A Distribution-to-Distribution Neural Probabilistic Forecasting Framework for Dynamical Systems**，2026 预印本。**A**：§II–III。[正文](https://arxiv.org/html/2603.25370v1)。 | Lorenz63，RK4 步长 .01、每 .05 观测并加高斯噪声；示例训练 30,000 样本。完整独立切分计数未核实。 | 五分量边际 GMM→核均值嵌入→LSTM→GMM，同一算子迭代；多期限 log-score 和 curriculum。 | 未找到作者公开实现。明确只传播各状态坐标边际，不是完整联合状态分布；不能把“递归分布传播 + 多期限联合训练”作为本项目宽泛创新。 |
 | **Rangapuram et al., Deep State Space Models for Time Series Forecasting**，NeurIPS 2018。**A**：§3–5。[原文](https://proceedings.neurips.cc/paper/8004-deep-state-space-models-for-time-series-forecasting.pdf)。 | Electricity、Traffic、M4、Tourism、Parts；采用指定顺序留出或公开标准切分；并非碳价。 | RNN 生成线性高斯状态空间参数；Kalman likelihood 可微训练，未来完整联合高斯分布可解析计算，也可路径采样。 | 这里核了原论文，未做特定 GluonTS 代码版本复现。它已覆盖神经参数化状态空间与解析联合概率预测；三态厚尾是受限分布族差异，不是新框架。 |
 | **Wang & Rachev, Neural Lévy SDE**，预印本记录需要澄清。**A（方法局部）**：§3–4.2。[原文](https://arxiv.org/html/2509.01041v1)。 | 美国股票横截面，日／周价格量、部分高频 RV 与结构特征；确切全样本日历和切分未核实。 | 共享 encoder、各 h 独立的 drift／diffusion／jump 头；加权 QML 与正则。§4 明确不依赖连续路径积分。 | 未找到作者代码。arXiv v1 的 2025 版本标识与稿内 2026 日期不一致，暂不作精确先后优先权依据。独立期限头没有实现本轮共享未来状态转移。 |
+| **Soliman et al., RC-Mamba: regime-conditioned selective state-space models for probabilistic time-series forecasting**，Frontiers in Artificial Intelligence，2026-09-23。**A**：§3、§4、availability 声明；[DOI／原文](https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1903497/full)。 | 18 ETF，历史 24 日、30 个历史特征和 3 个已知未来日历特征；预测未来 30 个**逐日日收益**。2021–2025 五个测试年，训练内 robust-MAD、30 日 embargo。 | HMM 后验与神经特征拼接，进入 Mamba 的 Δ/B/C 投影；Student-t 输出，NLL 与联合训练后再作 MC-CRPS 微调。 | 已核输入关系与训练流程，未数值复现；availability 只列 FRED／Yahoo，未找到作者代码。作者报告：匹配 no-regime 控制在五 fold 未分离；后验熵尺度门未获支持，不能把完整系统排名等同该机制有效。与本项目的累计端点、有限 GMM 和固定二阶矩持续性子族不同。 |
 
 ## 3. GAS-Norm：可核的数学接口与本轮适配
 
@@ -51,14 +52,14 @@
 
 ### 3.2 状态、更新与真正的标准差
 
-用 (m_t,s_t^2) 表示看见 (x_t) 前的 Student 工作分布位置和 **scale squared**，
+用 $m_t,s_t^2$ 表示看见 $x_t$ 前的 Student 工作分布位置和 **scale squared**，
 
 \[
  x_t\mid\mathcal F_{t-1}\sim t_\nu(m_t,s_t),\qquad
  v_t=\frac{\nu}{\nu-2}s_t^2.
 \]
 
-令 (e_t=x_t-m_t)、(\eta_j=\gamma_j/(1-\gamma_j))。先更新，再产生下一观测的先验：
+令 $e_t=x_t-m_t$、$\eta_j=\gamma_j/(1-\gamma_j)$。先更新，再产生下一观测的先验：
 
 \[
 \begin{aligned}
@@ -71,18 +72,18 @@ s_{t+1}^2&=\omega_\sigma+\beta_\sigma(s_t^2)^+.
 \end{aligned}
 \]
 
-归一化历史输入是 (z_t=(x_t-m_t)/\sqrt{v_t})，使用观测前的状态。原论文 Eq.(4) 第二行印为 (\beta_\mu)，本实现采用作者代码的 (\beta_\sigma)。未来未知观测没有实现值，采用原论文 §3.3 明列的纯 AR 预测：
+归一化历史输入是 $z_t=(x_t-m_t)/\sqrt{v_t}$，使用观测前的状态。原论文 Eq.(4) 第二行印为 $\beta_\mu$，本实现采用作者代码的 $\beta_\sigma$。未来未知观测没有实现值，采用原论文 §3.3 明列的纯 AR 预测：
 
 \[
 m_{t+j+1\mid t}=\omega_\mu+\beta_\mu m_{t+j\mid t},\quad
 s^2_{t+j+1\mid t}=\omega_\sigma+\beta_\sigma s^2_{t+j\mid t}.
 \]
 
-这不是把未来 (x\) 设成预测均值后再代回 score：那样尺度 score 不为零，会多出负的尺度修正。作者 `AR_GAS` 代码采用了后者，而论文预测式采用前者。本轮固定前者，并写入 metadata；不宣称二者数值相同。
+这不是把未来 $x$ 设成预测均值后再代回 score：那样尺度 score 不为零，会多出负的尺度修正。作者 `AR_GAS` 代码采用了后者，而论文预测式采用前者。本轮固定前者，并写入 metadata；不宣称二者数值相同。
 
 ### 3.3 固定拟合设置与已声明的偏离
 
-本轮无超参数搜索，固定 (\nu=20\)、(\gamma_\mu=\gamma_\sigma=.1\)。静态参数为八个：两组 (\alpha,\beta,\omega\) 和初始 (m_0,s_0^2\)。沿用作者数值边界：四个 (\alpha,\beta\in[0,1]\)，(\omega_\sigma,s_0^2\ge10^{-6}\)，位置截距与初值无符号限制。工作尺度单位先用训练前缀的均值和总体标准差固定；该标准化同样是训练数据内估计。
+本轮无超参数搜索，固定 $\nu=20$、$\gamma_\mu=\gamma_\sigma=.1$。静态参数为八个：两组 $\alpha,\beta,\omega$ 和初始 $m_0,s_0^2$。沿用作者数值边界：四个 $\alpha,\beta\in[0,1]$，$\omega_\sigma,s_0^2\ge10^{-6}$，位置截距与初值无符号限制。工作尺度单位先用训练前缀的均值和总体标准差固定；该标准化同样是训练数据内估计。
 
 原作者实现的目标把每次更新后状态用于下一真实观测的 Student log likelihood，并以相邻状态的平方变化惩罚；它不是论文 Eq.(2) 所写一般 Fisher 矩阵惩罚的逐字实现。本轮独立实现明确使用：
 
@@ -95,20 +96,20 @@ s^2_{t+j+1\mid t}=\omega_\sigma+\beta_\sigma s^2_{t+j\mid t}.
 
 作者源码会复制最后一个观测来凑最后一项。本轮删去此人工重复，命名 `author_penalty_terminal_fixed_v1`。单个确定起点、Powell、最多 400 次迭代／4,000 次目标计算；优化是否收敛、目标值、计算次数和训练数据哈希均保存。以上是明确选择的任务适配，不以测试结果决定用哪一种版本。
 
-当 (\gamma\le.5\)、(\alpha_\sigma\le1\) 时，尺度更新中的最小系数 (1-\eta_\sigma\alpha_\sigma\ge0\)，加正截距后保持正性。本实现不裁剪异常状态来隐藏发散。也不把 (\gamma=0\) 一概说成静态归一化：任意 (\omega,\beta\) 仍可产生 AR 变化；Global 臂单独定义。
+当 $0<\gamma\le.5$、$0\le\alpha_\sigma\le1$ 时，尺度更新中的最小系数 $1-\eta_\sigma\alpha_\sigma\ge0$，加正截距后保持正性。本实现不裁剪异常状态来隐藏发散。也不把 $\gamma=0$ 一概说成静态归一化：任意 $\omega,\beta$ 仍可产生 AR 变化；Global 臂单独定义。
 
 ### 3.4 和本项目完全相同目标的适配
 
-对每个 (h\in\{5,20\}\)，构造**截至 t 已观测的**目标过程
+对每个 $h\in\{5,20\}$，构造**截至 t 已观测的**目标过程
 
 \[
 x_t^{(h)}=\log(P_t/P_{t-h}),\quad
 x_{o+h}^{(h)}=\log(P_{o+h}/P_o).
 \]
 
-这样，原模型“预测自己所过滤的过程”的设计得到保留；从起点 (o\) 对 (x^{(h)}\) 预测 (h\) 步，正好是本项目未来 (h\) 步收益。无需把日方差乘以 (h\)，也无需宣称重叠收益独立。
+这样，原模型“预测自己所过滤的过程”的设计得到保留；从起点 $o$ 对 $x^{(h)}$ 预测 $h$ 步，正好是本项目未来 $h$ 步收益。无需把日方差乘以 $h$，也无需宣称重叠收益独立。
 
-三个归一化臂使用相同的历史 20 个 (x^{(h)}\)、GRU16、相同 GMM 输出参数数目、seeds 17/41/89、40 epochs。若神经头输出 \((\pi_k,\widetilde m_k,\widetilde s_k)\)，GAS 的最终分量为
+三个归一化臂使用相同的历史 20 个 $x^{(h)}$、GRU16、三分量 GMM 头、seeds 17/41/89。每臂神经参数均为 1,065；GAS 额外拟合八个静态参数和两个训练仿射矩，Global／EWMA 各估计两个初始化矩，因此只称神经参数预算相同。训练固定 AdamW（学习率 .002、weight decay .001）、batch 64、梯度范数裁剪 1，完整执行 40 epochs，验证候选包含 epoch 0，不作额外搜索。若神经头输出 $(\pi_k,\widetilde m_k,\widetilde s_k)$，GAS 的最终分量为
 
 \[
 m_k=m_{o+h\mid o}+\sqrt{v_{o+h\mid o}}\,\widetilde m_k,
@@ -118,7 +119,9 @@ m_k=m_{o+h\mid o}+\sqrt{v_{o+h\mid o}}\,\widetilde m_k,
 训练损失统一是反变换后收益分布的 CRPS，再除每个起点的公共单位
 \(u_o=\widehat\sigma_{o,\mathrm{daily\ EWMA}}\sqrt h\)。不同臂不能各用自己的尺度来改变评分权重。验证选择用同一指标；所有标签必须在规定边界前成熟，测试参数冻结，仅按允许的已观测历史过滤。
 
-最终输出保持 Gaussian mixture，因此价格 (P_o\exp(R_h)\) 是 lognormal mixture，有有限的任意固定阶矩。Student 只用作历史工作过滤器。若把无界 Student 直接作为对数收益最终密度，正指数矩通常发散，不能同时报告有限解析价格均值；本轮没有采用这种变换。
+最终输出保持 Gaussian mixture，因此价格 $P_o\exp(R_h)$ 是 lognormal mixture，有有限的任意固定阶矩。Student 只用作历史工作过滤器。若把无界 Student 直接作为对数收益最终密度，正指数矩通常发散，不能同时报告有限解析价格均值；本轮没有采用这种变换。
+
+三种归一化各保留两个无需新增神经拟合的控制：相同 epoch 0 三高斯残差分布，以及成熟训练残差的 101 个中点经验分位原子。另保留公共单位下的 $N(0,1)$。经验原子按有限离散分布计算精确 CRPS、价格矩与区间，不定义连续密度 NLL。共 22 个市场年／期限单元、198 次神经拟合、22 次静态 GAS 拟合和 154 份确定性控制预测。完整固定细节见 `provenance/GAS_IMPLEMENTATION_PRE_FIT.json`。
 
 独立文件接口：
 
@@ -128,7 +131,7 @@ history = filter_gas(x_observed, fit)
 mean_h, std_h = forecast_gas(fit, history, horizon=h)
 ```
 
-每个输出行 t 仅使用输入截至 t 的值。`history` 已保存 t+1 的状态，所以 `forecast_gas` 只追加 (h-1\) 次纯 AR 推进；归一化返回真正标准差，不混用 t scale。
+每个输出行 t 仅使用输入截至 t 的值。`history` 已保存 t+1 的状态，所以 `forecast_gas` 只追加 $h-1$ 次纯 AR 推进；归一化返回真正标准差，不混用 t scale。
 
 ## 4. 第二个低成本近邻：proper-score 状态过滤
 
@@ -148,7 +151,7 @@ CRPS 的原始负导数为 \(\sqrt v[\pi^{-1/2}-2\phi(z)]/2\)，上述 driver �
 
 ### 5.1 已存在的部分
 
-Calvet–Fisher 的多频率切换波动模型中，每个乘子以一定概率从固定分布重新抽取，否则保持。单个乘子写成 (P=\rho I+(1-\rho)\mathbf1\pi^\top\) 正是相同保持／重抽结构。原文还研究持续性、幂次协方差与多期限波动预测。因此保持核、持续性造成尾形变化，都不能称本轮的新理论。[2002 作者工作稿 §2.1](https://archive.nyu.edu/bitstream/2451/26508/2/02-64.pdf)
+Calvet–Fisher 的多频率切换波动模型中，每个乘子以一定概率从固定分布重新抽取，否则保持。单个乘子写成 $P=\rho I+(1-\rho)\mathbf1\pi^\top$ 正是相同保持／重抽结构。原文还研究持续性、幂次协方差与多期限波动预测。因此保持核、持续性造成尾形变化，都不能称本轮的新理论。[2002 作者工作稿 §2.1](https://archive.nyu.edu/bitstream/2451/26508/2/02-64.pdf)
 
 DS³M 的一般结构为
 
@@ -158,13 +161,15 @@ z_t\sim N(f_{d_t}(z_{t-1},h_t),\Sigma_{d_t}),\quad
 y_t\sim N(g_{d_t}(z_t,h_t),V_{d_t}),
 \]
 
-其中 RNN 状态 (h_t\) 同时进入 transition 和 emission。作者 `src/DSSSMCode.py` 的 `TransitionMatrix` 使用 (0.5\operatorname{softmax}(A)+0.5I\)，Sleep 为 (0.2\operatorname{softmax}(A)+0.8I\)；`_forecastingMultiStep` 从离散状态、连续状态、观测逐层采样未来，训练用 ELBO。[固定作者实现](https://github.com/Sherry-Xu/Deep-Switching-State-Space-Model/blob/f649ee04f63a32aff6fde9be19f384de187e249a/src/DSSSMCode.py)
+其中 RNN 状态 $h_t$ 同时进入 transition 和 emission。作者 `src/DSSSMCode.py` 的 `TransitionMatrix` 使用 $0.5\operatorname{softmax}(A)+0.5I$，Sleep 为 $0.2\operatorname{softmax}(A)+0.8I$；`_forecastingMultiStep` 从离散状态、连续状态、观测逐层采样未来，训练用 ELBO。[固定作者实现](https://github.com/Sherry-Xu/Deep-Switching-State-Space-Model/blob/f649ee04f63a32aff6fde9be19f384de187e249a/src/DSSSMCode.py)
 
 作者仓库固定版本 `f649ee04f63a32aff6fde9be19f384de187e249a`，已核 [Apache-2.0 LICENSE](https://github.com/Sherry-Xu/Deep-Switching-State-Space-Model/blob/f649ee04f63a32aff6fde9be19f384de187e249a/LICENSE)。因此不是只在摘要中泛泛出现 Markov 一词，而是已有可运行的神经切换路径模型。
 
 ### 5.2 尚可检验的窄子问题
 
-本轮暂限三态、固定 \(\pi=(.45,.4,.15)\)、固定已归一化波动乘子 f、起点平稳状态，并让可观测历史决定单一 \(\rho_o\)。在每个起点生成时冻结该 \(\rho_o\)，完整未来使用同一保持／重抽核。若 \(r_j=\sqrt{v_o f_{S_j}}\epsilon_j\) 且 \(\epsilon_j\) 独立标准高斯，则改变 \(\rho_o\) 不改变单步混合分布，亦不改变任意累计期限方差 \(h v_o\)。改变的是累计随机方差的分布，因而是端点分布的高阶形状。
+合成识别问题固定三态概率 $\pi=(.45,.4,.15)$、已归一化方差乘子 $f$ 和起点平稳分布，让可观测条件决定单一 $\rho_o$。在每个起点生成时冻结该 $\rho_o$，完整未来使用同一保持／重抽核。若 $r_j=\sqrt{v_o f_{S_j}}\epsilon_j$、$\sum_s\pi_s f_s=1$ 且 $\epsilon_j$ 独立标准高斯，则改变 $\rho_o$ 不改变单步混合分布，亦不改变任意累计期限方差 $h v_o$。改变的是累计随机方差的分布，因而是端点分布的高阶形状。
+
+市场适配另在成熟训练前缀上一次估计基准分布常数，再对成对神经臂冻结相同常数。当前主臂以端点 CRPS 加权重 .05 的 HMM 路径 NLL 训练，同时保留相同联合目标的无条件持续性控制和仅端点目标的消融。因此不能把市场执行方案描述为只用端点 CRPS 学习的纯机制；具体路径和参数约束以本轮冻结协议和实现为准。这里的数学比较也不预判任何市场收益。
 
 与一般神经状态空间相比，这一受限子族没有连续 latent、没有自由的各期限密度头；可通过有限状态／占用次数递推精确组成端点高斯混合，并对实际端点 CRPS 求导。潜在贡献只能落在这个约束及其学习效果上：控制自由度是否使小样本条件持续性能够被估计，而不是增加拟合噪声。
 
@@ -175,3 +180,64 @@ y_t\sim N(g_{d_t}(z_t,h_t),V_{d_t}),
 这次已读取多篇原始正文及两套 GAS-Norm、DS³M 作者源码。几篇 Applied Energy／Journal of Forecasting 碳价论文仅取得官方摘要／元数据；这里没有据摘要编造数据日期、分割、公式或作者实现。不存在把公开源码自动等同可自由复制、把预印本自动等同期刊定稿、或者把不同输入条件下论文表格的分数直接拿来排名的做法。
 
 本轮先交独立数学过滤器，冻结后完成三归一化的同骨干实验；三态方法先经过合成识别与效应规模筛选。文献相似度、合成可识别性、市场样本外收益是三类不同证据，必须分别报告。
+
+## 7. 本轮结果后的方向决策
+
+本节在全部固定实验完成后追加；前述筛选判断保留原貌，实际结论以本节、冻结协议和结果报告为准。**当前证据不支持把条件持续性候选写成具有预测增益的模型创新论文。** 主 GRU 相对同目标无条件持续性控制的 CRPS 高 0.183892%，名义配对区间为 [+0.004735%, +0.469536%]；六项继续条件仅一项通过。GAS 相对 EWMA 的点估计较好，但区间包含零，对同归一化无神经控制也未建立增益。这否决本轮固定候选及预算内的正向主张，不能推出所有状态模型都无用。[候选汇总](../results/market/persistence/SUMMARY.json)、[GAS 汇总](../results/gas_benchmark/SUMMARY.json)、[独立统计重放](../audits/PERSISTENCE_AGGREGATE_REPLAY.json)
+
+### 7.1 哪些直接延伸不足以成为下一轮贡献
+
+| 直接延伸 | 已核近邻与研究含义 |
+|---|---|
+| 将 GAS 的 log-score 改成 CRPS，或在 GAS-Norm 后训练概率头 | §3 的 GAS-Norm 与 §4 的 proper-score filter 已分别覆盖归一化和更新目标变化。当前同骨干适配可以补强基线；没有新的学习算子及匹配增益时，不能重新命名为新模型。 |
+| 将 HMM 后验接入更深的神经骨干 | DS³M 已有神经切换路径；RC-Mamba 将后验接入选择性状态空间投影。后者作者报告的同骨干 no-regime 五 fold 比较和熵尺度门比较均未建立对应机制优势，说明完整系统的排名不能替代机制归因。[DS³M 原文](https://arxiv.org/abs/2106.02329)、[RC-Mamba §4.7](https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1903497/full) |
+| 增加分位数、conformal 或一般不确定性输出 | §2.1 的碳价近邻已经覆盖这些组合。仅有摘要的几项仍不能用于猜测原损失、校准保证或精确数值复现。贡献必须落实在新增学习规则，且保留相同信息和同任务比较。 |
+| 加深骨干，或反复调用分布预测器 | D2D 已递归调用共享分布映射并作多期限训练；DS³M 已递归生成路径。层数增加和递归本身不足以区分方法，应先控制参数数、损失、成熟标签和推理预算。[D2D §II–III](https://arxiv.org/html/2603.25370v1) |
+
+上述 DS³M、RC-Mamba、D2D 均未在本项目完成作者方案的数值复现；本轮 GAS 也只完成已声明的任务适配。这里判断已公开的结构边界，不把作者的跨数据集报表当作我们的对照结果。
+
+### 7.2 只保留一个低维研究假说：整体现有混合分布的隐式状态更新
+
+**必要性与问题。** 本轮在固定起点平稳状态和全部期限二阶矩下改变持续性，主要作用于端点高阶形状；该变化未兑现稳定收益。一个不同、仍待否证的问题是：在相同有限状态模型下，更新当前状态概率的方式，能否改善未来累计分布，尤其能否同时应对偶发大观测与真实持续状态变化？这是对过滤学习规则的研究，不是已认定的碳市场事实。
+
+先取 $K=2$ 或 $3$，固定／仅在训练段拟合相同的状态发射 CDF $F_k$ 和转移矩阵 $P$。在公共固定单位下，观测 $y_t$ 前的权重为 $p_t^-$；只在观测后作
+
+\[
+q_t^+=\arg\min_{q\in\Delta_K}
+\left\{L_t(q)+\eta^{-1}\operatorname{KL}(q\|p_t^-)\right\},
+\qquad
+L_t(q)=\operatorname{CRPS}\!\left(\sum_kq_kF_k,y_t\right),
+\qquad
+p_{t+1}^-=q_t^+P.
+\]
+
+再从同一 $q_t^+$ 和 $P$ 传播未来累计收益分布。与已失败的只改持续性方案不同，这会改变当前状态权重与方差期限结构。只评价更新后尚未发生的端点；拟合同一条 $y_t$ 后的分数下降不作为预测证据。
+
+**可核数学差异及边界。** 令 $b_i(y)=E|X_i-y|$、$D_{ij}=E|X_i-X_j|$，其中 $X_i\sim F_i$ 且成对独立，则
+
+\[
+L_t(q)=b(y_t)^\top q-\tfrac12q^\top Dq.
+\]
+
+它是单纯形上的耦合凸目标，通常不同于对各分量 CRPS 作线性平均。若各分量一阶矩有限、$p_t^-$ 严格为正且 $\eta>0$，KL 项使解唯一且位于内部。由 CRPS 的 CDF 积分式和一阶条件直接得到
+
+\[
+\left|\log\frac{q_{t,i}^+/q_{t,j}^+}{p_{t,i}^-/p_{t,j}^-}\right|
+\le 2\eta\,W_1(F_i,F_j).
+\]
+
+该式只说明单次观测造成的对数权重比变化有界；它不证明未来风险改善，也不保证快速识别真实跳变。上述是该候选的代数性质，不能当作已经确证原创的新定理。
+
+**直接近邻足以限制创新主张。** Boustati 等的广义 Bayesian filtering 已用分量损失构造 $\exp(-\ell_k)$ 并按原转移核递推；Kulis–Bartlett 已研究保留非线性损失的 Bregman 隐式更新；Cesa-Bianchi 等已统一镜像下降与 fixed-share。此次读取了三篇原文的方法／算法段，未完成它们的数值复现。[NeurIPS 2020 §2–3](https://wrap.warwick.ac.uk/id/eprint/142420/7/WRAP-Generalised-Bayesian-Filtering-sequential-Monte-Carlo-2020.pdf)、[ICML 2010 §2–3](https://people.bu.edu/bkulis/pubs/icml_implicit.pdf)、[NeurIPS 2012 Algorithm 1 与 §5](https://proceedings.neurips.cc/paper_files/paper/2012/file/8e6b42f1644ecb1327dc03ab345e618b-Paper.pdf)
+
+因此，该式目前只能是**已有优化原理在有限状态预测中的待检验实例**。与 DS³M／RC-Mamba 的区别是控制过滤算子而非更换骨干；与 D2D 的区别是低维观测更新而非学习一般分布映射。是否存在未被上述方法覆盖、足以形成论文的增量仍未确认。若后续只能证明一般近端步性质或取得更换任务后的分数差，就应将它降为基线。
+
+### 7.3 降维验证和明确的否决条件
+
+无需神经网络即可先检验该假说。固定同一 $K$、$P$ 和 $F_k$，比较标准 Bayes filter、分量 CRPS 的 Gibbs 更新、整体现有混合 CDF 的显式 CRPS 镜像下降／相同转移的 fixed-share，以及上式隐式步；CRPS Learning 的任务适配另须保持相同专家与成熟信息。所有步长使用同一预定训练／验证预算，不能在测试上挑最强控制或调学习率。
+
+合成至少区分正确设定 HMM、偶发高方差高斯扰动、发射尾形误设，以及真实持续状态变化；测试目标保留全部观测，不能删除大变动后改评潜在“干净价格”。在已知正确模型下，Bayes 预测分布最小化条件期望 proper score，因此不应许诺统一支配。低维验证若通过，再讨论需要哪些真实数据；本节没有启动任何新的市场检验。
+
+**建议的未来否证门槛，尚未冻结或执行：** 两种预先指定的误设场景中，相对验证选定的最强匹配更新至少降低 1% 的未来端点 CRPS，且配对区间支持改善；正确设定及真实持续变化场景的劣化不超过 0.2%。若只胜普通 Bayes 而不胜分量 Gibbs／显式更新，若收益只来自额外参数或测试调参，若一受真实持续冲击就明显变差，均停止该算子开发。即使数值通过，仍需补清与现有隐式在线学习／广义过滤的实质差别，才能决定是否存在方法论文方向。
+
+本轮不凑第二个假说，也不建议立即追加大规模市场搜索。当前可以交付的是完整的失败证据、可复核强对照和这一尚待筛选的数学子问题；不能将它们包装成已经成功或已经确认新颖的预测模型。
