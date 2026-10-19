@@ -1,0 +1,99 @@
+{
+  "version": "1.0",
+  "freeze_date_utc": "2026-10-19",
+  "scope": "New provisional learning-method study, after completed failed OHLC candidate. Model innovation screening and actual experiments; no causal/econometric claim.",
+  "registration": "Local timestamped protocol, not externally preregistered; to be uploaded only after execution.",
+  "primary_target": "CRPS of cumulative log price increment divided by origin-known EWMA daily log-return scale times sqrt(h). This is a new probabilistic objective, not the previous price-mean MSE claim.",
+  "candidate": "Conditioned quadratic CDF update with a predictable, amplitude-budgeted reflected relative-CRPS control and an explicit conditional sign-imbalance sensitivity budget.",
+  "assumption": "For each future step, abs(E[sign(r_j) | abs(r_j), true past]) <= delta. This is stronger than unconditional symmetry or martingale increments, and is NOT certified from market data. Arbitrary distribution-shift safety is not claimed.",
+  "lambda_grid": [0.0, 0.5, 1.0],
+  "primary_sign_budget": 0.05,
+  "sensitivity_sign_budgets": [0.0, 0.025, 0.1],
+  "control": {
+    "G": "Gaussian-reference continuation of the exact relative-CRPS linear label B; remaining normalized reference variance (h-j)/h",
+    "increment": "0.5 * (G_j(prefix+r_j) - G_j(prefix-r_j))",
+    "cap": "At each step symmetrically clip to remaining origin cap K minus preceding absolute clipped increments",
+    "K": "Exact W1 between the common-centered, common-weight Gaussian scale-mixture F0 and its positive scale multiple F1",
+    "bias": "delta * upper estimate of E[K * history_basis]; finite-sample theorem uses a valid bound, market block bootstrap is explicitly an approximate adaptation",
+    "negative_control": "h=1 centered symmetric scale-only experts imply control identically zero"
+  },
+  "synthetic": {
+    "exact_independent_audit": {
+      "p0": 0.4, "p1": 0.6,
+      "epsilons": [0.0, -0.05, -0.15, 0.15],
+      "calibration_n": [64, 256, 1024, 4096],
+      "repetitions": 1000,
+      "seed": 20261019,
+      "lambda_grid": [0.0, 0.1],
+      "confidence_delta": 0.05,
+      "known_A": true,
+      "range_versions": ["exactly_proved_four_path_range", "generic_architecture_range"],
+      "rules": ["raw_safe", "correct_budget_cv", "zero_budget_cv", "empirical_mixture", "oracle"]
+    },
+    "general_operator": {
+      "scenarios": ["gaussian_h1_negative", "gaussian_h5", "gaussian_h20", "heavy_tail_h5", "leverage_h5", "sign_bias_h5", "harmful_scale_h5", "deployment_shift_h5"],
+      "calibration_n": [128, 512, 2048],
+      "repetitions": 300,
+      "test_paths": 100000,
+      "seed": 20261020,
+      "confidence_delta": 0.05,
+      "scope": "Fixed scalar experts first; population-risk estimates use independent Monte Carlo unless analytic. No synthetic hyperparameter rescue after results.",
+      "rules": ["baseline", "proposal", "empirical_mixture", "raw_bernstein", "path_bernstein_zero_budget", "path_bernstein_valid_budget", "path_bernstein_misspecified_budget", "path_uncapped", "oracle"]
+    }
+  },
+  "market_data": {
+    "markets": ["EUA_LONG", "GUANGZHOU", "HUBEI", "SHANGHAI"],
+    "EUA_LONG_start": "2013-01-01",
+    "data_max": "2023-12-31",
+    "exclude_duplicate": "EU_REPORTED is not an independent market; exact overlap with EUA_LONG through 2022",
+    "horizons_observation_steps": [5, 20],
+    "evaluation_years": [2021, 2022, 2023],
+    "excluded_cells": ["SHANGHAI:2021:all_horizons; only 47 reported prices and a 248-calendar-day gap"],
+    "no_calendar_fill": true,
+    "price_support": "Gaussian mixtures forecast standardized log increments. Transformed price forecasts are positive lognormal mixtures with finite analytic price moments.",
+    "sealed": "New EUA 2024/2025 values, new CEA 2025/2026, and unused Shenzhen prices remain unopened unless a later prospectively frozen confirmation extension is justified. Old EEX confirmation is not opened."
+  },
+  "market_split": {
+    "train_start_index": 39,
+    "calibration_origins": 252,
+    "validation_origins": 126,
+    "formula": "T=first quote index in evaluation year; cal_end=T-h-1; cal_start=cal_end-251; val_end=cal_start-h-1; val_start=val_end-125; train_end=val_start-h-1. Labels mature strictly before next segment's first origin.",
+    "minimum_training_origins": 128,
+    "test_origin_rule": "Origin and h-step endpoint both in the declared evaluation year",
+    "history_length": 20,
+    "daily_EWMA_decay": 0.94,
+    "scale_floor": "0.1 * training-prefix median absolute daily log increment, plus a numerical 1e-8 floor",
+    "features": ["past log increment divided by then-known EWMA", "log EWMA scale", "log1p calendar interval"],
+    "standardization": "Feature moments fitted on training origins only; origins see only their own past",
+    "gate": "Three nonnegative soft history-volatility basis functions summing to one; centers -1,0,1 in training-standardized log EWMA, width 0.75"
+  },
+  "experts": {
+    "F0": "Zero-centered three-component Gaussian scale mixture. Relative component scales [0.5,1,2]; global scale and weights fitted by training CRPS only.",
+    "F1": "Same weights and component ratios, with history-dependent positive scale factor 0.5+sigmoid(network_output) in [0.5,1.5]. Zero head starts at exact F0.",
+    "backbones": ["MLP32_16", "GRU16"],
+    "seeds": [17, 41, 89],
+    "maximum_epochs": 60,
+    "epoch_selection": "Lowest validation CRPS including epoch zero, then freeze before calibration",
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "learning_rate": 0.002,
+    "weight_decay": 0.001,
+    "gradient_norm_clip": 1.0,
+    "no_test_tuning": true
+  },
+  "market_rules": ["F0", "F1", "equal_mixture", "empirical_scalar", "empirical_gate3", "raw_block_gate3", "raw_block_gate3_same_joint_budget", "path_block_gate3_delta005", "path_block_gate3_delta0", "path_block_gate3_delta0025", "path_block_gate3_delta010", "path_block_scalar_delta005", "path_uncapped_gate3_delta005", "path_no_prefix_gate3_delta005", "BOA_CDF_frozen", "BOA_CDF_online", "quantile_BOAG_online", "FHS", "EWMA_Normal", "GARCH_Normal"],
+  "market_uncertainty": {
+    "calibration": "399 circular moving-block bootstrap replicates; block length 2*h observation steps; jointly standardized maximum over B(lambda,basis), A matrix entries and K*basis for the primary operator. Matrix upper bound by row-sum diagonal inflation.",
+    "confidence_nominal": 0.95,
+    "theory_boundary": "No finite-sample validity or future risk guarantee claimed for serial, shifting market data; this is a fixed approximate block-bootstrap adaptation of the proven iid rule.",
+    "evaluation": "Paired moving-block bootstrap with block length 2*h, 1999 replicates; equal cell weighting across distinct market-year-horizon cells; seeds are averaged within a cell, not independent observations.",
+    "report_all": true
+  },
+  "metrics": ["normalized log-increment CRPS (primary)", "price CRPS (secondary, analytic lognormal mixtures)", "90% interval coverage and width", "price mean MSE versus random walk", "update rate and magnitude", "selected control coefficient", "control variance ratio and bias cost", "runtime and actual gradient-fit counts"],
+  "publication_readiness": {
+    "necessary": ["Direct-neighbor distinction survives original-source audit", "Correct theorem and explicit violation counterexamples", "Net synthetic update efficiency beyond a proved toy identity", "Matched ablation establishes the path-control mechanism, not only stronger experts or shrinkage", "Stable market gain against raw update and direct online aggregation baselines", "Independent review and reproducible results", "New-period confirmation before affirmative paper claims"],
+    "advance_to_confirmation": "Primary rule must improve mean normalized CRPS against the same-budget raw update with a paired 95% block interval entirely below zero, improve at least 60% of usable distinct cells, and not lose to its no-prefix ablation. This is an internal screening rule, not a journal standard.",
+    "if_failed": "Complete and publish all predefined development analyses as a negative method-development record; keep new confirmation prices unopened; do not tune budgets or change primary target to manufacture success."
+  },
+  "public_delivery": "Code, protocol, source receipts, aggregate tables/figures, method and result reports, independent audits, hashes. No raw licensed prices, per-origin target/prediction files, or model checkpoints in public GitHub."
+}
