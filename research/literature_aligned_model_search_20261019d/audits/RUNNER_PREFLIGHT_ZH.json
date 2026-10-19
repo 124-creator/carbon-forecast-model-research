@@ -1,0 +1,130 @@
+{
+  "title": "运行器独立预检",
+  "status": "PASS_WITH_DISCLOSURES",
+  "date_utc": "2026-10-19",
+  "scope": "独立静态审查两个冻结源码文件；合成索引代数核验；不运行市场拟合。核心结论在主运行启动前通知根代理，正式书面记录在运行完成标记已可见时归档，不冒充额外事前注册。",
+  "source_sha256": {
+    "source/run_model_search.py": "26347433fe6416298e4969da618cbba291999f3a66131172bc8f2e510f3633bf",
+    "source/innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e"
+  },
+  "run_root": "/tmp/carbon-literature-aligned-runs-20261019d/main_v1",
+  "stage": "development_search; all 2022/2023 already exposed",
+  "checks": [
+    {
+      "id": "origin_label",
+      "status": "PASS",
+      "evidence": "Input window tokens[t-63:t+1] includes only observations through origin t. Targets are p[t+h]-p[t], h=1,5,20. Predictions assume origin price p[t] has already been observed; horizons count observed target records."
+    },
+    {
+      "id": "purge",
+      "status": "PASS",
+      "evidence": "If first test index is F, validation origins are F-100 ... F-21; selection training satisfies t+20 < F-100. Last training label is F-101, last validation label is F-1. Final refit includes only t+20 < F. Test origin and t+20 must both fall in the test year."
+    },
+    {
+      "id": "annual_test",
+      "status": "PASS",
+      "evidence": "One fixed model per year; realized observations through each origin enter the 64-record window. No optimizer updates or validation-based reselection within that test year. All horizons share the same origins and last 20 target observations are not forecast origins."
+    },
+    {
+      "id": "external_alignment",
+      "status": "PASS_WITH_DISCLOSURE",
+      "evidence": "For each carbon date d, backward as-of chooses last energy date <= d-14 calendar days. Missing source prices are excluded before alignment. Arithmetic differences are formed between aligned prices. These are public historical data files, not certified real-time vintages."
+    },
+    {
+      "id": "scale",
+      "status": "PASS",
+      "evidence": "Channel RMS is fitted on tokens[1:validation_start], entirely before validation origins. It includes available pre-validation observations beyond the earliest training feature rows. Target second moments use only selected training targets. Both remain fixed during final refit."
+    },
+    {
+      "id": "weighted_loss",
+      "status": "PASS",
+      "evidence": "With s=target RMS and v_h=training target second moment, (forecast/s - target/s)^2/(v_h/s^2) equals native squared error/v_h. Equal weight is assigned to H1/H5/H20; validation uses the same rule. Test primary instead divides each cell/horizon by its own RW test MSE, as declared."
+    },
+    {
+      "id": "own_forward_epoch",
+      "status": "PASS",
+      "evidence": "Initial validation and every epoch validation call predict(model,...), which calls that same model's forward and horizon coordinates. No alternative filter, teacher output, or postprocessed proxy is used for choosing epochs."
+    },
+    {
+      "id": "seeds_refit",
+      "status": "PASS",
+      "evidence": "Both learning rates use selection seed 17 on past validation. The minimum selected validation loss, tie-broken by lower learning rate, chooses the family configuration. Fresh model initializations with seeds 17/29/43 then refit all matured pretest labels for that selected epoch count."
+    },
+    {
+      "id": "epoch_zero",
+      "status": "PASS_WITH_DISCLOSURE",
+      "evidence": "Epoch 0 is a real scored initialization and saved state. It may defeat trained epochs. A final refit with selected_epoch=0 executes no training loop and records epochs_executed=0, zero gradient steps. Optimization parameter change is explicitly labeled before selection. GRU/LSTM epoch 0 equals RW because their readout is initialized to zero."
+    },
+    {
+      "id": "structural_controls",
+      "status": "PASS_WITH_DISCLOSURE",
+      "evidence": "Full/readout use the same inputs, parameter count 169, learning-rate budget, and paired initial state. Readout gates final forecast amplitudes, whereas full gates historical innovation allocation. Constant is a nested 7-parameter control, price-only is 118 parameters; neither is capacity-matched to full."
+    },
+    {
+      "id": "strong_controls",
+      "status": "PASS_WITH_DISCLOSURE",
+      "evidence": "GRU/LSTM and full-input allocation use 4 channels and 64 records. ridge_full uses 64 records; ridge_price and hgb_full use 20. All use past validation and matured-label final refits. Fair comparison holds for common information cutoff, but input history length, parameter count, and search dimensions are not globally identical."
+    },
+    {
+      "id": "primary_summary",
+      "status": "PASS_RESOLVED",
+      "evidence": "Frozen protocol explicitly selects mean_seed_mse_over_rw as primary; scoring the average three-seed forecast is a separate ensemble secondary. Strong baseline family is selected per market/year from RW, drift, ridge_price, ridge_full, hgb_full, GRU, LSTM using past validation only."
+    },
+    {
+      "id": "exposure_and_gate",
+      "status": "PASS",
+      "evidence": "All 2022/2023 cells are development evidence, not fresh confirmation. There is no universal 1% publication threshold. Neither static PASS nor completion demonstrates model utility or novelty."
+    }
+  ],
+  "synthetic_index_checks": [
+    {
+      "first_test": 400,
+      "validation_start": 300,
+      "last_training_label": 299,
+      "last_validation_label": 399,
+      "last_final_label": 399,
+      "validation_origins": 80,
+      "first_test_input": [
+        337,
+        400
+      ],
+      "pass": true
+    },
+    {
+      "first_test": 500,
+      "validation_start": 400,
+      "last_training_label": 399,
+      "last_validation_label": 499,
+      "last_final_label": 499,
+      "validation_origins": 80,
+      "first_test_input": [
+        437,
+        500
+      ],
+      "pass": true
+    },
+    {
+      "first_test": 750,
+      "validation_start": 650,
+      "last_training_label": 649,
+      "last_validation_label": 749,
+      "last_final_label": 749,
+      "validation_origins": 80,
+      "first_test_input": [
+        687,
+        750
+      ],
+      "pass": true
+    }
+  ],
+  "blockers": [],
+  "residual_limitations": [
+    "Static review does not replace independent reconstruction of observed targets and realized primary metrics from NPZ.",
+    "The execution-complete flag records whether hashes changed but does not itself throw on mismatch; downstream audit must reject a mismatch.",
+    "Selection on a single seed does not eliminate selection randomness; three refit seeds are algorithm randomness, not independent market observations.",
+    "The innovation model resets latent state at the start of every 64-record history. This finite-history convention is consistent but should be stated.",
+    "GRU/LSTM output 20 cumulative coordinates while only coordinates 1,5,20 enter loss; the other 17 output rows are unused in evaluation and included in raw parameter counts.",
+    "RMS uses the complete available pre-validation prefix, not only rows appearing as training inputs; this is not a validation/test lookahead claim.",
+    "No claim is made that observed latent components identify economic permanent or transitory shocks."
+  ]
+}

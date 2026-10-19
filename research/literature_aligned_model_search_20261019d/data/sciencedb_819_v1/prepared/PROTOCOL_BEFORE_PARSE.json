@@ -1,0 +1,40 @@
+{
+  "created_utc": "2026-10-19T09:39:14.792395+00:00",
+  "stage": "source restoration and fixed partition preservation; no model fitting",
+  "design_timing": "After v1 development discovery, before this preparation; original 60/20/20 scope was frozen 2026-10-17",
+  "source_doi": "10.11922/sciencedb.819",
+  "source_file_sha256": "5d362db0f8e0a7609d35a04afb25a8bcbbc67167b56c41c3800febf2364cf223",
+  "original_scope_sha256": "59e3e8cdce9e60d744f6b914dcec555c034952db0cf12ecf02aec35d1afae639",
+  "original_manifest_sha256": "ca7ff2c3abb35fd8cb69799363e7c11c2ba88da37445e3e86f492fc071032b88",
+  "script_sha256": "1233f3d31d6366d7c39bf91eb5f44570780eaa8601d0ce4d1cf30cf1b11c82bf",
+  "markets": {
+    "北京": "BEIJING",
+    "天津": "TIANJIN",
+    "重庆": "CHONGQING"
+  },
+  "schema": [
+    "date",
+    "price",
+    "volume_tons",
+    "turnover_yuan"
+  ],
+  "target": "Author-curated daily transaction mean price in CNY/tonne; copied from the workbook, never relabeled as close or recomputed",
+  "quantity_fields": "Author headers explicitly specify volume in tonnes and turnover in CNY",
+  "partition": "ascending observed dates; first n*3//5 train, next n//5 validation, all remaining confirmation; preserve legacy boundary dates and hashes",
+  "label_support_diagnostic": {
+    "lookback_records": 64,
+    "horizons_observation_steps": [
+      1,
+      5,
+      20
+    ],
+    "rule": "origins t>=64; select origin in each fixed partition only when t+20 is strictly before the partition end; final refit uses all such matured pre-confirmation labels"
+  },
+  "source_processing": "Author deleted non-trading dates and reports screening abnormalities relative to monthly weighted means, then replacing verified abnormalities with preceding trading-day data; replacement flags are unavailable.",
+  "new_processing": "Date format conversion and ascending sort only; no deletion, calendar filling, smoothing, price repair, or replacement of quantity missingness.",
+  "prior_exposure": "Acquired, mechanically parsed, source-compared and partitioned before; no Beijing/Tianjin/Chongqing model-fitting or forecast-scoring record identified in repository audit.",
+  "inference_scope": "New-market evaluation of this explicitly defined author-cleaned target; not a claim that source values were never accessed or available as this exact cleaned vintage in real time.",
+  "license": "CC BY 4.0, as stated in archived official ScienceDB metadata",
+  "market_fits": 0,
+  "forecast_scores": 0
+}

@@ -1,0 +1,37 @@
+{
+  "title": "V2 独立统计审查设计",
+  "date_utc": "2026-10-19",
+  "timing": "Written after V2 completion was visible, before this audit opened V2 test NPZ; V2 itself is an extension initiated after partial V1 development results.",
+  "run": "/tmp/carbon-literature-aligned-runs-20261019d/liquidity_v2",
+  "original_comparison_run": "/tmp/carbon-literature-aligned-runs-20261019d/main_v1",
+  "stage": "development_only",
+  "target": "liquidity_full",
+  "primary_contrasts": [
+    "rw",
+    "liquidity_readout",
+    "shock_size_only",
+    "liquidity_unconstrained",
+    "v1_allocation_constant"
+  ],
+  "strong_baseline": "Secondary validation-selected comparator from RW, drift, ridge_price, ridge_full, HGB, GRU, LSTM using V2 past validation only; not a substitute for the five core contrasts.",
+  "summary": "Equal two-market/two-year/three-horizon mean of seed-average MSE divided by same-cell RW MSE. Seeds17/29/43 measure algorithm randomness, not independent samples.",
+  "bootstrap": {
+    "method": "Paired synchronous circular calendar blocks across GZ/HB within each year; same date multiplicities for candidate, all controls and RW denominator; reestimate denominator in each replicate.",
+    "B": 20000,
+    "seed": 20261019,
+    "primary_days": 42,
+    "sensitivity_days": 84,
+    "intervals": "Marginal95% and99% Bonferroni intervals for the five fixed core contrasts. No adjustment for previous study search or development-conditioned model design.",
+    "seeds": "Fold seed losses within each origin before time resampling."
+  },
+  "integrity": [
+    "Verify all4 frozen source hashes, completion, 44 NPZ files, 120 neural task receipts.",
+    "Reconstruct target arrays, index masks, scale/weighted loss, EIA14day historical alignment independently.",
+    "Rebuild current volume surprise only from current reported volume and strictly preceding60targetrecords; verify source hashes/date match/counts/missing flag.",
+    "Verify each family actual native-forward epoch selection through frozen common runner and receipt replay; no model fitting.",
+    "Check chosen LR and epoch, seed labels, final epochs, positive gradient logs, checkpoint bytes.",
+    "For reused v1constant prove identical origins, observed arrays, horizons and input source hashes in corresponding4cells.",
+    "Keep V1 and V2 populations separate; do not pool eight and four cells."
+  ],
+  "limitation": "Current author-reported volume assumes availability after that day's report; publication timestamp/vintage and units not certified. Price-only ridge remains a deliberate price-only control; full ridge/HGB/recurrent models see added volume."
+}

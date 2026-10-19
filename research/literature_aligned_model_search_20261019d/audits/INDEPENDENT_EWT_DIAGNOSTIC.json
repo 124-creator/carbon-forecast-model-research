@@ -1,0 +1,877 @@
+{
+  "created_utc": "2026-10-19T09:26:35.499014+00:00",
+  "status": "PASS_REPLAY_WITH_SHARED_EWT_TRANSFORM",
+  "design_timing": "Written after completed diagnostic results were inspected; tolerances fixed in code before this replay; not preregistration",
+  "independent_parts": [
+    "CSV data/label/index reconstruction",
+    "Explicit feature layout",
+    "Train-only population standardization",
+    "SVD closed-form Ridge with intercept",
+    "All84fixed alpha choices and validation selection",
+    "All saved test forecasts and metrics",
+    "Four future perturbation comparisons",
+    "Equal-market aggregation"
+  ],
+  "shared_dependency": {
+    "function": "ewtpy.EWT1D",
+    "version": "0.2",
+    "path": "/tmp/carbon-forecast-20261019d-deps/ewtpy/ewtpy.py",
+    "sha256": "35cb4532ae35a41867ee1411cb61a33165f7eebab3ebf70a58b47c74c6e6a289",
+    "mathematical_transform_independently_verified": false
+  },
+  "production_imported": false,
+  "sklearn_or_pandas_used": false,
+  "production_results_modified": false,
+  "audit_script_sha256": "cbd4a36bd2ae511cf7f4eb516ab5e2c8ce2d43d37412dffea3aa68dcd0b26638",
+  "production_source_sha256": "e9053bfd34bce9e60c67c0590245271ccecaaf0bcf009a1e715be9abe7ada2e5",
+  "artifact_sha256": {
+    "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/results/information_diagnostic/PROTOCOL_BEFORE_RUN.json": "4d0220367b45937ad0f665531541cdc2c9aae39728c9587df3ce3ad9bb285175",
+    "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/results/information_diagnostic/INPUT_MANIFEST.json": "a5921909f0696761affb84cb0af92e6c1ce74212c00d05736b3ab251759c2037",
+    "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/results/information_diagnostic/METRICS.csv": "0c2d08d4e7f6e8af72891b7cf88fc49fa94c6657e7f8d3070ed652733e2ec0c2",
+    "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/results/information_diagnostic/SUMMARY.json": "36990937bbafc2489e0ce2a0ef277bbf68e0756cf8fa69f39a5eff17fe441de5",
+    "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/results/information_diagnostic/FUTURE_PERTURBATION_AUDIT.json": "b25776088862763ff9527e5e27cba18c444d9a723fc7817cc37bfd1209cd9c67",
+    "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/results/information_diagnostic/PREDICTIONS.csv": "d21795622bbb037772ff39f63c79b689ada5ad21721740219ca38efa7c660715"
+  },
+  "tolerances": {
+    "absolute": 1e-08,
+    "relative": 1e-08,
+    "ridge_relative_kkt": 1e-10
+  },
+  "counts": {
+    "scalar_comparisons": 10725,
+    "reconstructed_configurations": 84,
+    "prediction_rows": 3510
+  },
+  "max_absolute_discrepancy_by_quantity": {
+    "perturb_causal": 0.0,
+    "perturb_retrospective": 0.0,
+    "validation_mse": 1.2436718321851004e-12,
+    "validation_rw_mse": 4.440892098500626e-16,
+    "test_mse": 5.913047829153584e-13,
+    "test_rw_mse": 4.440892098500626e-16,
+    "test_mse_over_rw": 6.632472349110685e-13,
+    "test_rmse": 4.4708681201655054e-13,
+    "test_mae": 3.3295588508508445e-13,
+    "observed_change": 0.0,
+    "predicted_change": 1.8602008822199423e-11,
+    "aggregate": 6.7390537594747e-14
+  },
+  "maximum_ridge_relative_kkt": 1.4324676249908638e-13,
+  "support": [
+    {
+      "market": "GUANGZHOU",
+      "rows": 1434,
+      "train": 939,
+      "validation": 143,
+      "test": 286,
+      "max_training_label": 1002,
+      "first_validation_origin": 1003,
+      "max_validation_label": 1146,
+      "first_test_origin": 1147
+    },
+    {
+      "market": "HUBEI",
+      "rows": 1408,
+      "train": 921,
+      "validation": 140,
+      "test": 281,
+      "max_training_label": 984,
+      "first_validation_origin": 985,
+      "max_validation_label": 1125,
+      "first_test_origin": 1126
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "rows": 1507,
+      "train": 990,
+      "validation": 150,
+      "test": 301,
+      "max_training_label": 1053,
+      "first_validation_origin": 1054,
+      "max_validation_label": 1204,
+      "first_test_origin": 1205
+    },
+    {
+      "market": "EU_REPORTED",
+      "rows": 1515,
+      "train": 996,
+      "validation": 151,
+      "test": 302,
+      "max_training_label": 1059,
+      "first_validation_origin": 1060,
+      "max_validation_label": 1211,
+      "first_test_origin": 1212
+    }
+  ],
+  "future_perturbations": [
+    {
+      "market": "GUANGZHOU",
+      "causal_max_abs": 0.0,
+      "retrospective_max_abs": 2.9825138088382728
+    },
+    {
+      "market": "HUBEI",
+      "causal_max_abs": 0.0,
+      "retrospective_max_abs": 2.7534501068857664
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "causal_max_abs": 0.0,
+      "retrospective_max_abs": 5.282484297457989
+    },
+    {
+      "market": "EU_REPORTED",
+      "causal_max_abs": 0.0,
+      "retrospective_max_abs": 3.289230842598495
+    }
+  ],
+  "trial_validation_scores": [
+    {
+      "market": "GUANGZHOU",
+      "mode": "RAW",
+      "alpha": 0.01,
+      "validation_mse": 1.3881706250631498,
+      "relative_kkt": 7.65208985094072e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "RAW",
+      "alpha": 0.1,
+      "validation_mse": 1.3877807861073232,
+      "relative_kkt": 7.749614304946582e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "RAW",
+      "alpha": 1.0,
+      "validation_mse": 1.3840905155626404,
+      "relative_kkt": 7.954999439255925e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "RAW",
+      "alpha": 10.0,
+      "validation_mse": 1.3590219553935188,
+      "relative_kkt": 8.007024230441886e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "RAW",
+      "alpha": 100.0,
+      "validation_mse": 1.290648803642765,
+      "relative_kkt": 7.236662552826474e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "RAW",
+      "alpha": 1000.0,
+      "validation_mse": 1.1939331639194253,
+      "relative_kkt": 5.675636840059666e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "RAW",
+      "alpha": 10000.0,
+      "validation_mse": 1.1324913763621047,
+      "relative_kkt": 1.901654155870548e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 0.01,
+      "validation_mse": 1.694754103153077,
+      "relative_kkt": 6.370686619347973e-14
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 0.1,
+      "validation_mse": 1.5228610454171305,
+      "relative_kkt": 2.985434403990703e-14
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 1.0,
+      "validation_mse": 1.4156395028059816,
+      "relative_kkt": 4.796770577743445e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 10.0,
+      "validation_mse": 1.3711364481377588,
+      "relative_kkt": 2.1997656701138688e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 100.0,
+      "validation_mse": 1.3278057700511643,
+      "relative_kkt": 1.420237058859925e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 1000.0,
+      "validation_mse": 1.258363129615251,
+      "relative_kkt": 1.2985024538147884e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 10000.0,
+      "validation_mse": 1.1515895700804872,
+      "relative_kkt": 1.1789035435950052e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 0.01,
+      "validation_mse": 0.8505980161898485,
+      "relative_kkt": 3.4402423120374466e-14
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 0.1,
+      "validation_mse": 0.9719208907108011,
+      "relative_kkt": 1.3143639815485962e-14
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 1.0,
+      "validation_mse": 1.2225683218092622,
+      "relative_kkt": 3.198656718965566e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 10.0,
+      "validation_mse": 1.3017742346521826,
+      "relative_kkt": 1.6641419696043187e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 100.0,
+      "validation_mse": 1.2537393130261114,
+      "relative_kkt": 1.5826804745887227e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 1000.0,
+      "validation_mse": 1.1656046356832497,
+      "relative_kkt": 1.2137331744122666e-15
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 10000.0,
+      "validation_mse": 1.1125911270639535,
+      "relative_kkt": 8.827150359361939e-16
+    },
+    {
+      "market": "HUBEI",
+      "mode": "RAW",
+      "alpha": 0.01,
+      "validation_mse": 0.310275007113132,
+      "relative_kkt": 7.270099316478638e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "RAW",
+      "alpha": 0.1,
+      "validation_mse": 0.3102741103644426,
+      "relative_kkt": 7.295703850271417e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "RAW",
+      "alpha": 1.0,
+      "validation_mse": 0.31026557028490936,
+      "relative_kkt": 7.019335766667069e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "RAW",
+      "alpha": 10.0,
+      "validation_mse": 0.3102144605738476,
+      "relative_kkt": 7.22912892208339e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "RAW",
+      "alpha": 100.0,
+      "validation_mse": 0.3105217450412012,
+      "relative_kkt": 7.252628229101283e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "RAW",
+      "alpha": 1000.0,
+      "validation_mse": 0.31177432748923584,
+      "relative_kkt": 5.58046701393332e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "RAW",
+      "alpha": 10000.0,
+      "validation_mse": 0.313015725075809,
+      "relative_kkt": 2.4538223749210343e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 0.01,
+      "validation_mse": 0.35306906564016977,
+      "relative_kkt": 2.87430424873268e-14
+    },
+    {
+      "market": "HUBEI",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 0.1,
+      "validation_mse": 0.3298156052082757,
+      "relative_kkt": 1.7865481522211764e-14
+    },
+    {
+      "market": "HUBEI",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 1.0,
+      "validation_mse": 0.3097471851319859,
+      "relative_kkt": 6.3377387215122895e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 10.0,
+      "validation_mse": 0.31230814686564695,
+      "relative_kkt": 6.214867553638068e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 100.0,
+      "validation_mse": 0.3145278184982793,
+      "relative_kkt": 5.433757986437662e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 1000.0,
+      "validation_mse": 0.3129858134088061,
+      "relative_kkt": 5.01358247486778e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 10000.0,
+      "validation_mse": 0.3123325073507399,
+      "relative_kkt": 3.3701806045500698e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 0.01,
+      "validation_mse": 0.2364086018224477,
+      "relative_kkt": 1.4324676249908638e-13
+    },
+    {
+      "market": "HUBEI",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 0.1,
+      "validation_mse": 0.26192120248624956,
+      "relative_kkt": 7.546304630231477e-14
+    },
+    {
+      "market": "HUBEI",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 1.0,
+      "validation_mse": 0.32148568151090756,
+      "relative_kkt": 1.5538089170375874e-14
+    },
+    {
+      "market": "HUBEI",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 10.0,
+      "validation_mse": 0.3485727749338967,
+      "relative_kkt": 1.7487313511064864e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 100.0,
+      "validation_mse": 0.3318019181246049,
+      "relative_kkt": 1.4647975510881213e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 1000.0,
+      "validation_mse": 0.3128488897002762,
+      "relative_kkt": 1.3839422305530903e-15
+    },
+    {
+      "market": "HUBEI",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 10000.0,
+      "validation_mse": 0.30424965820894345,
+      "relative_kkt": 1.2635994278962998e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "RAW",
+      "alpha": 0.01,
+      "validation_mse": 1.9392970816868713,
+      "relative_kkt": 2.5212760263848636e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "RAW",
+      "alpha": 0.1,
+      "validation_mse": 1.9392957638158028,
+      "relative_kkt": 2.3339900843796523e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "RAW",
+      "alpha": 1.0,
+      "validation_mse": 1.939282962073077,
+      "relative_kkt": 2.389812903005139e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "RAW",
+      "alpha": 10.0,
+      "validation_mse": 1.9391857728220372,
+      "relative_kkt": 2.3199264350463803e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "RAW",
+      "alpha": 100.0,
+      "validation_mse": 1.9387590052292445,
+      "relative_kkt": 2.121225985986821e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "RAW",
+      "alpha": 1000.0,
+      "validation_mse": 1.9250807354350812,
+      "relative_kkt": 1.7896199385496754e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "RAW",
+      "alpha": 10000.0,
+      "validation_mse": 1.8581269936382008,
+      "relative_kkt": 2.1054352218231473e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 0.01,
+      "validation_mse": 1.9845900802288945,
+      "relative_kkt": 1.618791640351915e-14
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 0.1,
+      "validation_mse": 1.9595101179619037,
+      "relative_kkt": 6.680356798649136e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 1.0,
+      "validation_mse": 1.9475104456597678,
+      "relative_kkt": 2.998487234931326e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 10.0,
+      "validation_mse": 1.93382490385783,
+      "relative_kkt": 1.4894309323131718e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 100.0,
+      "validation_mse": 1.928055565567921,
+      "relative_kkt": 1.3672169971714064e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 1000.0,
+      "validation_mse": 1.9326090806462195,
+      "relative_kkt": 1.0211360825842265e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 10000.0,
+      "validation_mse": 1.8917927489606101,
+      "relative_kkt": 8.00065384292796e-16
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 0.01,
+      "validation_mse": 1.1275453043888826,
+      "relative_kkt": 1.401941463272268e-13
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 0.1,
+      "validation_mse": 1.347835702830724,
+      "relative_kkt": 3.3010099022779555e-14
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 1.0,
+      "validation_mse": 1.6228189850743477,
+      "relative_kkt": 7.989386474748672e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 10.0,
+      "validation_mse": 1.8497464497505476,
+      "relative_kkt": 2.7662622533602174e-15
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 100.0,
+      "validation_mse": 1.837742966184777,
+      "relative_kkt": 8.737556170566062e-16
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 1000.0,
+      "validation_mse": 1.8481772034930963,
+      "relative_kkt": 6.832795243322933e-16
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 10000.0,
+      "validation_mse": 1.8410671042222895,
+      "relative_kkt": 1.157989372002731e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "RAW",
+      "alpha": 0.01,
+      "validation_mse": 5.9637285289891695,
+      "relative_kkt": 2.172083477142193e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "RAW",
+      "alpha": 0.1,
+      "validation_mse": 5.9628352220062615,
+      "relative_kkt": 1.5950243105665436e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "RAW",
+      "alpha": 1.0,
+      "validation_mse": 5.954194757064379,
+      "relative_kkt": 1.8076349130347e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "RAW",
+      "alpha": 10.0,
+      "validation_mse": 5.889061945277526,
+      "relative_kkt": 2.1454895942525406e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "RAW",
+      "alpha": 100.0,
+      "validation_mse": 5.709512948928663,
+      "relative_kkt": 1.8608226788140053e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "RAW",
+      "alpha": 1000.0,
+      "validation_mse": 5.592498827025879,
+      "relative_kkt": 1.7739243572590837e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "RAW",
+      "alpha": 10000.0,
+      "validation_mse": 5.57151327122165,
+      "relative_kkt": 3.5478487145181674e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 0.01,
+      "validation_mse": 6.802124792492515,
+      "relative_kkt": 9.857002773169665e-14
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 0.1,
+      "validation_mse": 6.584388274079849,
+      "relative_kkt": 3.539960837345054e-14
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 1.0,
+      "validation_mse": 6.188515863040181,
+      "relative_kkt": 1.3133916244366146e-14
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 10.0,
+      "validation_mse": 5.870560187164642,
+      "relative_kkt": 2.3886205136004176e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 100.0,
+      "validation_mse": 5.773567821874918,
+      "relative_kkt": 2.6434148097304013e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 1000.0,
+      "validation_mse": 5.702057759559878,
+      "relative_kkt": 2.634293295549137e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 10000.0,
+      "validation_mse": 5.592601682944594,
+      "relative_kkt": 2.354566860657031e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 0.01,
+      "validation_mse": 2.5077831833086073,
+      "relative_kkt": 1.2013843220928635e-13
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 0.1,
+      "validation_mse": 3.1422545801887205,
+      "relative_kkt": 4.1116326880855205e-14
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 1.0,
+      "validation_mse": 4.467388807544765,
+      "relative_kkt": 1.3368386069274263e-14
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 10.0,
+      "validation_mse": 5.420271591138408,
+      "relative_kkt": 1.5181720598836142e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 100.0,
+      "validation_mse": 5.439132390478762,
+      "relative_kkt": 1.2091156048358785e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 1000.0,
+      "validation_mse": 5.197812534964277,
+      "relative_kkt": 1.0410322696344782e-15
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 10000.0,
+      "validation_mse": 5.2642443481590675,
+      "relative_kkt": 1.0844086142025816e-15
+    }
+  ],
+  "selected_metrics": [
+    {
+      "market": "GUANGZHOU",
+      "mode": "RAW",
+      "alpha": 10000.0,
+      "validation_mse": 1.1324913763621047,
+      "validation_rw_mse": 1.111196503496503,
+      "test_mse": 1.616963765404604,
+      "test_rw_mse": 1.5762919580419594,
+      "test_mse_over_rw": 1.0258022044426125,
+      "test_rmse": 1.2715989011494953,
+      "test_mae": 0.8359046567294717
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 10000.0,
+      "validation_mse": 1.1515895700804872,
+      "validation_rw_mse": 1.111196503496503,
+      "test_mse": 1.6522624472047558,
+      "test_rw_mse": 1.5762919580419594,
+      "test_mse_over_rw": 1.0481956967268713,
+      "test_rmse": 1.2854036125687354,
+      "test_mae": 0.8453729160998171
+    },
+    {
+      "market": "GUANGZHOU",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 0.01,
+      "validation_mse": 0.8505980161898485,
+      "validation_rw_mse": 1.111196503496503,
+      "test_mse": 1.0938467532322795,
+      "test_rw_mse": 1.5762919580419594,
+      "test_mse_over_rw": 0.6939366452081857,
+      "test_rmse": 1.0458712890371737,
+      "test_mae": 0.7782990374210571
+    },
+    {
+      "market": "HUBEI",
+      "mode": "RAW",
+      "alpha": 10.0,
+      "validation_mse": 0.3102144605738476,
+      "validation_rw_mse": 0.31482642857142856,
+      "test_mse": 0.89764291409176,
+      "test_rw_mse": 0.8915861209964406,
+      "test_mse_over_rw": 1.0067932788013234,
+      "test_rmse": 0.9474401902451468,
+      "test_mae": 0.5763467475653871
+    },
+    {
+      "market": "HUBEI",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 1.0,
+      "validation_mse": 0.3097471851319859,
+      "validation_rw_mse": 0.31482642857142856,
+      "test_mse": 0.8985624993518972,
+      "test_rw_mse": 0.8915861209964406,
+      "test_mse_over_rw": 1.0078246825417827,
+      "test_rmse": 0.9479253659185923,
+      "test_mae": 0.5988666881762028
+    },
+    {
+      "market": "HUBEI",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 0.01,
+      "validation_mse": 0.2364086018224477,
+      "validation_rw_mse": 0.31482642857142856,
+      "test_mse": 0.43724631842635053,
+      "test_rw_mse": 0.8915861209964406,
+      "test_mse_over_rw": 0.4904140027860484,
+      "test_rmse": 0.6612460347150299,
+      "test_mae": 0.4616767065573798
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "RAW",
+      "alpha": 10000.0,
+      "validation_mse": 1.8581269936382008,
+      "validation_rw_mse": 1.8620486666666667,
+      "test_mse": 2.8707370060559496,
+      "test_rw_mse": 3.1116930232558127,
+      "test_mse_over_rw": 0.9225643354280021,
+      "test_rmse": 1.6943249411066195,
+      "test_mae": 1.1429043420108722
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 10000.0,
+      "validation_mse": 1.8917927489606101,
+      "validation_rw_mse": 1.8620486666666667,
+      "test_mse": 2.788745566759241,
+      "test_rw_mse": 3.1116930232558127,
+      "test_mse_over_rw": 0.896214872713033,
+      "test_rmse": 1.6699537618626574,
+      "test_mae": 1.136815801659527
+    },
+    {
+      "market": "SHANGHAI_D4",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 0.01,
+      "validation_mse": 1.1275453043888826,
+      "validation_rw_mse": 1.8620486666666667,
+      "test_mse": 1.618517135400069,
+      "test_rw_mse": 3.1116930232558127,
+      "test_mse_over_rw": 0.5201403619520891,
+      "test_rmse": 1.2722095485414613,
+      "test_mae": 0.9374427180870885
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "RAW",
+      "alpha": 10000.0,
+      "validation_mse": 5.57151327122165,
+      "validation_rw_mse": 5.560686754966892,
+      "test_mse": 2.841064431946314,
+      "test_rw_mse": 2.8335218543046357,
+      "test_mse_over_rw": 1.002661909111525,
+      "test_rmse": 1.685545737126796,
+      "test_mae": 1.3129450103199525
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "SLIDING_PAST_ONLY",
+      "alpha": 10000.0,
+      "validation_mse": 5.592601682944594,
+      "validation_rw_mse": 5.560686754966892,
+      "test_mse": 2.8522087503346847,
+      "test_rw_mse": 2.8335218543046357,
+      "test_mse_over_rw": 1.0065949362633855,
+      "test_rmse": 1.6888483503070026,
+      "test_mae": 1.3149317708618298
+    },
+    {
+      "market": "EU_REPORTED",
+      "mode": "FULL_SERIES_RETROSPECTIVE",
+      "alpha": 0.01,
+      "validation_mse": 2.5077831833086073,
+      "validation_rw_mse": 5.560686754966892,
+      "test_mse": 1.2816865431278486,
+      "test_rw_mse": 2.8335218543046357,
+      "test_mse_over_rw": 0.4523298598105864,
+      "test_rmse": 1.1321159583398905,
+      "test_mae": 0.887757351812324
+    }
+  ],
+  "equal_market_mean_mse_over_rw": {
+    "RAW": 0.9894554319458657,
+    "SLIDING_PAST_ONLY": 0.9897075470612682,
+    "FULL_SERIES_RETROSPECTIVE": 0.5392052174392274
+  },
+  "failures": [],
+  "limitations": [
+    "The EWT numerical transform itself is reused, not independently derived.",
+    "Retrospective full-series decomposition deliberately includes future data and is not a deployable forecast.",
+    "All periods are previously exposed development data; this does not reproduce the SWEWT author experiment.",
+    "84 configurations were recomputed by algebra for audit, not84additional scientific experiment fits.",
+    "The production summary fit count follows its completed loop; no separate per-trial execution journal was saved."
+  ]
+}

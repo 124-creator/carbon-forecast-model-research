@@ -1,0 +1,305 @@
+[
+  {
+    "market": "BEIJING_MEAN",
+    "fold": "fixed602020",
+    "legacy_year_field_is_fold_id": true,
+    "target": "author-curated daily transaction mean in CNY/tonne",
+    "row_boundaries": [
+      0,
+      403,
+      537,
+      673
+    ],
+    "counts": {
+      "train": 319,
+      "val": 114,
+      "final": 453,
+      "test": 116
+    },
+    "origin_ranges": {
+      "train": [
+        64,
+        382
+      ],
+      "val": [
+        403,
+        516
+      ],
+      "final": [
+        64,
+        516
+      ],
+      "test": [
+        537,
+        652
+      ]
+    },
+    "first_train_origin": "2014-04-23",
+    "last_train_label": "2016-05-25",
+    "first_validation_origin": "2016-05-26",
+    "last_validation_label": "2017-01-19",
+    "first_test_origin": "2017-01-20",
+    "last_test_label": "2017-12-29",
+    "training_rms": [
+      5.3471683624083886,
+      1.5155423638804746,
+      1.5850755274940993,
+      0.2960091097159442
+    ],
+    "train_target_second_moment": [
+      13.457045423642768,
+      26.61717998459881,
+      68.58396049698416
+    ],
+    "sources": [
+      {
+        "path": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/data/sciencedb_819_v1/prepared/BEIJING_MEAN.csv",
+        "sha256": "952a69168d396cce3bbd54a5704f861cc459f67e9e121434fd7672e86bf18ed3",
+        "doi": "10.11922/sciencedb.819"
+      },
+      {
+        "path": "data/parsed/brent_eia_daily.csv",
+        "sha256": "2f4ef39f7046e5969a1471e2610febae3d57c277d14447b166b83f39d8f2e191"
+      },
+      {
+        "path": "data/parsed/wti_eia_daily.csv",
+        "sha256": "e1a301dbaf422dffd3a8b372e323fc7df182815f0ee61dfcc1db31c39d497d69"
+      },
+      {
+        "path": "data/parsed/henryhub_eia_daily.csv",
+        "sha256": "007ce1868c7966a864d22d2ae6c7a82e02586a3120a86b63b6aadaa5ad9bf5b5"
+      }
+    ],
+    "energy_alignment": [
+      {
+        "series": "brent",
+        "minimum_age_days": 14,
+        "maximum_age_days": 17,
+        "source_missing_price_rows_excluded_before_backward_asof": 0
+      },
+      {
+        "series": "wti",
+        "minimum_age_days": 14,
+        "maximum_age_days": 20,
+        "source_missing_price_rows_excluded_before_backward_asof": 0
+      },
+      {
+        "series": "henryhub",
+        "minimum_age_days": 14,
+        "maximum_age_days": 17,
+        "source_missing_price_rows_excluded_before_backward_asof": 1
+      }
+    ],
+    "volume": {
+      "unit": "tonnes",
+      "valid_rows": 673,
+      "usable_context_rows": 663,
+      "normalization": "current log1p volume minus prior-60-record median, divided by prior std floored .25, clipped [-5,5]; >=10 prior records",
+      "information": "current record's price and volume assumed observed at forecast issue; no turnover input",
+      "source_processing": "author monthly-reference outlier screening/replacement; flags and point-in-time vintage unavailable"
+    },
+    "role": "prespecified primary cross-market replication"
+  },
+  {
+    "market": "CHONGQING_MEAN",
+    "fold": "fixed602020",
+    "legacy_year_field_is_fold_id": true,
+    "target": "author-curated daily transaction mean in CNY/tonne",
+    "row_boundaries": [
+      0,
+      144,
+      192,
+      240
+    ],
+    "counts": {
+      "train": 60,
+      "val": 28,
+      "final": 108,
+      "test": 28
+    },
+    "origin_ranges": {
+      "train": [
+        64,
+        123
+      ],
+      "val": [
+        144,
+        171
+      ],
+      "final": [
+        64,
+        171
+      ],
+      "test": [
+        192,
+        219
+      ]
+    },
+    "first_train_origin": "2016-12-29",
+    "last_train_label": "2017-06-26",
+    "first_validation_origin": "2017-06-27",
+    "last_validation_label": "2017-09-12",
+    "first_test_origin": "2017-09-13",
+    "last_test_label": "2017-12-29",
+    "training_rms": [
+      2.253304488718983,
+      4.3106502519232075,
+      4.761998096820902,
+      0.21770577437404864
+    ],
+    "train_target_second_moment": [
+      2.651261666666666,
+      12.441541666666668,
+      71.63110166666664
+    ],
+    "sources": [
+      {
+        "path": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/data/sciencedb_819_v1/prepared/CHONGQING_MEAN.csv",
+        "sha256": "0782976147c5e6948a494f34990331e58b2815dcef946fb1fad1ff3fef632e67",
+        "doi": "10.11922/sciencedb.819"
+      },
+      {
+        "path": "data/parsed/brent_eia_daily.csv",
+        "sha256": "2f4ef39f7046e5969a1471e2610febae3d57c277d14447b166b83f39d8f2e191"
+      },
+      {
+        "path": "data/parsed/wti_eia_daily.csv",
+        "sha256": "e1a301dbaf422dffd3a8b372e323fc7df182815f0ee61dfcc1db31c39d497d69"
+      },
+      {
+        "path": "data/parsed/henryhub_eia_daily.csv",
+        "sha256": "007ce1868c7966a864d22d2ae6c7a82e02586a3120a86b63b6aadaa5ad9bf5b5"
+      }
+    ],
+    "energy_alignment": [
+      {
+        "series": "brent",
+        "minimum_age_days": 14,
+        "maximum_age_days": 17,
+        "source_missing_price_rows_excluded_before_backward_asof": 0
+      },
+      {
+        "series": "wti",
+        "minimum_age_days": 14,
+        "maximum_age_days": 18,
+        "source_missing_price_rows_excluded_before_backward_asof": 0
+      },
+      {
+        "series": "henryhub",
+        "minimum_age_days": 14,
+        "maximum_age_days": 15,
+        "source_missing_price_rows_excluded_before_backward_asof": 1
+      }
+    ],
+    "volume": {
+      "unit": "tonnes",
+      "valid_rows": 240,
+      "usable_context_rows": 230,
+      "normalization": "current log1p volume minus prior-60-record median, divided by prior std floored .25, clipped [-5,5]; >=10 prior records",
+      "information": "current record's price and volume assumed observed at forecast issue; no turnover input",
+      "source_processing": "author monthly-reference outlier screening/replacement; flags and point-in-time vintage unavailable"
+    },
+    "role": "small-sample stress test"
+  },
+  {
+    "market": "TIANJIN_MEAN",
+    "fold": "fixed602020",
+    "legacy_year_field_is_fold_id": true,
+    "target": "author-curated daily transaction mean in CNY/tonne",
+    "row_boundaries": [
+      0,
+      274,
+      365,
+      457
+    ],
+    "counts": {
+      "train": 190,
+      "val": 71,
+      "final": 281,
+      "test": 72
+    },
+    "origin_ranges": {
+      "train": [
+        64,
+        253
+      ],
+      "val": [
+        274,
+        344
+      ],
+      "final": [
+        64,
+        344
+      ],
+      "test": [
+        365,
+        436
+      ]
+    },
+    "first_train_origin": "2014-04-10",
+    "last_train_label": "2015-04-27",
+    "first_validation_origin": "2015-04-29",
+    "last_validation_label": "2015-12-02",
+    "first_test_origin": "2015-12-03",
+    "last_test_label": "2017-06-30",
+    "training_rms": [
+      1.2839534894349607,
+      1.3764260670114898,
+      1.699884395983139,
+      0.35200264318021923
+    ],
+    "train_target_second_moment": [
+      1.4193829509479727,
+      10.25265106846061,
+      31.883682843084582
+    ],
+    "sources": [
+      {
+        "path": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/data/sciencedb_819_v1/prepared/TIANJIN_MEAN.csv",
+        "sha256": "c35e24f047d903f1d1f68513e87900891a89314b0fb91100d57390c34bc27dda",
+        "doi": "10.11922/sciencedb.819"
+      },
+      {
+        "path": "data/parsed/brent_eia_daily.csv",
+        "sha256": "2f4ef39f7046e5969a1471e2610febae3d57c277d14447b166b83f39d8f2e191"
+      },
+      {
+        "path": "data/parsed/wti_eia_daily.csv",
+        "sha256": "e1a301dbaf422dffd3a8b372e323fc7df182815f0ee61dfcc1db31c39d497d69"
+      },
+      {
+        "path": "data/parsed/henryhub_eia_daily.csv",
+        "sha256": "007ce1868c7966a864d22d2ae6c7a82e02586a3120a86b63b6aadaa5ad9bf5b5"
+      }
+    ],
+    "energy_alignment": [
+      {
+        "series": "brent",
+        "minimum_age_days": 14,
+        "maximum_age_days": 17,
+        "source_missing_price_rows_excluded_before_backward_asof": 0
+      },
+      {
+        "series": "wti",
+        "minimum_age_days": 14,
+        "maximum_age_days": 20,
+        "source_missing_price_rows_excluded_before_backward_asof": 0
+      },
+      {
+        "series": "henryhub",
+        "minimum_age_days": 14,
+        "maximum_age_days": 17,
+        "source_missing_price_rows_excluded_before_backward_asof": 1
+      }
+    ],
+    "volume": {
+      "unit": "tonnes",
+      "valid_rows": 457,
+      "usable_context_rows": 447,
+      "normalization": "current log1p volume minus prior-60-record median, divided by prior std floored .25, clipped [-5,5]; >=10 prior records",
+      "information": "current record's price and volume assumed observed at forecast issue; no turnover input",
+      "source_processing": "author monthly-reference outlier screening/replacement; flags and point-in-time vintage unavailable"
+    },
+    "role": "prespecified primary cross-market replication"
+  }
+]

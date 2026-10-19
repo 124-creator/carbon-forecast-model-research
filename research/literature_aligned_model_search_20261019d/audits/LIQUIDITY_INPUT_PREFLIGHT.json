@@ -1,0 +1,90 @@
+{
+  "status": "PASS",
+  "scope": "date alignment, finite current volume contexts, future-volume perturbation of feature pipeline, model interfaces; zero market fits",
+  "records": [
+    {
+      "market": "GUANGZHOU",
+      "cutoff": "2021-08-05",
+      "future_volume_perturbation_past_input_difference": 0.0,
+      "models": [
+        {
+          "family": "liquidity_full",
+          "parameters": 11
+        },
+        {
+          "family": "liquidity_readout",
+          "parameters": 11
+        },
+        {
+          "family": "shock_size_only",
+          "parameters": 9
+        },
+        {
+          "family": "liquidity_unconstrained",
+          "parameters": 11
+        },
+        {
+          "family": "gru",
+          "parameters": 4500
+        },
+        {
+          "family": "lstm",
+          "parameters": 5780
+        }
+      ],
+      "manifest": {
+        "path": "/tmp/carbon-literature-data-audit-20261019d/prepared/GUANGZHOU_auxiliary.csv",
+        "sha256": "77f93f3c0579d350196975719aeb2e2e12684bf2e946933db74a07854c2afa00",
+        "rows": 1434,
+        "valid_reported_volume_rows": 1434,
+        "usable_context_rows": 1424,
+        "rule": "current log1p volume minus median of valid volumes in prior 60 target records; divide prior standard deviation floored .25, clip [-5,5]; require >=10 past valid rows",
+        "missing_rule": "context=(0,0) means absent information; never asserts volume itself equals zero",
+        "information": "author-reported current-day Volume assumed available after that day's report; exact publication vintage/unit not certified",
+        "input_information_span": "64 return tokens; each volume token uses up to 60 earlier target records for its reference"
+      }
+    },
+    {
+      "market": "HUBEI",
+      "cutoff": "2021-08-05",
+      "future_volume_perturbation_past_input_difference": 0.0,
+      "models": [
+        {
+          "family": "liquidity_full",
+          "parameters": 11
+        },
+        {
+          "family": "liquidity_readout",
+          "parameters": 11
+        },
+        {
+          "family": "shock_size_only",
+          "parameters": 9
+        },
+        {
+          "family": "liquidity_unconstrained",
+          "parameters": 11
+        },
+        {
+          "family": "gru",
+          "parameters": 4500
+        },
+        {
+          "family": "lstm",
+          "parameters": 5780
+        }
+      ],
+      "manifest": {
+        "path": "/tmp/carbon-literature-data-audit-20261019d/prepared/HUBEI_auxiliary.csv",
+        "sha256": "15d33910cc9c35d3f51a8043d6d909d5e045aa2c11ee0e55482c2cb5cdcf571d",
+        "rows": 1408,
+        "valid_reported_volume_rows": 1378,
+        "usable_context_rows": 1368,
+        "rule": "current log1p volume minus median of valid volumes in prior 60 target records; divide prior standard deviation floored .25, clip [-5,5]; require >=10 past valid rows",
+        "missing_rule": "context=(0,0) means absent information; never asserts volume itself equals zero",
+        "information": "author-reported current-day Volume assumed available after that day's report; exact publication vintage/unit not certified",
+        "input_information_span": "64 return tokens; each volume token uses up to 60 earlier target records for its reference"
+      }
+    }
+  ]
+}

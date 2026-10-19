@@ -1,0 +1,193 @@
+{
+  "scope": "Synthetic-only implementation qualification; no market data or performance gate",
+  "python": "/tmp/carbon-research-env/bin/python",
+  "python_version": "3.12.14",
+  "numpy_version": "2.3.5",
+  "torch_version": "2.14.1+cpu",
+  "source_sha256": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e",
+  "checks": {
+    "initialization_and_capacity": {
+      "max_initial_forecast_gap": 0.0,
+      "trainable_parameters": {
+        "full": 169,
+        "readout_gate": 169,
+        "constant_allocation": 7
+      },
+      "constant_has_no_unused_neural_parameters": true,
+      "output_shape": [
+        5,
+        20
+      ],
+      "note": "Equal initial forecasts are not generally the random-walk forecast"
+    },
+    "independent_numpy_conservation_and_prefix": {
+      "full": {
+        "max_errors": {
+          "forecast": 1.1102230246251565e-16,
+          "transient_state": 1.1102230246251565e-16,
+          "innovation": 2.220446049250313e-16,
+          "reconstructed_level": 3.552713678800501e-15,
+          "level_conservation": 7.993605777301127e-15
+        },
+        "future_input_prefix_gap": 0.0
+      },
+      "readout_gate": {
+        "max_errors": {
+          "forecast": 2.7755575615628914e-17,
+          "transient_state": 5.551115123125783e-17,
+          "innovation": 4.440892098500626e-16,
+          "reconstructed_level": 9.43689570931383e-16,
+          "level_conservation": 6.217248937900877e-15
+        },
+        "future_input_prefix_gap": 0.0
+      },
+      "constant_allocation": {
+        "max_errors": {
+          "forecast": 2.7755575615628914e-17,
+          "transient_state": 5.551115123125783e-17,
+          "innovation": 4.440892098500626e-16,
+          "reconstructed_level": 9.43689570931383e-16,
+          "level_conservation": 6.217248937900877e-15
+        },
+        "future_input_prefix_gap": 0.0
+      }
+    },
+    "mechanism_not_only_a_linear_ema": {
+      "full_vs_readout_same_parameters_max_gap": 0.0859517208975125,
+      "one_observation_equivalence_gap": 2.7755575615628914e-17,
+      "superposition_violation": 0.05439234938294188,
+      "interpretation": "Functional non-equivalence only, not novelty or predictive superiority"
+    },
+    "directional_gradient": {
+      "raw_rates": {
+        "autograd": -0.00834096176166212,
+        "finite_difference": -0.008340961810127112,
+        "absolute_error": 4.846499243593705e-11
+      },
+      "beta": {
+        "autograd": -0.04239068870350054,
+        "finite_difference": -0.042390688737015125,
+        "absolute_error": 3.351458693900966e-11
+      },
+      "base_logits": {
+        "autograd": -0.0362060901214558,
+        "finite_difference": -0.03620609001497854,
+        "absolute_error": 1.0647725756651738e-10
+      },
+      "gate.0.weight": {
+        "autograd": -0.0005330495824920744,
+        "finite_difference": -0.0005330494934341345,
+        "absolute_error": 8.905793984215205e-11
+      },
+      "gate.0.bias": {
+        "autograd": -0.00239630288918634,
+        "finite_difference": -0.002396303044882586,
+        "absolute_error": 1.5569624626024514e-10
+      },
+      "gate.2.weight": {
+        "autograd": -0.007181966362620455,
+        "finite_difference": -0.007181966354963265,
+        "absolute_error": 7.657189986243207e-12
+      },
+      "gate.2.bias": {
+        "autograd": -0.03877384988537652,
+        "finite_difference": -0.038773849908579905,
+        "absolute_error": 2.3203383658909615e-11
+      }
+    },
+    "known_law_conditional_mean": {
+      "enumerated_paths": 64,
+      "analytic_mean": [
+        -0.19,
+        -0.281,
+        -0.3229
+      ],
+      "enumerated_mean": [
+        -0.1900000000000001,
+        -0.2809999999999998,
+        -0.3229
+      ],
+      "maximum_error": 2.220446049250313e-16,
+      "known_rate_state_observability_singular_values": [
+        1.7411849368017513,
+        0.32569262329265963
+      ],
+      "interpretation": "State observability for known distinct rates, not general neural-parameter identification"
+    },
+    "real_gradient_training_smoke": {
+      "independent_synthetic_windows": 48,
+      "history_length": 24,
+      "future_length": 20,
+      "labels": "Realized independently generated future cumulative changes; oracle means not used for training",
+      "oracle_mean_square_diagnostic": 0.05523727573888563,
+      "variants": {
+        "full": {
+          "optimizer_steps": 12,
+          "initial_training_mse": 8.96043569587337,
+          "final_training_mse": 8.768441495575074,
+          "maximum_gradient_norm_by_parameter": {
+            "raw_rates": 0.02797340977936079,
+            "beta": 0.24664026827892677,
+            "base_logits": 0.17824403069227268,
+            "gate.0.weight": 0.09333741357306899,
+            "gate.0.bias": 0.0565520621349857,
+            "gate.2.weight": 0.539252395314744,
+            "gate.2.bias": 0.30883985028487076
+          },
+          "maximum_parameter_change": {
+            "raw_rates": 0.060907688150347056,
+            "beta": 0.060982862645648866,
+            "base_logits": 0.06122730874156934,
+            "gate.0.weight": 0.051889917690431234,
+            "gate.0.bias": 0.05063352493012607,
+            "gate.2.weight": 0.06137602103842695,
+            "gate.2.bias": 0.061121865969594444
+          }
+        },
+        "readout_gate": {
+          "optimizer_steps": 12,
+          "initial_training_mse": 8.96043569587337,
+          "final_training_mse": 8.845567592871028,
+          "maximum_gradient_norm_by_parameter": {
+            "raw_rates": 0.018917820589986648,
+            "beta": 0.25555794306778795,
+            "base_logits": 0.14006760586867403,
+            "gate.0.weight": 0.040773964817101466,
+            "gate.0.bias": 0.043293621150702226,
+            "gate.2.weight": 0.27952680760528126,
+            "gate.2.bias": 0.24801378947930447
+          },
+          "maximum_parameter_change": {
+            "raw_rates": 0.059949304885939705,
+            "beta": 0.06113366900639019,
+            "base_logits": 0.06095660021584148,
+            "gate.0.weight": 0.051810640389604756,
+            "gate.0.bias": 0.05089057984388895,
+            "gate.2.weight": 0.061384629289555084,
+            "gate.2.bias": 0.06088484943329446
+          }
+        },
+        "constant_allocation": {
+          "optimizer_steps": 12,
+          "initial_training_mse": 8.96043569587337,
+          "final_training_mse": 8.936710364539485,
+          "maximum_gradient_norm_by_parameter": {
+            "raw_rates": 0.018917820589986648,
+            "beta": 0.16449138512133127,
+            "base_logits": 0.09774088603658268
+          },
+          "maximum_parameter_change": {
+            "raw_rates": 0.06006448604963435,
+            "beta": 0.060140601960155755,
+            "base_logits": 0.06122396704848532
+          }
+        }
+      },
+      "formal_market_fits": 0,
+      "synthetic_smoke_fits": 3,
+      "total_optimizer_steps": 36,
+      "selection_or_gain_gate": "none"
+    }
+  },
+  "status": "PASS"
+}

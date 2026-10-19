@@ -1,0 +1,143 @@
+{
+  "title": "ScienceDB 三市场固定复制：事前统计分析方案",
+  "created_utc": "2026-10-19 09:46:10 UTC",
+  "design_timing": "Frozen before this audit has read any Beijing/Tianjin/Chongqing model prediction or performance output. Data previously underwent QC; this is first model-performance evaluation on these markets according to the project exposure audit, not a claim that raw prices were never viewed.",
+  "source_doi": "10.11922/sciencedb.819",
+  "run_root": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3",
+  "source_runner": "source/run_new_market_replication.py",
+  "fold_label": "fixed602020; legacy JSON year field is a fold label here, not a calendar year",
+  "stage": "predefined_new_market_replication_following_v1_v2_development",
+  "primary_markets": [
+    "BEIJING_MEAN",
+    "TIANJIN_MEAN"
+  ],
+  "stress_test_market": "CHONGQING_MEAN",
+  "target_definition": "Author-cleaned daily transaction mean price CNY/t, with volume tons and turnover CNY. These targets are not closing prices. Prior QC/author cleaning are disclosed separately; no automatic relabeling as target leakage.",
+  "candidate_primary": "liquidity_full",
+  "candidate_secondary": "allocation_readout",
+  "four_primary_contrasts": [
+    {
+      "candidate": "liquidity_full",
+      "comparator": "rw"
+    },
+    {
+      "candidate": "liquidity_full",
+      "comparator": "shock_size_only"
+    },
+    {
+      "candidate": "liquidity_full",
+      "comparator": "allocation_constant"
+    },
+    {
+      "candidate": "liquidity_full",
+      "comparator": "liquidity_readout"
+    }
+  ],
+  "two_prespecified_secondary_contrasts": [
+    {
+      "candidate": "allocation_readout",
+      "comparator": "rw"
+    },
+    {
+      "candidate": "allocation_readout",
+      "comparator": "allocation_constant"
+    }
+  ],
+  "noninferential_comparators": "liquidity_unconstrained, GRU, LSTM, drift, ridge_price, ridge_full, hgb_full; report fixed-family scores and differences without adding post-result hypothesis tests. V2 unconstrained parameterization/optimization-scale caveat remains.",
+  "strong_baseline_selection": {
+    "pool_tie_order": [
+      "rw",
+      "drift",
+      "ridge_price",
+      "ridge_full",
+      "hgb_full",
+      "gru",
+      "lstm"
+    ],
+    "rule": "For each market, choose the lowest past validation loss, exact ties in stated pool order. Store decision before reading test NPZ. Report selected family's mean-seed test score as additional context, without using it to replace RW or structural controls.",
+    "no_test_family_selection": true
+  },
+  "split": {
+    "row_counts": {
+      "BEIJING_MEAN": 673,
+      "TIANJIN_MEAN": 457,
+      "CHONGQING_MEAN": 240
+    },
+    "boundaries": "A=floor(0.6*N); B=A+floor(0.2*N). This preserves the historical sequential60/20/20 partitions; do not substitute floor(0.8*N).",
+    "lookback": 64,
+    "horizons_observation_steps": [
+      1,
+      5,
+      20
+    ],
+    "origin_set": "t=64,...,N-21; window tokens[t-63:t+1]; target p[t+h]-p[t].",
+    "train": "t+20 < A",
+    "validation": "t >= A and t+20 < B",
+    "final_refit": "t+20 < B",
+    "test": "t >= B and t+20 < N; all horizons share the same origins.",
+    "counts": {
+      "BEIJING_MEAN": {
+        "train": 319,
+        "val": 114,
+        "test": 116,
+        "final": 453
+      },
+      "TIANJIN_MEAN": {
+        "train": 190,
+        "val": 71,
+        "test": 72,
+        "final": 281
+      },
+      "CHONGQING_MEAN": {
+        "train": 60,
+        "val": 28,
+        "test": 28,
+        "final": 108
+      }
+    },
+    "prediction_time": "After origin daily mean price and reported volume are observed; exact publication vintage is not certified."
+  },
+  "fitting_policy": "No training by this audit. Runner retains two learning rates .003/.01, selection seed17, actual family forward for validation epoch choice including honest epoch0, fresh refits17/29/43 at selected epoch count, max80 epochs/min15/patience12, same weighted loss/scaler and matured-label rules. No test-time parameter fitting.",
+  "estimand": {
+    "cell_horizon": "R_mfh = [mean over seeds and origins of (forecast-target)^2] / [mean over the same origins of target^2]. The denominator is RW's MSE at that market/horizon.",
+    "per_market": "Equal mean over H1/H5/H20.",
+    "primary_macro": "Equal mean over Beijing and Tianjin and over the three horizons. Do not weight markets by origin count.",
+    "effect": "Positive improvement = comparator score minus candidate score, in RW-normalized loss units. Also show descriptive 1-candidate_macro/comparator_macro with its different denominator.",
+    "seeds": "Average squared errors across seeds at each origin before any bootstrap. Seeds are algorithmic repetitions, not independent markets or independent time observations.",
+    "secondary_ensemble": "Average forecasts first only for a separately labeled three-seed ensemble secondary.",
+    "native_metrics": "Report MSE/RMSE/MAE by market and horizon; do not pool raw price units across markets without labels.",
+    "cq": "Chongqing has its own point estimates; it is never included in the Beijing/Tianjin primary macro or its multiplicity family."
+  },
+  "bootstrap": {
+    "method": "Within each market, circular moving blocks of observed forecast origins. Pair the same sampled indices for candidate, comparator and RW denominator, jointly across all three horizons. Each replicate recomputes the same ratio statistic.",
+    "primary_block_length_observed_origins": 20,
+    "sensitivity_block_length_observed_origins": 40,
+    "replications_per_market_length": 50000,
+    "rng_seed": 20261019,
+    "block_choice": "Both lengths fixed now and both reported. Never choose the more favorable interval or block length after outcomes.",
+    "per_market_intervals": "Report percentile95% marginal intervals. For Beijing/Tianjin also compute97.5% and99.58333333333333% intervals used in the conservative macro constructions below.",
+    "two_market_macro_marginal95": "For each contrast, average the lower endpoints and average the upper endpoints of the two market-specific97.5% intervals. Bonferroni across two markets gives approximate95% coverage for that contrast without assuming independent markets.",
+    "joint_six_contrast_family": "The four primary contrasts AND both prespecified secondary-candidate contrasts form one family of six. Construct each market/contrast99.58333333333333% interval (alpha=.05/(2*6); two-tail quantiles .0020833333333333333 and .9979166666666667), then average endpoints across Beijing/Tianjin for each contrast. Bonferroni across12market-contrast intervals gives an approximate simultaneous95% set for all six macro contrasts; no market-independence assumption is required.",
+    "dependence_note": "Independent Monte Carlo draws used to estimate each market's marginal interval do not imply that the two markets are independent; macro endpoints are combined using the coverage union bound, not an independence-based joint bootstrap.",
+    "cq_policy": "For Chongqing, only length20 paired intervals may be shown as descriptive small-sample diagnostics. Length40 >= n_test28 degenerates toward whole-sample rotations and will not be used. No formal CQ significance/confirmation or inclusion in primary multiplicity counts.",
+    "short_sample_limit": "Beijing116, Tianjin72 and Chongqing28 test origins allow only about5,3,1 nonoverlapping20-origin blocks respectively; these counts are rough block counts, not estimated effective sample sizes. Circular wrap assumptions and short-sample approximation remain.",
+    "uncertainty_scope": "Conditional on frozen fitted models, selected epochs/families and this fixed new-market protocol. Does not include re-training variation beyond displayed seeds, or retroactively correct old development searches. Percentile intervals remain approximate with short dependent series.",
+    "no_bootstrap_posterior_claim": true
+  },
+  "conclusions": {
+    "no_arbitrary_percentage_gate": true,
+    "no_candidate_relabeling": "Primary remains liquidity_full. A secondary allocation_readout result is reported as such, with its own pre-specified contrasts and included in the six-contrast family.",
+    "reading": "Assess effect size, market/horizon direction, interval width, structural contrasts and stability together. Failure to exclude zero is inconclusive, not proof of no value. A useful small effect is not rejected by an arbitrary1% rule.",
+    "new_market_wording": "Describe as pre-specified replication on three additional author-processed markets, with Beijing/Tianjin primary and Chongqing stress. Do not equate new-market performance with unseen raw-data collection, historical-vintage certification, causal shock identification or guaranteed publication.",
+    "volume_boundary": "Preserve the V2 caution that constrained softplus versus unconstrained affine coefficients change local optimization geometry as well as sign permissions."
+  },
+  "integrity_checks": [
+    "Plan SHA is frozen in protocol before model output and checked at completion.",
+    "Verify exact source/author data and exported partition hashes and date ordering.",
+    "Verify label purge, same H1/H5/H20 origins, scale and historical EIA14day alignment; volume rolling reference is strictly previous60records with current-report availability assumption.",
+    "Check all expected family files, finite predictions, seed/horizon labels and exact reconstructed targets.",
+    "Replay permitted LR/epoch selection from receipts, count actual positive-gradient tasks and epoch0 refits, verify checkpoint byte hashes without fitting.",
+    "Recompute mean-seed primary and separately ensemble from NPZ before checking stored SUMMARY.",
+    "Retain every family and all three markets, including negative or unstable outcomes."
+  ]
+}

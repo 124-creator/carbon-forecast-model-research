@@ -1,0 +1,55 @@
+{
+  "audit_name": "V1_INDEPENDENT_STATISTICAL_AUDIT",
+  "created_utc": "2026-10-19",
+  "timing": "Audit design written after model run completed, before this audit opened predictions.npz. This is not experiment preregistration; root already inspected some development results.",
+  "run_root": "/tmp/carbon-literature-aligned-runs-20261019d/main_v1",
+  "model_fitting_performed_by_audit": false,
+  "target_stage": "development_only",
+  "primary_statistic": "For each market/year/horizon, average squared errors across forecast origins and then across its refit seeds; divide by RW MSE in the same cell/horizon. Equal mean over 4 markets, 2 years, 3 horizons. Classical models have one deterministic prediction.",
+  "primary_family": "allocation_full",
+  "prespecified_comparators": [
+    "rw",
+    "allocation_constant",
+    "allocation_readout",
+    "validation_selected_strong"
+  ],
+  "strong_pool_tie_order": [
+    "rw",
+    "drift",
+    "ridge_price",
+    "ridge_full",
+    "hgb_full",
+    "gru",
+    "lstm"
+  ],
+  "strong_selection": "Lowest recorded past validation loss per market/year, before reading that cell's test predictions. Exact numerical ties follow pool order. Reconstruct RW validation loss and input labels independently.",
+  "effect_definition": "Positive improvement = macro score(comparator) - macro score(allocation_full), measured in RW-normalized loss units. Also report 1-score(full)/score(comparator) as a descriptive relative reduction in the macro ratio.",
+  "bootstrap": {
+    "replications": 20000,
+    "rng_seed": 20261019,
+    "primary": "Synchronous circular calendar moving blocks within each year: 42 calendar days, sampled on the full calendar year; the same date multiplicities weight every market in that year. Recompute each cell/horizon's numerator and RW denominator in each replicate, then preserve equal cell and horizon weighting.",
+    "sensitivity": "Same procedure with 84 calendar-day blocks; length is not selected from results.",
+    "seed_handling": "Before resampling, average squared errors over seeds within every origin/horizon. Never resample seeds as independent observations or expand market sample size.",
+    "pairing": "The same date weights are used for full, every comparator, and RW denominator. Markets share the same weights within a year; year strata remain separate.",
+    "intervals": "Percentile 95% marginal CIs, and 98.75% marginal intervals as an approximate Bonferroni simultaneous 95% family for four contrasts. These are development-conditional uncertainty summaries, not multiplicity correction for earlier model searches.",
+    "probability": "The bootstrap positive-effect fraction is descriptive, not a p-value or a posterior probability.",
+    "assumptions": "Circular block approximation, chosen calendar block lengths, frozen fitted models and validation-selected families. Does not incorporate retraining, earlier research selection, or prove fresh confirmation."
+  },
+  "integrity_checks": [
+    "Frozen runner and model hashes match protocol and execution-complete record.",
+    "All 8 cells and 11 families exist, finite predictions, correct seeds/horizons.",
+    "All families use identical observed targets and origins in a cell.",
+    "Source CSV hashes match input manifest; dates/price recreate target arrays and train/val/test masks.",
+    "All input scale/variance and 14-day energy alignment quantities reproduce independently.",
+    "Each stored selection is the minimum permitted validation loss under its recorded trials; refit epoch and seed match.",
+    "Check actual selection/refit receipt counts, zero-epoch refits, gradient-positive work, and checkpoint hashes without unpickling checkpoints.",
+    "Recomputed primary and ensemble metrics agree with stored summaries."
+  ],
+  "secondary_reports": [
+    "native MSE/RMSE/MAE by cell and horizon",
+    "seed-dispersion summaries",
+    "ensemble separately",
+    "leave-one-market-out macro effects",
+    "all model family macro ratios"
+  ]
+}

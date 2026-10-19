@@ -1,0 +1,83 @@
+{
+  "stage": "fixed_candidate_new_market_replication_after_v1_v2_development",
+  "created_unix": 1792403339.5896356,
+  "markets": [
+    "BEIJING_MEAN",
+    "TIANJIN_MEAN",
+    "CHONGQING_MEAN"
+  ],
+  "fold": "fixed602020",
+  "source_doi": "10.11922/sciencedb.819",
+  "license": "CC BY 4.0",
+  "target": "author-curated daily transaction mean price, CNY/tonne; not close",
+  "prior_exposure": "source values previously mechanically parsed, quality checked and partitioned; no prior model fit or forecast score identified for these three markets",
+  "source_limitation": "author monthly-reference anomaly cleaning/replacement can use future-within-month information; this is evaluation of the published cleaned benchmark, not a certified live-vintage deployment test",
+  "fixed_primary_candidate": "liquidity_full",
+  "prespecified_secondary_candidate": "allocation_readout from v1 development discovery",
+  "primary_markets": [
+    "BEIJING_MEAN",
+    "TIANJIN_MEAN"
+  ],
+  "separate_stress_market": "CHONGQING_MEAN (28 common H20-complete test origins)",
+  "neural_families": [
+    "liquidity_full",
+    "liquidity_readout",
+    "shock_size_only",
+    "liquidity_unconstrained",
+    "allocation_constant",
+    "allocation_readout",
+    "gru",
+    "lstm"
+  ],
+  "classical_families": [
+    "rw",
+    "drift",
+    "ridge_price",
+    "ridge_full",
+    "hgb_full"
+  ],
+  "partition": "preserve previous 60/20/20 raw-row boundaries: n*3//5, then n//5, remainder",
+  "label_maturity": "origin t>=64; each split's t+20 must be before that split's end; final refit all matured pre-test labels",
+  "horizons_observation_steps": [
+    1,
+    5,
+    20
+  ],
+  "lookback": 64,
+  "learning_rates": [
+    0.003,
+    0.01
+  ],
+  "selection_seed": 17,
+  "refit_seeds": [
+    17,
+    29,
+    43
+  ],
+  "maximum_epochs": 80,
+  "minimum_epochs_before_stopping": 15,
+  "patience": 12,
+  "batch_size": 128,
+  "optimizer": "frozen v1 AdamW(weight_decay=1e-4), global gradient norm clip 5",
+  "training_loss": "equal H1/H5/H20 native squared error divided by training target second moment",
+  "selection": "past validation only selects lr and epoch including epoch0, then three seeds refit all matured pre-test labels for selected epoch count",
+  "test_updates": "all fitted weights frozen over test; observed history updated at each origin",
+  "primary_seed_summary": "mean individual-seed loss, then equal horizon and primary-market means of MSE/RW",
+  "secondary_seed_summary": "three-prediction ensemble scores labeled separately",
+  "energy": "same three public historical EIA arithmetic-change features, backward asof >=14 calendar days old; not historical-vintage certified",
+  "volume_context": "same v2 causal prior-60-record normalization; 64 input tokens may use 60 earlier records for volume reference",
+  "control_limitations": [
+    "v2 full and readout start at equal parameter values but different predictions",
+    "constrained and signed controls have unequal initial effective-coefficient derivative scales",
+    "price-only Ridge excludes volume intentionally; ridge_full/GRU/LSTM/HGB receive the same six channels"
+  ],
+  "statistics_plan_sha256": "c025efb1b6ab2bd4493868d6b48830b7b23f4049d8f74766797989b0d2453aad",
+  "source_sha256": {
+    "run_model_search.py": "26347433fe6416298e4969da618cbba291999f3a66131172bc8f2e510f3633bf",
+    "innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e",
+    "run_liquidity_extension.py": "95665858a1945b00bba6d6233022c34c0a58993899ccadda8c895f64ffe69807",
+    "liquidity_models.py": "91dd66c0b33b8d75100e37cc382f01be44021ae538f6cbbedddda7f9b9386e0b",
+    "run_new_market_replication.py": "8c617a714bb0b47d117b213de9d299c3bd6a534c8211c28c8d039d454df12e56"
+  },
+  "claim_rule": "report all markets/horizons and fixed controls; no test-driven retry, candidate promotion or universal percentage threshold; test-conditioned inference cannot certify source-time cleaning causality"
+}
