@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-19",
+  "status": "POST_RESULT_SINGLE_CANDIDATE_PROPOSAL_ONLY",
+  "original_stage_e_results_already_seen": true,
+  "budget320_results_already_seen": true,
+  "new_market_fits_or_forecast_tests": 0,
+  "complete_channel_panel_collected": false,
+  "one_candidate": "Training-only matured trading-channel-share supervision for a past-only direct total-mean-price student.",
+  "model_novelty_not_established": true,
+  "local_source_limit": "Parent read-only QC found only total fields in current CEA Body.js tables4/5; neither is a distinct trading channel. No channel panel is inferred from these tables.",
+  "sources": [
+    {
+      "id": "D1",
+      "title": "全国碳市场每日综合价格行情及成交信息20260730",
+      "publisher": "上海环境能源交易所",
+      "publication_date": "2026-07-30",
+      "url": "https://overview.cneeex.com/c/2026-07-30/498086.shtml",
+      "reading_scope": "Actual official full daily bulletin body, lines118-130; listed and block volume/turnover, explicit no one-way auction, and total values.",
+      "source_refs": ["turn112view0"],
+      "limits": "One field/identity example only; no complete daily collection, date coverage or forecasting score inferred."
+    },
+    {
+      "id": "D2",
+      "title": "全国碳市场每月综合价格行情及成交信息20250801-20250829",
+      "publisher": "上海环境能源交易所",
+      "publication_date": "2025-08-29",
+      "url": "https://overview.cneeex.com/c/2025-08-29/496735.shtml",
+      "reading_scope": "Actual official monthly bulletin body; all three trading channels and total volume/turnover.",
+      "source_refs": ["turn112view1"],
+      "limits": "Used only to establish that one-way auctions have occurred; not substituted for daily data."
+    },
+    {
+      "id": "D3",
+      "title": "交易数据查询",
+      "publisher": "上海环境能源交易所",
+      "url": "https://shyx.cneeex.com/qdata.html",
+      "reading_scope": "Actual official page labels and publication statement; three channel rows present, dynamic numerical fields not supplied in text retrieval.",
+      "source_refs": ["turn110view0"],
+      "limits": "No hidden API probing or bulk extraction; page labels alone are not data coverage."
+    },
+    {
+      "id": "P1",
+      "title": "Using time-series privileged information for provably efficient learning of prediction models",
+      "authors": ["Rickard K.A. Karlsson", "Martin Willbo", "Zeshan M. Hussain", "Rahul G. Krishnan", "David Sontag", "Fredrik Johansson"],
+      "venue": "AISTATS2022, PMLR151:5459-5484",
+      "conference_dates": "2022-03-28 to 2022-03-30",
+      "url": "https://proceedings.mlr.press/v151/k-a-karlsson22a.html",
+      "code_url": "https://github.com/RickardKarl/LearningUsingPrivilegedTimeSeries",
+      "reading_scope": "Official proceedings metadata and abstract; official software link opened. Publisher PDF retrieval exceeded tool content-length limit, so no new equation-level claim attributed to that unread PDF.",
+      "source_refs": ["turn106view1", "turn113view3"],
+      "code_review_scope": "Repository landing/README only; not executed or line-audited.",
+      "relevance": "Training-only intermediate future observations are an existing supervised-learning setting; linear-Gaussian fixed-horizon guarantees do not automatically apply to carbon prices."
+    },
+    {
+      "id": "P2",
+      "title": "Efficient learning of nonlinear prediction models with time-series privileged information",
+      "authors": ["Bastian Jung", "Fredrik D. Johansson"],
+      "venue": "NeurIPS2022, Advances in Neural Information Processing Systems35",
+      "doi": "10.52202/068431-1384",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/792845ddfe4047d7066348e52e46b74d-Abstract-Conference.html",
+      "full_text_url": "https://proceedings.neurips.cc/paper_files/paper/2022/file/792845ddfe4047d7066348e52e46b74d-Paper-Conference.pdf",
+      "code_url": "https://github.com/Healthy-AI/glupts",
+      "reading_scope": "Actual official PDF sections2 and3, Algorithm1, Theorem1/Proposition1, sections3.2/3.3 and experimental setup. Known-map assumptions, invertible-Gram equivalence and bias-amplification limitations explicitly read.",
+      "source_refs": ["turn109view0", "turn108view0", "turn111view4", "turn114view2", "turn113view0"],
+      "code_review_scope": "Author repository README and directory descriptions only, no execution or line-by-line algorithm audit.",
+      "relevance": "Nonlinear future-privileged representation learning and its failure modes are established; a channel teacher requires a narrower empirical mechanism claim."
+    },
+    {
+      "id": "P3",
+      "title": "Efficient Multivariate Time Series Forecasting via Calibrated Language Models with Privileged Knowledge Distillation",
+      "authors": ["Chenxi Liu", "Hao Miao", "Qianxiong Xu", "Shaowen Zhou", "Cheng Long", "Yan Zhao", "Ziyue Li", "Rui Zhao"],
+      "venue": "ICDE2025, pages3165-3178",
+      "doi": "10.1109/ICDE65448.2025.00237",
+      "conference_dates": "2025-05-19 to 2025-05-23",
+      "author_manuscript_dates": "arXiv v1 2025-05-04; read v2 2025-05-06",
+      "url": "https://doi.org/10.1109/ICDE65448.2025.00237",
+      "full_text_url": "https://arxiv.org/html/2505.02138v2",
+      "publication_record_url": "https://vbn.aau.dk/en/publications/efficient-multivariate-time-series-forecasting-via-calibrated-lan/",
+      "code_url": "https://github.com/ChenxiLiu-HNU/TimeKD",
+      "reading_scope": "Actual author full-text Introduction and sectionsIII/IV-B/IV-C/IV-D/IV-E; future ground-truth teacher, correlation/feature distillation, student-only test forecasting. Published venue/DOI corroborated by author institution record.",
+      "source_refs": ["turn106view2", "turn107view1", "turn108view5", "turn113view1", "turn114view0"],
+      "code_review_scope": "Official repository README and file listing only; not executed or line-audited.",
+      "relevance": "Future-aware teachers in time-series forecasting already exist. The proposed market-channel supervision cannot claim novelty from future information or distillation alone."
+    }
+  ],
+  "local_prior_reading": [
+    "research/ohlc_path_learning_20261019/METHOD_ZH.md",
+    "research/ohlc_path_learning_20261019/REPORT_ZH.md",
+    "research/event_feedback_innovation_20261017/audits/DSOF_REVISION_REVIEW_ZH.md"
+  ],
+  "endpoint_teacher_specific_implementation": "Not located and fully re-reviewed in this follow-up; no unsupported exact-equivalence or novelty claim made.",
+  "next_stage_conditions": [
+    "Obtain an authentic complete channel panel before any model, preserving all three routes and true zero/missing distinctions.",
+    "Retain original total-mean-price target and direct H1/H5/H20 outputs; no latent-efficient-price claim from accounting identity.",
+    "Use identical available historical information for direct and teacher controls; include ordinary multi-task future-channel supervision.",
+    "Select only deployable student validation outputs; future channel observations are training-only matured supervision.",
+    "Current CEA/Tianjin tails have already been scored; further modifications on them are development.",
+    "No further rescue of the current volume-conditioned two-exponential duration gate under a new name."
+  ]
+}

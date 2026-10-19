@@ -1,0 +1,50 @@
+{
+  "created_utc": "2026-10-19T11:59:48.357818+00:00",
+  "status": "FROZEN_BEFORE_STAGE_E_MARKET_FIT_OR_SCORE",
+  "local_parent": "01433a22ad610e4e8338075dd13381b4304f768c",
+  "remote_parent": "2365eb3bc710ee47ab2a3fed40af318f27d9038b",
+  "parent_content_tree": "1434dab918d787e474432caa2da46c07d2e96260",
+  "source_sha256": {
+    "signed_response_models.py": "5ceb7f04c567be32f1a399cbf01dafdfc6894d3840a158b6faae4153f09eb2f8",
+    "run_signed_response_search.py": "905da0ca33607799b1ca63d9efe6710df173ec33c5c44e137071e024906d990c",
+    "run_neural_references.py": "489249eb417e54611123da2b1508f946f416c7f5813124e2ddd2eedfe8b63b11"
+  },
+  "statistical_plan_sha256": "b6f33c9c328f37f9a283275d6cc36e4e48153bc3322d45e2b8deb74e3d1d987c",
+  "datasets_manifest_sha256": "f28fae19e3bcbabb090d3d1e9ebe97aa8c22558114a5c346143ec03a70ab2b22",
+  "datasets": [
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "file": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv",
+      "sha256": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a",
+      "role": "development",
+      "source_url": "https://www.chinatcx.com.cn/tshq",
+      "price_definition": "Official TJEA daily total published two-decimal transaction mean, CNY/tonne; not close",
+      "source_processing": "All1077 official canonical daily-total records retained; price preserved without recomputing turnover/volume; no model-based cleaning",
+      "source_vintage": "Current public historical snapshot; per-day publication vintages unverified. Stage d already scored this tail; fully exposed development in stage e.",
+      "license": "No redistribution license established; canonical rows remain private"
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "file": "/tmp/carbon-signed-response-data-20261019e/CEA_OFFICIAL_MEAN.csv",
+      "sha256": "f9f0e09b7500b2bdb4ec8b16c61d5d5fa2b64de63a24c0cf7bd1d269aa2be75d",
+      "role": "confirmation",
+      "source_url": "https://www.chinatcx.com.cn/tshq",
+      "price_definition": "Published daily TOTAL transaction mean in yuan per tonne, retained exactly as reported; not closing price or listing-only mean",
+      "source_processing": "Take every row from main CEA table index4; sort dates ascending and strip numeric thousands separators only. No row deletion, no deduplication, no date fill, no price recomputation, no splice.",
+      "source_vintage": "Current public historical snapshot; daily publication vintages unverified. Raw source values were previously read/QC; repository evidence found no prior CEA forecast scoring. Confirmation is limited to this fixed stage-e scoring design.",
+      "license": "No explicit redistribution license identified; raw and per-date CSV remain local-only. Public source/QC metadata and reconstruction script."
+    }
+  ],
+  "preflight_sha256": {
+    "CORE_DATA_FORWARD_PREFLIGHT_FINAL.json": "4e209be5685bcfcdc827cee5579cf1dc4c95a492651c3c17bd75e3902b550e16",
+    "SIGNED_RESPONSE_SYNTHETIC_CHECK_FINAL.json": "6c0ee86375f2c099961e24984336480960ccf31cacc076d8445915927fbd23d3",
+    "NEURAL_REFERENCE_PREFLIGHT.json": "be4f8606ac9cacb4a8f9e531a8242bda0eb59cf48a2503168116886c4ac12b93"
+  },
+  "planned_core_selection_fits": 208,
+  "planned_core_final_fits": 16,
+  "planned_fixed_formula_models": 4,
+  "planned_neural_reference_selection_fits": 8,
+  "planned_neural_reference_final_fits": 12,
+  "planned_additional_initial_dynamics_linear_diagnostic_solves": 12,
+  "interpretation": "Local code and plan freeze. Later GitHub upload is a content mirror, not an earlier external preregistration. No stage-e market model has yet been fitted or scored."
+}

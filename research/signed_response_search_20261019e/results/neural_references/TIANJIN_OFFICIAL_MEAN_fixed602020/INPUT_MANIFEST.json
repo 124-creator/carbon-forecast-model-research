@@ -1,0 +1,87 @@
+{
+  "market": "TIANJIN_OFFICIAL_MEAN",
+  "role": "development",
+  "fold": "fixed602020",
+  "target": "Official TJEA daily total published two-decimal transaction mean, CNY/tonne; not close",
+  "row_boundaries": [
+    0,
+    646,
+    861,
+    1077
+  ],
+  "counts": {
+    "train": 562,
+    "val": 195,
+    "final": 777,
+    "test": 196
+  },
+  "origin_ranges": {
+    "train": [
+      64,
+      625
+    ],
+    "val": [
+      646,
+      840
+    ],
+    "final": [
+      64,
+      840
+    ],
+    "test": [
+      861,
+      1056
+    ]
+  },
+  "raw_date_range": [
+    "2013-12-26",
+    "2026-09-30"
+  ],
+  "first_train_origin": "2014-04-03",
+  "last_train_label": "2020-10-22",
+  "first_validation_origin": "2020-10-23",
+  "last_validation_label": "2023-04-18",
+  "first_test_origin": "2023-04-19",
+  "last_test_origin": "2026-07-02",
+  "last_test_label": "2026-09-30",
+  "training_rms": [
+    1.3139645907468107
+  ],
+  "train_target_second_moment": [
+    1.621859964412811,
+    6.993383096085417,
+    22.16738167259787
+  ],
+  "sources": [
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "file": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv",
+      "sha256": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a",
+      "role": "development",
+      "source_url": "https://www.chinatcx.com.cn/tshq",
+      "price_definition": "Official TJEA daily total published two-decimal transaction mean, CNY/tonne; not close",
+      "source_processing": "All1077 official canonical daily-total records retained; price preserved without recomputing turnover/volume; no model-based cleaning",
+      "source_vintage": "Current public historical snapshot; per-day publication vintages unverified. Stage d already scored this tail; fully exposed development in stage e.",
+      "license": "No redistribution license established; canonical rows remain private",
+      "path": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv"
+    }
+  ],
+  "price_retained_without_turnover_division": true,
+  "observed_price_turnover_ratio_max_gap_qc_only": 0.005000000000002558,
+  "maximum_record_gap_calendar_days": 319,
+  "input_columns": [
+    "change_over_fixed_train_rms",
+    "volume_surprise",
+    "volume_valid"
+  ],
+  "energy_inputs": false,
+  "volume": {
+    "valid_rows": 1077,
+    "usable_context_rows": 1067,
+    "normalization": "current log1p volume minus prior60 target-record valid-log-volume median, divided by prior std floored .25, clipped[-5,5], >=10 valid past records",
+    "information": "origin price and volume observed after origin report; no future context; turnover not an input",
+    "missing": "0 surprise plus 0 valid mask; genuine observed zero volume is valid",
+    "model_usage": "only current origin context enters gates; historical price window64; current volume reference uses prior60 records"
+  },
+  "source_vintage": "Current public historical snapshot; per-day publication vintages unverified. Stage d already scored this tail; fully exposed development in stage e."
+}

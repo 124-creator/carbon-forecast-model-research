@@ -1,0 +1,56 @@
+{
+  "created_utc": "2026-10-19T11:43:22.631567+00:00",
+  "scope": "Data-source selection only; no model performance may be used to rank candidates. Stage d is immutable.",
+  "ranked_candidates": [
+    {
+      "rank": 1,
+      "market": "GUANGDONG",
+      "source_class": "originating exchange official bulk history or API",
+      "reason": "long pilot history and previously verified daily volume/turnover definitions; 2024+ scoring exposure must be checked"
+    },
+    {
+      "rank": 2,
+      "market": "HUBEI",
+      "source_class": "originating exchange official bulk history or API",
+      "reason": "long pilot history and daily activity fields; 2024+ scoring exposure must be checked"
+    },
+    {
+      "rank": 3,
+      "market": "SHENZHEN",
+      "source_class": "originating exchange official history",
+      "reason": "long independent pilot but contract/version/close-vs-mean alignment needs proof"
+    },
+    {
+      "rank": 4,
+      "market": "CEA",
+      "source_class": "originating national-market exchange official bulk history",
+      "reason": "shorter history from2021 but official identity; recent source exposure may be QC-only"
+    },
+    {
+      "rank": 5,
+      "market": "CEA",
+      "source_class": "other official exchange republished daily mean/volume history",
+      "reason": "Tianjin official page contains a long CEA table, previously acquired incidentally and schema-inspected only; validate exact national-table scope and target before use"
+    },
+    {
+      "rank": 6,
+      "market": "FIRST_ELIGIBLE_AUTHOR_PUBLIC_SOURCE",
+      "source_class": "pinned author-supplied files with documented original source",
+      "reason": "fallback only after originating official bulk paths are unavailable"
+    }
+  ],
+  "eligibility_before_scoring": {
+    "minimum_unique_daily_price_rows": 1000,
+    "date_column_and_price_definition_verified": true,
+    "positive_finite_price_target": true,
+    "volume_preferred_not_required": true,
+    "support_check_only": "60/20/20 raw-row support check, H20-complete tail>=180 origins, tail begins2024-or-later; actual experiment protocol is for root to freeze separately",
+    "recent_tail_model_scoring_exposure_must_be_absent_or_explicitly_excluded": true,
+    "source_values_read_or_qc_alone_do_not_count_as_model_scoring": true
+  },
+  "acquisition_budget": "One normal landing/bulk GET per primary candidate initially; at most two observed public followups per viable page. Do not bypass access walls or crawl large daily page sets.",
+  "selection_rule": "Fix first eligible candidate in the listed order; any later decision to add another market must be recorded as a new supplementary decision, not performance-selected replacement.",
+  "previous_state": "Known data/source metadata from stage d may inform this plan, including incidental existence of CEA table in the Tianjin static body. No new phase-e forecast scores exist or are computed by this task.",
+  "model_fits": 0,
+  "forecast_scores": 0
+}

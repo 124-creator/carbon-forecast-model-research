@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "study": "signed_response_search_20261019e",
+  "created_utc": "2026-10-19 11:51:15 UTC",
+  "status": "FIXED_BEFORE_STAGE_E_MODEL_FITTING_AND_SCORING",
+  "scope": "Local prospective analysis plan. It is not external preregistration and does not rewrite the exposure history of stage d.",
+  "scientific_question": "Does an origin-conditioned duration for two signed damped trends improve joint H1/H5/H20 forecasting beyond the same historical information, a static duration, a conditional amplitude, and unconstrained horizon readouts?",
+  "model_interpretation": "Origin-conditioned discriminative multihorizon regression; no claim of causal shock identification, a new state-space theory, or rolling conditional-expectation coherence.",
+  "data_roles": [
+    {
+      "logical_id": "TIANJIN_DEVELOPMENT",
+      "source": "Previously evaluated official Tianjin daily aggregate market series",
+      "role": "exposed_development",
+      "raw_rows": 1077,
+      "row_boundary_A": 646,
+      "row_boundary_B": 861,
+      "expected_mature_origin_counts": {"train": 562, "validation": 195, "final_pretest_fit": 777, "test": 196},
+      "test_origin_index_inclusive": [861, 1056],
+      "bootstrap_seed": 2026101901,
+      "interpretation": "Stage d official-Tianjin results informed this stage's design. Reuse of this tail is development evidence."
+    },
+    {
+      "logical_id": "CEA_NEW_OFFICIAL",
+      "source": "Newly acquired official national CEA daily market series; literal runner market ID, target price definition, dates and input hashes are supplied by the independent source manifest",
+      "role": "new_source_confirmation_for_this_fixed_stage_e_design",
+      "raw_rows": 1251,
+      "row_boundary_A": 750,
+      "row_boundary_B": 1000,
+      "expected_mature_origin_counts": {"train": 666, "validation": 230, "final_pretest_fit": 916, "test": 231},
+      "test_origin_index_inclusive": [1000, 1230],
+      "bootstrap_seed": 2026101902,
+      "interpretation": "Source quality and exposure inventory precede model scoring. Confirmatory status is limited to this fixed design on this source and tail; one market does not establish generality across all carbon markets."
+    }
+  ],
+  "date_and_identity_gate": {
+    "runtime_market_names": "Map the two logical IDs to exact runner names using the source manifests; this administrative mapping must not depend on forecast performance.",
+    "before_fit_freeze": "The execution protocol must record this file's SHA256, final model and runner SHA256, exact canonical input SHA256, price-field definition, dates, boundaries and exposure classification before fitting.",
+    "maturity_rule": "Zero-based price-origin index t >= 64; the full H20 target must be inside the corresponding label partition. Train: 64 <= t and t+20 < A. Validation: A <= t and t+20 < B. Final fit: 64 <= t and t+20 < B. Test: B <= t and t+20 < N.",
+    "forecast_issuance": "After the origin day's official market report is available; only origin-known prices and trading context enter forecasts.",
+    "elapsed_time": "Horizons and block lengths count observed market records, not calendar days. Actual date spans and gaps must be reported.",
+    "source_price": "Preserve the independently specified official price field and published rounding; do not substitute turnover divided by volume unless that is the predeclared source target."
+  },
+  "families": ["rw", "ridge_price", "ridge_interaction", "legacy_fixed_response", "fixed_response", "static_response", "signed_shock_only", "amplitude_context", "signed_context_response", "free_horizon_context"],
+  "primary_candidate": "signed_context_response",
+  "secondary_references_fixed_before_scoring": {
+    "logical_families": ["raw_gru32_price_volume", "swewt_gru32_price_volume"],
+    "registration": "Parent specified both reference models before stage-e fitting or scoring. Literal output family names are mapped from the frozen reference-runner protocol.",
+    "information": "Same prepared targets, masks and origin-known price/volume information as the core comparison; no energy covariates.",
+    "raw_gru": "GRU hidden width32 with three actual heads at H1/H5/H20.",
+    "swewt_gru": "Past-only 64-record EWT with three bands, retaining the last17 inputs; GRU hidden width32 and three actual H1/H5/H20 heads. A controlled adaptation of the 2024 Energies sliding-window idea, not the authors' numerical reproduction or an exhaustively tuned state-of-the-art claim.",
+    "selection": {"learning_rates": [0.003, 0.01], "maximum_epochs": 80, "minimum_epochs": 15, "patience": 12, "selection_seed": 17, "final_refit_seeds": [17, 29, 43]},
+    "primary_reference_aggregation": "Average squared errors across the three final seeds at each origin and horizon, then form the same equal-horizon MSE/RW risk. Ensemble-prediction error is a separately labeled descriptive secondary metric.",
+    "comparisons": ["signed_context_response versus raw_gru32_price_volume", "signed_context_response versus swewt_gru32_price_volume"],
+    "intervals": "Use the same paired circular-block indices and block20/40 draws as the core models. Report only marginal95 percentile intervals for these two explicitly secondary comparisons, in a separate section. They are outside the eight-comparison core family; do not claim simultaneous95 coverage for all ten comparisons or for both references together.",
+    "seeds": "Seed fits are training repeats, never independent time-series observations or additional markets."
+  },
+  "determinism_and_selection": {
+    "algorithm": "Deterministic full-batch regularized variable projection; no artificial seed repeats.",
+    "alpha_grid": [0.00001, 0.0001, 0.001, 0.01, 0.1, 1.0, 10.0, 100.0],
+    "nonlinear_learning_rates": [0.003, 0.01],
+    "maximum_epochs": 80,
+    "minimum_epochs": 15,
+    "early_stopping_patience": 12,
+    "epoch_choice": "Use each model's own actual validation forecasts and the declared training-derived horizon normalization. Test errors never select alpha, learning rate, epoch, features or candidate identity.",
+    "refit": "Independently initialize and fit on all H20-mature pretest labels for the selected number of updates, recomputing training-only scales and exact linear readouts as prescribed by the frozen runner.",
+    "epoch_zero": "For variable-projection response arms, epoch 0 already solves supervised linear coefficients exactly. Distinguish learned linear readout from zero nonlinear updates and from legacy_fixed_response.",
+    "linear_controls": "Ridge controls retain their frozen objective and alpha convention; do not silently equate sklearn sum-loss alpha with the response model's mean-loss alpha. Their normalization and effective penalties must be disclosed.",
+    "selection_order": "Follow the frozen runner's deterministic grid/tie rule and reproduce it from complete selection receipts. No post-result reselection."
+  },
+  "outcomes": {
+    "horizons": [1, 5, 20],
+    "target": "Arithmetic price change from each common forecast origin to its H-th subsequent observed record, in the exact official price field's units.",
+    "primary_market_risk_formula": "R(m,k) = (1/3) * sum_h [ mean_t((prediction_m,k,t,h - target_k,t,h)^2) / mean_t(target_k,t,h^2) ]. RW predicts zero change, so its risk is 1 when all three denominators are positive.",
+    "aggregation": "Equal weight across the three horizons within each market. Report Tianjin development and CEA confirmation separately; no pooled two-market headline or combined confidence interval.",
+    "native_metrics": ["MSE", "RMSE", "MAE", "MSE/RW for each horizon", "equal-horizon mean MSE/RW"],
+    "pair_effect": "Delta(k,comparator) = R(comparator,k) - R(signed_context_response,k); positive means improvement by the primary candidate. Multiply Delta by 100 for RW-normalized percentage points.",
+    "relative_reduction_secondary": "1 - R(primary,k)/R(comparator,k), when the denominator is positive; label separately from RW-normalized percentage points.",
+    "no_extra_formal_tests": "Per-horizon metrics, legacy_fixed_response, fitted coefficients, response curves and learning diagnostics are descriptive, not additional formal test families."
+  },
+  "eight_comparisons_one_family_within_each_market": [
+    {"id": "full_vs_rw", "candidate": "signed_context_response", "comparator": "rw"},
+    {"id": "full_vs_ridge_price", "candidate": "signed_context_response", "comparator": "ridge_price"},
+    {"id": "full_vs_static", "candidate": "signed_context_response", "comparator": "static_response"},
+    {"id": "full_vs_fixed", "candidate": "signed_context_response", "comparator": "fixed_response"},
+    {"id": "full_vs_no_volume", "candidate": "signed_context_response", "comparator": "signed_shock_only"},
+    {"id": "full_vs_amplitude", "candidate": "signed_context_response", "comparator": "amplitude_context"},
+    {"id": "full_vs_free_horizon", "candidate": "signed_context_response", "comparator": "free_horizon_context"},
+    {"id": "full_vs_interaction", "candidate": "signed_context_response", "comparator": "ridge_interaction"}
+  ],
+  "uncertainty": {
+    "method": "Paired circular moving-block percentile bootstrap of observed forecast origins within each market.",
+    "primary_block_length": 20,
+    "prespecified_sensitivity_block_length": 40,
+    "replicates_per_market_and_block": 50000,
+    "generator": "numpy.random.default_rng with the market-specific integer seed above. For each market initialize once, generate block-20 draws first and block-40 draws second. No reseeding across contrasts.",
+    "resampling": "For n test origins and block length L, independently draw ceil(n/L) starts uniformly from 0..n-1, form each block as (start + arange(L)) modulo n, concatenate and retain the first n indices. Share these exact indices across all ten core models, both registered secondary references, and all three horizons.",
+    "bootstrap_effect": "For each draw recompute mean squared errors and RW mean squared targets per horizon on the same sampled indices; calculate each model's equal-horizon risk and all eight paired effects. Do not resample model runs, horizons or random seeds as independent observations.",
+    "marginal_95_quantiles": [0.025, 0.975],
+    "bonferroni_family_95": {"number_of_comparisons": 8, "individual_interval_coverage": 0.99375, "individual_quantiles": [0.003125, 0.996875], "interpretation": "Eight-comparison family within one market. Separate Tianjin intervals are descriptive development uncertainty and are not combined with CEA into a sixteen-test confirmatory family. No simultaneous cross-market claim is made."},
+    "quantile_method": "numpy.quantile method=linear",
+    "invalid_denominator_policy": "If any observed RW horizon denominator is nonpositive, stop inference for that market and report the issue. If any bootstrap draw has a nonpositive RW horizon denominator, retain its invalid count and mark the affected market/block intervals unavailable; never silently discard or redraw such samples.",
+    "limitations": "H20 labels overlap and daily carbon-market observations can be irregular or clustered. Block resampling and percentile intervals are approximations; the tail provides many fewer effectively independent pieces of information than its row count. Both predeclared block lengths are retained even if their conclusions differ."
+  },
+  "independent_audit_after_execution_complete": {
+    "completion_gate": "Read all model outputs only after the parent confirms completion and the runner's final completion marker exists.",
+    "identity": ["all20 core market-family NPZ artifacts, plus4 secondary-reference NPZ artifacts when their separately completed run is available", "canonical data hashes", "frozen code and plan SHA256", "common forecast origins and exact target arrays", "dates and H20 label maturity", "training-only scale and context construction"],
+    "recalculation": "Recompute all ten models' native and normalized losses per market directly from NPZ arrays, rather than trusting aggregate summaries.",
+    "selection_receipts": "Verify every alpha/LR selection record, actual epoch choice, retained checkpoint, selected-versus-attempted updates, and final fixed-epoch refit. Count linear solves separately from nonlinear gradient updates.",
+    "linear_optimality": "Reconstruct the weighted standardized design and coefficient coordinates from frozen inputs and checkpoints; recompute ridge normal-equation/KKT residuals and compare independently solved coefficients/predictions. Use scale-aware floating-point tolerances and report maximum discrepancies, not only a PASS label.",
+    "learning_attribution": "Separate legacy prior, fixed-rate fitted linear readout, learned static rates, conditional amplitude and conditional duration. Nonzero parameter movement or a chosen positive epoch alone does not demonstrate useful increment.",
+    "self_test": "Test statistics and audit helpers on artificial arrays only. No additional market fitting, hyperparameter search or candidate selection is authorized by this plan."
+  },
+  "interpretation_rules": [
+    "All ten fixed arms and eight fixed comparisons are retained, including unfavorable estimates.",
+    "A confidence interval crossing zero is uncertainty about the particular comparison, not proof that the architecture can never be useful.",
+    "Neither a universal one-percent gain, significance for every ablation, nor victory in every market is imposed as a publication rule.",
+    "A useful domain mechanism requires evidence distinguishable from the matched alternatives; mere reparameterization, a smaller parameter count or comparison with a weak baseline is insufficient by itself.",
+    "Tianjin can inform further development; after the CEA scores are read, this particular CEA source tail becomes exposed for any subsequent design change.",
+    "Any later exploratory analysis must be labeled as such and kept separate from this fixed family; it cannot replace the original candidate or block length."
+  ]
+}
