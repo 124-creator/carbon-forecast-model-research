@@ -1,0 +1,21 @@
+{"scenario": "clean_correct", "phase": "validation_complete", "family": "future_cdf", "seconds": 1.259}
+{"scenario": "clean_correct", "phase": "validation_complete", "family": "current_cdf", "seconds": 1.616}
+{"scenario": "clean_correct", "phase": "validation_complete", "family": "future_variance", "seconds": 1.302}
+{"scenario": "clean_correct", "phase": "validation_complete", "family": "probability_euclidean", "seconds": 1.139}
+{"scenario": "clean_correct", "phase": "validation_complete", "family": "rotated_future_cdf", "seconds": 1.117}
+{"scenario": "clean_correct", "phase": "validation_complete", "family": "chi_square_only", "seconds": 0.998}
+Traceback (most recent call last):
+  File "/workspace/scratch/5a60a5e17bce/carbon-research/research/forecast_geometry_filter_20261019c/source/run_synthetic.py", line 575, in <module>
+    run(json.loads(PROTOCOL.read_text()), args.out, args.public)
+  File "/workspace/scratch/5a60a5e17bce/carbon-research/research/forecast_geometry_filter_20261019c/source/run_synthetic.py", line 530, in run
+    sr, st, receipt = run_scenario(scenario, protocol, reference, out, public)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/5a60a5e17bce/carbon-research/research/forecast_geometry_filter_20261019c/source/run_synthetic.py", line 245, in run_scenario
+    q = apply_update(family, prior, y, parameters, reference)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/5a60a5e17bce/carbon-research/research/forecast_geometry_filter_20261019c/source/run_synthetic.py", line 166, in apply_update
+    return gf.update_crps_kl(prior, y, parameter)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/5a60a5e17bce/carbon-research/research/forecast_geometry_filter_20261019c/source/geometry_filter.py", line 623, in update_crps_kl
+    raise FloatingPointError(
+FloatingPointError: CRPS+KL Newton budget exceeded; dual residual=1.48e-12
