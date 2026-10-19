@@ -1,0 +1,586 @@
+{
+  "schema_version": "1.0",
+  "study": "literature_aligned_model_search_20261019d",
+  "audit_date_utc": "2026-10-19",
+  "status": "completed_method_audit",
+  "scope": "有目的地选取2023–2026卷期的碳价预测方法，优先可读原文与公开代码；不是系统综述/随机抽样，不能估计全领域采用比例。7篇方法原文中P1首次在线为2022，严格按首次在线2023–2026计为6篇。另P8仅代码深读，不冒充论文全文。",
+  "reading_counts": {
+    "full_method_articles": 7,
+    "full_method_articles_first_online_2023_2026": 6,
+    "additional_author_code_audits": 1
+  },
+  "interpretation_rules": [
+    "未说明不等于已发生测试泄露。",
+    "未见RW仅限已读正文/表格/源码；ARIMA、Holt-Winters不自动等同已实现RW。",
+    "全样本分解可作为明确标注的信息条件下的文献复现实验；包含未知测试价格的表示不能直接支持真实逐日起点预测声称。",
+    "训练期合并表征不自动等同读过测试集；需分别讨论验证独立性、部署特征一致性与测试信息边界。",
+    "因果卷积/BiLSTM结构本身不能代替输入时间可用性的核查。",
+    "论文已发表、作者有统计显著性或漂亮误差，均不替代同数据同信息集复現与独立验证。"
+  ],
+  "sources": [
+    {
+      "id": "M1",
+      "url": "https://scijournals.onlinelibrary.wiley.com/doi/10.1002/ese3.1380",
+      "access": "出版社开放正文；已读方法、数据、实验设置及比较段",
+      "sections": [
+        "§2–3",
+        "§4.1–4.2",
+        "§5.1–5.2",
+        "Tables 3–5, 8"
+      ],
+      "refs": [
+        "turn36view2",
+        "turn39view5",
+        "turn42view7",
+        "turn46view6",
+        "turn52view4"
+      ]
+    },
+    {
+      "id": "M2",
+      "url": "https://scijournals.onlinelibrary.wiley.com/doi/10.1002/ese3.1769",
+      "access": "出版社开放正文；已读结构、数据划分、调参、实验、数据声明",
+      "sections": [
+        "§3",
+        "§4.1–4.4",
+        "§5",
+        "Table 1, 4",
+        "Data availability"
+      ],
+      "refs": [
+        "turn38view3",
+        "turn39view6",
+        "turn43view5",
+        "turn46view4",
+        "turn52view3"
+      ]
+    },
+    {
+      "id": "M3",
+      "url": "https://www.mdpi.com/1996-1073/17/17/4358",
+      "access": "官方HTML 429；改读明确标注由MDPI提供的全文",
+      "mirror_url": "https://www.researchgate.net/publication/383685619_Carbon_Price_Forecasting_Using_Optimized_Sliding_Window_Empirical_Wavelet_Transform_and_Gated_Recurrent_Unit_Network_to_Mitigate_Data_Leakage",
+      "sections": [
+        "§2–3（根代理）",
+        "§3.2",
+        "§3.4.2",
+        "Tables 3, 4, 6",
+        "Data availability",
+        "出版页/全文来源声明"
+      ],
+      "refs": [
+        "turn54view0",
+        "turn55view1",
+        "turn55view2",
+        "turn55view3",
+        "turn55view4",
+        "turn55view5",
+        "turn55view6",
+        "turn64view0",
+        "turn64view1"
+      ]
+    },
+    {
+      "id": "M4",
+      "url": "https://scijournals.onlinelibrary.wiley.com/doi/10.1002/ese3.2015",
+      "access": "出版社开放正文；已读结构、数据、超参数、比较、消融",
+      "sections": [
+        "§2.5",
+        "§3.1",
+        "§4.1–4.3",
+        "Tables 1, 4–6"
+      ],
+      "refs": [
+        "turn27view3",
+        "turn40view6",
+        "turn40view7",
+        "turn50view5",
+        "turn53view2"
+      ]
+    },
+    {
+      "id": "M5",
+      "url": "https://link.springer.com/article/10.1186/s13021-025-00348-7",
+      "access": "出版社开放正文；已读方法、数据/预处理、实验、讨论；独立表7页未取得",
+      "sections": [
+        "Methods: WOA-XGBoost-CEEMDAN-VMD",
+        "Data and evaluating indicators",
+        "Parameter configuration",
+        "Comparative experiments",
+        "DM test",
+        "Data availability"
+      ],
+      "refs": [
+        "turn28view4",
+        "turn28view5",
+        "turn39view2",
+        "turn43view6",
+        "turn52view1",
+        "turn53view0"
+      ]
+    },
+    {
+      "id": "M6",
+      "url": "https://www.nature.com/articles/s41598-025-31325-2",
+      "access": "出版社开放正文；已读模型构建、数据/预处理、调参、比较、消融、检验；网页表格部分仅标题",
+      "sections": [
+        "Proposed model",
+        "Empirical study",
+        "Normalization",
+        "Secondary decomposition",
+        "Prediction model construction",
+        "Ablation and statistical significance",
+        "Data availability"
+      ],
+      "refs": [
+        "turn27view0",
+        "turn39view1",
+        "turn40view3",
+        "turn40view4",
+        "turn42view5",
+        "turn53view1"
+      ]
+    },
+    {
+      "id": "M7",
+      "url": "https://www.nature.com/articles/s41598-026-35085-5",
+      "manuscript_url": "https://www.nature.com/articles/s41598-026-35085-5_reference.pdf",
+      "access": "已核正式发表记录；正式HTML/PDF抓取不稳定，实质方法审查读取出版社43页accepted manuscript，不能保证与最终排版版逐字一致",
+      "sections": [
+        "§2.5–2.6",
+        "§3",
+        "§4.1–4.3",
+        "Tables 1–4",
+        "Data availability"
+      ],
+      "refs": [
+        "turn44search35",
+        "turn45view0",
+        "turn46view0",
+        "turn48view5",
+        "turn52view5",
+        "turn53view3"
+      ]
+    },
+    {
+      "id": "C1P",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0360544226004755",
+      "access": "官方搜索结果确认题名、DOI及作者代码链接；正文403，未取得论文方法全文",
+      "refs": [
+        "turn44search7"
+      ]
+    },
+    {
+      "id": "C1R",
+      "url": "https://github.com/StriveOrange/TGSINFO-VMD-NEQQLattice",
+      "access": "GitHub公开树/脚本直接读取；固定commit notebook下载并只读21个code cells，未执行notebook，未读其输出成绩",
+      "commit": "3e8a155f034f38cb20430e601c4edb13c22ed7fc",
+      "files": [
+        {
+          "path": "TGSINFO-VMD/TGSINFO_VMD_GZ.m",
+          "blob_sha": "103d67df7f2d6bcda51b282b750b4aa67dc338ff",
+          "upstream_blob_size": 2669,
+          "local_saved_text_note": "本地读取文本保存为2670 bytes，可能多一个末尾换行；其SHA256若出现在桥接收据中，只标识本地文本，不能代替上游raw字节哈希。固定commit与blob_sha标识上游来源。"
+        },
+        {
+          "path": "NEQQLattice/NEQQLattice.ipynb",
+          "blob_sha": "f3398f3134fd2afed2f812e282d6bc20205447aa",
+          "sha256": "1e36a5c1f19e271adef449b6232602be8b31b504016776e6436a83ea212feb9e",
+          "size": 8887431,
+          "code_cells": 21
+        },
+        {
+          "path": "TGSINFO-VMD/Data_GuangZhou.xlsx",
+          "blob_sha": "0b03be52d87b75fbf5f9d3ca3955dcab89c8c1ba",
+          "size": 39135
+        },
+        {
+          "path": "NEQQLattice/TGSINFO-VMD-GZ.csv",
+          "blob_sha": "cf901ea0e656c796375ddc9197933ed5b3db6205",
+          "size": 301041
+        }
+      ]
+    },
+    {
+      "id": "D1",
+      "url": "https://github.com/Zzysty/carbon_dataset",
+      "access": "TFR正文直接链接；已读取公开树和README；本审查未直接执行价格数据实验",
+      "tree_sha": "8654ea586188634a519310d88a8c582e9685667d",
+      "files": [
+        "ShanghaiCarbonPrice.csv",
+        "HubeiCarbonPrice.xlsx",
+        "GuangdongCarbonPrice.xls",
+        "AssociatedExternalFactors.csv",
+        "README.md"
+      ]
+    },
+    {
+      "id": "A1",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html",
+      "access": "官方API文档确认shuffle默认True及random_state用途；作者未固定sklearn版本",
+      "refs": [
+        "turn55view0",
+        "turn57view0"
+      ]
+    },
+    {
+      "id": "D2",
+      "url": "../provenance/PUBLIC_AUTHOR_WORKBOOK_AUDIT.json",
+      "access": "本轮独立数据审查收据，已读取decomposition_bridge；不是新的模型成绩",
+      "fields": [
+        "1522 rows",
+        "16 IMF/residual columns",
+        "2016-11-08–2023-05-31",
+        "max absolute sum reconstruction difference 4.3000000005122274e-8",
+        "matlab_executed=false"
+      ],
+      "sha256": "3d2deb6d8a3d9a6407a9f7d1b5b6ed0eceb11ffdf36b9a1dcad68f63a066ba17"
+    }
+  ],
+  "records": [
+    {
+      "id": "P1",
+      "title": "A novel interpretable model ensemble multivariate fast iterative filtering and temporal fusion transform for carbon price forecasting",
+      "doi": "10.1002/ese3.1380",
+      "publication_status": "Energy Science & Engineering 11(3):1148–1179，2023卷期；首次在线2022-12-16，单列此日期边界",
+      "year": 2023,
+      "first_online": "2022-12-16",
+      "reading_level": "full_methods",
+      "source_ids": [
+        "M1"
+      ],
+      "model_increment": "MFIF同时分解价格和市场类外生序列；按价格IMF样本熵重构并同步重构外生IMF，TFT做分量预测与变量/时滞解释。",
+      "markets_sample": "广东、北京、上海、湖北、深圳，从各市场设立至2022-06-02；删除零成交日；样本分别1755/1250/1235/1909/1921。",
+      "split": "时序70/10/20；例如广东1229/175/351。输入过去10步预测下一步。",
+      "decomposition_scope": {
+        "classification": "unspecified",
+        "detail": "正文写原多变量序列分解/对称端点延拓；未交代是否每训练/验证/测试起点重新估计，不据图判定全样本测试泄露。"
+      },
+      "normalization_scope": {
+        "classification": "unspecified",
+        "detail": "进入模型前min–max，拟合极值的日期范围未明确。"
+      },
+      "feature_selection_scope": {
+        "classification": "partly_specified",
+        "detail": "TFT内置变量选择；PACF选10步、熵分组和旁支RF/因子分析的拟合样本边界未明确。"
+      },
+      "exogenous_availability": "Wind、Yahoo Finance，同日期对齐及插值；涵盖国际能源/EUA、汇率、经济、气象。具体收盘时区、发布时间、历史版本和可用滞后未说明。",
+      "tuning": "广东验证集比较batch 16/32/64/128与units 4–128；验证集自适应降学习率与早停；Adam，MAE损失，dropout .2。",
+      "seeds": "未说明具体随机种子或逐seed结果。",
+      "baselines": "BP、TCN、RNN、LSTM、GRU、TFT、MEMD-SE-TFT及外生变量处理对照。",
+      "random_walk": "已读主比较表未见随机游走/naive；不是对全领域的判断。",
+      "ablations_significance": "有分解/外生变量处理比较、DM及灰关联；正文把95%显著性表述为模型以>95%概率更好，本审查不继承此概率解释；HAC细节未说明。",
+      "metrics": "MAE、RMSE、MAPE、R²、方向准确率DA。",
+      "code_data_access": "原始来源写明，未见可下载作者代码或归档数据链接。",
+      "reproduction_priority": "中：多变量分解/重构与TFT是可对照设计；数据时点与分解边界须自行明确。"
+    },
+    {
+      "id": "P2",
+      "title": "A carbon price ensemble prediction model based on secondary decomposition strategies and bidirectional long short-term memory neural network by an improved particle swarm optimization",
+      "doi": "10.1002/ese3.1769",
+      "publication_status": "Energy Science & Engineering 12(6):2568–2590，2024-05-13在线",
+      "year": 2024,
+      "first_online": "2024-05-13",
+      "reading_level": "full_methods",
+      "source_ids": [
+        "M2"
+      ],
+      "model_increment": "CEEMDAN→样本熵分高/低/趋势→高频再VMD→IPSO优化BiLSTM分量预测→另一BiLSTM做非线性集成；IPSO改惯性权重/学习因子。",
+      "markets_sample": "广东1245日2017-07-04–2022-09-30；北京1247日2014-03-14–2022-09-30；湖北1265日2017-04-28–2022-09-30；EUA1250日2017-11-21–2022-09-30。依Table1；正文广东终点另误写2020。",
+      "split": "前80%训练、后20%测试；训练中10%用于所谓cross-validation，具体fold时序未说明。",
+      "decomposition_scope": {
+        "classification": "unspecified",
+        "detail": "价格先CEEMDAN、高频再VMD，但相对样本划分的估计范围未说明。"
+      },
+      "normalization_scope": {
+        "classification": "unspecified",
+        "detail": "已读方法中未找到数据归一化拟合范围。"
+      },
+      "feature_selection_scope": {
+        "classification": "unspecified",
+        "detail": "样本熵分组、历史价格特征；拟合边界未说明；无外生特征筛选主模型。"
+      },
+      "exogenous_availability": "主模型使用历史价格；宏观/能源等外生因素是未来工作。",
+      "tuning": "IPSO人口20×100轮；VMD层数10；优化BiLSTM层数、units、batch、学习率、dropout；1日超前。",
+      "seeds": "每模型平均10次运行；未给具体seed列表。",
+      "baselines": "17项比较含ARIMA、BP、DNN、GRU、LSTM、BiLSTM、PSO/IPSO及分解变体。",
+      "random_walk": "已读主表未见RW/naive；ARIMA不等同于已落实RW基线。",
+      "ablations_significance": "有优化器、分解、网络结构比较；未找到正式DM/配对显著性检验说明。",
+      "metrics": "R²、RMSE、MAE、MAPE、SIGN方向指标。",
+      "code_data_access": "数据来自碳交易网站/Investing；Data availability声明真实性与原创性，未提供可直接下载的数据/代码链接。",
+      "reproduction_priority": "中：有明确组合层级及10次重复；第二层集成的训练预测是否样本外未说明。"
+    },
+    {
+      "id": "P3",
+      "title": "Carbon Price Forecasting Using Optimized Sliding Window Empirical Wavelet Transform and Gated Recurrent Unit Network to Mitigate Data Leakage",
+      "doi": "10.3390/en17174358",
+      "publication_status": "Energies 17(17):4358，2024-08-31发表",
+      "year": 2024,
+      "first_online": "2024-08-31",
+      "reading_level": "full_methods",
+      "source_ids": [
+        "M3"
+      ],
+      "model_increment": "每起点只分解最近w点EWT，取末l点分量并与原始值共同输入GRU；TPE优化；明确比较四种分解信息范围。",
+      "markets_sample": "主广州/广东GDEA1972交易日，2014-03-11–2023-03-10；扩展湖北/北京/天津。扩展样本分别1365/1122/672，完整日期此轮未逐项读出。",
+      "split": "时序70/10/20，1380/197/395；l=17。",
+      "decomposition_scope": {
+        "classification": "explicit_multiple_protocols",
+        "detail": "Case1训练+验证+测试整段；Case2训练+验证合并、测试滑窗；Case3训练整段、验证及测试滑窗；Case4全部按起点滑窗。作者用leakage统称，但本审查保留三个不同信息边界。"
+      },
+      "normalization_scope": {
+        "classification": "explicit_train_only",
+        "detail": "Eq28明确极值来自训练集。"
+      },
+      "feature_selection_scope": {
+        "classification": "partly_specified",
+        "detail": "历史价格单变量；l=17的正文解释来自ADF检验程序自动选lag17后的输入长度讨论；PACF原文是二阶截断。该统计估计范围此轮未确认。"
+      },
+      "exogenous_availability": "主实验无外生变量，因此无跨时区/统计发布期问题。",
+      "tuning": "验证集TPE；窗口24–64、分量2–4，及dropout/batch/学习率；Table4明确TPE runs=10、最大epochs=1000、patience=100。",
+      "seeds": "未给具体seed列表；TPE runs=10不能直接解释为10个独立随机seed重复。",
+      "baselines": "GRU、LSTM、RF、SVR、SWVMD-GRU、SWCWT-GRU、SWEWT-LSTM等。",
+      "random_walk": "已读比较表未见RW。",
+      "ablations_significance": "四信息范围对照、分解和骨干对照、多市场；未见正式显著性检验说明。",
+      "metrics": "MAE、RMSE、MAPE、R²、误差方差VAE、时间。",
+      "code_data_access": "MDPI提供全文可读；数据声明指向文章及联系作者，本轮未取得作者代码/完整数据包。",
+      "reproduction_priority": "高：最明确的已发表全样本分解/滑窗分解对照协议，可直接作为复现实验结构。",
+      "reported_case_rmse": {
+        "case1": 1.594,
+        "case2": 7.106,
+        "case3": 5.998,
+        "case4": 2.317
+      },
+      "reported_case_note": "仅原论文Table6结果，不是我们复现所得。"
+    },
+    {
+      "id": "P4",
+      "title": "TFR: A Temporal Feature-Refined Multi-Stage Carbon Price Forecasting",
+      "doi": "10.1002/ese3.2015",
+      "publication_status": "Energy Science & Engineering 2025卷期；首次在线2024-12-17",
+      "year": 2025,
+      "first_online": "2024-12-17",
+      "reading_level": "full_methods",
+      "source_ids": [
+        "M4",
+        "D1"
+      ],
+      "model_increment": "CEEMDAN价格特征与多源外生数据拼接，经autoencoder压缩，再以3个残差块TCN预测。",
+      "markets_sample": "上海Wind日价格，2013-12–2021-03；公开库另含湖北、广东与外生因素。",
+      "split": "Table1：训练2013-12-22–2019-08-02；验证2019-08-03–2020-06-03；测试2020-06-04–2021-03-23。文字给2049/303/263且称80/10/10，比例/交易日称谓需对照数据，不私自修正。",
+      "decomposition_scope": {
+        "classification": "unspecified",
+        "detail": "正文展示上海序列CEEMDAN结果，未明确按每起点重分解/只训练期估计。"
+      },
+      "normalization_scope": {
+        "classification": "unspecified",
+        "detail": "未说明数据scaler拟合区间；TCN的weight normalization是网络参数操作，不能当作训练期数据缩放证据。"
+      },
+      "feature_selection_scope": {
+        "classification": "unspecified",
+        "detail": "AE特征压缩，具体拟合样本边界未明确。"
+      },
+      "exogenous_availability": "能源、全球股指/EUA、AQI、百度搜索与政策不确定性；具体发布时间、统计版本和可用滞后未说明。",
+      "tuning": "固定表：lr .01、batch64、1000 epochs、Adam；AE8/64、TCN[64,32,16]，kernel3，dilation[1,2,4]，dropout .3；未说明搜索预算/seed。",
+      "seeds": "未说明。",
+      "baselines": "SVR、LSTM、GRU、TCN，EMD/EEMD/CEEMDAN组合。",
+      "random_walk": "已读Table5–6未见RW。",
+      "ablations_significance": "有去AE、去CEEMDAN等消融；未找到显著性检验。",
+      "metrics": "MAE、RMSE、MAPE、R²。",
+      "code_data_access": "正文直接链接Zzysty/carbon_dataset，目录和README已核；该库提供数据，未含模型源码。",
+      "reproduction_priority": "高：公开多变量数据与可落地模型结构；实际复现需锁定日期对齐/缩放/AE/分解口径。"
+    },
+    {
+      "id": "P5",
+      "title": "Method for predicting the price of carbon based on quadratic decomposition and multiscale prediction",
+      "doi": "10.1186/s13021-025-00348-7",
+      "publication_status": "Carbon Balance and Management 20:55，2025-11-14发表",
+      "year": 2025,
+      "first_online": "2025-11-14",
+      "reading_level": "full_methods",
+      "source_ids": [
+        "M5"
+      ],
+      "model_increment": "先WOA-XGBoost预测价格，再CEEMDAN分解残差、VMD细分IMF1；模糊熵重构4组、重做特征筛选与XGBoost；加回原预测。",
+      "markets_sample": "湖北1789日2016-09-12–2024-05-02；EU1577日2018-01-02–2024-03-27；Wind与百度指数等15外因。",
+      "split": "主实验前70%开发/后30%评价；另为对比已发表模型用湖北2018-01-09–2021-06-30的80/10/10、EU2021-01-04–2021-11-22的80/20。",
+      "decomposition_scope": {
+        "classification": "unspecified",
+        "detail": "残差分解明确；残差来自样本内还是样本外预测、分解是否含测试残差未说明。不能因残差纠正本身判定泄露。"
+      },
+      "normalization_scope": {
+        "classification": "unspecified",
+        "detail": "min–max公式给出，极值拟合范围未明确。"
+      },
+      "feature_selection_scope": {
+        "classification": "unspecified",
+        "detail": "PACF选择历史滞后，RF对15外因取8；分解后再筛选。筛选估计范围未明确。"
+      },
+      "exogenous_availability": "互为外因的EU/湖北价格、AQI、能源、股指、百度搜索；历史价格有滞后，跨时区与百度指数可用时点未说明。",
+      "tuning": "WOA优化XGBoost；正文指Table7，其独立表体未取得；验证目标/调参预算/seed未说明到可复现程度。",
+      "seeds": "未说明。",
+      "baselines": "GBDT、TFT、CEEMDAN-BiGRU、SVR、XGBoost、COA/WOA及分解变体；另有已发表模型匹配样本对照。",
+      "random_walk": "已读主表与比较叙述未见RW。",
+      "ablations_significance": "有优化器/一二次分解对照、平方误差DM；匹配论文对照明确有些基线未使用百度指数，因此优势不能仅归因于模型结构。",
+      "metrics": "MSE、MAE、R²、RMSPE/RMSE、MAPE；指标命名与部分数值应复核。",
+      "code_data_access": "数据声明仅表示同意在适当情况下放入公开仓库，没有具体数据URL；未见作者源码。",
+      "reproduction_priority": "高（机制对照）：先预测再分解残差与直接分解价格是实质不同的增量；应在复现实验明确残差生成时间。"
+    },
+    {
+      "id": "P6",
+      "title": "Intelligent carbon price prediction system based on improved secondary decomposition and multi-head attention bidirectional long short-term memory (BiLSTM) model",
+      "doi": "10.1038/s41598-025-31325-2",
+      "publication_status": "Scientific Reports 16:1803，2026卷期；2025-12-18首次在线",
+      "year": 2026,
+      "first_online": "2025-12-18",
+      "reading_level": "full_methods",
+      "source_ids": [
+        "M6"
+      ],
+      "model_increment": "CEEMDAN→AFETM频率/能量双阈值筛高频→GWO优化VMD二次分解→GWO调学习率/dropout的多头注意力BiLSTM。",
+      "markets_sample": "湖北2386、广州2384日：2015年初–2024-10-31；深圳2724日：2013-06-18–2024-10-31；交易平台来源。",
+      "split": "已读正文未说明train/validation/test比例、日期或滚动方法；表格独立页未成功取得。",
+      "decomposition_scope": {
+        "classification": "unspecified",
+        "detail": "分解各市场价格序列；相对切分的估计范围未说明。"
+      },
+      "normalization_scope": {
+        "classification": "unspecified",
+        "detail": "min–max、插值、3σ异常处理；其拟合范围未说明。"
+      },
+      "feature_selection_scope": {
+        "classification": "unspecified",
+        "detail": "AFETM按IMF频率95分位/5%能量阈值筛选；平均价、成交量额、累计量额作为特征，筛选及变量时间边界未说明。"
+      },
+      "exogenous_availability": "主要是同市场日交易/累计特征；用于预测哪一天、是否在起点已发布未说明。",
+      "tuning": "CEEMDAN100次、noise .2；GWO调VMD alpha10–4000/K1–15；预测GWO以RMSE寻优50轮；hidden128/batch64/epochs100，Adam、早停。",
+      "seeds": "未说明具体随机种子或重复次数。",
+      "baselines": "11项含LSTM/BiLSTM、多头注意力、GWO/分解变体及DA-FEDformer、多尺度Transformer。",
+      "random_walk": "已读比较段未见RW。",
+      "ablations_significance": "有AFETM/GWO/MAM消融；paired t与Wilcoxon，正文以两者较小p值作综合判据；不能把取较小p本身当作控制错误率的证明。",
+      "metrics": "MSE、RMSE、MAE、MAPE。",
+      "code_data_access": "数据可向通讯作者合理请求；未见公开模型代码。",
+      "reproduction_priority": "中低：组合与超参数较具体，切分/预测起点缺失影响可核对复现。"
+    },
+    {
+      "id": "P7",
+      "title": "RF-LSTM carbon price prediction based on CEEMDAN decomposition and multiscale entropy reconstruction",
+      "doi": "10.1038/s41598-026-35085-5",
+      "publication_status": "Scientific Reports，2026-01-14发表；本轮方法读取为出版社accepted manuscript",
+      "year": 2026,
+      "first_online": "2026-01-14",
+      "reading_level": "publisher_accepted_full_methods",
+      "source_ids": [
+        "M7"
+      ],
+      "model_increment": "每滚动窗CEEMDAN→多尺度熵分组；RF预测最高频组，LSTM预测其余组，合成预测；BO调参并评价准确性/耗时权衡。",
+      "markets_sample": "湖北2015-03-26–2025-03-27，2408日；EU2014-04-01–2024-04-08，文称2587日。",
+      "split": "明确先时序80/20：湖北1927/481；EU文列2096/518，与2587不相加，原文算术不一致。§2.5一步滚动，§3实际step=5，其具体预测/更新解释仍待代码确认。",
+      "decomposition_scope": {
+        "classification": "explicit_rolling_train_window",
+        "detail": "初训练窗分解；得到下一实际值后添入、删最早值，重复分解/预测；初窗形成的IMF分组合并规则在后续窗口沿用。"
+      },
+      "normalization_scope": {
+        "classification": "unspecified",
+        "detail": "accepted正文未说明数据归一化拟合范围。"
+      },
+      "feature_selection_scope": {
+        "classification": "explicit_initial_window_rule",
+        "detail": "初训练窗多尺度熵m3、r=.15std、尺度1–20，分组规则用于后续滚动；无外生特征主模型。"
+      },
+      "exogenous_availability": "历史碳价单变量；无跨市场外生时点。",
+      "tuning": "BO：RF树数50–500/depth3–15等；LSTM3层units30–100、dropout.1–.5、lr.001–.01；验证目标、BO轮数未明确。",
+      "seeds": "未说明。",
+      "baselines": "Transformer、CNN-LSTM-Attention、CNN、XGBoost、Holt-Winters、RF/LSTM及分解/熵重构变体。",
+      "random_walk": "已读比较/框架未见RW。",
+      "ablations_significance": "有去重构/RF/LSTM的消融、DM、误差与耗时综合指标；accepted版DM公式排版及误差差/损失差定义需复核。",
+      "metrics": "MSE、RMSE、MAE、MAPE、Dstat、runtime及综合Score。",
+      "code_data_access": "声明数据在正文或补充材料；本轮未取得实际补充数据文件/作者代码。",
+      "reproduction_priority": "高：给出完整滚动分解思想与混合频率预测，但不能原样补猜样本计数/step含义。"
+    },
+    {
+      "id": "P8",
+      "title": "An integrated prediction framework combining variational mode optimization decomposition, empirical quantile regression, and QLattice for dynamic point and interval prediction of carbon prices",
+      "doi": "10.1016/j.energy.2026.140372",
+      "publication_status": "Energy，2026；官方搜索确认DOI/题名/代码链接，出版社方法全文未取得",
+      "year": 2026,
+      "first_online": null,
+      "reading_level": "author_code_only_plus_publisher_metadata",
+      "source_ids": [
+        "C1P",
+        "C1R",
+        "A1",
+        "D2"
+      ],
+      "model_increment": "从公开实现可核：TGSINFO优化VMD→各分量QLattice符号回归→求和点预测→验证绝对残差经验分位数校准对称区间。",
+      "markets_sample": "作者广州示例：按脚本清洗后取1522个价格观测，2016-11-08–2023-05-31；原表有1603个带日期行、80缺价，不能把原始行数当模型样本。论文完整样本/其他市场未取得。",
+      "split": "分量构造5滞后后，时序90/10；前90%以train_test_split(test_size=.4, random_state=42)随机分成训练与验证/校准，约54/36/10；默认shuffle=True经官方文档确认。",
+      "decomposition_scope": {
+        "classification": "explicit_pre_split_in_public_implementation",
+        "detail": "MATLAB对1522点整段优化VMD后分解；notebook先载预分解CSV再生成滞后/切分。独立来源审查确认16分量求和与同一清洗后价格序列最大差4.30e-8，支持这条流程的数值桥接（未执行MATLAB）。"
+      },
+      "normalization_scope": {
+        "classification": "not_explicit_in_visible_code",
+        "detail": "已读脚本与notebook未显式scaler；不能推断feyn内部完全不做变换。"
+      },
+      "feature_selection_scope": {
+        "classification": "model_search_on_train_subset",
+        "detail": "每分量过去5步，QLattice auto_run(train_t)后取models[0]；没有把验证集传入auto_run。"
+      },
+      "exogenous_availability": "可见代码为单变量分解分量历史滞后。",
+      "tuning": "可见VMD优化5个体×5轮，alpha100–1.5×序列长，K2–15；QLattice自动搜索的预算/版本未锁定。",
+      "seeds": "内层划分42；未见MATLAB/QLattice随机种子。",
+      "baselines": "所读notebook只实现目标模型；论文完整基线不能由此确定。",
+      "random_walk": "可见notebook无RW；论文是否有RW未知。",
+      "ablations_significance": "可见notebook无模型消融或显著性检验；论文全文未知。",
+      "metrics": "代码有R²/MSE/RMSE/MAE/MAPE、PICP/PINAW/CWC；alpha .05，区间用一个固定q加减点预测，不是代码中另训条件分位数模型。",
+      "code_data_access": "作者仓库公开可读；原xlsx和notebook已按Git blob校验；需feyn.connect_qlattice外部服务，数据路径是待替换占位；仓库未声明许可证。未执行源码、未引用输出成绩。",
+      "reproduction_priority": "高（文献式流程对照）：可精确重建操作顺序，但论文全文层面的全部声称尚不能复核。"
+    }
+  ],
+  "recommended_protocols": [
+    {
+      "id": "R1",
+      "name": "SWEWT四分解范围复现",
+      "primary_record": "P3",
+      "purpose": "同骨干、同数据、同切分比较表示构造信息范围；Case1保留为明示全样本条件的已发表对照。",
+      "do_not_infer": "不把Case1分数称为真实可用预测收益；Case2/3不统称测试集已泄露。"
+    },
+    {
+      "id": "R2",
+      "name": "直接分解价格与先预测后分解残差",
+      "primary_record": "P5",
+      "purpose": "明确增量所在：残差频率任务分工，并用同一简单/强基线比较。",
+      "do_not_infer": "原文未说明的残差生成与筛选边界必须作为复现实验设定披露，不能默认为作者已这样做。"
+    },
+    {
+      "id": "R3",
+      "name": "TFR公开多变量数据的AE/分解/TCN对照",
+      "primary_record": "P4",
+      "purpose": "利用作者正文直接给的数据入口，复现已有模块消融，并增加可用信息时间与RW比较。",
+      "do_not_infer": "公开数据可访问不证明未在我们旧研究中暴露；实际选择以独立数据盘点为准。"
+    },
+    {
+      "id": "R4",
+      "name": "作者VMD-QLattice与经验区间流程",
+      "primary_record": "P8",
+      "purpose": "作为公开实现操作顺序的文献对照，可与本地明确切分实现比较。",
+      "do_not_infer": "可见代码不能替代未取得论文正文；不宣称已复现其成绩。"
+    }
+  ],
+  "not_counted_as_fulltext": [
+    {
+      "url": "https://www.mdpi.com/2071-1050/18/17/8967",
+      "reason": "根代理仅官方搜索缓存；本代理HTML反复429；方法、数据声明与补充文件未取得，不用于凑全文篇数。"
+    },
+    {
+      "url": "https://link.springer.com/article/10.1007/s40747-026-02550-7",
+      "reason": "已知2026-10-13早期发表的TLCC-DyG-STFusion；本轮PDF未取得，未继承旧轮摘要审查为新全文审查。"
+    },
+    {
+      "url": "https://github.com/merwanroudane/peltwtcn",
+      "reason": "第三方实现，不能作为原作者代码或已发表原文证据；不计主表。"
+    }
+  ],
+  "limitations": "这是发表做法与复现可用性审查，没有执行模型训练、确认论文全部数值、核对全部参考文献、完成统计效力审计或保证发表。正文版本差异、折叠表格缺失、未知时间戳均逐项保留。"
+}

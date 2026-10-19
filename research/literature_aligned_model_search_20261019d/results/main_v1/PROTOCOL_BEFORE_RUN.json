@@ -1,0 +1,64 @@
+{
+  "stage": "development_search",
+  "exposure": "2022/2023 already used in prior studies",
+  "markets": [
+    "GUANGZHOU",
+    "HUBEI",
+    "SHANGHAI_D4",
+    "EU_REPORTED"
+  ],
+  "years": [
+    2022,
+    2023
+  ],
+  "horizons_observation_steps": [
+    1,
+    5,
+    20
+  ],
+  "lookback": 64,
+  "validation_origins": 80,
+  "label_purge": 20,
+  "neural_families": [
+    "allocation_full",
+    "allocation_constant",
+    "allocation_readout",
+    "allocation_price",
+    "gru",
+    "lstm"
+  ],
+  "learning_rates": [
+    0.003,
+    0.01
+  ],
+  "selection_seed": 17,
+  "refit_seeds": [
+    17,
+    29,
+    43
+  ],
+  "maximum_epochs": 80,
+  "minimum_epochs_before_stopping": 15,
+  "patience": 12,
+  "optimizer": "AdamW(weight_decay=1e-4), global gradient norm clip 5",
+  "batch_size": 128,
+  "training_loss": "mean native price squared error / training target second moment, equal H1/H5/H20",
+  "selection": "past validation only; select lr and epoch on seed17, refit all matured pretest labels for same epochs with seeds17/29/43",
+  "test_updates": "weights frozen during each year; each origin receives actual past observations",
+  "primary_comparison": "equal market/year/horizon mean MSE ratio to RW; same-data structural controls",
+  "primary_seed_summary": "mean_seed_mse_over_rw: score each refit seed then average losses; do not score a seed ensemble for the primary claim",
+  "secondary_seed_summary": "ensemble_mse_over_rw: average the three seed forecasts before scoring, explicitly a three-model ensemble",
+  "strong_baseline_selector": "per market/year choose lowest past validation loss from RW, drift, ridge_price, ridge_full, hgb_full, GRU, LSTM; evaluate that family's final forecast without consulting test performance",
+  "uncertainty": "paired block bootstrap; seeds measure algorithm randomness, not independent markets",
+  "energy_features": {
+    "lag_calendar_days": 14,
+    "version": "public historical file; not historical-vintage certified",
+    "transform": "arithmetic change between aligned carbon observation dates"
+  },
+  "gate": "no universal publication percentage; need consistent gain over RW and strongest same-data control, material allocation ablation and supported novelty before confirmation",
+  "source_sha256": {
+    "run_model_search.py": "26347433fe6416298e4969da618cbba291999f3a66131172bc8f2e510f3633bf",
+    "innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e"
+  },
+  "created_unix": 1792401335.5548215
+}
