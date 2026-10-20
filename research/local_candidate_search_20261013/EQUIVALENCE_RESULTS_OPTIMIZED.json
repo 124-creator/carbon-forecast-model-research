@@ -1,0 +1,58 @@
+{
+  "configuration": {
+    "start_local": "2026-10-13T15:59:29.512373",
+    "budget_seconds": 1200,
+    "candidate": "learned tanh directions with exact ridge multi-output head",
+    "objective": "sum_h d_h ||Y_h-Phi(theta) W_h||^2 + lambda sum_h d_h ||W_h||^2 + rho ||theta||^2",
+    "gate": "First derive equivalence to same-capacity MLP/variable projection and fixed-feature primal-dual ridge. Reject model novelty if only exact output-layer elimination differs.",
+    "verification_only": "Random synthetic arrays with fixed theta; solve only linear head. No nonlinear candidate fitting after failed gate.",
+    "test_seed": 20261013,
+    "verification_shapes": [
+      83,
+      5,
+      7,
+      4
+    ],
+    "lambda": 0.3,
+    "absolute_tolerance": 1e-08,
+    "comparison_if_gate_passes": [
+      "fixed same features ridge",
+      "same-capacity tanh MLP same objective",
+      "linear ridge",
+      "low-dimensional MLE",
+      "random walk"
+    ],
+    "training_allowed_only_after_gate": true,
+    "market_years_after_2021": "do not open",
+    "data_download": false,
+    "archives": "Not needed when novelty gate rejects; no extraction or old weights loaded",
+    "git": "No commit, no push, no modifications outside new output directory",
+    "alternative": "Distinguish learning a noise-aware conditional transition operator from merely iterating a learned conditional mean; compare direct horizon regressions and stochastic Koopman/operator-learning priors before naming a model."
+  },
+  "versions": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "checks": {
+    "mlp_prediction_equivalence": 0.0,
+    "fixed_kernel_primal_dual": 9.325873406851315e-15,
+    "profile_objective_decomposition": 5.684341886080802e-14,
+    "envelope_gradient_complex_step": 7.704947790898586e-14,
+    "linear_factorization_equivalence": 4.787836793695988e-16,
+    "transformed_penalty_coordinate_equivalence": 1.033895191682177e-15
+  },
+  "isotropic_penalty_coordinate_change_prediction_difference": 0.016073874193005544,
+  "alternative_quadratic_noise_example": {
+    "x": 0.4,
+    "variance": 0.09,
+    "true_second_conditional_mean": 0.11560000000000001,
+    "iterated_first_mean": 0.025600000000000005,
+    "gap": 0.09
+  },
+  "decision": "REJECT: same-capacity MLP function class and profiled objective; variable projection is an existing optimizer",
+  "candidate_training_runs": 0,
+  "market_files_opened": 0,
+  "benchmark_scores": null,
+  "runtime_seconds": 0.0057836000341922045,
+  "source_sha256": "205cf2cb1011cc38d29c2f5afb1c14523f7bd7d8a5bf662dfe0d950400b637d5"
+}

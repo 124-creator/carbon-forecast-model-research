@@ -10,3 +10,31 @@ research/stageC_20261013_submitted/raw_private/
 research/stageC_20261013_submitted/parsed_private/
 research/stageC_20261013_submitted/outputs/predictions/
 research/stageC_20261013_submitted/outputs/selected_forecasts_check.csv.gz
+
+# --- 2026-10-20 仓库整理新增 ---
+# 1) 任意层级的 Python 虚拟环境：仅由仓库内 lock 文件重建，不进入版本历史
+**/.venv/
+**/venv/
+**/Lib/site-packages/
+**/Scripts/
+**/site-packages/
+
+# 2) 任意层级的 local_only 目录：逐点预测、权重与私有缓冲不公开
+**/local_only/
+
+# 3) 文件级 LOCAL_ONLY 标记：与各研究报告的公开范围声明一致
+*LOCAL_ONLY*
+
+# 4) 允许再发布的第三方原始行情之外，模型权重与打包产物不提交
+*.whl
+*.onnx
+*.safetensors
+*.ckpt
+*.npz
+*.npy
+
+# 5) 覆盖在官方依赖目录内的可执行文件与编译产物（虚拟环境之外的残留）
+*.dll
+*.pyd
+*.lib
+*.exe

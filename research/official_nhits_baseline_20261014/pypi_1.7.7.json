@@ -1,0 +1,145 @@
+{
+  "info": {
+    "author": "Nixtla",
+    "author_email": "business@nixtla.io",
+    "bugtrack_url": null,
+    "classifiers": [
+      "Development Status :: 3 - Alpha",
+      "Intended Audience :: Developers",
+      "License :: OSI Approved :: Apache Software License",
+      "Natural Language :: English",
+      "Programming Language :: Python :: 3.10",
+      "Programming Language :: Python :: 3.11",
+      "Programming Language :: Python :: 3.8",
+      "Programming Language :: Python :: 3.9"
+    ],
+    "description": "# Nixtla &nbsp; [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Statistical%20Forecasting%20Algorithms%20by%20Nixtla%20&url=https://github.com/Nixtla/neuralforecast&via=nixtlainc&hashtags=StatisticalModels,TimeSeries,Forecasting) &nbsp;[![Slack](https://img.shields.io/badge/Slack-4A154B?&logo=slack&logoColor=white)](https://join.slack.com/t/nixtlacommunity/shared_invite/zt-1pmhan9j5-F54XR20edHk0UtYAPcW4KQ)\n\n<div align=\"center\">\n<img src=\"https://raw.githubusercontent.com/Nixtla/neuralforecast/main/nbs/imgs_indx/logo_new.png\">\n<h1 align=\"center\">Neural \ud83e\udde0 Forecast</h1>\n<h3 align=\"center\">User friendly state-of-the-art neural forecasting models</h3>\n\n[![CI](https://github.com/Nixtla/neuralforecast/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/Nixtla/neuralforecast/actions/workflows/ci.yaml)\n[![Python](https://img.shields.io/pypi/pyversions/neuralforecast)](https://pypi.org/project/neuralforecast/)\n[![PyPi](https://img.shields.io/pypi/v/neuralforecast?color=blue)](https://pypi.org/project/neuralforecast/)\n[![conda-nixtla](https://img.shields.io/conda/vn/conda-forge/neuralforecast?color=seagreen&label=conda)](https://anaconda.org/conda-forge/neuralforecast)\n[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://github.com/Nixtla/neuralforecast/blob/main/LICENSE)\n[![docs](https://img.shields.io/website-up-down-green-red/http/nixtla.github.io/neuralforecast.svg?label=docs)](https://nixtla.github.io/neuralforecast/)  \n<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->\n[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)\n<!-- ALL-CONTRIBUTORS-BADGE:END -->\n\n**NeuralForecast** offers a large collection of neural forecasting models focusing on their performance, usability, and robustness. The models range from classic networks like RNNs to the latest transformers: `MLP`, `LSTM`, `GRU`, `RNN`, `TCN`, `TimesNet`, `BiTCN`, `DeepAR`, `NBEATS`, `NBEATSx`, `NHITS`, `TiDE`, `DeepNPTS`, `TSMixer`, `TSMixerx`, `MLPMultivariate`, `DLinear`, `NLinear`, `TFT`, `Informer`, `AutoFormer`, `FedFormer`, `PatchTST`, `iTransformer`, `StemGNN`, and `TimeLLM`.\n</div>\n\n## Installation\n\nYou can install `NeuralForecast` with:\n\n```python\npip install neuralforecast\n```\n\nor \n\n```python\nconda install -c conda-forge neuralforecast\n``` \nVist our [Installation Guide](https://nixtlaverse.nixtla.io/neuralforecast/docs/getting-started/installation.html) for further details.\n\n## Quick Start\n\n**Minimal Example**\n\n```python\nfrom neuralforecast import NeuralForecast\nfrom neuralforecast.models import NBEATS\nfrom neuralforecast.utils import AirPassengersDF\n\nnf = NeuralForecast(\n    models = [NBEATS(input_size=24, h=12, max_steps=100)],\n    freq = 'M'\n)\n\nnf.fit(df=AirPassengersDF)\nnf.predict()\n```\n\n**Get Started with this [quick guide](https://nixtlaverse.nixtla.io/neuralforecast/docs/getting-started/quickstart.html).**\n\n## Why? \n\nThere is a shared belief in Neural forecasting methods' capacity to improve forecasting pipeline's accuracy and efficiency.\n\nUnfortunately, available implementations and published research are yet to realize neural networks' potential. They are hard to use and continuously fail to improve over statistical methods while being computationally prohibitive. For this reason, we created `NeuralForecast`, a library favoring proven accurate and efficient models focusing on their usability.\n\n## Features \n\n* Fast and accurate implementations of more than 30 state-of-the-art models. See the entire [collection here](https://nixtlaverse.nixtla.io/neuralforecast/docs/capabilities/overview.html).\n* Support for exogenous variables and static covariates.\n* Interpretability methods for trend, seasonality and exogenous components.\n* Probabilistic Forecasting with adapters for quantile losses and parametric distributions.\n* Train and Evaluation Losses with scale-dependent, percentage and scale independent errors, and parametric likelihoods.\n* Automatic Model Selection with distributed automatic hyperparameter tuning.\n* Familiar sklearn syntax: `.fit` and `.predict`.\n\n## Highlights\n\n* Official `NHITS` implementation, published at AAAI 2023. See [paper](https://ojs.aaai.org/index.php/AAAI/article/view/25854) and [experiments](./experiments/).\n* Official `NBEATSx` implementation, published at the International Journal of Forecasting. See [paper](https://www.sciencedirect.com/science/article/pii/S0169207022000413).\n* Unified with`StatsForecast`, `MLForecast`, and `HierarchicalForecast` interface `NeuralForecast().fit(Y_df).predict()`, inputs and outputs.\n* Built-in integrations with `utilsforecast` and `coreforecast` for visualization and data-wrangling efficient methods.\n* Integrations with `Ray` and `Optuna` for automatic hyperparameter optimization.\n* Predict with little to no history using Transfer learning. Check the experiments [here](https://github.com/Nixtla/transfer-learning-time-series).\n\nMissing something? Please open an issue or write us in [![Slack](https://img.shields.io/badge/Slack-4A154B?&logo=slack&logoColor=white)](https://join.slack.com/t/nixtlaworkspace/shared_invite/zt-135dssye9-fWTzMpv2WBthq8NK0Yvu6A)\n\n## Examples and Guides\n\nThe [documentation page](https://nixtlaverse.nixtla.io/neuralforecast/docs/getting-started/introduction.html) contains all the examples and tutorials.\n\n\ud83d\udcc8 [Automatic Hyperparameter Optimization](https://nixtlaverse.nixtla.io/neuralforecast/docs/capabilities/hyperparameter_tuning.html): Easy and Scalable Automatic Hyperparameter Optimization with `Auto` models on `Ray` or `Optuna`.\n\n\ud83c\udf21\ufe0f [Exogenous Regressors](https://nixtlaverse.nixtla.io/neuralforecast/docs/capabilities/exogenous_variables.html): How to incorporate static or temporal exogenous covariates like weather or prices.\n\n\ud83d\udd0c [Transformer Models](https://nixtlaverse.nixtla.io/neuralforecast/docs/tutorials/longhorizon_transformers.html): Learn how to forecast with many state-of-the-art Transformers models.\n\n\ud83d\udc51 [Hierarchical Forecasting](https://nixtlaverse.nixtla.io/neuralforecast/docs/tutorials/hierarchical_forecasting.html): forecast series with very few non-zero observations. \n\n\ud83d\udc69\u200d\ud83d\udd2c [Add Your Own Model](https://nixtlaverse.nixtla.io/neuralforecast/docs/tutorials/adding_models.html): Learn how to add a new model to the library.\n\n## Models\n\nSee the entire [collection here](https://nixtlaverse.nixtla.io/neuralforecast/docs/capabilities/overview.html).\n\nMissing a model? Please open an issue or write us in [![Slack](https://img.shields.io/badge/Slack-4A154B?&logo=slack&logoColor=white)](https://join.slack.com/t/nixtlaworkspace/shared_invite/zt-135dssye9-fWTzMpv2WBthq8NK0Yvu6A)\n\n## How to contribute\nIf you wish to contribute to the project, please refer to our [contribution guidelines](https://github.com/Nixtla/neuralforecast/blob/main/CONTRIBUTING.md).\n\n## References\nThis work is highly influenced by the fantastic work of previous contributors and other scholars on the neural forecasting methods presented here. We want to highlight the work of [Boris Oreshkin](https://arxiv.org/abs/1905.10437), [Slawek Smyl](https://www.sciencedirect.com/science/article/pii/S0169207019301153), [Bryan Lim](https://www.sciencedirect.com/science/article/pii/S0169207021000637), and [David Salinas](https://arxiv.org/abs/1704.04110). We refer to [Benidis et al.](https://arxiv.org/abs/2004.10240) for a comprehensive survey of neural forecasting methods.\n\n## Contributors \u2728\n\nThanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):\n<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->\n<!-- prettier-ignore-start -->\n<!-- markdownlint-disable -->\n<table>\n  <tbody>\n    <tr>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/AzulGarza\"><img src=\"https://avatars.githubusercontent.com/u/10517170?v=4?s=100\" width=\"100px;\" alt=\"azul\"/><br /><sub><b>azul</b></sub></a><br /><a href=\"https://github.com/Nixtla/neuralforecast/commits?author=AzulGarza\" title=\"Code\">\ud83d\udcbb</a> <a href=\"#maintenance-AzulGarza\" title=\"Maintenance\">\ud83d\udea7</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/cchallu\"><img src=\"https://avatars.githubusercontent.com/u/31133398?v=4?s=100\" width=\"100px;\" alt=\"Cristian Challu\"/><br /><sub><b>Cristian Challu</b></sub></a><br /><a href=\"https://github.com/Nixtla/neuralforecast/commits?author=cchallu\" title=\"Code\">\ud83d\udcbb</a> <a href=\"#maintenance-cchallu\" title=\"Maintenance\">\ud83d\udea7</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/jmoralez\"><img src=\"https://avatars.githubusercontent.com/u/8473587?v=4?s=100\" width=\"100px;\" alt=\"Jos\u00e9 Morales\"/><br /><sub><b>Jos\u00e9 Morales</b></sub></a><br /><a href=\"https://github.com/Nixtla/neuralforecast/commits?author=jmoralez\" title=\"Code\">\ud83d\udcbb</a> <a href=\"#maintenance-jmoralez\" title=\"Maintenance\">\ud83d\udea7</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/mergenthaler\"><img src=\"https://avatars.githubusercontent.com/u/4086186?v=4?s=100\" width=\"100px;\" alt=\"mergenthaler\"/><br /><sub><b>mergenthaler</b></sub></a><br /><a href=\"https://github.com/Nixtla/neuralforecast/commits?author=mergenthaler\" title=\"Documentation\">\ud83d\udcd6</a> <a href=\"https://github.com/Nixtla/neuralforecast/commits?author=mergenthaler\" title=\"Code\">\ud83d\udcbb</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/kdgutier\"><img src=\"https://avatars.githubusercontent.com/u/19935241?v=4?s=100\" width=\"100px;\" alt=\"Kin\"/><br /><sub><b>Kin</b></sub></a><br /><a href=\"https://github.com/Nixtla/neuralforecast/commits?author=kdgutier\" title=\"Code\">\ud83d\udcbb</a> <a href=\"https://github.com/Nixtla/neuralforecast/issues?q=author%3Akdgutier\" title=\"Bug reports\">\ud83d\udc1b</a> <a href=\"#data-kdgutier\" title=\"Data\">\ud83d\udd23</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/gdevos010\"><img src=\"https://avatars.githubusercontent.com/u/15316026?v=4?s=100\" width=\"100px;\" alt=\"Greg DeVos\"/><br /><sub><b>Greg DeVos</b></sub></a><br /><a href=\"#ideas-gdevos010\" title=\"Ideas, Planning, & Feedback\">\ud83e\udd14</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/alejandroxag\"><img src=\"https://avatars.githubusercontent.com/u/64334543?v=4?s=100\" width=\"100px;\" alt=\"Alejandro\"/><br /><sub><b>Alejandro</b></sub></a><br /><a href=\"https://github.com/Nixtla/neuralforecast/commits?author=alejandroxag\" title=\"Code\">\ud83d\udcbb</a></td>\n    </tr>\n    <tr>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"http://lavattiata.com\"><img src=\"https://avatars.githubusercontent.com/u/48966177?v=4?s=100\" width=\"100px;\" alt=\"stefanialvs\"/><br /><sub><b>stefanialvs</b></sub></a><br /><a href=\"#design-stefanialvs\" title=\"Design\">\ud83c\udfa8</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://bandism.net/\"><img src=\"https://avatars.githubusercontent.com/u/22633385?v=4?s=100\" width=\"100px;\" alt=\"Ikko Ashimine\"/><br /><sub><b>Ikko Ashimine</b></sub></a><br /><a href=\"https://github.com/Nixtla/neuralforecast/issues?q=author%3Aeltociear\" title=\"Bug reports\">\ud83d\udc1b</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/vglaucus\"><img src=\"https://avatars.githubusercontent.com/u/75549033?v=4?s=100\" width=\"100px;\" alt=\"vglaucus\"/><br /><sub><b>vglaucus</b></sub></a><br /><a href=\"https://github.com/Nixtla/neuralforecast/issues?q=author%3Avglaucus\" title=\"Bug reports\">\ud83d\udc1b</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/pitmonticone\"><img src=\"https://avatars.githubusercontent.com/u/38562595?v=4?s=100\" width=\"100px;\" alt=\"Pietro Monticone\"/><br /><sub><b>Pietro Monticone</b></sub></a><br /><a href=\"https://github.com/Nixtla/neuralforecast/issues?q=author%3Apitmonticone\" title=\"Bug reports\">\ud83d\udc1b</a></td>\n    </tr>\n  </tbody>\n</table>\n\n<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->\n\n<!-- ALL-CONTRIBUTORS-LIST:END -->\n\nThis project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!\n",
+    "description_content_type": "text/markdown",
+    "docs_url": null,
+    "download_url": null,
+    "downloads": {
+      "last_day": -1,
+      "last_month": -1,
+      "last_week": -1
+    },
+    "dynamic": null,
+    "home_page": "https://github.com/Nixtla/neuralforecast/",
+    "keywords": "time-series forecasting deep-learning",
+    "license": "Apache Software License 2.0",
+    "license_expression": null,
+    "license_files": null,
+    "maintainer": null,
+    "maintainer_email": null,
+    "name": "neuralforecast",
+    "package_url": "https://pypi.org/project/neuralforecast/",
+    "platform": null,
+    "project_url": "https://pypi.org/project/neuralforecast/",
+    "project_urls": {
+      "Homepage": "https://github.com/Nixtla/neuralforecast/"
+    },
+    "provides_extra": [
+      "aws",
+      "spark",
+      "dev"
+    ],
+    "release_url": "https://pypi.org/project/neuralforecast/1.7.7/",
+    "requires_dist": [
+      "coreforecast>=0.0.6",
+      "fsspec",
+      "numpy>=1.21.6",
+      "pandas>=1.3.5",
+      "torch>=2.0.0",
+      "pytorch-lightning>=2.0.0",
+      "ray[tune]>=2.2.0",
+      "optuna",
+      "utilsforecast>=0.2.3",
+      "fsspec[s3]; extra == \"aws\"",
+      "fugue; extra == \"spark\"",
+      "pyspark>=3.5; extra == \"spark\"",
+      "black; extra == \"dev\"",
+      "gitpython; extra == \"dev\"",
+      "hyperopt; extra == \"dev\"",
+      "matplotlib; extra == \"dev\"",
+      "mypy; extra == \"dev\"",
+      "nbdev==2.3.25; extra == \"dev\"",
+      "polars; extra == \"dev\"",
+      "pre-commit; extra == \"dev\"",
+      "pyarrow; extra == \"dev\"",
+      "ruff; extra == \"dev\"",
+      "s3fs; extra == \"dev\"",
+      "transformers; extra == \"dev\""
+    ],
+    "requires_python": ">=3.8",
+    "summary": "Time series forecasting suite using deep learning models",
+    "version": "1.7.7",
+    "yanked": false,
+    "yanked_reason": null
+  },
+  "last_serial": 41928673,
+  "ownership": {
+    "organization": null,
+    "roles": [
+      {
+        "role": "Owner",
+        "user": "MergenthalerMax"
+      },
+      {
+        "role": "Owner",
+        "user": "capybara"
+      },
+      {
+        "role": "Owner",
+        "user": "goodwanghan"
+      }
+    ]
+  },
+  "urls": [
+    {
+      "comment_text": "",
+      "core-metadata": {
+        "sha256": "f120201170ed98ab5800f657c816f1f395379b2881b1790107b808e8ddb93357"
+      },
+      "digests": {
+        "blake2b_256": "5c19867a7745235f18a4bd8f5677980f4ba0df79a80f889f44aacbfbaf113155",
+        "md5": "6f7e1aabeea6a28d231c33b19f35ca96",
+        "sha256": "b7f36b672aba7bd1a920d6b341a267cb27ae7a0ced0333e2152bf6560a38cd16"
+      },
+      "downloads": -1,
+      "filename": "neuralforecast-1.7.7-py3-none-any.whl",
+      "has_sig": false,
+      "md5_digest": "6f7e1aabeea6a28d231c33b19f35ca96",
+      "packagetype": "bdist_wheel",
+      "python_version": "py3",
+      "requires_python": ">=3.8",
+      "size": 259222,
+      "upload_time": "2024-12-16T22:41:41",
+      "upload_time_iso_8601": "2024-12-16T22:41:41.005768Z",
+      "url": "https://files.pythonhosted.org/packages/5c/19/867a7745235f18a4bd8f5677980f4ba0df79a80f889f44aacbfbaf113155/neuralforecast-1.7.7-py3-none-any.whl",
+      "yanked": false,
+      "yanked_reason": null
+    },
+    {
+      "comment_text": "",
+      "core-metadata": false,
+      "digests": {
+        "blake2b_256": "3a6ca00c7711c247a92b42abbdb32c22787e2f42bcc407e43deaa0e35cc82eee",
+        "md5": "fcd19af8da1b4496a9416d3bdadbe731",
+        "sha256": "f2c7f5b6aa31e8ebea332c3a3c621baae53cfc9d9261e694963dcfba3e2bc85e"
+      },
+      "downloads": -1,
+      "filename": "neuralforecast-1.7.7.tar.gz",
+      "has_sig": false,
+      "md5_digest": "fcd19af8da1b4496a9416d3bdadbe731",
+      "packagetype": "sdist",
+      "python_version": "source",
+      "requires_python": ">=3.8",
+      "size": 188439,
+      "upload_time": "2024-12-16T22:41:42",
+      "upload_time_iso_8601": "2024-12-16T22:41:42.342650Z",
+      "url": "https://files.pythonhosted.org/packages/3a/6c/a00c7711c247a92b42abbdb32c22787e2f42bcc407e43deaa0e35cc82eee/neuralforecast-1.7.7.tar.gz",
+      "yanked": false,
+      "yanked_reason": null
+    }
+  ],
+  "vulnerabilities": []
+}

@@ -1,0 +1,15 @@
+{
+  "scope": "Learning-capability baseline only; ordinary trained tanh MLP, not architectural novelty or RFF. Old 2020-2021 development, no untouched test claim.",
+  "seeds": [7, 17],
+  "budget_seconds": 900,
+  "model": "60 inputs -> 24 trainable tanh hidden units -> 3 jointly trainable outputs; all biases learned; scipy L-BFGS-B analytic backprop",
+  "optimizer": {"maxiter": 200, "maxfun": 240, "l2": 0.01, "ftol": 1e-9, "gtol": 1e-6},
+  "input": "60 reverse chronological one-step increments divided by current causal 60-increment RMS; predicted normalized changes multiplied by that RMS; horizon loss scales fitted only on initial pre-2020 prices",
+  "labels": "1,5,20 observation-step changes; exclusive fit_end; training origin+20 < fit_end; last at most480 mature origins; refit every40 points",
+  "synthetic": "Independent 480 train and 2000 held-out rows per fixed seed, 60 Gaussian inputs, unit local scales; positive target (1,2,3)*tanh(2*x0) plus Gaussian noise sd .1; null independent Gaussian outputs. Synthetic fixture is a capability diagnostic not a market process, extra sample availability is explicit.",
+  "gate": "Both positive-control seeds must achieve held-out MSE/RW <0.6 and MSE/ridge <0.9, objective decrease, finite parameters and gradient finite-difference relative error <1e-5; otherwise no market access. Null reported, not used for tuning.",
+  "market": "Read exactly header plus950 permitted records bytewise, never request2022 boundary;451 common same-year origins; RAW MLP only one architecture/regularization/window; both seeds retained, equal mean loss not best seed and not prediction ensemble",
+  "baselines": "RW fresh; MLE window480 and simple trend residual correction alpha1 fixed from earlier development, recompute and label historically selected scores; no new tuning",
+  "metric": "Original price squared error; relative RW MSE per year/horizon then equal mean over six cells",
+  "retention": "Protocol hash, source review, environment, gradients, controls, every-fit objectives/solver status/maturity, all seeds predictions and parameters local NPZ, independent saved-score and future perturbation verification. No commit/push."
+}

@@ -1,0 +1,7 @@
+# Fixed protocol supersedes design's three outputs and tuning grid.
+20 outputs, past 60 price differences; direct raw-price net changes; no scaling, variance weighting, covariance estimation, exogenous inputs, or residual correction.
+Initial prefix 459 records; last 480 origins with s+20 < fit_end; fit_end=459+40*k. Same-year complete-H20 451 scoring origins from audited 950-record prefix ending 2021-12-31; no 2022 boundary read.
+Single frozen configuration: MBTR 100 attempted boosts, learning_rate=.05, n_q=10, min_leaf=40 (PARENT stop threshold, NOT strict child support), lambda_weights=.1, lambda_leaves=.1, val_ratio=0, early_stopping_rounds=100, refit=False, MSE. Author fit still truncates to best penalized TRAIN loss; retained counts explicitly recorded. No random validation; no outer selection; no external early stopping since tree budget fixed.
+Independent per-output HGBT: 100 trees per output, .05 learning_rate, 7 max_leaf_nodes, 40 strict minimum child support, l2=.1, early_stopping=False, seed17. No subsampling; seed not claimed as independent stochastic replication. MBTR deterministic after val_ratio=0. One realization each, not fake two repeats.
+15-minute cumulative actual fit budget, representative full-budget future-price re-fits included; complete blocks saved; unfinished missing. Baselines run only; unsupported joint-risk innovation NOT trained.
+Primary equal-year h1/5/20 mean MSE/RW-MSE; all20 equal-year secondary. Local raw predictions/fit states ignored. Development data, not unseen confirmation.

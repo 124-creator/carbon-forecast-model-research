@@ -1,0 +1,2083 @@
+arXiv is now an independent nonprofit!
+Learn more
+×
+Back to arXiv
+License: CC BY 4.0
+arXiv:2609.30929v1 [cs.LG] 25 Sep 2026
+EPOC: Endpoint-Preserving Online Correction With Compressed Residual State for Multi-Horizon Time Series Forecasting
+Takumi Fujimoto
+School of Science for Open and Environmental SystemsGraduate School of Science and Technology, Keio University, Yokohama 223-8522, Japan
+Hiroaki Nishi
+Department of System Design, Faculty of Science and TechnologyKeio University, Yokohama 223-8522, JapanCorrespondence: takmin@keio.jp
+Abstract
+
+Completed multi-horizon forecasts provide residual feedback for a fixed forecaster, but retaining full residual blocks increases auxiliary state. We propose Endpoint-Preserving Online Correction (EPOC) with a compressed residual state. It stores low-order discrete cosine transform (DCT) coefficients and the final value of the preceding residual block. Within each channel, the endpoint is shared across component-wise online ridge regressions that also use current-forecast coefficients. The fitted DCT correction is blended with the base forecast. We evaluate eight multivariate series with DLinear and PatchTST, three seeds, and two training variants, yielding 96 matched fixed-base conditions at a 24-step horizon. EPOC achieves mean condition-wise reductions in mean squared error (MSE) and mean absolute error (MAE) of 15.40% and 9.35% from the uncorrected base, respectively, with a median of 6,352 B in retained auxiliary arrays. It has lower paired MSE than the 
+𝛿
+-Adapter, COSA, FAC, and OMPB in a majority of conditions and uses less state than each. Full ELF achieves the largest mean MSE reduction, 19.29%, but its median retained state is 474,048 B (
+×
+75
+ relative to EPOC). Equal-size summary controls favor the endpoint by 1.65–2.20% in paired MSE; a coefficient-reconstructed endpoint yields similar accuracy to the observed endpoint, highlighting its role as a shared input. Increasing the retained DCT component count from 4 to 8 adds 1.00 percentage point of MSE reduction for 5,728 B. On jointly trained bases, EPOC lowers MSE by 16.69–20.15% relative to globally blended TEFL-style adapters applied to the same base. The code and numerical records are available at https://github.com/keiotakmin/endpoint-preserving-residual-correction.
+
+Keywords: Time series forecasting, residual correction, online regression, compressed state, multi-horizon forecasting.
+
+1Introduction
+
+A multi-horizon forecaster issues predictions before their targets arrive. Once a block is complete, its errors can guide the next prediction. With a fixed base forecaster, an auxiliary correction must decide which past errors to retain between forecasts and how much state to devote to them.
+
+Residual feedback has been used to correct traffic forecasts [1], while TEFL [2] feeds a fully observed multi-step residual vector to a learned adapter trained jointly with the base model. Other fixed-forecaster approaches learn an auxiliary online forecast from Fourier features of observation history [3], correct a forecast using recent target statistics [4], or calibrate input and output spectra [5]. These methods use different information about the recent stream. We study a compressed representation of the base forecaster’s own errors that keeps the most recent error explicitly available.
+
+Keeping a complete residual block preserves every horizon-specific error but requires state proportional to its length. A few transform coefficients require less state but lose individual values. Two blocks can therefore have identical retained discrete cosine transform (DCT) coefficients and different final errors. That endpoint is the latest observed error when the next nonoverlapping block is forecast. We test whether retaining it alongside the compressed summary and current base forecast improves correction.
+
+We propose Endpoint-Preserving Online Correction (EPOC) for a fixed multi-horizon forecaster. EPOC retains low-order DCT coefficients of the preceding completed base-residual block and its uncompressed final value. For each channel, it supplies that endpoint as a shared feature to separate online ridge regressions for the retained correction components. Each regression also receives the corresponding coefficient of the current base forecast. The fitted components reconstruct a correction in the same fixed DCT subspace, and a blending weight derived from completed blocks combines it with the base forecast. Updates occur after the full target block has arrived; the retained auxiliary arrays include regression statistics, the residual summary, the fixed DCT basis, and blending state.
+
+We evaluate three questions. First, how do correction accuracy and retained auxiliary arrays compare with other online methods? Second, what do the endpoint and the other input components contribute at a fixed output dimension? Third, how does the number of retained components affect the accuracy–storage choice? The main comparison applies the uncorrected base, five correction comparators, and EPOC to eight multivariate series, DLinear and PatchTST bases, three seeds, and two base-training variants, yielding 96 matched fixed-base conditions. Equal-size first, middle, and mean residual summaries isolate the position and type of retained scalar; input-removal and projected-endpoint controls examine the complete regression input. A separate experiment compares the correction with TEFL-style residual adapters on the same jointly trained bases.
+
+Across the 96 fixed-base conditions, EPOC reduces mean squared error (MSE) by an average of 15.40% and mean absolute error (MAE) by 9.35% relative to the uncorrected base, while retaining a median of 6,352 B of auxiliary numerical arrays. The endpoint yields 1.65–2.20% lower paired MSE than the three equal-size residual summaries. Full ELF achieves a larger mean MSE reduction from the uncorrected base, 19.29%, with 474,048 median retained bytes. EPOC retains about one seventy-fifth of ELF’s auxiliary state, with a 3.89-percentage-point smaller mean MSE reduction. On jointly trained bases, it lowers MSE by 16.69–20.15% relative to the globally blended TEFL-style adapter applied to the same base.
+
+The contributions are as follows:
+
+1.
+
+We define a compact retained state that pairs truncated residual DCT coefficients with an uncompressed endpoint and uses current-forecast coefficients in channel- and component-wise online correction.
+
+2.
+
+We evaluate the retained-information choice through equal-size residual-summary controls, a coefficient-reconstructed endpoint, and input ablations under matched base forecasts and correction dimensions.
+
+3.
+
+We compare accuracy and retained arrays over 96 fixed-base conditions, jointly trained adapters, and component and update settings.
+
+Section 2 reviews related correction and adaptation methods. Section 3 defines the forecast–feedback order and retained state; Section 4 gives the evaluation protocol. Section 5 presents the results, followed by discussion and conclusions in Sections 6 and 7.
+
+2Related Work
+2.1Residual feedback for multi-horizon forecasts
+
+Prediction errors from completed forecasts can inform the next correction. ResCAL [1] estimates future traffic-forecasting errors from previously observed residuals and graph signals. TEFL [2] addresses the timing of residual feedback in rolling multi-horizon forecasts: it selects the most recent fully observable residual vector, maps that vector through a low-rank additive adapter, and jointly trains the adapter and base forecaster after a base-model warmup. TEFL’s complete residual input already includes its final value. We examine how to retain that value explicitly when the residual block is compressed.
+
+EPOC addresses the retained representation of a completed block. It keeps a small set of fixed DCT coefficients together with the uncompressed final residual, shares that endpoint across component-wise regressions, and also uses coefficients of the current base forecast. The base forecaster remains fixed while the regression statistics update after each completed block. The joint-base comparison in Table 4 evaluates this correction against a TEFL-style residual adapter; the equal-size summary in Table 5 and input controls in Fig. 3 examine the retained endpoint and its combination with compressed features.
+
+2.2Calibration of fixed forecasters
+
+Methods that retain a fixed base differ in the information supplied to their auxiliary predictors and in what they update. ELF [3] learns an online forecast from Fourier features of observed history and combines it with the fixed model’s forecast through an adaptive weight. TAFAS [6] places gated temporal calibration modules around the base and can adapt using partially observed targets. PETSA [7] uses low-rank input and output calibration modules with robust, spectral, and patch-structure loss terms. The 
+𝛿
+-Adapter [8] attaches bounded input and output adjustments to a deployed forecaster, including an additive output correction.
+
+COSA [4] applies a gated linear correction to the current forecast using statistics of recently observed targets as context. FAC [5] calibrates the input and output through gated complex-affine transformations in the frequency domain, updating from matured targets. OMPB [9] trains a gated Bayesian residual head on a fixed forecast under an online objective that includes source-risk and source-to-target mismatch terms. These methods establish several routes to online correction: a separate forecast, input/output calibration, or an output-side adapter. Our correction uses the preceding forecast’s residual coefficients and endpoint as explicit inputs, with the current forecast coefficients, and constrains its output to a fixed DCT subspace. Table 1 compares the auxiliary information, feedback mechanism, and retained state of the methods evaluated in this study.
+
+2.3Sequential adaptation and retained information
+
+Other online forecasters adapt the forecasting system or regulate when it should change. FSNet [10] combines fast adaptation with memory for recurring patterns, and OneNet [11] updates and combines models of temporal and cross-variable dependencies. Reconditionor identifies context-driven shifts through residual–context dependence, while SOLID selects similar samples to fine-tune a prediction layer [12]. DynaTTA [13] adjusts adaptation using prediction-error and representation-drift signals; PADRE [14] uses delayed residual trajectories and retrieved drift patterns to gate backbone updates. EPOC keeps the backbone fixed and uses completed residuals directly as features for an auxiliary correction.
+
+The DCT [15], ridge regression [16], and forgetting in sequential least squares [17] provide established tools for compressing and estimating from a stream. The design choice examined here is which information from a completed residual block to keep alongside its compressed coefficients. The endpoint, residual coefficients, and current-forecast coefficients define the regression input; the fixed output subspace and sufficient statistics determine the retained state analyzed in Section 3.
+
+Table 1:Auxiliary inputs, correction mechanisms, and retained state in the evaluated comparison methods. Existing methods are ordered by publication year; EPOC appears last.
+Method
+	
+Auxiliary input
+	
+Correction and feedback
+	
+Retained state
+
+
+ELF (ICML 2025)
+	
+Fourier features of observed history
+	
+Online auxiliary forecast and adaptive mixing
+	
+Regression and mixing statistics
+
+
+TEFL (arXiv 2026)
+	
+Most recent completed residual block
+	
+Low-rank residual adapter; joint base training
+	
+Adapter weights and residual input
+
+
+𝛿
+-Adapter (ICLR 2026)
+	
+Current input and forecast
+	
+Bounded input/output adapters; online updates
+	
+Adapter weights and optimizer state
+
+
+COSA (ICLR 2026)
+	
+Current forecast and recent target statistics
+	
+Gated linear output correction; online updates
+	
+Linear adapter, gate, context
+
+
+FAC (arXiv 2026)
+	
+Frequency representations of input and forecast
+	
+Gated frequency-domain calibration
+	
+Masks, biases, optimizer state
+
+
+OMPB (UAI 2026)
+	
+Base forecast
+	
+Gated Bayesian residual head; predict then update
+	
+Head, optimizer, source/target buffers
+
+
+EPOC
+	
+Past residual DCT coefficients and endpoint; current forecast coefficients
+	
+Fixed DCT output subspace; complete-block update
+	
+Ridge statistics, endpoint, mixing state
+3EPOC: Endpoint-Preserving Online Correction
+3.1Forecasting and feedback order
+
+Let 
+𝑡
+=
+1
+,
+2
+,
+…
+ index consecutive, nonoverlapping forecast blocks. At the origin of block 
+𝑡
+, a fixed base forecaster maps the preceding 
+𝐿
+ observations to 
+𝑓
+𝑡
+∈
+ℝ
+𝐻
+×
+𝐶
+, where 
+𝐻
+ is the forecast horizon and 
+𝐶
+ is the number of channels. The target 
+𝑦
+𝑡
+∈
+ℝ
+𝐻
+×
+𝐶
+ becomes available only after the block is complete. We define its base residual as
+
+	
+𝑒
+𝑡
+=
+𝑦
+𝑡
+−
+𝑓
+𝑡
+.
+		
+(1)
+
+This residual is measured against the uncorrected base forecast, so its definition is independent of the correction issued for block 
+𝑡
+.
+
+Forecast origins advance by 
+𝐻
+ samples. Consequently, 
+𝑒
+𝑡
+−
+1
+ is known when block 
+𝑡
+ is issued, while 
+𝑒
+𝑡
+ is not. The correction and its blending weight use only completed blocks. After all of 
+𝑦
+𝑡
+ has arrived, the method updates its regression and blending states and retains a summary of 
+𝑒
+𝑡
+ for block 
+𝑡
++
+1
+. The experiments use 
+𝐿
+=
+96
+ and 
+𝐻
+=
+24
+. Figure 1 shows the information flow and the order of issuance and feedback.
+
+Figure 1:Correction of block 
+𝑡
+ and the complete-block feedback order. The DCT coefficients and final value of 
+𝑒
+𝑡
+−
+1
+ are available when 
+𝑓
+𝑡
+ is issued. The residual trace is schematic. After 
+𝑦
+𝑡
+ is fully observed, its base residual updates the regression, the blending controller, and the summary used at the next origin.
+3.2Residual representation and online correction
+
+Let 
+𝑈
+𝐾
+∈
+ℝ
+𝐻
+×
+𝐾
+ contain the first 
+𝐾
+ columns of a fixed orthonormal DCT basis [15]. The first column is constant. With horizon index 
+ℎ
+=
+1
+,
+…
+,
+𝐻
+ and component index 
+𝑘
+=
+1
+,
+…
+,
+𝐾
+,
+
+	
+(
+𝑈
+𝐾
+)
+ℎ
+,
+𝑘
+=
+{
+𝐻
+−
+1
+/
+2
+,
+	
+𝑘
+=
+1
+,
+
+
+2
+/
+𝐻
+​
+cos
+⁡
+[
+𝜋
+⁡
+(
+ℎ
+−
+1
+2
+)
+​
+(
+𝑘
+−
+1
+)
+/
+𝐻
+]
+,
+	
+𝑘
+>
+1
+.
+		
+(2)
+
+Thus 
+𝑈
+𝐾
+𝖳
+​
+𝑈
+𝐾
+=
+𝐼
+𝐾
+. For channel 
+𝑐
+, we retain the coefficients of the preceding base residual and its observed final value, and transform the current base forecast:
+
+	
+𝑧
+𝑡
+−
+1
+,
+𝑐
+	
+=
+𝑈
+𝐾
+𝖳
+𝑒
+𝑡
+−
+1
+,
+𝑐
+,
+𝑎
+𝑡
+,
+𝑐
+=
+𝑈
+𝐾
+𝖳
+𝑓
+𝑡
+,
+𝑐
+,
+
+
+𝑟
+𝑡
+−
+1
+,
+𝑐
+	
+=
+𝑒
+𝑡
+−
+1
+,
+𝐻
+,
+𝑐
+.
+		
+(3)
+
+The reference configuration uses 
+𝐾
+=
+4
+. Before the first evaluated block, 
+𝑧
+0
+,
+𝑐
+ and 
+𝑟
+0
+,
+𝑐
+ are zero.
+
+We estimate each correction component with a separate regression for each channel. Its four-dimensional input is
+
+	
+𝑥
+𝑡
+,
+𝑘
+,
+𝑐
+=
+[
+1
+,
+𝑧
+𝑡
+−
+1
+,
+𝑘
+,
+𝑐
+,
+𝑎
+𝑡
+,
+𝑘
+,
+𝑐
+,
+𝐻
+​
+𝑟
+𝑡
+−
+1
+,
+𝑐
+]
+𝖳
+.
+		
+(4)
+
+The same uncompressed endpoint 
+𝑟
+𝑡
+−
+1
+,
+𝑐
+ is supplied to all 
+𝐾
+ regressions of channel 
+𝑐
+; it is stored once per channel. The factor 
+𝐻
+ is fixed. If the residual is constant throughout a block, the scaled endpoint equals its constant DCT coefficient, so the two inputs have the same scale in that case.
+
+The endpoint can distinguish residual blocks that have the same retained DCT coefficients. Let 
+𝛿
+𝐻
+∈
+ℝ
+𝐻
+ select the final sample and set 
+𝑣
+=
+(
+𝐼
+𝐻
+−
+𝑈
+𝐾
+​
+𝑈
+𝐾
+𝖳
+)
+​
+𝛿
+𝐻
+. When 
+𝐾
+<
+𝐻
+, 
+𝑈
+𝐾
+𝖳
+​
+𝑣
+=
+0
+, whereas 
+𝛿
+𝐻
+𝖳
+​
+𝑣
+=
+∥
+𝑣
+∥
+2
+2
+>
+0
+. Adding 
+𝑣
+ to a residual block therefore leaves its first 
+𝐾
+ coefficients unchanged but changes its endpoint. This establishes the information difference between the stored endpoint and the endpoint reconstructed from truncated coefficients; their forecasting effect is evaluated in Fig. 3.
+
+For each 
+(
+𝑘
+,
+𝑐
+)
+, let 
+𝛽
+𝑡
+,
+𝑘
+,
+𝑐
+∈
+ℝ
+4
+ be the coefficients fitted before block 
+𝑡
+. We use exponentially weighted ridge regression [16, 17] on inputs recorded at their original forecast times:
+
+	
+𝛽
+𝑡
+,
+𝑘
+,
+𝑐
+=
+arg
+⁡
+min
+𝑏
+∈
+ℝ
+4
+	
+𝜆
+​
+∥
+𝑏
+∥
+2
+2
+
+	
++
+∑
+𝑠
+=
+1
+𝑡
+−
+1
+𝜌
+𝑡
+−
+1
+−
+𝑠
+(
+𝑧
+𝑠
+,
+𝑘
+,
+𝑐
+−
+𝑏
+𝖳
+𝑥
+𝑠
+,
+𝑘
+,
+𝑐
+)
+2
+.
+		
+(5)
+
+The target 
+𝑧
+𝑠
+,
+𝑘
+,
+𝑐
+ is the coefficient of the base residual revealed after block 
+𝑠
+. The penalty includes the intercept. We set 
+𝜆
+=
+1
+ and 
+𝜌
+=
+2
+−
+1
+/
+128
+, giving a weight half-life of 128 completed blocks.
+
+The objective can be updated without retaining previous blocks. With 
+(
+𝑘
+,
+𝑐
+)
+ suppressed, initialize 
+𝐺
+1
+=
+𝜆
+​
+𝐼
+4
+ and 
+𝑞
+1
+=
+0
+. After 
+𝑦
+𝑡
+ is observed, update
+
+	
+𝐺
+𝑡
++
+1
+	
+=
+𝜌
+​
+𝐺
+𝑡
++
+𝑥
+𝑡
+​
+𝑥
+𝑡
+𝖳
++
+(
+1
+−
+𝜌
+)
+​
+𝜆
+​
+𝐼
+4
+,
+
+
+𝑞
+𝑡
++
+1
+	
+=
+𝜌
+​
+𝑞
+𝑡
++
+𝑥
+𝑡
+​
+𝑧
+𝑡
+.
+		
+(6)
+
+Solving 
+𝐺
+𝑡
+​
+𝛽
+𝑡
+=
+𝑞
+𝑡
+ gives the minimizer of (5). The final term in the Gram update keeps the ridge penalty fixed while older observations lose weight. The implementation packs the symmetric statistics and solves the linear system directly.
+
+The fitted coefficient, raw correction, and final issued forecast are
+
+	
+𝑧
+^
+𝑡
+,
+𝑘
+,
+𝑐
+=
+𝛽
+𝑡
+,
+𝑘
+,
+𝑐
+𝖳
+​
+𝑥
+𝑡
+,
+𝑘
+,
+𝑐
+,
+𝑑
+𝑡
+=
+𝑈
+𝐾
+​
+𝑧
+^
+𝑡
+,
+		
+(7)
+	
+𝑦
+^
+𝑡
+=
+𝑓
+𝑡
++
+𝛼
+𝑡
+​
+𝑑
+𝑡
+.
+		
+(8)
+
+The correction for each channel lies in 
+span
+⁡
+(
+𝑈
+𝐾
+)
+. The separately retained endpoint changes the regression inputs, while 
+𝐾
+ fixes the correction output dimension.
+
+The scalar 
+𝛼
+𝑡
+∈
+[
+0
+,
+1
+]
+ is shared across all horizons and channels. For each completed block 
+𝑠
+, the controller records the squared magnitude of the raw correction and its agreement with the base residual:
+
+	
+𝐴
+𝑠
+=
+∥
+𝑑
+𝑠
+∥
+𝐹
+2
+𝐻
+​
+𝐶
+,
+𝐵
+𝑠
+=
+⟨
+𝑑
+𝑠
+,
+𝑒
+𝑠
+⟩
+𝐹
+𝐻
+​
+𝐶
+.
+		
+(9)
+
+Let 
+𝒲
+𝑡
+=
+{
+max
+⁡
+(
+1
+,
+𝑡
+−
+𝑊
+)
+,
+…
+,
+𝑡
+−
+1
+}
+ contain at most 
+𝑊
+ completed blocks. Minimizing the squared error of 
+𝑓
+𝑠
++
+𝛼
+​
+𝑑
+𝑠
+ over these blocks for one bounded weight gives
+
+	
+𝛼
+𝑡
+=
+{
+clip
+[
+0
+,
+1
+]
+⁡
+(
+∑
+𝑠
+∈
+𝒲
+𝑡
+𝐵
+𝑠
+∑
+𝑠
+∈
+𝒲
+𝑡
+𝐴
+𝑠
+)
+,
+	
+∑
+𝑠
+∈
+𝒲
+𝑡
+𝐴
+𝑠
+>
+0
+,
+
+
+0
+,
+	
+otherwise
+.
+		
+(10)
+
+We use 
+𝑊
+=
+32
+. The controller uses the raw correction computed when block 
+𝑠
+ was issued; it does not recompute that correction with later regression coefficients. Algorithm 1 specifies the issue and update order.
+
+Algorithm 1 Online retained-state correction
+0:  Base forecast 
+𝑓
+𝑡
+ at each origin; completed target 
+𝑦
+𝑡
+ after issuance; fixed 
+𝑈
+𝐾
+, 
+𝜆
+, 
+𝜌
+, and 
+𝑊
+.
+0:  Corrected forecast 
+𝑦
+^
+𝑡
+ issued before 
+𝑦
+𝑡
+ arrives.
+1:  Initialize 
+𝑧
+0
+,
+𝑐
+=
+𝑟
+0
+,
+𝑐
+=
+0
+, 
+𝐺
+1
+=
+𝜆
+​
+𝐼
+4
+, 
+𝑞
+1
+=
+0
+, and an empty controller.
+2:  for each block 
+𝑡
+ do
+3:   Receive 
+𝑓
+𝑡
+; compute 
+𝑎
+𝑡
+, 
+𝑥
+𝑡
+,
+𝑘
+,
+𝑐
+, 
+𝑧
+^
+𝑡
+, and 
+𝛼
+𝑡
+ from prior state.
+4:   Issue 
+𝑦
+^
+𝑡
+=
+𝑓
+𝑡
++
+𝛼
+𝑡
+​
+𝑈
+𝐾
+​
+𝑧
+^
+𝑡
+; retain 
+𝑑
+𝑡
+ and 
+𝑥
+𝑡
+,
+𝑘
+,
+𝑐
+ until feedback.
+5:   After all of 
+𝑦
+𝑡
+ arrives, compute 
+𝑒
+𝑡
+=
+𝑦
+𝑡
+−
+𝑓
+𝑡
+ and 
+𝑧
+𝑡
+=
+𝑈
+𝐾
+𝖳
+​
+𝑒
+𝑡
+.
+6:   Update the controller with 
+(
+𝑑
+𝑡
+,
+𝑒
+𝑡
+)
+ and each regression with 
+(
+𝑥
+𝑡
+,
+𝑘
+,
+𝑐
+,
+𝑧
+𝑡
+,
+𝑘
+,
+𝑐
+)
+.
+7:   Retain 
+𝑧
+𝑡
+,
+𝑐
+ and 
+𝑟
+𝑡
+,
+𝑐
+=
+𝑒
+𝑡
+,
+𝐻
+,
+𝑐
+ for block 
+𝑡
++
+1
+.
+8:  end for
+3.3Retained-state accounting
+
+We count numerical arrays kept by the correction method between forecast blocks. Its regression statistics contain, for each of the 
+𝐾
+​
+𝐶
+ regressions, six packed entries of the symmetric Gram matrix for three non-intercept features, three intercept–feature cross terms, and four target cross terms. The intercept weight sum is common to every regression and is stored once. These statistics therefore occupy 
+13
+​
+𝐾
+​
+𝐶
++
+1
+ floating-point values.
+
+The other retained arrays contain 
+𝐻
+​
+𝐾
+ values for 
+𝑈
+𝐾
+, 
+𝐾
+​
+𝐶
+ previous residual coefficients, 
+𝐶
+ endpoints, and 
+2
+​
+𝑊
++
+2
+ values for the circular blending history and its running sums. The implementation also retains 
+𝐾
+ component indices. All counted values and indices use 64 bits, giving
+
+	
+𝑆
+⁡
+(
+𝐻
+,
+𝐾
+,
+𝐶
+,
+𝑊
+)
+=
+8
+​
+(
+𝐻
+​
+𝐾
++
+𝐾
++
+14
+​
+𝐾
+​
+𝐶
++
+𝐶
++
+2
+​
+𝑊
++
+3
+)
+​
+bytes
+.
+		
+(11)
+
+At 
+𝐻
+=
+24
+, 
+𝐾
+=
+4
+, and 
+𝑊
+=
+32
+, this is 
+8
+​
+(
+167
++
+57
+​
+𝐶
+)
+ bytes: 4,528 B for a seven-channel ETT series, 8,176 B for a 15-channel BDG2 site, and 13,192 B for the 26-channel Appliances series. The median over the 96 fixed-base conditions is 6,352 B, as reported in Table 3. This is the size of persistent auxiliary numerical arrays. The base forecaster, common observation history, forecast and target buffers, temporary features and solver workspace, and language-runtime overhead are outside this count; it is not a measurement of peak RAM or execution time.
+
+4Experimental Setup
+4.1Data and common evaluation protocol
+
+Table 2 lists eight multivariate series: ETTh1, ETTh2, ETTm1, and ETTm2 from the Electricity Transformer Temperature data [18]; Appliances Energy Prediction [19]; and the Rat, Fox, and Panther sites from Building Data Genome 2 (BDG2) [20]. Each ETT series has seven channels. For Appliances, we omit the timestamp and the random variables rv1 and rv2, leaving 26 numerical channels. Each BDG2 site contains 15 selected electricity meters. Forecasts and losses include every retained channel.
+
+The BDG2 meter IDs and channel order are fixed in the released inputs. Meters were chosen by their missing-value fractions over the supplied series. Fox and Panther were forward filled and then backward filled from the pinned cleaned source. The archived Rat input differs from that procedure at 78 cells; explicit snapshot adjustments reproduce its evaluated values.
+
+For every series, the lookback is 
+𝐿
+=
+96
+ samples, the horizon is 
+𝐻
+=
+24
+ samples, and consecutive forecast origins are 24 samples apart. These sample counts represent different durations: ETTh and BDG2 are hourly, ETTm is sampled every 15 minutes, and Appliances every 10 minutes. Let 
+𝑇
+ be the series length, 
+𝑛
+=
+⌊
+𝑇
+/
+2
+⌋
+, and 
+𝑎
+=
+⌊
+0.8
+​
+𝑛
+⌋
+. The legacy base is fitted using 
+[
+0
+,
+𝑎
+)
+, with 
+[
+𝑎
+,
+𝑛
+)
+ reserved for model and comparator selection. A refit base uses 
+[
+0
+,
+𝑛
+)
+ after its settings have been selected. Evaluation origins are 
+𝑛
+,
+𝑛
++
+𝐻
+,
+…
+; only complete target blocks within 
+[
+𝑛
+,
+𝑇
+)
+ are scored. Per-channel means and standard deviations are computed on 
+[
+0
+,
+𝑛
+)
+; we subtract the mean and divide by the standard deviation plus 
+10
+−
+8
+. All reported errors use this normalized scale.
+
+Table 2:Prepared evaluation series. Eval. is the zero-based index of the first evaluation target; Blocks counts complete 24-sample targets. All eight series enter the same fixed-base comparison.
+Series	Samples	
+𝐶
+	Eval.	Blocks
+ETTh1	17420	7	8710	362
+ETTh2	17420	7	8710	362
+ETTm1	69680	7	34840	1451
+ETTm2	69680	7	34840	1451
+Appliances	19735	26	9867	411
+BDG2 (Rat)	17544	15	8772	365
+BDG2 (Fox)	17544	15	8772	365
+BDG2 (Panther)	17544	15	8772	365
+
+The fixed-base comparison uses DLinear [21] and a compact, channel-independent PatchTST [22]. DLinear decomposes the input with a replicate-padded moving average of width 25 and uses separate trend and remainder maps shared across channels. PatchTST uses length-16 patches at stride 8, a 64-dimensional embedding, four attention heads, two encoder layers, a feed-forward width of 128, zero dropout, a learned position embedding, and a linear forecast head. It also uses a learned affine input transformation per channel.
+
+For each series, architecture, and seed in 
+{
+0
+,
+1
+,
+2
+}
+, we train the legacy base with Adam at 
+10
+−
+3
+, batch size 32, and MSE loss on randomly sampled training windows. The update count is chosen by validation MSE from 
+{
+200,500
+,
+1000
+,
+2000
+,
+4000
+,
+8000
+,
+20000
+}
+. The refit base is reinitialized with the corresponding seed and trained on 
+[
+0
+,
+𝑛
+)
+ for that selected count. Both models are frozen during evaluation. The eight series, two architectures, three seeds, and two training variants yield 
+8
+×
+2
+×
+3
+×
+2
+=
+96
+ conditions. Within each condition, all methods receive the same base forecasts, observed targets, and forecast origins. Each method issues a complete forecast before the target arrives and updates only after the full target block is observed. The first evaluation block is included in every reported loss.
+
+4.2Comparators and learned comparison design
+
+Table 1 distinguishes the auxiliary inputs and retained states of related methods. The main fixed-base comparison contains seven arms: the uncorrected base (Static), the input/output 
+𝛿
+-Adapter [8], COSA [4], FAC [5], OMPB [9], full ELF [3], and EPOC with 
+𝐾
+=
+4
+. All six correction arms use the same bounded, global, 32-completed-block blending rule of Section 3. Online states start empty at the evaluation boundary; weights trained before evaluation are retained. The base remains fixed, including when FAC calibrates its input.
+
+The 
+𝛿
+-Adapter has bounded additive input and output multilayer perceptrons of width 512. The additive bound is 0.01 on ETT and 0.1 on the other series. For each fixed base, the adapter receives ten source-training epochs with Adam on at most 1024 sampled pre-validation windows. It takes one clipped Adam step when each evaluation target completes. Its online rate is selected from 
+{
+10
+−
+6
+,
+10
+−
+4
+,
+10
+−
+3
+}
+ using chronological online MSE on legacy validation origins starting at 
+𝑎
++
+96
+. COSA uses the official linear adapter and adaptive rate function from commit 527c0feb, with channel-specific maps and gates and ten entries of completed-block context. FAC is a reconstruction of the published input/output frequency-calibration equations using channel-specific complex masks and biases, inverse real FFT, and a gated correction. COSA and FAC take three gradient steps per completed block. Their initial rates are selected on the same legacy validation origins from 
+{
+10
+−
+4
+,
+10
+−
+3
+,
+5
+×
+10
+−
+3
+,
+10
+−
+2
+}
+. Each selection uses that series, architecture, and seed; the chosen rate is carried to the corresponding refit condition, and adapter state is reset before evaluation.
+
+OMPB uses a gated per-channel Gaussian residual head with source-risk, divergence, and supervised-feedback terms. Its transferred settings are 
+𝐾
+=
+5
+, five optimizer steps per completed block, Adam rate 0.005, a 256-pair source buffer, and a 64-forecast target buffer. The head is pretrained for 20 epochs using at most 1024 source windows per fixed base; no validation search changes these settings. Full ELF uses cumulative Fourier-coordinate ridge regression with one newly completed training window per block, no pre-evaluation regression pairs, and ridge coefficient 20. Its input/output frequency counts are 
+(
+𝑑
+,
+𝑞
+)
+=
+(
+87
+,
+10
+)
+. The input is centered by its channel mean before orthonormal Fourier transformation; the mean is restored after reconstruction. In unscaled sufficient statistics, the channel-
+𝑐
+ ridge term is 
+20
+​
+𝜎
+𝑐
+2
+​
+𝐼
+. Before fitting, the auxiliary forecast repeats the most recent daily cycle. We retain independent real Fourier coordinates and packed symmetric statistics for storage accounting. ELF’s original dynamic weighting is replaced by the shared global controller in the main comparison.
+
+A separate experiment compares EPOC with the two-projection TEFL-style residual adapter [2]. It covers six series (the four ETT series, Appliances, and Rat), both architectures, and three seeds. The adapter has shared weights across channels, a ReLU hidden layer, no projection biases, and widths 2, 4, or 64; its second projection is initialized to zero. Base warmup lasts three chronological epochs under either MAE alone or MAE plus spectral flatness (SF) with unit weight. SF is the geometric-to-arithmetic mean ratio of full Fourier power, stabilized by 
+10
+−
+8
+, after consecutive residual blocks in a batch are concatenated in time and averaged over channels. The second stage uses 12 epochs of MAE optimization, either jointly for base and adapter or for the base alone. Both stages use AdamW at 
+10
+−
+3
+, weight decay 0.01, and batch size 32. Checkpoints are selected by validation MAE over epochs 0–12, with earlier epochs winning ties. Paired runs share the warmup state and shuffle seed.
+
+At evaluation, a learned adapter receives the previous completed base residual and has fixed weights. We score its raw and globally blended forecasts. For each warmup and width, the direct EPOC-versus-adapter comparison applies both corrections to the same jointly trained base with the same blending rule. A separately trained base-only run tests the benefit of the joint adapter procedure. We aggregate this group separately from the 96 fixed-base conditions.
+
+The endpoint-location control replaces the most recent residual in EPOC’s regression with the first residual, the twelfth residual, or the mean residual of the preceding block. Each scalar is multiplied by 
+𝐻
+, enters all 
+𝐾
+ regressions of its channel, and has the same retained size as the endpoint. We run this control on all 96 fixed-base conditions and, separately, on the width-64 jointly trained bases under each warmup. For the fixed-base group, input ablations additionally remove the endpoint, the residual DCT coefficients, or the current forecast coefficients; compare endpoint-only regression and endpoint persistence; and supply an endpoint projected from the retained residual DCT coefficients. All fitted variants retain the same 
+𝐾
+-component output subspace. A 13-setting one-factor sweep changes 
+𝐾
+ to 
+1
+,
+2
+,
+3
+,
+6
+,
+8
+, ridge strength to 
+0.1
+ or 
+10
+, forgetting half-life to 
+32,512
+, or infinity completed blocks, and blending window to 
+8
+ or 
+128
+ blocks, alongside the reference setting. The input and setting studies each use all 96 fixed-base conditions.
+
+4.3Metrics and aggregation
+
+For 
+𝑁
+ completed evaluation blocks, write 
+𝐸
+𝑡
+,
+ℎ
+,
+𝑐
+=
+𝑦
+^
+𝑡
+,
+ℎ
+,
+𝑐
+−
+𝑦
+𝑡
+,
+ℎ
+,
+𝑐
+. We report normalized-scale errors
+
+	
+MSE
+	
+=
+1
+𝑁
+​
+𝐻
+​
+𝐶
+​
+∑
+𝑡
+,
+ℎ
+,
+𝑐
+𝐸
+𝑡
+,
+ℎ
+,
+𝑐
+2
+,
+		
+(12)
+
+	
+MAE
+	
+=
+1
+𝑁
+​
+𝐻
+​
+𝐶
+​
+∑
+𝑡
+,
+ℎ
+,
+𝑐
+|
+𝐸
+𝑡
+,
+ℎ
+,
+𝑐
+|
+.
+	
+
+For metric 
+𝑚
+∈
+{
+MSE
+,
+MAE
+}
+ and condition 
+𝑖
+, the reduction from Static is 
+100
+​
+(
+1
+−
+𝑚
+𝑖
+,
+method
+/
+𝑚
+𝑖
+,
+Static
+)
+. A paired reduction from comparator 
+𝑏
+ to method 
+𝑝
+ instead uses 
+100
+​
+(
+1
+−
+𝑚
+𝑖
+,
+𝑝
+/
+𝑚
+𝑖
+,
+𝑏
+)
+; positive values favor 
+𝑝
+. These are different denominators, and MSE and MAE are calculated separately.
+
+Main overview values average the 96 condition-wise reductions and take the median of retained numerical-array bytes over those conditions. Each point in Fig. 2 summarizes the three seeds and two training variants for one series and one architecture. In the jointly trained experiment, we first average each method’s losses over three seeds within each of 12 series–architecture pairs, then compute the paired reduction and average those 12 percentages. Endpoint-location results keep the fixed-base and jointly trained groups separate. The order of aggregation matters: a mean of paired percentages generally differs from a percentage calculated from pooled losses.
+
+5Results
+5.1Accuracy and retained state
+
+Retained bytes count the correction parameters, optimizer tensors, regression statistics, residual summaries, method-specific buffers, and blending state kept between forecasts. The count excludes the frozen base, common observation history, forecast and target buffers, and temporary workspace.
+
+Table 3 compares seven methods on the 96 fixed-base conditions. EPOC reduces mean MSE by 15.40% and mean MAE by 9.35% relative to Static while retaining a median of 6,352 B. Its paired MSE reductions relative to the 
+𝛿
+-Adapter, COSA, FAC, and OMPB are 9.55%, 4.18%, 0.92%, and 6.06%, respectively. EPOC has lower MSE in 84, 77, 58, and 91 of the 96 paired conditions. All 96 EPOC conditions improve both MSE and MAE over Static. Full ELF has the highest mean reduction from Static, 19.29% in MSE and 12.74% in MAE, with 474,048 median retained bytes. EPOC therefore retains about one seventy-fifth of ELF’s median auxiliary state, alongside a 3.89-percentage-point smaller mean MSE reduction from Static.
+
+Table 3:Seven-method comparison on 96 matched conditions. The overview averages condition-wise reductions from Static; retained-byte multiples are relative to EPOC (6,352 B) and rounded to integers. The MSE and MAE panels average losses over three seeds and the legacy/refit variants within each series–backbone pair. The rightmost ratio divides EPOC’s unrounded loss by the lowest unrounded loss in that row; 1 indicates the best result. Bold marks row-minimum losses and the corresponding ratio when EPOC is best. All corrections use global blending.
+96-condition overview
+Method	MSE 
+↑
+ (%)	MAE 
+↑
+ (%)	Retained bytes 
+↓
+
+Static	0.00	0.00	0 (
+×
+0
+)
+
+𝛿
+-Adapter	6.70	5.12	22,552,608 (
+×
+3550
+)
+COSA	11.73	7.56	111,756 (
+×
+18
+)
+FAC	14.59	9.11	33,312 (
+×
+5
+)
+OMPB	10.05	6.73	767,216 (
+×
+121
+)
+ELF	19.29	12.74	474,048 (
+×
+75
+)
+EPOC	15.40	9.35	6,352 (
+×
+1
+)
+MSE 
+↓
+
+Dataset	Backbone	Static	
+𝛿
+-Adapter	COSA	FAC	OMPB	ELF	EPOC	EPOC/best
+ETTh1	DLinear	0.3962	0.3939	0.3929	0.3840	0.3920	0.3673	0.3583	1.00000
+ETTh1	PatchTST	0.4378	0.4341	0.4143	0.3983	0.4018	0.3654	0.3779	1.03433
+ETTh2	DLinear	0.1453	0.1421	0.1397	0.1401	0.1414	0.1349	0.1341	1.00000
+ETTh2	PatchTST	0.1805	0.1752	0.1501	0.1407	0.1475	0.1382	0.1422	1.02896
+ETTm1	DLinear	0.2630	0.2570	0.2498	0.2366	0.2561	0.2390	0.2467	1.04298
+ETTm1	PatchTST	0.3167	0.3105	0.2653	0.2608	0.2793	0.2368	0.2718	1.14783
+ETTm2	DLinear	0.0998	0.0971	0.0960	0.0918	0.0965	0.0860	0.0895	1.04031
+ETTm2	PatchTST	0.1169	0.1120	0.0989	0.0943	0.0989	0.0862	0.0927	1.07540
+Appliances	DLinear	0.2307	0.1994	0.2158	0.1858	0.2118	0.1932	0.1843	1.00000
+Appliances	PatchTST	0.4393	0.3476	0.2018	0.1897	0.2059	0.1803	0.1827	1.01291
+BDG2 (Rat)	DLinear	0.2193	0.2049	0.2011	0.1992	0.2062	0.1839	0.1929	1.04911
+BDG2 (Rat)	PatchTST	0.2129	0.1941	0.1897	0.1857	0.1917	0.1737	0.1871	1.07681
+BDG2 (Fox)	DLinear	0.2375	0.2024	0.1993	0.2065	0.2243	0.1761	0.2091	1.18712
+BDG2 (Fox)	PatchTST	0.1817	0.1632	0.1623	0.1605	0.1689	0.1545	0.1714	1.10953
+BDG2 (Panther)	DLinear	0.0779	0.0726	0.0715	0.0706	0.0757	0.0645	0.0666	1.03126
+BDG2 (Panther)	PatchTST	0.0752	0.0689	0.0690	0.0670	0.0697	0.0642	0.0673	1.04854
+MAE 
+↓
+
+Dataset	Backbone	Static	
+𝛿
+-Adapter	COSA	FAC	OMPB	ELF	EPOC	EPOC/best
+ETTh1	DLinear	0.4040	0.4021	0.3989	0.3951	0.3984	0.3863	0.3863	1.00004
+ETTh1	PatchTST	0.4400	0.4364	0.4221	0.4122	0.4159	0.3922	0.4083	1.04097
+ETTh2	DLinear	0.2577	0.2538	0.2498	0.2513	0.2507	0.2443	0.2429	1.00000
+ETTh2	PatchTST	0.2974	0.2902	0.2633	0.2529	0.2596	0.2498	0.2555	1.02289
+ETTm1	DLinear	0.3389	0.3327	0.3263	0.3177	0.3313	0.3191	0.3266	1.02787
+ETTm1	PatchTST	0.3615	0.3555	0.3363	0.3339	0.3435	0.3182	0.3433	1.07887
+ETTm2	DLinear	0.2115	0.2072	0.2051	0.2009	0.2056	0.1915	0.1982	1.03468
+ETTm2	PatchTST	0.2329	0.2247	0.2097	0.2030	0.2088	0.1923	0.2030	1.05589
+Appliances	DLinear	0.2870	0.2565	0.2788	0.2560	0.2752	0.2562	0.2491	1.00000
+Appliances	PatchTST	0.3857	0.3346	0.2667	0.2604	0.2689	0.2493	0.2503	1.00408
+BDG2 (Rat)	DLinear	0.3095	0.2869	0.2856	0.2854	0.2900	0.2659	0.2814	1.05813
+BDG2 (Rat)	PatchTST	0.3140	0.2906	0.2850	0.2824	0.2876	0.2648	0.2860	1.08016
+BDG2 (Fox)	DLinear	0.3171	0.2840	0.2888	0.2954	0.3042	0.2671	0.2993	1.12034
+BDG2 (Fox)	PatchTST	0.2912	0.2698	0.2679	0.2679	0.2747	0.2568	0.2788	1.08569
+BDG2 (Panther)	DLinear	0.1786	0.1704	0.1702	0.1692	0.1759	0.1598	0.1632	1.02153
+BDG2 (Panther)	PatchTST	0.1770	0.1644	0.1655	0.1627	0.1661	0.1590	0.1647	1.03599
+
+Figure 2 shows how the mean MSE reduction and retained bytes vary across the eight series and two backbones. Its connecting segments join the DLinear and PatchTST results for the same method within one series. EPOC occupies the lowest-storage end of the fitted online methods in each panel. The ranking by error varies by series. On Fox, COSA, FAC, and the 
+𝛿
+-Adapter each have lower MSE than EPOC with both backbones, as the corresponding rows of Table 3 show. ELF has the lowest MSE for both Fox backbones and both Panther backbones, with substantially more retained state than EPOC.
+
+Figure 2:Series-level accuracy and storage for six correction methods on the 96 fixed-base conditions. Each marker averages Static-relative MSE reductions over three seeds and two training variants for one series and backbone; circles denote DLinear and triangles denote PatchTST. Lines connect the two backbones for the same method. The horizontal axis gives median retained bytes on a logarithmic scale.
+
+Table 4 evaluates EPOC against the TEFL-style residual adapter on jointly trained bases. Across the six warmup–width settings, EPOC lowers MSE by 16.69–20.15% and MAE by 8.82–11.29% relative to the globally blended adapter on the same joint base. In a separate training comparison, the raw joint adapter lowers MSE by 2.22–6.44% relative to its paired base-only run. Thus, the direct correction comparison is made against adapters that also improve on base-only training. EPOC retains 4,528 B in each joint-base comparison. The globally blended adapters retain median sizes of 1,584 B, 1,968 B, and 13,488 B at widths 2, 4, and 64: the small adapters use less state, while the width-64 adapter uses more.
+
+Table 4:Joint-training comparison over six series, two backbones, and three seeds. The same-base columns give the paired reduction of EPOC relative to the globally blended adapter on the same jointly trained base. The separate-training columns give the reduction of the raw joint adapter relative to a separately trained base-only run. For each metric, seed losses are averaged within each of 12 series–backbone pairs before calculating reductions, which are then averaged across pairs. Retained bytes are medians for the globally blended corrections. SF denotes spectral flatness in base warmup; positive reductions favor the first-named method.
+		Same-base: EPOC vs. adapter	Separate training: adapter vs. base-only	Retained state (B)
+Warmup	Width	MSE (%)	MAE (%)	MSE (%)	MAE (%)	EPOC	Adapter
+MAE	2	19.27	10.78	2.22	1.29	4,528	1,584
+	4	18.98	10.61	3.13	1.77	4,528	1,968
+	64	16.69	8.82	6.09	3.68	4,528	13,488
+MAE+SF	2	20.15	11.29	2.49	1.27	4,528	1,584
+	4	19.54	10.86	3.68	1.98	4,528	1,968
+	64	17.21	9.06	6.44	3.74	4,528	13,488
+5.2Endpoint selection and input construction
+
+Table 5 compares equal-size residual summaries in EPOC’s regression. Over the 96 fixed-base conditions, the retained endpoint lowers mean paired MSE by 2.20%, 1.65%, and 1.96% relative to the first residual, middle residual, and block mean, respectively. The corresponding MAE reductions are 1.46%, 1.11%, and 1.39%. The joint-base groups show the same ordering of positive endpoint gains: their MSE reductions range from 4.70% to 6.00% with MAE warmup and from 5.43% to 6.94% with MAE+SF warmup. Within each condition, the endpoint and its three controls retain the same number of bytes, so these comparisons evaluate the chosen scalar summary at fixed regression and storage size.
+
+Table 5:Endpoint gain over equal-size residual summaries. Each entry gives the mean paired reduction when the preceding block’s endpoint replaces the listed first residual, middle residual, or block mean. The frozen-base row averages 96 condition-wise reductions; each joint row averages reductions across 12 series–backbone pairs after seed-mean losses are formed. All variants within a comparison use the same base, regression settings, blending rule, and retained array size.
+	MSE reduction (%)	MAE reduction (%)	
+Base / training	First	Middle	Mean	First	Middle	Mean	Retained (B)
+Frozen base (96 conditions)	2.20	1.65	1.96	1.46	1.11	1.39	6,352
+Joint MAE (12 pairs)	4.70	4.83	6.00	2.93	2.95	3.61	4,528
+Joint MAE+SF (12 pairs)	5.43	5.49	6.94	3.38	3.34	4.14	4,528
+
+Figure 3 tests the complete regression input on the same 96 fixed-base conditions. The complete input yields a 15.40% mean MSE reduction from Static, compared with 13.37% without the endpoint, 13.87% without residual DCT coefficients, 13.02% without current forecast coefficients, and 11.34% with the endpoint alone. In paired losses, the complete input reduces MSE by 4.55% relative to endpoint-only regression and wins in all 96 conditions. An endpoint projected from the retained DCT coefficients yields a 14.98% mean MSE reduction from Static, close to the 15.40% of the observed-endpoint variant. Supplying that projected value to all component regressions therefore recovers much of the gain obtained by explicitly sharing an endpoint input. The complete method retains 6,352 median bytes, versus 6,264 B with the projected endpoint and 2,832 B with endpoint-only regression.
+
+Figure 3:Input construction on 96 matched fixed-base conditions. Markers show mean condition-wise MSE and MAE reductions from Static; bars show median retained bytes with global blending. The projected endpoint 
+𝑟
+~
+ is reconstructed from retained residual DCT coefficients and supplied to every component regression. Endpoint persistence repeats the preceding endpoint without a fitted regression.
+5.3Accuracy–storage and setting sensitivity
+
+The upper panels of Fig. 4 put all six corrections from Table 3 on common MSE, MAE, and retained-state axes. EPOC gives a 15.40% mean MSE reduction at 6,352 median bytes; full ELF gives 19.29% at 474,048 B. FAC is the closest of the other main comparators in mean MSE reduction, at 14.59% and 33,312 B. These points show the accuracy and storage choices behind the paired comparisons.
+
+The lower panels vary one EPOC setting at a time over the same 96 conditions. Increasing 
+𝐾
+ from 1 to 4 raises the mean MSE reduction from 11.13% to 15.40% and median retained bytes from 2,056 to 6,352. At 
+𝐾
+=
+8
+, MSE reduction reaches 16.40% with 12,080 B. The additional 1.00 percentage point from 
+𝐾
+=
+4
+ to 
+𝐾
+=
+8
+ requires 5,728 more retained bytes. With 
+𝐾
+=
+4
+ fixed, changing ridge strength, forgetting half-life, or blending window produces mean MSE reductions between 14.47% and 15.43%. Component count is the largest accuracy–storage choice among these one-factor changes. Table S2 gives the full 13-setting summary, with condition-level values in the accompanying CSV.
+
+Figure 4:Main comparison and one-factor sensitivity on 96 fixed-base conditions. Upper panels plot mean condition-wise reductions from Static against median retained bytes for the six globally blended correction methods. Lower left varies the retained DCT component count 
+𝐾
+; lower right changes ridge strength, forgetting half-life, or blending window relative to the 
+𝐾
+=
+4
+ reference. Unchanged settings follow Section 3.
+6Discussion
+
+The main comparison identifies an accuracy–storage operating point (Table 3 and Fig. 2). On the 96 fixed-base conditions, EPOC reduces mean MSE by 15.40% relative to Static with 6,352 median retained bytes. Full ELF increases that reduction to 19.29%, but retains about 75 times as many bytes. EPOC also uses less state than the 
+𝛿
+-Adapter, COSA, FAC, and OMPB, and has lower paired MSE than each in a majority of conditions. The choice depends on the series and the available state budget: on BDG2 (Fox), the 
+𝛿
+-Adapter, COSA, and FAC have lower MSE with both backbones, while the width-2 and width-4 TEFL-style adapters in the separate joint-base experiment (Table 4) retain fewer bytes than EPOC.
+
+The endpoint controls clarify what the retained scalar contributes (Table 5 and Fig. 3). At the same regression dimension and retained size, the preceding block’s endpoint gives 1.65–2.20% lower paired MSE than its first value, middle value, or mean. The low-order DCT coefficients summarize the completed block, whereas the observed endpoint explicitly records its latest residual; blocks with identical retained coefficients can have different endpoints. Without an endpoint input, the mean MSE reduction from Static falls to 13.37%. Yet the endpoint projected from the retained coefficients achieves 14.98%, close to the 15.40% obtained with the observed endpoint. Much of the measured benefit therefore comes from supplying an endpoint-like feature to every component regression, with a smaller additional gain from retaining its uncompressed value in these experiments. The complete input also lowers paired MSE by 4.55% relative to endpoint-only regression across the 96 conditions, supporting the combined use of residual coefficients, the shared endpoint feature, and current-forecast coefficients.
+
+Among the tested settings, the number of retained components sets the principal accuracy–storage choice within EPOC (Fig. 4). Increasing 
+𝐾
+ from 1 to 4 raises the mean MSE reduction from 11.13% to 15.40%, while increasing median retained state from 2,056 to 6,352 B. Increasing 
+𝐾
+ further to 8 adds 1.00 percentage point of MSE reduction and 5,728 B of state. Thus, 
+𝐾
+=
+4
+ is a compact reference setting rather than the most accurate tested setting; the preferred 
+𝐾
+ depends on the storage available for each channel.
+
+The evidence covers eight series, two base forecasters, an input length of 96, a forecast horizon of 24, and updates after complete target blocks. Retained-byte counts describe persistent auxiliary numerical arrays between forecasts. Evaluating other horizons and series, and measuring peak memory, latency, and energy on target devices, would extend the accuracy–storage comparison to deployment costs.
+
+7Conclusion
+
+This paper introduced EPOC, an endpoint-preserving online correction with compressed residual state for fixed multi-horizon forecasters. After each target block is complete, the method retains low-order DCT coefficients and the final value of the base residual, and shares that endpoint across component-wise online ridge regressions that also receive current-forecast coefficients. On 96 matched fixed-base conditions across eight series and two backbones, the complete correction yielded mean condition-wise MSE and MAE reductions from Static of 15.40% and 9.35%, respectively, while retaining a median of 6,352 B. It used less auxiliary state than the 
+𝛿
+-Adapter, COSA, FAC, and OMPB and yielded lower paired MSE than each in most conditions. Full ELF achieved a larger 19.29% mean MSE reduction from Static with about 75 times the state. In the joint-base experiment, EPOC lowered MSE by 16.69–20.15% relative to globally blended TEFL-style adapters applied to the same base. Equal-size residual-summary controls favored the endpoint by 1.65–2.20% in paired MSE. The projected-endpoint and input-ablation controls indicate that sharing an endpoint-like feature across the component regressions, alongside residual and current-forecast coefficients, accounts for much of the measured gain. Increasing 
+𝐾
+ from 4 to 8 added 1.00 percentage point of mean MSE reduction at 5,728 B of additional retained state. These results identify a compact accuracy–storage operating point for online correction under complete-block feedback.
+
+References
+[1]
+D. Kim, Y. Cho, D. Kim, C. Park, and J. Choo (2022)
+Residual correction in real-time traffic forecasting.
+Note: arXiv:2209.05406
+External Links: Link
+Cited by: §1, §2.1.
+[2]
+X. Huang, S. Fang, S. Qiu, C. Yu, J. Du, and C. Yang (2026)
+TEFL: prediction-residual-guided rolling forecasting for multi-horizon time series.
+Note: arXiv:2602.22520, version 1
+External Links: Link
+Cited by: §1, §2.1, §4.2.
+[3]
+T. L. Lee, W. Toner, R. Singh, A. Joosen, and M. Asenov (2025)
+Lightweight online adaption for time series foundation model forecasts.
+In Proceedings of the 42nd International Conference on Machine Learning,
+Proceedings of Machine Learning Research, Vol. 267, pp. 33736–33764.
+External Links: Link
+Cited by: §1, §2.2, §4.2.
+[4]
+J. Im and H. Kwon (2026)
+COSA: context-aware output-space adapter for test-time adaptation in time series forecasting.
+In International Conference on Learning Representations,
+External Links: Link
+Cited by: §1, §2.2, §4.2.
+[5]
+H. Wang, R. Xu, G. Kementzidis, K. Cho, S. Ramirez Villarreal, and Y. Deng (2026)
+Towards principled test-time adaptation for time series forecasting.
+Note: arXiv:2605.17250, version 1
+External Links: Link
+Cited by: §1, §2.2, §4.2.
+[6]
+H. Kim, S. Kim, J. Mok, and S. Yoon (2025)
+Battling the non-stationarity in time series forecasting via test-time adaptation.
+Proceedings of the AAAI Conference on Artificial Intelligence 39 (17), pp. 17868–17876.
+External Links: Document
+Cited by: §2.2.
+[7]
+H. R. Medeiros, H. Sharifi-Noghabi, G. L. Oliveira, and S. Irandoust (2025)
+Accurate parameter-efficient test-time adaptation for time series forecasting.
+Note: arXiv:2506.23424, version 1Second Workshop on Test-Time Adaptation, ICML 2025
+External Links: Link
+Cited by: §2.2.
+[8]
+D. Liang, Q. Li, Y. Wang, J. Chen, H. Zhang, X. Cui, Q. Wang, and S. Li (2026)
+The forecast after the forecast: a post-processing shift in time series.
+In International Conference on Learning Representations,
+External Links: Link
+Cited by: §2.2, §4.2.
+[9]
+C. Huang, Z. Ma, and G. Michailidis (2026)
+Model-agnostic online certificate-driven calibration for time series forecasting under distribution shift.
+In Proceedings of the 42nd Conference on Uncertainty in Artificial Intelligence,
+Proceedings of Machine Learning Research, Vol. 337, pp. 2244–2273.
+External Links: Link
+Cited by: §2.2, §4.2.
+[10]
+Q. Pham, C. Liu, D. Sahoo, and S. C. H. Hoi (2023)
+Learning fast and slow for online time series forecasting.
+In International Conference on Learning Representations,
+External Links: Link
+Cited by: §2.3.
+[11]
+Y. Zhang, Q. Wen, X. Wang, W. Chen, L. Sun, Z. Zhang, L. Wang, R. Jin, and T. Tan (2023)
+OneNet: enhancing time series forecasting models under concept drift by online ensembling.
+In Advances in Neural Information Processing Systems,
+Vol. 36.
+External Links: Link
+Cited by: §2.3.
+[12]
+M. Chen, L. Shen, H. Fu, Z. Li, J. Sun, and C. Liu (2024)
+Calibration of time-series forecasting: detecting and adapting context-driven distribution shift.
+In Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining,
+pp. 341–352.
+External Links: Document, Link
+Cited by: §2.3.
+[13]
+S. Grover and A. Etemad (2025)
+Shift-aware test-time adaptation and benchmarking for time-series forecasting.
+Note: Second Workshop on Test-Time Adaptation: Putting Updates to the Test, ICML 2025
+External Links: Link
+Cited by: §2.3.
+[14]
+X. Li, F. Teng, C. Zhou, and Q. Duan (2026)
+Beyond uniform updates: drift pattern aware online time series forecasting under delayed feedback.
+In Proceedings of the Thirty-Fifth International Joint Conference on Artificial Intelligence,
+pp. 4518–4526.
+External Links: Document, Link
+Cited by: §2.3.
+[15]
+N. Ahmed, T. Natarajan, and K. R. Rao (1974)
+Discrete cosine transform.
+IEEE Transactions on Computers C-23 (1), pp. 90–93.
+External Links: Document
+Cited by: §2.3, §3.2.
+[16]
+A. E. Hoerl and R. W. Kennard (1970)
+Ridge regression: biased estimation for nonorthogonal problems.
+Technometrics 12 (1), pp. 55–67.
+External Links: Document
+Cited by: §2.3, §3.2.
+[17]
+A. Goel, A. L. Bruce, and D. S. Bernstein (2020)
+Recursive least squares with variable-direction forgetting: compensating for the loss of persistency.
+IEEE Control Systems Magazine 40 (4), pp. 80–102.
+External Links: Document
+Cited by: §2.3, §3.2.
+[18]
+H. Zhou
+ETDataset: electricity transformer temperature dataset.
+Note: Dataset repositoryAccessed: Sep. 13, 2026
+External Links: Link
+Cited by: §4.1.
+[19]
+L. Candanedo (2017)
+Appliances energy prediction.
+Note: UCI Machine Learning Repository
+External Links: Document, Link
+Cited by: §4.1.
+[20]
+C. Miller, A. Kathirgamanathan, B. Picchetti, P. Arjunan, J. Y. Park, Z. Nagy, P. Raftery, B. W. Hobson, Z. Shi, and F. Meggers (2020)
+The building data genome project 2, energy meter data from the ASHRAE great energy predictor III competition.
+Scientific Data 7, pp. 368.
+External Links: Document
+Cited by: §4.1.
+[21]
+A. Zeng, M. Chen, L. Zhang, and Q. Xu (2022)
+Are transformers effective for time series forecasting?.
+Note: arXiv:2205.13504
+External Links: Link
+Cited by: §4.1.
+[22]
+Y. Nie, N. H. Nguyen, P. Sinthong, and J. Kalagnanam (2023)
+A time series is worth 64 words: long-term forecasting with transformers.
+Note: arXiv:2211.14730, version 2
+External Links: Link
+Cited by: §4.1.
+Appendix ASupplementary Numerical Records
+Table S1:Common evaluation settings and learned-adapter training configuration for the supplementary records. The fixed-base training and comparator protocols are given in Section 4.
+Item	Setting
+Lookback / horizon / stride	96 / 24 / 24
+EPOC residual basis	DCT, 
+𝐾
+=
+4
+
+Ridge / forgetting	
+𝜆
+=
+1
+, 
+𝜌
+=
+2
+−
+1
+/
+128
+
+Blending window	32 completed blocks
+Learned widths / seeds	2, 4, 64 / 0, 1, 2
+Warmup / joint training	3 / 12 epochs
+Joint loss / optimizer	MAE / AdamW
+Learning rate / weight decay / batch	
+10
+−
+3
+ / 0.01 / 32
+SF weight / power stabilization	1 / 
+10
+−
+8
+
+ELF transfer ridge	
+20
+​
+𝜎
+𝑐
+2
+​
+𝐼
+ in unscaled statistics; one window per block
+Checkpoint selection	Validation MAE, epochs 0–12
+Storage excludes	Base model, observation history, forecast/target buffers,
+	temporary arrays, and Python object overhead
+
+The ancillary CSV files packaged with this preprint provide losses before the aggregation in the main tables. The file tableS01_all_conditions.csv has one row per fixed-base condition, for 96 rows. Its mse and mae fields describe EPOC. The static and elf prefixes identify the uncorrected base and globally blended full ELF; independent_mse is the coefficient-only correction. Percentage-field suffixes name the reference method, and trace_file points to the archived block losses. The seven-arm file table03_all_conditions.csv has 672 rows, one for each method and fixed-base condition behind Table 3. Its archived Proposed method label denotes EPOC.
+
+To reconstruct the Table 3 overview from the seven-arm file, average mse_reduction_pct and mae_reduction_pct across the 96 rows of each method and take the median state_bytes. For its dataset–backbone MSE and MAE panels, average the raw losses over the three seeds and two base-training phases within each dataset–backbone–method group. The method and arm fields identify the displayed comparator and its forecast variant.
+
+The file tableS02_learned_all.csv has 864 rows: six series, two backbones, two warmups, three seeds, three adapter widths, and four forecast variants. Here rank is adapter width, kind is warmup, and arm identifies the uncorrected jointly trained base, raw adapter, globally blended adapter_global, or globally blended EPOC (boundary). The state_bytes field counts auxiliary correction arrays, so it is zero for the uncorrected base. The companion tableS02_width64_training.csv contains 288 width-64 rows, including the separately trained base-only runs used for the training comparison in Table 4. In both files, the dataset code bdg2 means BDG2 (Rat).
+
+For the same-base percentages in Table 4, average the three seed losses within each series–backbone–warmup–width–arm group in tableS02_learned_all.csv. Calculate 
+100
+​
+(
+1
+−
+𝑚
+boundary
+/
+𝑚
+adapter
+​
+_
+​
+global
+)
+ for each metric and each of the 12 series–backbone pairs, then average the 12 percentages. Table S1 collects the common evaluation and joint-training settings.
+
+Appendix BSetting Sensitivity
+
+Table S2 lists the 13 one-factor settings summarized in Fig. 4; the corresponding 1,248 condition-level rows are in tableS05_sensitivity_conditions.csv. Raising 
+𝐾
+ from 1 to 8 increases mean MSE reduction from 11.13% to 16.40% and median retained state from 2,056 to 12,080 B. With 
+𝐾
+=
+4
+, changing ridge strength, forgetting half-life, or blending window yields mean MSE reductions of 14.47–15.43%. The shortest tested forgetting half-life, 32 blocks, gives 15.43%; no forgetting gives 14.47%.
+
+Table S2:One-factor sensitivity on 96 fixed-base conditions. Percentages average condition-wise reductions from Static with global blending; bytes are median retained arrays. Other settings match the reference.
+Setting	MSE (%)	MAE (%)	Bytes
+Reference (
+𝐾
+=
+4
+)	15.40	9.35	6,352
+
+𝐾
+=
+1
+	11.13	6.47	2,056
+
+𝐾
+=
+2
+	13.10	7.85	3,488
+
+𝐾
+=
+3
+	14.49	8.79	4,920
+
+𝐾
+=
+6
+	16.00	9.76	9,216
+
+𝐾
+=
+8
+	16.40	10.08	12,080
+
+𝜆
+=
+0.1
+	15.19	9.17	6,352
+
+𝜆
+=
+10
+	15.18	9.46	6,352
+Half-life 32	15.43	9.72	6,352
+Half-life 512	14.82	8.96	6,352
+No forgetting	14.47	8.76	6,352
+Window 8	15.24	9.35	5,968
+Window 128	14.98	9.07	7,888
+Experimental support, please view the build logs for errors. Generated by L A T E xml  .
+Instructions for reporting errors
+
+We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the methods listed below:
+
+Click the "Report Issue" () button, located in the page header.
+
+Tip: You can select the relevant text first, to include it in your report.
+
+Our team has already identified the following issues. We appreciate your time reviewing and reporting rendering errors we may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability should not be a barrier to accessing research. Thank you for your continued support in championing open access for all.
+
+Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a list of packages that need conversion, and welcome developer contributions.
+
+We gratefully acknowledge support from our major funders, member institutions, and all contributors.
+About
+·
+Help
+·
+Contact
+·
+Subscribe
+·
+Copyright
+·
+Privacy
+·
+Accessibility
+·
+Operational Status
+(opens in new tab)
+Major funding support from

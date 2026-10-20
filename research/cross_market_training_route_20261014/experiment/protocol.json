@@ -1,0 +1,49 @@
+{
+  "seeds": [
+    17,
+    29
+  ],
+  "kinds": [
+    "independent",
+    "pooled",
+    "staticprivate",
+    "dynamic_noepisodic",
+    "dynamic_episodic"
+  ],
+  "configurations": 1,
+  "fit_budget_seconds": 900,
+  "gradient_calls_per_fit": 120,
+  "batch_size": 64,
+  "optimizer": "Adam lr .001; episodic first-order private SGD .01; final private SGD 6 steps",
+  "validation": "last 40 mature target origins; train endpoints strictly before first query; no selection (one fixed configuration)",
+  "source": "both HB and author EU predeclared, identity caveat",
+  "scaler": "MAD differences on purged train-label range only, floor .001",
+  "refresh": "from scratch every40, frozen in each block",
+  "L": 60,
+  "H": 20,
+  "audit": {
+    "guangzhou": {
+      "rows": 950,
+      "last": "2021-12-31",
+      "sha256": "1366ca4814dcdb8aa43296eb64768d1336d6f0fc9088648d6d7ccdbe43318070",
+      "boundary_read": false
+    },
+    "hubei": {
+      "rows": 936,
+      "last": "2021-12-31",
+      "sha256": "53d855627952f99fdab37dfcdbf8edb3f403a5e8a5b7c3564b66252c36ad465f",
+      "boundary_read": false
+    },
+    "eu": {
+      "rows": 999,
+      "last": "2021-12-31",
+      "sha256": "d15acc9adc1ff1de804c5dbb79d7b0683cca5953c3b7c46cf0495d71827664a2",
+      "boundary_read": false
+    }
+  },
+  "score": "451 2020-21 same-year H20; full year/H20 plus h1/5/20 original price; average seed losses",
+  "not_real_time": true,
+  "gradient_call_matching_not_equal_FLOPs": true,
+  "license": "Fan 2025 DOI 10.6084/m9.figshare.28682348.v1 CC BY4; historical metadata not newly verified; EU semantics unknown",
+  "original_design": "DESIGN_ZH.md copied unchanged; candidate provisional not first"
+}
