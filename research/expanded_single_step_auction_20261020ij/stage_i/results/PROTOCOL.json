@@ -1,0 +1,169 @@
+{
+  "study": "one_step_path_complement_development",
+  "lookback": 32,
+  "horizon_records": 1,
+  "source_shas": {
+    "EUA_LONG": {
+      "container_archive": "carbon_distribution_update_private_run_20261019.zip",
+      "inner_path": "inputs/development/EUA_LONG_development.csv",
+      "bytes_sha256": "142f391305c482eb3bd58dcf8df477db90cf54402495527749a53e126cdf0e7f",
+      "data_identity": "archived_author_reported_price",
+      "market_group": "EU"
+    },
+    "GUANGZHOU": {
+      "container_archive": "carbon_distribution_update_private_run_20261019.zip",
+      "inner_path": "inputs/development/GUANGZHOU_development.csv",
+      "bytes_sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+      "data_identity": "archived_author_reported_price",
+      "market_group": "GUANGZHOU"
+    },
+    "HUBEI": {
+      "container_archive": "carbon_distribution_update_private_run_20261019.zip",
+      "inner_path": "inputs/development/HUBEI_development.csv",
+      "bytes_sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+      "data_identity": "archived_author_reported_price",
+      "market_group": "HUBEI"
+    },
+    "SHANGHAI": {
+      "container_archive": "carbon_distribution_update_private_run_20261019.zip",
+      "inner_path": "inputs/development/SHANGHAI_development.csv",
+      "bytes_sha256": "425424353bb3ac09e3d96b291680b4179e86f180da626a5d19e5c1e58ed960a1",
+      "data_identity": "archived_author_reported_price",
+      "market_group": "SHANGHAI"
+    },
+    "EU_REPORTED_SOURCE_SENSITIVITY": {
+      "container_archive": "carbon_research_prior_transport_20261018.zip",
+      "inner_path": "research/cross_market_innovation_20261017/data/EU_REPORTED_development.csv",
+      "bytes_sha256": "ca7c192380897076ef57516a11ea2ccefda6ba92ab9823d9aa8f2bb281cefedc",
+      "data_identity": "author_reported_secondary_EU_source",
+      "market_group": "EU",
+      "do_not_count_as_new_independent_market": true
+    },
+    "CCER_DAILY_AVERAGE": {
+      "container_archive": null,
+      "inner_path": "ccer_from_public_repository.csv",
+      "bytes_sha256": "8109019324efd64961ece4989c2f0ad8e0f0c17903a22a4dbb3719b505f75cfa",
+      "data_identity": "volume_weighted_average",
+      "market_group": "CCER_DAILY_AVERAGE",
+      "github_source_blob_sha": "1e6ed6269612b529a833e4ae84af5901e5080d6d",
+      "public_reconstruction": true
+    },
+    "CEA_REPORTED_CLOSE": {
+      "container_archive": null,
+      "inner_path": "cea_from_public_repository.csv",
+      "bytes_sha256": "4117ca275bca0e6926dcab094b7cf120c21ef4ef99806edea3b7fc191bd59ca2",
+      "data_identity": "reported_close_not_official_average",
+      "market_group": "CEA_REPORTED_CLOSE",
+      "github_source_blob_sha": "287c72ca277233005d54b9e04805d49762a439ad",
+      "public_reconstruction": true
+    }
+  },
+  "epochs_max": 45,
+  "patience": 8,
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "learning_rates": [
+    0.001,
+    0.003
+  ],
+  "alpha_grid": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1,
+    10
+  ],
+  "candidate": "comp_zero",
+  "information": "historical prices only, full past-window representation; validation used for tuning, test-year data exposed from previous project development",
+  "models": [
+    "rw",
+    "static",
+    "ridge32",
+    "hgb",
+    "raw_free",
+    "raw_zero",
+    "comp_free",
+    "comp_zero",
+    "gru_residual"
+  ],
+  "cells_predeclared": [
+    [
+      "EUA_LONG",
+      2021
+    ],
+    [
+      "EUA_LONG",
+      2022
+    ],
+    [
+      "EUA_LONG",
+      2023
+    ],
+    [
+      "GUANGZHOU",
+      2021
+    ],
+    [
+      "GUANGZHOU",
+      2022
+    ],
+    [
+      "GUANGZHOU",
+      2023
+    ],
+    [
+      "HUBEI",
+      2021
+    ],
+    [
+      "HUBEI",
+      2022
+    ],
+    [
+      "HUBEI",
+      2023
+    ],
+    [
+      "SHANGHAI",
+      2021
+    ],
+    [
+      "SHANGHAI",
+      2022
+    ],
+    [
+      "SHANGHAI",
+      2023
+    ],
+    [
+      "EU_REPORTED_SOURCE_SENSITIVITY",
+      2022
+    ],
+    [
+      "EU_REPORTED_SOURCE_SENSITIVITY",
+      2023
+    ],
+    [
+      "CCER_DAILY_AVERAGE",
+      2026
+    ],
+    [
+      "CEA_REPORTED_CLOSE",
+      2026
+    ]
+  ],
+  "main_nn_metric": "mean_loss_across_three_final_seeds; ensemble_pred_loss_retained_as_separate_diagnostic",
+  "source_sha256": {
+    "replay_and_statistics.py": "10877acf462c926b845e8a19a53fcb8f603254c5a3e304c002a052eb9983b40c",
+    "test_preflight.py": "6386db8526a0dc31dcdd929a11a8224b6589adeae62080fa2942063e0bae4bcb",
+    "download_secondary_sources.py": "ce2af01afe4d5cb6f87615bdaaa2d33c32463a17f57c8119f4fbea88e7c31d30",
+    "run_single_step.py": "c6493da0d73ad1839aa3002c4e15f272649db4211b6f0c698088f363a1969e80"
+  },
+  "input_convention": "price[t+1] at origin t: known price[t] plus forecast next arithmetic change; train-only scale for change and all other scalers",
+  "evaluation": "chronological, market-year cell, in-year one-observation-ahead, equal cell mean Q; native RMSE MAE MAPE R2 for paper-compatible display",
+  "publication": "all exposed development; no new independent confirmation; no future-data full-series decomposition"
+}
