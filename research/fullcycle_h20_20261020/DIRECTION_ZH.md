@@ -3300,3 +3300,79 @@ D1 在 HUBEI h=120 达到 EMP 的 **6.06 倍**、SHANGHAI h=60 到 1.45 倍、EU
 4. **没有做 DL 侧的 conformal 后处理。** 24.18 已证边际 PIT 校准只能修宽度、不能修条件异方差，但 Mondrian / 局部加权 conformal 未试。这是 DL 一方还有余量的地方。
 
 **对可发表性的净影响。** 24.15 的六条局限里，"无 DL 基准"这一条**可以删掉**：现在有四个 DL 设计、25 格、同一评估协议。但换上来一条更诚实的：**没有 SOTA 序列架构**。两害相权，后者在审稿里可辩护（样本量是硬约束、且已给出四个设计的一致结论），前者不可辩护（等于没做）。同时本节给出了一条**正面的机理结论**：DL 的 CRPS 随 $h$ 单调恶化而 A5 单调改善，交叉点在 $h\approx20$–$40$——这正好是全文主张的收益区间，构成一个独立的、非 CRPS 排名的支撑。
+
+### 24.23 现阶段的完整结论：能主张什么、不能主张什么、还差什么
+
+前面 24 节都是零件。这一节是装配图，也是投稿时的自查表。
+
+#### 24.23.1 模型一句话
+
+$$
+\boxed{\;Q_{t,h}(\tau)=\underbrace{\lambda(h)}_{<1}\cdot\hat\mu_{t,h}+\hat\sigma_{d,t}\cdot h^{H}\cdot\xi_{t,h}(\tau)\;}
+\qquad \lambda(h)=\frac{h_0}{h_0+h}
+$$
+
+三项各有分工，且都有独立的消融支持：$\lambda(h)$ 把窗口均值在长期限上关掉（否则窗口漂移污染），$h^{H}$ 把 $\sqrt h$ 换成一个**可估的市场特征**，$\xi$ 是窗口内标准化后的经验分位（保留厚尾与偏度）。全部参数在训练段估一次：$H$ 每个市场一个、$h_0$ 每个市场一个，共 **10 个自由参数**，5 个市场、25 个（市场×期限）格、5 个期限共用。
+
+#### 24.23.2 证据分级（这是本节最重要的表）
+
+| 级别 | 结论 | 支撑 | 能否写进摘要 |
+|---|---|---|---|
+| **A 硬** | 经验分位模型 EMP 的长期限覆盖率系统性崩塌：$h=120$ 平均 0.393，SHANGHAI 0.085，CEA 0.304；本文 0.879 | §24.19 HAC 检验；§24.21 STEP=1 复核（逐格差 ≤0.017） | **能**，这是机制不是排名 |
+| **A 硬** | $H$ 是可估、跨切分稳定的市场特征：SHANGHAI 0.30–0.35 < GUANGZHOU 0.30–0.35 ≈ HUBEI 0.35–0.40 < EU 0.45–0.50 < CEA 0.50–0.60，极差 ≤0.05 | §24.3 主估计、§24.7 三切分稳健、§24.17 逐 (市场,期限) 滚动重估独立复现 | **能** |
+| **A 硬** | 建模收益随期限单调：$h=5$ 无（1/5）、$h=20$ 中性（3/5）、$h\ge40$ 决定性（$h=120$ 5/5，中位 0.776） | §24.3；§24.16 三窗口（5/5×3）；§24.17 滚动重估（5/5）；§24.21 STEP=1（5/5）；§24.22 DL 对照的交叉点 | **能**，但须附"非显著"限定 |
+| **B 中** | 模型置信集：本文在 25/25 格存活，SHANGHAI $h=120$ 与 HUBEI $h=120$ 两格 6 个模型里只有 A4/A5 存活 | §24.13 MCS（HLN range，B=400，block=10） | 结果节能写，摘要不写"最优" |
+| **B 中** | 对最强 DL 对手 21/25 胜，$h\ge40$ 对四个 DL 设计均 15/15 | §24.22 | 结果节能写 |
+| **B 中** | 覆盖率检验通过 23/25（EMP 14/25） | §24.19 | 结果节能写 |
+| **C 弱 / 不能主张** | **统计显著**。$h=120$ 每格有效样本 1.2–4.5；DM 带宽从 $L=6$ 到 $L=40$，"显著优于 RW"的格数从 8 变到 0 | §24.20 | **不能**。摘要禁用 significant |
+| **C 弱 / 不能主张** | 相对 RW 的经济价值优势。本文 1.096%、RW 1.093%，实质等同；HUBEI/EU 反而过度保险 | §24.12 | **不能** |
+| **C 弱 / 不能主张** | $h_0$ 的可识别性。在 0.1 与 120 之间跳跃，跨切分不稳 | §24.6、§24.17 | 只能作为"数值稳定化装置"写 |
+| **已撤回** | "残差独立性全部被拒"——那是带宽造成的假象 | §24.19 | — |
+| **已撤回** | "对 RW 无一格显著"是模型弱点——实为检验力不足 | §24.20 | — |
+| **已撤回** | "对 EMP 2–3 格显著、对 RW 0 格"——两半都错 | §24.20 | — |
+
+**读法。** A 级三条构成论文的骨架，且**没有一条依赖 $p$ 值**：覆盖率崩塌是机制、$H$ 的市场排序是估计量的稳定性、收益随期限单调是五个市场×三个窗口×两种重估的一致符号。C 级三条都是"想主张但主张不了"的东西，必须从摘要里清掉。**这不是退让，是把论文从"我们显著更好"改成"我们指出了文献模型的一个系统性失效，并给出一个有可解释参数的最小修复"——后者更难被推翻。**
+
+#### 24.23.3 在文献里占的是哪个位置
+
+`LIT_SCAN_20261020.md` 的结论是：22 个候选槽位里只有 8 个有分量，**全部集中在 DL 架构与跨市场迁移**；分布维度与期限维度是空的。本文占的正是这个空位，具体到三件事：
+
+1. **没人做过多期限概率预测的期限标度检验。** 碳价文献的多步预测几乎全是点预测（RMSE/MAE），做区间的用 $\sqrt h$ 或 GARCH 递推，没有一篇去问"这个市场的宽度到底该按 $h^{0.5}$ 还是 $h^{0.35}$ 长"。$H$ 的跨市场排序（中国区域试点均值回复 $H=0.30$--$0.35$、EU 居中 $H=0.45$、CEA 超扩散 $H=0.60$）本身就是一个可独立发表的实证发现，而且有政策解释（CEA 的配额收紧是单向棘轮）。
+2. **没人报告过"经验分位模型在长期限上覆盖率崩塌"这个具体失效。** 这是本文最硬的一条，因为它是对**一个被广泛使用的简单基线**的诊断，任何人拿到数据都能复现，而且崩塌幅度大得不可能是噪声（0.085 vs 0.95）。§24.22 又证明黑箱 DL 也修不好它（DL 的 CRPS 随 $h$ 单调恶化）。
+3. **没有一篇把"建模收益随期限单调"作为可检验命题提出。** 本文在五个市场、三个窗口、两种重估方式下都得到同一符号，并且给出了机理（$h$ 越大，$\sqrt h$ 与 $h^H$ 的相对误差按 $h^{H-0.5}$ 累积，$h=120$ 时差 39%）。
+
+#### 24.23.4 审稿人会打的十个点，以及现在的回答状态
+
+| # | 质疑 | 状态 | 依据 |
+|---|---|---|---|
+| 1 | 只赢一个手搓基线，没跟 SOTA 比 | **已答（部分）** | §24.22 四个 DL 设计；但无序列架构，仍是缺口 |
+| 2 | 长期限样本太少，$p$ 值不可信 | **已答（且主动承认）** | §24.20 给出 $n_{\text{eff}}$ 与带宽敏感性，并撤回自己的显著性表述 |
+| 3 | $H$ 是不是过拟合出来的 | **已答** | §24.7 三切分极差 ≤0.05；§24.17 逐格滚动重估独立复现排序 |
+| 4 | $h_0$ 不可识别，说明模型设定有问题 | **部分答** | §24.6 已承认为数值稳定装置；但这是真实弱点，审稿人可继续追 |
+| 5 | 经济价值没有提升，那有什么用 | **未答** | §24.12 显示与 RW 等同；只能改成"提供正确的尾部概率"，放弃"经济价值"卖点 |
+| 6 | 只有 5 个市场，外部效度弱 | **未答** | 需要加市场，见 24.23.5 |
+| 7 | 中国试点市场 2021 年才有数据，$h=120$ 的结论建立在 71–100 个原点上 | **已答（承认）** | §24.20 明确列出 SHANGHAI 71、HUBEI 87、EU 100 |
+| 8 | 为什么不用 GARCH / 已实现波动率做尺度 | **已答** | §23.7 与 §24.3 的族比较；GARCH 在四格上优于 EMP 但不及 A5 |
+| 9 | 收益率口径（对数收益）与经济含义脱节 | **部分答** | §24.12 用 $C=e^y$ 转回价格做损失；但 $c_c,c_p$ 是假设值 |
+| 10 | 结果是否可复现 | **已答** | 全部脚本入库、`PANEL_5MARKET.csv` 带 sha256、每次运行打印训练/测试原点重叠数 |
+
+**净判断：10 个点里 6 个已答、2 个部分答、2 个未答（第 5、6 条）。** 未答的两条都不是致命的，但第 6 条（市场数）会直接被写成"limitation"，而它恰恰是唯一能真正提高推断力的方向。
+
+#### 24.23.5 离"可发表"还差什么（按性价比排序）
+
+| 优先级 | 事项 | 成本 | 收益 |
+|---|---|---|---|
+| **1** | **加市场**：中国区域试点（天津、重庆、福建、深圳）与欧盟 EUA 之外的试点，目标 10–15 个市场 | 高（要抓数） | $h=120$ 的符号检验 $p$ 从 0.0625 降到 $10^{-4}$ 量级；这是唯一能把 A 级结论从"一致"升级为"可推断"的路 |
+| **2** | **$h=1$ 日频密度预测作为主战场** | 低 | $n_{\text{eff}}\approx n$，全部检验立即有检验力；多期限降级为稳健性附录。**这是性价比最高的一步** |
+| 3 | 条件 conformal（按波动率分桶的 Mondrian） | 低 | §24.18 已证边际 PIT 修不了条件异方差；分桶版可能修好 $h=120$ 的下尾 |
+| 4 | 一个序列 DL 基准（LSTM 或 TCN，池化 + 标准化） | 中 | 补上第 1 条质疑的最后一块 |
+| 5 | 经济价值换成碳市场真实损失（履约缺口、罚则） | 中 | 第 5 条质疑；需要真实履约数据 |
+| 6 | 把 $h_0$ 换成有界的、可识别的参数化（如 $\lambda(h)=1/(1+(h/h_0)^\kappa)$ 并固定 $\kappa$） | 低 | 第 4 条质疑的一部分 |
+
+**我的判断：第 2 项做完，这篇论文的骨架就成立了。** 理由是：$h=1$ 上 $n_{\text{eff}}\approx n\approx 200$–$500$，A5 的机制（$H$ 与 $\lambda$ 都退化到接近无作用）恰好说明**日频上不该有收益**——那是一个可证伪的预言，而且如果日频上真的有收益，说明机制解释错了，这对论文同样是有效信息。**把主战场放在能检验的地方，把 $h=120$ 作为机制展示，是最稳的结构。**
+
+#### 24.23.6 一段可以直接用的摘要（英文，已按上面分级写好）
+
+> Multi-step probabilistic forecasts of carbon prices are routinely produced by rescaling one-day predictive distributions with $\sqrt{h}$. We show that this convention fails systematically, and we replace it with two estimable parameters. Using daily data from five carbon markets (China's national ETS and three regional pilots, plus EU ETS; 1{,}262--2{,}839 observations each) and a rolling-origin evaluation at horizons of 5 to 120 trading days, the standard empirical-quantile benchmark attains nominal 95\% coverage at short horizons but collapses to 0.393 on average at $h=120$ (0.085 for Shanghai), because a fixed window shape cannot represent how dispersion grows with the horizon. Our specification writes the quantile as a shrunk location plus a scale term $\hat\sigma_{d,t}h^{H}$ with an empirical shape, where $\lambda(h)=h_0/(h_0+h)$ removes window drift and $H$ is estimated once per market. The resulting model attains 0.879 coverage at $h=120$ and passes a HAC-corrected coverage test in 23 of 25 market-horizon cells against 14 of 25 for the benchmark. Estimated $H$ is stable across three split points (range $\le0.05$) and orders the markets interpretably: 0.30--0.35 for the three mean-reverting Chinese regional pilots, 0.45 for EU ETS, and 0.60 for the national ETS, the only super-diffusive market, consistent with its ratcheting cap. CRPS gains are monotone in horizon --- none at five days, decisive beyond forty, with a median 22\% reduction and five of five markets improving at 120 days --- and reproduce under three window lengths, rolling re-estimation, and one-day origin spacing. We also document a limitation of the evaluation protocol: with overlapping origins the effective sample size at 120 days is 1.2--4.5, so our long-horizon results are consistent in sign and mechanism but not statistically significant, and we report them as such. Four neural quantile baselines, including cross-market and cross-horizon pooled training, degrade with horizon where our specification improves, and all four lose at horizons of forty days and beyond.
+
+**这段摘要的自我约束：** 没有 significant 一词；明确写出 $n_{\text{eff}}$ 与"非显著"；没有"最优模型"表述；DL 对比只说"在 $h\ge40$ 上胜出"，不说"优于深度学习"。**摘要里任何一句超出 24.23.2 的 A/B 级，都应在投稿前删掉。**
