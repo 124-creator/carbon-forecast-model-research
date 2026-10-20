@@ -1,0 +1,517 @@
+{
+  "arm": "PROCEED",
+  "author_commit": "0a8646199f6dcbf5346f933508b33c5e35b5708b",
+  "cut": 703,
+  "seed": 17,
+  "train_n": 400,
+  "validation_n": 60,
+  "pool_start": 203,
+  "train_first_origin": 203,
+  "train_max_origin": 602,
+  "train_max_target": 622,
+  "validation_first_origin": 623,
+  "validation_max_target": 702,
+  "input_global_mean": 24.68869875,
+  "input_global_sd": 3.7000721809511283,
+  "fair_support_increment_scale": 0.5166082629349232,
+  "normalization_fit_source": "raw[train] input windows only; one mean/std",
+  "target": "20 standardized future price levels",
+  "validation": "frozen parameters; per-origin mature context; all 20 normalized outputs MSE",
+  "pretraining_recent_batch": "previous shuffled training minibatch; zeros initially",
+  "sampler": "separate torch.Generator seeded identically across arms",
+  "parameter_count": 2324,
+  "initial_parameter_audit": {
+    "backbone_weights": {
+      "names": [
+        "backbone.Linear.weight"
+      ],
+      "parameter_count": 400,
+      "trainable_count": 400,
+      "sha256": "d69d68950d346feeaeeaa13c41159c08219451f04fef103ae8c28c438872aa7f"
+    },
+    "backbone_bias": {
+      "names": [
+        "backbone.Linear.bias"
+      ],
+      "parameter_count": 20,
+      "trainable_count": 0,
+      "sha256": "244de6bfe9bd7833355d9084566aa8a2b5338d5005c0b72ac4c46bccd97ad685"
+    },
+    "dynamic_adapter": {
+      "names": [
+        "generator.bottlenecks.Linear_60.biases.0",
+        "generator.bottlenecks.Linear_60.weights.1",
+        "generator.bottlenecks.Linear_60.weights.0.weight",
+        "mlp1.1.weight",
+        "mlp1.1.bias",
+        "mlp1.3.weight",
+        "mlp1.3.bias",
+        "mlp2.1.weight",
+        "mlp2.1.bias",
+        "mlp2.3.weight",
+        "mlp2.3.bias"
+      ],
+      "parameter_count": 1844,
+      "trainable_count": 1844,
+      "sha256": "80d124df519df01487ad6b18acefa0b48d48188c59affec0933e1cb72deeee25"
+    },
+    "fixed_adapter_bias": {
+      "names": [
+        "generator.bottlenecks.Linear_60.biases.1"
+      ],
+      "parameter_count": 60,
+      "trainable_count": 60,
+      "sha256": "f031588ed20ba3e606310add919c438afa40b662cdc0edaedd3ac07041b7ac79"
+    }
+  },
+  "selected_pretraining_parameter_audit": {
+    "backbone_weights": {
+      "names": [
+        "backbone.Linear.weight"
+      ],
+      "parameter_count": 400,
+      "trainable_count": 400,
+      "sha256": "3f05c7783e1e51a604d794a0d01bbdf359eb2f32caba9ab1c2f118c5b1c91ae8",
+      "initial_sha256": "d69d68950d346feeaeeaa13c41159c08219451f04fef103ae8c28c438872aa7f",
+      "maximum_absolute_change": 0.22247650550240802,
+      "bitwise_unchanged": false
+    },
+    "backbone_bias": {
+      "names": [
+        "backbone.Linear.bias"
+      ],
+      "parameter_count": 20,
+      "trainable_count": 0,
+      "sha256": "244de6bfe9bd7833355d9084566aa8a2b5338d5005c0b72ac4c46bccd97ad685",
+      "initial_sha256": "244de6bfe9bd7833355d9084566aa8a2b5338d5005c0b72ac4c46bccd97ad685",
+      "maximum_absolute_change": 0.0,
+      "bitwise_unchanged": true
+    },
+    "dynamic_adapter": {
+      "names": [
+        "generator.bottlenecks.Linear_60.biases.0",
+        "generator.bottlenecks.Linear_60.weights.1",
+        "generator.bottlenecks.Linear_60.weights.0.weight",
+        "mlp1.1.weight",
+        "mlp1.1.bias",
+        "mlp1.3.weight",
+        "mlp1.3.bias",
+        "mlp2.1.weight",
+        "mlp2.1.bias",
+        "mlp2.3.weight",
+        "mlp2.3.bias"
+      ],
+      "parameter_count": 1844,
+      "trainable_count": 1844,
+      "sha256": "13670067e2c11bb9e4c06134676a1b4f614f640602853dd70ff4ac5546f775d6",
+      "initial_sha256": "80d124df519df01487ad6b18acefa0b48d48188c59affec0933e1cb72deeee25",
+      "maximum_absolute_change": 0.538600954965607,
+      "bitwise_unchanged": false
+    },
+    "fixed_adapter_bias": {
+      "names": [
+        "generator.bottlenecks.Linear_60.biases.1"
+      ],
+      "parameter_count": 60,
+      "trainable_count": 60,
+      "sha256": "6533e3a36ed002e8a9523b57bd9b97d353a36d08a11dcaf96c1ee1b761b9c4e9",
+      "initial_sha256": "f031588ed20ba3e606310add919c438afa40b662cdc0edaedd3ac07041b7ac79",
+      "maximum_absolute_change": 0.2032050683360403,
+      "bitwise_unchanged": false
+    }
+  },
+  "parameters_with_nonzero_gradient_in_any_attempted_pretraining_batch": [
+    "backbone.Linear.weight",
+    "generator.bottlenecks.Linear_60.biases.0",
+    "generator.bottlenecks.Linear_60.biases.1",
+    "generator.bottlenecks.Linear_60.weights.0.weight",
+    "generator.bottlenecks.Linear_60.weights.1",
+    "mlp1.1.bias",
+    "mlp1.1.weight",
+    "mlp1.3.bias",
+    "mlp1.3.weight",
+    "mlp2.1.bias",
+    "mlp2.1.weight",
+    "mlp2.3.bias",
+    "mlp2.3.weight"
+  ],
+  "state_sha256": "119e746f967fd2bd832400f94ad0a777cb9cf925a6cb81503c17cb56bbd26caa",
+  "epochs": 30,
+  "selected_epoch": 18,
+  "initial_validation": 0.03387114655191163,
+  "best_validation": 0.010005396701913501,
+  "validation_primary": 0.7276501354923642,
+  "seconds": 1.717244354000286,
+  "trace": [
+    [
+      1,
+      0.09104579156271914,
+      0.01692825461796084,
+      0.1523891177491316
+    ],
+    [
+      2,
+      0.06631398437614898,
+      0.014431495353234982,
+      0.11168677499069826
+    ],
+    [
+      3,
+      0.06003916689986131,
+      0.012891150430975596,
+      0.06478645495405498
+    ],
+    [
+      4,
+      0.05721259885959702,
+      0.012587056827304943,
+      0.06058335110769386
+    ],
+    [
+      5,
+      0.05538907612174066,
+      0.013026119538743943,
+      0.04905249843691096
+    ],
+    [
+      6,
+      0.054235270420277516,
+      0.012880465919414599,
+      0.04346927955292933
+    ],
+    [
+      7,
+      0.053425115790384836,
+      0.01212919882288258,
+      0.060643360638057926
+    ],
+    [
+      8,
+      0.05226951016329455,
+      0.013614917961494787,
+      0.05461855488046958
+    ],
+    [
+      9,
+      0.05304523523985567,
+      0.01090419518205278,
+      0.06485886664950864
+    ],
+    [
+      10,
+      0.05107752162660689,
+      0.011272196708177694,
+      0.04054925938876229
+    ],
+    [
+      11,
+      0.05040107346179616,
+      0.011125355318382631,
+      0.06868992251060395
+    ],
+    [
+      12,
+      0.0498168139881668,
+      0.010620844390528033,
+      0.048934414296961375
+    ],
+    [
+      13,
+      0.04872108680509287,
+      0.010169922940065806,
+      0.0528501647481825
+    ],
+    [
+      14,
+      0.047990735739912395,
+      0.012112001775111247,
+      0.06097293214092558
+    ],
+    [
+      15,
+      0.047101069050562695,
+      0.014794728593837334,
+      0.07079082028319118
+    ],
+    [
+      16,
+      0.049138196959283044,
+      0.011015608801530796,
+      0.13226968337484238
+    ],
+    [
+      17,
+      0.04743869238814229,
+      0.013142240283874597,
+      0.07195976237569075
+    ],
+    [
+      18,
+      0.04644414156377889,
+      0.010005396701913501,
+      0.06536414895927936
+    ],
+    [
+      19,
+      0.04571414196195168,
+      0.014888095720399406,
+      0.11137404661623017
+    ],
+    [
+      20,
+      0.04526086302445195,
+      0.011414449966655681,
+      0.05742037533020971
+    ],
+    [
+      21,
+      0.04540449938783774,
+      0.012929726292634634,
+      0.09328669816635095
+    ],
+    [
+      22,
+      0.046930258734399655,
+      0.021113634930694295,
+      0.14428063295139903
+    ],
+    [
+      23,
+      0.04673520954724835,
+      0.012121923076411543,
+      0.12390138196755174
+    ],
+    [
+      24,
+      0.0445539352252214,
+      0.011019090922133752,
+      0.0735890675065614
+    ],
+    [
+      25,
+      0.04398163737794031,
+      0.010823089062699276,
+      0.09000550235219329
+    ],
+    [
+      26,
+      0.043367903475938864,
+      0.0117658407921899,
+      0.07682155625474378
+    ],
+    [
+      27,
+      0.04320691467502973,
+      0.011307786396136736,
+      0.07652815797122971
+    ],
+    [
+      28,
+      0.043321439390131944,
+      0.012107182815175964,
+      0.1099441400894265
+    ],
+    [
+      29,
+      0.044032612139981435,
+      0.011195307995357635,
+      0.153160768003145
+    ],
+    [
+      30,
+      0.0426005577549442,
+      0.013078601118785083,
+      0.08752044655127907
+    ]
+  ],
+  "trace_columns": [
+    "epoch",
+    "training_batch_weighted_mean_MSE",
+    "frozen_validation_MSE",
+    "maximum_unclipped_batch_gradient_norm"
+  ],
+  "optimizer": {
+    "name": "Adam",
+    "lr": 0.003,
+    "batch_size": 32,
+    "max_epochs": 60,
+    "patience": 12,
+    "minimum_validation_improvement": 1e-06,
+    "weight_decay": 0.0,
+    "gradient_clipping": false
+  },
+  "config": {
+    "seq_len": 20,
+    "pred_len": 20,
+    "enc_in": 1,
+    "individual": false,
+    "freeze": false,
+    "concept_dim": 16,
+    "bottleneck_dim": 4,
+    "act": "sigmoid",
+    "individual_generator": false,
+    "ema": 0.0,
+    "tune_mode": "down_up",
+    "merge_weights": true,
+    "do_predict": true,
+    "wo_clip": false
+  },
+  "no_drift": false,
+  "historical_predictions_or_weights_used": false,
+  "task": {
+    "arm": "PROCEED",
+    "seed": 17,
+    "cut": 703
+  },
+  "formal_stage": "B",
+  "ordinal": 4,
+  "online": {
+    "updates": 227,
+    "first_origin": 703,
+    "last_origin": 929,
+    "first_mature_origin": 683,
+    "last_mature_origin": 909,
+    "all_label_maxima_equal_issue_origin": true,
+    "all_input_maxima_equal_issue_origin": true,
+    "all_prior_context_label_maxima_equal_issue_origin_minus_one": true,
+    "frozen_parameter_checks": 2724,
+    "frozen_parameters_bitwise_unchanged": true,
+    "initial_state_sha256": "119e746f967fd2bd832400f94ad0a777cb9cf925a6cb81503c17cb56bbd26caa",
+    "final_state_sha256": "2d7f0e82907ff790095c4838413b4e2c962e8fdd61024d1c2d499517ce4203ee",
+    "initial_parameter_audit": {
+      "backbone_weights": {
+        "names": [
+          "backbone.Linear.weight"
+        ],
+        "parameter_count": 400,
+        "trainable_count": 400,
+        "sha256": "3f05c7783e1e51a604d794a0d01bbdf359eb2f32caba9ab1c2f118c5b1c91ae8"
+      },
+      "backbone_bias": {
+        "names": [
+          "backbone.Linear.bias"
+        ],
+        "parameter_count": 20,
+        "trainable_count": 0,
+        "sha256": "244de6bfe9bd7833355d9084566aa8a2b5338d5005c0b72ac4c46bccd97ad685"
+      },
+      "dynamic_adapter": {
+        "names": [
+          "generator.bottlenecks.Linear_60.biases.0",
+          "generator.bottlenecks.Linear_60.weights.1",
+          "generator.bottlenecks.Linear_60.weights.0.weight",
+          "mlp1.1.weight",
+          "mlp1.1.bias",
+          "mlp1.3.weight",
+          "mlp1.3.bias",
+          "mlp2.1.weight",
+          "mlp2.1.bias",
+          "mlp2.3.weight",
+          "mlp2.3.bias"
+        ],
+        "parameter_count": 1844,
+        "trainable_count": 0,
+        "sha256": "13670067e2c11bb9e4c06134676a1b4f614f640602853dd70ff4ac5546f775d6"
+      },
+      "fixed_adapter_bias": {
+        "names": [
+          "generator.bottlenecks.Linear_60.biases.1"
+        ],
+        "parameter_count": 60,
+        "trainable_count": 60,
+        "sha256": "6533e3a36ed002e8a9523b57bd9b97d353a36d08a11dcaf96c1ee1b761b9c4e9"
+      }
+    },
+    "final_parameter_audit": {
+      "backbone_weights": {
+        "names": [
+          "backbone.Linear.weight"
+        ],
+        "parameter_count": 400,
+        "trainable_count": 400,
+        "sha256": "526ca139d7cc3b10dbc03cb21360c32b2030f45915be9faf48553668680c2b05",
+        "initial_sha256": "3f05c7783e1e51a604d794a0d01bbdf359eb2f32caba9ab1c2f118c5b1c91ae8",
+        "maximum_absolute_change": 0.03854913237931923,
+        "bitwise_unchanged": false
+      },
+      "backbone_bias": {
+        "names": [
+          "backbone.Linear.bias"
+        ],
+        "parameter_count": 20,
+        "trainable_count": 0,
+        "sha256": "244de6bfe9bd7833355d9084566aa8a2b5338d5005c0b72ac4c46bccd97ad685",
+        "initial_sha256": "244de6bfe9bd7833355d9084566aa8a2b5338d5005c0b72ac4c46bccd97ad685",
+        "maximum_absolute_change": 0.0,
+        "bitwise_unchanged": true
+      },
+      "dynamic_adapter": {
+        "names": [
+          "generator.bottlenecks.Linear_60.biases.0",
+          "generator.bottlenecks.Linear_60.weights.1",
+          "generator.bottlenecks.Linear_60.weights.0.weight",
+          "mlp1.1.weight",
+          "mlp1.1.bias",
+          "mlp1.3.weight",
+          "mlp1.3.bias",
+          "mlp2.1.weight",
+          "mlp2.1.bias",
+          "mlp2.3.weight",
+          "mlp2.3.bias"
+        ],
+        "parameter_count": 1844,
+        "trainable_count": 0,
+        "sha256": "13670067e2c11bb9e4c06134676a1b4f614f640602853dd70ff4ac5546f775d6",
+        "initial_sha256": "13670067e2c11bb9e4c06134676a1b4f614f640602853dd70ff4ac5546f775d6",
+        "maximum_absolute_change": 0.0,
+        "bitwise_unchanged": true
+      },
+      "fixed_adapter_bias": {
+        "names": [
+          "generator.bottlenecks.Linear_60.biases.1"
+        ],
+        "parameter_count": 60,
+        "trainable_count": 60,
+        "sha256": "c50a591cb087883488a7f5763da38068c33f1a0bf6d394f95c66e14b36fb8f47",
+        "initial_sha256": "6533e3a36ed002e8a9523b57bd9b97d353a36d08a11dcaf96c1ee1b761b9c4e9",
+        "maximum_absolute_change": 0.03929530395292846,
+        "bitwise_unchanged": false
+      }
+    },
+    "loss_mean": 0.2851185224096844,
+    "loss_max": 2.035878269434245,
+    "gradient_norm_mean": 0.351895390818197,
+    "gradient_norm_max": 1.282697198506155,
+    "trace_sha256": "e43db55e831f6bd16ea8b0c28dd1999cf525ca80d59064e0c8f69ad54930a443",
+    "trace_columns": [
+      "issue_origin",
+      "mature_origin",
+      "mature_input_min",
+      "mature_input_max",
+      "mature_target_min",
+      "mature_target_max",
+      "forecast_input_min",
+      "forecast_input_max",
+      "previous_recent_label_max",
+      "new_recent_label_max",
+      "normalized_mature_MSE",
+      "unclipped_gradient_norm"
+    ],
+    "trace_location": "local_only/stage_b/fits/*.npz; pointwise not published",
+    "seconds": 0.4252289590003784,
+    "optimizer": {
+      "name": "Adam",
+      "lr": 0.0003,
+      "batch_size": 1,
+      "steps_per_origin": 1,
+      "fresh_online_optimizer": true,
+      "generator_frozen": true,
+      "fixed_adapter_bias_trainable": true
+    }
+  },
+  "final_state_sha256": "2d7f0e82907ff790095c4838413b4e2c962e8fdd61024d1c2d499517ce4203ee",
+  "boundary_origin": 702,
+  "frozen_boundary_suffix_difference": 0.0,
+  "boundary_forecast_sha256": "92fad2d7ace0962d421fe4d36218b4550dd2a73b25ff968ecf6c02ff49a3d4ee",
+  "completed_monotonic": 12330.759419725
+}
