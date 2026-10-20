@@ -10,6 +10,8 @@ Two findings carry the paper. First, the **horizon-scaling exponent** is a genui
 
 Second, and this is the methodological contribution, **we show that the conventional Diebold-Mariano test is not calibrated for this design and that a great deal of published evidence in this literature rests on that mis-calibration.** Permuting the returns destroys every exploitable temporal structure, and running the identical pipeline on the permuted series produces p-values below 0.05 in 28.8% of cases under the asymptotic $t$ distribution with HAC bandwidth ten, and in 28.0% under a permutation test; a Kolmogorov-Smirnov test rejects uniformity of the $p$-values at $p=0.0000$. We therefore calibrate every comparison against a null distribution obtained by running the complete pipeline on permuted series, which is the only defensible null for this design, and we apply the same rule to our own results.
 
+We also confront the standard statistical benchmarks of this literature, ARIMA, GARCH, AR and EMA, implemented per origin on the training segment. Our model is better than each of them on four of the five markets in raw CRPS, but under the calibrated null **none of these comparisons is significant**: on permuted series ARIMA is better than our model by 26 per cent, because a model that mixes in an uninformative empirical shape must lose, and so the comparison cannot distinguish our model from the benchmark in either direction. A GARCH variant that borrows only our horizon-scaling exponent is likewise not distinguishable from our model. This isolates what is and is not defensible: the horizon-scaling exponent is robustly worth 10.2% of CRPS against a fixed square-root scaling (calibrated p = 0.0000), while the location and shape blocks cannot be separated from noise in this sample.
+
 Under that calibration the shape correction is real but uneven: the pooled improvement over the previous specification is -0.00549 in log CRPS (p = 0.0300), concentrated in the three markets whose short-horizon return shape is repeatable, while CEA and the EU show no detectable gain. Replacing the empirical shape with random quantiles makes the model significantly worse (+0.01479), and a lagged shape reproduces almost the whole gain (-0.00566 against -0.00549), which locates the mechanism in the cross-sectional skewness of daily returns rather than in point-in-time information. We report no applicability condition: five candidate market-level diagnostics fail to predict where the gain appears in leave-one-market-out cross-validation ($R^2=-0.762$).
 
 **Keywords:** carbon price forecasting, quantile forecasting, horizon scaling, continuous ranked probability score, small-sample inference, Diebold-Mariano test.
@@ -156,6 +158,22 @@ Percentages are savings relative to buying the whole requirement now.
 
 A pre-registered sequence benchmark with LSTM, TCN and Transformer architectures, five seeds and a pinball loss was run against the same specification. The primary model, LSTM, is worse by a median of 1.1033 in the pooled comparison and loses on significance in more cells than it wins. The one cell where a deep model beats the statistical specification significantly, EU at $h=20$, is a cell where the statistical specification also loses to most alternatives.
 
+### 5.6 The standard statistical benchmarks, and what they do and do not show
+
+| Benchmark | Pooled log ratio | Null mean | Null s.d. | Calibrated $p$ |
+|---|---:|---:|---:|---:|
+| ARIMA, order selected by training-segment AIC | -0.12852 | -0.26140 | 0.02926 | **1.0000** |
+| GARCH(1,1) with Student-t innovations | -0.13722 | -0.61474 | 0.41249 | **1.0000** |
+| GARCH(1,1) with our $h^{H_m}$ scaling grafted on | -0.07923 | -0.28126 | 0.42892 | **0.3333** |
+| AR(5) | -0.13639 | -0.28939 | 0.02381 | **1.0000** |
+| EMA(20) | -0.18050 | -0.33194 | 0.04797 | **1.0000** |
+
+In raw CRPS our model beats each of these on four of the five markets. Under the calibrated null, **none of the comparisons is significant**, and the reason is instructive. The null mean for ARIMA is -0.261: on a permuted series ARIMA is better than our model by about a quarter, because a point forecast on noise collapses towards a constant while our shape block mixes an uninformative empirical shape into the predictive distribution. A model that deliberately carries shape information must lose on data with none, and the comparison therefore cannot separate the two models in either direction.
+
+The GARCH_H row is the most useful diagnostic in the table. GARCH_H and our model share the $h^{H_m}$ scaling and differ only in the location and shape blocks, and neither difference is significant on its own ($p=0.3333$ for GARCH_H against our model, $p=0.0300$ for our model against the Gaussian-shape specification). The $h^{H_m}$ scaling, by contrast, is worth 10.2% against a fixed square-root scaling with a calibrated p of 0.0000. Taken together with the selection/evaluation split, the per-market analysis, the placebo battery and the mechanism diagnostics, five independent lines of evidence say the same thing: **the horizon-scaling exponent is the robust contribution, and the location and shape blocks cannot be separated from noise in this sample.**
+
+One indirect observation is worth recording. Our model is worse than ARIMA on permuted data, which means the shape block is information-sensitive: it helps when there is shape to exploit and hurts when there is none. That is itself evidence that the block is doing what it is designed to do, even though its incremental contribution cannot be pinned down at this sample size.
+
 ## 6. What we do not claim
 
 - 不得声称“显著优于现有方法”（相对 EMP 不显著，p=0.725）
@@ -164,6 +182,9 @@ A pre-registered sequence benchmark with LSTM, TCN and Transformer architectures
 - 不得引用未校准的渐近 DM p 值
 - 不得声称 h_sat=50 来自测试段读数（它由规则 R 在训练段选出）
 - 不得以 EMP 作为唯一或主要比较对象
+- 不得声称优于文献标准统计基准（ARIMA/GARCH/AR/EMA，校准 p 全部 ≥ 0.333）
+- 不得声称位置块与形状块有可检测的增量贡献（五条证据链一致不显著）
+- 不得把 GARCH_H 的结果读成"GARCH 也行"或"本文也行"——它测的是位置/形状块，不是 H
 
 In addition, the horizons beyond 120 have an effective sample size near one and carry no statistical power; the 95 per cent interval exceedance rate is 0.079 against a nominal 0.05 at long horizons and coverage remains unresolved; and the length of the estimation window affects the effect size, so $W=250$ is fixed in advance rather than tuned.
 
