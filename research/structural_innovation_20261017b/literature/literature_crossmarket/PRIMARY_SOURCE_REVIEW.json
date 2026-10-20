@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-17 13:35:31 UTC",
+  "review_scope": "One complete main published method and two necessary neighbors; paper/source/metadata only.",
+  "main_method": {
+    "id": "P1",
+    "title": "GRU-ODE-Bayes: Continuous modeling of sporadically-observed time series",
+    "authors": [
+      "Edward De Brouwer",
+      "Jaak Simm",
+      "Adam Arany",
+      "Yves Moreau"
+    ],
+    "venue": "NeurIPS 2019",
+    "primary_page": "https://papers.nips.cc/paper_files/paper/2019/hash/455cb2657aaa59e32fad80cb0b65b9dc-Abstract.html",
+    "primary_pdf": "https://papers.nips.cc/paper_files/paper/2019/file/455cb2657aaa59e32fad80cb0b65b9dc-Paper.pdf",
+    "arxiv": "https://arxiv.org/abs/1905.12374",
+    "arxiv_doi": "10.48550/arXiv.1905.12374",
+    "conference_doi_verified": false,
+    "source_refs": [
+      "turn183view0",
+      "turn184view0",
+      "turn186view0",
+      "turn201view0"
+    ],
+    "read_level": {
+      "search": true,
+      "official_main_pdf_all_12_pages": true,
+      "supplement": false,
+      "author_core_source": true,
+      "full_experiment_code": false,
+      "original_preprocessing_complete": false,
+      "model_import": false,
+      "model_execution": false
+    },
+    "supplement_limit": "Official supplemental click returned an internal tool error; appendix-only proofs were not verified.",
+    "method_evidence": [
+      {
+        "location": "Figure 1; section 1; section 4",
+        "claim": "A newly observed dimension can update predictions of a correlated unobserved dimension."
+      },
+      {
+        "location": "Sections 2.1-2.4",
+        "claim": "Continuous GRU hidden-state evolution with masked discrete observation jumps and pre/post losses."
+      },
+      {
+        "location": "Section 2.4",
+        "claim": "Paper post loss uses KL(p_Bayes || p_post), with p_Bayes proportional to pre and observation distributions."
+      },
+      {
+        "location": "Section 2.4 and algorithm",
+        "claim": "Future values are obtained by continuous propagation to a calendar query time; future-event-index prediction is not automatically the same estimand."
+      }
+    ],
+    "author_repository": "https://github.com/edebrouwer/gru_ode_bayes",
+    "author_commit": "ddd0b34e884dbee1c09b6a3927d1e9ab10443af8",
+    "author_commit_time": "2022-05-26T14:46:48Z",
+    "license": "MIT; exact commit License.md copied",
+    "local_source_manifest": "AUTHOR_SOURCE_MANIFEST.json",
+    "core_source_read_ranges": [
+      {
+        "path": "gru_ode_bayes/models.py",
+        "lines": "1-485",
+        "level": "Read main cells, NNFOwithBayesianJumps, loss and solver code; subsequent alternatives not fully audited."
+      },
+      {
+        "path": "gru_ode_bayes/data_utils.py",
+        "lines": "48-198,225-294,369-399",
+        "level": "Read dataset slicing, collation, validation-time organization and extraction; indexed remaining function names only."
+      },
+      {
+        "path": "README.md",
+        "lines": "complete",
+        "level": "Read"
+      },
+      {
+        "path": "License.md",
+        "lines": "complete",
+        "level": "Read"
+      },
+      {
+        "path": "setup.py",
+        "lines": "complete",
+        "level": "Read"
+      }
+    ],
+    "static_findings": [
+      {
+        "id": "paper_code_kl",
+        "where": "models.py compute_KL_loss and gaussian_KL",
+        "finding": "Main author code computes KL(p_post || N(observation,0.01^2)), not the paper's full-posterior KL direction.",
+        "executed": false
+      },
+      {
+        "id": "old_dependencies",
+        "where": "setup.py, README.md and data_utils.py",
+        "finding": "Unpinned dependencies, deprecated NumPy aliases, and a separate modified torchdiffeq install; no compatibility claim or install performed."
+      },
+      {
+        "id": "time_grid",
+        "where": "models.py ode_step and forward; data_utils.py extract_from_path",
+        "finding": "Fixed Euler steps may overshoot an off-grid observation time; extraction can map a query to the closest stored time. This is a static numerical-interface issue, not a demonstrated empirical leak."
+      },
+      {
+        "id": "bounded_state_inference",
+        "where": "GRU-ODE cell and p_model",
+        "finding": "For fixed finite weights, a continuous decoder over the bounded hidden state has bounded mean output. This is an own mathematical observation, not a carbon performance result."
+      }
+    ]
+  },
+  "necessary_neighbors": [
+    {
+      "id": "P2",
+      "title": "Modeling Irregular Time Series with Continuous Recurrent Units",
+      "authors": [
+        "Mona Schirmer",
+        "Mazin Eltayeb",
+        "Stefan Lessmann",
+        "Maja Rudolph"
+      ],
+      "venue": "ICML 2022; PMLR 162:19388-19405",
+      "primary_page": "https://proceedings.mlr.press/v162/schirmer22a.html",
+      "primary_pdf": "https://proceedings.mlr.press/v162/schirmer22a/schirmer22a.pdf",
+      "source_refs": [
+        "turn183view2",
+        "turn184view2",
+        "turn185view1",
+        "turn201view1"
+      ],
+      "read_level": "Official method and related-work sections read; not a claim of full appendix or full source audit.",
+      "evidence": "Sections 2-3 relate a neural encoder/decoder to a continuous latent linear SDE and a continuous-discrete Kalman update; direct neighbor of learned common-state filtering.",
+      "author_repository": "https://github.com/boschresearch/Continuous-Recurrent-Units",
+      "author_commit_metadata": "cdc220f5029f202a14fd14c2548bc2f1e318621a",
+      "author_source_body_read": false,
+      "license_verified": false,
+      "executed": false
+    },
+    {
+      "id": "P3",
+      "title": "Forecasting Government Bond Yields with Neural Networks Considering Cointegration",
+      "authors": [
+        "Christoph Wegener",
+        "Christian von Spreckelsen",
+        "Tobias Basse",
+        "Hans-Jörg von Mettenheim"
+      ],
+      "venue": "Journal of Forecasting 35(1):86-92, 2016",
+      "first_online": "2015-11-23",
+      "doi": "10.1002/for.2385",
+      "primary_page": "https://onlinelibrary.wiley.com/doi/10.1002/for.2385",
+      "source_refs": [
+        "turn185view2",
+        "turn186view1",
+        "turn201view2"
+      ],
+      "read_level": "Publisher abstract, bibliographic metadata and references only; full article not read.",
+      "evidence": "Publisher abstract explicitly joins cointegration/error-correction information and neural-network forecasts; enough to reject a generic first-combination claim.",
+      "author_code_verified": false,
+      "license_verified": false,
+      "executed": false
+    }
+  ],
+  "excluded_partial_sources": [
+    {
+      "title": "A Neural Learning Approach for a Data-Driven Nonlinear Error Correction Model",
+      "doi": "10.1155/2023/5884314",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9886459/",
+      "source_refs": [
+        "turn183view3",
+        "turn184view3",
+        "turn184view6"
+      ],
+      "status": "Partial abstract/introduction read; subsequent access returned reCAPTCHA. No workaround, no full method, no author source, not used as a recommended or implemented method.",
+      "publication_status_beyond_page_not_verified": true
+    }
+  ],
+  "local_metadata_evidence": [
+    {
+      "id": "D1",
+      "path": "../../../carbon_workspace/research/cross_market_innovation_20261017/DATA_ATTRIBUTION.md",
+      "bytes": 5013,
+      "sha256": "f81f082809bcc7e30cdb3c6808bb9a46217cc591b9330ccb48fae5ff4f609ace",
+      "purpose": "EU_REPORTED instrument/venue/currency/roll convention caveat; source provenance."
+    },
+    {
+      "id": "D2",
+      "path": "../../../carbon_workspace/research/cross_market_innovation_20261017/reproduction/DATA_METHODS_ZH.md",
+      "bytes": 6485,
+      "sha256": "0386767f15832aa48e138ba754072cd069ac70a522261d3dabdbb8f8455f5d26",
+      "purpose": "Only date/count/definition metadata; source ends 2024-03-27; no 2025 live EU donor."
+    },
+    {
+      "id": "D3a",
+      "path": "../../../carbon_workspace/research/event_feedback_innovation_20261017/provenance/EEX_SOURCE_SCOPE.json",
+      "bytes": 3394,
+      "sha256": "05fef41b2a591f0570cef37f1aa34b24e48c7d9a105eb819a1603275a88b650f",
+      "purpose": "Official auction source, horizon and sealing rules."
+    },
+    {
+      "id": "D3b",
+      "path": "../../../carbon_workspace/research/event_feedback_innovation_20261017/provenance/EEX_SOURCE_ADDENDUM.json",
+      "bytes": 1634,
+      "sha256": "13368f9e7dc0d33ae68d5d12c5611c7e4336a96c06f61656158fe43d7eb23e97",
+      "purpose": "Previously frozen T3PA and legacy status clarification; hash rechecked in this phase."
+    }
+  ],
+  "market_csv_read": false,
+  "prediction_npz_read": false,
+  "model_checkpoint_read": false,
+  "confirmation_price_read": false,
+  "model_executed": false
+}
+

@@ -1,0 +1,119 @@
+{
+  "stage": "signed_response_search_20261019e",
+  "created_unix": 1792411335.2334013,
+  "frozen_analysis_plan": "/workspace/scratch/562d14c1693a/carbon-research/research/signed_response_search_20261019e/audits/STATISTICAL_PLAN_BEFORE_FIT.json",
+  "frozen_analysis_plan_sha256": "b6f33c9c328f37f9a283275d6cc36e4e48153bc3322d45e2b8deb74e3d1d987c",
+  "source_sha256": {
+    "signed_response_models.py": "5ceb7f04c567be32f1a399cbf01dafdfc6894d3840a158b6faae4153f09eb2f8",
+    "run_signed_response_search.py": "905da0ca33607799b1ca63d9efe6710df173ec33c5c44e137071e024906d990c"
+  },
+  "old_frozen_source_sha256": {
+    "run_model_search.py": "26347433fe6416298e4969da618cbba291999f3a66131172bc8f2e510f3633bf",
+    "innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e",
+    "run_liquidity_extension.py": "95665858a1945b00bba6d6233022c34c0a58993899ccadda8c895f64ffe69807",
+    "liquidity_models.py": "91dd66c0b33b8d75100e37cc382f01be44021ae538f6cbbedddda7f9b9386e0b",
+    "run_new_market_replication.py": "8c617a714bb0b47d117b213de9d299c3bd6a534c8211c28c8d039d454df12e56",
+    "literature_diagnostic.py": "e9053bfd34bce9e60c67c0590245271ccecaaf0bcf009a1e715be9abe7ada2e5",
+    "run_swewt_gru_comparison.py": "0b3395f547fad792c6880a9d25819c6e326ab48ef733240ad690e4833b63218d",
+    "run_official_tianjin_extension.py": "2b47055caf840d7fe572365760a8a602edff844df7dc23dc2caf99717fc77e24"
+  },
+  "datasets": [
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "file": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv",
+      "sha256": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a",
+      "role": "development",
+      "source_url": "https://www.chinatcx.com.cn/tshq",
+      "price_definition": "Official TJEA daily total published two-decimal transaction mean, CNY/tonne; not close",
+      "source_processing": "All1077 official canonical daily-total records retained; price preserved without recomputing turnover/volume; no model-based cleaning",
+      "source_vintage": "Current public historical snapshot; per-day publication vintages unverified. Stage d already scored this tail; fully exposed development in stage e.",
+      "license": "No redistribution license established; canonical rows remain private"
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "file": "/tmp/carbon-signed-response-data-20261019e/CEA_OFFICIAL_MEAN.csv",
+      "sha256": "f9f0e09b7500b2bdb4ec8b16c61d5d5fa2b64de63a24c0cf7bd1d269aa2be75d",
+      "role": "confirmation",
+      "source_url": "https://www.chinatcx.com.cn/tshq",
+      "price_definition": "Published daily TOTAL transaction mean in yuan per tonne, retained exactly as reported; not closing price or listing-only mean",
+      "source_processing": "Take every row from main CEA table index4; sort dates ascending and strip numeric thousands separators only. No row deletion, no deduplication, no date fill, no price recomputation, no splice.",
+      "source_vintage": "Current public historical snapshot; daily publication vintages unverified. Raw source values were previously read/QC; repository evidence found no prior CEA forecast scoring. Confirmation is limited to this fixed stage-e scoring design.",
+      "license": "No explicit redistribution license identified; raw and per-date CSV remain local-only. Public source/QC metadata and reconstruction script."
+    }
+  ],
+  "families": [
+    "rw",
+    "ridge_price",
+    "ridge_interaction",
+    "legacy_fixed_response",
+    "fixed_response",
+    "static_response",
+    "amplitude_context",
+    "signed_context_response",
+    "free_horizon_context",
+    "signed_shock_only"
+  ],
+  "primary_candidate": "signed_context_response",
+  "horizons": [
+    1,
+    5,
+    20
+  ],
+  "lookback": 64,
+  "learning_rates": [
+    0.003,
+    0.01
+  ],
+  "mean_weighted_ridge_alphas": [
+    1e-05,
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "price_ridge_sum_alphas": [
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    1000.0,
+    10000.0,
+    100000.0
+  ],
+  "fit_config_defaults": {
+    "learning_rate": 0.01,
+    "alpha": 0.001,
+    "maximum_epochs": 80,
+    "minimum_epochs": 15,
+    "patience": 12,
+    "selection_tolerance": 1e-07,
+    "gradient_clip": 5.0
+  },
+  "deterministic": true,
+  "seed_repeats": 0,
+  "selection": "training-only profiled weighted ridge plus nonlinear Adam; validation selects alpha/lr/epoch; ties use alpha then lr then epoch",
+  "refit": "fresh initialization; all H20-mature pretest labels; exactly selected nonlinear epoch count; recompute training head scales and ridge beta each update",
+  "epoch0": "fitted signed linear readout on fixed initial rates, not a completely untrained fixed prediction",
+  "past_information": "64 historical price changes and current activity/volume context; volume reference prior60 target records; no energy or future context",
+  "global_normalization": "fixed initial-train price RMS and H-specific training target second moments throughout selection/refit/test",
+  "dynamic_interpretation": "origin-conditioned discriminative forecast, frozen future rates within each issued horizon; no generative or rolling tower-property claim",
+  "initialization_diagnostic": "same chosen alpha and initial nonlinear rates/gates, readout exactly refitted on final training labels; saved without selection or extra p-values",
+  "planned_selection_fits_per_market": 104,
+  "planned_final_fit_constructions_per_market": 8,
+  "additional_fixed_dynamics_linear_readout_diagnostic_solves_per_market": 6,
+  "linear_solve_count_definition": "Every response epoch including epoch0 solves one readout;8 ridge_interaction selection+1 refit,8 ridge_price selection+1 refit,plus6 fixed-dynamics diagnostic solves. Report actual readout solves separately from nonlinear optimizer steps.",
+  "fixed_formula_arms_per_market": 2,
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "torch": "2.14.1+cpu",
+    "sklearn": "1.8.0",
+    "precision": "float64 for all new response calculations; frozen legacy model float32",
+    "torch_threads_per_worker": 1
+  }
+}

@@ -1,0 +1,2288 @@
+{
+  "title": "官方天津 V4：独立统计审查",
+  "status": "PASS_INTEGRITY",
+  "created_utc": "2026-10-19T10:42:26.339672+00:00",
+  "stage": "official_tianjin_later_period_replication_after_candidate_selection_from_v1_v2_v3_and_swewt_results",
+  "design_timing": "allocation_readout is selected as this new stage primary after inspecting prior V1/V2/V3 and SWEWT supplement results, before any model prediction/performance output for the newly acquired official 2023-2026 tail. This does not rename the old V3 primary or make this model design globally preregistered.",
+  "script_sha256": "784fbac90e5abe1be77054f37e0d14442b12382597fa15fd0d777916bdfd1941",
+  "utility_script_sha256": "e83ceb2e567400c6b59af0a5f8fb7bcfc56bec73b32d12e1e2c05e3dadf6091e",
+  "frozen_plan_sha256": "8645aa650d5202852d00700f5bb7a47f907c5c7476db7dd84a923cecc7eae913",
+  "source_sha256": {
+    "run_model_search.py": "26347433fe6416298e4969da618cbba291999f3a66131172bc8f2e510f3633bf",
+    "innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e",
+    "run_liquidity_extension.py": "95665858a1945b00bba6d6233022c34c0a58993899ccadda8c895f64ffe69807",
+    "liquidity_models.py": "91dd66c0b33b8d75100e37cc382f01be44021ae538f6cbbedddda7f9b9386e0b",
+    "run_new_market_replication.py": "8c617a714bb0b47d117b213de9d299c3bd6a534c8211c28c8d039d454df12e56",
+    "literature_diagnostic.py": "e9053bfd34bce9e60c67c0590245271ccecaaf0bcf009a1e715be9abe7ada2e5",
+    "run_swewt_gru_comparison.py": "0b3395f547fad792c6880a9d25819c6e326ab48ef733240ad690e4833b63218d",
+    "run_official_tianjin_extension.py": "2b47055caf840d7fe572365760a8a602edff844df7dc23dc2caf99717fc77e24"
+  },
+  "protocol_sha256": "07e77d164eec1b388bf7324aaed47ac3a6d62d3360c003aba15f1d9d17af1741",
+  "completion_sha256": "c4298e13b419222dd930f4488ee1556b7e0a973d09ee03c5f3f1f6391cfc07e9",
+  "resolved_arguments": {
+    "run": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4",
+    "data_file": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv",
+    "plan": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/audits/V4_STATISTICAL_AUDIT_PLAN.json",
+    "ewt_module": null,
+    "out": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/audits",
+    "self_test": false
+  },
+  "runtime_ewt_module": {
+    "path": "/tmp/carbon-forecast-20261019d-deps/ewtpy/ewtpy.py",
+    "current_bytes_verified": true,
+    "recorded_sha256": "35cb4532ae35a41867ee1411cb61a33165f7eebab3ebf70a58b47c74c6e6a289"
+  },
+  "self_test": {
+    "status": "PASS_SYNTHETIC_STATISTICS_NO_TRAINING",
+    "model_fits": 0,
+    "market_data_reads": 0,
+    "checks": [
+      "mean-seed and ensemble estimands differ as intended",
+      "known paired effect under both20/40 circular observed-origin blocks",
+      "95 and99 percentile conventions",
+      "undefined ratio draws disable intervals"
+    ]
+  },
+  "data_reconstruction": {
+    "counts": {
+      "train": 562,
+      "val": 195,
+      "final": 777,
+      "test": 196
+    },
+    "validation_rw": 1.0552404109771687,
+    "drift_choice": [
+      1.066793678683331,
+      "None"
+    ],
+    "source_path_resolved": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv",
+    "source_sha256": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a",
+    "published_price_cent_gap": 4.547473508864641e-13,
+    "price_minus_turnover_over_volume_max_abs": 0.005000000000002558,
+    "training_rms": [
+      1.3139645907468114,
+      1.9673306591624646,
+      2.031303968871593,
+      0.24610295948376298
+    ],
+    "train_target_second_moment": [
+      1.621859964412811,
+      6.993383096085417,
+      22.16738167259787
+    ],
+    "old_date_gate": [
+      {
+        "market": "BEIJING_MEAN",
+        "tail_date_intersection": 0,
+        "source_sha256": "952a69168d396cce3bbd54a5704f861cc459f67e9e121434fd7672e86bf18ed3"
+      },
+      {
+        "market": "TIANJIN_MEAN",
+        "tail_date_intersection": 0,
+        "source_sha256": "c35e24f047d903f1d1f68513e87900891a89314b0fb91100d57390c34bc27dda"
+      },
+      {
+        "market": "CHONGQING_MEAN",
+        "tail_date_intersection": 0,
+        "source_sha256": "0782976147c5e6948a494f34990331e58b2815dcef946fb1fad1ff3fef632e67"
+      }
+    ],
+    "energy_reconstruction": [
+      {
+        "series": "brent",
+        "path_resolved": "/workspace/scratch/562d14c1693a/carbon-research/data/parsed/brent_eia_daily.csv",
+        "sha256": "2f4ef39f7046e5969a1471e2610febae3d57c277d14447b166b83f39d8f2e191",
+        "minimum_age_days": 14,
+        "maximum_age_days": 18
+      },
+      {
+        "series": "wti",
+        "path_resolved": "/workspace/scratch/562d14c1693a/carbon-research/data/parsed/wti_eia_daily.csv",
+        "sha256": "e1a301dbaf422dffd3a8b372e323fc7df182815f0ee61dfcc1db31c39d497d69",
+        "minimum_age_days": 14,
+        "maximum_age_days": 20
+      },
+      {
+        "series": "henryhub",
+        "path_resolved": "/workspace/scratch/562d14c1693a/carbon-research/data/parsed/henryhub_eia_daily.csv",
+        "sha256": "007ce1868c7966a864d22d2ae6c7a82e02586a3120a86b63b6aadaa5ad9bf5b5",
+        "minimum_age_days": 14,
+        "maximum_age_days": 17
+      }
+    ],
+    "volume_context_float32_sha256": "5ce78766a8687895239b8a47d3c231dfdd54b33c7e52117946d93b1713781731",
+    "masks_sha256": {
+      "train": "a051bd5658272804d9e10331db975cd3d71c86d13f9236dbec98504f067b05d3",
+      "val": "30e7b8dfdc0a1d2e966f6b6999a3bd34e580de5ad4730a40e76408cff79deca8",
+      "final": "cbcc801f1244983f76debd3c64da9397e75f1c54cced35acbb19ab2b007e5481",
+      "test": "e12c6f8e4f1f6dbe4e780e681c7285adaf2262f605ed997e6ade34d44961f06f"
+    }
+  },
+  "execution_counts": {
+    "neural_tasks": 50,
+    "selection_tasks": 20,
+    "refit_tasks": 30,
+    "prediction_npz_files": 15,
+    "test_origins": 196,
+    "origin_horizon_targets": 588,
+    "tasks_with_positive_gradient_steps": 29,
+    "selection_tasks_with_positive_gradient_steps": 20,
+    "refit_tasks_with_positive_gradient_steps": 9,
+    "zero_epoch_refits": 21,
+    "selected_epoch_zero_families": 7,
+    "total_executed_epochs": 399,
+    "total_logged_positive_gradient_steps": 2127,
+    "optimizer_steps_from_epochs_and_batches": 2127,
+    "auditor_model_fits": 0,
+    "auditor_checkpoint_unpickles": 0
+  },
+  "single_market_metrics": {
+    "liquidity_full": {
+      "mean_seed_mse_over_rw": 0.957620696610488,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9676834141180017,
+          0.9440377164803786,
+          0.9611409592330838
+        ],
+        [
+          0.9676834141180017,
+          0.9440377164803786,
+          0.9611409592330838
+        ],
+        [
+          0.9676834141180017,
+          0.9440377164803786,
+          0.9611409592330838
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.957620696610488,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.9676834141180017,
+        0.9440377164803786,
+        0.9611409592330838
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.454014444590703,
+        14.575889360748462,
+        29.11057249486932
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.5290245740984436,
+        3.8178383099272897,
+        5.395421438114849
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.5290245740984436,
+        3.8178383099272897,
+        5.39542143811485
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.5791783468605225,
+        2.1562158643665645,
+        3.8501041043083806
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.454014444590703,
+        14.575889360748462,
+        29.11057249486932
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.579178346860522,
+        2.156215864366564,
+        3.8501041043083815
+      ]
+    },
+    "liquidity_readout": {
+      "mean_seed_mse_over_rw": 0.9537541738865362,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9676277353060043,
+          0.939644282856247,
+          0.9539905034973573
+        ],
+        [
+          0.9676277353060043,
+          0.939644282856247,
+          0.9539905034973573
+        ],
+        [
+          0.9676277353060043,
+          0.939644282856247,
+          0.9539905034973573
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.9537541738865363,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.9676277353060043,
+        0.939644282856247,
+        0.9539905034973573
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.453297862370983,
+        14.508054992162124,
+        28.894002950031364
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.5289230456856076,
+        3.808944078371606,
+        5.37531421872539
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.528923045685607,
+        3.808944078371606,
+        5.375314218725391
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.5754955226480303,
+        2.1316129491997304,
+        3.809966635391994
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.453297862370984,
+        14.508054992162124,
+        28.894002950031364
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.5754955226480312,
+        2.1316129491997278,
+        3.809966635391991
+      ]
+    },
+    "shock_size_only": {
+      "mean_seed_mse_over_rw": 0.9401171993556855,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9577102168644804,
+          0.9198440692101065,
+          0.9427973119924694
+        ],
+        [
+          0.9577102168644804,
+          0.9198440692101065,
+          0.9427973119924694
+        ],
+        [
+          0.9577102168644804,
+          0.9198440692101065,
+          0.9427973119924694
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.9401171993556855,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.9577102168644804,
+        0.9198440692101065,
+        0.9427973119924694
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.325660128662582,
+        14.202340804702196,
+        28.554988979581093
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.51079195177706,
+        3.7685993160194413,
+        5.3436868339734405
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.5107919517770605,
+        3.768599316019441,
+        5.3436868339734405
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.572285222251409,
+        2.120821794603466,
+        3.793520870273399
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.32566012866258,
+        14.202340804702196,
+        28.55498897958109
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.5722852222514108,
+        2.1208217946034673,
+        3.7935208702733973
+      ]
+    },
+    "liquidity_unconstrained": {
+      "mean_seed_mse_over_rw": 0.957620696610488,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9676834141180017,
+          0.9440377164803786,
+          0.9611409592330838
+        ],
+        [
+          0.9676834141180017,
+          0.9440377164803786,
+          0.9611409592330838
+        ],
+        [
+          0.9676834141180017,
+          0.9440377164803786,
+          0.9611409592330838
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.957620696610488,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.9676834141180017,
+        0.9440377164803786,
+        0.9611409592330838
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.454014444590703,
+        14.575889360748462,
+        29.11057249486932
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.5290245740984436,
+        3.8178383099272897,
+        5.395421438114849
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.5290245740984436,
+        3.8178383099272897,
+        5.39542143811485
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.5791783468605225,
+        2.1562158643665645,
+        3.8501041043083806
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.454014444590703,
+        14.575889360748462,
+        29.11057249486932
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.579178346860522,
+        2.156215864366564,
+        3.8501041043083815
+      ]
+    },
+    "allocation_constant": {
+      "mean_seed_mse_over_rw": 0.9599145404148542,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9721879315619572,
+          0.947335671863842,
+          0.9602200178187634
+        ],
+        [
+          0.9721879315619572,
+          0.947335671863842,
+          0.9602200178187634
+        ],
+        [
+          0.9721879315619572,
+          0.947335671863842,
+          0.9602200178187634
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.9599145404148542,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.9721879315619572,
+        0.947335671863842,
+        0.9602200178187634
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.511987253150272,
+        14.626809606779807,
+        29.08267946674731
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.53722875329689,
+        3.82450122326818,
+        5.392835939164783
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.53722875329689,
+        3.82450122326818,
+        5.392835939164783
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.577882521406949,
+        2.133871042250817,
+        3.8141710838560208
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.51198725315027,
+        14.626809606779805,
+        29.08267946674731
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.5778825214069478,
+        2.133871042250819,
+        3.8141710838560208
+      ]
+    },
+    "allocation_readout": {
+      "mean_seed_mse_over_rw": 0.9599145404148542,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9721879315619572,
+          0.947335671863842,
+          0.9602200178187634
+        ],
+        [
+          0.9721879315619572,
+          0.947335671863842,
+          0.9602200178187634
+        ],
+        [
+          0.9721879315619572,
+          0.947335671863842,
+          0.9602200178187634
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.9599145404148542,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.9721879315619572,
+        0.947335671863842,
+        0.9602200178187634
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.511987253150272,
+        14.626809606779807,
+        29.08267946674731
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.53722875329689,
+        3.82450122326818,
+        5.392835939164783
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.53722875329689,
+        3.82450122326818,
+        5.392835939164783
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.577882521406949,
+        2.133871042250817,
+        3.8141710838560208
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.51198725315027,
+        14.626809606779805,
+        29.08267946674731
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.5778825214069478,
+        2.133871042250819,
+        3.8141710838560208
+      ]
+    },
+    "gru": {
+      "mean_seed_mse_over_rw": 1.0,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 1.0,
+      "ensemble_mse_over_rw_by_horizon": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.587467983217724,
+        3.9293693994776078,
+        5.503409518337757
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.587467983217724,
+        3.9293693994776078,
+        5.503409518337756
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.591530612244898,
+        2.161122448979593,
+        3.851938775510208
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.5915306122448971,
+        2.161122448979592,
+        3.8519387755102024
+      ]
+    },
+    "lstm": {
+      "mean_seed_mse_over_rw": 1.0013103531798981,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9468518676134027,
+          0.9813731411594379,
+          1.0344967420877718
+        ],
+        [
+          0.9682226497518323,
+          1.015957332770699,
+          1.0447978229672457
+        ],
+        [
+          0.9649609080883134,
+          0.9947826542664123,
+          1.060350059913967
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.9979497414848085,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.9594621811745737,
+        0.9941120764988031,
+        1.0402749667810487
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.355281443715912,
+        15.39935292487944,
+        31.697345946084067
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.5149657669067267,
+        3.924101157480603,
+        5.629967127076686
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.5150080289689116,
+        3.924200928199197,
+        5.6300396043086645
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.5824556856312977,
+        2.3440160810466977,
+        4.022228468706786
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.348207780617736,
+        15.34903466913722,
+        31.5073450404621
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.5804816480690032,
+        2.338553397825013,
+        4.0079240247477355
+      ]
+    },
+    "swewt_gru_price": {
+      "mean_seed_mse_over_rw": 0.9751720722864567,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9005251737039421,
+          0.9403784370677021,
+          1.1174840246575808
+        ],
+        [
+          0.9107114872949805,
+          0.9287903845368635,
+          1.057181487763699
+        ],
+        [
+          0.8894441561552361,
+          0.9283019958499211,
+          1.1037315035481843
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.9659803745646438,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.8985307090949811,
+        0.9251136054923872,
+        1.074296809106563
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        11.585854566469285,
+        14.39759747352801,
+        33.098167715341454
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.4037604064952514,
+        3.794399661868313,
+        5.752696997970951
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.403800018577661,
+        3.7944166183391106,
+        5.753100704432476
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.5705408191884307,
+        2.204476918518446,
+        4.175461367934181
+      ],
+      "native_ensemble_mse_by_horizon": [
+        11.564024211551327,
+        14.283702149161329,
+        32.53778214535477
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.5680840276313823,
+        2.1842585753106882,
+        4.126705707801556
+      ]
+    },
+    "swewt_gru_full": {
+      "mean_seed_mse_over_rw": 0.9915639648884002,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9875898957543717,
+          0.993160166701104,
+          0.9926135034371256
+        ],
+        [
+          0.9845954835583764,
+          0.9903922668416805,
+          0.9906294594692759
+        ],
+        [
+          0.9898789142171781,
+          0.9968178537793018,
+          0.9983981402371866
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.9915203009904362,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.9873305940747004,
+        0.9933999854720923,
+        0.993830323424516
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.707183278893334,
+        15.338916656857869,
+        30.102167863772056
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.564711492565351,
+        3.9164894682551536,
+        5.486536720792181
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.56471363210193,
+        3.9164929026946886,
+        5.486544255154793
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.5846607978569025,
+        2.157602704292871,
+        3.8502764279507478
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.706872207167132,
+        15.338040023649098,
+        30.100652146521227
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.5846129527200892,
+        2.1571333847132417,
+        3.849791151546936
+      ]
+    },
+    "rw": {
+      "mean_seed_mse_over_rw": 1.0,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 1.0,
+      "ensemble_mse_over_rw_by_horizon": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.587467983217724,
+        3.9293693994776078,
+        5.503409518337756
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.587467983217724,
+        3.9293693994776078,
+        5.503409518337756
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.5915306122448971,
+        2.161122448979592,
+        3.8519387755102024
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.5915306122448971,
+        2.161122448979592,
+        3.8519387755102024
+      ]
+    },
+    "drift": {
+      "mean_seed_mse_over_rw": 1.0092176922730367,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          1.0010590195524622,
+          1.0053613773993249,
+          1.0212326798673226
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 1.0092176922730367,
+      "ensemble_mse_over_rw_by_horizon": [
+        1.0010590195524622,
+        1.0053613773993249,
+        1.0212326798673226
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.883556034446913,
+        15.52272324370296,
+        30.93060146466814
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.5893670799246644,
+        3.9398887349394727,
+        5.561528698538572
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.5893670799246644,
+        3.9398887349394727,
+        5.561528698538572
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.5925396884852714,
+        2.1668007661820683,
+        3.8677372215330346
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.883556034446913,
+        15.52272324370296,
+        30.93060146466814
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.5925396884852714,
+        2.1668007661820683,
+        3.8677372215330346
+      ]
+    },
+    "ridge_price": {
+      "mean_seed_mse_over_rw": 0.9016238309545268,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9022469626000637,
+          0.9080096267896831,
+          0.8946149034738339
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.9016238309545268,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.9022469626000637,
+        0.9080096267896831,
+        0.8946149034738339
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        11.61185212113087,
+        14.01961767790875,
+        27.09566349492135
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.4076167802631314,
+        3.744277991537053,
+        5.205349507470305
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.4076167802631314,
+        3.744277991537053,
+        5.205349507470305
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.6497795327086404,
+        2.1816637574767275,
+        3.800949305520981
+      ],
+      "native_ensemble_mse_by_horizon": [
+        11.61185212113087,
+        14.01961767790875,
+        27.09566349492135
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.6497795327086404,
+        2.1816637574767275,
+        3.800949305520981
+      ]
+    },
+    "ridge_full": {
+      "mean_seed_mse_over_rw": 0.9963888166682818,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9972243278123974,
+          0.9984452680798012,
+          0.9934968541126469
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.9963888166682818,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.9972243278123974,
+        0.9984452680798012,
+        0.9934968541126469
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.834203833484732,
+        15.415938903958507,
+        30.090552189293593
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.5824857059707487,
+        3.926313653283256,
+        5.485485592843499
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.5824857059707487,
+        3.926313653283256,
+        5.485485592843499
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.5922306150091536,
+        2.1644947588876153,
+        3.87571834529997
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.834203833484732,
+        15.415938903958507,
+        30.090552189293593
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.5922306150091536,
+        2.1644947588876153,
+        3.87571834529997
+      ]
+    },
+    "hgb_full": {
+      "mean_seed_mse_over_rw": 0.966733073386605,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9376406187766404,
+          0.9539490587600096,
+          1.008609542623165
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.966733073386605,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.9376406187766404,
+        0.9539490587600096,
+        1.008609542623165
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        12.067365875773163,
+        14.728919929297163,
+        30.54827798929368
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.4738114335371115,
+        3.8378275012430096,
+        5.527049664087856
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.4738114335371115,
+        3.8378275012430096,
+        5.527049664087856
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.5671089777397431,
+        2.1732479221027945,
+        3.9234677359822565
+      ],
+      "native_ensemble_mse_by_horizon": [
+        12.067365875773163,
+        14.728919929297163,
+        30.54827798929368
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.5671089777397431,
+        2.1732479221027945,
+        3.9234677359822565
+      ]
+    },
+    "validation_selected_strong": {
+      "mean_seed_mse_over_rw": 0.9016238309545268,
+      "seed_mse_over_rw_by_horizon": [
+        [
+          0.9022469626000637,
+          0.9080096267896831,
+          0.8946149034738339
+        ]
+      ],
+      "rw_mse_by_horizon": [
+        12.869926530612242,
+        15.439943877551014,
+        30.28751632653061
+      ],
+      "ensemble_mse_over_rw": 0.9016238309545268,
+      "ensemble_mse_over_rw_by_horizon": [
+        0.9022469626000637,
+        0.9080096267896831,
+        0.8946149034738339
+      ],
+      "native_mean_seed_mse_by_horizon": [
+        11.61185212113087,
+        14.01961767790875,
+        27.09566349492135
+      ],
+      "native_mean_seed_rmse_by_horizon": [
+        3.4076167802631314,
+        3.744277991537053,
+        5.205349507470305
+      ],
+      "native_rmse_of_mean_seed_mse_by_horizon": [
+        3.4076167802631314,
+        3.744277991537053,
+        5.205349507470305
+      ],
+      "native_mean_seed_mae_by_horizon": [
+        1.6497795327086404,
+        2.1816637574767275,
+        3.800949305520981
+      ],
+      "native_ensemble_mse_by_horizon": [
+        11.61185212113087,
+        14.01961767790875,
+        27.09566349492135
+      ],
+      "native_ensemble_mae_by_horizon": [
+        1.6497795327086404,
+        2.1816637574767275,
+        3.800949305520981
+      ]
+    }
+  },
+  "five_prespecified_effects": {
+    "primary_readout_vs_rw": {
+      "candidate": "allocation_readout",
+      "comparator": "rw",
+      "improvement_rw_units": 0.040085459585145755,
+      "relative_risk_reduction": 0.040085459585145755,
+      "improvement_by_horizon_rw_units": [
+        0.027812068438042847,
+        0.052664328136157956,
+        0.03977998218123657
+      ],
+      "block20": {
+        "block_observed_origins": 20,
+        "replications": 50000,
+        "ci95_marginal": [
+          0.016688123035175542,
+          0.06288681146636059
+        ],
+        "ci99_five_contrast_family": [
+          0.01305596652383492,
+          0.07018661525047354
+        ],
+        "undefined_rw_denominator_resamples": 0,
+        "status": "approximate_percentile"
+      },
+      "block40": {
+        "block_observed_origins": 40,
+        "replications": 50000,
+        "ci95_marginal": [
+          0.018388381381078445,
+          0.06142235522504104
+        ],
+        "ci99_five_contrast_family": [
+          0.015598522449389014,
+          0.0677070011078643
+        ],
+        "undefined_rw_denominator_resamples": 0,
+        "status": "approximate_percentile"
+      }
+    },
+    "primary_readout_vs_constant": {
+      "candidate": "allocation_readout",
+      "comparator": "allocation_constant",
+      "improvement_rw_units": 0.0,
+      "relative_risk_reduction": 0.0,
+      "improvement_by_horizon_rw_units": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "block20": {
+        "block_observed_origins": 20,
+        "replications": 50000,
+        "ci95_marginal": [
+          0.0,
+          0.0
+        ],
+        "ci99_five_contrast_family": [
+          0.0,
+          0.0
+        ],
+        "undefined_rw_denominator_resamples": 0,
+        "status": "approximate_percentile"
+      },
+      "block40": {
+        "block_observed_origins": 40,
+        "replications": 50000,
+        "ci95_marginal": [
+          0.0,
+          0.0
+        ],
+        "ci99_five_contrast_family": [
+          0.0,
+          0.0
+        ],
+        "undefined_rw_denominator_resamples": 0,
+        "status": "approximate_percentile"
+      }
+    },
+    "primary_readout_vs_swewt_full": {
+      "candidate": "allocation_readout",
+      "comparator": "swewt_gru_full",
+      "improvement_rw_units": 0.031649424473545906,
+      "relative_risk_reduction": 0.031918691677251476,
+      "improvement_by_horizon_rw_units": [
+        0.01516683294801835,
+        0.04612109057685321,
+        0.03366034989576594
+      ],
+      "block20": {
+        "block_observed_origins": 20,
+        "replications": 50000,
+        "ci95_marginal": [
+          0.0089375094268856,
+          0.0525993723957637
+        ],
+        "ci99_five_contrast_family": [
+          0.006833957243905421,
+          0.059320985046901566
+        ],
+        "undefined_rw_denominator_resamples": 0,
+        "status": "approximate_percentile"
+      },
+      "block40": {
+        "block_observed_origins": 40,
+        "replications": 50000,
+        "ci95_marginal": [
+          0.010293023490750883,
+          0.0510822560379373
+        ],
+        "ci99_five_contrast_family": [
+          0.008500092037843987,
+          0.05661892823038806
+        ],
+        "undefined_rw_denominator_resamples": 0,
+        "status": "approximate_percentile"
+      }
+    },
+    "secondary_full_vs_rw": {
+      "candidate": "liquidity_full",
+      "comparator": "rw",
+      "improvement_rw_units": 0.04237930338951201,
+      "relative_risk_reduction": 0.04237930338951201,
+      "improvement_by_horizon_rw_units": [
+        0.03231658588199826,
+        0.055962283519621514,
+        0.03885904076691615
+      ],
+      "block20": {
+        "block_observed_origins": 20,
+        "replications": 50000,
+        "ci95_marginal": [
+          0.0189757727236246,
+          0.06760929767761795
+        ],
+        "ci99_five_contrast_family": [
+          0.012654878054539789,
+          0.07609692481928673
+        ],
+        "undefined_rw_denominator_resamples": 0,
+        "status": "approximate_percentile"
+      },
+      "block40": {
+        "block_observed_origins": 40,
+        "replications": 50000,
+        "ci95_marginal": [
+          0.0222501207127089,
+          0.06676354682614453
+        ],
+        "ci99_five_contrast_family": [
+          0.016828766784390395,
+          0.07557006065962349
+        ],
+        "undefined_rw_denominator_resamples": 0,
+        "status": "approximate_percentile"
+      }
+    },
+    "secondary_full_vs_shock_size": {
+      "candidate": "liquidity_full",
+      "comparator": "shock_size_only",
+      "improvement_rw_units": -0.01750349725480249,
+      "relative_risk_reduction": -0.018618420412687575,
+      "improvement_by_horizon_rw_units": [
+        -0.009973197253521415,
+        -0.024193647270271956,
+        -0.018343647240614436
+      ],
+      "block20": {
+        "block_observed_origins": 20,
+        "replications": 50000,
+        "ci95_marginal": [
+          -0.033487982436920076,
+          0.0011150087381411658
+        ],
+        "ci99_five_contrast_family": [
+          -0.039280170067787105,
+          0.003125496111311937
+        ],
+        "undefined_rw_denominator_resamples": 0,
+        "status": "approximate_percentile"
+      },
+      "block40": {
+        "block_observed_origins": 40,
+        "replications": 50000,
+        "ci95_marginal": [
+          -0.03176512046750198,
+          0.0009887432158262508
+        ],
+        "ci99_five_contrast_family": [
+          -0.035870107723614285,
+          0.0029430362861554565
+        ],
+        "undefined_rw_denominator_resamples": 0,
+        "status": "approximate_percentile"
+      }
+    }
+  },
+  "validation_selected_strong": {
+    "family": "ridge_price",
+    "pool_validation_losses": {
+      "rw": 1.0552404109771687,
+      "drift": 1.066793678683331,
+      "ridge_price": 1.0368306434542058,
+      "ridge_full": 1.0681397808437445,
+      "hgb_full": 1.1181409275237426,
+      "gru": 1.0552404109771687,
+      "lstm": 1.0471422883259143
+    }
+  },
+  "selected_epochs": [
+    {
+      "family": "liquidity_full",
+      "selected_epoch": 0,
+      "selected_lr": 0.003,
+      "validation_loss": 1.0448265252021347
+    },
+    {
+      "family": "liquidity_readout",
+      "selected_epoch": 0,
+      "selected_lr": 0.003,
+      "validation_loss": 1.0438685599608843
+    },
+    {
+      "family": "shock_size_only",
+      "selected_epoch": 0,
+      "selected_lr": 0.003,
+      "validation_loss": 1.0403773239606644
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "selected_epoch": 0,
+      "selected_lr": 0.003,
+      "validation_loss": 1.0448265252021347
+    },
+    {
+      "family": "allocation_constant",
+      "selected_epoch": 0,
+      "selected_lr": 0.003,
+      "validation_loss": 1.0429118144667215
+    },
+    {
+      "family": "allocation_readout",
+      "selected_epoch": 0,
+      "selected_lr": 0.003,
+      "validation_loss": 1.0429118144667215
+    },
+    {
+      "family": "gru",
+      "selected_epoch": 0,
+      "selected_lr": 0.003,
+      "validation_loss": 1.0552404109771687
+    },
+    {
+      "family": "lstm",
+      "selected_epoch": 12,
+      "selected_lr": 0.003,
+      "validation_loss": 1.0471422883259143
+    },
+    {
+      "family": "swewt_gru_price",
+      "selected_epoch": 9,
+      "selected_lr": 0.01,
+      "validation_loss": 1.0288953800447334
+    },
+    {
+      "family": "swewt_gru_full",
+      "selected_epoch": 1,
+      "selected_lr": 0.003,
+      "validation_loss": 1.0546706260499097
+    }
+  ],
+  "training_receipt_ledger": [
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 0.5236397123388097,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/selection_lr0.003.json",
+      "receipt_sha256": "d826e68b8846db473cbd29bc13602afcf5b9a725bc5bb7a4ad18724ee5ba8f26",
+      "checkpoint_sha256": "fab0f5bbdb79ba87b1d9fcfb9ef503f6fa600285e1fe83deff8bf1a95d787f80",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 0.0381217896938324
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 1.5909311437376996,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/selection_lr0.01.json",
+      "receipt_sha256": "ef9826a0166750ffd07a4d37348f8a285d8b811d10d4ca5a116d6855f9a37178",
+      "checkpoint_sha256": "e8bbed6bfc91ca757f0b2132f8822c0446ae73cb3b31543510b3fcac6b9496ed",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 0.055388547480106354
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/refit_seed17.json",
+      "receipt_sha256": "2c087839ad37f0a24df1be995eb4ccdbf83d02874101423f52089a6690d1df25",
+      "checkpoint_sha256": "80581a23cb4f4b0e1ea574e4a0590482713bc68f147eb03bfb1f05ec6e9ca298",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/refit_seed29.json",
+      "receipt_sha256": "1d96bfcd2a76490e684b9829e1c2ab84e8a59b80b4fdd2825b9d8e29f89a7c4f",
+      "checkpoint_sha256": "07883fbdb6c6dba0d6873651a693620fa20322fd8ca5931ef156bdac6e9cb9b9",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/refit_seed43.json",
+      "receipt_sha256": "9137e81e7a3d2bf82f6e551f0c6239e03f5db85349c06eb1c407693321f71c8d",
+      "checkpoint_sha256": "a1a888b58b8cc1e7f855280ec7f4a2618cc9428abb8db9bb22911cb84cd696cd",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 0.5223110423154834,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/selection_lr0.003.json",
+      "receipt_sha256": "3155b5d3a049ccd5460950fbb0f4c04c2b35cf0c22c3850ba5ba7b83d453f548",
+      "checkpoint_sha256": "fab0f5bbdb79ba87b1d9fcfb9ef503f6fa600285e1fe83deff8bf1a95d787f80",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 0.03838469460606575
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 1.6381493900294286,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/selection_lr0.01.json",
+      "receipt_sha256": "18233ee30bfd9734660efc092ea71e266d913672c563042bd2c85a16c02a2e7f",
+      "checkpoint_sha256": "e8bbed6bfc91ca757f0b2132f8822c0446ae73cb3b31543510b3fcac6b9496ed",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 0.05805455893278122
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/refit_seed17.json",
+      "receipt_sha256": "fa233f98423723016e6ed73760b9bd7ad15482b0cadbdc375d689cba08a1eb3b",
+      "checkpoint_sha256": "80581a23cb4f4b0e1ea574e4a0590482713bc68f147eb03bfb1f05ec6e9ca298",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/refit_seed29.json",
+      "receipt_sha256": "5bf457032f3783dfbf137e4b5df48bcd9e1c33efbfdd2fd130817098abe41bba",
+      "checkpoint_sha256": "07883fbdb6c6dba0d6873651a693620fa20322fd8ca5931ef156bdac6e9cb9b9",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/refit_seed43.json",
+      "receipt_sha256": "51fdd8b8c29cc9426c2ad8d57e6aaf4abae57a529a972496a47c91733b1e4d74",
+      "checkpoint_sha256": "a1a888b58b8cc1e7f855280ec7f4a2618cc9428abb8db9bb22911cb84cd696cd",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 0.4785794308400482,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/selection_lr0.003.json",
+      "receipt_sha256": "7b6948d860d97cfcc6952c1cbf00bc70a693b9042dc5ac14fffdce0ca73b5164",
+      "checkpoint_sha256": "966aae3d25bb305da7cd3268c5ed5dbd1465a7c537e336589dec933c9fedfb49",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 0.03893766179680824
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 1.44642019298165,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/selection_lr0.01.json",
+      "receipt_sha256": "3b74bd5c62e9fec9830187ef46299302cd92c4e6306b555250d9089c8eabb6db",
+      "checkpoint_sha256": "d58f6bfda0f96920d7223dc1af6b283987281490bee324f9e931d70ec24bee3b",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 0.06925483793020248
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/refit_seed17.json",
+      "receipt_sha256": "7e181c34e67af213b0cd21ad99e5b9c61f5ecaf2854b0841283a943cc2785ee3",
+      "checkpoint_sha256": "26a7e40a73925f7f2f45e529a95c5fdd370e8e39cfed36c3ddb611f3542a40bf",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/refit_seed29.json",
+      "receipt_sha256": "686d998ad6e70b7059af4981e4c0ff1ca8320933483a0984489023825f09d689",
+      "checkpoint_sha256": "269e4d1cb42578180014806f5fe6b203272d65f92a57990bf15f2f1f2cc40f01",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/refit_seed43.json",
+      "receipt_sha256": "534cee25e88b1de34895513c61851cabc5ca81de17f1173f07e1dcaf5e7c7cb3",
+      "checkpoint_sha256": "ae2a212080fd15a94ba59436ee4d7641c40d125ab5cd7181e4dd3f58646b70a5",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 0.525602256688975,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.003.json",
+      "receipt_sha256": "4b1060f7ee9ba5546bf5d582a109a287c1f5afb542dac6c1d7413450c7ca8088",
+      "checkpoint_sha256": "fab0f5bbdb79ba87b1d9fcfb9ef503f6fa600285e1fe83deff8bf1a95d787f80",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 0.20261652767658234
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 1.3720216083814136,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.01.json",
+      "receipt_sha256": "381586d224fc8789afc113db04bda806fe246fd1c7fc0300126b881d701743a7",
+      "checkpoint_sha256": "e8bbed6bfc91ca757f0b2132f8822c0446ae73cb3b31543510b3fcac6b9496ed",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 0.23717792332172394
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/refit_seed17.json",
+      "receipt_sha256": "3b6bbf4fe485a6cef9e092fdee8ce69411527ebacfed75ffd7d5a18a41486de7",
+      "checkpoint_sha256": "80581a23cb4f4b0e1ea574e4a0590482713bc68f147eb03bfb1f05ec6e9ca298",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/refit_seed29.json",
+      "receipt_sha256": "7b41d2e9cafae77124cd7ee09ac80e9f7a33488344ac2da0e2f9d0d6c9087664",
+      "checkpoint_sha256": "07883fbdb6c6dba0d6873651a693620fa20322fd8ca5931ef156bdac6e9cb9b9",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/refit_seed43.json",
+      "receipt_sha256": "2d4f8b352b8ec4d059cd2cbeb415992502d7028c99b7425315aedec25cca1741",
+      "checkpoint_sha256": "a1a888b58b8cc1e7f855280ec7f4a2618cc9428abb8db9bb22911cb84cd696cd",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 0.41469433057976685,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/selection_lr0.003.json",
+      "receipt_sha256": "755a8b2bcb4041bf392f20f7408e02117d1c7d648d242e110ae325053932619e",
+      "checkpoint_sha256": "cb550b86bf75fd5ecd87cae7269106353b9ffee71ce43ec1483f5a11e3c6066a",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 0.030574079602956772
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 1.273629262619276,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/selection_lr0.01.json",
+      "receipt_sha256": "be260d4260b78b9c452672c942086a509acaff83c441bc41cf99d4e5fc832d63",
+      "checkpoint_sha256": "2bc95b3684a316c7902916499e0b343c042f959834daf4932641add61654e39a",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 0.03587229549884796
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/refit_seed17.json",
+      "receipt_sha256": "dcc7284e7258507e03408e69a6dc4a9f21455cb898604903befdcf2a471c6086",
+      "checkpoint_sha256": "a0da3e6d40bdef1e4669239dc2782e0834ef58dd7ff347d009ae48d530ad1555",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/refit_seed29.json",
+      "receipt_sha256": "815bea157504fe4d2c6aeb501f032fe64bed16496bd5716b41fbbf549530b7ee",
+      "checkpoint_sha256": "6c75f7dcc89cd36443e4e88ff12b564e02b720acd074dc6f16cf385468f47df2",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/refit_seed43.json",
+      "receipt_sha256": "fd4b7806d0be32a358e509f3091700fcdae337cebf97f4640a45f458ec85765b",
+      "checkpoint_sha256": "bf43142d592040c962731dae895fa23d914b4ef601774c8323690b5e26c56108",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 1.5798895467187524,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/selection_lr0.003.json",
+      "receipt_sha256": "ef5cc571071e64cbaf6197a412225864d305b726b9bb8d6c63d2e0fa2cdc2f75",
+      "checkpoint_sha256": "ec469f83bd8059bb22db49f71fb71c94fab5a02e5b36144ef93ee5c794d1c21b",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 0.11056539416313171
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 2.708800528002317,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/selection_lr0.01.json",
+      "receipt_sha256": "d3380eb8b0a55d1e9db6e6f1ce80cf965e5ba6ef6837b1287a93b8605ea40ca7",
+      "checkpoint_sha256": "9a5f8a38568223c08b409290641dbed78fa5dd40a6aa43721468075cb339ab4c",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 0.08999311178922653
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/refit_seed17.json",
+      "receipt_sha256": "807b96858e6d3fd420d56e03fccb9745965e08cd80f5aecef385e17c036c1dbf",
+      "checkpoint_sha256": "d02337470f9ed843ca467310496daade3b842fea68ebc46acf69ebb091eacad2",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/refit_seed29.json",
+      "receipt_sha256": "ef5c6298e7acc12d36c29a3548d5e1c0786b7c78722a99f936022879d4147f60",
+      "checkpoint_sha256": "52b05d018137650dbc097a30fef76386bfba4c3e01de521284328004b7ae9002",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/refit_seed43.json",
+      "receipt_sha256": "c2c6914c3abb099b4cf508656fe39edb589b93f6015da760915104cfd0d1825c",
+      "checkpoint_sha256": "56e0243f8d5cd050374f89b3ef64a2003b0d5c7560d26a62e1b498183e0436bd",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "gru",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 4.904332826267176,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/gru/selection_lr0.003.json",
+      "receipt_sha256": "8ecef48d2701b815197c79a616a1bfdf9d6f9d92d7e7aa56b23ea0082f9f9473",
+      "checkpoint_sha256": "1b94c72a6078e4e497f60dce915de7e19e4da238f76273aaa8dd2eaeb3c16e09",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 1.0376585721969604
+    },
+    {
+      "family": "gru",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 10.501169966245607,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/gru/selection_lr0.01.json",
+      "receipt_sha256": "be650efb57136e2e4c21fb3630eea01335a707b0da87e9ea3986df5bf4eb4c24",
+      "checkpoint_sha256": "5735695e790de5ee1cd1be2eb537e59eafd4aa72b43d471a08f746689d69645b",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 2.0570826530456543
+    },
+    {
+      "family": "gru",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/gru/refit_seed17.json",
+      "receipt_sha256": "993b194c063882b0ee671865e3917520f28ee1b290d5536132d1eca2b2e512b9",
+      "checkpoint_sha256": "dc6ba3c081e74ab7bd4c36c9825d0c8c6a175c49f2620d3146a28b8362098ac7",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "gru",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/gru/refit_seed29.json",
+      "receipt_sha256": "5c9eed73f34d6651dc5fedf4a81e7a8ed3f944b885d58d4c05e36d5837310bda",
+      "checkpoint_sha256": "2eeba2386b44ef9f1365d581231ab012f65b74406cc426689c235b25d6ce2e9c",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "gru",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/gru/refit_seed43.json",
+      "receipt_sha256": "35fd70745de097bcbfa119996782973bb3537c45e65b5a4c2ec5620e45e7da88",
+      "checkpoint_sha256": "d737cf6405ee43a1b680edee0c5ee9b88180b034b89b88cfec6f8d178456ef11",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 0,
+      "max_gradient_norm_before_clip": 0.0
+    },
+    {
+      "family": "lstm",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 24,
+      "selected_epoch": 12,
+      "gradient_positive_steps": 120,
+      "optimization_parameter_change_l2_before_selection": 6.331816969890842,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/lstm/selection_lr0.003.json",
+      "receipt_sha256": "1e1d5b52ab3025f57976102dced2e8dbcc2c73b1de174018ee71cd6d866c58da",
+      "checkpoint_sha256": "0de18035246774880fd2ce9b7d19567b3c35a24828f6eb72df484c95beaa7557",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 120,
+      "max_gradient_norm_before_clip": 6.900459289550781
+    },
+    {
+      "family": "lstm",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 9.98337274380449,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/lstm/selection_lr0.01.json",
+      "receipt_sha256": "0867e182b5fa862b34cbf78cf8636b2025d465508c8e0f9496d09955a6a14f6d",
+      "checkpoint_sha256": "dffff8240efb4ba4c7e908e8f1a6962edea43bf804c73dbca9ab85c3a4201d56",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 60.18445587158203
+    },
+    {
+      "family": "lstm",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 12,
+      "selected_epoch": 12,
+      "gradient_positive_steps": 84,
+      "optimization_parameter_change_l2_before_selection": 5.61700229197945,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/lstm/refit_seed17.json",
+      "receipt_sha256": "de1485b32146451ee4d222ecd4c3216214a0b9ceabf4a1a93e4f5065d98ceba9",
+      "checkpoint_sha256": "7ce29b2e2f38ed2da064854a08e760f3b75e0093147499830c7ed9c93e33eda0",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 84,
+      "max_gradient_norm_before_clip": 1.0896493196487427
+    },
+    {
+      "family": "lstm",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 12,
+      "selected_epoch": 12,
+      "gradient_positive_steps": 84,
+      "optimization_parameter_change_l2_before_selection": 5.142413436877331,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/lstm/refit_seed29.json",
+      "receipt_sha256": "fd2e15db813050c1bc74032e2524b553b6918047a33af634aa577a63cb3441b8",
+      "checkpoint_sha256": "715eddf737fba08b0f5cf9a03d4755b69ff0496bfdb697828576c2c7d6629b78",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 84,
+      "max_gradient_norm_before_clip": 2.8324882984161377
+    },
+    {
+      "family": "lstm",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 12,
+      "selected_epoch": 12,
+      "gradient_positive_steps": 84,
+      "optimization_parameter_change_l2_before_selection": 4.74965729359381,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/lstm/refit_seed43.json",
+      "receipt_sha256": "60f0c5f38f810d2de1bfbbd081bd3b08007cd652438a6131a90fdae2a65caea2",
+      "checkpoint_sha256": "4708b1cd02077ee2dd25a7617885e5b154397180ebe9d24da8e4d9195863917a",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 84,
+      "max_gradient_norm_before_clip": 4.8553996086120605
+    },
+    {
+      "family": "swewt_gru_price",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 33,
+      "selected_epoch": 21,
+      "gradient_positive_steps": 165,
+      "optimization_parameter_change_l2_before_selection": 9.61331873047705,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/swewt_gru_price/selection_lr0.003.json",
+      "receipt_sha256": "59ec19bc91098d6ed7c6c94bb08bd2bb01169405cb728828ce8cf97a2809e5d3",
+      "checkpoint_sha256": "64f2e9896ef9eab6a8c40f8ab340c8dffa6aed95199a893562ca2cfb3bf9f699",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 165,
+      "max_gradient_norm_before_clip": 1.6911604404449463
+    },
+    {
+      "family": "swewt_gru_price",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 21,
+      "selected_epoch": 9,
+      "gradient_positive_steps": 105,
+      "optimization_parameter_change_l2_before_selection": 13.753341159279021,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/swewt_gru_price/selection_lr0.01.json",
+      "receipt_sha256": "0f21935712fdddb0a7cfc888c2f4533a5506b3e8d4d2b79f3c6ef7d72fa5961b",
+      "checkpoint_sha256": "e0d95545512dcdedef8d4a07b8e123a4b8eb920dd4e7099144083a54c107912b",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 105,
+      "max_gradient_norm_before_clip": 1.087320327758789
+    },
+    {
+      "family": "swewt_gru_price",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 9,
+      "selected_epoch": 9,
+      "gradient_positive_steps": 63,
+      "optimization_parameter_change_l2_before_selection": 9.065569109731422,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/swewt_gru_price/refit_seed17.json",
+      "receipt_sha256": "aacf96d18d6b0eb4faa12efb7f355d8ae8cb9025291cf67facdb1907ed1dc41c",
+      "checkpoint_sha256": "32ea842e82b200f929f4662a8bdbd19c163010e92643ed471d815c735fc2648d",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 63,
+      "max_gradient_norm_before_clip": 0.5815871357917786
+    },
+    {
+      "family": "swewt_gru_price",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 9,
+      "selected_epoch": 9,
+      "gradient_positive_steps": 63,
+      "optimization_parameter_change_l2_before_selection": 8.285666201906178,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/swewt_gru_price/refit_seed29.json",
+      "receipt_sha256": "dae0534dd98ed84bc4e4480e13f69c039decb8cf9333cd30ddc5594b90f29026",
+      "checkpoint_sha256": "bb55e7fc97499a543b9b8197e46b706c34301ccabda2461e020877282d07063f",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 63,
+      "max_gradient_norm_before_clip": 0.536832869052887
+    },
+    {
+      "family": "swewt_gru_price",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 9,
+      "selected_epoch": 9,
+      "gradient_positive_steps": 63,
+      "optimization_parameter_change_l2_before_selection": 8.995521598242812,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/swewt_gru_price/refit_seed43.json",
+      "receipt_sha256": "1aaa1ffc20343ddfa3c6d57fb26d4cf1464d42d7f10dc99dec46d24d023111c7",
+      "checkpoint_sha256": "36f7b5365655b6636eea6f01779ed793e20a14bc91fe7d5b8cfb0e93a0e810ae",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 63,
+      "max_gradient_norm_before_clip": 0.5372146964073181
+    },
+    {
+      "family": "swewt_gru_full",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 15,
+      "selected_epoch": 1,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 6.063946000211958,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/swewt_gru_full/selection_lr0.003.json",
+      "receipt_sha256": "45172f2213b4b69f123aebe8efe9ea4a82b9b138b61dd3835c47b6da1664976d",
+      "checkpoint_sha256": "642374102db5c438c2a4e5b4a5c698af65e8731c81b43e4dd885bce31b9dbad4",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 1.6955267190933228
+    },
+    {
+      "family": "swewt_gru_full",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 12.351027649734172,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/swewt_gru_full/selection_lr0.01.json",
+      "receipt_sha256": "9f1d6fee6135ed3ac56797016a0724b265f8b57361e29ba3b92b54e127527be1",
+      "checkpoint_sha256": "eb54b07e362282ad97ce679bc5d56264b50acc086bf2b7111b7228903c465f96",
+      "training_rows": 562,
+      "optimizer_steps_from_epochs_and_batches": 75,
+      "max_gradient_norm_before_clip": 1.6520954370498657
+    },
+    {
+      "family": "swewt_gru_full",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 1,
+      "selected_epoch": 1,
+      "gradient_positive_steps": 7,
+      "optimization_parameter_change_l2_before_selection": 0.5201646692951164,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/swewt_gru_full/refit_seed17.json",
+      "receipt_sha256": "68f86ded1b1b6b0c22cd4b91f457796e09ca619a81b88ae11bec14b551b1dadb",
+      "checkpoint_sha256": "18f3665bea35be68b7d00b167baa5a60e3bead0077f13aaa33443a08ba0319c6",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 7,
+      "max_gradient_norm_before_clip": 0.24101480841636658
+    },
+    {
+      "family": "swewt_gru_full",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 1,
+      "selected_epoch": 1,
+      "gradient_positive_steps": 7,
+      "optimization_parameter_change_l2_before_selection": 0.5088917038979426,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/swewt_gru_full/refit_seed29.json",
+      "receipt_sha256": "36caba71f0dd2e4158e63888a19a233d06cab586cf54fa255230bbf418068315",
+      "checkpoint_sha256": "7f7b31f83ff6c674dc567cebedb6d7ed511b8c93348a84d89234de8ffbfee37f",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 7,
+      "max_gradient_norm_before_clip": 0.16537727415561676
+    },
+    {
+      "family": "swewt_gru_full",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 1,
+      "selected_epoch": 1,
+      "gradient_positive_steps": 7,
+      "optimization_parameter_change_l2_before_selection": 0.5077404525158323,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/swewt_gru_full/refit_seed43.json",
+      "receipt_sha256": "12969a53a8bf74173fb47e57c5ecb382ce9af5ecb8fb2d66bf7789977b162e9a",
+      "checkpoint_sha256": "625a69ae0c58a413ee8865a40d71763b941f9a4531d02786b5180281bb07c5fa",
+      "training_rows": 777,
+      "optimizer_steps_from_epochs_and_batches": 7,
+      "max_gradient_norm_before_clip": 0.17946475744247437
+    }
+  ],
+  "npz_identity": [
+    {
+      "family": "liquidity_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/predictions.npz",
+      "npz_sha256": "6df3981b11b2d4e8ff689673bec2282c4a09d6d4f56f3e1d1084332c081bebae",
+      "origins": 196
+    },
+    {
+      "family": "liquidity_readout",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/predictions.npz",
+      "npz_sha256": "65d8cc87268ff4af33b9028ef8fdaa72dcc97b2ba2bd14d452a54457e071fbcd",
+      "origins": 196
+    },
+    {
+      "family": "shock_size_only",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/predictions.npz",
+      "npz_sha256": "8f9a7a6f497c5024d8d47417fe617f475ab5bab3b9d94913bd8230103df8f837",
+      "origins": 196
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/predictions.npz",
+      "npz_sha256": "6df3981b11b2d4e8ff689673bec2282c4a09d6d4f56f3e1d1084332c081bebae",
+      "origins": 196
+    },
+    {
+      "family": "allocation_constant",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/predictions.npz",
+      "npz_sha256": "188818d02eee3c5333d8f8d079e4997afaa6d9724f2751e60b0ceb0fd445181c",
+      "origins": 196
+    },
+    {
+      "family": "allocation_readout",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/predictions.npz",
+      "npz_sha256": "188818d02eee3c5333d8f8d079e4997afaa6d9724f2751e60b0ceb0fd445181c",
+      "origins": 196
+    },
+    {
+      "family": "gru",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/gru/predictions.npz",
+      "npz_sha256": "10c43ae40d238db00ddb6a806ac57d7932ecdbe5470f55d6762b62b360a94b62",
+      "origins": 196
+    },
+    {
+      "family": "lstm",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/lstm/predictions.npz",
+      "npz_sha256": "08124405bea4dedf7942149250d536334186d82f7940b60dbc27f13d59cb8fcc",
+      "origins": 196
+    },
+    {
+      "family": "swewt_gru_price",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/swewt_gru_price/predictions.npz",
+      "npz_sha256": "de9f37f7ec80da2f1e77b0a405b6dc69a3cfa432751280c7d8c0200686e74d3e",
+      "origins": 196
+    },
+    {
+      "family": "swewt_gru_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/swewt_gru_full/predictions.npz",
+      "npz_sha256": "e17b43994f54a39e739078fbb2f2401945d4004d5a69bbec5befdf4174dd3842",
+      "origins": 196
+    },
+    {
+      "family": "rw",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/rw/predictions.npz",
+      "npz_sha256": "a9f7117f0eb2bfdf3152bf9724dd24cbbb0d498bb18b501d7733938aee770cd8",
+      "origins": 196
+    },
+    {
+      "family": "drift",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/drift/predictions.npz",
+      "npz_sha256": "6bf61122b61d97810590e54ea50fdfaa23db99e03f6fc42b09aee0a612f9a687",
+      "origins": 196
+    },
+    {
+      "family": "ridge_price",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/ridge_price/predictions.npz",
+      "npz_sha256": "f6a249974710d8f256d90ff92af696d767ed18792a7dc155984b4a39a36acd96",
+      "origins": 196
+    },
+    {
+      "family": "ridge_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/ridge_full/predictions.npz",
+      "npz_sha256": "6d9be8e6e99e2ca1b776c680575c6ee1c0d12635e03b3933e4f9f8c3d22b224f",
+      "origins": 196
+    },
+    {
+      "family": "hgb_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/official_tianjin_v4/TIANJIN_OFFICIAL_MEAN_fixed602020/hgb_full/predictions.npz",
+      "npz_sha256": "6b0f41ce053d1620e98d8cb768064f2984f47bd081ee4f70e55a37c691877d59",
+      "origins": 196
+    }
+  ],
+  "scientific_assessment": {
+    "primary_candidate_fixed": "allocation_readout",
+    "secondary_candidate_fixed": "liquidity_full",
+    "single_official_market_later_period_only": true,
+    "primary_block20_99_intervals_exclude_zero_in_positive_direction": {
+      "primary_readout_vs_rw": true,
+      "primary_readout_vs_constant": false,
+      "primary_readout_vs_swewt_full": true,
+      "secondary_full_vs_rw": true,
+      "secondary_full_vs_shock_size": false
+    },
+    "note": "Per-contrast numerical interval indicators, not a publication rule or evidence that every market is confirmed.",
+    "descriptive_verdict": "USEFUL_FIXED_PRIOR_TRANSFER_WITHOUT_LEARNED_ALLOCATION_INCREMENT_ON_THIS_TAIL",
+    "interpretation": "Primary allocation_readout and constant have exactly identical predictions because both retained epoch0. All six structural families retained their native initial parameters; all three seed refits had zero optimizer updates and identical predictions. The prespecified positive comparisons with RW/SWEWTfull support this selected fixed forecast rule on the official later Tianjin sample, not incremental learning of the allocation module here. Validation-selected ridge_price has a lower point risk and remains reported."
+  },
+  "limitations": [
+    "Primary candidate selected after old V3/SWEWT outcomes, before this official new-tail forecast evaluation; old V3 identities unchanged.",
+    "One official Tianjin later period, not new-market population confirmation. Test dates became exposed after this run.",
+    "All official rounded prices retained. Current historical snapshot lacks certified daily vintages; no author ScienceDB monthly cleaning is newly imposed.",
+    "196 irregular observed origins, overlapping H20 labels, circular-block and percentile approximation;20 primary and40 sensitivity both retained.",
+    "Three primary and two secondary contrasts jointly comprise the five-family Bonferroni set; no seeds treated as independent observations and no horizon-specific tests added.",
+    "Condition on fitted models and recorded validation choices; does not retroactively correct every old development search.",
+    "Gradient counts reconstructed from hash-matched execution logs and optimizer-call bounds, not independent backward-pass replay.",
+    "Checkpoint bytes checked without unpickling; trained checkpoint validation predictions not replayed by this audit.",
+    "Useful fixed initialization differs from learned improvement; softplus and affine controls differ in optimization geometry as well as sign freedom.",
+    "No arbitrary1% gate and no publication-success guarantee."
+  ],
+  "post_execution_initialization_identity_check": {
+    "checked_utc": "2026-10-19T10:44:33.181077+00:00",
+    "classification": "deterministic post-execution forecast/receipt identity check; no new hypothesis test or model fit",
+    "structural_families_all_selected_epoch_zero": [
+      "liquidity_full",
+      "liquidity_readout",
+      "shock_size_only",
+      "liquidity_unconstrained",
+      "allocation_constant",
+      "allocation_readout"
+    ],
+    "each_structural_family_has_three_zero_update_refits": true,
+    "pairwise_forecast_identity": {
+      "allocation_readout_vs_allocation_constant": {
+        "exact_array_equal": true,
+        "max_absolute_forecast_difference": 0.0
+      },
+      "liquidity_full_vs_liquidity_unconstrained": {
+        "exact_array_equal": true,
+        "max_absolute_forecast_difference": 0.0
+      }
+    },
+    "maximum_across_seed_forecast_difference": {
+      "liquidity_full": 0.0,
+      "liquidity_readout": 0.0,
+      "shock_size_only": 0.0,
+      "liquidity_unconstrained": 0.0,
+      "allocation_constant": 0.0,
+      "allocation_readout": 0.0
+    },
+    "npz_sha256": {
+      "liquidity_full": "6df3981b11b2d4e8ff689673bec2282c4a09d6d4f56f3e1d1084332c081bebae",
+      "liquidity_readout": "65d8cc87268ff4af33b9028ef8fdaa72dcc97b2ba2bd14d452a54457e071fbcd",
+      "shock_size_only": "8f9a7a6f497c5024d8d47417fe617f475ab5bab3b9d94913bd8230103df8f837",
+      "liquidity_unconstrained": "6df3981b11b2d4e8ff689673bec2282c4a09d6d4f56f3e1d1084332c081bebae",
+      "allocation_constant": "188818d02eee3c5333d8f8d079e4997afaa6d9724f2751e60b0ceb0fd445181c",
+      "allocation_readout": "188818d02eee3c5333d8f8d079e4997afaa6d9724f2751e60b0ceb0fd445181c"
+    }
+  }
+}

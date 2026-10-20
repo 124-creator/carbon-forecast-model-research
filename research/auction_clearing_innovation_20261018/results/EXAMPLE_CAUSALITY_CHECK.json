@@ -1,0 +1,94 @@
+{
+  "overall_status": "PASS",
+  "prepare_examples_sha256": "fc025870ec5aa7c6cb173e5353d51d6d9f752af12e6acbd333f9f76f0e937116",
+  "builder_unchanged_during_review": true,
+  "verification_script_sha256": "a53f3c9ec10e0dc4918f85ac53142060582c47ad3b475c0ff56f9a4f2cf03b42",
+  "checks": {
+    "independent_calendar_join_and_input_finiteness": {
+      "status": "PASS",
+      "issued_examples_checked": 4141,
+      "issue_dates": 1404,
+      "calendar_versions": 32,
+      "independent_join_algorithm": "Group whole versions by year; select newest available; reject expired latest version; then sort future scheduled date/platform and take horizon rank.",
+      "model_input_arrays": {
+        "x": {
+          "shape": [
+            4141,
+            20,
+            39
+          ],
+          "dtype": "float32",
+          "finite": true
+        },
+        "context": {
+          "shape": [
+            4141,
+            16
+          ],
+          "dtype": "float32",
+          "finite": true
+        },
+        "base": {
+          "shape": [
+            4141,
+            3
+          ],
+          "dtype": "float32",
+          "finite": true
+        }
+      },
+      "real_price_or_bid_label_arrays_opened": false,
+      "metadata_sha256": "ab363eaa043325d957784dab20d49277222d5cbd544ef1676f9c1be702325ac6",
+      "calendar_sha256": "710017cf3f3096385c7c909659a2a376a067ac2200b7081825e4c55d24e38411",
+      "examples_sha256": "f3202f9bbe4412234414456c1e552d2f19c6c77fd00e8d88791481b1f03aa4a6"
+    },
+    "artificial_future_perturbation": {
+      "status": "PASS",
+      "artificial_issue": "2017-01-16",
+      "horizons": [
+        1,
+        5,
+        20
+      ],
+      "mutations": [
+        "All future prices replaced",
+        "All future bid/volume values multiplied",
+        "Future status text replaced",
+        "First target outcome row deleted",
+        "Unpublished later calendar added with changed supply and deleted target"
+      ],
+      "bitwise_unchanged_inputs_and_past_references": [
+        "x",
+        "context",
+        "base",
+        "anchor",
+        "scale",
+        "last_bid_median"
+      ],
+      "target_identities_unchanged": true,
+      "labels_changed": true,
+      "missing_outcome_forecast_retained": true,
+      "expired_vintage_no_fallback": true,
+      "real_event_price_records_read": 0,
+      "market_training_runs": 0
+    }
+  },
+  "static_dataflow_review": {
+    "past_rows": "ev.date <= origin; issue = origin + 1 day",
+    "historical_anchor": "Last positive observed clearing-price row in past, with its own B/S; after a cancellation this is not necessarily the most recent event.",
+    "target_before_outcome_lookup": true,
+    "forward_model_arguments": [
+      "x",
+      "context",
+      "base"
+    ],
+    "future_price_B_status": "Only target/loss fields and terminal metadata; not x/context/base.",
+    "calendar_supply": "Known calendar plannedvolume; final supply mismatch is terminal audit metadata, never an input replacement.",
+    "price_only_label_limit": "Price-only history ablation retains common auction calendar context, including ratios to historical B/S."
+  },
+  "limitations": [
+    "Annual result fields are assumed known by next-day 00:00 UTC; this check cannot certify historical publication timestamps or revisions.",
+    "Calendar availability dates are accepted from the separately audited metadata; this is a join/dataflow audit, not a new source-publication review.",
+    "No real label/performance arrays or confirmation data were opened; no market model was fitted."
+  ]
+}

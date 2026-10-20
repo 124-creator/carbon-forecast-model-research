@@ -1,0 +1,290 @@
+{
+  "study": "conditional_persistence_20261019b",
+  "created_utc": "2026-10-19T06:19:32.311108+00:00",
+  "decision": {
+    "all_passed": false,
+    "decision": "STOP_FIXED_CANDIDATE",
+    "checks": {
+      "GRU_development_primary_mean_negative": {
+        "value": 0.0018389246502629741,
+        "rule": "value < 0",
+        "passed": false
+      },
+      "GRU_at_least_60_percent_cells_strictly_better": {
+        "better_cells": 9,
+        "cells": 22,
+        "rule": "5 * better_cells >= 3 * cells; strict cell improvement means relative < 0",
+        "passed": false
+      },
+      "GRU_development_bootstrap_upper_negative": {
+        "value": 0.004695355050542584,
+        "rule": "value < 0",
+        "passed": false
+      },
+      "GRU_main_lower_than_scale_capacity_on_average": {
+        "value": 0.002589639476026806,
+        "rule": "equal-cell mean(main/capacity - 1) < 0",
+        "passed": false
+      },
+      "MLP_development_primary_mean_negative": {
+        "value": -0.00011816851413548097,
+        "rule": "value < 0",
+        "passed": true
+      },
+      "Shenzhen_additional_primary_mean_nonpositive": {
+        "value": 6.975992979618706e-05,
+        "rule": "value <= 0",
+        "passed": false
+      }
+    },
+    "failed_checks": [
+      "GRU_development_primary_mean_negative",
+      "GRU_at_least_60_percent_cells_strictly_better",
+      "GRU_development_bootstrap_upper_negative",
+      "GRU_main_lower_than_scale_capacity_on_average",
+      "Shenzhen_additional_primary_mean_nonpositive"
+    ],
+    "rounding_or_tie_tolerance_used": false,
+    "interpretation": "Internal research decision only; even PASS does not establish SOTA, independent-market transportability or publication readiness",
+    "if_failed": "Stop this fixed candidate. Complete the already specified baselines; do not tune q, losses, horizons, seeds or market years, and do not open reserved 2024+ data to rescue it"
+  },
+  "publication_ready_positive_model_claim": false,
+  "formal_market": {
+    "neural_fits": 510,
+    "statistical_fits": 61,
+    "completed_epochs": 20400,
+    "gradient_updates": 387360,
+    "candidate_neural_fits": 312,
+    "gas_neural_fits": 198,
+    "fixed_control_forecasts": 154,
+    "original_prediction_files": 690,
+    "seeds": [
+      17,
+      41,
+      89
+    ]
+  },
+  "synthetic": {
+    "decision": "PASS_FINITE_SYNTHETIC_RESOURCE_GATE",
+    "model_fits": 720,
+    "scalar_optimizers": 1080,
+    "neural_gradient_fits": 0,
+    "scalar_objective_calls": 36713,
+    "unique_training_paths": 245760
+  },
+  "primary_GRU_development": {
+    "comparison": "GRU16__conditional_joint005__vs__GRU16__constant_joint005",
+    "stratum": "development",
+    "horizons": [
+      5,
+      20
+    ],
+    "candidate": {
+      "backbone": "GRU16",
+      "arm": "conditional_joint005"
+    },
+    "control": {
+      "backbone": "GRU16",
+      "arm": "constant_joint005"
+    },
+    "cells": 22,
+    "mean_relative_CRPS_minus_one": 0.0018389246502629741,
+    "mean_CRPS_difference": 0.0008048154166982003,
+    "better_cells": 9,
+    "tie_cells": 5,
+    "worse_cells": 8,
+    "strict_win_fraction": 0.4090909090909091,
+    "tiny_effect_description_only": {
+      "absolute_relative_threshold": 1e-12,
+      "cells_below_threshold_including_exact_zero": 6,
+      "nonzero_cells_below_threshold": 1,
+      "does_not_change_strict_wins_ties_or_gates": true,
+      "note": "Near-machine-precision effects may include arithmetic differences such as sigmoid(logit(rho_base)) versus stored rho_base; no model or threshold is retroactively altered"
+    },
+    "bootstrap_nominal95_relative_CRPS": [
+      4.734741397257729e-05,
+      0.004695355050542584
+    ],
+    "secondary_equal_cell_means": {
+      "price_CRPS_relative": 0.00231503668578153,
+      "normalized_NLL_difference": 0.003771780053721868,
+      "price_NLL_difference": 0.003771780053721868,
+      "coverage90_difference": 0.00210599471885384,
+      "normalized_width90_difference": 0.014264910789929348
+    },
+    "cell_relative_values": {
+      "EUA_LONG_2021_h5": -0.00011623877949018535,
+      "EUA_LONG_2021_h20": -1.82785009370523e-05,
+      "EUA_LONG_2022_h5": -0.003392984179965697,
+      "EUA_LONG_2022_h20": -0.0019084656873880057,
+      "EUA_LONG_2023_h5": 0.0010921207499547947,
+      "EUA_LONG_2023_h20": 0.004421533420008172,
+      "GUANGZHOU_2021_h5": -8.861449375308084e-05,
+      "GUANGZHOU_2021_h20": -0.00048164721839150104,
+      "GUANGZHOU_2022_h5": 0.0,
+      "GUANGZHOU_2022_h20": 0.0,
+      "GUANGZHOU_2023_h5": 0.0009354344732883657,
+      "GUANGZHOU_2023_h20": -0.005375592446349664,
+      "HUBEI_2021_h5": 0.0,
+      "HUBEI_2021_h20": 0.0,
+      "HUBEI_2022_h5": 0.0009616477112601718,
+      "HUBEI_2022_h20": 0.000478464348435681,
+      "HUBEI_2023_h5": -0.0004755560821354532,
+      "HUBEI_2023_h20": 0.00010144944533285738,
+      "SHANGHAI_2022_h5": 0.018204170284528365,
+      "SHANGHAI_2022_h20": 0.026118899261388107,
+      "SHANGHAI_2023_h5": 0.0,
+      "SHANGHAI_2023_h20": -4.440892098500626e-16
+    },
+    "design": {
+      "candidate_neural_parameters": 1042,
+      "control_neural_parameters": 1025,
+      "control_minus_candidate_parameters": -17,
+      "interpretation": "Prespecified matched or contextual contrast; inspect the named arms and fit capacities"
+    }
+  },
+  "capacity_control_development": {
+    "comparison": "GRU16__conditional_joint005__vs__GRU16__scale_capacity_joint005",
+    "stratum": "development",
+    "horizons": [
+      5,
+      20
+    ],
+    "candidate": {
+      "backbone": "GRU16",
+      "arm": "conditional_joint005"
+    },
+    "control": {
+      "backbone": "GRU16",
+      "arm": "scale_capacity_joint005"
+    },
+    "cells": 22,
+    "mean_relative_CRPS_minus_one": 0.002589639476026806,
+    "mean_CRPS_difference": 0.0011532761115850378,
+    "better_cells": 6,
+    "tie_cells": 5,
+    "worse_cells": 11,
+    "strict_win_fraction": 0.2727272727272727,
+    "tiny_effect_description_only": {
+      "absolute_relative_threshold": 1e-12,
+      "cells_below_threshold_including_exact_zero": 6,
+      "nonzero_cells_below_threshold": 1,
+      "does_not_change_strict_wins_ties_or_gates": true,
+      "note": "Near-machine-precision effects may include arithmetic differences such as sigmoid(logit(rho_base)) versus stored rho_base; no model or threshold is retroactively altered"
+    },
+    "bootstrap_nominal95_relative_CRPS": [
+      0.0009894398188037986,
+      0.00502603479540184
+    ],
+    "secondary_equal_cell_means": {
+      "price_CRPS_relative": 0.002794539721963933,
+      "normalized_NLL_difference": 0.005837219701115665,
+      "price_NLL_difference": 0.005837219701115685,
+      "coverage90_difference": -0.0019012597443101272,
+      "normalized_width90_difference": -0.025051933578870325
+    },
+    "cell_relative_values": {
+      "EUA_LONG_2021_h5": -2.396879173649502e-05,
+      "EUA_LONG_2021_h20": -0.0009557427288030551,
+      "EUA_LONG_2022_h5": 0.001717610666194469,
+      "EUA_LONG_2022_h20": -0.0003238077018106189,
+      "EUA_LONG_2023_h5": 0.00048280879567474955,
+      "EUA_LONG_2023_h20": 0.005367925712324251,
+      "GUANGZHOU_2021_h5": 2.0491869194172452e-05,
+      "GUANGZHOU_2021_h20": 0.00027267904579963975,
+      "GUANGZHOU_2022_h5": 0.0,
+      "GUANGZHOU_2022_h20": 0.0,
+      "GUANGZHOU_2023_h5": 0.0007612456396854927,
+      "GUANGZHOU_2023_h20": 0.00703835332067837,
+      "HUBEI_2021_h5": 0.0,
+      "HUBEI_2021_h20": 0.0,
+      "HUBEI_2022_h5": -4.6932057523041415e-05,
+      "HUBEI_2022_h20": -0.0031006330768156287,
+      "HUBEI_2023_h5": 0.0008763550765469308,
+      "HUBEI_2023_h20": 0.004070203688560259,
+      "SHANGHAI_2022_h5": 0.018278827969444134,
+      "SHANGHAI_2022_h20": 0.022536651045176548,
+      "SHANGHAI_2023_h5": 0.0,
+      "SHANGHAI_2023_h20": -4.440892098500626e-16
+    },
+    "design": {
+      "candidate_neural_parameters": 1042,
+      "control_neural_parameters": 1042,
+      "control_minus_candidate_parameters": 0,
+      "interpretation": "Same joint objective and 1042-parameter GRU architecture. The extra head changes persistence in the candidate and scale in the control, whose persistence remains at its train-fitted constant."
+    }
+  },
+  "additional_shenzhen": {
+    "comparison": "GRU16__conditional_joint005__vs__GRU16__constant_joint005",
+    "stratum": "additional_shenzhen",
+    "horizons": [
+      5,
+      20
+    ],
+    "candidate": {
+      "backbone": "GRU16",
+      "arm": "conditional_joint005"
+    },
+    "control": {
+      "backbone": "GRU16",
+      "arm": "constant_joint005"
+    },
+    "cells": 4,
+    "mean_relative_CRPS_minus_one": 6.975992979618706e-05,
+    "mean_CRPS_difference": 3.639480093593078e-05,
+    "better_cells": 3,
+    "tie_cells": 0,
+    "worse_cells": 1,
+    "strict_win_fraction": 0.75,
+    "tiny_effect_description_only": {
+      "absolute_relative_threshold": 1e-12,
+      "cells_below_threshold_including_exact_zero": 0,
+      "nonzero_cells_below_threshold": 0,
+      "does_not_change_strict_wins_ties_or_gates": true,
+      "note": "Near-machine-precision effects may include arithmetic differences such as sigmoid(logit(rho_base)) versus stored rho_base; no model or threshold is retroactively altered"
+    },
+    "bootstrap_nominal95_relative_CRPS": [
+      -0.0003488360069581989,
+      0.0005510855274791475
+    ],
+    "secondary_equal_cell_means": {
+      "price_CRPS_relative": -0.14633429482884944,
+      "normalized_NLL_difference": 0.0004500955554568864,
+      "price_NLL_difference": 0.00045009555545705293,
+      "coverage90_difference": -0.0013564625042080392,
+      "normalized_width90_difference": -0.007083911241453356
+    },
+    "cell_relative_values": {
+      "SHENZHEN_PLOS_2020_h5": -1.4261815293625801e-05,
+      "SHENZHEN_PLOS_2020_h20": 0.0020548590214828355,
+      "SHENZHEN_PLOS_2021_h5": -0.0016933803055803054,
+      "SHENZHEN_PLOS_2021_h20": -6.817718142415607e-05
+    },
+    "design": {
+      "candidate_neural_parameters": 1042,
+      "control_neural_parameters": 1025,
+      "control_minus_candidate_parameters": -17,
+      "interpretation": "Prespecified matched or contextual contrast; inspect the named arms and fit capacities"
+    }
+  },
+  "numerical_score_replay": {
+    "status": "COMPLETE_WITH_PRICE_CRPS_NUMERICAL_QUALIFICATION",
+    "origin_horizon_distributions": 421600,
+    "individual_metric_values": 4187068,
+    "normalized_crps_max_absolute_error": 2.4424906541753444e-15,
+    "price_crps_saved_vs_stable_violations": 331,
+    "qualification_scope": "Shenzhen h20 only; 215 validation and 116 test coordinates; original tolerance not widened",
+    "stable_companion_arrays": 624,
+    "stable_companion_cell_rows": 934
+  },
+  "no_reserved_2024plus_prices_opened": true,
+  "no_model_retuning_after_market_results": true,
+  "limits": [
+    "Internal content freezes, not external preregistration",
+    "Known state-switching and proper-score principles; no verified method originality",
+    "Published GAS method adapted to the current task, not original-paper numerical reproduction",
+    "Fixed panels and three seeds; dependent-data intervals are approximate and ablations are not multiplicity adjusted",
+    "Shenzhen source first used for model fitting/scoring here, not a never-read source",
+    "Secondary price-CRPS numerical correction retained alongside original results"
+  ]
+}

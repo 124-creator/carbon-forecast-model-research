@@ -1,0 +1,119 @@
+{
+  "created_unix": 1792421443.9489162,
+  "contract": {
+    "block": "raw_dense_path_supervision",
+    "families": [
+      "signed_context_response",
+      "static_response",
+      "amplitude_context",
+      "signed_shock_only"
+    ],
+    "train_horizons": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "selection_and_evaluation_horizons": [
+      1,
+      5,
+      20
+    ],
+    "features": "exact stage-e raw inputs, price scale and volume context",
+    "training_loss": "mean over origins and H1..20 of squared cumulative-change error divided by initial-training target second moment, plus original standardized-column ridge",
+    "training_second_moment_floor": "original train price RMS squared times 1e-6",
+    "validation_loss": "original mean over H1/5/20 with original initial-training variance",
+    "alpha_grid": [
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "learning_rates": [
+      0.003,
+      0.01
+    ],
+    "fit_config_except_alpha_lr": {
+      "learning_rate": 0.01,
+      "alpha": 0.001,
+      "maximum_epochs": 320,
+      "minimum_epochs": 15,
+      "patience": 12,
+      "selection_tolerance": 1e-07,
+      "gradient_clip": 5.0
+    },
+    "selection_tie_order": [
+      "validation_loss",
+      "alpha",
+      "learning_rate",
+      "selected_epoch"
+    ],
+    "refit": "fresh original initialization; mature pretest origins; exactly chosen updates",
+    "planned_selection_fits": 128,
+    "planned_final_refits": 8,
+    "input_information": "history only at all prediction origins; future path used only as matured training labels",
+    "new_fitted_parameters": 0,
+    "independent_sample_count": "unchanged; 17 extra dependent supervision coordinates per origin",
+    "source_sha256": {
+      "research/literature_tricks_primary_model_20261019f/source/run_dense_path_supervision.py": "368fe4e1399ae2e814e2638e6093e65ff269ce5aa4769251afb4736476a18914",
+      "research/signed_response_search_20261019e/source/signed_response_models.py": "5ceb7f04c567be32f1a399cbf01dafdfc6894d3840a158b6faae4153f09eb2f8",
+      "research/signed_response_search_20261019e/source/run_signed_response_search.py": "905da0ca33607799b1ca63d9efe6710df173ec33c5c44e137071e024906d990c"
+    }
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "torch": "2.14.1+cpu",
+    "sklearn": "1.8.0",
+    "precision": "float64 for all new response calculations; frozen legacy model float32",
+    "torch_threads_per_worker": 1
+  },
+  "plan_path": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_tricks_primary_model_20261019f/audits/EXPERIMENT_PLAN_BEFORE_RUN.json",
+  "plan_sha256": "78893370f6862b1295ba9cfcc5e71fc89776944aeae39346de788a4e09cc8880",
+  "datasets": [
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "file": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv",
+      "sha256": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a",
+      "role": "development",
+      "source_url": "https://www.chinatcx.com.cn/tshq",
+      "price_definition": "Official TJEA daily total published two-decimal transaction mean, CNY/tonne; not closing price",
+      "source_processing": "All 1077 official canonical daily-total records retained. Published prices preserved exactly; no row deletion, time filling, turnover-based price recomputation or splice.",
+      "source_vintage": "Current public historical snapshot; per-day publication vintages unverified. Evaluation tail scored in stages d and e and is fully exposed development.",
+      "license": "No redistribution license established; canonical rows and per-origin arrays remain private"
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "file": "/tmp/carbon-signed-response-data-20261019e/CEA_OFFICIAL_MEAN.csv",
+      "sha256": "f9f0e09b7500b2bdb4ec8b16c61d5d5fa2b64de63a24c0cf7bd1d269aa2be75d",
+      "role": "development",
+      "source_url": "https://www.chinatcx.com.cn/tshq",
+      "price_definition": "Published CEA daily TOTAL transaction mean in yuan per tonne; not closing price or listing-only mean",
+      "source_processing": "All 1251 rows from the official main CEA table retained; date sort and numeric thousands separator removal only. No row deletion, deduplication, time filling, price recomputation or splice.",
+      "source_vintage": "Current public historical snapshot; daily publication vintages unverified. Original stage-e and max320 sensitivity scores now fully exposed; stage f is development.",
+      "license": "No explicit redistribution license identified; raw rows and per-origin arrays remain private. Public reconstruction code and provenance remain available."
+    }
+  ],
+  "all_results_are_exposed_development": true
+}

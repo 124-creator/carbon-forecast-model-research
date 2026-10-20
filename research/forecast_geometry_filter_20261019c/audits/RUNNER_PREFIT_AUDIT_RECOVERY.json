@@ -1,0 +1,154 @@
+{
+  "status": "PASS",
+  "audit": "independent_runner_prefit",
+  "completed_utc": "2026-10-19T07:53:06.817721+00:00",
+  "source_hashes": {
+    "source/run_synthetic.py": "4ac6a99a415ffa50ddec266faee42c5037aedd8f8cfb3d1b988ea5872bf84b8f",
+    "provenance/SYNTHETIC_PROTOCOL.json": "b5c6b2ac088d7c82ee765ecc8064d3322e07512a798c20fc26743b0cbea85676"
+  },
+  "audit_script_sha256": "f6708ae752da76e17970895d2b746a5d8204629cce8e2a04d7664ce6dcd68f3b",
+  "protocol_version": "1.1",
+  "scope": "Read-only runner/protocol review and independent finite fixtures; no formal run or market data.",
+  "core_imported": false,
+  "formal_run_called": false,
+  "run_scenario_called": false,
+  "checks": [
+    {
+      "name": "validation_test_indices_and_label_noninterference",
+      "status": "PASS",
+      "details": {
+        "validation_origins": [
+          128,
+          639
+        ],
+        "validation_label_max": 659,
+        "test_origin_min": 659,
+        "test_future_label_min": 660,
+        "test_label_max": 1702,
+        "future_suffix_perturbation_leaves_validation_identical": true
+      }
+    },
+    {
+      "name": "selection_precedes_oracle_and_test_scoring_static",
+      "status": "PASS",
+      "details": {
+        "selection_dump_line": 295,
+        "first_test_target_call_line": 303,
+        "oracle_and_test_scores_follow_selection": true,
+        "interpretation": "y659 is a matured validation label and current information, while test future labels start at660."
+      }
+    },
+    {
+      "name": "hyperparameter_ties_composite_selection_and_trial_counts",
+      "status": "PASS",
+      "details": {
+        "validation_trials": 5600,
+        "selected_family_streams": 800,
+        "composite_controls": [
+          "current_cdf",
+          "future_variance",
+          "probability_euclidean",
+          "rotated_future_cdf",
+          "chi_square_only",
+          "crps_kl",
+          "tempered_bayes",
+          "contaminated_bayes"
+        ],
+        "exact_ties_choose_first": true,
+        "candidate_and_ratio_ablation_excluded_from_composite": true
+      }
+    },
+    {
+      "name": "empirical_and_expected_CRPS_vs_CDF_integrals",
+      "status": "PASS",
+      "details": {
+        "empirical_crps_error": 1.6653345369377348e-16,
+        "conditional_expected_crps_error": 1.6653345369377348e-16,
+        "expected_crps_excess_is_nonnegative": true
+      }
+    },
+    {
+      "name": "oracle_history_causality_and_common_randomness",
+      "status": "PASS",
+      "details": {
+        "enumerated_history_posterior_max_error": 1.6653345369377348e-16,
+        "future_observation_does_not_change_past_oracle": true,
+        "same_seed_equal_dynamics_share_state_and_clean_draws": true
+      }
+    },
+    {
+      "name": "future_contamination_count_kernels_vs_enumeration",
+      "status": "PASS",
+      "details": {
+        "horizons": [
+          1,
+          2,
+          3
+        ],
+        "maximum_enumeration_error": 1.5543122344752192e-15,
+        "cross_uses_h_shocks_true_pair_uses_2h_shocks": true,
+        "core_DP_stubbed_with_declared_finite_fixture": true
+      }
+    },
+    {
+      "name": "ratio_aggregation_and_paired_seed_bootstrap",
+      "status": "PASS",
+      "details": {
+        "bootstrap_draws": 9999,
+        "bound_scenarios_per_seed": 2,
+        "mean_of_within_cell_ratios_verified": true,
+        "composite_control_uses_recorded_validation_choice": true,
+        "comparison_rows": 130
+      }
+    },
+    {
+      "name": "common_markov_propagation_output_and_accounting",
+      "status": "PASS",
+      "details": {
+        "fixture_shapes": [
+          [
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            2,
+            4
+          ]
+        ],
+        "outputs_bitwise_identical_to_previous_normalization": true,
+        "independent_rowwise_counts": {
+          "calls": 3,
+          "rows": 7,
+          "rows_with_nonunit_sum_before_normalization": 3,
+          "rows_with_any_coordinate_changed": 3,
+          "maximum_absolute_mass_error": 5.000000413701855e-12,
+          "maximum_absolute_coordinate_change": 1.2500001034254637e-12
+        },
+        "lazy_initialization_and_explicit_reset_verified": true
+      }
+    },
+    {
+      "name": "source_freeze_and_numerical_solver_accounting",
+      "status": "PASS",
+      "details": {
+        "neural_optimizer_counts_distinguished_from_online_solver_counts": true,
+        "source_and_prefit_audit_hash_binding_present": true,
+        "common_markov_normalization_separately_recorded": true,
+        "initial_test_priors_retained_for_replay": true,
+        "core_module_not_imported": true
+      }
+    }
+  ],
+  "failed_checks": [],
+  "manual_review_limits": [
+    "Core DP, QP, KL convergence and filtering math require the separate independent core audit.",
+    "AST order and suffix perturbation establish the reviewed implementation's intended selection boundary, not a general static information-flow theorem.",
+    "Validation weights h1/h5/h20 differ from primary test weights h5/h20 by frozen design.",
+    "The moderate-shock control has a misspecified fixed contamination scale; this is explicitly disclosed.",
+    "Twenty simulation seeds, with paired scenarios, are the independent units; origins and horizons are not counted as independent replications."
+  ]
+}

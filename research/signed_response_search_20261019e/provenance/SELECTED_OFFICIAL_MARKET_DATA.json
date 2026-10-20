@@ -1,0 +1,156 @@
+{
+  "status": "FIXED_FIRST_ELIGIBLE_SOURCE_BEFORE_PHASE_E_MODEL_SCORES",
+  "created_utc": "2026-10-19T11:55:58.477440+00:00",
+  "selection_rule_ref": "ACQUISITION_PRIORITY_BEFORE_NUMERIC_QC.json",
+  "selection_rule_sha256": "164dfe3a9ae723868c1cce35ed558236313b677d3d85c257a958a41e4c1ad8ea",
+  "selected_rank": 5,
+  "selected_market": "CEA_OFFICIAL_MEAN",
+  "selection_basis": "Ranks1-4 each received one limited ordinary GET and yielded no usable data; rank5 passed predeclared source/length/target/exposure support. No second market is added and no performance was computed.",
+  "failed_higher_priority_receipt": "OFFICIAL_PRIORITY_GET_RECEIPTS.json",
+  "failed_higher_priority_receipt_sha256": "c1e6597d526aee39cb63d6ce0f2a31707edc630adc99541d1a150bfe95b47c59",
+  "source": {
+    "publisher": "天津排放权交易所有限公司 / Tianjin Climate Exchange",
+    "market": "Nationwide carbon emissions allowances CEA, republished on another official exchange",
+    "page_url": "https://www.chinatcx.com.cn/tshq",
+    "body_url": "https://img.wanwang.xin/pubsf/10335/10335545/cdn-static-pages/pages/pc/12689_zh-cn.html.Body.js?version=20260930192009",
+    "table_index_zero_based": 4,
+    "header": [
+      "交易日期",
+      "交易品种",
+      "总成交量（吨）",
+      "总成交额（元）",
+      "成交均价（元/吨）"
+    ],
+    "product_every_row": "CEA",
+    "raw_path": "/tmp/carbon-signed-response-data-20261019e/tianjin_market_page_body.js",
+    "raw_sha256": "c3e4c075832f6e5087cf416adecbae9d3c1b61859a6ad09fdf84294197393238",
+    "raw_bytes": 7288971,
+    "first_actual_acquisition": {
+      "url": "https://img.wanwang.xin/pubsf/10335/10335545/cdn-static-pages/pages/pc/12689_zh-cn.html.Body.js?version=20260930192009",
+      "status": 200,
+      "bytes": 7288971,
+      "sha256": "c3e4c075832f6e5087cf416adecbae9d3c1b61859a6ad09fdf84294197393238",
+      "file": "/tmp/carbon-next-market-data-20261019d/tianjin_body.js",
+      "retrieved_at_utc": "2026-10-19T10:20:23Z"
+    },
+    "phase_e_acquisition_semantics": "Exact cached raw reused from a successful earlier ordinary GET in the same authorized research task; copied hash checked and CEA newly extracted/QC checked. Four higher-priority fresh GETs are separately recorded.",
+    "version_query_semantics": "Opaque version label, not a verified publication timestamp or timezone"
+  },
+  "canonical": {
+    "file": "/tmp/carbon-signed-response-data-20261019e/CEA_OFFICIAL_MEAN.csv",
+    "sha256": "f9f0e09b7500b2bdb4ec8b16c61d5d5fa2b64de63a24c0cf7bd1d269aa2be75d",
+    "bytes": 44402,
+    "schema": [
+      "date",
+      "price",
+      "volume_tons",
+      "turnover_yuan"
+    ],
+    "price_definition": "Published daily TOTAL transaction mean in yuan per tonne, retained exactly as reported; not closing price or listing-only mean",
+    "source_processing": "Take every row from main CEA table index4; sort dates ascending and strip numeric thousands separators only. No row deletion, no deduplication, no date fill, no price recomputation, no splice.",
+    "rows": 1251,
+    "unique_dates": 1251,
+    "date_range": [
+      "2021-07-16",
+      "2026-09-30"
+    ],
+    "counts_by_year": {
+      "2021": 114,
+      "2022": 242,
+      "2023": 242,
+      "2024": 242,
+      "2025": 233,
+      "2026": 178
+    },
+    "bad_rows": 0,
+    "duplicate_dates": 0,
+    "zero_or_nonfinite_prices": 0,
+    "nonpositive_or_nonfinite_volumes": 0,
+    "negative_or_nonfinite_turnover": 0,
+    "all_source_rows_retained": true,
+    "maximum_mean_rounding_difference": 0.0049999999999954525,
+    "maximum_calendar_gap_days": 13,
+    "complete_calendar_independently_certified": false
+  },
+  "fixed_support": {
+    "N": 1251,
+    "A": 750,
+    "B": 1000,
+    "partition_formula": "A=N*3//5; B=A+N//5",
+    "raw_partitions_half_open": {
+      "train": [
+        0,
+        750
+      ],
+      "validation": [
+        750,
+        1000
+      ],
+      "test": [
+        1000,
+        1251
+      ]
+    },
+    "L": 64,
+    "horizons_observation_steps": [
+      1,
+      5,
+      20
+    ],
+    "common_origin_ranges_half_open": {
+      "train": [
+        64,
+        730
+      ],
+      "validation": [
+        750,
+        980
+      ],
+      "final": [
+        64,
+        980
+      ],
+      "test": [
+        1000,
+        1231
+      ]
+    },
+    "common_mature_origin_counts": {
+      "train": 666,
+      "validation": 230,
+      "final": 916,
+      "test": 231
+    },
+    "test_partition_dates": [
+      "2025-09-12",
+      "2026-09-30"
+    ],
+    "mature_test_origin_dates": [
+      "2025-09-12",
+      "2026-09-01"
+    ],
+    "last_test_label_date": "2026-09-30",
+    "status": "Data support check; root separately freezes training/model/statistical protocol"
+  },
+  "license": {
+    "copyright_notice": "天津排放权交易所有限公司",
+    "explicit_redistribution_license_identified": false,
+    "distribution": "Raw Body.js and per-date CSV remain private /tmp; public source links, acquisition/QC/hash metadata and reconstruction code only"
+  },
+  "exposure_audit": {
+    "path": "CEA_EXPOSURE_AUDIT.json",
+    "sha256": "a010cd2345439ac5321ec59773fa05eaf54f1f482518bd31d319fce110428f65",
+    "prior_source_or_price_QC": true,
+    "prior_CEA_model_scoring_found": false,
+    "cannot_claim_raw_values_never_read": true
+  },
+  "reproduction": {
+    "script": "prepare_cea_official_snapshot.py",
+    "script_sha256": "e503fca7654944e0fcc8520a7d07d90ad7ac392478bfd98a5556197c8162124a",
+    "offline_receipt": "CEA_OFFLINE_REPRODUCTION.json",
+    "offline_receipt_sha256": "f0b575ef5a58653ddf632003dea671445804781f6582a47a3373ee11a2410a39",
+    "exact_canonical_bytes_matched": true
+  },
+  "model_fits_in_this_data_task": 0,
+  "forecast_scores_computed_in_this_data_task": 0
+}

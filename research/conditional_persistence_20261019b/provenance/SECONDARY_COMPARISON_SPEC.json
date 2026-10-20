@@ -1,0 +1,51 @@
+{
+  "created_utc": "2026-10-19T05:05:28.681845+00:00",
+  "stage": "Secondary analysis specification while frozen model fits are running; before inspecting between-model market comparison results",
+  "not_a_prefit_or_external_preregistration": true,
+  "new_model_fits": 0,
+  "primary_protocol_and_gate_changed": false,
+  "purpose": "Put the restricted candidate and published-filter adaptations on identical origins, with disclosed input/parameter differences; examine sensitivity to synchronous dependence between markets.",
+  "families": [
+    "CP_conditional_joint005",
+    "CP_constant_joint005",
+    "CP_scale_capacity_joint005",
+    "CP_conditional_endpoint",
+    "CP_independent_horizon_endpoint",
+    "gas_gru_gmm",
+    "ewma_gru_gmm",
+    "global_gru_gmm",
+    "gas_no_neural",
+    "ewma_no_neural",
+    "global_no_neural",
+    "gas_empirical101",
+    "ewma_empirical101",
+    "global_empirical101",
+    "daily_ewma_normal"
+  ],
+  "panels": "All11 existing development panels, h5/20, seed-mean scores first, equal cells",
+  "metrics": [
+    "normalized_CRPS",
+    "price_CRPS",
+    "normalized_NLL",
+    "price_NLL",
+    "mean_price_squared_error",
+    "rw_mean_price_squared_error",
+    "coverage90",
+    "normalized_width90"
+  ],
+  "cross_comparisons": "CP conditional_joint005 against each of GAS/EWMA/Global GRU-GMM, their three empirical101 controls, and dailyEWMA Normal",
+  "uncertainty": {
+    "resamples": 1999,
+    "seed": 20261019,
+    "block_length": 40,
+    "panel_bootstrap": "Same paired circular-origin method as the original protocol",
+    "synchronized_secondary": "Within each test year, form the sorted union of available forecast-origin dates across markets, resample circular blocks of40 union dates, use the same date multiplicities for all markets/horizons/methods, retain each cell only at its own observed dates. Equal-weight the22 resulting cell ratios. This checks same-year cross-market dependence without fabricating prices.",
+    "interpretation": "Both are nominal conditional intervals. No inference about an independent population of markets; neither selects or retrains a model. Synchronized interval is secondary and does not replace the frozen primary decision."
+  },
+  "comparison_caveats": [
+    "Candidate uses daily three-feature histories and joint horizons; GAS comparison uses one mature h-return process per horizon.",
+    "Candidate has zero conditional log-return mean and variance proportional to h; GAS/GMM can learn location and separate horizon scale.",
+    "Each normalizer subgroup is capacity matched internally, not all fifteen families globally.",
+    "Reported family ranking is contextual performance, not mechanism attribution or complete original-paper reproduction."
+  ]
+}

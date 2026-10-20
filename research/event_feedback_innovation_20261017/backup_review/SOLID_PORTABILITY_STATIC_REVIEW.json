@@ -1,0 +1,32 @@
+{
+  "created_utc": "2026-10-17T10:58:10.213159+00:00",
+  "review_type": "Independent static portability review only",
+  "reviewer_task": "literature_linear",
+  "passed": true,
+  "blocking_issues_identified": [],
+  "entry": "source/reproduce_solid.py",
+  "entry_sha256": "71864c8422a7bb64d6b9520193ef7e410d36ee1b88a290681bdcc9da6fa373df",
+  "historical_B1_protocol_sha256": "b44357f30ce5c7f50f2023ebb0fd3fcc17e1598038724738b0b64b56c7ca76fd",
+  "review_scope": "Read the complete new helper and relevant path/protocol/receipt portions of reproduce_rrc.py and run_rrc_development.py. No helper execution or market/checkpoint read was performed during this static review. Separate earlier B1 numerical auditing by this reviewer is not part of this static review.",
+  "checks": [
+    "Original or declared REPLAY D1 protocol identity is validated; algorithm/data identity fields remain fixed while path/time/replication metadata may change.",
+    "User-specified previous-study and EEX-development paths replace historical absolute runtime inputs; hashes must match the fixed approved development bytes.",
+    "Offline validation-score selection uses the original larger-shrink exact-tie rule, and PRETRAIN_SELECTION is cross-checked.",
+    "Only selected offline pretrain T.* teacher state is used, never the online final teacher. Joint-state receipt hash, canonical teacher hash, shape and float64/finiteness are checked.",
+    "File-byte identity and canonical teacher-state identity are recorded separately against the original B1; optional require-original-state fails on a changed teacher.",
+    "Five frozen runtime files are copied byte for byte and checked; source/history identities are checked before prepare.",
+    "prepare performs no fitting; paths-only checks existence without data/checkpoint content reads and does not claim hash validation. dry-run checks bytes/states but does not execute adaptation.",
+    "run is the only path invoking the original runner, with explicit protocol/prepared/helper/state-registry identities and unchanged design checks.",
+    "Fresh output and existing-result guards prevent overwrite or silent restart; the preparation deadline is not silently renewed.",
+    "The new output records 60 actual streams, 80 prediction series and 20 declared equivalent derived series separately, with 25332 head updates and 480 cells.",
+    "Original historical results are not copied into the replay as new experimental outcomes; no confirmation argument or data expansion is introduced."
+  ],
+  "important_limit": "This helper prepares and executes a new SOLID_REPLAY and validates declared completion counts. It does not automatically run the original B1 independent selector/metric audit, which is intentionally bound to the original protocol, phase, D1 metric SHA and freeze. A new replay cannot inherit the original independent PASS; additional replay-specific aggregation/auditing must be explicitly provided and labelled.",
+  "market_files_read_in_this_static_review": false,
+  "confirmation_read_in_this_static_review": false,
+  "checkpoint_contents_read_in_this_static_review": false,
+  "helper_executed_in_this_static_review": false,
+  "market_fit": false,
+  "frozen_experimental_source_modified": false,
+  "static_review_is_not_a_new_replication_or_numerical_audit": true
+}

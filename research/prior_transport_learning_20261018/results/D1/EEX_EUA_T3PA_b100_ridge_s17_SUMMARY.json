@@ -1,0 +1,228 @@
+{
+  "job": "EEX_EUA_T3PA_b100_ridge_s17",
+  "status": "COMPLETE",
+  "model": "ridge",
+  "target": "EEX_EUA_T3PA",
+  "budget": 100,
+  "seed": 17,
+  "started_utc": "2026-10-18T02:54:36.602312+00:00",
+  "completed_utc": "2026-10-18T02:54:36.610155+00:00",
+  "wall_seconds": 0.007835638998585637,
+  "data_receipt": {
+    "target": "EEX_EUA_T3PA",
+    "target_sha256": "5a0c7580edebc2a7a5e66d7487568f6d99a8e08cca0785676c2aaeccad7db6bb",
+    "year": 2022,
+    "budget": 100,
+    "budget_interpretation": "retained supervised origin windows;100 is nested and spans the same role endpoints as400; causal full past quote histories remain available; not a cold-start or independent-label count",
+    "roles": {
+      "support": {
+        "n": 60,
+        "first_origin": 1367,
+        "last_origin": 1606,
+        "first_date": "2019-11-04",
+        "last_date": "2021-02-02",
+        "last_label_date": "2021-03-02"
+      },
+      "meta": {
+        "n": 20,
+        "first_origin": 1627,
+        "last_origin": 1706,
+        "first_date": "2021-03-03",
+        "last_date": "2021-07-01",
+        "last_label_date": "2021-07-29"
+      },
+      "val": {
+        "n": 20,
+        "first_origin": 1727,
+        "last_origin": 1806,
+        "first_date": "2021-07-30",
+        "last_date": "2021-11-22",
+        "last_label_date": "2021-12-20"
+      },
+      "test": {
+        "n": 193,
+        "first_origin": 1827,
+        "last_origin": 2019,
+        "first_date": "2022-01-10",
+        "last_date": "2022-11-17",
+        "last_label_date": "2022-12-19"
+      }
+    },
+    "source_cutoff_exclusive": "2021-03-03",
+    "sources": {
+      "GUANGZHOU": {
+        "n": 660,
+        "sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+        "first_origin": 60,
+        "last_origin": 719,
+        "first_date": "2018-05-07",
+        "last_label_date": "2021-03-02"
+      },
+      "HUBEI": {
+        "n": 650,
+        "sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+        "first_origin": 60,
+        "last_origin": 709,
+        "first_date": "2018-04-04",
+        "last_label_date": "2021-03-02"
+      },
+      "SHANGHAI": {
+        "n": 990,
+        "sha256": "425424353bb3ac09e3d96b291680b4179e86f180da626a5d19e5c1e58ed960a1",
+        "first_origin": 60,
+        "last_origin": 1049,
+        "first_date": "2014-03-28",
+        "last_label_date": "2021-02-26"
+      }
+    },
+    "excluded_sources": [
+      {
+        "name": "EU_REPORTED",
+        "reason": "related EU ETS series excluded as mutual transfer sources"
+      }
+    ],
+    "H": 20,
+    "L": 20,
+    "initial_volatility": "first60 raw increments; common causal EWMA .94 thereafter",
+    "new_shenzhen_used": false,
+    "confirmation_used": false,
+    "episode_schedule_sha256": "abeb643b2c59a16f2cfff44f78095cef852dfd967aa98282228cf8d911a8e81b",
+    "episode_seed": 17018
+  },
+  "evaluation": {
+    "score": 1.2940675180851466,
+    "horizons": [
+      {
+        "h": 1,
+        "mse": 9.165430427478793,
+        "rw_mse": 7.616201554404143,
+        "rmse": 3.0274461890310773,
+        "relative_mse": 1.2034122734289763,
+        "mae": 2.125559719147634
+      },
+      {
+        "h": 5,
+        "mse": 51.102494524638,
+        "rw_mse": 44.763551813471494,
+        "rmse": 7.148600878818036,
+        "relative_mse": 1.1416094669516106,
+        "mae": 5.2950224155584
+      },
+      {
+        "h": 20,
+        "mse": 188.14981975070893,
+        "rw_mse": 122.39927668393786,
+        "rmse": 13.716771476944162,
+        "relative_mse": 1.537180813874853,
+        "mae": 10.712883752929955
+      }
+    ],
+    "n_origins": 193,
+    "all20_relative_mse": [
+      1.2034122734289763,
+      1.1300190358680338,
+      1.0866817457560298,
+      1.0893579504046822,
+      1.1416094669516106,
+      1.1520308752962731,
+      1.138341831303973,
+      1.1564378016941965,
+      1.1807821648241812,
+      1.230147267600823,
+      1.2186077242574251,
+      1.2683157836010837,
+      1.2717718441458736,
+      1.3085399045653554,
+      1.2970034648456998,
+      1.3313487978477636,
+      1.3950317436191593,
+      1.4276319815087484,
+      1.4557256957892628,
+      1.537180813874853
+    ]
+  },
+  "validation": {
+    "score": 0.8403405958141806,
+    "horizons": [
+      {
+        "h": 1,
+        "mse": 1.295283732786012,
+        "rw_mse": 1.4048599999999993,
+        "rmse": 1.138105325875427,
+        "relative_mse": 0.9220020021824329,
+        "mae": 0.8935440708046218
+      },
+      {
+        "h": 5,
+        "mse": 7.367495400011153,
+        "rw_mse": 8.466509999999994,
+        "rmse": 2.7143130622702962,
+        "relative_mse": 0.8701927240399123,
+        "mae": 2.204025086984511
+      },
+      {
+        "h": 20,
+        "mse": 61.252670584852055,
+        "rw_mse": 84.04280499999997,
+        "rmse": 7.826408536797198,
+        "relative_mse": 0.7288270612201969,
+        "mae": 5.183262777366115
+      }
+    ],
+    "n_origins": 20,
+    "all20_relative_mse": [
+      0.9220020021824329,
+      0.9998076089502677,
+      0.8938358218390452,
+      0.8751026839964584,
+      0.8701927240399123,
+      0.8441267693140276,
+      0.8534667025324457,
+      0.8155009087437033,
+      0.7983633688330413,
+      0.7618267989432853,
+      0.7798105380766749,
+      0.7637429232968648,
+      0.7660571190002168,
+      0.7173046668556721,
+      0.7470230085913661,
+      0.7328146883021127,
+      0.7184638639382674,
+      0.6831936375367287,
+      0.7247633860311697,
+      0.7288270612201969
+    ]
+  },
+  "fit_receipt": {
+    "selected_alpha": 10.0,
+    "ridge_fits": 5,
+    "support_plus_meta_n": 80,
+    "validation_score": 0.8403405958141806,
+    "test_forward_calls": 1
+  },
+  "validation_traces": [
+    {
+      "alpha": 0.01,
+      "validation_score": 1.0588140418034835
+    },
+    {
+      "alpha": 0.1,
+      "validation_score": 0.9935906642006168
+    },
+    {
+      "alpha": 1.0,
+      "validation_score": 0.8437104875442722
+    },
+    {
+      "alpha": 10.0,
+      "validation_score": 0.8403405958141806
+    },
+    {
+      "alpha": 100.0,
+      "validation_score": 0.9476201517537625
+    }
+  ],
+  "private_prediction_sha256": "e2f92db777ab2a25551714038867d21043f9246e6bbea47d0c381d334f26421a",
+  "private_state_sha256": "0e4872aac5fa022dc20be6ca2fc5bc3a3f3af7a192c38045e6704156573a61aa",
+  "private_full_trace_sha256": "dffe0fa78105850711e26b84f83d4c4886db5a2cae50bdb7c2e87103c11727f4"
+}

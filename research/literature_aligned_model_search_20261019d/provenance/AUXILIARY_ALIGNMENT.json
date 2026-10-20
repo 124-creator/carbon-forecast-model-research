@@ -1,0 +1,71 @@
+{
+  "created_utc": "2026-10-19T09:07:23.965056+00:00",
+  "script_sha256": "8df52ee3e551dcca0b99264da2dccf01520bb04da381488aa3b4c7da273ce67d",
+  "parser_sha256": "1154ce5dc51860f73d04a4a7e42ad70948258b890be81315005c48ffec94c932",
+  "rule": {
+    "canonical_dates_preserved": true,
+    "cutoff_exclusive": "2024-01-01",
+    "price_match": "exact float equality of reported source and canonical price; no tolerance, rescaling or rounding",
+    "valid_volume": "exactly one author row on date, finite price match and finite volume >= 0",
+    "missing_output": "empty CSV field denotes NA; never filled with zero or a prior value",
+    "duplicate_or_price_conflict": "both quantity fields blank; valid_volume=0",
+    "turnover": "reported finite value when date unique and price matches; not required for valid_volume",
+    "publication": "raw source and prepared row quantities remain outside Git; only this aggregate receipt is public"
+  },
+  "fits": 0,
+  "sources": {
+    "GUANGZHOU": {
+      "author_path": "/tmp/carbon-literature-data-audit-20261019d/zzy/GuangdongCarbonPrice.xls",
+      "author_sha256": "1c244f77877cba4fc59deb30ac741e4b0871064cb314152656e27b1d486cb33f",
+      "canonical_path": "/workspace/scratch/562d14c1693a/carbon-research/research/cross_market_innovation_20261017/data/GUANGZHOU_development.csv",
+      "canonical_sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+      "output_path": "/tmp/carbon-literature-data-audit-20261019d/prepared/GUANGZHOU_auxiliary.csv",
+      "rows": 1434,
+      "first_date": "2018-01-03",
+      "last_date": "2023-12-29",
+      "counts": {
+        "price_match_true": 1434,
+        "price_match_false": 0,
+        "price_match_unknown": 0,
+        "valid_volume": 1434,
+        "volume_na": 0,
+        "turnover_na": 0,
+        "reported_volume_zero": 0
+      },
+      "reason_counts": {
+        "valid_volume": 1434
+      },
+      "source_quantity_units": "Header says Volume and Turnover; exact unit, channel and availability not independently authenticated.",
+      "source_license": "Zzysty/carbon_dataset contains no LICENSE; public retrieval does not establish redistribution rights.",
+      "output_sha256": "77f93f3c0579d350196975719aeb2e2e12684bf2e946933db74a07854c2afa00"
+    },
+    "HUBEI": {
+      "author_path": "/tmp/carbon-literature-data-audit-20261019d/zzy/HubeiCarbonPrice.xlsx",
+      "author_sha256": "df1de9279d0a34a2860fa749558e67ea61ae17e5b2a14787a06ba7416a58645c",
+      "canonical_path": "/workspace/scratch/562d14c1693a/carbon-research/research/cross_market_innovation_20261017/data/HUBEI_development.csv",
+      "canonical_sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+      "output_path": "/tmp/carbon-literature-data-audit-20261019d/prepared/HUBEI_auxiliary.csv",
+      "rows": 1408,
+      "first_date": "2018-01-02",
+      "last_date": "2023-12-29",
+      "counts": {
+        "price_match_true": 1378,
+        "price_match_false": 4,
+        "price_match_unknown": 26,
+        "valid_volume": 1378,
+        "volume_na": 30,
+        "turnover_na": 30,
+        "reported_volume_zero": 0
+      },
+      "reason_counts": {
+        "valid_volume": 1378,
+        "duplicate_author_date": 3,
+        "price_conflict": 4,
+        "no_author_date": 23
+      },
+      "source_quantity_units": "Header says Volume and Turnover; exact unit, channel and availability not independently authenticated.",
+      "source_license": "Zzysty/carbon_dataset contains no LICENSE; public retrieval does not establish redistribution rights.",
+      "output_sha256": "15d33910cc9c35d3f51a8043d6d909d5e045aa2c11ee0e55482c2cb5cdcf571d"
+    }
+  }
+}

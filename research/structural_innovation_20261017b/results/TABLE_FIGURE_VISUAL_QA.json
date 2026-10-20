@@ -1,0 +1,134 @@
+{
+  "status": "PASS",
+  "created_utc": "2026-10-17T14:37:34.572581+00:00",
+  "source_sha256": "725867f74e7c77e391abe41854858e672461c3adbefa1d20e82b8e0dcecda365",
+  "protocol_sha256": "b10409de072efaba5fce1d570c15e6e0b4128f5234f037c25afeecfd90efc503",
+  "figure_files": [
+    {
+      "path": "figures/D1_main_and_ablations.png",
+      "bytes": 236457,
+      "sha256": "552fbfb8981016cfc72f2139c1461ce06d2148896645d31ffce7e84bbf8057e7"
+    },
+    {
+      "path": "figures/D1_main_and_ablations.svg",
+      "bytes": 28033,
+      "sha256": "96b9280dcbdc14c22ce754809d07e5dcfbcba5f8b4b8b6a0cbbc56aa1788965b"
+    },
+    {
+      "path": "figures/D1_EEX_horizons_and_decomposition.png",
+      "bytes": 292795,
+      "sha256": "5840082278000d5276b6018569894ed3b59cc4be9270d778a66ec8b41cbedc94"
+    },
+    {
+      "path": "figures/D1_EEX_horizons_and_decomposition.svg",
+      "bytes": 30830,
+      "sha256": "fe6602201c6c5d90a1bb5a22d6393849175dab89442f6b6d2e38b1e6dddea774"
+    },
+    {
+      "path": "figures/D1_selected_series_heatmap.png",
+      "bytes": 173482,
+      "sha256": "c22f946b9dfda0123b6260de1315e540ea9b30e123709cc5dcb61244569abee3"
+    },
+    {
+      "path": "figures/D1_selected_series_heatmap.svg",
+      "bytes": 24816,
+      "sha256": "ae98110fd409a6f2005e995cacb156be03062f837e6607b6a259b77a8bd7eeef"
+    }
+  ],
+  "visual_reviews": [
+    {
+      "figure": "D1_main_and_ablations",
+      "result": "PASS",
+      "method": "view_image PNG",
+      "checks": [
+        "all ten primary-panel points and seven SMP matched points visible",
+        "RW=1 reference and score axis visible",
+        "2022 development and seed 17 and no CI stated",
+        "D1 failed gate retained",
+        "no clipped labels or values"
+      ]
+    },
+    {
+      "figure": "D1_EEX_horizons_and_decomposition",
+      "result": "PASS",
+      "method": "view_image PNG, then repeat only after label clarification",
+      "checks": [
+        "all20 horizon support shown as observation steps",
+        "all numeric curves unchanged after presentation correction",
+        "green curve explicitly twice alignment",
+        "excess explicitly energy minus twice alignment",
+        "dimensionless aggregation only; no daily/raw forecasts"
+      ]
+    },
+    {
+      "figure": "D1_selected_series_heatmap",
+      "result": "PASS",
+      "method": "view_image PNG",
+      "checks": [
+        "25 numerical cells readable",
+        "log color scale centered at RW=1",
+        "small deviations from RW remain near-neutral",
+        "related EU ETS series dependence stated",
+        "no CI or significance symbols"
+      ]
+    }
+  ],
+  "svg_xml_parse": "all three PASS",
+  "complete_table_export_runs": 1,
+  "targeted_figure2_label_re_renderings": 1,
+  "table_count": 9,
+  "table_rows": {
+    "D1_all_configs.csv": 33,
+    "D1_all_configs_market_horizons.csv": 3300,
+    "D1_selected_models.csv": 17,
+    "D1_selected_models_market_horizons.csv": 1700,
+    "D1_matched_models.csv": 12,
+    "D1_matched_models_market_horizons.csv": 1200,
+    "D1_job_execution.csv": 160,
+    "D1_job_horizons.csv": 3200,
+    "D1_selected_decomposition_horizons.csv": 1700
+  },
+  "csv_input_files_read": 0,
+  "csv_outputs_read_in_visual_qa": 0,
+  "local_only_files_read": 0,
+  "confirmation_files_read": 0,
+  "new_fits": 0,
+  "new_optimizer_steps": 0,
+  "model_selection_changed": false,
+  "frozen_training_sources_edited": false,
+  "notes": "Public-result algebra and visual delivery QA only, not a second private-data metric audit. PNG/SVG visual reviews predate the final documentation-only baseline-1 correction; no images or numbers changed. Both correction histories are retained in TABLE_FIGURE_EXPORT.json.",
+  "documentation_correction_history": [
+    {
+      "created_utc": "2026-10-17T14:44:21.462051+00:00",
+      "reason": "Correct explanation of excess relative MSE: add the RW baseline 1 to recover the full relative MSE.",
+      "old_sentence": "虚线显示 energy−twice alignment，即相对 MSE 超出 RW 的部分，不能把它再额外加一次 RW。",
+      "new_sentence": "虚线显示 energy−twice alignment，即相对 MSE 超出 RW 的部分；若要还原相对 MSE，需要加上 RW 基准 1。",
+      "previous_manifest_sha256": "e4d82ba3ec37141d4df9d4c10708fda9003e30e3e684a9687e6048b020b63e67",
+      "previous_visual_qa_sha256": "d88ede24c667506151281aaf80d856bb4846a8a8f6266f347a72000556c676ac",
+      "changes": [
+        {
+          "path": "source/export_results.py",
+          "before_sha256": "20b4316f9986f01f07d33efd70b74568daf440e6c23d55776b422dfc5f0dcdb0",
+          "after_sha256": "725867f74e7c77e391abe41854858e672461c3adbefa1d20e82b8e0dcecda365",
+          "bytes": 31762
+        },
+        {
+          "path": "figures/FIGURES_ZH.md",
+          "before_sha256": "604d755b6df50acd912717e08a81605f059514d0c1fd15530962d65391f3d067",
+          "after_sha256": "9f1aa26f6062018249fce20434f33c23bd18f31d2183316eaad637c90eb91157",
+          "bytes": 5521
+        }
+      ],
+      "pure_documentation_correction": true,
+      "tables_regenerated": false,
+      "figures_regenerated": false,
+      "exporter_executed_after_this_change": false,
+      "csv_files_read_or_written": 0,
+      "image_files_read_or_written": 0,
+      "new_fits": 0,
+      "new_optimizer_steps": 0,
+      "original_result_numbers_changed": false,
+      "frozen_training_sources_edited": false
+    }
+  ]
+}

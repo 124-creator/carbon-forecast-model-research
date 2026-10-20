@@ -1,0 +1,76 @@
+{
+  "status": "PASS_WITH_COOPERATIVE_TIMEOUT_SCOPE",
+  "created_utc": "2026-10-17T10:19:24.915281+00:00",
+  "method": "Independent human static review plus AST parse, frozen hash and protocol-count assertions; no training-module imports.",
+  "protocol_sha256": "404c14867dcc5b43f456075d6b9edd4a5cd75cd99ad943a034e8da7172ef8a70",
+  "source_sha256": {
+    "source/rrc_core.py": "0ee05e9ad74062d7d5467e7a89efc601931be59c5737d2dea90cc9c9182c20d5",
+    "source/check_rrc.py": "58b5ec004a74efe6a7748f947052ff860b8a9639ec6d4d5a407ac590e47d6c42",
+    "source/run_rrc_development.py": "1a456be38e08e9dc26487d64986e6bb912cc95ea2424d519b07a24d7a65dd89f"
+  },
+  "auditor_sha256": "9df97aa7944d38f06dd00579fb87610edce29648e9562e980c99e31a7c33bed4",
+  "actual_counts": {
+    "jobs": 10,
+    "joint_teacher_student_offline_fits": 20,
+    "selected_teacher_online_streams": 10,
+    "student_online_streams": 260,
+    "ridge_calibration_online_streams": 90
+  },
+  "scored_configurations_per_job": 38,
+  "expected_metric_rows": 2280,
+  "processes": 2,
+  "threads_per_process": 1,
+  "data_paths_reviewed": [
+    {
+      "name": "EEX_EUA_T3PA",
+      "path": "/workspace/scratch/b31c5edbd0de/scratch/next_data_20261017/local_only/eex_prepared/development/EEX_EUA_T3PA_daily_development.csv",
+      "with_auction": true
+    },
+    {
+      "name": "GUANGZHOU",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/GUANGZHOU_development.csv",
+      "with_auction": false
+    },
+    {
+      "name": "HUBEI",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/HUBEI_development.csv",
+      "with_auction": false
+    },
+    {
+      "name": "SHANGHAI",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/SHANGHAI_D4_development.csv",
+      "with_auction": false
+    },
+    {
+      "name": "EU_REPORTED",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/EU_REPORTED_development.csv",
+      "with_auction": false
+    }
+  ],
+  "data_file_contents_read": false,
+  "market_numeric_reads": 0,
+  "model_fits": 0,
+  "result_or_forecast_files_read": false,
+  "reviewed_semantics": [
+    "Only the five explicitly configured development paths are passed to load_market; numeric price conversion follows the date<2024 filter.",
+    "The worker refuses an existing per-series/per-seed directory; the parent refuses an existing D1 STARTED marker.",
+    "Each worker selects shrink only from pre-online validation; exact ties prefer the larger shrink.",
+    "A single selected teacher stream is shared by every student intervention; each student_stream independently copies the same initial student.",
+    "Four direct forecasts, eight correct-target output calibrations and 26 student branches yield 38 configurations per job.",
+    "The runner saves every score without selecting on 2023; the separately specified selection function is outside this review.",
+    "Public worker summaries omit raw support/local paths and numerical arrays; per-origin forecasts and numerical calibration/weights are written under local_only.",
+    "Any caught worker failure is recorded and unstarted futures are cancelled; there is no failed-fit retry loop."
+  ],
+  "timeout_scope": [
+    "One shared UTC deadline is converted to a local monotonic deadline in every worker, so late-starting jobs do not receive a fresh 40-minute budget.",
+    "Deadline checks occur at each pretrain epoch and teacher/calibrator/student event, not during an individual optimizer or linear-solve call.",
+    "Static forecast assembly, metrics, serialization and file writes do not have independent hard-stop checks.",
+    "ProcessPoolExecutor context exit waits for already-running workers; cancellation does not forcibly terminate running work.",
+    "Describe the budget as cooperative. It does not guarantee an exact wall-clock kill at the deadline."
+  ],
+  "limitations": [
+    "No actual market row counts, market file hashes, runtime result completeness or scores verified here.",
+    "Score arithmetic and 2022-only selection are assigned to a separate independent audit.",
+    "EEX and EU_REPORTED are related EU ETS targets, not independent replications."
+  ]
+}

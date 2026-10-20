@@ -1,0 +1,4553 @@
+{
+  "schema_version": 2,
+  "date_only_counts": true,
+  "price_values_used_for_counts": false,
+  "lookback_increments": 39,
+  "history_price_nodes": 40,
+  "horizons_observation_steps": [
+    5,
+    20
+  ],
+  "count_rule": "Origin date belongs to its role/year; its h-step target must mature within the same role/year. History may precede the role but never the dataset start. No calendar filling; no price-dependent eligibility. Overlapping origins are not independent samples.",
+  "default_design": "observation_block_expanding_train_validation126_calibration252_by_horizon",
+  "formal_observation_blocks": {
+    "index_base": 0,
+    "train_start_index": 39,
+    "history_quote_nodes": 40,
+    "validation_origins": 126,
+    "calibration_origins": 252,
+    "minimum_train_origins": 128,
+    "rule": "test_start = first quote index of evaluation year; cal_end = test_start-h-1; cal_start = cal_end-251; val_end = cal_start-h-1; val_start = val_end-125; train_end = val_start-h-1; train_start=39. End indices are inclusive. Every earlier role's last target matures strictly before the next role's first origin. Test origin and endpoint belong to the same evaluation year.",
+    "scheduled_cases_before_exclusions": 24,
+    "eligible_cases": 22,
+    "cases": [
+      {
+        "market": "EUA_LONG",
+        "evaluation_year": 2021,
+        "horizon_observation_steps": 5,
+        "test_start_index_before_year_end_maturity_filter": 2064,
+        "test_start_date": "2021-01-04",
+        "quotes_in_evaluation_year": 259,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 1670,
+            "origin_count": 1632,
+            "available": true,
+            "first_origin_date": "2013-02-26",
+            "last_origin_date": "2019-06-25",
+            "first_history_index": 0,
+            "first_history_date": "2013-01-02",
+            "first_maturity_index": 44,
+            "last_maturity_index": 1675,
+            "first_maturity_date": "2013-03-05",
+            "last_maturity_date": "2019-07-02",
+            "target_matured_count": 1632,
+            "origin_calendar_span_days_inclusive": 2311,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 2318
+          },
+          "validation": {
+            "origin_index_start": 1676,
+            "origin_index_end_inclusive": 1801,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2019-07-03",
+            "last_origin_date": "2019-12-26",
+            "first_history_index": 1637,
+            "first_history_date": "2019-05-09",
+            "first_maturity_index": 1681,
+            "last_maturity_index": 1806,
+            "first_maturity_date": "2019-07-10",
+            "last_maturity_date": "2020-01-03",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 177,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 185
+          },
+          "calibration": {
+            "origin_index_start": 1807,
+            "origin_index_end_inclusive": 2058,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2020-01-06",
+            "last_origin_date": "2020-12-23",
+            "first_history_index": 1768,
+            "first_history_date": "2019-11-08",
+            "first_maturity_index": 1812,
+            "last_maturity_index": 2063,
+            "first_maturity_date": "2020-01-13",
+            "last_maturity_date": "2020-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 353,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 361
+          },
+          "evaluation": {
+            "origin_index_start": 2064,
+            "origin_index_end_inclusive": 2317,
+            "origin_count": 254,
+            "available": true,
+            "first_origin_date": "2021-01-04",
+            "last_origin_date": "2021-12-24",
+            "first_history_index": 2025,
+            "first_history_date": "2020-11-06",
+            "first_maturity_index": 2069,
+            "last_maturity_index": 2322,
+            "first_maturity_date": "2021-01-11",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 254,
+            "origin_calendar_span_days_inclusive": 355,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 362
+          }
+        },
+        "used_evaluation_origins": 254,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 1675,
+            "next_first_origin_index": 1676,
+            "last_previous_maturity_date": "2019-07-02",
+            "next_first_origin_date": "2019-07-03",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 1806,
+            "next_first_origin_index": 1807,
+            "last_previous_maturity_date": "2020-01-03",
+            "next_first_origin_date": "2020-01-06",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 2063,
+            "next_first_origin_index": 2064,
+            "last_previous_maturity_date": "2020-12-31",
+            "next_first_origin_date": "2021-01-04",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 353,
+        "calibration_through_last_label_calendar_span_days_inclusive": 361
+      },
+      {
+        "market": "EUA_LONG",
+        "evaluation_year": 2021,
+        "horizon_observation_steps": 20,
+        "test_start_index_before_year_end_maturity_filter": 2064,
+        "test_start_date": "2021-01-04",
+        "quotes_in_evaluation_year": 259,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 1625,
+            "origin_count": 1587,
+            "available": true,
+            "first_origin_date": "2013-02-26",
+            "last_origin_date": "2019-04-23",
+            "first_history_index": 0,
+            "first_history_date": "2013-01-02",
+            "first_maturity_index": 59,
+            "last_maturity_index": 1645,
+            "first_maturity_date": "2013-03-26",
+            "last_maturity_date": "2019-05-21",
+            "target_matured_count": 1587,
+            "origin_calendar_span_days_inclusive": 2248,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 2276
+          },
+          "validation": {
+            "origin_index_start": 1646,
+            "origin_index_end_inclusive": 1771,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2019-05-22",
+            "last_origin_date": "2019-11-13",
+            "first_history_index": 1607,
+            "first_history_date": "2019-03-27",
+            "first_maturity_index": 1666,
+            "last_maturity_index": 1791,
+            "first_maturity_date": "2019-06-19",
+            "last_maturity_date": "2019-12-11",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 176,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 204
+          },
+          "calibration": {
+            "origin_index_start": 1792,
+            "origin_index_end_inclusive": 2043,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2019-12-12",
+            "last_origin_date": "2020-12-02",
+            "first_history_index": 1753,
+            "first_history_date": "2019-10-18",
+            "first_maturity_index": 1812,
+            "last_maturity_index": 2063,
+            "first_maturity_date": "2020-01-13",
+            "last_maturity_date": "2020-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 357,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 386
+          },
+          "evaluation": {
+            "origin_index_start": 2064,
+            "origin_index_end_inclusive": 2302,
+            "origin_count": 239,
+            "available": true,
+            "first_origin_date": "2021-01-04",
+            "last_origin_date": "2021-12-03",
+            "first_history_index": 2025,
+            "first_history_date": "2020-11-06",
+            "first_maturity_index": 2084,
+            "last_maturity_index": 2322,
+            "first_maturity_date": "2021-02-01",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 239,
+            "origin_calendar_span_days_inclusive": 334,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 362
+          }
+        },
+        "used_evaluation_origins": 239,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 1645,
+            "next_first_origin_index": 1646,
+            "last_previous_maturity_date": "2019-05-21",
+            "next_first_origin_date": "2019-05-22",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 1791,
+            "next_first_origin_index": 1792,
+            "last_previous_maturity_date": "2019-12-11",
+            "next_first_origin_date": "2019-12-12",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 2063,
+            "next_first_origin_index": 2064,
+            "last_previous_maturity_date": "2020-12-31",
+            "next_first_origin_date": "2021-01-04",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 357,
+        "calibration_through_last_label_calendar_span_days_inclusive": 386
+      },
+      {
+        "market": "EUA_LONG",
+        "evaluation_year": 2022,
+        "horizon_observation_steps": 5,
+        "test_start_index_before_year_end_maturity_filter": 2323,
+        "test_start_date": "2022-01-03",
+        "quotes_in_evaluation_year": 258,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 1929,
+            "origin_count": 1891,
+            "available": true,
+            "first_origin_date": "2013-02-26",
+            "last_origin_date": "2020-06-25",
+            "first_history_index": 0,
+            "first_history_date": "2013-01-02",
+            "first_maturity_index": 44,
+            "last_maturity_index": 1934,
+            "first_maturity_date": "2013-03-05",
+            "last_maturity_date": "2020-07-02",
+            "target_matured_count": 1891,
+            "origin_calendar_span_days_inclusive": 2677,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 2684
+          },
+          "validation": {
+            "origin_index_start": 1935,
+            "origin_index_end_inclusive": 2060,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2020-07-03",
+            "last_origin_date": "2020-12-28",
+            "first_history_index": 1896,
+            "first_history_date": "2020-05-11",
+            "first_maturity_index": 1940,
+            "last_maturity_index": 2065,
+            "first_maturity_date": "2020-07-10",
+            "last_maturity_date": "2021-01-05",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 179,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 187
+          },
+          "calibration": {
+            "origin_index_start": 2066,
+            "origin_index_end_inclusive": 2317,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2021-01-06",
+            "last_origin_date": "2021-12-24",
+            "first_history_index": 2027,
+            "first_history_date": "2020-11-10",
+            "first_maturity_index": 2071,
+            "last_maturity_index": 2322,
+            "first_maturity_date": "2021-01-13",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 353,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 360
+          },
+          "evaluation": {
+            "origin_index_start": 2323,
+            "origin_index_end_inclusive": 2575,
+            "origin_count": 253,
+            "available": true,
+            "first_origin_date": "2022-01-03",
+            "last_origin_date": "2022-12-22",
+            "first_history_index": 2284,
+            "first_history_date": "2021-11-09",
+            "first_maturity_index": 2328,
+            "last_maturity_index": 2580,
+            "first_maturity_date": "2022-01-10",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 253,
+            "origin_calendar_span_days_inclusive": 354,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 362
+          }
+        },
+        "used_evaluation_origins": 253,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 1934,
+            "next_first_origin_index": 1935,
+            "last_previous_maturity_date": "2020-07-02",
+            "next_first_origin_date": "2020-07-03",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 2065,
+            "next_first_origin_index": 2066,
+            "last_previous_maturity_date": "2021-01-05",
+            "next_first_origin_date": "2021-01-06",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 2322,
+            "next_first_origin_index": 2323,
+            "last_previous_maturity_date": "2021-12-31",
+            "next_first_origin_date": "2022-01-03",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 353,
+        "calibration_through_last_label_calendar_span_days_inclusive": 360
+      },
+      {
+        "market": "EUA_LONG",
+        "evaluation_year": 2022,
+        "horizon_observation_steps": 20,
+        "test_start_index_before_year_end_maturity_filter": 2323,
+        "test_start_date": "2022-01-03",
+        "quotes_in_evaluation_year": 258,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 1884,
+            "origin_count": 1846,
+            "available": true,
+            "first_origin_date": "2013-02-26",
+            "last_origin_date": "2020-04-23",
+            "first_history_index": 0,
+            "first_history_date": "2013-01-02",
+            "first_maturity_index": 59,
+            "last_maturity_index": 1904,
+            "first_maturity_date": "2013-03-26",
+            "last_maturity_date": "2020-05-21",
+            "target_matured_count": 1846,
+            "origin_calendar_span_days_inclusive": 2614,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 2642
+          },
+          "validation": {
+            "origin_index_start": 1905,
+            "origin_index_end_inclusive": 2030,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2020-05-22",
+            "last_origin_date": "2020-11-13",
+            "first_history_index": 1866,
+            "first_history_date": "2020-03-27",
+            "first_maturity_index": 1925,
+            "last_maturity_index": 2050,
+            "first_maturity_date": "2020-06-19",
+            "last_maturity_date": "2020-12-11",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 176,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 204
+          },
+          "calibration": {
+            "origin_index_start": 2051,
+            "origin_index_end_inclusive": 2302,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2020-12-14",
+            "last_origin_date": "2021-12-03",
+            "first_history_index": 2012,
+            "first_history_date": "2020-10-20",
+            "first_maturity_index": 2071,
+            "last_maturity_index": 2322,
+            "first_maturity_date": "2021-01-13",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 355,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 383
+          },
+          "evaluation": {
+            "origin_index_start": 2323,
+            "origin_index_end_inclusive": 2560,
+            "origin_count": 238,
+            "available": true,
+            "first_origin_date": "2022-01-03",
+            "last_origin_date": "2022-12-01",
+            "first_history_index": 2284,
+            "first_history_date": "2021-11-09",
+            "first_maturity_index": 2343,
+            "last_maturity_index": 2580,
+            "first_maturity_date": "2022-01-31",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 238,
+            "origin_calendar_span_days_inclusive": 333,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 362
+          }
+        },
+        "used_evaluation_origins": 238,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 1904,
+            "next_first_origin_index": 1905,
+            "last_previous_maturity_date": "2020-05-21",
+            "next_first_origin_date": "2020-05-22",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 2050,
+            "next_first_origin_index": 2051,
+            "last_previous_maturity_date": "2020-12-11",
+            "next_first_origin_date": "2020-12-14",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 2322,
+            "next_first_origin_index": 2323,
+            "last_previous_maturity_date": "2021-12-31",
+            "next_first_origin_date": "2022-01-03",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 355,
+        "calibration_through_last_label_calendar_span_days_inclusive": 383
+      },
+      {
+        "market": "EUA_LONG",
+        "evaluation_year": 2023,
+        "horizon_observation_steps": 5,
+        "test_start_index_before_year_end_maturity_filter": 2581,
+        "test_start_date": "2023-01-02",
+        "quotes_in_evaluation_year": 258,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 2187,
+            "origin_count": 2149,
+            "available": true,
+            "first_origin_date": "2013-02-26",
+            "last_origin_date": "2021-06-25",
+            "first_history_index": 0,
+            "first_history_date": "2013-01-02",
+            "first_maturity_index": 44,
+            "last_maturity_index": 2192,
+            "first_maturity_date": "2013-03-05",
+            "last_maturity_date": "2021-07-02",
+            "target_matured_count": 2149,
+            "origin_calendar_span_days_inclusive": 3042,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 3049
+          },
+          "validation": {
+            "origin_index_start": 2193,
+            "origin_index_end_inclusive": 2318,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2021-07-05",
+            "last_origin_date": "2021-12-27",
+            "first_history_index": 2154,
+            "first_history_date": "2021-05-11",
+            "first_maturity_index": 2198,
+            "last_maturity_index": 2323,
+            "first_maturity_date": "2021-07-12",
+            "last_maturity_date": "2022-01-03",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 176,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 183
+          },
+          "calibration": {
+            "origin_index_start": 2324,
+            "origin_index_end_inclusive": 2575,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2022-01-04",
+            "last_origin_date": "2022-12-22",
+            "first_history_index": 2285,
+            "first_history_date": "2021-11-10",
+            "first_maturity_index": 2329,
+            "last_maturity_index": 2580,
+            "first_maturity_date": "2022-01-11",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 353,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 361
+          },
+          "evaluation": {
+            "origin_index_start": 2581,
+            "origin_index_end_inclusive": 2833,
+            "origin_count": 253,
+            "available": true,
+            "first_origin_date": "2023-01-02",
+            "last_origin_date": "2023-12-21",
+            "first_history_index": 2542,
+            "first_history_date": "2022-11-07",
+            "first_maturity_index": 2586,
+            "last_maturity_index": 2838,
+            "first_maturity_date": "2023-01-09",
+            "last_maturity_date": "2023-12-29",
+            "target_matured_count": 253,
+            "origin_calendar_span_days_inclusive": 354,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 362
+          }
+        },
+        "used_evaluation_origins": 253,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 2192,
+            "next_first_origin_index": 2193,
+            "last_previous_maturity_date": "2021-07-02",
+            "next_first_origin_date": "2021-07-05",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 2323,
+            "next_first_origin_index": 2324,
+            "last_previous_maturity_date": "2022-01-03",
+            "next_first_origin_date": "2022-01-04",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 2580,
+            "next_first_origin_index": 2581,
+            "last_previous_maturity_date": "2022-12-30",
+            "next_first_origin_date": "2023-01-02",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 353,
+        "calibration_through_last_label_calendar_span_days_inclusive": 361
+      },
+      {
+        "market": "EUA_LONG",
+        "evaluation_year": 2023,
+        "horizon_observation_steps": 20,
+        "test_start_index_before_year_end_maturity_filter": 2581,
+        "test_start_date": "2023-01-02",
+        "quotes_in_evaluation_year": 258,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 2142,
+            "origin_count": 2104,
+            "available": true,
+            "first_origin_date": "2013-02-26",
+            "last_origin_date": "2021-04-23",
+            "first_history_index": 0,
+            "first_history_date": "2013-01-02",
+            "first_maturity_index": 59,
+            "last_maturity_index": 2162,
+            "first_maturity_date": "2013-03-26",
+            "last_maturity_date": "2021-05-21",
+            "target_matured_count": 2104,
+            "origin_calendar_span_days_inclusive": 2979,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 3007
+          },
+          "validation": {
+            "origin_index_start": 2163,
+            "origin_index_end_inclusive": 2288,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2021-05-24",
+            "last_origin_date": "2021-11-15",
+            "first_history_index": 2124,
+            "first_history_date": "2021-03-29",
+            "first_maturity_index": 2183,
+            "last_maturity_index": 2308,
+            "first_maturity_date": "2021-06-21",
+            "last_maturity_date": "2021-12-13",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 176,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 204
+          },
+          "calibration": {
+            "origin_index_start": 2309,
+            "origin_index_end_inclusive": 2560,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2021-12-14",
+            "last_origin_date": "2022-12-01",
+            "first_history_index": 2270,
+            "first_history_date": "2021-10-20",
+            "first_maturity_index": 2329,
+            "last_maturity_index": 2580,
+            "first_maturity_date": "2022-01-11",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 353,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 382
+          },
+          "evaluation": {
+            "origin_index_start": 2581,
+            "origin_index_end_inclusive": 2818,
+            "origin_count": 238,
+            "available": true,
+            "first_origin_date": "2023-01-02",
+            "last_origin_date": "2023-11-30",
+            "first_history_index": 2542,
+            "first_history_date": "2022-11-07",
+            "first_maturity_index": 2601,
+            "last_maturity_index": 2838,
+            "first_maturity_date": "2023-01-30",
+            "last_maturity_date": "2023-12-29",
+            "target_matured_count": 238,
+            "origin_calendar_span_days_inclusive": 333,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 362
+          }
+        },
+        "used_evaluation_origins": 238,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 2162,
+            "next_first_origin_index": 2163,
+            "last_previous_maturity_date": "2021-05-21",
+            "next_first_origin_date": "2021-05-24",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 2308,
+            "next_first_origin_index": 2309,
+            "last_previous_maturity_date": "2021-12-13",
+            "next_first_origin_date": "2021-12-14",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 2580,
+            "next_first_origin_index": 2581,
+            "last_previous_maturity_date": "2022-12-30",
+            "next_first_origin_date": "2023-01-02",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 353,
+        "calibration_through_last_label_calendar_span_days_inclusive": 382
+      },
+      {
+        "market": "GUANGZHOU",
+        "evaluation_year": 2021,
+        "horizon_observation_steps": 5,
+        "test_start_index_before_year_end_maturity_filter": 703,
+        "test_start_date": "2021-01-04",
+        "quotes_in_evaluation_year": 247,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 309,
+            "origin_count": 271,
+            "available": true,
+            "first_origin_date": "2018-03-30",
+            "last_origin_date": "2019-05-29",
+            "first_history_index": 0,
+            "first_history_date": "2018-01-03",
+            "first_maturity_index": 44,
+            "last_maturity_index": 314,
+            "first_maturity_date": "2018-04-11",
+            "last_maturity_date": "2019-06-05",
+            "target_matured_count": 271,
+            "origin_calendar_span_days_inclusive": 426,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 433
+          },
+          "validation": {
+            "origin_index_start": 315,
+            "origin_index_end_inclusive": 440,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2019-06-06",
+            "last_origin_date": "2019-12-05",
+            "first_history_index": 276,
+            "first_history_date": "2019-04-09",
+            "first_maturity_index": 320,
+            "last_maturity_index": 445,
+            "first_maturity_date": "2019-06-14",
+            "last_maturity_date": "2019-12-12",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 183,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 190
+          },
+          "calibration": {
+            "origin_index_start": 446,
+            "origin_index_end_inclusive": 697,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2019-12-13",
+            "last_origin_date": "2020-12-24",
+            "first_history_index": 407,
+            "first_history_date": "2019-10-21",
+            "first_maturity_index": 451,
+            "last_maturity_index": 702,
+            "first_maturity_date": "2019-12-20",
+            "last_maturity_date": "2020-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 378,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 385
+          },
+          "evaluation": {
+            "origin_index_start": 703,
+            "origin_index_end_inclusive": 944,
+            "origin_count": 242,
+            "available": true,
+            "first_origin_date": "2021-01-04",
+            "last_origin_date": "2021-12-24",
+            "first_history_index": 664,
+            "first_history_date": "2020-11-15",
+            "first_maturity_index": 708,
+            "last_maturity_index": 949,
+            "first_maturity_date": "2021-01-11",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 242,
+            "origin_calendar_span_days_inclusive": 355,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 362
+          }
+        },
+        "used_evaluation_origins": 242,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 314,
+            "next_first_origin_index": 315,
+            "last_previous_maturity_date": "2019-06-05",
+            "next_first_origin_date": "2019-06-06",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 445,
+            "next_first_origin_index": 446,
+            "last_previous_maturity_date": "2019-12-12",
+            "next_first_origin_date": "2019-12-13",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 702,
+            "next_first_origin_index": 703,
+            "last_previous_maturity_date": "2020-12-31",
+            "next_first_origin_date": "2021-01-04",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 378,
+        "calibration_through_last_label_calendar_span_days_inclusive": 385
+      },
+      {
+        "market": "GUANGZHOU",
+        "evaluation_year": 2021,
+        "horizon_observation_steps": 20,
+        "test_start_index_before_year_end_maturity_filter": 703,
+        "test_start_date": "2021-01-04",
+        "quotes_in_evaluation_year": 247,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 264,
+            "origin_count": 226,
+            "available": true,
+            "first_origin_date": "2018-03-30",
+            "last_origin_date": "2019-03-21",
+            "first_history_index": 0,
+            "first_history_date": "2018-01-03",
+            "first_maturity_index": 59,
+            "last_maturity_index": 284,
+            "first_maturity_date": "2018-05-04",
+            "last_maturity_date": "2019-04-19",
+            "target_matured_count": 226,
+            "origin_calendar_span_days_inclusive": 357,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 386
+          },
+          "validation": {
+            "origin_index_start": 285,
+            "origin_index_end_inclusive": 410,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2019-04-22",
+            "last_origin_date": "2019-10-24",
+            "first_history_index": 246,
+            "first_history_date": "2019-02-25",
+            "first_maturity_index": 305,
+            "last_maturity_index": 430,
+            "first_maturity_date": "2019-05-23",
+            "last_maturity_date": "2019-11-21",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 186,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 214
+          },
+          "calibration": {
+            "origin_index_start": 431,
+            "origin_index_end_inclusive": 682,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2019-11-22",
+            "last_origin_date": "2020-12-03",
+            "first_history_index": 392,
+            "first_history_date": "2019-09-23",
+            "first_maturity_index": 451,
+            "last_maturity_index": 702,
+            "first_maturity_date": "2019-12-20",
+            "last_maturity_date": "2020-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 378,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 406
+          },
+          "evaluation": {
+            "origin_index_start": 703,
+            "origin_index_end_inclusive": 929,
+            "origin_count": 227,
+            "available": true,
+            "first_origin_date": "2021-01-04",
+            "last_origin_date": "2021-12-03",
+            "first_history_index": 664,
+            "first_history_date": "2020-11-15",
+            "first_maturity_index": 723,
+            "last_maturity_index": 949,
+            "first_maturity_date": "2021-02-01",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 227,
+            "origin_calendar_span_days_inclusive": 334,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 362
+          }
+        },
+        "used_evaluation_origins": 227,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 284,
+            "next_first_origin_index": 285,
+            "last_previous_maturity_date": "2019-04-19",
+            "next_first_origin_date": "2019-04-22",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 430,
+            "next_first_origin_index": 431,
+            "last_previous_maturity_date": "2019-11-21",
+            "next_first_origin_date": "2019-11-22",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 702,
+            "next_first_origin_index": 703,
+            "last_previous_maturity_date": "2020-12-31",
+            "next_first_origin_date": "2021-01-04",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 378,
+        "calibration_through_last_label_calendar_span_days_inclusive": 406
+      },
+      {
+        "market": "GUANGZHOU",
+        "evaluation_year": 2022,
+        "horizon_observation_steps": 5,
+        "test_start_index_before_year_end_maturity_filter": 950,
+        "test_start_date": "2022-01-04",
+        "quotes_in_evaluation_year": 242,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 556,
+            "origin_count": 518,
+            "available": true,
+            "first_origin_date": "2018-03-30",
+            "last_origin_date": "2020-06-08",
+            "first_history_index": 0,
+            "first_history_date": "2018-01-03",
+            "first_maturity_index": 44,
+            "last_maturity_index": 561,
+            "first_maturity_date": "2018-04-11",
+            "last_maturity_date": "2020-06-15",
+            "target_matured_count": 518,
+            "origin_calendar_span_days_inclusive": 802,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 809
+          },
+          "validation": {
+            "origin_index_start": 562,
+            "origin_index_end_inclusive": 687,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2020-06-16",
+            "last_origin_date": "2020-12-10",
+            "first_history_index": 523,
+            "first_history_date": "2020-04-17",
+            "first_maturity_index": 567,
+            "last_maturity_index": 692,
+            "first_maturity_date": "2020-06-23",
+            "last_maturity_date": "2020-12-17",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 178,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 185
+          },
+          "calibration": {
+            "origin_index_start": 693,
+            "origin_index_end_inclusive": 944,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2020-12-18",
+            "last_origin_date": "2021-12-24",
+            "first_history_index": 654,
+            "first_history_date": "2020-11-03",
+            "first_maturity_index": 698,
+            "last_maturity_index": 949,
+            "first_maturity_date": "2020-12-25",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 372,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 379
+          },
+          "evaluation": {
+            "origin_index_start": 950,
+            "origin_index_end_inclusive": 1186,
+            "origin_count": 237,
+            "available": true,
+            "first_origin_date": "2022-01-04",
+            "last_origin_date": "2022-12-23",
+            "first_history_index": 911,
+            "first_history_date": "2021-11-09",
+            "first_maturity_index": 955,
+            "last_maturity_index": 1191,
+            "first_maturity_date": "2022-01-11",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 237,
+            "origin_calendar_span_days_inclusive": 354,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 361
+          }
+        },
+        "used_evaluation_origins": 237,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 561,
+            "next_first_origin_index": 562,
+            "last_previous_maturity_date": "2020-06-15",
+            "next_first_origin_date": "2020-06-16",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 692,
+            "next_first_origin_index": 693,
+            "last_previous_maturity_date": "2020-12-17",
+            "next_first_origin_date": "2020-12-18",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 949,
+            "next_first_origin_index": 950,
+            "last_previous_maturity_date": "2021-12-31",
+            "next_first_origin_date": "2022-01-04",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 372,
+        "calibration_through_last_label_calendar_span_days_inclusive": 379
+      },
+      {
+        "market": "GUANGZHOU",
+        "evaluation_year": 2022,
+        "horizon_observation_steps": 20,
+        "test_start_index_before_year_end_maturity_filter": 950,
+        "test_start_date": "2022-01-04",
+        "quotes_in_evaluation_year": 242,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 511,
+            "origin_count": 473,
+            "available": true,
+            "first_origin_date": "2018-03-30",
+            "last_origin_date": "2020-03-31",
+            "first_history_index": 0,
+            "first_history_date": "2018-01-03",
+            "first_maturity_index": 59,
+            "last_maturity_index": 531,
+            "first_maturity_date": "2018-05-04",
+            "last_maturity_date": "2020-04-29",
+            "target_matured_count": 473,
+            "origin_calendar_span_days_inclusive": 733,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 762
+          },
+          "validation": {
+            "origin_index_start": 532,
+            "origin_index_end_inclusive": 657,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2020-04-30",
+            "last_origin_date": "2020-11-06",
+            "first_history_index": 493,
+            "first_history_date": "2020-03-05",
+            "first_maturity_index": 552,
+            "last_maturity_index": 677,
+            "first_maturity_date": "2020-06-02",
+            "last_maturity_date": "2020-11-28",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 191,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 213
+          },
+          "calibration": {
+            "origin_index_start": 678,
+            "origin_index_end_inclusive": 929,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2020-11-29",
+            "last_origin_date": "2021-12-03",
+            "first_history_index": 639,
+            "first_history_date": "2020-10-13",
+            "first_maturity_index": 698,
+            "last_maturity_index": 949,
+            "first_maturity_date": "2020-12-25",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 370,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 398
+          },
+          "evaluation": {
+            "origin_index_start": 950,
+            "origin_index_end_inclusive": 1171,
+            "origin_count": 222,
+            "available": true,
+            "first_origin_date": "2022-01-04",
+            "last_origin_date": "2022-12-02",
+            "first_history_index": 911,
+            "first_history_date": "2021-11-09",
+            "first_maturity_index": 970,
+            "last_maturity_index": 1191,
+            "first_maturity_date": "2022-02-08",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 222,
+            "origin_calendar_span_days_inclusive": 333,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 361
+          }
+        },
+        "used_evaluation_origins": 222,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 531,
+            "next_first_origin_index": 532,
+            "last_previous_maturity_date": "2020-04-29",
+            "next_first_origin_date": "2020-04-30",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 677,
+            "next_first_origin_index": 678,
+            "last_previous_maturity_date": "2020-11-28",
+            "next_first_origin_date": "2020-11-29",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 949,
+            "next_first_origin_index": 950,
+            "last_previous_maturity_date": "2021-12-31",
+            "next_first_origin_date": "2022-01-04",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 370,
+        "calibration_through_last_label_calendar_span_days_inclusive": 398
+      },
+      {
+        "market": "GUANGZHOU",
+        "evaluation_year": 2023,
+        "horizon_observation_steps": 5,
+        "test_start_index_before_year_end_maturity_filter": 1192,
+        "test_start_date": "2023-01-03",
+        "quotes_in_evaluation_year": 242,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 798,
+            "origin_count": 760,
+            "available": true,
+            "first_origin_date": "2018-03-30",
+            "last_origin_date": "2021-05-28",
+            "first_history_index": 0,
+            "first_history_date": "2018-01-03",
+            "first_maturity_index": 44,
+            "last_maturity_index": 803,
+            "first_maturity_date": "2018-04-11",
+            "last_maturity_date": "2021-06-04",
+            "target_matured_count": 760,
+            "origin_calendar_span_days_inclusive": 1156,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 1163
+          },
+          "validation": {
+            "origin_index_start": 804,
+            "origin_index_end_inclusive": 929,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2021-06-07",
+            "last_origin_date": "2021-12-03",
+            "first_history_index": 765,
+            "first_history_date": "2021-04-08",
+            "first_maturity_index": 809,
+            "last_maturity_index": 934,
+            "first_maturity_date": "2021-06-15",
+            "last_maturity_date": "2021-12-10",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 180,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 187
+          },
+          "calibration": {
+            "origin_index_start": 935,
+            "origin_index_end_inclusive": 1186,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2021-12-13",
+            "last_origin_date": "2022-12-23",
+            "first_history_index": 896,
+            "first_history_date": "2021-10-19",
+            "first_maturity_index": 940,
+            "last_maturity_index": 1191,
+            "first_maturity_date": "2021-12-20",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 376,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 383
+          },
+          "evaluation": {
+            "origin_index_start": 1192,
+            "origin_index_end_inclusive": 1428,
+            "origin_count": 237,
+            "available": true,
+            "first_origin_date": "2023-01-03",
+            "last_origin_date": "2023-12-22",
+            "first_history_index": 1153,
+            "first_history_date": "2022-11-08",
+            "first_maturity_index": 1197,
+            "last_maturity_index": 1433,
+            "first_maturity_date": "2023-01-10",
+            "last_maturity_date": "2023-12-29",
+            "target_matured_count": 237,
+            "origin_calendar_span_days_inclusive": 354,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 361
+          }
+        },
+        "used_evaluation_origins": 237,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 803,
+            "next_first_origin_index": 804,
+            "last_previous_maturity_date": "2021-06-04",
+            "next_first_origin_date": "2021-06-07",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 934,
+            "next_first_origin_index": 935,
+            "last_previous_maturity_date": "2021-12-10",
+            "next_first_origin_date": "2021-12-13",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 1191,
+            "next_first_origin_index": 1192,
+            "last_previous_maturity_date": "2022-12-30",
+            "next_first_origin_date": "2023-01-03",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 376,
+        "calibration_through_last_label_calendar_span_days_inclusive": 383
+      },
+      {
+        "market": "GUANGZHOU",
+        "evaluation_year": 2023,
+        "horizon_observation_steps": 20,
+        "test_start_index_before_year_end_maturity_filter": 1192,
+        "test_start_date": "2023-01-03",
+        "quotes_in_evaluation_year": 242,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 753,
+            "origin_count": 715,
+            "available": true,
+            "first_origin_date": "2018-03-30",
+            "last_origin_date": "2021-03-22",
+            "first_history_index": 0,
+            "first_history_date": "2018-01-03",
+            "first_maturity_index": 59,
+            "last_maturity_index": 773,
+            "first_maturity_date": "2018-05-04",
+            "last_maturity_date": "2021-04-20",
+            "target_matured_count": 715,
+            "origin_calendar_span_days_inclusive": 1089,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 1118
+          },
+          "validation": {
+            "origin_index_start": 774,
+            "origin_index_end_inclusive": 899,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2021-04-21",
+            "last_origin_date": "2021-10-22",
+            "first_history_index": 735,
+            "first_history_date": "2021-02-24",
+            "first_maturity_index": 794,
+            "last_maturity_index": 919,
+            "first_maturity_date": "2021-05-24",
+            "last_maturity_date": "2021-11-19",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 185,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 213
+          },
+          "calibration": {
+            "origin_index_start": 920,
+            "origin_index_end_inclusive": 1171,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2021-11-22",
+            "last_origin_date": "2022-12-02",
+            "first_history_index": 881,
+            "first_history_date": "2021-09-17",
+            "first_maturity_index": 940,
+            "last_maturity_index": 1191,
+            "first_maturity_date": "2021-12-20",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 376,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 404
+          },
+          "evaluation": {
+            "origin_index_start": 1192,
+            "origin_index_end_inclusive": 1413,
+            "origin_count": 222,
+            "available": true,
+            "first_origin_date": "2023-01-03",
+            "last_origin_date": "2023-12-01",
+            "first_history_index": 1153,
+            "first_history_date": "2022-11-08",
+            "first_maturity_index": 1212,
+            "last_maturity_index": 1433,
+            "first_maturity_date": "2023-02-07",
+            "last_maturity_date": "2023-12-29",
+            "target_matured_count": 222,
+            "origin_calendar_span_days_inclusive": 333,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 361
+          }
+        },
+        "used_evaluation_origins": 222,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 773,
+            "next_first_origin_index": 774,
+            "last_previous_maturity_date": "2021-04-20",
+            "next_first_origin_date": "2021-04-21",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 919,
+            "next_first_origin_index": 920,
+            "last_previous_maturity_date": "2021-11-19",
+            "next_first_origin_date": "2021-11-22",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 1191,
+            "next_first_origin_index": 1192,
+            "last_previous_maturity_date": "2022-12-30",
+            "next_first_origin_date": "2023-01-03",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 376,
+        "calibration_through_last_label_calendar_span_days_inclusive": 404
+      },
+      {
+        "market": "HUBEI",
+        "evaluation_year": 2021,
+        "horizon_observation_steps": 5,
+        "test_start_index_before_year_end_maturity_filter": 694,
+        "test_start_date": "2021-01-04",
+        "quotes_in_evaluation_year": 242,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 300,
+            "origin_count": 262,
+            "available": true,
+            "first_origin_date": "2018-03-05",
+            "last_origin_date": "2019-04-01",
+            "first_history_index": 0,
+            "first_history_date": "2018-01-02",
+            "first_maturity_index": 44,
+            "last_maturity_index": 305,
+            "first_maturity_date": "2018-03-12",
+            "last_maturity_date": "2019-04-09",
+            "target_matured_count": 262,
+            "origin_calendar_span_days_inclusive": 393,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 401
+          },
+          "validation": {
+            "origin_index_start": 306,
+            "origin_index_end_inclusive": 431,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2019-04-10",
+            "last_origin_date": "2019-10-16",
+            "first_history_index": 267,
+            "first_history_date": "2019-02-13",
+            "first_maturity_index": 311,
+            "last_maturity_index": 436,
+            "first_maturity_date": "2019-04-17",
+            "last_maturity_date": "2019-10-23",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 190,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 197
+          },
+          "calibration": {
+            "origin_index_start": 437,
+            "origin_index_end_inclusive": 688,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2019-10-24",
+            "last_origin_date": "2020-12-24",
+            "first_history_index": 398,
+            "first_history_date": "2019-08-22",
+            "first_maturity_index": 442,
+            "last_maturity_index": 693,
+            "first_maturity_date": "2019-10-31",
+            "last_maturity_date": "2020-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 428,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 435
+          },
+          "evaluation": {
+            "origin_index_start": 694,
+            "origin_index_end_inclusive": 930,
+            "origin_count": 237,
+            "available": true,
+            "first_origin_date": "2021-01-04",
+            "last_origin_date": "2021-12-24",
+            "first_history_index": 655,
+            "first_history_date": "2020-11-09",
+            "first_maturity_index": 699,
+            "last_maturity_index": 935,
+            "first_maturity_date": "2021-01-11",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 237,
+            "origin_calendar_span_days_inclusive": 355,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 362
+          }
+        },
+        "used_evaluation_origins": 237,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 305,
+            "next_first_origin_index": 306,
+            "last_previous_maturity_date": "2019-04-09",
+            "next_first_origin_date": "2019-04-10",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 436,
+            "next_first_origin_index": 437,
+            "last_previous_maturity_date": "2019-10-23",
+            "next_first_origin_date": "2019-10-24",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 693,
+            "next_first_origin_index": 694,
+            "last_previous_maturity_date": "2020-12-31",
+            "next_first_origin_date": "2021-01-04",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 428,
+        "calibration_through_last_label_calendar_span_days_inclusive": 435
+      },
+      {
+        "market": "HUBEI",
+        "evaluation_year": 2021,
+        "horizon_observation_steps": 20,
+        "test_start_index_before_year_end_maturity_filter": 694,
+        "test_start_date": "2021-01-04",
+        "quotes_in_evaluation_year": 242,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 255,
+            "origin_count": 217,
+            "available": true,
+            "first_origin_date": "2018-03-05",
+            "last_origin_date": "2019-01-21",
+            "first_history_index": 0,
+            "first_history_date": "2018-01-02",
+            "first_maturity_index": 59,
+            "last_maturity_index": 275,
+            "first_maturity_date": "2018-04-03",
+            "last_maturity_date": "2019-02-25",
+            "target_matured_count": 217,
+            "origin_calendar_span_days_inclusive": 323,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 358
+          },
+          "validation": {
+            "origin_index_start": 276,
+            "origin_index_end_inclusive": 401,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2019-02-26",
+            "last_origin_date": "2019-08-27",
+            "first_history_index": 237,
+            "first_history_date": "2018-12-24",
+            "first_maturity_index": 296,
+            "last_maturity_index": 421,
+            "first_maturity_date": "2019-03-26",
+            "last_maturity_date": "2019-09-25",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 183,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 212
+          },
+          "calibration": {
+            "origin_index_start": 422,
+            "origin_index_end_inclusive": 673,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2019-09-26",
+            "last_origin_date": "2020-12-03",
+            "first_history_index": 383,
+            "first_history_date": "2019-08-01",
+            "first_maturity_index": 442,
+            "last_maturity_index": 693,
+            "first_maturity_date": "2019-10-31",
+            "last_maturity_date": "2020-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 435,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 463
+          },
+          "evaluation": {
+            "origin_index_start": 694,
+            "origin_index_end_inclusive": 915,
+            "origin_count": 222,
+            "available": true,
+            "first_origin_date": "2021-01-04",
+            "last_origin_date": "2021-12-03",
+            "first_history_index": 655,
+            "first_history_date": "2020-11-09",
+            "first_maturity_index": 714,
+            "last_maturity_index": 935,
+            "first_maturity_date": "2021-02-01",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 222,
+            "origin_calendar_span_days_inclusive": 334,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 362
+          }
+        },
+        "used_evaluation_origins": 222,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 275,
+            "next_first_origin_index": 276,
+            "last_previous_maturity_date": "2019-02-25",
+            "next_first_origin_date": "2019-02-26",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 421,
+            "next_first_origin_index": 422,
+            "last_previous_maturity_date": "2019-09-25",
+            "next_first_origin_date": "2019-09-26",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 693,
+            "next_first_origin_index": 694,
+            "last_previous_maturity_date": "2020-12-31",
+            "next_first_origin_date": "2021-01-04",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 435,
+        "calibration_through_last_label_calendar_span_days_inclusive": 463
+      },
+      {
+        "market": "HUBEI",
+        "evaluation_year": 2022,
+        "horizon_observation_steps": 5,
+        "test_start_index_before_year_end_maturity_filter": 936,
+        "test_start_date": "2022-01-04",
+        "quotes_in_evaluation_year": 237,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 542,
+            "origin_count": 504,
+            "available": true,
+            "first_origin_date": "2018-03-05",
+            "last_origin_date": "2020-05-22",
+            "first_history_index": 0,
+            "first_history_date": "2018-01-02",
+            "first_maturity_index": 44,
+            "last_maturity_index": 547,
+            "first_maturity_date": "2018-03-12",
+            "last_maturity_date": "2020-05-29",
+            "target_matured_count": 504,
+            "origin_calendar_span_days_inclusive": 810,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 817
+          },
+          "validation": {
+            "origin_index_start": 548,
+            "origin_index_end_inclusive": 673,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2020-06-01",
+            "last_origin_date": "2020-12-03",
+            "first_history_index": 509,
+            "first_history_date": "2020-04-01",
+            "first_maturity_index": 553,
+            "last_maturity_index": 678,
+            "first_maturity_date": "2020-06-08",
+            "last_maturity_date": "2020-12-10",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 186,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 193
+          },
+          "calibration": {
+            "origin_index_start": 679,
+            "origin_index_end_inclusive": 930,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2020-12-11",
+            "last_origin_date": "2021-12-24",
+            "first_history_index": 640,
+            "first_history_date": "2020-10-19",
+            "first_maturity_index": 684,
+            "last_maturity_index": 935,
+            "first_maturity_date": "2020-12-18",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 379,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 386
+          },
+          "evaluation": {
+            "origin_index_start": 936,
+            "origin_index_end_inclusive": 1167,
+            "origin_count": 232,
+            "available": true,
+            "first_origin_date": "2022-01-04",
+            "last_origin_date": "2022-12-23",
+            "first_history_index": 897,
+            "first_history_date": "2021-11-09",
+            "first_maturity_index": 941,
+            "last_maturity_index": 1172,
+            "first_maturity_date": "2022-01-11",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 232,
+            "origin_calendar_span_days_inclusive": 354,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 361
+          }
+        },
+        "used_evaluation_origins": 232,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 547,
+            "next_first_origin_index": 548,
+            "last_previous_maturity_date": "2020-05-29",
+            "next_first_origin_date": "2020-06-01",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 678,
+            "next_first_origin_index": 679,
+            "last_previous_maturity_date": "2020-12-10",
+            "next_first_origin_date": "2020-12-11",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 935,
+            "next_first_origin_index": 936,
+            "last_previous_maturity_date": "2021-12-31",
+            "next_first_origin_date": "2022-01-04",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 379,
+        "calibration_through_last_label_calendar_span_days_inclusive": 386
+      },
+      {
+        "market": "HUBEI",
+        "evaluation_year": 2022,
+        "horizon_observation_steps": 20,
+        "test_start_index_before_year_end_maturity_filter": 936,
+        "test_start_date": "2022-01-04",
+        "quotes_in_evaluation_year": 237,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 497,
+            "origin_count": 459,
+            "available": true,
+            "first_origin_date": "2018-03-05",
+            "last_origin_date": "2020-01-17",
+            "first_history_index": 0,
+            "first_history_date": "2018-01-02",
+            "first_maturity_index": 59,
+            "last_maturity_index": 517,
+            "first_maturity_date": "2018-04-03",
+            "last_maturity_date": "2020-04-14",
+            "target_matured_count": 459,
+            "origin_calendar_span_days_inclusive": 684,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 772
+          },
+          "validation": {
+            "origin_index_start": 518,
+            "origin_index_end_inclusive": 643,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2020-04-15",
+            "last_origin_date": "2020-10-22",
+            "first_history_index": 479,
+            "first_history_date": "2019-12-23",
+            "first_maturity_index": 538,
+            "last_maturity_index": 663,
+            "first_maturity_date": "2020-05-18",
+            "last_maturity_date": "2020-11-19",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 191,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 219
+          },
+          "calibration": {
+            "origin_index_start": 664,
+            "origin_index_end_inclusive": 915,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2020-11-20",
+            "last_origin_date": "2021-12-03",
+            "first_history_index": 625,
+            "first_history_date": "2020-09-18",
+            "first_maturity_index": 684,
+            "last_maturity_index": 935,
+            "first_maturity_date": "2020-12-18",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 379,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 407
+          },
+          "evaluation": {
+            "origin_index_start": 936,
+            "origin_index_end_inclusive": 1152,
+            "origin_count": 217,
+            "available": true,
+            "first_origin_date": "2022-01-04",
+            "last_origin_date": "2022-12-02",
+            "first_history_index": 897,
+            "first_history_date": "2021-11-09",
+            "first_maturity_index": 956,
+            "last_maturity_index": 1172,
+            "first_maturity_date": "2022-02-08",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 217,
+            "origin_calendar_span_days_inclusive": 333,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 361
+          }
+        },
+        "used_evaluation_origins": 217,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 517,
+            "next_first_origin_index": 518,
+            "last_previous_maturity_date": "2020-04-14",
+            "next_first_origin_date": "2020-04-15",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 663,
+            "next_first_origin_index": 664,
+            "last_previous_maturity_date": "2020-11-19",
+            "next_first_origin_date": "2020-11-20",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 935,
+            "next_first_origin_index": 936,
+            "last_previous_maturity_date": "2021-12-31",
+            "next_first_origin_date": "2022-01-04",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 379,
+        "calibration_through_last_label_calendar_span_days_inclusive": 407
+      },
+      {
+        "market": "HUBEI",
+        "evaluation_year": 2023,
+        "horizon_observation_steps": 5,
+        "test_start_index_before_year_end_maturity_filter": 1173,
+        "test_start_date": "2023-01-03",
+        "quotes_in_evaluation_year": 235,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 779,
+            "origin_count": 741,
+            "available": true,
+            "first_origin_date": "2018-03-05",
+            "last_origin_date": "2021-05-17",
+            "first_history_index": 0,
+            "first_history_date": "2018-01-02",
+            "first_maturity_index": 44,
+            "last_maturity_index": 784,
+            "first_maturity_date": "2018-03-12",
+            "last_maturity_date": "2021-05-24",
+            "target_matured_count": 741,
+            "origin_calendar_span_days_inclusive": 1170,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 1177
+          },
+          "validation": {
+            "origin_index_start": 785,
+            "origin_index_end_inclusive": 910,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2021-05-25",
+            "last_origin_date": "2021-11-26",
+            "first_history_index": 746,
+            "first_history_date": "2021-03-25",
+            "first_maturity_index": 790,
+            "last_maturity_index": 915,
+            "first_maturity_date": "2021-06-01",
+            "last_maturity_date": "2021-12-03",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 186,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 193
+          },
+          "calibration": {
+            "origin_index_start": 916,
+            "origin_index_end_inclusive": 1167,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2021-12-06",
+            "last_origin_date": "2022-12-23",
+            "first_history_index": 877,
+            "first_history_date": "2021-10-12",
+            "first_maturity_index": 921,
+            "last_maturity_index": 1172,
+            "first_maturity_date": "2021-12-13",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 383,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 390
+          },
+          "evaluation": {
+            "origin_index_start": 1173,
+            "origin_index_end_inclusive": 1402,
+            "origin_count": 230,
+            "available": true,
+            "first_origin_date": "2023-01-03",
+            "last_origin_date": "2023-12-22",
+            "first_history_index": 1134,
+            "first_history_date": "2022-11-08",
+            "first_maturity_index": 1178,
+            "last_maturity_index": 1407,
+            "first_maturity_date": "2023-01-10",
+            "last_maturity_date": "2023-12-29",
+            "target_matured_count": 230,
+            "origin_calendar_span_days_inclusive": 354,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 361
+          }
+        },
+        "used_evaluation_origins": 230,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 784,
+            "next_first_origin_index": 785,
+            "last_previous_maturity_date": "2021-05-24",
+            "next_first_origin_date": "2021-05-25",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 915,
+            "next_first_origin_index": 916,
+            "last_previous_maturity_date": "2021-12-03",
+            "next_first_origin_date": "2021-12-06",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 1172,
+            "next_first_origin_index": 1173,
+            "last_previous_maturity_date": "2022-12-30",
+            "next_first_origin_date": "2023-01-03",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 383,
+        "calibration_through_last_label_calendar_span_days_inclusive": 390
+      },
+      {
+        "market": "HUBEI",
+        "evaluation_year": 2023,
+        "horizon_observation_steps": 20,
+        "test_start_index_before_year_end_maturity_filter": 1173,
+        "test_start_date": "2023-01-03",
+        "quotes_in_evaluation_year": 235,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 734,
+            "origin_count": 696,
+            "available": true,
+            "first_origin_date": "2018-03-05",
+            "last_origin_date": "2021-03-09",
+            "first_history_index": 0,
+            "first_history_date": "2018-01-02",
+            "first_maturity_index": 59,
+            "last_maturity_index": 754,
+            "first_maturity_date": "2018-04-03",
+            "last_maturity_date": "2021-04-07",
+            "target_matured_count": 696,
+            "origin_calendar_span_days_inclusive": 1101,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 1130
+          },
+          "validation": {
+            "origin_index_start": 755,
+            "origin_index_end_inclusive": 880,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2021-04-08",
+            "last_origin_date": "2021-10-15",
+            "first_history_index": 716,
+            "first_history_date": "2021-02-03",
+            "first_maturity_index": 775,
+            "last_maturity_index": 900,
+            "first_maturity_date": "2021-05-11",
+            "last_maturity_date": "2021-11-12",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 191,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 219
+          },
+          "calibration": {
+            "origin_index_start": 901,
+            "origin_index_end_inclusive": 1152,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2021-11-15",
+            "last_origin_date": "2022-12-02",
+            "first_history_index": 862,
+            "first_history_date": "2021-09-10",
+            "first_maturity_index": 921,
+            "last_maturity_index": 1172,
+            "first_maturity_date": "2021-12-13",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 383,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 411
+          },
+          "evaluation": {
+            "origin_index_start": 1173,
+            "origin_index_end_inclusive": 1387,
+            "origin_count": 215,
+            "available": true,
+            "first_origin_date": "2023-01-03",
+            "last_origin_date": "2023-12-01",
+            "first_history_index": 1134,
+            "first_history_date": "2022-11-08",
+            "first_maturity_index": 1193,
+            "last_maturity_index": 1407,
+            "first_maturity_date": "2023-02-07",
+            "last_maturity_date": "2023-12-29",
+            "target_matured_count": 215,
+            "origin_calendar_span_days_inclusive": 333,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 361
+          }
+        },
+        "used_evaluation_origins": 215,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 754,
+            "next_first_origin_index": 755,
+            "last_previous_maturity_date": "2021-04-07",
+            "next_first_origin_date": "2021-04-08",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 900,
+            "next_first_origin_index": 901,
+            "last_previous_maturity_date": "2021-11-12",
+            "next_first_origin_date": "2021-11-15",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 1172,
+            "next_first_origin_index": 1173,
+            "last_previous_maturity_date": "2022-12-30",
+            "next_first_origin_date": "2023-01-03",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 383,
+        "calibration_through_last_label_calendar_span_days_inclusive": 411
+      },
+      {
+        "market": "SHANGHAI",
+        "evaluation_year": 2021,
+        "horizon_observation_steps": 5,
+        "test_start_index_before_year_end_maturity_filter": 1049,
+        "test_start_date": "2021-01-08",
+        "quotes_in_evaluation_year": 47,
+        "eligible_for_model_evaluation": false,
+        "exclusion_reasons": [
+          "Predefined before new model fitting: Shanghai has 47 author quotes in 2021 and only 27 L20/H20 same-year mature origins; exclude the entire 2021 Shanghai evaluation, retaining source rows and all audit counts."
+        ],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 655,
+            "origin_count": 617,
+            "available": true,
+            "first_origin_date": "2014-02-21",
+            "last_origin_date": "2018-04-27",
+            "first_history_index": 0,
+            "first_history_date": "2013-12-19",
+            "first_maturity_index": 44,
+            "last_maturity_index": 660,
+            "first_maturity_date": "2014-03-03",
+            "last_maturity_date": "2018-05-08",
+            "target_matured_count": 617,
+            "origin_calendar_span_days_inclusive": 1527,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 1538
+          },
+          "validation": {
+            "origin_index_start": 661,
+            "origin_index_end_inclusive": 786,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2018-05-10",
+            "last_origin_date": "2019-04-26",
+            "first_history_index": 622,
+            "first_history_date": "2018-01-26",
+            "first_maturity_index": 666,
+            "last_maturity_index": 791,
+            "first_maturity_date": "2018-05-21",
+            "last_maturity_date": "2019-05-08",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 352,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 364
+          },
+          "calibration": {
+            "origin_index_start": 792,
+            "origin_index_end_inclusive": 1043,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2019-05-09",
+            "last_origin_date": "2020-12-07",
+            "first_history_index": 753,
+            "first_history_date": "2019-01-24",
+            "first_maturity_index": 797,
+            "last_maturity_index": 1048,
+            "first_maturity_date": "2019-05-16",
+            "last_maturity_date": "2020-12-28",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 579,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 600
+          },
+          "evaluation": {
+            "origin_index_start": 1049,
+            "origin_index_end_inclusive": 1090,
+            "origin_count": 42,
+            "available": true,
+            "first_origin_date": "2021-01-08",
+            "last_origin_date": "2021-12-22",
+            "first_history_index": 1010,
+            "first_history_date": "2020-10-12",
+            "first_maturity_index": 1054,
+            "last_maturity_index": 1095,
+            "first_maturity_date": "2021-01-18",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 42,
+            "origin_calendar_span_days_inclusive": 349,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 358
+          }
+        },
+        "used_evaluation_origins": 0,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 660,
+            "next_first_origin_index": 661,
+            "last_previous_maturity_date": "2018-05-08",
+            "next_first_origin_date": "2018-05-10",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 791,
+            "next_first_origin_index": 792,
+            "last_previous_maturity_date": "2019-05-08",
+            "next_first_origin_date": "2019-05-09",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 1048,
+            "next_first_origin_index": 1049,
+            "last_previous_maturity_date": "2020-12-28",
+            "next_first_origin_date": "2021-01-08",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 579,
+        "calibration_through_last_label_calendar_span_days_inclusive": 600
+      },
+      {
+        "market": "SHANGHAI",
+        "evaluation_year": 2021,
+        "horizon_observation_steps": 20,
+        "test_start_index_before_year_end_maturity_filter": 1049,
+        "test_start_date": "2021-01-08",
+        "quotes_in_evaluation_year": 47,
+        "eligible_for_model_evaluation": false,
+        "exclusion_reasons": [
+          "Predefined before new model fitting: Shanghai has 47 author quotes in 2021 and only 27 L20/H20 same-year mature origins; exclude the entire 2021 Shanghai evaluation, retaining source rows and all audit counts."
+        ],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 610,
+            "origin_count": 572,
+            "available": true,
+            "first_origin_date": "2014-02-21",
+            "last_origin_date": "2018-01-10",
+            "first_history_index": 0,
+            "first_history_date": "2013-12-19",
+            "first_maturity_index": 59,
+            "last_maturity_index": 630,
+            "first_maturity_date": "2014-03-27",
+            "last_maturity_date": "2018-03-01",
+            "target_matured_count": 572,
+            "origin_calendar_span_days_inclusive": 1420,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 1470
+          },
+          "validation": {
+            "origin_index_start": 631,
+            "origin_index_end_inclusive": 756,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2018-03-02",
+            "last_origin_date": "2019-02-22",
+            "first_history_index": 592,
+            "first_history_date": "2017-12-05",
+            "first_maturity_index": 651,
+            "last_maturity_index": 776,
+            "first_maturity_date": "2018-04-23",
+            "last_maturity_date": "2019-04-04",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 358,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 399
+          },
+          "calibration": {
+            "origin_index_start": 777,
+            "origin_index_end_inclusive": 1028,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2019-04-08",
+            "last_origin_date": "2020-11-10",
+            "first_history_index": 738,
+            "first_history_date": "2018-11-28",
+            "first_maturity_index": 797,
+            "last_maturity_index": 1048,
+            "first_maturity_date": "2019-05-16",
+            "last_maturity_date": "2020-12-28",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 583,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 631
+          },
+          "evaluation": {
+            "origin_index_start": 1049,
+            "origin_index_end_inclusive": 1075,
+            "origin_count": 27,
+            "available": true,
+            "first_origin_date": "2021-01-08",
+            "last_origin_date": "2021-11-29",
+            "first_history_index": 1010,
+            "first_history_date": "2020-10-12",
+            "first_maturity_index": 1069,
+            "last_maturity_index": 1095,
+            "first_maturity_date": "2021-02-26",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 27,
+            "origin_calendar_span_days_inclusive": 326,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 358
+          }
+        },
+        "used_evaluation_origins": 0,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 630,
+            "next_first_origin_index": 631,
+            "last_previous_maturity_date": "2018-03-01",
+            "next_first_origin_date": "2018-03-02",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 776,
+            "next_first_origin_index": 777,
+            "last_previous_maturity_date": "2019-04-04",
+            "next_first_origin_date": "2019-04-08",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 1048,
+            "next_first_origin_index": 1049,
+            "last_previous_maturity_date": "2020-12-28",
+            "next_first_origin_date": "2021-01-08",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 583,
+        "calibration_through_last_label_calendar_span_days_inclusive": 631
+      },
+      {
+        "market": "SHANGHAI",
+        "evaluation_year": 2022,
+        "horizon_observation_steps": 5,
+        "test_start_index_before_year_end_maturity_filter": 1096,
+        "test_start_date": "2022-01-04",
+        "quotes_in_evaluation_year": 215,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 702,
+            "origin_count": 664,
+            "available": true,
+            "first_origin_date": "2014-02-21",
+            "last_origin_date": "2018-07-19",
+            "first_history_index": 0,
+            "first_history_date": "2013-12-19",
+            "first_maturity_index": 44,
+            "last_maturity_index": 707,
+            "first_maturity_date": "2014-03-03",
+            "last_maturity_date": "2018-07-26",
+            "target_matured_count": 664,
+            "origin_calendar_span_days_inclusive": 1610,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 1617
+          },
+          "validation": {
+            "origin_index_start": 708,
+            "origin_index_end_inclusive": 833,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2018-07-27",
+            "last_origin_date": "2019-07-26",
+            "first_history_index": 669,
+            "first_history_date": "2018-05-24",
+            "first_maturity_index": 713,
+            "last_maturity_index": 838,
+            "first_maturity_date": "2018-08-30",
+            "last_maturity_date": "2019-08-05",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 365,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 375
+          },
+          "calibration": {
+            "origin_index_start": 839,
+            "origin_index_end_inclusive": 1090,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2019-08-12",
+            "last_origin_date": "2021-12-22",
+            "first_history_index": 800,
+            "first_history_date": "2019-05-21",
+            "first_maturity_index": 844,
+            "last_maturity_index": 1095,
+            "first_maturity_date": "2019-08-28",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 864,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 873
+          },
+          "evaluation": {
+            "origin_index_start": 1096,
+            "origin_index_end_inclusive": 1305,
+            "origin_count": 210,
+            "available": true,
+            "first_origin_date": "2022-01-04",
+            "last_origin_date": "2022-12-23",
+            "first_history_index": 1057,
+            "first_history_date": "2021-01-22",
+            "first_maturity_index": 1101,
+            "last_maturity_index": 1310,
+            "first_maturity_date": "2022-01-11",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 210,
+            "origin_calendar_span_days_inclusive": 354,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 361
+          }
+        },
+        "used_evaluation_origins": 210,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 707,
+            "next_first_origin_index": 708,
+            "last_previous_maturity_date": "2018-07-26",
+            "next_first_origin_date": "2018-07-27",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 838,
+            "next_first_origin_index": 839,
+            "last_previous_maturity_date": "2019-08-05",
+            "next_first_origin_date": "2019-08-12",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 1095,
+            "next_first_origin_index": 1096,
+            "last_previous_maturity_date": "2021-12-31",
+            "next_first_origin_date": "2022-01-04",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 864,
+        "calibration_through_last_label_calendar_span_days_inclusive": 873
+      },
+      {
+        "market": "SHANGHAI",
+        "evaluation_year": 2022,
+        "horizon_observation_steps": 20,
+        "test_start_index_before_year_end_maturity_filter": 1096,
+        "test_start_date": "2022-01-04",
+        "quotes_in_evaluation_year": 215,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 657,
+            "origin_count": 619,
+            "available": true,
+            "first_origin_date": "2014-02-21",
+            "last_origin_date": "2018-05-03",
+            "first_history_index": 0,
+            "first_history_date": "2013-12-19",
+            "first_maturity_index": 59,
+            "last_maturity_index": 677,
+            "first_maturity_date": "2014-03-27",
+            "last_maturity_date": "2018-06-11",
+            "target_matured_count": 619,
+            "origin_calendar_span_days_inclusive": 1533,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 1572
+          },
+          "validation": {
+            "origin_index_start": 678,
+            "origin_index_end_inclusive": 803,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2018-06-13",
+            "last_origin_date": "2019-05-27",
+            "first_history_index": 639,
+            "first_history_date": "2018-03-23",
+            "first_maturity_index": 698,
+            "last_maturity_index": 823,
+            "first_maturity_date": "2018-07-13",
+            "last_maturity_date": "2019-07-08",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 349,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 391
+          },
+          "calibration": {
+            "origin_index_start": 824,
+            "origin_index_end_inclusive": 1075,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2019-07-09",
+            "last_origin_date": "2021-11-29",
+            "first_history_index": 785,
+            "first_history_date": "2019-04-25",
+            "first_maturity_index": 844,
+            "last_maturity_index": 1095,
+            "first_maturity_date": "2019-08-28",
+            "last_maturity_date": "2021-12-31",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 875,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 907
+          },
+          "evaluation": {
+            "origin_index_start": 1096,
+            "origin_index_end_inclusive": 1290,
+            "origin_count": 195,
+            "available": true,
+            "first_origin_date": "2022-01-04",
+            "last_origin_date": "2022-12-01",
+            "first_history_index": 1057,
+            "first_history_date": "2021-01-22",
+            "first_maturity_index": 1116,
+            "last_maturity_index": 1310,
+            "first_maturity_date": "2022-02-15",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 195,
+            "origin_calendar_span_days_inclusive": 332,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 361
+          }
+        },
+        "used_evaluation_origins": 195,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 677,
+            "next_first_origin_index": 678,
+            "last_previous_maturity_date": "2018-06-11",
+            "next_first_origin_date": "2018-06-13",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 823,
+            "next_first_origin_index": 824,
+            "last_previous_maturity_date": "2019-07-08",
+            "next_first_origin_date": "2019-07-09",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 1095,
+            "next_first_origin_index": 1096,
+            "last_previous_maturity_date": "2021-12-31",
+            "next_first_origin_date": "2022-01-04",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 875,
+        "calibration_through_last_label_calendar_span_days_inclusive": 907
+      },
+      {
+        "market": "SHANGHAI",
+        "evaluation_year": 2023,
+        "horizon_observation_steps": 5,
+        "test_start_index_before_year_end_maturity_filter": 1311,
+        "test_start_date": "2023-01-10",
+        "quotes_in_evaluation_year": 196,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 917,
+            "origin_count": 879,
+            "available": true,
+            "first_origin_date": "2014-02-21",
+            "last_origin_date": "2020-03-27",
+            "first_history_index": 0,
+            "first_history_date": "2013-12-19",
+            "first_maturity_index": 44,
+            "last_maturity_index": 922,
+            "first_maturity_date": "2014-03-03",
+            "last_maturity_date": "2020-04-08",
+            "target_matured_count": 879,
+            "origin_calendar_span_days_inclusive": 2227,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 2239
+          },
+          "validation": {
+            "origin_index_start": 923,
+            "origin_index_end_inclusive": 1048,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2020-04-09",
+            "last_origin_date": "2020-12-28",
+            "first_history_index": 884,
+            "first_history_date": "2019-11-27",
+            "first_maturity_index": 928,
+            "last_maturity_index": 1053,
+            "first_maturity_date": "2020-04-21",
+            "last_maturity_date": "2021-01-15",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 264,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 282
+          },
+          "calibration": {
+            "origin_index_start": 1054,
+            "origin_index_end_inclusive": 1305,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2021-01-18",
+            "last_origin_date": "2022-12-23",
+            "first_history_index": 1015,
+            "first_history_date": "2020-10-20",
+            "first_maturity_index": 1059,
+            "last_maturity_index": 1310,
+            "first_maturity_date": "2021-01-28",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 705,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 712
+          },
+          "evaluation": {
+            "origin_index_start": 1311,
+            "origin_index_end_inclusive": 1501,
+            "origin_count": 191,
+            "available": true,
+            "first_origin_date": "2023-01-10",
+            "last_origin_date": "2023-12-18",
+            "first_history_index": 1272,
+            "first_history_date": "2022-11-07",
+            "first_maturity_index": 1316,
+            "last_maturity_index": 1506,
+            "first_maturity_date": "2023-01-18",
+            "last_maturity_date": "2023-12-29",
+            "target_matured_count": 191,
+            "origin_calendar_span_days_inclusive": 343,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 354
+          }
+        },
+        "used_evaluation_origins": 191,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 922,
+            "next_first_origin_index": 923,
+            "last_previous_maturity_date": "2020-04-08",
+            "next_first_origin_date": "2020-04-09",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 1053,
+            "next_first_origin_index": 1054,
+            "last_previous_maturity_date": "2021-01-15",
+            "next_first_origin_date": "2021-01-18",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 1310,
+            "next_first_origin_index": 1311,
+            "last_previous_maturity_date": "2022-12-30",
+            "next_first_origin_date": "2023-01-10",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 705,
+        "calibration_through_last_label_calendar_span_days_inclusive": 712
+      },
+      {
+        "market": "SHANGHAI",
+        "evaluation_year": 2023,
+        "horizon_observation_steps": 20,
+        "test_start_index_before_year_end_maturity_filter": 1311,
+        "test_start_date": "2023-01-10",
+        "quotes_in_evaluation_year": 196,
+        "eligible_for_model_evaluation": true,
+        "exclusion_reasons": [],
+        "minimum_train_origins": 128,
+        "roles": {
+          "train": {
+            "origin_index_start": 39,
+            "origin_index_end_inclusive": 872,
+            "origin_count": 834,
+            "available": true,
+            "first_origin_date": "2014-02-21",
+            "last_origin_date": "2019-11-11",
+            "first_history_index": 0,
+            "first_history_date": "2013-12-19",
+            "first_maturity_index": 59,
+            "last_maturity_index": 892,
+            "first_maturity_date": "2014-03-27",
+            "last_maturity_date": "2020-01-10",
+            "target_matured_count": 834,
+            "origin_calendar_span_days_inclusive": 2090,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 2150
+          },
+          "validation": {
+            "origin_index_start": 893,
+            "origin_index_end_inclusive": 1018,
+            "origin_count": 126,
+            "available": true,
+            "first_origin_date": "2020-01-13",
+            "last_origin_date": "2020-10-23",
+            "first_history_index": 854,
+            "first_history_date": "2019-10-11",
+            "first_maturity_index": 913,
+            "last_maturity_index": 1038,
+            "first_maturity_date": "2020-03-23",
+            "last_maturity_date": "2020-11-25",
+            "target_matured_count": 126,
+            "origin_calendar_span_days_inclusive": 285,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 318
+          },
+          "calibration": {
+            "origin_index_start": 1039,
+            "origin_index_end_inclusive": 1290,
+            "origin_count": 252,
+            "available": true,
+            "first_origin_date": "2020-11-26",
+            "last_origin_date": "2022-12-01",
+            "first_history_index": 1000,
+            "first_history_date": "2020-09-15",
+            "first_maturity_index": 1059,
+            "last_maturity_index": 1310,
+            "first_maturity_date": "2021-01-28",
+            "last_maturity_date": "2022-12-30",
+            "target_matured_count": 252,
+            "origin_calendar_span_days_inclusive": 736,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 765
+          },
+          "evaluation": {
+            "origin_index_start": 1311,
+            "origin_index_end_inclusive": 1486,
+            "origin_count": 176,
+            "available": true,
+            "first_origin_date": "2023-01-10",
+            "last_origin_date": "2023-11-20",
+            "first_history_index": 1272,
+            "first_history_date": "2022-11-07",
+            "first_maturity_index": 1331,
+            "last_maturity_index": 1506,
+            "first_maturity_date": "2023-02-24",
+            "last_maturity_date": "2023-12-29",
+            "target_matured_count": 176,
+            "origin_calendar_span_days_inclusive": 315,
+            "origin_to_last_maturity_calendar_span_days_inclusive": 354
+          }
+        },
+        "used_evaluation_origins": 176,
+        "strict_maturity_boundaries": [
+          {
+            "previous_role": "train",
+            "next_role": "validation",
+            "last_previous_maturity_index": 892,
+            "next_first_origin_index": 893,
+            "last_previous_maturity_date": "2020-01-10",
+            "next_first_origin_date": "2020-01-13",
+            "passed": true
+          },
+          {
+            "previous_role": "validation",
+            "next_role": "calibration",
+            "last_previous_maturity_index": 1038,
+            "next_first_origin_index": 1039,
+            "last_previous_maturity_date": "2020-11-25",
+            "next_first_origin_date": "2020-11-26",
+            "passed": true
+          },
+          {
+            "previous_role": "calibration",
+            "next_role": "evaluation",
+            "last_previous_maturity_index": 1310,
+            "next_first_origin_index": 1311,
+            "last_previous_maturity_date": "2022-12-30",
+            "next_first_origin_date": "2023-01-10",
+            "passed": true
+          }
+        ],
+        "calibration_origin_calendar_span_days_inclusive": 736,
+        "calibration_through_last_label_calendar_span_days_inclusive": 765
+      }
+    ]
+  },
+  "calendar_screening_only": {
+    "fixed_train_2018_tuning_2019_calibration_2020": {
+      "EUA_LONG": {
+        "train": {
+          "period_start_inclusive": "2013-01-02",
+          "period_end_inclusive": "2018-12-31",
+          "observed_dates": 1547,
+          "horizons": {
+            "5": {
+              "mature_origins": 1503,
+              "first_origin_date": "2013-02-26",
+              "last_origin_date": "2018-12-21",
+              "first_label_date": "2013-03-05",
+              "last_label_date": "2018-12-31"
+            },
+            "20": {
+              "mature_origins": 1488,
+              "first_origin_date": "2013-02-26",
+              "last_origin_date": "2018-11-30",
+              "first_label_date": "2013-03-26",
+              "last_label_date": "2018-12-31"
+            }
+          },
+          "joint_h5_h20_mature_origins": 1488
+        },
+        "tuning": {
+          "period_start_inclusive": "2019-01-01",
+          "period_end_inclusive": "2019-12-31",
+          "observed_dates": 258,
+          "horizons": {
+            "5": {
+              "mature_origins": 253,
+              "first_origin_date": "2019-01-02",
+              "last_origin_date": "2019-12-23",
+              "first_label_date": "2019-01-09",
+              "last_label_date": "2019-12-31"
+            },
+            "20": {
+              "mature_origins": 238,
+              "first_origin_date": "2019-01-02",
+              "last_origin_date": "2019-12-02",
+              "first_label_date": "2019-01-30",
+              "last_label_date": "2019-12-31"
+            }
+          },
+          "joint_h5_h20_mature_origins": 238
+        },
+        "calibration": {
+          "period_start_inclusive": "2020-01-01",
+          "period_end_inclusive": "2020-12-31",
+          "observed_dates": 259,
+          "horizons": {
+            "5": {
+              "mature_origins": 254,
+              "first_origin_date": "2020-01-02",
+              "last_origin_date": "2020-12-23",
+              "first_label_date": "2020-01-09",
+              "last_label_date": "2020-12-31"
+            },
+            "20": {
+              "mature_origins": 239,
+              "first_origin_date": "2020-01-02",
+              "last_origin_date": "2020-12-02",
+              "first_label_date": "2020-01-30",
+              "last_label_date": "2020-12-31"
+            }
+          },
+          "joint_h5_h20_mature_origins": 239
+        },
+        "evaluation": {
+          "2021": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 259,
+            "horizons": {
+              "5": {
+                "mature_origins": 254,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-24",
+                "first_label_date": "2021-01-11",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 239,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-03",
+                "first_label_date": "2021-02-01",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 239,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 254,
+              "20": 239
+            },
+            "used_joint_h5_h20_origins": 239
+          },
+          "2022": {
+            "period_start_inclusive": "2022-01-01",
+            "period_end_inclusive": "2022-12-31",
+            "observed_dates": 258,
+            "horizons": {
+              "5": {
+                "mature_origins": 253,
+                "first_origin_date": "2022-01-03",
+                "last_origin_date": "2022-12-22",
+                "first_label_date": "2022-01-10",
+                "last_label_date": "2022-12-30"
+              },
+              "20": {
+                "mature_origins": 238,
+                "first_origin_date": "2022-01-03",
+                "last_origin_date": "2022-12-01",
+                "first_label_date": "2022-01-31",
+                "last_label_date": "2022-12-30"
+              }
+            },
+            "joint_h5_h20_mature_origins": 238,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 253,
+              "20": 238
+            },
+            "used_joint_h5_h20_origins": 238
+          },
+          "2023": {
+            "period_start_inclusive": "2023-01-01",
+            "period_end_inclusive": "2023-12-31",
+            "observed_dates": 258,
+            "horizons": {
+              "5": {
+                "mature_origins": 253,
+                "first_origin_date": "2023-01-02",
+                "last_origin_date": "2023-12-21",
+                "first_label_date": "2023-01-09",
+                "last_label_date": "2023-12-29"
+              },
+              "20": {
+                "mature_origins": 238,
+                "first_origin_date": "2023-01-02",
+                "last_origin_date": "2023-11-30",
+                "first_label_date": "2023-01-30",
+                "last_label_date": "2023-12-29"
+              }
+            },
+            "joint_h5_h20_mature_origins": 238,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 253,
+              "20": 238
+            },
+            "used_joint_h5_h20_origins": 238
+          }
+        }
+      },
+      "GUANGZHOU": {
+        "train": {
+          "period_start_inclusive": "2018-01-03",
+          "period_end_inclusive": "2018-12-31",
+          "observed_dates": 214,
+          "horizons": {
+            "5": {
+              "mature_origins": 170,
+              "first_origin_date": "2018-03-30",
+              "last_origin_date": "2018-12-21",
+              "first_label_date": "2018-04-11",
+              "last_label_date": "2018-12-28"
+            },
+            "20": {
+              "mature_origins": 155,
+              "first_origin_date": "2018-03-30",
+              "last_origin_date": "2018-11-30",
+              "first_label_date": "2018-05-04",
+              "last_label_date": "2018-12-28"
+            }
+          },
+          "joint_h5_h20_mature_origins": 155
+        },
+        "tuning": {
+          "period_start_inclusive": "2019-01-01",
+          "period_end_inclusive": "2019-12-31",
+          "observed_dates": 245,
+          "horizons": {
+            "5": {
+              "mature_origins": 240,
+              "first_origin_date": "2019-01-02",
+              "last_origin_date": "2019-12-24",
+              "first_label_date": "2019-01-09",
+              "last_label_date": "2019-12-31"
+            },
+            "20": {
+              "mature_origins": 225,
+              "first_origin_date": "2019-01-02",
+              "last_origin_date": "2019-12-03",
+              "first_label_date": "2019-01-31",
+              "last_label_date": "2019-12-31"
+            }
+          },
+          "joint_h5_h20_mature_origins": 225
+        },
+        "calibration": {
+          "period_start_inclusive": "2020-01-01",
+          "period_end_inclusive": "2020-12-31",
+          "observed_dates": 244,
+          "horizons": {
+            "5": {
+              "mature_origins": 239,
+              "first_origin_date": "2020-01-02",
+              "last_origin_date": "2020-12-24",
+              "first_label_date": "2020-01-09",
+              "last_label_date": "2020-12-31"
+            },
+            "20": {
+              "mature_origins": 224,
+              "first_origin_date": "2020-01-02",
+              "last_origin_date": "2020-12-03",
+              "first_label_date": "2020-02-14",
+              "last_label_date": "2020-12-31"
+            }
+          },
+          "joint_h5_h20_mature_origins": 224
+        },
+        "evaluation": {
+          "2021": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 247,
+            "horizons": {
+              "5": {
+                "mature_origins": 242,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-24",
+                "first_label_date": "2021-01-11",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 227,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-03",
+                "first_label_date": "2021-02-01",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 227,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 242,
+              "20": 227
+            },
+            "used_joint_h5_h20_origins": 227
+          },
+          "2022": {
+            "period_start_inclusive": "2022-01-01",
+            "period_end_inclusive": "2022-12-31",
+            "observed_dates": 242,
+            "horizons": {
+              "5": {
+                "mature_origins": 237,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-23",
+                "first_label_date": "2022-01-11",
+                "last_label_date": "2022-12-30"
+              },
+              "20": {
+                "mature_origins": 222,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-02",
+                "first_label_date": "2022-02-08",
+                "last_label_date": "2022-12-30"
+              }
+            },
+            "joint_h5_h20_mature_origins": 222,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 237,
+              "20": 222
+            },
+            "used_joint_h5_h20_origins": 222
+          },
+          "2023": {
+            "period_start_inclusive": "2023-01-01",
+            "period_end_inclusive": "2023-12-31",
+            "observed_dates": 242,
+            "horizons": {
+              "5": {
+                "mature_origins": 237,
+                "first_origin_date": "2023-01-03",
+                "last_origin_date": "2023-12-22",
+                "first_label_date": "2023-01-10",
+                "last_label_date": "2023-12-29"
+              },
+              "20": {
+                "mature_origins": 222,
+                "first_origin_date": "2023-01-03",
+                "last_origin_date": "2023-12-01",
+                "first_label_date": "2023-02-07",
+                "last_label_date": "2023-12-29"
+              }
+            },
+            "joint_h5_h20_mature_origins": 222,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 237,
+              "20": 222
+            },
+            "used_joint_h5_h20_origins": 222
+          }
+        }
+      },
+      "HUBEI": {
+        "train": {
+          "period_start_inclusive": "2018-01-02",
+          "period_end_inclusive": "2018-12-31",
+          "observed_dates": 242,
+          "horizons": {
+            "5": {
+              "mature_origins": 198,
+              "first_origin_date": "2018-03-05",
+              "last_origin_date": "2018-12-21",
+              "first_label_date": "2018-03-12",
+              "last_label_date": "2018-12-28"
+            },
+            "20": {
+              "mature_origins": 183,
+              "first_origin_date": "2018-03-05",
+              "last_origin_date": "2018-11-30",
+              "first_label_date": "2018-04-03",
+              "last_label_date": "2018-12-28"
+            }
+          },
+          "joint_h5_h20_mature_origins": 183
+        },
+        "tuning": {
+          "period_start_inclusive": "2019-01-01",
+          "period_end_inclusive": "2019-12-31",
+          "observed_dates": 244,
+          "horizons": {
+            "5": {
+              "mature_origins": 239,
+              "first_origin_date": "2019-01-02",
+              "last_origin_date": "2019-12-24",
+              "first_label_date": "2019-01-09",
+              "last_label_date": "2019-12-31"
+            },
+            "20": {
+              "mature_origins": 224,
+              "first_origin_date": "2019-01-02",
+              "last_origin_date": "2019-12-03",
+              "first_label_date": "2019-01-30",
+              "last_label_date": "2019-12-31"
+            }
+          },
+          "joint_h5_h20_mature_origins": 224
+        },
+        "calibration": {
+          "period_start_inclusive": "2020-01-01",
+          "period_end_inclusive": "2020-12-31",
+          "observed_dates": 208,
+          "horizons": {
+            "5": {
+              "mature_origins": 203,
+              "first_origin_date": "2020-01-02",
+              "last_origin_date": "2020-12-24",
+              "first_label_date": "2020-01-09",
+              "last_label_date": "2020-12-31"
+            },
+            "20": {
+              "mature_origins": 188,
+              "first_origin_date": "2020-01-02",
+              "last_origin_date": "2020-12-03",
+              "first_label_date": "2020-03-27",
+              "last_label_date": "2020-12-31"
+            }
+          },
+          "joint_h5_h20_mature_origins": 188
+        },
+        "evaluation": {
+          "2021": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 242,
+            "horizons": {
+              "5": {
+                "mature_origins": 237,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-24",
+                "first_label_date": "2021-01-11",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 222,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-03",
+                "first_label_date": "2021-02-01",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 222,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 237,
+              "20": 222
+            },
+            "used_joint_h5_h20_origins": 222
+          },
+          "2022": {
+            "period_start_inclusive": "2022-01-01",
+            "period_end_inclusive": "2022-12-31",
+            "observed_dates": 237,
+            "horizons": {
+              "5": {
+                "mature_origins": 232,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-23",
+                "first_label_date": "2022-01-11",
+                "last_label_date": "2022-12-30"
+              },
+              "20": {
+                "mature_origins": 217,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-02",
+                "first_label_date": "2022-02-08",
+                "last_label_date": "2022-12-30"
+              }
+            },
+            "joint_h5_h20_mature_origins": 217,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 232,
+              "20": 217
+            },
+            "used_joint_h5_h20_origins": 217
+          },
+          "2023": {
+            "period_start_inclusive": "2023-01-01",
+            "period_end_inclusive": "2023-12-31",
+            "observed_dates": 235,
+            "horizons": {
+              "5": {
+                "mature_origins": 230,
+                "first_origin_date": "2023-01-03",
+                "last_origin_date": "2023-12-22",
+                "first_label_date": "2023-01-10",
+                "last_label_date": "2023-12-29"
+              },
+              "20": {
+                "mature_origins": 215,
+                "first_origin_date": "2023-01-03",
+                "last_origin_date": "2023-12-01",
+                "first_label_date": "2023-02-07",
+                "last_label_date": "2023-12-29"
+              }
+            },
+            "joint_h5_h20_mature_origins": 215,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 230,
+              "20": 215
+            },
+            "used_joint_h5_h20_origins": 215
+          }
+        }
+      },
+      "SHANGHAI": {
+        "train": {
+          "period_start_inclusive": "2013-12-19",
+          "period_end_inclusive": "2018-12-31",
+          "observed_dates": 746,
+          "horizons": {
+            "5": {
+              "mature_origins": 702,
+              "first_origin_date": "2014-02-21",
+              "last_origin_date": "2018-12-11",
+              "first_label_date": "2014-03-03",
+              "last_label_date": "2018-12-20"
+            },
+            "20": {
+              "mature_origins": 687,
+              "first_origin_date": "2014-02-21",
+              "last_origin_date": "2018-09-28",
+              "first_label_date": "2014-03-27",
+              "last_label_date": "2018-12-20"
+            }
+          },
+          "joint_h5_h20_mature_origins": 687
+        },
+        "tuning": {
+          "period_start_inclusive": "2019-01-01",
+          "period_end_inclusive": "2019-12-31",
+          "observed_dates": 142,
+          "horizons": {
+            "5": {
+              "mature_origins": 137,
+              "first_origin_date": "2019-01-04",
+              "last_origin_date": "2019-11-25",
+              "first_label_date": "2019-01-17",
+              "last_label_date": "2019-12-31"
+            },
+            "20": {
+              "mature_origins": 122,
+              "first_origin_date": "2019-01-04",
+              "last_origin_date": "2019-11-01",
+              "first_label_date": "2019-03-14",
+              "last_label_date": "2019-12-31"
+            }
+          },
+          "joint_h5_h20_mature_origins": 122
+        },
+        "calibration": {
+          "period_start_inclusive": "2020-01-01",
+          "period_end_inclusive": "2020-12-31",
+          "observed_dates": 161,
+          "horizons": {
+            "5": {
+              "mature_origins": 156,
+              "first_origin_date": "2020-01-02",
+              "last_origin_date": "2020-12-07",
+              "first_label_date": "2020-01-13",
+              "last_label_date": "2020-12-28"
+            },
+            "20": {
+              "mature_origins": 141,
+              "first_origin_date": "2020-01-02",
+              "last_origin_date": "2020-11-10",
+              "first_label_date": "2020-03-13",
+              "last_label_date": "2020-12-28"
+            }
+          },
+          "joint_h5_h20_mature_origins": 141
+        },
+        "evaluation": {
+          "2021": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 47,
+            "horizons": {
+              "5": {
+                "mature_origins": 42,
+                "first_origin_date": "2021-01-08",
+                "last_origin_date": "2021-12-22",
+                "first_label_date": "2021-01-18",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 27,
+                "first_origin_date": "2021-01-08",
+                "last_origin_date": "2021-11-29",
+                "first_label_date": "2021-02-26",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 27,
+            "excluded_by_predefined_design": true,
+            "exclusion_reason": "Predefined before new model fitting: Shanghai has 47 author quotes in 2021 and only 27 L20/H20 same-year mature origins; exclude the entire 2021 Shanghai evaluation, retaining source rows and all audit counts.",
+            "used_origins_by_horizon": {
+              "5": 0,
+              "20": 0
+            },
+            "used_joint_h5_h20_origins": 0
+          },
+          "2022": {
+            "period_start_inclusive": "2022-01-01",
+            "period_end_inclusive": "2022-12-31",
+            "observed_dates": 215,
+            "horizons": {
+              "5": {
+                "mature_origins": 210,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-23",
+                "first_label_date": "2022-01-11",
+                "last_label_date": "2022-12-30"
+              },
+              "20": {
+                "mature_origins": 195,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-01",
+                "first_label_date": "2022-02-15",
+                "last_label_date": "2022-12-30"
+              }
+            },
+            "joint_h5_h20_mature_origins": 195,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 210,
+              "20": 195
+            },
+            "used_joint_h5_h20_origins": 195
+          },
+          "2023": {
+            "period_start_inclusive": "2023-01-01",
+            "period_end_inclusive": "2023-12-31",
+            "observed_dates": 196,
+            "horizons": {
+              "5": {
+                "mature_origins": 191,
+                "first_origin_date": "2023-01-10",
+                "last_origin_date": "2023-12-18",
+                "first_label_date": "2023-01-18",
+                "last_label_date": "2023-12-29"
+              },
+              "20": {
+                "mature_origins": 176,
+                "first_origin_date": "2023-01-10",
+                "last_origin_date": "2023-11-20",
+                "first_label_date": "2023-02-24",
+                "last_label_date": "2023-12-29"
+              }
+            },
+            "joint_h5_h20_mature_origins": 176,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 191,
+              "20": 176
+            },
+            "used_joint_h5_h20_origins": 176
+          }
+        }
+      }
+    },
+    "expanding_rolling": {
+      "2021": {
+        "EUA_LONG": {
+          "train": {
+            "period_start_inclusive": "2013-01-02",
+            "period_end_inclusive": "2018-12-31",
+            "observed_dates": 1547,
+            "horizons": {
+              "5": {
+                "mature_origins": 1503,
+                "first_origin_date": "2013-02-26",
+                "last_origin_date": "2018-12-21",
+                "first_label_date": "2013-03-05",
+                "last_label_date": "2018-12-31"
+              },
+              "20": {
+                "mature_origins": 1488,
+                "first_origin_date": "2013-02-26",
+                "last_origin_date": "2018-11-30",
+                "first_label_date": "2013-03-26",
+                "last_label_date": "2018-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 1488
+          },
+          "tuning": {
+            "period_start_inclusive": "2019-01-01",
+            "period_end_inclusive": "2019-12-31",
+            "observed_dates": 258,
+            "horizons": {
+              "5": {
+                "mature_origins": 253,
+                "first_origin_date": "2019-01-02",
+                "last_origin_date": "2019-12-23",
+                "first_label_date": "2019-01-09",
+                "last_label_date": "2019-12-31"
+              },
+              "20": {
+                "mature_origins": 238,
+                "first_origin_date": "2019-01-02",
+                "last_origin_date": "2019-12-02",
+                "first_label_date": "2019-01-30",
+                "last_label_date": "2019-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 238
+          },
+          "calibration": {
+            "period_start_inclusive": "2020-01-01",
+            "period_end_inclusive": "2020-12-31",
+            "observed_dates": 259,
+            "horizons": {
+              "5": {
+                "mature_origins": 254,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-23",
+                "first_label_date": "2020-01-09",
+                "last_label_date": "2020-12-31"
+              },
+              "20": {
+                "mature_origins": 239,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-02",
+                "first_label_date": "2020-01-30",
+                "last_label_date": "2020-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 239
+          },
+          "evaluation": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 259,
+            "horizons": {
+              "5": {
+                "mature_origins": 254,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-24",
+                "first_label_date": "2021-01-11",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 239,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-03",
+                "first_label_date": "2021-02-01",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 239,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 254,
+              "20": 239
+            },
+            "used_joint_h5_h20_origins": 239
+          }
+        },
+        "GUANGZHOU": {
+          "train": {
+            "period_start_inclusive": "2018-01-03",
+            "period_end_inclusive": "2018-12-31",
+            "observed_dates": 214,
+            "horizons": {
+              "5": {
+                "mature_origins": 170,
+                "first_origin_date": "2018-03-30",
+                "last_origin_date": "2018-12-21",
+                "first_label_date": "2018-04-11",
+                "last_label_date": "2018-12-28"
+              },
+              "20": {
+                "mature_origins": 155,
+                "first_origin_date": "2018-03-30",
+                "last_origin_date": "2018-11-30",
+                "first_label_date": "2018-05-04",
+                "last_label_date": "2018-12-28"
+              }
+            },
+            "joint_h5_h20_mature_origins": 155
+          },
+          "tuning": {
+            "period_start_inclusive": "2019-01-01",
+            "period_end_inclusive": "2019-12-31",
+            "observed_dates": 245,
+            "horizons": {
+              "5": {
+                "mature_origins": 240,
+                "first_origin_date": "2019-01-02",
+                "last_origin_date": "2019-12-24",
+                "first_label_date": "2019-01-09",
+                "last_label_date": "2019-12-31"
+              },
+              "20": {
+                "mature_origins": 225,
+                "first_origin_date": "2019-01-02",
+                "last_origin_date": "2019-12-03",
+                "first_label_date": "2019-01-31",
+                "last_label_date": "2019-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 225
+          },
+          "calibration": {
+            "period_start_inclusive": "2020-01-01",
+            "period_end_inclusive": "2020-12-31",
+            "observed_dates": 244,
+            "horizons": {
+              "5": {
+                "mature_origins": 239,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-24",
+                "first_label_date": "2020-01-09",
+                "last_label_date": "2020-12-31"
+              },
+              "20": {
+                "mature_origins": 224,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-03",
+                "first_label_date": "2020-02-14",
+                "last_label_date": "2020-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 224
+          },
+          "evaluation": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 247,
+            "horizons": {
+              "5": {
+                "mature_origins": 242,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-24",
+                "first_label_date": "2021-01-11",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 227,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-03",
+                "first_label_date": "2021-02-01",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 227,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 242,
+              "20": 227
+            },
+            "used_joint_h5_h20_origins": 227
+          }
+        },
+        "HUBEI": {
+          "train": {
+            "period_start_inclusive": "2018-01-02",
+            "period_end_inclusive": "2018-12-31",
+            "observed_dates": 242,
+            "horizons": {
+              "5": {
+                "mature_origins": 198,
+                "first_origin_date": "2018-03-05",
+                "last_origin_date": "2018-12-21",
+                "first_label_date": "2018-03-12",
+                "last_label_date": "2018-12-28"
+              },
+              "20": {
+                "mature_origins": 183,
+                "first_origin_date": "2018-03-05",
+                "last_origin_date": "2018-11-30",
+                "first_label_date": "2018-04-03",
+                "last_label_date": "2018-12-28"
+              }
+            },
+            "joint_h5_h20_mature_origins": 183
+          },
+          "tuning": {
+            "period_start_inclusive": "2019-01-01",
+            "period_end_inclusive": "2019-12-31",
+            "observed_dates": 244,
+            "horizons": {
+              "5": {
+                "mature_origins": 239,
+                "first_origin_date": "2019-01-02",
+                "last_origin_date": "2019-12-24",
+                "first_label_date": "2019-01-09",
+                "last_label_date": "2019-12-31"
+              },
+              "20": {
+                "mature_origins": 224,
+                "first_origin_date": "2019-01-02",
+                "last_origin_date": "2019-12-03",
+                "first_label_date": "2019-01-30",
+                "last_label_date": "2019-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 224
+          },
+          "calibration": {
+            "period_start_inclusive": "2020-01-01",
+            "period_end_inclusive": "2020-12-31",
+            "observed_dates": 208,
+            "horizons": {
+              "5": {
+                "mature_origins": 203,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-24",
+                "first_label_date": "2020-01-09",
+                "last_label_date": "2020-12-31"
+              },
+              "20": {
+                "mature_origins": 188,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-03",
+                "first_label_date": "2020-03-27",
+                "last_label_date": "2020-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 188
+          },
+          "evaluation": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 242,
+            "horizons": {
+              "5": {
+                "mature_origins": 237,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-24",
+                "first_label_date": "2021-01-11",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 222,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-03",
+                "first_label_date": "2021-02-01",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 222,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 237,
+              "20": 222
+            },
+            "used_joint_h5_h20_origins": 222
+          }
+        },
+        "SHANGHAI": {
+          "train": {
+            "period_start_inclusive": "2013-12-19",
+            "period_end_inclusive": "2018-12-31",
+            "observed_dates": 746,
+            "horizons": {
+              "5": {
+                "mature_origins": 702,
+                "first_origin_date": "2014-02-21",
+                "last_origin_date": "2018-12-11",
+                "first_label_date": "2014-03-03",
+                "last_label_date": "2018-12-20"
+              },
+              "20": {
+                "mature_origins": 687,
+                "first_origin_date": "2014-02-21",
+                "last_origin_date": "2018-09-28",
+                "first_label_date": "2014-03-27",
+                "last_label_date": "2018-12-20"
+              }
+            },
+            "joint_h5_h20_mature_origins": 687
+          },
+          "tuning": {
+            "period_start_inclusive": "2019-01-01",
+            "period_end_inclusive": "2019-12-31",
+            "observed_dates": 142,
+            "horizons": {
+              "5": {
+                "mature_origins": 137,
+                "first_origin_date": "2019-01-04",
+                "last_origin_date": "2019-11-25",
+                "first_label_date": "2019-01-17",
+                "last_label_date": "2019-12-31"
+              },
+              "20": {
+                "mature_origins": 122,
+                "first_origin_date": "2019-01-04",
+                "last_origin_date": "2019-11-01",
+                "first_label_date": "2019-03-14",
+                "last_label_date": "2019-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 122
+          },
+          "calibration": {
+            "period_start_inclusive": "2020-01-01",
+            "period_end_inclusive": "2020-12-31",
+            "observed_dates": 161,
+            "horizons": {
+              "5": {
+                "mature_origins": 156,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-07",
+                "first_label_date": "2020-01-13",
+                "last_label_date": "2020-12-28"
+              },
+              "20": {
+                "mature_origins": 141,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-11-10",
+                "first_label_date": "2020-03-13",
+                "last_label_date": "2020-12-28"
+              }
+            },
+            "joint_h5_h20_mature_origins": 141
+          },
+          "evaluation": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 47,
+            "horizons": {
+              "5": {
+                "mature_origins": 42,
+                "first_origin_date": "2021-01-08",
+                "last_origin_date": "2021-12-22",
+                "first_label_date": "2021-01-18",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 27,
+                "first_origin_date": "2021-01-08",
+                "last_origin_date": "2021-11-29",
+                "first_label_date": "2021-02-26",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 27,
+            "excluded_by_predefined_design": true,
+            "exclusion_reason": "Predefined before new model fitting: Shanghai has 47 author quotes in 2021 and only 27 L20/H20 same-year mature origins; exclude the entire 2021 Shanghai evaluation, retaining source rows and all audit counts.",
+            "used_origins_by_horizon": {
+              "5": 0,
+              "20": 0
+            },
+            "used_joint_h5_h20_origins": 0
+          }
+        }
+      },
+      "2022": {
+        "EUA_LONG": {
+          "train": {
+            "period_start_inclusive": "2013-01-02",
+            "period_end_inclusive": "2019-12-31",
+            "observed_dates": 1805,
+            "horizons": {
+              "5": {
+                "mature_origins": 1761,
+                "first_origin_date": "2013-02-26",
+                "last_origin_date": "2019-12-23",
+                "first_label_date": "2013-03-05",
+                "last_label_date": "2019-12-31"
+              },
+              "20": {
+                "mature_origins": 1746,
+                "first_origin_date": "2013-02-26",
+                "last_origin_date": "2019-12-02",
+                "first_label_date": "2013-03-26",
+                "last_label_date": "2019-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 1746
+          },
+          "tuning": {
+            "period_start_inclusive": "2020-01-01",
+            "period_end_inclusive": "2020-12-31",
+            "observed_dates": 259,
+            "horizons": {
+              "5": {
+                "mature_origins": 254,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-23",
+                "first_label_date": "2020-01-09",
+                "last_label_date": "2020-12-31"
+              },
+              "20": {
+                "mature_origins": 239,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-02",
+                "first_label_date": "2020-01-30",
+                "last_label_date": "2020-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 239
+          },
+          "calibration": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 259,
+            "horizons": {
+              "5": {
+                "mature_origins": 254,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-24",
+                "first_label_date": "2021-01-11",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 239,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-03",
+                "first_label_date": "2021-02-01",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 239
+          },
+          "evaluation": {
+            "period_start_inclusive": "2022-01-01",
+            "period_end_inclusive": "2022-12-31",
+            "observed_dates": 258,
+            "horizons": {
+              "5": {
+                "mature_origins": 253,
+                "first_origin_date": "2022-01-03",
+                "last_origin_date": "2022-12-22",
+                "first_label_date": "2022-01-10",
+                "last_label_date": "2022-12-30"
+              },
+              "20": {
+                "mature_origins": 238,
+                "first_origin_date": "2022-01-03",
+                "last_origin_date": "2022-12-01",
+                "first_label_date": "2022-01-31",
+                "last_label_date": "2022-12-30"
+              }
+            },
+            "joint_h5_h20_mature_origins": 238,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 253,
+              "20": 238
+            },
+            "used_joint_h5_h20_origins": 238
+          }
+        },
+        "GUANGZHOU": {
+          "train": {
+            "period_start_inclusive": "2018-01-03",
+            "period_end_inclusive": "2019-12-31",
+            "observed_dates": 459,
+            "horizons": {
+              "5": {
+                "mature_origins": 415,
+                "first_origin_date": "2018-03-30",
+                "last_origin_date": "2019-12-24",
+                "first_label_date": "2018-04-11",
+                "last_label_date": "2019-12-31"
+              },
+              "20": {
+                "mature_origins": 400,
+                "first_origin_date": "2018-03-30",
+                "last_origin_date": "2019-12-03",
+                "first_label_date": "2018-05-04",
+                "last_label_date": "2019-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 400
+          },
+          "tuning": {
+            "period_start_inclusive": "2020-01-01",
+            "period_end_inclusive": "2020-12-31",
+            "observed_dates": 244,
+            "horizons": {
+              "5": {
+                "mature_origins": 239,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-24",
+                "first_label_date": "2020-01-09",
+                "last_label_date": "2020-12-31"
+              },
+              "20": {
+                "mature_origins": 224,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-03",
+                "first_label_date": "2020-02-14",
+                "last_label_date": "2020-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 224
+          },
+          "calibration": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 247,
+            "horizons": {
+              "5": {
+                "mature_origins": 242,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-24",
+                "first_label_date": "2021-01-11",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 227,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-03",
+                "first_label_date": "2021-02-01",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 227
+          },
+          "evaluation": {
+            "period_start_inclusive": "2022-01-01",
+            "period_end_inclusive": "2022-12-31",
+            "observed_dates": 242,
+            "horizons": {
+              "5": {
+                "mature_origins": 237,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-23",
+                "first_label_date": "2022-01-11",
+                "last_label_date": "2022-12-30"
+              },
+              "20": {
+                "mature_origins": 222,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-02",
+                "first_label_date": "2022-02-08",
+                "last_label_date": "2022-12-30"
+              }
+            },
+            "joint_h5_h20_mature_origins": 222,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 237,
+              "20": 222
+            },
+            "used_joint_h5_h20_origins": 222
+          }
+        },
+        "HUBEI": {
+          "train": {
+            "period_start_inclusive": "2018-01-02",
+            "period_end_inclusive": "2019-12-31",
+            "observed_dates": 486,
+            "horizons": {
+              "5": {
+                "mature_origins": 442,
+                "first_origin_date": "2018-03-05",
+                "last_origin_date": "2019-12-24",
+                "first_label_date": "2018-03-12",
+                "last_label_date": "2019-12-31"
+              },
+              "20": {
+                "mature_origins": 427,
+                "first_origin_date": "2018-03-05",
+                "last_origin_date": "2019-12-03",
+                "first_label_date": "2018-04-03",
+                "last_label_date": "2019-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 427
+          },
+          "tuning": {
+            "period_start_inclusive": "2020-01-01",
+            "period_end_inclusive": "2020-12-31",
+            "observed_dates": 208,
+            "horizons": {
+              "5": {
+                "mature_origins": 203,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-24",
+                "first_label_date": "2020-01-09",
+                "last_label_date": "2020-12-31"
+              },
+              "20": {
+                "mature_origins": 188,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-03",
+                "first_label_date": "2020-03-27",
+                "last_label_date": "2020-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 188
+          },
+          "calibration": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 242,
+            "horizons": {
+              "5": {
+                "mature_origins": 237,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-24",
+                "first_label_date": "2021-01-11",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 222,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-03",
+                "first_label_date": "2021-02-01",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 222
+          },
+          "evaluation": {
+            "period_start_inclusive": "2022-01-01",
+            "period_end_inclusive": "2022-12-31",
+            "observed_dates": 237,
+            "horizons": {
+              "5": {
+                "mature_origins": 232,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-23",
+                "first_label_date": "2022-01-11",
+                "last_label_date": "2022-12-30"
+              },
+              "20": {
+                "mature_origins": 217,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-02",
+                "first_label_date": "2022-02-08",
+                "last_label_date": "2022-12-30"
+              }
+            },
+            "joint_h5_h20_mature_origins": 217,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 232,
+              "20": 217
+            },
+            "used_joint_h5_h20_origins": 217
+          }
+        },
+        "SHANGHAI": {
+          "train": {
+            "period_start_inclusive": "2013-12-19",
+            "period_end_inclusive": "2019-12-31",
+            "observed_dates": 888,
+            "horizons": {
+              "5": {
+                "mature_origins": 844,
+                "first_origin_date": "2014-02-21",
+                "last_origin_date": "2019-11-25",
+                "first_label_date": "2014-03-03",
+                "last_label_date": "2019-12-31"
+              },
+              "20": {
+                "mature_origins": 829,
+                "first_origin_date": "2014-02-21",
+                "last_origin_date": "2019-11-01",
+                "first_label_date": "2014-03-27",
+                "last_label_date": "2019-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 829
+          },
+          "tuning": {
+            "period_start_inclusive": "2020-01-01",
+            "period_end_inclusive": "2020-12-31",
+            "observed_dates": 161,
+            "horizons": {
+              "5": {
+                "mature_origins": 156,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-12-07",
+                "first_label_date": "2020-01-13",
+                "last_label_date": "2020-12-28"
+              },
+              "20": {
+                "mature_origins": 141,
+                "first_origin_date": "2020-01-02",
+                "last_origin_date": "2020-11-10",
+                "first_label_date": "2020-03-13",
+                "last_label_date": "2020-12-28"
+              }
+            },
+            "joint_h5_h20_mature_origins": 141
+          },
+          "calibration": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 47,
+            "horizons": {
+              "5": {
+                "mature_origins": 42,
+                "first_origin_date": "2021-01-08",
+                "last_origin_date": "2021-12-22",
+                "first_label_date": "2021-01-18",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 27,
+                "first_origin_date": "2021-01-08",
+                "last_origin_date": "2021-11-29",
+                "first_label_date": "2021-02-26",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 27
+          },
+          "evaluation": {
+            "period_start_inclusive": "2022-01-01",
+            "period_end_inclusive": "2022-12-31",
+            "observed_dates": 215,
+            "horizons": {
+              "5": {
+                "mature_origins": 210,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-23",
+                "first_label_date": "2022-01-11",
+                "last_label_date": "2022-12-30"
+              },
+              "20": {
+                "mature_origins": 195,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-01",
+                "first_label_date": "2022-02-15",
+                "last_label_date": "2022-12-30"
+              }
+            },
+            "joint_h5_h20_mature_origins": 195,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 210,
+              "20": 195
+            },
+            "used_joint_h5_h20_origins": 195
+          }
+        }
+      },
+      "2023": {
+        "EUA_LONG": {
+          "train": {
+            "period_start_inclusive": "2013-01-02",
+            "period_end_inclusive": "2020-12-31",
+            "observed_dates": 2064,
+            "horizons": {
+              "5": {
+                "mature_origins": 2020,
+                "first_origin_date": "2013-02-26",
+                "last_origin_date": "2020-12-23",
+                "first_label_date": "2013-03-05",
+                "last_label_date": "2020-12-31"
+              },
+              "20": {
+                "mature_origins": 2005,
+                "first_origin_date": "2013-02-26",
+                "last_origin_date": "2020-12-02",
+                "first_label_date": "2013-03-26",
+                "last_label_date": "2020-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 2005
+          },
+          "tuning": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 259,
+            "horizons": {
+              "5": {
+                "mature_origins": 254,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-24",
+                "first_label_date": "2021-01-11",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 239,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-03",
+                "first_label_date": "2021-02-01",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 239
+          },
+          "calibration": {
+            "period_start_inclusive": "2022-01-01",
+            "period_end_inclusive": "2022-12-31",
+            "observed_dates": 258,
+            "horizons": {
+              "5": {
+                "mature_origins": 253,
+                "first_origin_date": "2022-01-03",
+                "last_origin_date": "2022-12-22",
+                "first_label_date": "2022-01-10",
+                "last_label_date": "2022-12-30"
+              },
+              "20": {
+                "mature_origins": 238,
+                "first_origin_date": "2022-01-03",
+                "last_origin_date": "2022-12-01",
+                "first_label_date": "2022-01-31",
+                "last_label_date": "2022-12-30"
+              }
+            },
+            "joint_h5_h20_mature_origins": 238
+          },
+          "evaluation": {
+            "period_start_inclusive": "2023-01-01",
+            "period_end_inclusive": "2023-12-31",
+            "observed_dates": 258,
+            "horizons": {
+              "5": {
+                "mature_origins": 253,
+                "first_origin_date": "2023-01-02",
+                "last_origin_date": "2023-12-21",
+                "first_label_date": "2023-01-09",
+                "last_label_date": "2023-12-29"
+              },
+              "20": {
+                "mature_origins": 238,
+                "first_origin_date": "2023-01-02",
+                "last_origin_date": "2023-11-30",
+                "first_label_date": "2023-01-30",
+                "last_label_date": "2023-12-29"
+              }
+            },
+            "joint_h5_h20_mature_origins": 238,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 253,
+              "20": 238
+            },
+            "used_joint_h5_h20_origins": 238
+          }
+        },
+        "GUANGZHOU": {
+          "train": {
+            "period_start_inclusive": "2018-01-03",
+            "period_end_inclusive": "2020-12-31",
+            "observed_dates": 703,
+            "horizons": {
+              "5": {
+                "mature_origins": 659,
+                "first_origin_date": "2018-03-30",
+                "last_origin_date": "2020-12-24",
+                "first_label_date": "2018-04-11",
+                "last_label_date": "2020-12-31"
+              },
+              "20": {
+                "mature_origins": 644,
+                "first_origin_date": "2018-03-30",
+                "last_origin_date": "2020-12-03",
+                "first_label_date": "2018-05-04",
+                "last_label_date": "2020-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 644
+          },
+          "tuning": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 247,
+            "horizons": {
+              "5": {
+                "mature_origins": 242,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-24",
+                "first_label_date": "2021-01-11",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 227,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-03",
+                "first_label_date": "2021-02-01",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 227
+          },
+          "calibration": {
+            "period_start_inclusive": "2022-01-01",
+            "period_end_inclusive": "2022-12-31",
+            "observed_dates": 242,
+            "horizons": {
+              "5": {
+                "mature_origins": 237,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-23",
+                "first_label_date": "2022-01-11",
+                "last_label_date": "2022-12-30"
+              },
+              "20": {
+                "mature_origins": 222,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-02",
+                "first_label_date": "2022-02-08",
+                "last_label_date": "2022-12-30"
+              }
+            },
+            "joint_h5_h20_mature_origins": 222
+          },
+          "evaluation": {
+            "period_start_inclusive": "2023-01-01",
+            "period_end_inclusive": "2023-12-31",
+            "observed_dates": 242,
+            "horizons": {
+              "5": {
+                "mature_origins": 237,
+                "first_origin_date": "2023-01-03",
+                "last_origin_date": "2023-12-22",
+                "first_label_date": "2023-01-10",
+                "last_label_date": "2023-12-29"
+              },
+              "20": {
+                "mature_origins": 222,
+                "first_origin_date": "2023-01-03",
+                "last_origin_date": "2023-12-01",
+                "first_label_date": "2023-02-07",
+                "last_label_date": "2023-12-29"
+              }
+            },
+            "joint_h5_h20_mature_origins": 222,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 237,
+              "20": 222
+            },
+            "used_joint_h5_h20_origins": 222
+          }
+        },
+        "HUBEI": {
+          "train": {
+            "period_start_inclusive": "2018-01-02",
+            "period_end_inclusive": "2020-12-31",
+            "observed_dates": 694,
+            "horizons": {
+              "5": {
+                "mature_origins": 650,
+                "first_origin_date": "2018-03-05",
+                "last_origin_date": "2020-12-24",
+                "first_label_date": "2018-03-12",
+                "last_label_date": "2020-12-31"
+              },
+              "20": {
+                "mature_origins": 635,
+                "first_origin_date": "2018-03-05",
+                "last_origin_date": "2020-12-03",
+                "first_label_date": "2018-04-03",
+                "last_label_date": "2020-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 635
+          },
+          "tuning": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 242,
+            "horizons": {
+              "5": {
+                "mature_origins": 237,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-24",
+                "first_label_date": "2021-01-11",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 222,
+                "first_origin_date": "2021-01-04",
+                "last_origin_date": "2021-12-03",
+                "first_label_date": "2021-02-01",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 222
+          },
+          "calibration": {
+            "period_start_inclusive": "2022-01-01",
+            "period_end_inclusive": "2022-12-31",
+            "observed_dates": 237,
+            "horizons": {
+              "5": {
+                "mature_origins": 232,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-23",
+                "first_label_date": "2022-01-11",
+                "last_label_date": "2022-12-30"
+              },
+              "20": {
+                "mature_origins": 217,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-02",
+                "first_label_date": "2022-02-08",
+                "last_label_date": "2022-12-30"
+              }
+            },
+            "joint_h5_h20_mature_origins": 217
+          },
+          "evaluation": {
+            "period_start_inclusive": "2023-01-01",
+            "period_end_inclusive": "2023-12-31",
+            "observed_dates": 235,
+            "horizons": {
+              "5": {
+                "mature_origins": 230,
+                "first_origin_date": "2023-01-03",
+                "last_origin_date": "2023-12-22",
+                "first_label_date": "2023-01-10",
+                "last_label_date": "2023-12-29"
+              },
+              "20": {
+                "mature_origins": 215,
+                "first_origin_date": "2023-01-03",
+                "last_origin_date": "2023-12-01",
+                "first_label_date": "2023-02-07",
+                "last_label_date": "2023-12-29"
+              }
+            },
+            "joint_h5_h20_mature_origins": 215,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 230,
+              "20": 215
+            },
+            "used_joint_h5_h20_origins": 215
+          }
+        },
+        "SHANGHAI": {
+          "train": {
+            "period_start_inclusive": "2013-12-19",
+            "period_end_inclusive": "2020-12-31",
+            "observed_dates": 1049,
+            "horizons": {
+              "5": {
+                "mature_origins": 1005,
+                "first_origin_date": "2014-02-21",
+                "last_origin_date": "2020-12-07",
+                "first_label_date": "2014-03-03",
+                "last_label_date": "2020-12-28"
+              },
+              "20": {
+                "mature_origins": 990,
+                "first_origin_date": "2014-02-21",
+                "last_origin_date": "2020-11-10",
+                "first_label_date": "2014-03-27",
+                "last_label_date": "2020-12-28"
+              }
+            },
+            "joint_h5_h20_mature_origins": 990
+          },
+          "tuning": {
+            "period_start_inclusive": "2021-01-01",
+            "period_end_inclusive": "2021-12-31",
+            "observed_dates": 47,
+            "horizons": {
+              "5": {
+                "mature_origins": 42,
+                "first_origin_date": "2021-01-08",
+                "last_origin_date": "2021-12-22",
+                "first_label_date": "2021-01-18",
+                "last_label_date": "2021-12-31"
+              },
+              "20": {
+                "mature_origins": 27,
+                "first_origin_date": "2021-01-08",
+                "last_origin_date": "2021-11-29",
+                "first_label_date": "2021-02-26",
+                "last_label_date": "2021-12-31"
+              }
+            },
+            "joint_h5_h20_mature_origins": 27
+          },
+          "calibration": {
+            "period_start_inclusive": "2022-01-01",
+            "period_end_inclusive": "2022-12-31",
+            "observed_dates": 215,
+            "horizons": {
+              "5": {
+                "mature_origins": 210,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-23",
+                "first_label_date": "2022-01-11",
+                "last_label_date": "2022-12-30"
+              },
+              "20": {
+                "mature_origins": 195,
+                "first_origin_date": "2022-01-04",
+                "last_origin_date": "2022-12-01",
+                "first_label_date": "2022-02-15",
+                "last_label_date": "2022-12-30"
+              }
+            },
+            "joint_h5_h20_mature_origins": 195
+          },
+          "evaluation": {
+            "period_start_inclusive": "2023-01-01",
+            "period_end_inclusive": "2023-12-31",
+            "observed_dates": 196,
+            "horizons": {
+              "5": {
+                "mature_origins": 191,
+                "first_origin_date": "2023-01-10",
+                "last_origin_date": "2023-12-18",
+                "first_label_date": "2023-01-18",
+                "last_label_date": "2023-12-29"
+              },
+              "20": {
+                "mature_origins": 176,
+                "first_origin_date": "2023-01-10",
+                "last_origin_date": "2023-11-20",
+                "first_label_date": "2023-02-24",
+                "last_label_date": "2023-12-29"
+              }
+            },
+            "joint_h5_h20_mature_origins": 176,
+            "excluded_by_predefined_design": false,
+            "exclusion_reason": null,
+            "used_origins_by_horizon": {
+              "5": 191,
+              "20": 176
+            },
+            "used_joint_h5_h20_origins": 176
+          }
+        }
+      }
+    },
+    "rolling_rule": "For evaluation year Y: train through Y-3, tuning Y-2, calibration Y-1. Diagnostic capacity only, not the formal model protocol."
+  },
+  "predefined_exclusion": {
+    "market": "SHANGHAI",
+    "evaluation_year": 2021,
+    "reason": "Predefined before new model fitting: Shanghai has 47 author quotes in 2021 and only 27 L20/H20 same-year mature origins; exclude the entire 2021 Shanghai evaluation, retaining source rows and all audit counts."
+  },
+  "rolling_sparse_role_warning": "Calendar-year screening would give Shanghai only 47 quotes / 27 H20 mature origins in 2021 as 2022 calibration or 2023 tuning. Formal observation blocks use 252 calibration and 126 validation origins and may span multiple calendar years; no missing dates/prices are filled."
+}

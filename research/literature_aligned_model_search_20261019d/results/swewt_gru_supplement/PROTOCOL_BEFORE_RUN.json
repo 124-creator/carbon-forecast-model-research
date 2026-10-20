@@ -1,0 +1,111 @@
+{
+  "stage": "additional_published_structure_control_after_partial_v3_results",
+  "created_unix": 1792404930.8756256,
+  "paper": {
+    "title": "Carbon Price Forecasting Using Optimized Sliding Window Empirical Wavelet Transform and Gated Recurrent Unit Network to Mitigate Data Leakage",
+    "doi": "10.3390/en17174358",
+    "venue": "Energies 17(17), 4358 (2024)",
+    "official_url": "https://www.mdpi.com/1996-1073/17/17/4358",
+    "publisher_provided_full_text": "https://www.researchgate.net/publication/383685619_Carbon_Price_Forecasting_Using_Optimized_Sliding_Window_Empirical_Wavelet_Transform_and_Gated_Recurrent_Unit_Network_to_Mitigate_Data_Leakage"
+  },
+  "registration_status": "added after at least Beijing v3 scores were inspected; not among original v3 registered baselines",
+  "purpose": "descriptive same-target comparison with a published past-window decomposition plus recurrent forecasting structure; no new model candidate or p-value search",
+  "markets": [
+    "BEIJING_MEAN",
+    "TIANJIN_MEAN",
+    "CHONGQING_MEAN"
+  ],
+  "fold": "fixed602020",
+  "families": [
+    "swewt_gru_price",
+    "swewt_gru_full"
+  ],
+  "target": "author-curated daily transaction mean price, CNY/tonne; not close",
+  "source_limitation": "author monthly-reference anomaly cleaning/replacement can use future-within-month information; this is evaluation of the published cleaned benchmark, not a certified live-vintage deployment test",
+  "primary_markets": [
+    "BEIJING_MEAN",
+    "TIANJIN_MEAN"
+  ],
+  "separate_stress_market": "CHONGQING_MEAN (28 common H20-complete test origins)",
+  "reference_v3_protocol_path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/PROTOCOL_BEFORE_RUN.json",
+  "reference_v3_protocol_sha256": "a688676a492d2abfbe69fc219e99f96e7c0f7b4b319b88fbd0730b4a1037da08",
+  "reference_v3_manifest_sha256": {
+    "BEIJING_MEAN": "b38dea4cc9ea9a45824c24b805b515b6aba828747ada774a00273d0859959f6f",
+    "TIANJIN_MEAN": "56820a3118b83b36d42aad91879c6285a99650d31a613a7a8fd780df2fc90d96",
+    "CHONGQING_MEAN": "e45f1f41fd0fd8962eb9b56aaec72fd1773207e7b330f20c1416cabea2631c32"
+  },
+  "source_sha256": {
+    "run_model_search.py": "26347433fe6416298e4969da618cbba291999f3a66131172bc8f2e510f3633bf",
+    "innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e",
+    "run_liquidity_extension.py": "95665858a1945b00bba6d6233022c34c0a58993899ccadda8c895f64ffe69807",
+    "liquidity_models.py": "91dd66c0b33b8d75100e37cc382f01be44021ae538f6cbbedddda7f9b9386e0b",
+    "run_new_market_replication.py": "8c617a714bb0b47d117b213de9d299c3bd6a534c8211c28c8d039d454df12e56",
+    "literature_diagnostic.py": "e9053bfd34bce9e60c67c0590245271ccecaaf0bcf009a1e715be9abe7ada2e5",
+    "run_swewt_gru_comparison.py": "0b3395f547fad792c6880a9d25819c6e326ab48ef733240ad690e4833b63218d"
+  },
+  "runtime": {
+    "python_executable": "/tmp/carbon-research-env/bin/python",
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "torch": "2.14.1+cpu",
+    "ewtpy_version": "0.2",
+    "ewtpy_module_path": "/tmp/carbon-forecast-20261019d-deps/ewtpy/ewtpy.py",
+    "ewtpy_module_sha256": "35cb4532ae35a41867ee1411cb61a33165f7eebab3ebf70a58b47c74c6e6a289"
+  },
+  "window_price_levels": 64,
+  "sequence_length": 17,
+  "ewt_modes": 3,
+  "decomposition": "ewtpy EWT1D called independently on only the 64 observed levels ending at each origin; exact frozen settings from literature_diagnostic.decompose",
+  "input_channels": {
+    "swewt_gru_price": 4,
+    "swewt_gru_full": 9
+  },
+  "nominal_parameter_counts": {
+    "swewt_gru_price": 4308,
+    "swewt_gru_full": 4788
+  },
+  "potentially_data_active_parameters_at_supervised_horizons": {
+    "swewt_gru_price": 3747,
+    "swewt_gru_full": 4227
+  },
+  "readout": "20 zero-initialized linear outputs; only rows h1,h5,h20 receive the common loss, other 17 rows are not claimed to be supervised forecasts",
+  "normalization": "raw price and low EWT band subtract origin price; all four price channels divide fixed v3 target RMS; energy/volume retain v3 transforms",
+  "horizons_observation_steps": [
+    1,
+    5,
+    20
+  ],
+  "learning_rates": [
+    0.003,
+    0.01
+  ],
+  "selection_seed": 17,
+  "refit_seeds": [
+    17,
+    29,
+    43
+  ],
+  "maximum_epochs": 80,
+  "minimum_epochs_before_stopping": 15,
+  "patience": 12,
+  "batch_size": 128,
+  "optimizer": "frozen v1 AdamW(weight_decay=1e-4), global gradient norm clip 5",
+  "training_loss": "equal H1/H5/H20 native squared error divided by training target second moment",
+  "selection": "past validation only selects lr and epoch including epoch0, then three seeds refit all matured pre-test labels for selected epoch count",
+  "label_maturity": "origin t>=64; each split's t+20 must be before that split's end; final refit all matured pre-test labels",
+  "initialization": "GRU initial weights use the paired fixed seed; zero readout gives RW before any update",
+  "primary_seed_summary": "mean individual-seed loss, then equal horizon and primary-market means of MSE/RW",
+  "secondary_seed_summary": "three-prediction ensemble scores labeled separately",
+  "planned_neural_tasks": 30,
+  "comparison_scope": "do not rerun v3 controls; compare on identical existing targets/origins; price arm omits exogenous information intentionally",
+  "departures_from_original_paper": [
+    "three ScienceDB transaction-mean benchmark markets and preserved 60/20/20 raw-row boundaries instead of the paper's single-market 70/10/20 experiment",
+    "fixed window64 and three bands within the published search ranges, rather than TPE searching window24-64 and two-four bands",
+    "single GRU32 and a direct 20-row head with supervised horizons1/5/20, rather than the paper's tuned single-step forecast",
+    "origin-centered level features with fixed training RMS and original-price horizon-risk loss, rather than the paper's train-minmax level formulation",
+    "two fixed learning rates, at most80 epochs/patience12 and three specified refit seeds, rather than paper TPE runs10/maxepochs1000/patience100",
+    "full arm adds permitted energy and volume context; these inputs were not in the original univariate paper",
+    "the ewtpy implementation and fixed EWT options are recorded; not an author-code or numerical reproduction"
+  ],
+  "statistics": "no new p-values or post-result choice between these two arms; retain price and full outputs separately"
+}

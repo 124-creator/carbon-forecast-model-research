@@ -1,0 +1,77 @@
+{
+  "stage": "development_search",
+  "exposure": "2022/2023 already used in prior studies",
+  "markets": [
+    "GUANGZHOU",
+    "HUBEI"
+  ],
+  "years": [
+    2022,
+    2023
+  ],
+  "horizons_observation_steps": [
+    1,
+    5,
+    20
+  ],
+  "lookback": 64,
+  "validation_origins": 80,
+  "label_purge": 20,
+  "neural_families": [
+    "liquidity_full",
+    "liquidity_readout",
+    "shock_size_only",
+    "liquidity_unconstrained",
+    "gru",
+    "lstm"
+  ],
+  "learning_rates": [
+    0.003,
+    0.01
+  ],
+  "selection_seed": 17,
+  "refit_seeds": [
+    17,
+    29,
+    43
+  ],
+  "maximum_epochs": 80,
+  "minimum_epochs_before_stopping": 15,
+  "patience": 12,
+  "optimizer": "AdamW(weight_decay=1e-4), global gradient norm clip 5",
+  "batch_size": 128,
+  "training_loss": "mean native price squared error / training target second moment, equal H1/H5/H20",
+  "selection": "past validation only; select lr and epoch on seed17, refit all matured pretest labels for same epochs with seeds17/29/43",
+  "test_updates": "weights frozen during each year; each origin receives actual past observations",
+  "primary_comparison": "equal market/year/horizon mean MSE ratio to RW; same-data structural controls",
+  "primary_seed_summary": "mean_seed_mse_over_rw: score each refit seed then average losses; do not score a seed ensemble for the primary claim",
+  "secondary_seed_summary": "ensemble_mse_over_rw: average the three seed forecasts before scoring, explicitly a three-model ensemble",
+  "strong_baseline_selector": "per market/year choose lowest past validation loss from RW, drift, ridge_price, ridge_full, hgb_full, GRU, LSTM; evaluate that family's final forecast without consulting test performance",
+  "uncertainty": "paired block bootstrap; seeds measure algorithm randomness, not independent markets",
+  "energy_features": {
+    "lag_calendar_days": 14,
+    "version": "public historical file; not historical-vintage certified",
+    "transform": "arithmetic change between aligned carbon observation dates"
+  },
+  "gate": "no universal publication percentage; need consistent gain over RW and strongest same-data control, material allocation ablation and supported novelty before confirmation",
+  "source_sha256": {
+    "run_model_search.py": "26347433fe6416298e4969da618cbba291999f3a66131172bc8f2e510f3633bf",
+    "innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e",
+    "run_liquidity_extension.py": "95665858a1945b00bba6d6233022c34c0a58993899ccadda8c895f64ffe69807",
+    "liquidity_models.py": "91dd66c0b33b8d75100e37cc382f01be44021ae538f6cbbedddda7f9b9386e0b"
+  },
+  "created_unix": 1792402113.441233,
+  "study_version": "liquidity_extension_after_partial_v1_development_results",
+  "relationship_to_v1": "same price targets, folds and energy features; add downloaded author volume; new constrained gate and matched readout control; do not overwrite or pool v1 test scores",
+  "reason": "small-data MLP allocation was unstable in the first GZ/HB development cells; test observed trading volume and a parsimonious sign-constrained hypothesis instead",
+  "volume_hypothesis": "at fixed volume larger absolute innovation is more transient; at fixed innovation positive volume surprise is more permanent; these signs are testable restrictions, not established economic facts",
+  "critical_controls": [
+    "liquidity_readout (same capacity)",
+    "shock_size_only (remove volume from gate)",
+    "liquidity_unconstrained (remove economic sign restrictions)",
+    "v1 allocation_constant (same target and energy information, volume ignored)",
+    "GRU/LSTM/Ridge/HGB with the same added volume inputs"
+  ],
+  "frozen_prior_diagnostic": "also score the four compact gate models at their fixed initial coefficients without fitting, to separate a useful hand-specified prior from gains learned from data; secondary diagnostic",
+  "volume_source_directory": "/tmp/carbon-literature-data-audit-20261019d/prepared"
+}

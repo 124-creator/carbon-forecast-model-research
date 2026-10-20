@@ -1,0 +1,576 @@
+{
+  "status": "PASS_NO_MARKET_FIT_NO_SCORE",
+  "contract": {
+    "experiment": "raw_matured_readout_on_frozen_stage_e_budget320",
+    "analysis_role": "development_for_both_markets_after_prior_scores_seen",
+    "primary_family": "signed_context_response",
+    "families": [
+      "signed_context_response",
+      "static_response",
+      "amplitude_context",
+      "signed_shock_only"
+    ],
+    "markets": [
+      "TIANJIN_OFFICIAL_MEAN",
+      "CEA_OFFICIAL_MEAN"
+    ],
+    "strategies_in_tie_order": [
+      "frozen",
+      "expanding_equal",
+      "expanding_half_life126",
+      "rolling126",
+      "rolling252"
+    ],
+    "frontend": "unchanged original raw return and raw volume-context tokens; no EWT or dense-path combination",
+    "source_sha256": {
+      "phase_f/run_matured_readout.py": "28e9ba220a37b964d79ec000efbc07aa0c80c4045b206a4381a2b174acd0b59d",
+      "phase_e/signed_response_models.py": "5ceb7f04c567be32f1a399cbf01dafdfc6894d3840a158b6faae4153f09eb2f8",
+      "phase_e/run_signed_response_search.py": "905da0ca33607799b1ca63d9efe6710df173ec33c5c44e137071e024906d990c",
+      "phase_e/run_neural_references.py": "489249eb417e54611123da2b1508f946f416c7f5813124e2ddd2eedfe8b63b11",
+      "phase_e/run_budget_sensitivity.py": "c353e5d386bf96ed8a9a4d048cffe152de08d9303a0e2551c2df755e51fb606b"
+    },
+    "budget_protocol_sha256": "f80ec648275a3c79e23d34ad5d668ebf10cf55c7ec5ec1565995b989dc06b771",
+    "budget_completion_sha256": "25ba1089f6cb9875f81a3a46e535f8768c3fe72e67272f3c9a89e41903127e22",
+    "supplied_manifest_rule": "same market/canonical SHA and development role required; only file location overrides source-run spec; original semantics retained, later explanatory wording logged separately; schema/splits/scales must numerically match",
+    "datasets": [
+      {
+        "market": "TIANJIN_OFFICIAL_MEAN",
+        "sha256": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a",
+        "role": "development",
+        "row_boundaries": [
+          0,
+          646,
+          861,
+          1077
+        ],
+        "counts": {
+          "train": 562,
+          "val": 195,
+          "final": 777,
+          "test": 196
+        },
+        "origin_ranges": {
+          "train": [
+            64,
+            625
+          ],
+          "val": [
+            646,
+            840
+          ],
+          "final": [
+            64,
+            840
+          ],
+          "test": [
+            861,
+            1056
+          ]
+        },
+        "initial_training_rms": 1.3139645907468107,
+        "initial_training_target_second_moment": [
+          1.621859964412811,
+          6.993383096085417,
+          22.16738167259787
+        ]
+      },
+      {
+        "market": "CEA_OFFICIAL_MEAN",
+        "sha256": "f9f0e09b7500b2bdb4ec8b16c61d5d5fa2b64de63a24c0cf7bd1d269aa2be75d",
+        "role": "development",
+        "row_boundaries": [
+          0,
+          750,
+          1000,
+          1251
+        ],
+        "counts": {
+          "train": 666,
+          "val": 230,
+          "final": 916,
+          "test": 231
+        },
+        "origin_ranges": {
+          "train": [
+            64,
+            729
+          ],
+          "val": [
+            750,
+            979
+          ],
+          "final": [
+            64,
+            979
+          ],
+          "test": [
+            1000,
+            1230
+          ]
+        },
+        "initial_training_rms": 4.583739487607653,
+        "initial_training_target_second_moment": [
+          22.67713183183186,
+          25.91302477477477,
+          37.883000750750725
+        ]
+      }
+    ],
+    "checkpoints": [
+      {
+        "market": "TIANJIN_OFFICIAL_MEAN",
+        "family": "signed_context_response",
+        "alpha": 1.0,
+        "original_learning_rate": 0.01,
+        "original_selected_epoch": 320,
+        "parameter_counts": {
+          "nonlinear_optimizer_parameters": 6,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 9
+        },
+        "selection_numeric_state_sha256": "bc2da98c83fd5e87cde7bb1b1cadf8d93aca4709b6bc926c3d0ab3f9370548da",
+        "final_numeric_state_sha256": "8fad7f6133314979d52bb845f976fe1afc0a97d9a3bc571bb5469b468ac10d70",
+        "validation_state_source": "selection_alpha1_lr0.01.json",
+        "test_state_source": "REFIT.json",
+        "files": {
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/signed_context_response/SELECTION.json": "1390a05dec57d2a69da0be036f8f4471235cd72a4ecc32ba777351df5a000b22",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/signed_context_response/selection_alpha1_lr0.01.json": "ad817d083ca5de0db4b056f8d4fdbc5af98a17917cf29cd248d17bd3edb237bc",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/signed_context_response/selection_alpha1_lr0.01.pt": "5c8c0c768e70b2626610d6128fc337aa1ea2035884b5c8e25c02d8074d8f7202",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/signed_context_response/REFIT.json": "eecb0903af879dc3313c5c7a82d07123a1d75ddf00205aac2f54bf9b6fbbfe36",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/signed_context_response/refit.pt": "be2b4fe28149db81f221a0155634e6ced68df3dc7658d41af4b16151d403c5d1",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/signed_context_response/predictions.npz": "2fade7ba76a36851ac0a019b1cb010fdc28319a97d0d5540b42dc7ceb4ee6243"
+        }
+      },
+      {
+        "market": "TIANJIN_OFFICIAL_MEAN",
+        "family": "static_response",
+        "alpha": 1.0,
+        "original_learning_rate": 0.01,
+        "original_selected_epoch": 145,
+        "parameter_counts": {
+          "nonlinear_optimizer_parameters": 2,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 5
+        },
+        "selection_numeric_state_sha256": "310ced6ab18c6cfafff2356ec20a3daccbebcf5e45562b33265202c579cc1d74",
+        "final_numeric_state_sha256": "975e7b1f2bcb5974ceb3e24c68df5e09c1fada618a2bf1ff1521c49696066cbd",
+        "validation_state_source": "selection_alpha1_lr0.01.json",
+        "test_state_source": "REFIT.json",
+        "files": {
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/static_response/SELECTION.json": "7e028b7209442a42aaee7e9a24e99fb68cba795224a63817127fc147fb3824e0",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/static_response/selection_alpha1_lr0.01.json": "f25b55a91611c76bdff572f0e8ec59d79f2577ff019c748c5ffaf9415f46c5c5",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/static_response/selection_alpha1_lr0.01.pt": "0546459c26dbf78da098fa9ab2bbf952d3e98e50c766603eaaf8de03ea69b1b3",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/static_response/REFIT.json": "a0842efd5f642cadcd519c75b452ce8fd5a0ea683e059ec9b494772f2fee8461",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/static_response/refit.pt": "8118150b65f2bb8bf621ed042d371f2606749a971eb959016105011c7892710f",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/static_response/predictions.npz": "08112357458ea92e7925164c712c47a4c244d600dc45b2f8a2738662e90a75a0"
+        }
+      },
+      {
+        "market": "TIANJIN_OFFICIAL_MEAN",
+        "family": "amplitude_context",
+        "alpha": 1.0,
+        "original_learning_rate": 0.01,
+        "original_selected_epoch": 320,
+        "parameter_counts": {
+          "nonlinear_optimizer_parameters": 6,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 9
+        },
+        "selection_numeric_state_sha256": "05236eacc6fc596d3750577368e74422926b8874de2c9502d204903a05df55a0",
+        "final_numeric_state_sha256": "c90e2c4c2cba6d2c6b1f0aa85fd23a65bb4e804b2698ba68250203b8b386e502",
+        "validation_state_source": "selection_alpha1_lr0.01.json",
+        "test_state_source": "REFIT.json",
+        "files": {
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/amplitude_context/SELECTION.json": "70bd94b027a96158f416da690bf4f6fecb8ae26f6062b947f1cf22a1a83a6f87",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/amplitude_context/selection_alpha1_lr0.01.json": "cf615b792a39ebf1298cbd6cba140616a71c68f9fad1ace9e3c2e7672390f8da",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/amplitude_context/selection_alpha1_lr0.01.pt": "1d8a099a95e13ce97362745654e4b05e3d617919a1dca3534beba93dcc117958",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/amplitude_context/REFIT.json": "fd620b903648c2b2e4f346d46a06728885fa176dad09d02661c8cd1a77f6082e",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/amplitude_context/refit.pt": "e9ca3cdb31b469df4656a94dc15c8f2fac9dc29212061816c55e7cfc14bc87d9",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/amplitude_context/predictions.npz": "8e15f9ba6df6b9c332e65495ac3a3a097979b8966ad5a6bc0f92ad0d7c81aa1c"
+        }
+      },
+      {
+        "market": "TIANJIN_OFFICIAL_MEAN",
+        "family": "signed_shock_only",
+        "alpha": 1.0,
+        "original_learning_rate": 0.01,
+        "original_selected_epoch": 141,
+        "parameter_counts": {
+          "nonlinear_optimizer_parameters": 4,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 7
+        },
+        "selection_numeric_state_sha256": "4388210bf8b402e144d9d44fd587d4ccb3667fa93fd4eb986d84495d208ef2d5",
+        "final_numeric_state_sha256": "39f74ec5a9538477edac6d87541cda1f6b386296e3fea5b0bcd699478d56958a",
+        "validation_state_source": "selection_alpha1_lr0.01.json",
+        "test_state_source": "REFIT.json",
+        "files": {
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/signed_shock_only/SELECTION.json": "2a4a18fe0ee1c8df7ee85d6475a644724cc0345fc25df3e2653893e2889688e0",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/signed_shock_only/selection_alpha1_lr0.01.json": "486e45cf23e25d47c7f5f3cf634c77cee40de09010730d76f879114a770688c8",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/signed_shock_only/selection_alpha1_lr0.01.pt": "fca89cee8e2748de04d9f9e9df4f78cc8c627fc5e11f1cc67e8512447dd226d4",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/signed_shock_only/REFIT.json": "8700be8991aaf5036bfd7e87b6234f73b287b23685c21115bf4dcf8ac4eb2a02",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/signed_shock_only/refit.pt": "1a567b0fe2ec126d33b8dbca8b4fd153ccd558f76e566cf02e1b78d18c13bb89",
+          "TIANJIN_OFFICIAL_MEAN_fixed602020/signed_shock_only/predictions.npz": "d7b37a7f10a6ba27f4dccbb912f2d2361c0706a7cfba9073445d6420019fd018"
+        }
+      },
+      {
+        "market": "CEA_OFFICIAL_MEAN",
+        "family": "signed_context_response",
+        "alpha": 1.0,
+        "original_learning_rate": 0.01,
+        "original_selected_epoch": 320,
+        "parameter_counts": {
+          "nonlinear_optimizer_parameters": 6,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 9
+        },
+        "selection_numeric_state_sha256": "404a5b8391b66e94ba2944d23d755a1810d4132c2611558325c7edb8354af7c1",
+        "final_numeric_state_sha256": "6698dcb2e3af833f2f9ffb7fbb28200217bae3149a5a99f9bd28f840e1a1ad01",
+        "validation_state_source": "selection_alpha1_lr0.01.json",
+        "test_state_source": "REFIT.json",
+        "files": {
+          "CEA_OFFICIAL_MEAN_fixed602020/signed_context_response/SELECTION.json": "1f098b35a014f008d85495982885a8cf035d548cce9a574cf2b3ac6fb28a3644",
+          "CEA_OFFICIAL_MEAN_fixed602020/signed_context_response/selection_alpha1_lr0.01.json": "1f243ac367a792b673538b886d64ca9213154015b8e0d61c581a656864e70636",
+          "CEA_OFFICIAL_MEAN_fixed602020/signed_context_response/selection_alpha1_lr0.01.pt": "553fe914aaef4b6fb7cf23d64cdb414ab8d79b25606a276764690e4307260148",
+          "CEA_OFFICIAL_MEAN_fixed602020/signed_context_response/REFIT.json": "b70b6bc864fbab3541831a11439283b4977c655c7155e7c3ca8128ad37899805",
+          "CEA_OFFICIAL_MEAN_fixed602020/signed_context_response/refit.pt": "2e40d299bb1b6bf855d1a02742291631fcce59440a817697aa7017eb80ff17ab",
+          "CEA_OFFICIAL_MEAN_fixed602020/signed_context_response/predictions.npz": "cbcb0da9d2b07405b34a9538c08905e2b330ee3ed5e003aabeff6cecf9381484"
+        }
+      },
+      {
+        "market": "CEA_OFFICIAL_MEAN",
+        "family": "static_response",
+        "alpha": 1.0,
+        "original_learning_rate": 0.01,
+        "original_selected_epoch": 320,
+        "parameter_counts": {
+          "nonlinear_optimizer_parameters": 2,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 5
+        },
+        "selection_numeric_state_sha256": "cc0c47120989c1b6b9a24a43e865fb9ba0205df801c951823ff9f168adc74a8d",
+        "final_numeric_state_sha256": "2fa60a8e427bf1284ecf29e99a25ca2ceaf0c50743dcb8a25cbd7e6f42227300",
+        "validation_state_source": "selection_alpha1_lr0.01.json",
+        "test_state_source": "REFIT.json",
+        "files": {
+          "CEA_OFFICIAL_MEAN_fixed602020/static_response/SELECTION.json": "3c19f127b8846a7c1e285209ac56846a037d74b977a0d0673e73a33ca3800a6f",
+          "CEA_OFFICIAL_MEAN_fixed602020/static_response/selection_alpha1_lr0.01.json": "095b711db320b774811e4f55723a3f160b1090a625839a47696f095ea916c7ba",
+          "CEA_OFFICIAL_MEAN_fixed602020/static_response/selection_alpha1_lr0.01.pt": "0d0c1ee04635a92341b1e490c3e3fde3422d51b3ec618546d52c904ada79f718",
+          "CEA_OFFICIAL_MEAN_fixed602020/static_response/REFIT.json": "3f2c77d6edf1580d87fc0f9ca4345d4f2aba27db4ba4e614ba5111f5ed201a8d",
+          "CEA_OFFICIAL_MEAN_fixed602020/static_response/refit.pt": "c928f7c352ca31dc81a3da82bf1bec05f292fa6da9964a4af7fbf8cd18b6ed2c",
+          "CEA_OFFICIAL_MEAN_fixed602020/static_response/predictions.npz": "fbdec3af420dc14a9859b81c81f825501241edfb3af7c474f4f7a257bfc28ab1"
+        }
+      },
+      {
+        "market": "CEA_OFFICIAL_MEAN",
+        "family": "amplitude_context",
+        "alpha": 1.0,
+        "original_learning_rate": 0.01,
+        "original_selected_epoch": 320,
+        "parameter_counts": {
+          "nonlinear_optimizer_parameters": 6,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 9
+        },
+        "selection_numeric_state_sha256": "b76053e19cd91113a151cb6461db4085eecec76fc078dfaab1b4fb18482fdf8b",
+        "final_numeric_state_sha256": "25f43a33a3a74d8685099eb3637082765843d4b270fdef0168a75d5f5e7822a8",
+        "validation_state_source": "selection_alpha1_lr0.01.json",
+        "test_state_source": "REFIT.json",
+        "files": {
+          "CEA_OFFICIAL_MEAN_fixed602020/amplitude_context/SELECTION.json": "9b0553bbe588f858dbc9574751995cd7d8dad6f529ea20233652661370335411",
+          "CEA_OFFICIAL_MEAN_fixed602020/amplitude_context/selection_alpha1_lr0.01.json": "f4d70e3b5d661749d7d9b7205acfb10778e19b7b3ff05d650f053ff246c5930a",
+          "CEA_OFFICIAL_MEAN_fixed602020/amplitude_context/selection_alpha1_lr0.01.pt": "d3baca43cb1e8001e032267c3ee8ef5fd20c4684ce8668300cdcdee5973b02da",
+          "CEA_OFFICIAL_MEAN_fixed602020/amplitude_context/REFIT.json": "ffa5ed1484d3d63cbb2cc71e0108e4b12dc06fd21b93056ea8aa100e0d1cb8b2",
+          "CEA_OFFICIAL_MEAN_fixed602020/amplitude_context/refit.pt": "dc60361a75a2d0cad2c963c603816997886480a21ffb21461bd0f6642d31e280",
+          "CEA_OFFICIAL_MEAN_fixed602020/amplitude_context/predictions.npz": "651a23ddeb80be86737fd81d9aad11b4e794ef5ec6d1fa1c1d3bf6b0147e93ee"
+        }
+      },
+      {
+        "market": "CEA_OFFICIAL_MEAN",
+        "family": "signed_shock_only",
+        "alpha": 1.0,
+        "original_learning_rate": 0.01,
+        "original_selected_epoch": 320,
+        "parameter_counts": {
+          "nonlinear_optimizer_parameters": 4,
+          "exactly_fitted_linear_coefficients": 3,
+          "total_fitted_scalars": 7
+        },
+        "selection_numeric_state_sha256": "e78912b7f1c786728e22024d62db8b702c4b16e52960a99a29e4d868e316117c",
+        "final_numeric_state_sha256": "f81ca5e77e91b0090d87822bb96a763e535eb05f6511a5a29f47033b220bdf1e",
+        "validation_state_source": "selection_alpha1_lr0.01.json",
+        "test_state_source": "REFIT.json",
+        "files": {
+          "CEA_OFFICIAL_MEAN_fixed602020/signed_shock_only/SELECTION.json": "65aafa18f0a15929c87726e5a892b7e3c79d3db8569d413783a7f1cf3b92560c",
+          "CEA_OFFICIAL_MEAN_fixed602020/signed_shock_only/selection_alpha1_lr0.01.json": "e594978128b966028dac1a119e06cf5751ff9fecde3747969e0fbe8a562d23d7",
+          "CEA_OFFICIAL_MEAN_fixed602020/signed_shock_only/selection_alpha1_lr0.01.pt": "37366a1eb94d769b803f71ec89b64d56576a65e940f72607a4b77aa78a82f425",
+          "CEA_OFFICIAL_MEAN_fixed602020/signed_shock_only/REFIT.json": "bf62705c7a78f6c86455998682bb5e7cfedf9e36ca5b7023d4a471a74e25bceb",
+          "CEA_OFFICIAL_MEAN_fixed602020/signed_shock_only/refit.pt": "0e263219dbfaa763d40e71c6dfb69822c5dda5927197b82b511d97887ffab3a4",
+          "CEA_OFFICIAL_MEAN_fixed602020/signed_shock_only/predictions.npz": "fe1ba5fd6fa22c59505b3958539cd1c46878a474249ee62d7a95688c28149901"
+        }
+      }
+    ],
+    "horizons": [
+      1,
+      5,
+      20
+    ],
+    "first_history_origin": 64,
+    "label_maturity": "tau+20<=issue_t; report at t is observed; all3 labels update together",
+    "old_split": "A=floor(3N/5),B=A+floor(N/5); train tau+20<A; val A<=tau and tau+20<B; final tau+20<B; test B<=tau<=N-21",
+    "validation_theta": "original validation-selected training checkpoint; never final-refit theta",
+    "test_theta": "original REFIT.json, immutable for the whole test trace",
+    "validation_reuse": "Original theta/alpha/epoch already selected on this validation; readout strategy selection is additional development reuse, not nested or prospective confirmation",
+    "fixed_normalization": "original price-return RMS and initial-training horizon second moments, including at final/test",
+    "weighted_head": "normalized mean over origins and3 horizons; recompute weighted column RMS; same original selected alpha; penalize all3 standardized coefficients including drift",
+    "column_scale_floor": 1e-08,
+    "half_life_unit": "126 target-market observation records in eligible origin age; no calendar-day resampling",
+    "rolling_unit": "most recent126/252 eligible origins; all eligible if fewer",
+    "effective_weight_count_definition": "1/sum(normalized_origin_weights^2); descriptive weighting count, not a count of independent observations; horizon overlap remains",
+    "frozen_strategy": "reuse stored selection head for validation and stored final-refit head for test; zero new ridge solves",
+    "first_issue_inclusive_maturity": "At issue A/B the updated policies may add origin A-20/B-20; its H20 label equals the observed issue price",
+    "selection": "minimum mean over validation origins/horizons of native squared error / fixed initial-training horizon variance; exact ties use declared strategy order",
+    "test_execution": "fix strategy before accessing test forecast losses; issue sequential forecasts, update from matured prior labels only; retain every strategy including unfavorable ones",
+    "summary": "native MSE,RMSE,MAE,bias,H-specific MSE/RW MSE and equal-H mean MSE/RW; no new p-values or confirmation gate",
+    "frozen_prediction_relative_tolerance": 1e-10,
+    "normal_equation_relative_tolerance": 1e-09,
+    "planned_nonlinear_fits": 0,
+    "planned_optimizer_steps": 0,
+    "planned_ridge_solves": 13632,
+    "planned_validation_strategy_paths": 40,
+    "planned_test_strategy_paths": 40,
+    "publication": "aggregate receipts may be exported; per-origin labels, forecasts and head paths stay in private run output"
+  },
+  "market_fits": 0,
+  "ridge_solves": 0,
+  "optimizer_steps": 0,
+  "model_forward_calls": 0,
+  "new_forecast_scores": 0,
+  "binary_json_exact_state_pairs": 16,
+  "supplied_dataset_manifest": {
+    "file": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_tricks_primary_model_20261019f/provenance/RUN_DATASETS.json",
+    "sha256": "24cdefff05fc124faa6f913787aeda07a9aeb92ea69c2af75a3bdafd92b242cf",
+    "notes": {
+      "TIANJIN_OFFICIAL_MEAN": {
+        "role": "development",
+        "price_definition": "Official TJEA daily total published two-decimal transaction mean, CNY/tonne; not closing price",
+        "source_processing": "All 1077 official canonical daily-total records retained. Published prices preserved exactly; no row deletion, time filling, turnover-based price recomputation or splice.",
+        "source_url": "https://www.chinatcx.com.cn/tshq",
+        "source_vintage": "Current public historical snapshot; per-day publication vintages unverified. Evaluation tail scored in stages d and e and is fully exposed development.",
+        "license": "No redistribution license established; canonical rows and per-origin arrays remain private"
+      },
+      "CEA_OFFICIAL_MEAN": {
+        "role": "development",
+        "price_definition": "Published CEA daily TOTAL transaction mean in yuan per tonne; not closing price or listing-only mean",
+        "source_processing": "All 1251 rows from the official main CEA table retained; date sort and numeric thousands separator removal only. No row deletion, deduplication, time filling, price recomputation or splice.",
+        "source_url": "https://www.chinatcx.com.cn/tshq",
+        "source_vintage": "Current public historical snapshot; daily publication vintages unverified. Original stage-e and max320 sensitivity scores now fully exposed; stage f is development.",
+        "license": "No explicit redistribution license identified; raw rows and per-origin arrays remain private. Public reconstruction code and provenance remain available."
+      }
+    }
+  },
+  "availability_checks": [
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "subset": "val",
+      "strategy": "expanding_equal",
+      "first_issue": 646,
+      "eligible_count": 563,
+      "first_eligible_origin": 64,
+      "last_eligible_origin": 626,
+      "last_observed_label_row": 646,
+      "effective_weight_count": 563.0,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "subset": "val",
+      "strategy": "expanding_half_life126",
+      "first_issue": 646,
+      "eligible_count": 563,
+      "first_eligible_origin": 64,
+      "last_eligible_origin": 626,
+      "last_observed_label_row": 646,
+      "effective_weight_count": 332.1305524849329,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "subset": "val",
+      "strategy": "rolling126",
+      "first_issue": 646,
+      "eligible_count": 126,
+      "first_eligible_origin": 501,
+      "last_eligible_origin": 626,
+      "last_observed_label_row": 646,
+      "effective_weight_count": 126.00000000000006,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "subset": "val",
+      "strategy": "rolling252",
+      "first_issue": 646,
+      "eligible_count": 252,
+      "first_eligible_origin": 375,
+      "last_eligible_origin": 626,
+      "last_observed_label_row": 646,
+      "effective_weight_count": 252.0000000000001,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "subset": "test",
+      "strategy": "expanding_equal",
+      "first_issue": 861,
+      "eligible_count": 778,
+      "first_eligible_origin": 64,
+      "last_eligible_origin": 841,
+      "last_observed_label_row": 861,
+      "effective_weight_count": 778.0,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "subset": "test",
+      "strategy": "expanding_half_life126",
+      "first_issue": 861,
+      "eligible_count": 778,
+      "first_eligible_origin": 64,
+      "last_eligible_origin": 841,
+      "last_observed_label_row": 861,
+      "effective_weight_count": 353.6313234500124,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "subset": "test",
+      "strategy": "rolling126",
+      "first_issue": 861,
+      "eligible_count": 126,
+      "first_eligible_origin": 716,
+      "last_eligible_origin": 841,
+      "last_observed_label_row": 861,
+      "effective_weight_count": 126.00000000000006,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "TIANJIN_OFFICIAL_MEAN",
+      "subset": "test",
+      "strategy": "rolling252",
+      "first_issue": 861,
+      "eligible_count": 252,
+      "first_eligible_origin": 590,
+      "last_eligible_origin": 841,
+      "last_observed_label_row": 861,
+      "effective_weight_count": 252.0000000000001,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "subset": "val",
+      "strategy": "expanding_equal",
+      "first_issue": 750,
+      "eligible_count": 667,
+      "first_eligible_origin": 64,
+      "last_eligible_origin": 730,
+      "last_observed_label_row": 750,
+      "effective_weight_count": 667.0000000000002,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "subset": "val",
+      "strategy": "expanding_half_life126",
+      "first_issue": 750,
+      "eligible_count": 667,
+      "first_eligible_origin": 64,
+      "last_eligible_origin": 730,
+      "last_observed_label_row": 750,
+      "effective_weight_count": 345.4831230713144,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "subset": "val",
+      "strategy": "rolling126",
+      "first_issue": 750,
+      "eligible_count": 126,
+      "first_eligible_origin": 605,
+      "last_eligible_origin": 730,
+      "last_observed_label_row": 750,
+      "effective_weight_count": 126.00000000000006,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "subset": "val",
+      "strategy": "rolling252",
+      "first_issue": 750,
+      "eligible_count": 252,
+      "first_eligible_origin": 479,
+      "last_eligible_origin": 730,
+      "last_observed_label_row": 750,
+      "effective_weight_count": 252.0000000000001,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "subset": "test",
+      "strategy": "expanding_equal",
+      "first_issue": 1000,
+      "eligible_count": 917,
+      "first_eligible_origin": 64,
+      "last_eligible_origin": 980,
+      "last_observed_label_row": 1000,
+      "effective_weight_count": 916.9999999999998,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "subset": "test",
+      "strategy": "expanding_half_life126",
+      "first_issue": 1000,
+      "eligible_count": 917,
+      "first_eligible_origin": 64,
+      "last_eligible_origin": 980,
+      "last_observed_label_row": 1000,
+      "effective_weight_count": 358.90434509861086,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "subset": "test",
+      "strategy": "rolling126",
+      "first_issue": 1000,
+      "eligible_count": 126,
+      "first_eligible_origin": 855,
+      "last_eligible_origin": 980,
+      "last_observed_label_row": 1000,
+      "effective_weight_count": 126.00000000000006,
+      "unavailable_future_origin_extension_gap": 0
+    },
+    {
+      "market": "CEA_OFFICIAL_MEAN",
+      "subset": "test",
+      "strategy": "rolling252",
+      "first_issue": 1000,
+      "eligible_count": 252,
+      "first_eligible_origin": 729,
+      "last_eligible_origin": 980,
+      "last_observed_label_row": 1000,
+      "effective_weight_count": 252.0000000000001,
+      "unavailable_future_origin_extension_gap": 0
+    }
+  ],
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "torch": "2.14.1+cpu",
+    "sklearn": "1.8.0",
+    "precision": "float64 for all new response calculations; frozen legacy model float32",
+    "torch_threads_per_worker": 1
+  },
+  "scope": "Source/data hashes, exact checkpoint states and index/weight checks only"
+}

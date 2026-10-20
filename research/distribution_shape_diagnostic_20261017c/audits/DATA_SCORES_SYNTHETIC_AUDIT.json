@@ -1,0 +1,431 @@
+{
+  "status": "PASS",
+  "completed_utc": "2026-10-17T15:43:45.729377+00:00",
+  "scope": "Independent pure-synthetic data/CRPS/aggregation audit plus explicit static review; no claim of completed market results.",
+  "data_reads": 0,
+  "market_fits": 0,
+  "optimizer_steps": 0,
+  "confirmation_reads": 0,
+  "runtime": {
+    "numpy": "2.5.4",
+    "torch": "2.3.1+cpu",
+    "python": "3.12.14"
+  },
+  "source_sha256": {
+    "data.py": "8afc3aa3567cb17f6c90a348a1f8a3e91748e4639a081352c9e0e8016c4ae242",
+    "scores.py": "5dc04bac9a03761d4f0c5eedc04c3a0b2e3b506a3937d5f5e5e38b6db4b78fad",
+    "run.py": "9fb8d3719d1e9e2fe69cc4ff6b6e59c3aa3a945fa54fbddabd6fd9acdea76e05",
+    "models.py": "a35b7bb216c74b9feac0fdde9b7658bb045378f1fb6d9af82b23e14f4396265c",
+    "statistics.py": "0b04f619461a937ef0adeb290153f08db03a3366daa6821d78c8cb26802c1a07"
+  },
+  "protocol_sha256": "336fb932ea617fe4b8f0dbc361591a08482b4eb75810584bf4d1da8e3912b713",
+  "script_sha256": "c255bff485947e6496f12fc9d889804d9b217de53bc55db7ee9fbbc204d78010",
+  "checks": 60,
+  "numeric_comparisons": 4136,
+  "maximum_abs_error": 1.887379141862766e-15,
+  "synthetic_support": {
+    "rows": 950,
+    "train": 551,
+    "validation": 80,
+    "evaluation": 199
+  },
+  "oracle_examples": {
+    "same_moments_shape_oracle_expected_crps": 0.5531461677089521,
+    "static_pooled_expected_crps": 0.5628942275360774,
+    "conditional_shape_gain": 0.009748059827125344,
+    "scale_only_oracle_shape_gain": 0.0
+  },
+  "test_details": [
+    {
+      "name": "training support from explicit maturity inequalities",
+      "kind": "numeric",
+      "comparisons": 551,
+      "max_abs_error": 0.0,
+      "tolerance": 0,
+      "pass_": true
+    },
+    {
+      "name": "validation last80 fully mature before year",
+      "kind": "numeric",
+      "comparisons": 80,
+      "max_abs_error": 0.0,
+      "tolerance": 0,
+      "pass_": true
+    },
+    {
+      "name": "same-year fullH20 test support",
+      "kind": "numeric",
+      "comparisons": 199,
+      "max_abs_error": 0.0,
+      "tolerance": 0,
+      "pass_": true
+    },
+    {
+      "name": "train labels strictly precede validation origin",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "validation labels strictly precede test year",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "evaluation labels exist and remain in fixed year",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "EWMA against scalar past-price recursion",
+      "kind": "numeric",
+      "comparisons": 890,
+      "max_abs_error": 2.220446049250313e-16,
+      "tolerance": 2e-12,
+      "pass_": true
+    },
+    {
+      "name": "prediction-only batch excludes all labels",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "own-origin forecast scale sqrt(h)",
+      "kind": "numeric",
+      "comparisons": 20,
+      "max_abs_error": 4.440892098500626e-16,
+      "tolerance": 1e-10,
+      "pass_": true
+    },
+    {
+      "name": "past20 observed input from scalar prices and dates",
+      "kind": "numeric",
+      "comparisons": 60,
+      "max_abs_error": 0.0,
+      "tolerance": 1e-10,
+      "pass_": true
+    },
+    {
+      "name": "fullH label endpoint at current origin",
+      "kind": "numeric",
+      "comparisons": 20,
+      "max_abs_error": 0.0,
+      "tolerance": 1e-10,
+      "pass_": true
+    },
+    {
+      "name": "historical targets use their own issue-time scale",
+      "kind": "numeric",
+      "comparisons": 20,
+      "max_abs_error": 1.1102230246251565e-16,
+      "tolerance": 1e-10,
+      "pass_": true
+    },
+    {
+      "name": "immature complete path rejected",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "future feature origin rejected",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "pre-initialization origin rejected",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "future price/calendar poison leaves x unchanged",
+      "kind": "numeric",
+      "comparisons": 60,
+      "max_abs_error": 0.0,
+      "tolerance": 0,
+      "pass_": true
+    },
+    {
+      "name": "future price/calendar poison leaves sigma unchanged",
+      "kind": "numeric",
+      "comparisons": 20,
+      "max_abs_error": 0.0,
+      "tolerance": 0,
+      "pass_": true
+    },
+    {
+      "name": "future price/calendar poison leaves base unchanged",
+      "kind": "numeric",
+      "comparisons": 1,
+      "max_abs_error": 0.0,
+      "tolerance": 0,
+      "pass_": true
+    },
+    {
+      "name": "future poison leaves train empirical support unchanged",
+      "kind": "numeric",
+      "comparisons": 620,
+      "max_abs_error": 0.0,
+      "tolerance": 0,
+      "pass_": true
+    },
+    {
+      "name": "future poison leaves rolling distribution unchanged",
+      "kind": "numeric",
+      "comparisons": 620,
+      "max_abs_error": 0.0,
+      "tolerance": 0,
+      "pass_": true
+    },
+    {
+      "name": "rolling pool latest120 exactly matured own-origin outcomes",
+      "kind": "numeric",
+      "comparisons": 620,
+      "max_abs_error": 1.887379141862766e-15,
+      "tolerance": 2e-12,
+      "pass_": true
+    },
+    {
+      "name": "rolling pool last sample endpoint equals current observation",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "constant normalization rejected",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "nonfinite normalization rejected",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "degenerate quantiles rejected before gap floor",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "rare tails outside midpoint quantiles do not manufacture distribution",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "sorted exact CRPS vs pairwise weighted finite-law identity",
+      "kind": "numeric",
+      "comparisons": 12,
+      "max_abs_error": 4.440892098500626e-16,
+      "tolerance": 2e-14,
+      "pass_": true
+    },
+    {
+      "name": "CRPS translation invariance",
+      "kind": "numeric",
+      "comparisons": 12,
+      "max_abs_error": 9.992007221626409e-16,
+      "tolerance": 2e-14,
+      "pass_": true
+    },
+    {
+      "name": "CRPS positive scale homogeneity in native units",
+      "kind": "numeric",
+      "comparisons": 12,
+      "max_abs_error": 1.7763568394002505e-15,
+      "tolerance": 3e-14,
+      "pass_": true
+    },
+    {
+      "name": "ties and zero probabilities preserve weighted law CRPS",
+      "kind": "numeric",
+      "comparisons": 12,
+      "max_abs_error": 3.3306690738754696e-16,
+      "tolerance": 2e-14,
+      "pass_": true
+    },
+    {
+      "name": "torch sorted CRPS vs independent NumPy double sum",
+      "kind": "numeric",
+      "comparisons": 12,
+      "max_abs_error": 4.440892098500626e-16,
+      "tolerance": 2e-14,
+      "pass_": true
+    },
+    {
+      "name": "atom gradients vs exact analytic formula",
+      "kind": "numeric",
+      "comparisons": 84,
+      "max_abs_error": 1.1102230246251565e-16,
+      "tolerance": 2e-14,
+      "pass_": true
+    },
+    {
+      "name": "simplex logit gradients vs exact analytic formula",
+      "kind": "numeric",
+      "comparisons": 84,
+      "max_abs_error": 1.942890293094024e-16,
+      "tolerance": 2e-14,
+      "pass_": true
+    },
+    {
+      "name": "two-point finite measure uses V score .5",
+      "kind": "numeric",
+      "comparisons": 1,
+      "max_abs_error": 0.0,
+      "tolerance": 1e-15,
+      "pass_": true
+    },
+    {
+      "name": "iid-ensemble offdiagonal correction is different score",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "zero-change mean gives exactly RW point risk",
+      "kind": "numeric",
+      "comparisons": 20,
+      "max_abs_error": 2.220446049250313e-16,
+      "tolerance": 2e-14,
+      "pass_": true
+    },
+    {
+      "name": "evaluate CRPS uses proper individual finite measures",
+      "kind": "numeric",
+      "comparisons": 100,
+      "max_abs_error": 8.881784197001252e-16,
+      "tolerance": 2e-14,
+      "pass_": true
+    },
+    {
+      "name": "2D forecast prevents silent horizon broadcast",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "empty forecast origins rejected",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "empty atom axis rejected",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "mismatched horizon dimensions rejected",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "negative probability rejected",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "unnormalized probability rejected",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "nonfinite predictive atom rejected",
+      "kind": "rejection",
+      "pass_": true
+    },
+    {
+      "name": "different conditional shapes with same mean/variance give positive oracle score gain",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "two shape worlds have same mean",
+      "kind": "numeric",
+      "comparisons": 2,
+      "max_abs_error": 4.297637514678025e-17,
+      "tolerance": 1e-14,
+      "pass_": true
+    },
+    {
+      "name": "two shape worlds have same variance",
+      "kind": "numeric",
+      "comparisons": 2,
+      "max_abs_error": 2.220446049250313e-16,
+      "tolerance": 1e-14,
+      "pass_": true
+    },
+    {
+      "name": "correct dynamic scale with fixed true shape leaves no oracle shape gain",
+      "kind": "numeric",
+      "comparisons": 1,
+      "max_abs_error": 0.0,
+      "tolerance": 0,
+      "pass_": true
+    },
+    {
+      "name": "all five synthetic resource gates pass jointly",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "forecast/fit accounting is 65/30/10",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "aggregation averages within-cell ratios before equal markets",
+      "kind": "numeric",
+      "comparisons": 1,
+      "max_abs_error": 1.1102230246251565e-16,
+      "tolerance": 1e-14,
+      "pass_": true
+    },
+    {
+      "name": "shape below scale alone cannot bypass conditional-shape gate",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "two-of-five shape wins fail breadth gate",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "three-of-five shape wins pass breadth gate",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "two-of-five shape plus scale wins fail breadth gate",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "one failed flow blocks all expansion",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "one missing flow blocks all expansion",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "fixed design is five exposed development series in2022",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "no automatic D2 bootstrap or confirmation follows this diagnostic",
+      "kind": "logical",
+      "pass_": true
+    },
+    {
+      "name": "1percent gate explicitly not publication threshold",
+      "kind": "logical",
+      "pass_": true
+    }
+  ],
+  "limits": [
+    "No market score, fitted prediction, GARCH optimizer, or neural optimizer was run.",
+    "Past-only feature proofs are conditional on the declared fixed training-prefix scaler; offline training does not claim a prequential scaler at each training origin.",
+    "The31-atom laws are finite approximations; marginal CRPS does not establish a joint path distribution.",
+    "Raw test labels used only by post-forecast scoring and checkpoint-independent reporting must remain separate from model inputs.",
+    "Prior sibling model/GARCH synthetic audits are separate evidence and are not counted in this script."
+  ]
+}

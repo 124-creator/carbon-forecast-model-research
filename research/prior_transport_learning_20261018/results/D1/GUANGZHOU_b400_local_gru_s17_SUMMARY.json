@@ -1,0 +1,716 @@
+{
+  "job": "GUANGZHOU_b400_local_gru_s17",
+  "status": "COMPLETE",
+  "model": "local_gru",
+  "target": "GUANGZHOU",
+  "budget": 400,
+  "seed": 17,
+  "started_utc": "2026-10-18T02:55:53.149132+00:00",
+  "completed_utc": "2026-10-18T02:55:53.864442+00:00",
+  "wall_seconds": 0.7152675399993313,
+  "data_receipt": {
+    "target": "GUANGZHOU",
+    "target_sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+    "year": 2022,
+    "budget": 400,
+    "budget_interpretation": "retained supervised origin windows;100 is nested and spans the same role endpoints as400; causal full past quote histories remain available; not a cold-start or independent-label count",
+    "roles": {
+      "support": {
+        "n": 240,
+        "first_origin": 490,
+        "last_origin": 729,
+        "first_date": "2020-03-02",
+        "last_date": "2021-02-09",
+        "last_label_date": "2021-03-16"
+      },
+      "meta": {
+        "n": 80,
+        "first_origin": 750,
+        "last_origin": 829,
+        "first_date": "2021-03-17",
+        "last_date": "2021-07-11",
+        "last_label_date": "2021-08-04"
+      },
+      "val": {
+        "n": 80,
+        "first_origin": 850,
+        "last_origin": 929,
+        "first_date": "2021-08-05",
+        "last_date": "2021-12-03",
+        "last_label_date": "2021-12-31"
+      },
+      "test": {
+        "n": 222,
+        "first_origin": 950,
+        "last_origin": 1171,
+        "first_date": "2022-01-04",
+        "last_date": "2022-12-02",
+        "last_label_date": "2022-12-30"
+      }
+    },
+    "source_cutoff_exclusive": "2021-03-17",
+    "sources": {
+      "EEX_EUA_T3PA": {
+        "n": 1557,
+        "sha256": "5a0c7580edebc2a7a5e66d7487568f6d99a8e08cca0785676c2aaeccad7db6bb",
+        "first_origin": 60,
+        "last_origin": 1616,
+        "first_date": "2013-03-25",
+        "last_label_date": "2021-03-16"
+      },
+      "HUBEI": {
+        "n": 660,
+        "sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+        "first_origin": 60,
+        "last_origin": 719,
+        "first_date": "2018-04-04",
+        "last_label_date": "2021-03-16"
+      },
+      "SHANGHAI": {
+        "n": 992,
+        "sha256": "425424353bb3ac09e3d96b291680b4179e86f180da626a5d19e5c1e58ed960a1",
+        "first_origin": 60,
+        "last_origin": 1051,
+        "first_date": "2014-03-28",
+        "last_label_date": "2021-03-08"
+      },
+      "EU_REPORTED": {
+        "n": 712,
+        "sha256": "ca7c192380897076ef57516a11ea2ccefda6ba92ab9823d9aa8f2bb281cefedc",
+        "first_origin": 60,
+        "last_origin": 771,
+        "first_date": "2018-04-06",
+        "last_label_date": "2021-03-16"
+      }
+    },
+    "excluded_sources": [],
+    "H": 20,
+    "L": 20,
+    "initial_volatility": "first60 raw increments; common causal EWMA .94 thereafter",
+    "new_shenzhen_used": false,
+    "confirmation_used": false,
+    "episode_schedule_sha256": "3b575ff658a6586b875bb2ff77b7e106becd718752a8ec46dfde73f8d7a8379d",
+    "episode_seed": 17018
+  },
+  "evaluation": {
+    "score": 1.0742672104152906,
+    "horizons": [
+      {
+        "h": 1,
+        "mse": 3.397694246047324,
+        "rw_mse": 2.9197018018018035,
+        "rmse": 1.8432835500940499,
+        "relative_mse": 1.163712761334237,
+        "mae": 1.107592047383445
+      },
+      {
+        "h": 5,
+        "mse": 19.008925128386103,
+        "rw_mse": 18.515116216216235,
+        "rmse": 4.359922605779385,
+        "relative_mse": 1.0266705812917,
+        "mae": 2.4694174882447997
+      },
+      {
+        "h": 20,
+        "mse": 49.41300886172486,
+        "rw_mse": 47.8614234234234,
+        "rmse": 7.029438730206336,
+        "relative_mse": 1.0324182886199351,
+        "mae": 3.6885154624476493
+      }
+    ],
+    "n_origins": 222,
+    "all20_relative_mse": [
+      1.163712761334237,
+      1.0968641056864352,
+      1.0524326900279688,
+      1.0150237570130287,
+      1.0266705812917,
+      1.0037918654945808,
+      1.0035232385527226,
+      0.9950346693572982,
+      0.993813134561501,
+      0.9882821531691255,
+      0.9880659107944785,
+      0.9863555842326853,
+      0.9865627766579347,
+      0.986432261211357,
+      0.9906730790567337,
+      1.0026357038827456,
+      1.015012916218232,
+      1.0123826461858216,
+      1.0272682235312953,
+      1.0324182886199351
+    ]
+  },
+  "validation": {
+    "score": 0.8591033673184246,
+    "horizons": [
+      {
+        "h": 1,
+        "mse": 0.4253836938673891,
+        "rw_mse": 0.4760825000000005,
+        "rmse": 0.6522144538933411,
+        "relative_mse": 0.8935083601421784,
+        "mae": 0.514616936506558
+      },
+      {
+        "h": 5,
+        "mse": 1.408578016758868,
+        "rw_mse": 1.6177712499999999,
+        "rmse": 1.1868352947055745,
+        "relative_mse": 0.8706904741686243,
+        "mae": 0.9825691213252142
+      },
+      {
+        "h": 20,
+        "mse": 22.762906626846046,
+        "rw_mse": 27.994823750000002,
+        "rmse": 4.771048797365842,
+        "relative_mse": 0.8131112676444711,
+        "mae": 3.413056544966935
+      }
+    ],
+    "n_origins": 80,
+    "all20_relative_mse": [
+      0.8935083601421784,
+      0.9508872692466976,
+      0.9028984891555215,
+      0.8937130502647085,
+      0.8706904741686243,
+      0.8743946333252794,
+      0.8619165604794033,
+      0.8760049345202556,
+      0.8908648014210588,
+      0.8839704239850376,
+      0.8770868288382192,
+      0.8745530547571708,
+      0.8640114439472724,
+      0.8523697407864596,
+      0.8486488807218677,
+      0.8427140220244861,
+      0.839042955843064,
+      0.8258612928684779,
+      0.8256403618919647,
+      0.8131112676444711
+    ]
+  },
+  "fit_receipt": {
+    "family": "local_gru",
+    "seed": 17,
+    "target": "GUANGZHOU",
+    "config": {
+      "lr": 0.003,
+      "weight_decay": 0.0001,
+      "max_steps": 600,
+      "batch_size": 64,
+      "validation_every": 10,
+      "patience": 10,
+      "min_delta": 1e-06,
+      "sampler_seed": 17018
+    },
+    "architecture": "GRU(input3,hidden16,one_layer) plus independent Linear16_to20 per market",
+    "novelty": "standard strong supervised baseline; no innovation claim",
+    "dtype": "torch.float64",
+    "device": "cpu",
+    "torch_threads": 1,
+    "torch_version": "2.3.1+cpu",
+    "numpy_version": "2.5.4",
+    "target_supervision": "support plus meta, legally inside the retained target budget; validation excluded",
+    "target_support_count": 240,
+    "target_meta_count": 80,
+    "target_training_count": 320,
+    "validation_count": 80,
+    "source_counts": {},
+    "source_cutoff": "2021-03-17",
+    "source_pool": "entire fixed caller-approved source pool, no later crop",
+    "training_loss": "full20 mean squared scaled increment error",
+    "market_loss_weights": {
+      "GUANGZHOU": 1.0
+    },
+    "selection_score": "equal h1,h5,h20 raw-price MSE divided by same-cell validation RW MSE",
+    "zero_head_initialization": true,
+    "initial_predictions_equal_rw": true,
+    "initial_state_sha256": "487d21685eb0e5e6a35d558c900ea0f462687bdcc868d4b6220d9a670097b24a",
+    "initial_encoder_hash": "20181472447097fa4ceb6fd80cb2670015993a20b9b2291ac4669661c505c308",
+    "last_state_sha256": "b9153080a9cc12078c13ec5fd0ca1361c30d6cde5f7e9f99fb47bed8d1fac7a7",
+    "selected_state_sha256": "81cd04345c1b91b90168b8daa8169f7ab55684ad15d8ba63f52aead65c26d7c0",
+    "steps_completed": 160,
+    "validation_calls": 17,
+    "best_step": 60,
+    "best_validation_score": 0.8591033673184246,
+    "stop_reason": "early_stop_patience",
+    "test_forward_calls": 1,
+    "test_labels_accessed": false,
+    "sampler": "independent target/source NumPy streams; no replacement within a batch when enough origins",
+    "sampler_seeds": {
+      "GUANGZHOU": 17018
+    },
+    "sampled_indices_sha256": {
+      "GUANGZHOU": "bc44d3724b47932e71d1eaba12d5d3c29af8fda03fe23ee8eab6d6088eabc9c1"
+    },
+    "parameter_count": 1348,
+    "elapsed_seconds": 0.7060439380002208
+  },
+  "validation_traces": [
+    {
+      "step": 0,
+      "validation": {
+        "score": 1.0,
+        "raw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "selected": true,
+      "training_loss": null
+    },
+    {
+      "step": 10,
+      "training_loss": 0.6070519844645103,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.6070519844645103
+      },
+      "validation": {
+        "score": 0.9377532780313316,
+        "raw_mse_h1_h5_h20": [
+          0.47256733664119777,
+          1.4821060498524279,
+          25.321392921624064
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9926164827339742,
+          0.9161406780176296,
+          0.9045026733423911
+        ]
+      },
+      "selected": true,
+      "consecutive_nonimproving_validation_checks": 0
+    },
+    {
+      "step": 20,
+      "training_loss": 0.5396520362411651,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.5396520362411651
+      },
+      "validation": {
+        "score": 0.8869624323916101,
+        "raw_mse_h1_h5_h20": [
+          0.4614841675658211,
+          1.441243444664507,
+          22.41457775589646
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9693365489506979,
+          0.8908820976170192,
+          0.800668650607113
+        ]
+      },
+      "selected": true,
+      "consecutive_nonimproving_validation_checks": 0
+    },
+    {
+      "step": 30,
+      "training_loss": 0.5061960466947326,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.5061960466947326
+      },
+      "validation": {
+        "score": 0.8709168520960769,
+        "raw_mse_h1_h5_h20": [
+          0.4520252806695518,
+          1.4170688428989042,
+          22.04153493658895
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9494683813615314,
+          0.8759389455702741,
+          0.7873432293564251
+        ]
+      },
+      "selected": true,
+      "consecutive_nonimproving_validation_checks": 0
+    },
+    {
+      "step": 40,
+      "training_loss": 0.6674208600432301,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.6674208600432301
+      },
+      "validation": {
+        "score": 0.8787061708719858,
+        "raw_mse_h1_h5_h20": [
+          0.4434290064845266,
+          1.4103044092315564,
+          23.318254418307866
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9314121113137452,
+          0.8717576166788453,
+          0.8329487846233669
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 1
+    },
+    {
+      "step": 50,
+      "training_loss": 0.5910769102552309,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.5910769102552309
+      },
+      "validation": {
+        "score": 0.8740757376738436,
+        "raw_mse_h1_h5_h20": [
+          0.43357084554431885,
+          1.4063279844961625,
+          23.57786437219387
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9107052780648698,
+          0.8692996519107151,
+          0.8422222830459458
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 2
+    },
+    {
+      "step": 60,
+      "training_loss": 0.5957811361189557,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.5957811361189557
+      },
+      "validation": {
+        "score": 0.8591033673184246,
+        "raw_mse_h1_h5_h20": [
+          0.4253836938673891,
+          1.408578016758868,
+          22.762906626846046
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.8935083601421784,
+          0.8706904741686243,
+          0.8131112676444711
+        ]
+      },
+      "selected": true,
+      "consecutive_nonimproving_validation_checks": 0
+    },
+    {
+      "step": 70,
+      "training_loss": 0.4590080263184892,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.4590080263184892
+      },
+      "validation": {
+        "score": 0.8632882899686173,
+        "raw_mse_h1_h5_h20": [
+          0.42294875592643744,
+          1.4096624652633105,
+          23.238789584884504
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.8883938307466395,
+          0.8713608090533879,
+          0.8301102301058245
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 1
+    },
+    {
+      "step": 80,
+      "training_loss": 0.5506380379003204,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.5506380379003204
+      },
+      "validation": {
+        "score": 0.8650446408765138,
+        "raw_mse_h1_h5_h20": [
+          0.42473928492457613,
+          1.3946163181950528,
+          23.54137526418595
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.8921547944412485,
+          0.8620602685299624,
+          0.8409188596583306
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 2
+    },
+    {
+      "step": 90,
+      "training_loss": 0.5333144479002503,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.5333144479002503
+      },
+      "validation": {
+        "score": 0.8830396931244975,
+        "raw_mse_h1_h5_h20": [
+          0.4288411933332837,
+          1.4168601530916618,
+          24.42655806173981
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9007707557687653,
+          0.8758099472293515,
+          0.8725383763753758
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 3
+    },
+    {
+      "step": 100,
+      "training_loss": 0.602439401658675,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.602439401658675
+      },
+      "validation": {
+        "score": 0.8828576412655327,
+        "raw_mse_h1_h5_h20": [
+          0.43592420428818474,
+          1.3924394686069665,
+          24.41735930227522
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9156484522917441,
+          0.8607146829979619,
+          0.872209788506892
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 4
+    },
+    {
+      "step": 110,
+      "training_loss": 0.47536107550320794,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.47536107550320794
+      },
+      "validation": {
+        "score": 0.8807172621844934,
+        "raw_mse_h1_h5_h20": [
+          0.4394344689110355,
+          1.3699367726507428,
+          24.420587799303735
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9230216798790861,
+          0.8468049933825582,
+          0.872325113291836
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 5
+    },
+    {
+      "step": 120,
+      "training_loss": 0.5338582266504035,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.5338582266504035
+      },
+      "validation": {
+        "score": 0.9012917730159694,
+        "raw_mse_h1_h5_h20": [
+          0.4388147561915822,
+          1.39162137551362,
+          25.809725281061922
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9217199880096029,
+          0.860208991545387,
+          0.9219463394929186
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 6
+    },
+    {
+      "step": 130,
+      "training_loss": 0.5583642102660257,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.5583642102660257
+      },
+      "validation": {
+        "score": 0.9275397403981049,
+        "raw_mse_h1_h5_h20": [
+          0.4396771219735305,
+          1.4062595687376698,
+          27.710130180836877
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9235313668818534,
+          0.8692573617794666,
+          0.9898304925329946
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 7
+    },
+    {
+      "step": 140,
+      "training_loss": 0.5685557796355034,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.5685557796355034
+      },
+      "validation": {
+        "score": 0.9139061176064663,
+        "raw_mse_h1_h5_h20": [
+          0.43672341722592484,
+          1.386675990746855,
+          27.077687944422753
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.9173271801125317,
+          0.8571520792861508,
+          0.9672390934207168
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 8
+    },
+    {
+      "step": 150,
+      "training_loss": 0.4621303537471295,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.4621303537471295
+      },
+      "validation": {
+        "score": 0.8953977226085831,
+        "raw_mse_h1_h5_h20": [
+          0.4268415705711893,
+          1.3368202595286847,
+          26.96707872061622
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.8965705955820448,
+          0.8263345386615597,
+          0.9632880335821447
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 9
+    },
+    {
+      "step": 160,
+      "training_loss": 0.5243176071692799,
+      "per_market_training_mse": {
+        "GUANGZHOU": 0.5243176071692799
+      },
+      "validation": {
+        "score": 0.8959501811109988,
+        "raw_mse_h1_h5_h20": [
+          0.4229298935360764,
+          1.3306095735034678,
+          27.350966105918037
+        ],
+        "rw_mse_h1_h5_h20": [
+          0.4760825000000005,
+          1.6177712499999999,
+          27.994823750000002
+        ],
+        "relative_mse_h1_h5_h20": [
+          0.8883542107430454,
+          0.8224955002157863,
+          0.9770008323741647
+        ]
+      },
+      "selected": false,
+      "consecutive_nonimproving_validation_checks": 10
+    }
+  ],
+  "private_prediction_sha256": "895425df5c74e8afe09e810fe95a48667a69eb1e5fd51f5100efe6278df0a6be",
+  "private_state_sha256": "509d44066e9cfc0eed66686be30d11365a8ae87e30035dff86e52b0e707f6d90",
+  "private_full_trace_sha256": "97ddfec3cf03f123dd0cc1ad1cb6a28af239d8c779d2b41c3d709ecf9d953c09"
+}

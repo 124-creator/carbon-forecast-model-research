@@ -1,0 +1,109 @@
+{
+  "status": "DRAFT; no market fit yet",
+  "parent_commit": "e2d99b8a5c26c4d7b363ec728eadab6d3fbabbcd",
+  "question": "Can conditional standardized distribution shape improve carbon price probabilistic forecasts beyond scale-only and empirical distribution controls?",
+  "novelty": "Necessity diagnostic using established modules, not a proposed novel algorithm. No claim of point-mean improvement.",
+  "markets": [
+    {
+      "name": "EEX_EUA_T3PA",
+      "path": "/workspace/scratch/b31c5edbd0de/scratch/next_data_20261017/local_only/eex_prepared/development/EEX_EUA_T3PA_daily_development.csv",
+      "sha256": "5a0c7580edebc2a7a5e66d7487568f6d99a8e08cca0785676c2aaeccad7db6bb",
+      "with_auction": true
+    },
+    {
+      "name": "GUANGZHOU",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/GUANGZHOU_development.csv",
+      "sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+      "with_auction": false
+    },
+    {
+      "name": "HUBEI",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/HUBEI_development.csv",
+      "sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+      "with_auction": false
+    },
+    {
+      "name": "SHANGHAI",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/SHANGHAI_D4_development.csv",
+      "sha256": "425424353bb3ac09e3d96b291680b4179e86f180da626a5d19e5c1e58ed960a1",
+      "with_auction": false
+    },
+    {
+      "name": "EU_REPORTED",
+      "path": "/workspace/scratch/b31c5edbd0de/carbon_workspace/research/cross_market_innovation_20261017/data/EU_REPORTED_development.csv",
+      "sha256": "ca7c192380897076ef57516a11ea2ccefda6ba92ab9823d9aa8f2bb281cefedc",
+      "with_auction": false
+    }
+  ],
+  "year": 2022,
+  "validation_size": 80,
+  "H": 20,
+  "L": 20,
+  "K": 31,
+  "score_horizons": [
+    1,
+    5,
+    20
+  ],
+  "data_end_exclusive": "2024-01-01",
+  "data_exposure": "The five development files were previously used; 2022 and 2023 are not untouched tests. EEX2024/2025 remain unopened for model use. Shanghai confirmation was previously exposed.",
+  "data_extension": "New Shenzhen PLOS author workbook has only been checked mechanically; no new-source price file is supplied to this experiment.",
+  "statistical_families": [
+    "fhs_fixed",
+    "fhs_rolling",
+    "ewma_normal",
+    "ewma_t5",
+    "garch_normal",
+    "garch_t5",
+    "garch_fhs"
+  ],
+  "neural_families": [
+    "global_shape",
+    "conditional_shape",
+    "scale_only",
+    "shape_scale",
+    "deepnpts_rps",
+    "deepnpts_crps"
+  ],
+  "neural": {
+    "seed": 17,
+    "learning_rate": 0.003,
+    "weight_decay": 0.001,
+    "batch_size": 128,
+    "max_epochs": 60,
+    "patience": 12,
+    "min_delta": 1e-06,
+    "gradient_clip": 1.0
+  },
+  "cpu_processes": 2,
+  "threads_per_process": 1,
+  "dtype": "float64",
+  "device": "CPU",
+  "deadline_seconds": 2400,
+  "counts": {
+    "neural_fits": 30,
+    "statistical_fits": 10,
+    "forecast_jobs": 65,
+    "market_retries": 0
+  },
+  "validation_and_training": "Own issued distribution chooses checkpoint by h1/5/20 raw CRPS / same-validation-cell fixedFHS CRPS. Training uses all20 raw-unit CRPS / fixed training-cell FHS CRPS. Author_rps arm uses original source score with same native units/denominators. Epoch0 eligible. Purge fullH20 from training into firstvalidation origin; all validation labels <yearstart. No year-internal parameter updates.",
+  "scale": "EWMA(.94), initialized from first60 increments; sigma_t,h=sigma_t sqrt(h), first60 variance floor fixed. Each historical outcome is divided by its own origin scale.",
+  "finite_measure": "31 midpoint quantile atoms for every arm, gapfloor1e-4 on nondegenerate empirical quantiles. Exact probability-weighted CRPS uses V-statistic formula. This regularized finite approximation does not preserve an exact zero-return atom.",
+  "common_mean": "Every issued finite measure is probability-centered at zero raw change. Common price mean=current price; MSE equals RW up to rounding. Zero drift is a modeling restriction, not a physical/no-arbitrage theorem.",
+  "shape_control": "global_shape and conditional_shape have exact zero mean/unit variance; scale_only and shape_scale additionally use exp(tanh(head)) multiplier. Both conditional shape heads change positive FHS gaps by exp(2tanh(head)); common zero-initialized heads.",
+  "author_adapter": "Unmodified GluonTS DeepNPTS MLP/distribution core d60556ca71167a3ec1ea807b491dd982d1de2112; current past20 input mapped into fixed FHS support slots, direct20 horizons, static h/20, shared p=.03/31+.97*p_author, weighted mean0/unitvar. Original score vs exact CRPS pair. Not author benchmark reproduction; scoring correction is established CRPS, not an original algorithm.",
+  "garch": "normal and standardized t5 maximum likelihood; each one fixed start, training-price prefix only, zero mean; cumulative horizon variance analytic; normal/t5 shape for h>1 is approximation. GARCH-FHS reuses normal fit with2048 fixed-seed recursive innovation draws perorigin then projects into31 normalized atoms with analytic sigma. No additional fit.",
+  "primary_score": "Equal mean across5 series and h1/5/20 of test-cell raw CRPS divided by same-cell fixedFHS CRPS. Lower is better. Seeds/overlapping origins/related EEX and EU are not IID repetitions.",
+  "gate": [
+    "conditional_shape<=.99*min(fhs_fixed,fhs_rolling,global_shape)",
+    "shape_scale<=.99*scale_only",
+    "shape_scale<best statistical family",
+    "conditional_shape<global_shape in>=3/5 series",
+    "shape_scale<scale_only in>=3/5 series"
+  ],
+  "gate_meaning": "All gates required before considering further model invention for this fixed need. One percent is a resource gate, not a publication threshold. Failure ends the fixed experiment, no new hyperparameters.",
+  "later_stages": "No D2/bootstrap/C under this protocol. Even a pass only motivates a separately defined new mechanism and independently frozen experiment; no publication or novelty certification.",
+  "failure_policy": "Record all failed/incomplete jobs. No retries. Stop expansion on failure; genuine defects require explicit recorded revision, not silent source edits.",
+  "publication": "Publish source/aggregate metrics/training traces/provenance. Keep per-origin prices, forecasts, residual paths and weights in local_only. No raw EEX data redistribution.",
+  "neural_batch_sampler": "Dedicated torch.Generator(seed=17) for randperm, independent of model parameter initialization; shared batch orders for paired families."
+}

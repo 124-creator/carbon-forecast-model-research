@@ -1,0 +1,456 @@
+{
+  "reviewed_utc": "2026-10-18T17:29:50.438107+00:00",
+  "scope": "carbon-research/research/ohlc_path_learning_20261019",
+  "scope_note": "Final local publication snapshot. The receipt itself and ignored Python bytecode caches are excluded from the inventory to avoid self-reference. This is a review of the new experiment release, not a redistribution review of all older repository history. Later file changes require a new snapshot review.",
+  "status": "pass_for_current_snapshot",
+  "file_count": 52,
+  "prospective_release_file_count_including_this_receipt": 53,
+  "extension_counts": {
+    "": 1,
+    ".csv": 5,
+    ".json": 17,
+    ".jsonl": 1,
+    ".md": 12,
+    ".png": 2,
+    ".py": 11,
+    ".svg": 2,
+    ".txt": 1
+  },
+  "bytes_total": 1845881,
+  "inventory_sha256": "7c4ab997991e477e02957a0571e76654614841103d2bb631224ab7cf2de27917",
+  "known_original_or_reconstructed_price_file_matches": 0,
+  "manual_review_candidates": [],
+  "release_content_review": {
+    "raw_or_reconstructed_price_series_present": false,
+    "per_origin_prices_or_predictions_present": false,
+    "fitted_model_weights_or_serialized_checkpoints_present": false,
+    "archive_database_binary_array_or_model_file_present": false,
+    "symlinks_present": false,
+    "textual_evidence": "Reviewed root README/report and provenance/audit documents together with all JSON/JSONL schemas and result CSV fields. Source dates/URLs/hashes, record counts, violation dates, model dimensions, aggregate normalization matrices, scores, execution counters and checkpoint/forecast hashes are metadata or aggregate evidence; no original price rows, per-origin forecast arrays or fitted parameters are included.",
+    "replay_evidence": "REPLAY_AUDIT contains comparison counts, maximum numerical differences and hashes for local checkpoints and forecast files; it does not export their values. SCORER_BEFORE_AFTER contains equality flags, mismatch counts and maximum numerical differences only.",
+    "redistribution_boundary": "Raw author CSV files, reconstructed price CSVs, original official HTML, forecast arrays and model weights remain outside this public directory. Public download/reconstruction scripts point to pinned original sources; source permissions remain separate from this release review."
+  },
+  "csv_content_review": [
+    {
+      "path": "results/comparisons.csv",
+      "rows": 324,
+      "columns": [
+        "scope",
+        "source",
+        "fold",
+        "candidate",
+        "comparator",
+        "metric",
+        "ratio",
+        "gain_percent",
+        "ci_lower",
+        "ci_upper",
+        "block_length",
+        "bootstrap_repetitions",
+        "bootstrap_seed"
+      ],
+      "interpretation": "Paired aggregate error ratios, gains and bootstrap confidence intervals by scope, comparator and block length."
+    },
+    {
+      "path": "results/energy_scores.csv",
+      "rows": 135,
+      "columns": [
+        "scope",
+        "source",
+        "fold",
+        "family",
+        "estimate",
+        "seed",
+        "origins",
+        "samples_per_seed",
+        "dimensions",
+        "energy_v"
+      ],
+      "interpretation": "Aggregate energy score by source/fold/model/seed; origins is a count, not an observation identifier."
+    },
+    {
+      "path": "results/mse_by_cell.csv",
+      "rows": 684,
+      "columns": [
+        "source",
+        "fold",
+        "horizon",
+        "family",
+        "estimate",
+        "seed",
+        "origins",
+        "mse",
+        "rmse",
+        "mae",
+        "mse_ratio_to_rw"
+      ],
+      "interpretation": "Aggregate MSE, RMSE, MAE and relative MSE per source/fold/horizon/model/seed."
+    },
+    {
+      "path": "results/neural_fit_ledger.csv",
+      "rows": 210,
+      "columns": [
+        "source",
+        "fold",
+        "family",
+        "phase",
+        "seed",
+        "learning_rate",
+        "selected_epoch",
+        "epochs_executed",
+        "optimizer_steps",
+        "validation_mse",
+        "parameters",
+        "elapsed_seconds"
+      ],
+      "interpretation": "Training and selection metadata per fitted configuration, including aggregate validation MSE and parameter count, with no fitted coefficients."
+    },
+    {
+      "path": "results/single_seed_overall.csv",
+      "rows": 26,
+      "columns": [
+        "family",
+        "seed",
+        "cells",
+        "equal_weight_mean_mse_ratio_to_rw"
+      ],
+      "interpretation": "Aggregate equal-weight mean relative MSE per model and seed."
+    }
+  ],
+  "json_review": {
+    "json_files_parsed": 17,
+    "jsonl_records_parsed": 73,
+    "suspect_exact_series_or_weights_keys": [],
+    "numeric_vectors_longer_than_20": [],
+    "interpretation": "Schema and content review is primary; the key/array scan is an additional check, not proof by itself. Small numerical arrays are fixed horizons/seeds/settings, synthetic aggregate ratios or fold-level scale summaries."
+  },
+  "scientific_figure_review": {
+    "script": "reporting/make_figures.py",
+    "script_sha256": "da98877a73c03250a46729f9c97901963bbd0f5d2c4cc10d09f9b6385a19a50f",
+    "only_numeric_data_inputs": [
+      "results/mse_by_cell.csv",
+      "results/comparisons.csv"
+    ],
+    "input_sha256": {
+      "results/mse_by_cell.csv": "505a54e5d7ad70e0eb026e2bc5323128c8d0659447cce9e57de27858b0ca77c1",
+      "results/comparisons.csv": "62fcfe8a2f00af00e4e9a02e8bba3074dfa51d47276b3177b40136571c7037a1"
+    },
+    "transformation": "Filter mean_ensemble aggregate scores, average MSE ratios across 18 cells, select overall paired block-20 confidence intervals, and pivot 18 candidate cell scores into a 6-by-3 heatmap.",
+    "visual_inspection": "Both PNGs were visually inspected: model-level MSE ratios and paired confidence intervals; source/fold/horizon MSE ratios. They show aggregate scientific results and no observation price paths. SVG structure is consistent with the same Matplotlib figures.",
+    "figures": [
+      {
+        "path": "figures/fold_horizon_results.png",
+        "kind": "scientific aggregate-score figure",
+        "pixel_dimensions": [
+          1613,
+          1012
+        ]
+      },
+      {
+        "path": "figures/fold_horizon_results.svg",
+        "kind": "scientific aggregate-score figure",
+        "embedded_raster_elements": 2,
+        "embedded_raster_interpretation": "Matplotlib-rendered aggregate heatmap and color bar.",
+        "script_or_foreign_object_elements": 0
+      },
+      {
+        "path": "figures/performance_overview.png",
+        "kind": "scientific aggregate-score figure",
+        "pixel_dimensions": [
+          2650,
+          1263
+        ]
+      },
+      {
+        "path": "figures/performance_overview.svg",
+        "kind": "scientific aggregate-score figure",
+        "embedded_raster_elements": 0,
+        "embedded_raster_interpretation": "None.",
+        "script_or_foreign_object_elements": 0
+      }
+    ]
+  },
+  "excluded_bytecode": {
+    "count": 4,
+    "all_git_ignored": true,
+    "paths": [
+      "__pycache__/model.cpython-312.pyc",
+      "__pycache__/pipeline.cpython-312.pyc",
+      "__pycache__/run.cpython-312.pyc",
+      "provenance/__pycache__/prepare_eua_sources.cpython-312.pyc"
+    ]
+  },
+  "git_base_preservation": {
+    "base_commit": "4cc0919a749e5263bba717f4bfdbafb26a3df77c",
+    "checked_head": "469d6a162ee4cbe778c98a7acfad540733bb73ae",
+    "base_blob_path_count": 2737,
+    "base_unique_blob_object_count": 2498,
+    "base_paths_with_changed_or_missing_mode_or_blob_in_head": [],
+    "base_paths_modified_or_deleted_in_current_worktree_diff": [],
+    "prospective_release_paths_colliding_with_base_blob_paths": [],
+    "all_existing_base_blob_paths_preserved": true,
+    "verification": "Compared every recursive base blob path, mode and object ID with HEAD; checked base-to-worktree diff paths; checked all 53 prospective new release paths against the base tree. This review made no Git mutation or GitHub write."
+  },
+  "inventory": [
+    {
+      "path": ".gitignore",
+      "bytes": 63,
+      "sha256": "5c398200dff695bb811f7df538d95f8511bb77704e2be002c2fcf26da6c0370e"
+    },
+    {
+      "path": "AUDIT_ZH.md",
+      "bytes": 10987,
+      "sha256": "064a19d1673ceb196e15de238a37cd337f31b3e807c644083eb84a30038f8ba2"
+    },
+    {
+      "path": "DIRECT_NEIGHBORS_ZH.md",
+      "bytes": 8574,
+      "sha256": "53ccf89a984f9692379ace6234c350efc541847fdc823da30549a3452d9ca906"
+    },
+    {
+      "path": "FROZEN_PROTOCOL.json",
+      "bytes": 4163,
+      "sha256": "12df0ff655c338e309c8abbaed4ef0ae3fb3f6d8f49af97483cfa2fc45f92dda"
+    },
+    {
+      "path": "LITERATURE_ZH.md",
+      "bytes": 15703,
+      "sha256": "8c04bc56aabaac92e886316036ba78816fcc6f4c67c18278f538ae55bf067bad"
+    },
+    {
+      "path": "METHOD_ZH.md",
+      "bytes": 5671,
+      "sha256": "1b0aaf92bda4d5be97f7d056602adab96f2b47cafacd0fe312c087abdf91a61f"
+    },
+    {
+      "path": "PROTOCOL_ZH.md",
+      "bytes": 10699,
+      "sha256": "d3de8cfec06bcb74163b10703636ca4b554718af5f16ebf1d9d5c237ef846ae7"
+    },
+    {
+      "path": "PUBLICATION_ROUTE_ZH.md",
+      "bytes": 7320,
+      "sha256": "cdbef4b9fa310586fe61abc952fdf22a0db2aa5b14b7c127bdcc274da22537dd"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4985,
+      "sha256": "301f9b104f117480d4c35f61a1a3063b9f9a2bf0181abd9bf7dcebc1e74fc182"
+    },
+    {
+      "path": "REPORT_ZH.md",
+      "bytes": 19344,
+      "sha256": "ac5200dd209164ce426366829ed0ce8aec8394106eb1470d5854b2f9886e3857"
+    },
+    {
+      "path": "audits/INITIAL_PATH_REVIEW_ZH.md",
+      "bytes": 5743,
+      "sha256": "211b432dddadd5f3d6b2781b04c9a318ae702e2b3ed04026e44f89bdbd78fa19"
+    },
+    {
+      "path": "audits/PRIOR_AUDIT_ZH.md",
+      "bytes": 15280,
+      "sha256": "6a1668bc9d92b88d5c015b94b6e8dab4667b07e0f165c1dbe207367edb729c1c"
+    },
+    {
+      "path": "audits/REPLAY_AUDIT.json",
+      "bytes": 99776,
+      "sha256": "22b64599dc904d77ded011de346f62eaceedff9cb2cefa175d7140670b0c00b0"
+    },
+    {
+      "path": "audits/SCORER_AUDIT_ZH.md",
+      "bytes": 4787,
+      "sha256": "544ec0bf3c41c163fdc868a133254d9cfa2fd018249b82b105d5787ea35538db"
+    },
+    {
+      "path": "audits/SCORER_BEFORE_AFTER.json",
+      "bytes": 2714,
+      "sha256": "9ff79f30366a41c1725dc25e23e53ce01284f0867784aa5fec38c8438e64db56"
+    },
+    {
+      "path": "audits/SYNTHETIC_PREFLIGHT_LEDGER.json",
+      "bytes": 2752,
+      "sha256": "afee775d5d2f3523a190d7ceede09a6cd19b24d353f557f8abc4816b21464c96"
+    },
+    {
+      "path": "audits/model_review.json",
+      "bytes": 3482,
+      "sha256": "5f307c68abb01d94f9c3f44fd83dc9975e738b8f22f8d1924d296bbf342f30a8"
+    },
+    {
+      "path": "audits/model_review.py",
+      "bytes": 10112,
+      "sha256": "e68577b9ca2d679f74eee2c47fee6bf98090650487980521be4828dfccfbcde5"
+    },
+    {
+      "path": "audits/pipeline_review.json",
+      "bytes": 4745,
+      "sha256": "0fe98c5bbc026be1529445c57f10c648ec2555bdc4d8b245b67e6a37b1455bc7"
+    },
+    {
+      "path": "audits/pipeline_review.py",
+      "bytes": 7595,
+      "sha256": "614927a7d3298172937e0cca930b07de11f3774ffc74fc9de2e13a23d22d138f"
+    },
+    {
+      "path": "audits/replay_checkpoints.py",
+      "bytes": 12206,
+      "sha256": "8164a58b81ece5e8d2ce16e8b768a3f9ef0491073a0aecd60d6bebdac42e531e"
+    },
+    {
+      "path": "figures/fold_horizon_results.png",
+      "bytes": 170055,
+      "sha256": "fd139429f483c943aa9e98c288ec05edc3b1c1ba821dba0181c760a4d0140d6a"
+    },
+    {
+      "path": "figures/fold_horizon_results.svg",
+      "bytes": 99440,
+      "sha256": "008e0bae64999de57271611002de9d962a3e19320c62dccebf233c23e9305d34"
+    },
+    {
+      "path": "figures/performance_overview.png",
+      "bytes": 268248,
+      "sha256": "81f0664b9736a87343308d2900e167f0d7e25e38c9195edd07e302a79b9b8c9b"
+    },
+    {
+      "path": "figures/performance_overview.svg",
+      "bytes": 137177,
+      "sha256": "78d19a914fa8b706227a8ec5c997004b952b4e5ab19c5436c8ddf0b3c3919b32"
+    },
+    {
+      "path": "model.py",
+      "bytes": 9990,
+      "sha256": "01da25349d1e0a18778b6b1a5ab2cf2c0cb4dad77ef80f2faad294f493e3ef37"
+    },
+    {
+      "path": "pipeline.py",
+      "bytes": 5242,
+      "sha256": "ea6784b3108448162c72b3e1016e9228078e30b22d90a34d66624ac2256ef6a9"
+    },
+    {
+      "path": "provenance/CEA_AUDIT_SUMMARY.json",
+      "bytes": 3377,
+      "sha256": "6fcedd20644f943fbc498aaf2e15dcd41a127709c177540ce5db90e2203009c8"
+    },
+    {
+      "path": "provenance/CEA_SOURCE_MANIFEST.json",
+      "bytes": 150728,
+      "sha256": "cd03ddfe843bee2b522eda3119ac08ff8195ff69d498e487f98d83c616b09748"
+    },
+    {
+      "path": "provenance/DATA_AUDIT_ZH.md",
+      "bytes": 19557,
+      "sha256": "afaeedbfe27337f2b7e14398a3ca27dc2d01c14454c5fefa83a0969484a7e55a"
+    },
+    {
+      "path": "provenance/PREPARATION_VALIDATION.json",
+      "bytes": 603,
+      "sha256": "928343848df35b4861fafdb30bb91bb04d4f8713996436b1cbdf4ee1d8cfaeab"
+    },
+    {
+      "path": "provenance/SOURCE_AUDIT.json",
+      "bytes": 2820,
+      "sha256": "1e2ed3f1ff04c090355a4e472dfbe1eb7992d523e58e171c8d3b91287797732c"
+    },
+    {
+      "path": "provenance/SOURCE_MANIFEST.json",
+      "bytes": 4893,
+      "sha256": "539c231ce0d002c65ee3ab78b59685ae03e4a6109c2e9aab688d63a3a0921686"
+    },
+    {
+      "path": "provenance/parse_cea_official_pre2024.py",
+      "bytes": 6638,
+      "sha256": "d429a7ccb71d20606e9c9c79ceca3fb15e50f80418684cd688e12d71c8511782"
+    },
+    {
+      "path": "provenance/prepare_eua_sources.py",
+      "bytes": 12555,
+      "sha256": "50996b5c0a1ed8bf5713263f5dceac5dabc6bf0969e268a5adce35958a531f54"
+    },
+    {
+      "path": "provenance/rebuild_cea_official_pre2024.py",
+      "bytes": 7165,
+      "sha256": "60b6ef0f6f717df8c5432261aa6a32a66d1bd965b308e8d314c8954172195f66"
+    },
+    {
+      "path": "reporting/make_figures.py",
+      "bytes": 5146,
+      "sha256": "da98877a73c03250a46729f9c97901963bbd0f5d2c4cc10d09f9b6385a19a50f"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 159,
+      "sha256": "3f181b1778386ed9326e8e880214145f4e494c0559bb0af73f1e2a1e38a5b937"
+    },
+    {
+      "path": "results/EXECUTION_LOG.jsonl",
+      "bytes": 8906,
+      "sha256": "0e8abe475fa1b5a545cc9cecf75377b9f4ca722f020a56e611bac0263041a35d"
+    },
+    {
+      "path": "results/EXECUTION_PLAN.json",
+      "bytes": 2602,
+      "sha256": "8eda0179d41922b000b53725d1792887690cd1893c99a8fd25da761c2328e2d9"
+    },
+    {
+      "path": "results/EXECUTION_RECEIPT.json",
+      "bytes": 1314,
+      "sha256": "cef7bd87f996f3e97c5a1bfb471f09c0f992a1424b8d02dcb6de6853a9945f97"
+    },
+    {
+      "path": "results/TRAINING_RECEIPTS.json",
+      "bytes": 383440,
+      "sha256": "5b1fda2093058e593746414833c2125adb3a8e9189e2ad8f59f1373c10e2ddb6"
+    },
+    {
+      "path": "results/audit.json",
+      "bytes": 69504,
+      "sha256": "a9c355c5979c08a16f368ee0f81ae1d8563c5fce67a992b3dbcf822fb9f895b0"
+    },
+    {
+      "path": "results/comparisons.csv",
+      "bytes": 49230,
+      "sha256": "62fcfe8a2f00af00e4e9a02e8bba3074dfa51d47276b3177b40136571c7037a1"
+    },
+    {
+      "path": "results/energy_scores.csv",
+      "bytes": 9639,
+      "sha256": "ef81c5e471b3d8b1db0744d830be211d96cb2aa4380e29430e0aa0d71bb89134"
+    },
+    {
+      "path": "results/gates.json",
+      "bytes": 2305,
+      "sha256": "1ae07176fca567b71865241616066034f659b8309e2ea1f1703cd0c8ac327e26"
+    },
+    {
+      "path": "results/mse_by_cell.csv",
+      "bytes": 77015,
+      "sha256": "505a54e5d7ad70e0eb026e2bc5323128c8d0659447cce9e57de27858b0ca77c1"
+    },
+    {
+      "path": "results/neural_fit_ledger.csv",
+      "bytes": 16732,
+      "sha256": "f6ced48f0660273997125f4bdc07d580d25702eac1a2d9c319013735a1ba28c9"
+    },
+    {
+      "path": "results/single_seed_overall.csv",
+      "bytes": 966,
+      "sha256": "dad5c31e983ccf487aeda86fe486e46e437ab38aa4a3728c3e43686cfa8e9b46"
+    },
+    {
+      "path": "results/summary.json",
+      "bytes": 12850,
+      "sha256": "8082651fae1eea4606df4cd67ab0c90310de0133f8078c607e7b1477d2e73da0"
+    },
+    {
+      "path": "run.py",
+      "bytes": 14375,
+      "sha256": "983ae836a70ede21c8d734956f457ea2647e39f6387d898a51f005402b8f8dcc"
+    },
+    {
+      "path": "score_independent.py",
+      "bytes": 36509,
+      "sha256": "71d17817367db15776bb2b0515bdc258c2a24a5dfe58ada4bcfc698af6b9e6ae"
+    }
+  ]
+}

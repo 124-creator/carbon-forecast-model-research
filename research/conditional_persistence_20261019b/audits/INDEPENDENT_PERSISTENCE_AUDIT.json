@@ -1,0 +1,212 @@
+{
+  "audit": "independent_persistence_model_audit",
+  "created_utc": "2026-10-19T04:30:41.504603+00:00",
+  "production_source_sha256": "4c7dfa7a941089d9b21f54508dbff3b7446a8ec9af90a524fcd65d12ca5a92eb",
+  "protocol_sha256": "88c72e1781084473a426f0276869c63d78ed5076b088e2291a1c97a47dff77b8",
+  "audit_script_sha256": "446e425204589414316f426674ac263a48c39c3a5faca612cfc76cfd69e51994",
+  "scope": "Pure numerical / mathematical audit. No market reads, no synthetic parameter fits.",
+  "production_imports": [
+    "source/persistence.py"
+  ],
+  "independent_reference": "All finite state sequences + direct CDF integrals + complete-path log-sum-exp",
+  "checks": {
+    "enumeration_and_moments": {
+      "passed": true,
+      "enumerated_cases": 50,
+      "covariance_pairs": 200,
+      "maximum_weight_difference": 1.1102230246251565e-16,
+      "maximum_variance_difference": 4.440892098500626e-16,
+      "maximum_kurtosis_difference": 4.718447854656915e-15,
+      "maximum_covariance_difference": 4.2674197509029455e-16,
+      "h20_moment_cases": 10
+    },
+    "crps_and_expected_score": {
+      "passed": true,
+      "cdf_integral_score_cases": 36,
+      "expected_score_integral_cases": 9,
+      "maximum_crps_difference": 8.881784197001252e-16,
+      "maximum_expected_crps_difference": 2.220446049250313e-16,
+      "maximum_quadrature_error_estimate": 1.7579298642499132e-11
+    },
+    "likelihood": {
+      "passed": true,
+      "path_likelihood_cases": 100,
+      "maximum_emission_difference": 1.1102230246251565e-16,
+      "maximum_nll_difference": 8.881784197001252e-16,
+      "stable_path_likelihood_cases": 100,
+      "maximum_stable_nll_difference": 8.881784197001252e-16
+    },
+    "autograd": {
+      "passed": true,
+      "torch_numpy_maximum_difference": 0.0,
+      "h1_autograd_derivative": [
+        -0.0,
+        -0.0,
+        0.0
+      ],
+      "higher_horizon_gradient_cases": 6,
+      "higher_horizon_gradient_minimum_abs": 0.0022893671714387873,
+      "maximum_gradient_difference": 2.16036147304699e-11
+    },
+    "numerical_guards": {
+      "passed": true,
+      "rejected_invalid_inputs": [
+        "rho_nan",
+        "rho_inf",
+        "pi_nan",
+        "rho_negative",
+        "rho_above_one"
+      ],
+      "extreme_path_handling": "explicit numerical-range rejection",
+      "extreme_path_nll_absolute_difference": null,
+      "stable_extreme_path_likelihood_cases": 12,
+      "maximum_stable_extreme_nll_difference": 4.547473508864641e-13,
+      "extreme_test_is_synthetic": true
+    },
+    "protocol": {
+      "passed": true,
+      "synthetic_n": [
+        256,
+        1024,
+        4096
+      ],
+      "seeds": [
+        1000,
+        1001,
+        1002,
+        1003,
+        1004,
+        1005,
+        1006,
+        1007,
+        1008,
+        1009,
+        1010,
+        1011,
+        1012,
+        1013,
+        1014,
+        1015,
+        1016,
+        1017,
+        1018,
+        1019
+      ],
+      "arms": [
+        "conditional_endpoint",
+        "constant_endpoint",
+        "conditional_joint005",
+        "constant_joint005"
+      ],
+      "main": "conditional_joint005",
+      "main_matched": "constant_joint005",
+      "endpoint_loss": "equal mean CRPS of path sums divided by sqrt(h) at h=1,5,20",
+      "joint_loss": "endpoint_loss + .05 times forward-HMM path NLL per step",
+      "gate": "At n=1024, mean of 20 per-seed (main risk / matched risk - 1) <= -.0002, main strictly wins at least 14 of 20 seeds, and mean per-seed main/constant_endpoint -1 <=0. This is an internal resource gate, not a significance/publication standard.",
+      "scope": "protocol identity only; no fitting executed"
+    }
+  },
+  "passed": true,
+  "prior_attempts": [
+    {
+      "created_utc": "2026-10-19T04:29:49.260931+00:00",
+      "passed": true,
+      "production_source_sha256": "4c7dfa7a941089d9b21f54508dbff3b7446a8ec9af90a524fcd65d12ca5a92eb",
+      "protocol_sha256": "88c72e1781084473a426f0276869c63d78ed5076b088e2291a1c97a47dff77b8",
+      "audit_script_sha256": "4a5c46a901e537c90f9293adcbec02bacf209fedc99b3c599970729652e4642e",
+      "checks": {
+        "enumeration_and_moments": {
+          "passed": true,
+          "enumerated_cases": 50,
+          "covariance_pairs": 200,
+          "maximum_weight_difference": 1.1102230246251565e-16,
+          "maximum_variance_difference": 4.440892098500626e-16,
+          "maximum_kurtosis_difference": 4.718447854656915e-15,
+          "maximum_covariance_difference": 4.2674197509029455e-16,
+          "h20_moment_cases": 10
+        },
+        "crps_and_expected_score": {
+          "passed": true,
+          "cdf_integral_score_cases": 36,
+          "expected_score_integral_cases": 9,
+          "maximum_crps_difference": 8.881784197001252e-16,
+          "maximum_expected_crps_difference": 2.220446049250313e-16,
+          "maximum_quadrature_error_estimate": 1.7579298642499132e-11
+        },
+        "likelihood": {
+          "passed": true,
+          "path_likelihood_cases": 100,
+          "maximum_emission_difference": 1.1102230246251565e-16,
+          "maximum_nll_difference": 8.881784197001252e-16
+        },
+        "autograd": {
+          "passed": true,
+          "torch_numpy_maximum_difference": 0.0,
+          "h1_autograd_derivative": [
+            -0.0,
+            -0.0,
+            0.0
+          ],
+          "higher_horizon_gradient_cases": 6,
+          "higher_horizon_gradient_minimum_abs": 0.0022893671714387873,
+          "maximum_gradient_difference": 2.16036147304699e-11
+        },
+        "numerical_guards": {
+          "passed": true,
+          "rejected_invalid_inputs": [
+            "rho_nan",
+            "rho_inf",
+            "pi_nan",
+            "rho_negative",
+            "rho_above_one"
+          ],
+          "extreme_path_handling": "explicit numerical-range rejection",
+          "extreme_path_nll_absolute_difference": null,
+          "extreme_test_is_synthetic": true
+        },
+        "protocol": {
+          "passed": true,
+          "synthetic_n": [
+            256,
+            1024,
+            4096
+          ],
+          "seeds": [
+            1000,
+            1001,
+            1002,
+            1003,
+            1004,
+            1005,
+            1006,
+            1007,
+            1008,
+            1009,
+            1010,
+            1011,
+            1012,
+            1013,
+            1014,
+            1015,
+            1016,
+            1017,
+            1018,
+            1019
+          ],
+          "arms": [
+            "conditional_endpoint",
+            "constant_endpoint",
+            "conditional_joint005",
+            "constant_joint005"
+          ],
+          "main": "conditional_joint005",
+          "main_matched": "constant_joint005",
+          "endpoint_loss": "equal mean CRPS of path sums divided by sqrt(h) at h=1,5,20",
+          "joint_loss": "endpoint_loss + .05 times forward-HMM path NLL per step",
+          "gate": "At n=1024, mean of 20 per-seed (main risk / matched risk - 1) <= -.0002, main strictly wins at least 14 of 20 seeds, and mean per-seed main/constant_endpoint -1 <=0. This is an internal resource gate, not a significance/publication standard.",
+          "scope": "protocol identity only; no fitting executed"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "created_utc": "2026-10-17",
+  "frozen_before_new_acquisition": true,
+  "authorization": "Parent relayed user's explicit request to expand public carbon-market data and perform new research; acquisition and format audit authorized.",
+  "markets_priority": [
+    "GDEA",
+    "HBEA",
+    "CEA_19_20_if_identity_confirmed"
+  ],
+  "development_last_date": "2023-12-31",
+  "confirmation_first_date": "2024-01-01",
+  "confirmation_last_date": "2025-12-31",
+  "excluded_dates": "2026-01-01 and later; retained only in raw source response, never parsed into experiment price inputs",
+  "target_fields": {
+    "GDEA": "reported endPrice (official template labels closing price)",
+    "HBEA": "reported Latest; not relabeled close",
+    "CEA_19_20": "named vintage-specific price only if source schema/identity is confirmed; composite excluded from initial main pool"
+  },
+  "transformations": [
+    "ISO date normalization",
+    "ascending date order",
+    "one series per explicit market/product",
+    "exact duplicate removal only after logging source locators"
+  ],
+  "prohibited_transformations": [
+    "filling absent trading dates",
+    "forward/back filling price",
+    "combining same-day different products",
+    "splicing spot and futures",
+    "selecting rows by price behavior",
+    "silently fixing nonpositive or malformed prices"
+  ],
+  "audit_allowed": [
+    "response bytes and SHA256",
+    "schema",
+    "source date bounds and counts",
+    "duplicate date and product conflicts",
+    "finite strictly-positive format checks"
+  ],
+  "audit_prohibited": [
+    "returns",
+    "price distribution summaries",
+    "model fitting",
+    "prediction scoring",
+    "model or hyperparameter selection from confirmation"
+  ],
+  "confirmation_policy": "CSV under local_only/confirmation_sealed; no price values emitted in console or metadata; parsing/sealing is raw-source audit, not scoring exposure.",
+  "revision_policy": "Write any acquisition restriction or protocol amendment as a new separate record, never silently overwrite this freeze.",
+  "publication": "Raw official responses and derived daily prices stay local_only; aggregate metadata/code public only; source bulk redistribution rights unconfirmed.",
+  "access": "Public documented URLs only; no auth or security refusal workarounds; stop blocked sources."
+}

@@ -1,0 +1,128 @@
+{
+  "status": "PARTIAL_PASS",
+  "audit_utc": "2026-10-17T07:23:43.723332+00:00",
+  "scope": "D1 development only; independent NumPy replay, no training",
+  "expected_fits": 141,
+  "audited_fits": 141,
+  "observed_attempts": 141,
+  "completed_receipt": {
+    "completed_utc": "2026-10-17T07:21:40.367502+00:00",
+    "expected_fits": 141,
+    "completed_fits": 141,
+    "failures": [],
+    "elapsed_seconds": 245.1620573939981,
+    "all_completed": true,
+    "confirmation_used": false,
+    "additional_retry_fits": 0
+  },
+  "market_fits_by_auditor": 0,
+  "optimizer_steps_by_auditor": 0,
+  "confirmation_file_reads": 0,
+  "independent_checks": 8898020,
+  "maximum_absolute_difference": 2.842170943040401e-14,
+  "largest_difference_location": "d1_062/sparse/cell8/mse",
+  "plan_sha256": "4c1a31662959c951548b19c068cf6e8f33d7ab9b86fbe519203575f4a3e593ba",
+  "source_sha256": {
+    "run_development.py": "3da4a1445143be31c2d41538e508b76679bfb1db5eb75ed587f3140c9cb3acb8",
+    "statistical_reference.py": "d2e7e086199cb056067a39db10d8a6ef6f3ab34f198169b7c9e006b87065a580",
+    "information_model.py": "efe1de4d3f7e36b72771c7f9bc6d0d01008b5a3d0c02c180d65d5972389caf33",
+    "data_core.py": "158afb8217299c1e26287fa37db203a38d045d8ba4e53d6d97db64e240239d07",
+    "fit_core.py": "1b4616244731ec69a1a614a3fa30b245f12f46388a89fd111a29ee520d0a3f44"
+  },
+  "numpy_version": "2.5.4",
+  "audit_script_sha256": "afd519ce5bf877ed98ac740233586478a0052fbd2713e3dcceaaa94c5df1d4ea",
+  "development_sources": [
+    {
+      "name": "GUANGZHOU",
+      "rows": 1434,
+      "sha256": "8d78a4f13c5a799519546fd3bfa0e0ac5eaa52b0441a983a95ef06f5e5e34051",
+      "first_date": "2018-01-03",
+      "last_date": "2023-12-29",
+      "observations_by_year": {
+        "2018": 214,
+        "2019": 245,
+        "2020": 244,
+        "2021": 247,
+        "2022": 242,
+        "2023": 242
+      },
+      "h20_median_calendar_days": 29.0,
+      "h20_maximum_calendar_days": 55
+    },
+    {
+      "name": "HUBEI",
+      "rows": 1408,
+      "sha256": "04655d59c1b585f6c35c02a43469a965fe3589eb613d7d8d8e46996751b7d797",
+      "first_date": "2018-01-02",
+      "last_date": "2023-12-29",
+      "observations_by_year": {
+        "2018": 242,
+        "2019": 244,
+        "2020": 208,
+        "2021": 242,
+        "2022": 237,
+        "2023": 235
+      },
+      "h20_median_calendar_days": 29.0,
+      "h20_maximum_calendar_days": 88
+    },
+    {
+      "name": "EU_REPORTED",
+      "rows": 1515,
+      "sha256": "ca7c192380897076ef57516a11ea2ccefda6ba92ab9823d9aa8f2bb281cefedc",
+      "first_date": "2018-01-02",
+      "last_date": "2023-12-29",
+      "observations_by_year": {
+        "2018": 241,
+        "2019": 240,
+        "2020": 259,
+        "2021": 259,
+        "2022": 258,
+        "2023": 258
+      },
+      "h20_median_calendar_days": 28.0,
+      "h20_maximum_calendar_days": 38
+    },
+    {
+      "name": "SHANGHAI_D4",
+      "rows": 1507,
+      "sha256": "425424353bb3ac09e3d96b291680b4179e86f180da626a5d19e5c1e58ed960a1",
+      "first_date": "2013-12-19",
+      "last_date": "2023-12-29",
+      "observations_by_year": {
+        "2013": 9,
+        "2014": 169,
+        "2015": 149,
+        "2016": 111,
+        "2017": 166,
+        "2018": 142,
+        "2019": 142,
+        "2020": 161,
+        "2021": 47,
+        "2022": 215,
+        "2023": 196
+      },
+      "h20_median_calendar_days": 37.0,
+      "h20_maximum_calendar_days": 314
+    }
+  ],
+  "checks": [
+    "frozen code and registry identities",
+    "fully mature chronological train/validation",
+    "training-only RMS scale",
+    "same-year H20 evaluation support",
+    "all original labels and statistical anchors",
+    "market ID order and raw/coarse inputs",
+    "independent GRU/LSTM/ridge NumPy forward",
+    "all view/horizon point predictions",
+    "all reported cell scores and selected-state validation",
+    "epoch selection logic",
+    "matched neural initial-state hashes",
+    "no duplicate fit attempts"
+  ],
+  "limitations": [
+    "Initial random-encoder/ridge parameters were hashed but not saved by D1; their initial values are not independently reconstructed.",
+    "Only the saved selected state's validation prediction is replayed; intermediate epoch parameters were not stored.",
+    "This verifies implementation and scores, not novelty or statistical significance."
+  ]
+}

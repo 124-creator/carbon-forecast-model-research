@@ -1,0 +1,376 @@
+{
+  "protocol": {
+    "estimand": "equal-year/equal-horizon mean of (seed-mean candidate squared loss minus seed-mean comparator squared loss) / RW MSE",
+    "negative_delta_favors_candidate": true,
+    "years": [
+      2024,
+      2025
+    ],
+    "horizons": [
+      1,
+      5,
+      20
+    ],
+    "primary_block_length": 40,
+    "sensitivity_block_lengths": [
+      20,
+      60
+    ],
+    "bootstrap": "paired, stratified-year, circular moving blocks; uniform starts, concatenate and truncate within year",
+    "replicates": 10000,
+    "bootstrap_seed": 20261019,
+    "rng": "NumPy PCG64(SeedSequence([bootstrap_seed, block_length]))",
+    "bootstrap_chunk_size": 256,
+    "bootstrap_denominators_recomputed": true,
+    "null": "candidate relative-MSE delta >= 0",
+    "alternative": "delta < 0",
+    "p_value": "(1 + count(delta_star - delta_hat <= delta_hat)) / (B+1)",
+    "ci_method": "basic bootstrap; 2*delta_hat minus reversed empirical quantiles",
+    "multiplicity": "Holm over two primary block-40 comparisons only, alpha=0.05; positive-evidence gate requires adjusted p < 0.05",
+    "sensitivity_results_are_confirmatory": false,
+    "seed_loss_aggregation": "average squared losses, never square the average prediction",
+    "seed_ids": [
+      17,
+      29,
+      43
+    ],
+    "seed_resampling": false,
+    "model_order": [
+      "pooled:kcm_h32_s1_l1",
+      "pooled:gru_price_h16_s0.1_l0",
+      "pooled:augment_h32_s1_l0"
+    ],
+    "comparator_roles": {
+      "strongest_development_baseline": "pooled:gru_price_h16_s0.1_l0",
+      "matched_augmentation": "pooled:augment_h32_s1_l0"
+    },
+    "confirmation_maximum_origins": 221
+  },
+  "support": [
+    {
+      "year": 2024,
+      "origins": 143,
+      "first_origin": 1507,
+      "last_origin": 1649
+    },
+    {
+      "year": 2025,
+      "origins": 78,
+      "first_origin": 1670,
+      "last_origin": 1747
+    }
+  ],
+  "observed_scores": {
+    "pooled:kcm_h32_s1_l1": 0.97097473758646,
+    "pooled:gru_price_h16_s0.1_l0": 0.9846238781179489,
+    "pooled:augment_h32_s1_l0": 0.9709637893813703
+  },
+  "observed_cells": [
+    {
+      "year": 2024,
+      "horizon": 1,
+      "origins": 143,
+      "rw_mse": 0.5951888111888122,
+      "mse_by_model": {
+        "pooled:kcm_h32_s1_l1": 0.5883131215917125,
+        "pooled:gru_price_h16_s0.1_l0": 0.5805237279928886,
+        "pooled:augment_h32_s1_l0": 0.5882873493333566
+      },
+      "relative_mse_by_model": {
+        "pooled:kcm_h32_s1_l1": 0.9884478849940636,
+        "pooled:gru_price_h16_s0.1_l0": 0.9753606201591191,
+        "pooled:augment_h32_s1_l0": 0.9884045840148258
+      }
+    },
+    {
+      "year": 2024,
+      "horizon": 5,
+      "origins": 143,
+      "rw_mse": 1.9929769230769259,
+      "mse_by_model": {
+        "pooled:kcm_h32_s1_l1": 1.9803865542544528,
+        "pooled:gru_price_h16_s0.1_l0": 2.0139351204570057,
+        "pooled:augment_h32_s1_l0": 1.9794361706316435
+      },
+      "relative_mse_by_model": {
+        "pooled:kcm_h32_s1_l1": 0.9936826319077318,
+        "pooled:gru_price_h16_s0.1_l0": 1.0105160261202237,
+        "pooled:augment_h32_s1_l0": 0.9932057655618124
+      }
+    },
+    {
+      "year": 2024,
+      "horizon": 20,
+      "origins": 143,
+      "rw_mse": 7.4972447552447585,
+      "mse_by_model": {
+        "pooled:kcm_h32_s1_l1": 7.564722793322019,
+        "pooled:gru_price_h16_s0.1_l0": 8.07889544476817,
+        "pooled:augment_h32_s1_l0": 7.5613818646196105
+      },
+      "relative_mse_by_model": {
+        "pooled:kcm_h32_s1_l1": 1.0090003781762702,
+        "pooled:gru_price_h16_s0.1_l0": 1.0775819262291675,
+        "pooled:augment_h32_s1_l0": 1.0085547573100084
+      }
+    },
+    {
+      "year": 2025,
+      "horizon": 1,
+      "origins": 78,
+      "rw_mse": 14.239776923076928,
+      "mse_by_model": {
+        "pooled:kcm_h32_s1_l1": 13.99373529186114,
+        "pooled:gru_price_h16_s0.1_l0": 13.83379125502408,
+        "pooled:augment_h32_s1_l0": 13.993703414192717
+      },
+      "relative_mse_by_model": {
+        "pooled:kcm_h32_s1_l1": 0.9827215248844908,
+        "pooled:gru_price_h16_s0.1_l0": 0.9714893238675032,
+        "pooled:augment_h32_s1_l0": 0.9827192862491108
+      }
+    },
+    {
+      "year": 2025,
+      "horizon": 5,
+      "origins": 78,
+      "rw_mse": 44.612170512820526,
+      "mse_by_model": {
+        "pooled:kcm_h32_s1_l1": 42.05886237725344,
+        "pooled:gru_price_h16_s0.1_l0": 41.07981863820901,
+        "pooled:augment_h32_s1_l0": 42.0574780421147
+      },
+      "relative_mse_by_model": {
+        "pooled:kcm_h32_s1_l1": 0.9427665566096292,
+        "pooled:gru_price_h16_s0.1_l0": 0.9208208918327254,
+        "pooled:augment_h32_s1_l0": 0.9427355261728039
+      }
+    },
+    {
+      "year": 2025,
+      "horizon": 20,
+      "origins": 78,
+      "rw_mse": 57.7154730769231,
+      "mse_by_model": {
+        "pooled:kcm_h32_s1_l1": 52.47660778142164,
+        "pooled:gru_price_h16_s0.1_l0": 54.94365749915529,
+        "pooled:augment_h32_s1_l0": 52.53047755900609
+      },
+      "relative_mse_by_model": {
+        "pooled:kcm_h32_s1_l1": 0.9092294489465744,
+        "pooled:gru_price_h16_s0.1_l0": 0.9519744804989551,
+        "pooled:augment_h32_s1_l0": 0.9101628169796606
+      }
+    }
+  ],
+  "blocks": {
+    "40": {
+      "role": "primary",
+      "block_length": 40,
+      "effective_blocks_by_year": {
+        "2024": 3.575,
+        "2025": 1.95
+      },
+      "drawn_blocks_per_year": {
+        "2024": 4,
+        "2025": 2
+      },
+      "zero_rw_denominator_draws": 0,
+      "secondary_raw_mse_difference": {
+        "pooled:gru_price_h16_s0.1_l0": {
+          "observed_delta": -0.31133229431700704,
+          "basic_ci_95": [
+            -0.7447676219186147,
+            0.18465512799459216
+          ]
+        },
+        "pooled:augment_h32_s1_l0": {
+          "observed_delta": -0.008022746698951718,
+          "basic_ci_95": [
+            -0.012595018686436886,
+            -0.0033094371444582615
+          ]
+        }
+      },
+      "status": "ESTIMATED",
+      "comparisons": {
+        "pooled:gru_price_h16_s0.1_l0": {
+          "observed_delta": -0.013649140531489004,
+          "basic_ci_95": [
+            -0.13553852546576275,
+            0.025069549601918314
+          ],
+          "basic_bonferroni_ci_97_5": [
+            -0.14462704002849314,
+            0.028342270701880865
+          ],
+          "centered_bootstrap_one_sided_p": 0.30326967303269675,
+          "bootstrap_standard_deviation": 0.04454696528798174,
+          "bootstrap_mean": 0.0019000051825950302,
+          "monte_carlo_p_resolution": 9.999000099990002e-05,
+          "holm_adjusted_p": 0.6065393460653935,
+          "holm_reject": false,
+          "candidate_direction_and_holm_pass": false
+        },
+        "pooled:augment_h32_s1_l0": {
+          "observed_delta": 1.0948205089678087e-05,
+          "basic_ci_95": [
+            -0.00024213653639925645,
+            0.00043256376251228775
+          ],
+          "basic_bonferroni_ci_97_5": [
+            -0.00029318086146680423,
+            0.0004922061264560874
+          ],
+          "centered_bootstrap_one_sided_p": 0.5185481451854814,
+          "bootstrap_standard_deviation": 0.00015917003178272612,
+          "bootstrap_mean": -8.157616677770996e-06,
+          "monte_carlo_p_resolution": 9.999000099990002e-05,
+          "holm_adjusted_p": 0.6065393460653935,
+          "holm_reject": false,
+          "candidate_direction_and_holm_pass": false
+        }
+      },
+      "both_primary_comparisons_pass": false
+    },
+    "20": {
+      "role": "sensitivity_only",
+      "block_length": 20,
+      "effective_blocks_by_year": {
+        "2024": 7.15,
+        "2025": 3.9
+      },
+      "drawn_blocks_per_year": {
+        "2024": 8,
+        "2025": 4
+      },
+      "zero_rw_denominator_draws": 0,
+      "secondary_raw_mse_difference": {
+        "pooled:gru_price_h16_s0.1_l0": {
+          "observed_delta": -0.31133229431700704,
+          "basic_ci_95": [
+            -0.9093085015747568,
+            0.2811815517755586
+          ]
+        },
+        "pooled:augment_h32_s1_l0": {
+          "observed_delta": -0.008022746698951718,
+          "basic_ci_95": [
+            -0.014672481824680849,
+            -0.0012221207697531485
+          ]
+        }
+      },
+      "status": "ESTIMATED",
+      "comparisons": {
+        "pooled:gru_price_h16_s0.1_l0": {
+          "observed_delta": -0.013649140531489004,
+          "basic_ci_95": [
+            -0.12761073959337935,
+            0.02292381780461238
+          ],
+          "basic_bonferroni_ci_97_5": [
+            -0.1359819336377328,
+            0.02629602142273958
+          ],
+          "centered_bootstrap_one_sided_p": 0.25997400259974,
+          "bootstrap_standard_deviation": 0.03945635299434231,
+          "bootstrap_mean": 0.0009050101131250189,
+          "monte_carlo_p_resolution": 9.999000099990002e-05
+        },
+        "pooled:augment_h32_s1_l0": {
+          "observed_delta": 1.0948205089678087e-05,
+          "basic_ci_95": [
+            -0.00031723126371494546,
+            0.000369693426104635
+          ],
+          "basic_bonferroni_ci_97_5": [
+            -0.0004026706591848421,
+            0.0004552003913507243
+          ],
+          "centered_bootstrap_one_sided_p": 0.5272472752724727,
+          "bootstrap_standard_deviation": 0.00015942687973158372,
+          "bootstrap_mean": 9.230367268893611e-06,
+          "monte_carlo_p_resolution": 9.999000099990002e-05
+        }
+      },
+      "multiplicity_adjustment": "none; descriptive sensitivity p values are not additional primary tests"
+    },
+    "60": {
+      "role": "sensitivity_only",
+      "block_length": 60,
+      "effective_blocks_by_year": {
+        "2024": 2.3833333333333333,
+        "2025": 1.3
+      },
+      "drawn_blocks_per_year": {
+        "2024": 3,
+        "2025": 2
+      },
+      "zero_rw_denominator_draws": 0,
+      "secondary_raw_mse_difference": {
+        "pooled:gru_price_h16_s0.1_l0": {
+          "observed_delta": -0.31133229431700704,
+          "basic_ci_95": [
+            -0.8116237008109476,
+            0.19668885398478808
+          ]
+        },
+        "pooled:augment_h32_s1_l0": {
+          "observed_delta": -0.008022746698951718,
+          "basic_ci_95": [
+            -0.012631919345200662,
+            -0.003398445438897167
+          ]
+        }
+      },
+      "status": "ESTIMATED",
+      "comparisons": {
+        "pooled:gru_price_h16_s0.1_l0": {
+          "observed_delta": -0.013649140531489004,
+          "basic_ci_95": [
+            -0.1329252652227163,
+            0.022922336337503357
+          ],
+          "basic_bonferroni_ci_97_5": [
+            -0.1379200724570705,
+            0.025930616790648117
+          ],
+          "centered_bootstrap_one_sided_p": 0.2967703229677032,
+          "bootstrap_standard_deviation": 0.043723576858622916,
+          "bootstrap_mean": 0.0012257138864665861,
+          "monte_carlo_p_resolution": 9.999000099990002e-05
+        },
+        "pooled:augment_h32_s1_l0": {
+          "observed_delta": 1.0948205089678087e-05,
+          "basic_ci_95": [
+            -0.0001412720954101759,
+            0.00038819611105236044
+          ],
+          "basic_bonferroni_ci_97_5": [
+            -0.00016458337438428501,
+            0.0004393812143206244
+          ],
+          "centered_bootstrap_one_sided_p": 0.5198480151984801,
+          "bootstrap_standard_deviation": 0.0001317329016079429,
+          "bootstrap_mean": -1.4330862429223603e-05,
+          "monte_carlo_p_resolution": 9.999000099990002e-05
+        }
+      },
+      "multiplicity_adjustment": "none; descriptive sensitivity p values are not additional primary tests"
+    }
+  },
+  "limitations": [
+    "Coverage and p values are approximate under adequate within-year weak dependence; arbitrary regime changes are not covered by an exact validity claim.",
+    "Inference is conditional on the frozen development selection and fixed training seeds; it does not estimate across-seed or across-market sampling uncertainty.",
+    "Two year strata do not supply two independent replications of a general market population.",
+    "If the fixed 2025 refresh uses matured 2024 labels, year strata are not literally independent: this fixed-loss bootstrap does not repeat fitting or propagate that training-estimation dependence.",
+    "Circular wrap is a resampling device, not a claim that year-end and year-start observations are adjacent in real time.",
+    "Large blocks in a short year yield few effective blocks; do not select a block length after examining significance.",
+    "Same-year mature H20 target support must be verified upstream; raw outcome arrays alone cannot verify target dates.",
+    "Any zero bootstrap RW denominator invalidates normalized inference at that block length; no epsilon, dropped draw, or block-length rescue is used."
+  ],
+  "primary_inference_status": "ESTIMATED",
+  "both_primary_comparisons_pass": false,
+  "numpy_version": "2.3.5"
+}

@@ -1,0 +1,173 @@
+{
+  "status": "PASS",
+  "created_utc": "2026-10-18T05:57:09.156179+00:00",
+  "scope": "Independent deterministic identities and simulated Gamma/Dirichlet orders only; no market data, no training, no project imports.",
+  "not_validated": [
+    "root model implementation",
+    "autograd and custom special-function gradients",
+    "real market fitting",
+    "economic identification",
+    "predictive superiority",
+    "screening-rule identification"
+  ],
+  "seed": 20261018,
+  "mc_samples": 400000,
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "script_sha256": "aed018266dc699a4e382c9ef7c470f811204fe7477a203533d878700eb16e1fc",
+  "checks": {
+    "strict_inverse_boundary": {
+      "pass": true,
+      "actual": 30,
+      "strict_inverse": 30,
+      "usual_inverse": 20
+    },
+    "weighted_summary_nonidentification": {
+      "pass": true,
+      "summary_min_max_mean_median": [
+        10,
+        20,
+        15.0,
+        15.0
+      ],
+      "same_supply_clearing": [
+        15,
+        15
+      ],
+      "changed_supply_clearing": [
+        18,
+        19
+      ]
+    },
+    "count_weighted_summary_nonidentification": {
+      "pass": true,
+      "same_price_summary_and_total_volume": true,
+      "clearing": [
+        10,
+        30
+      ]
+    },
+    "nonnegative_and_normalized": {
+      "pass": true,
+      "minimum_raw_mass": 6.819368524535463e-06,
+      "max_component_error": 0.0,
+      "success_probability": 0.6789795264369302,
+      "failure_probability": 0.3210204735630699
+    },
+    "success_reweights_mixture": {
+      "pass": true,
+      "original_pi": [
+        0.2,
+        0.5,
+        0.3
+      ],
+      "correct_success_weights": [
+        0.004312189793744869,
+        0.6165756093988615,
+        0.37911220080739355
+      ],
+      "max_difference_if_original_pi_used": 0.19568781020625514
+    },
+    "volume_unit_invariance": {
+      "pass": true,
+      "max_absolute_error": 3.885780586188048e-16
+    },
+    "gamma_operator_vs_independent_monte_carlo": {
+      "pass": true,
+      "samples": 400000,
+      "max_absolute_mass_error": 0.0007153202157742095,
+      "max_error_over_six_sigma_plus_three_counts": 0.2527975284798412,
+      "empirical_success": 0.678255,
+      "analytic_success": 0.6789795264369302
+    },
+    "pathwise_supply_monotonicity_on_shared_success": {
+      "pass": true,
+      "shared_success_count": 219500,
+      "statement": "Only the same demand realization and both supplies mechanically successful; no conditional-mean monotonicity claim."
+    },
+    "constant_admission_cancels_from_price_law": {
+      "pass": true,
+      "max_conditional_mass_error": 2.7755575615628914e-17,
+      "working_cancel_probability": 0.3413898593561778
+    },
+    "span_scaled_reference_centering_rw_identity": {
+      "pass": true,
+      "component_means": [
+        42.00000000000001,
+        41.99999999999999,
+        42.0
+      ],
+      "correct_mixture_mean": 42.0,
+      "mean_under_unscaled_reference_bug": 42.37457720699911,
+      "note": "Reference and future distributions here match; no price-dependent screening."
+    },
+    "positive_exponential_moment_rw_anchor_interior": {
+      "pass": true,
+      "component_means": [
+        42.00000000000001,
+        42.0,
+        42.0
+      ],
+      "mixture_mean": 41.999999999999986,
+      "minimum_positive_price": 27.635747175248156,
+      "maximum_absolute_log_ratio": 0.41855949608308696,
+      "expected_mean_with_location_012": 42.35428591765541,
+      "clipping_note": "No log-ratio clip or weight floor active in this algebraic check; no root-model autograd claim."
+    },
+    "conditional_beta_formula_vs_dirichlet_monte_carlo": {
+      "pass": true,
+      "max_absolute_mass_error": 0.0011465430738658022,
+      "analytic_mass": [
+        0.02029115590072489,
+        0.4231382377164498,
+        0.2515115430738658,
+        0.27771547110534867,
+        0.027343592203610823
+      ],
+      "empirical_mass": [
+        0.020545,
+        0.4232875,
+        0.250365,
+        0.27857,
+        0.0272325
+      ]
+    },
+    "joint_beta_gamma_integral_matches_marginal": {
+      "pass": true,
+      "max_absolute_mass_error": 1.1657341758564144e-15
+    },
+    "crps_energy_equals_full_cdf_integral_outside_support": {
+      "pass": true,
+      "energy_crps": 7.760975834881615,
+      "full_integral_crps": 7.760975834881611,
+      "observation_outside_support": true
+    },
+    "fixed_supply_categorical_reparameterization": {
+      "pass": true,
+      "target_mass": [
+        0.03,
+        0.17,
+        0.37,
+        0.11,
+        0.32
+      ],
+      "recovered_mass": [
+        0.030000000000000155,
+        0.16999999999999946,
+        0.3699999999999994,
+        0.11000000000000121,
+        0.3199999999999998
+      ],
+      "equivalent_gamma_shapes": [
+        0.1404982811323796,
+        0.6659116208959661,
+        1.161174299031209,
+        0.3485780835488659,
+        1.8838377153915795
+      ],
+      "max_absolute_error": 1.2073675392798577e-15,
+      "implication": "No new single-supply categorical expressivity; possible differences are shared parameterization, joint laws, capacity and learning."
+    }
+  }
+}

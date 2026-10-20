@@ -1,0 +1,5353 @@
+{
+  "title": "V3 三市场固定复制独立统计审查",
+  "status": "PASS_INTEGRITY",
+  "created_utc": "2026-10-19T09:59:04.928949+00:00",
+  "stage": "fixed_candidate_new_market_replication_after_v1_v2_development",
+  "frozen_plan_sha256": "c025efb1b6ab2bd4493868d6b48830b7b23f4049d8f74766797989b0d2453aad",
+  "script_sha256": "8f0508db068d60e0355d40a3b9455f411c4bfbb06b1ef58cf81cd897c9025d8f",
+  "utility_script_sha256": "e83ceb2e567400c6b59af0a5f8fb7bcfc56bec73b32d12e1e2c05e3dadf6091e",
+  "source_sha256": {
+    "run_model_search.py": "26347433fe6416298e4969da618cbba291999f3a66131172bc8f2e510f3633bf",
+    "innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e",
+    "run_liquidity_extension.py": "95665858a1945b00bba6d6233022c34c0a58993899ccadda8c895f64ffe69807",
+    "liquidity_models.py": "91dd66c0b33b8d75100e37cc382f01be44021ae538f6cbbedddda7f9b9386e0b",
+    "run_new_market_replication.py": "8c617a714bb0b47d117b213de9d299c3bd6a534c8211c28c8d039d454df12e56"
+  },
+  "resolved_run": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3",
+  "resolved_data_root": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/data/sciencedb_819_v1/prepared",
+  "resolved_out": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/audits",
+  "self_test": {
+    "status": "PASS",
+    "checks": [
+      "paired observed-origin blocks",
+      "equal-market endpoint combination despite unequal sample sizes"
+    ]
+  },
+  "execution_counts": {
+    "neural_tasks": 120,
+    "selection_tasks": 48,
+    "refit_tasks": 72,
+    "tasks_with_positive_gradient_steps": 108,
+    "refits_with_positive_gradient_steps": 60,
+    "zero_epoch_refits": 12,
+    "selected_epoch_zero_family_markets": 4,
+    "total_executed_epochs": 6805,
+    "total_logged_positive_gradient_steps": 16751,
+    "prediction_files": 39,
+    "primary_market_origins": 188,
+    "stress_market_origins": 28,
+    "primary_origin_horizon_targets": 564,
+    "stress_origin_horizon_targets": 84
+  },
+  "primary_macro_scores_bj_tj": {
+    "liquidity_full": {
+      "primary_mean_seed_mse_over_rw": 0.8101675210023073,
+      "secondary_ensemble_mse_over_rw": 0.8101652844707725
+    },
+    "liquidity_readout": {
+      "primary_mean_seed_mse_over_rw": 0.8107475243500136,
+      "secondary_ensemble_mse_over_rw": 0.8107450864503245
+    },
+    "shock_size_only": {
+      "primary_mean_seed_mse_over_rw": 0.8164211874461889,
+      "secondary_ensemble_mse_over_rw": 0.8164188079044183
+    },
+    "liquidity_unconstrained": {
+      "primary_mean_seed_mse_over_rw": 0.8103335154499858,
+      "secondary_ensemble_mse_over_rw": 0.8103287961346924
+    },
+    "allocation_constant": {
+      "primary_mean_seed_mse_over_rw": 0.8050941358341865,
+      "secondary_ensemble_mse_over_rw": 0.8050928617148471
+    },
+    "allocation_readout": {
+      "primary_mean_seed_mse_over_rw": 0.7905122522251073,
+      "secondary_ensemble_mse_over_rw": 0.7903675138974968
+    },
+    "gru": {
+      "primary_mean_seed_mse_over_rw": 0.8031549147924331,
+      "secondary_ensemble_mse_over_rw": 0.8009397943164216
+    },
+    "lstm": {
+      "primary_mean_seed_mse_over_rw": 0.815316825028602,
+      "secondary_ensemble_mse_over_rw": 0.8112830258007462
+    },
+    "rw": {
+      "primary_mean_seed_mse_over_rw": 1.0,
+      "secondary_ensemble_mse_over_rw": 1.0
+    },
+    "drift": {
+      "primary_mean_seed_mse_over_rw": 0.9978830679407493,
+      "secondary_ensemble_mse_over_rw": 0.9978830679407493
+    },
+    "ridge_price": {
+      "primary_mean_seed_mse_over_rw": 0.8250780844636112,
+      "secondary_ensemble_mse_over_rw": 0.8250780844636112
+    },
+    "ridge_full": {
+      "primary_mean_seed_mse_over_rw": 0.9186989688371354,
+      "secondary_ensemble_mse_over_rw": 0.9186989688371354
+    },
+    "hgb_full": {
+      "primary_mean_seed_mse_over_rw": 0.8441907310713637,
+      "secondary_ensemble_mse_over_rw": 0.8441907310713637
+    },
+    "validation_selected_strong": {
+      "primary_mean_seed_mse_over_rw": 0.8042897913687461,
+      "secondary_ensemble_mse_over_rw": 0.8020746708927345
+    }
+  },
+  "six_prespecified_effects": {
+    "primary_full_vs_rw": {
+      "candidate": "liquidity_full",
+      "comparator": "rw",
+      "macro_improvement_rw_units": 0.18983247899769273,
+      "macro_relative_reduction": 0.18983247899769273,
+      "per_market_improvement_rw_units": {
+        "BEIJING_MEAN": 0.44039580313557347,
+        "TIANJIN_MEAN": -0.060730845140188006,
+        "CHONGQING_MEAN": 0.026202964778758053
+      },
+      "primary_market_wins_of2": 1,
+      "block20": {
+        "macro_ci95_without_market_independence": [
+          -0.2609479671816527,
+          0.3273718246402072
+        ],
+        "macro_simultaneous95_joint_six_family": [
+          -0.7086077216840982,
+          0.41197343822960963
+        ]
+      },
+      "block40": {
+        "macro_ci95_without_market_independence": [
+          -0.08365032741070821,
+          0.2805108946004488
+        ],
+        "macro_simultaneous95_joint_six_family": [
+          -0.6848254464773841,
+          0.3190157102369329
+        ]
+      }
+    },
+    "primary_full_vs_shock_size": {
+      "candidate": "liquidity_full",
+      "comparator": "shock_size_only",
+      "macro_improvement_rw_units": 0.006253666443881589,
+      "macro_relative_reduction": 0.007659853198375921,
+      "per_market_improvement_rw_units": {
+        "BEIJING_MEAN": 0.0023247115027917875,
+        "TIANJIN_MEAN": 0.010182621384971391,
+        "CHONGQING_MEAN": -0.0069579397613342975
+      },
+      "primary_market_wins_of2": 2,
+      "block20": {
+        "macro_ci95_without_market_independence": [
+          -0.034803866437226105,
+          0.06694017724882308
+        ],
+        "macro_simultaneous95_joint_six_family": [
+          -0.058154177817797664,
+          0.12155785361228182
+        ]
+      },
+      "block40": {
+        "macro_ci95_without_market_independence": [
+          -0.02208185285071794,
+          0.024858151467330836
+        ],
+        "macro_simultaneous95_joint_six_family": [
+          -0.02641341867383971,
+          0.10875950039791285
+        ]
+      }
+    },
+    "primary_full_vs_constant": {
+      "candidate": "liquidity_full",
+      "comparator": "allocation_constant",
+      "macro_improvement_rw_units": -0.005073385168120725,
+      "macro_relative_reduction": -0.006301604920850634,
+      "per_market_improvement_rw_units": {
+        "BEIJING_MEAN": 0.028338442483063164,
+        "TIANJIN_MEAN": -0.038485212819304726,
+        "CHONGQING_MEAN": -0.0030173548273639827
+      },
+      "primary_market_wins_of2": 1,
+      "block20": {
+        "macro_ci95_without_market_independence": [
+          -0.10685120196441057,
+          1.0376035805130899
+        ],
+        "macro_simultaneous95_joint_six_family": [
+          -0.32692189294585067,
+          1.6230053479723547
+        ]
+      },
+      "block40": {
+        "macro_ci95_without_market_independence": [
+          -0.0817273769025046,
+          0.9321514351740001
+        ],
+        "macro_simultaneous95_joint_six_family": [
+          -0.2455230404185546,
+          1.002932011189457
+        ]
+      }
+    },
+    "primary_full_vs_liquidity_readout": {
+      "candidate": "liquidity_full",
+      "comparator": "liquidity_readout",
+      "macro_improvement_rw_units": 0.0005800033477063593,
+      "macro_relative_reduction": 0.0007153933009802493,
+      "per_market_improvement_rw_units": {
+        "BEIJING_MEAN": 0.0235303315601314,
+        "TIANJIN_MEAN": -0.022370324864718683,
+        "CHONGQING_MEAN": -0.004584992861726311
+      },
+      "primary_market_wins_of2": 1,
+      "block20": {
+        "macro_ci95_without_market_independence": [
+          -0.047965023702109505,
+          0.46578167048196567
+        ],
+        "macro_simultaneous95_joint_six_family": [
+          -0.20583808066446108,
+          0.7587830914505366
+        ]
+      },
+      "block40": {
+        "macro_ci95_without_market_independence": [
+          -0.017584154902547694,
+          0.4146134347384841
+        ],
+        "macro_simultaneous95_joint_six_family": [
+          -0.12749353109344636,
+          0.4603326955199878
+        ]
+      }
+    },
+    "secondary_readout_vs_rw": {
+      "candidate": "allocation_readout",
+      "comparator": "rw",
+      "macro_improvement_rw_units": 0.20948774777489265,
+      "macro_relative_reduction": 0.20948774777489265,
+      "per_market_improvement_rw_units": {
+        "BEIJING_MEAN": 0.3972830194996182,
+        "TIANJIN_MEAN": 0.021692476050166998,
+        "CHONGQING_MEAN": 0.0040713665781224595
+      },
+      "primary_market_wins_of2": 2,
+      "block20": {
+        "macro_ci95_without_market_independence": [
+          -0.7855790432261744,
+          0.2694716908764902
+        ],
+        "macro_simultaneous95_joint_six_family": [
+          -1.1905585400095937,
+          0.2833739533688475
+        ]
+      },
+      "block40": {
+        "macro_ci95_without_market_independence": [
+          -0.5172103738666329,
+          0.2586222168003374
+        ],
+        "macro_simultaneous95_joint_six_family": [
+          -0.8003922362031302,
+          0.2689749746377374
+        ]
+      }
+    },
+    "secondary_readout_vs_constant": {
+      "candidate": "allocation_readout",
+      "comparator": "allocation_constant",
+      "macro_improvement_rw_units": 0.014581883609079194,
+      "macro_relative_reduction": 0.01811202312878657,
+      "per_market_improvement_rw_units": {
+        "BEIJING_MEAN": -0.014774341152892112,
+        "TIANJIN_MEAN": 0.04393810837105028,
+        "CHONGQING_MEAN": -0.025148953027999577
+      },
+      "primary_market_wins_of2": 1,
+      "block20": {
+        "macro_ci95_without_market_independence": [
+          -0.2401098781565505,
+          0.32956554390498155
+        ],
+        "macro_simultaneous95_joint_six_family": [
+          -0.3763115816087322,
+          0.6650991707884986
+        ]
+      },
+      "block40": {
+        "macro_ci95_without_market_independence": [
+          -0.07185977579293613,
+          0.2183878930113984
+        ],
+        "macro_simultaneous95_joint_six_family": [
+          -0.09326023073553481,
+          0.2527974487783188
+        ]
+      }
+    }
+  },
+  "marketwise_bootstrap": {
+    "BEIJING_MEAN": {
+      "20": {
+        "primary_full_vs_rw": {
+          "ci95_marginal": [
+            0.34476809760104504,
+            0.5074695460407213
+          ],
+          "ci97_5_for_macro_marginal": [
+            0.33109303735132917,
+            0.5148859010019017
+          ],
+          "ci99_583333_for_joint_six_family": [
+            0.3061343003206349,
+            0.5303282469448461
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_shock_size": {
+          "ci95_marginal": [
+            0.0005580880392563199,
+            0.004039897882905982
+          ],
+          "ci97_5_for_macro_marginal": [
+            0.0003060722893455482,
+            0.004327009028100145
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.00024524545710428216,
+            0.004951639072502034
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_constant": {
+          "ci95_marginal": [
+            0.009550006968071845,
+            0.03967619886646239
+          ],
+          "ci97_5_for_macro_marginal": [
+            0.005972071348515202,
+            0.04113980810433682
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.0019108653669167002,
+            0.044265448312555224
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_liquidity_readout": {
+          "ci95_marginal": [
+            0.007666826755481837,
+            0.03654553623378445
+          ],
+          "ci97_5_for_macro_marginal": [
+            0.005197176628254925,
+            0.03835533813350157
+          ],
+          "ci99_583333_for_joint_six_family": [
+            3.706505714872944e-05,
+            0.04200050167750174
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "secondary_readout_vs_rw": {
+          "ci95_marginal": [
+            0.31028790016751295,
+            0.4638609796542335
+          ],
+          "ci97_5_for_macro_marginal": [
+            0.29838029625844437,
+            0.4718868751758883
+          ],
+          "ci99_583333_for_joint_six_family": [
+            0.27708723367891575,
+            0.48719483883132547
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "secondary_readout_vs_constant": {
+          "ci95_marginal": [
+            -0.02528490824072401,
+            -0.004274217241011822
+          ],
+          "ci97_5_for_macro_marginal": [
+            -0.026618021167725457,
+            -0.00318739556977276
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.029398842678171534,
+            -0.0011743133490412889
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        }
+      },
+      "40": {
+        "primary_full_vs_rw": {
+          "ci95_marginal": [
+            0.36739749195629384,
+            0.4854455005566823
+          ],
+          "ci97_5_for_macro_marginal": [
+            0.3528839849795472,
+            0.4910441271245582
+          ],
+          "ci99_583333_for_joint_six_family": [
+            0.3156483610265952,
+            0.5021943054813938
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 40,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_shock_size": {
+          "ci95_marginal": [
+            0.0008541692392363369,
+            0.003633296640093063
+          ],
+          "ci97_5_for_macro_marginal": [
+            0.0006109040521726725,
+            0.003795523769550382
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -8.416725708993452e-07,
+            0.004120049883641273
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 40,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_constant": {
+          "ci95_marginal": [
+            0.009708043142212283,
+            0.03720059948080818
+          ],
+          "ci97_5_for_macro_marginal": [
+            0.005946400143935672,
+            0.03853340384344431
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.0041696183090473415,
+            0.04109184684159846
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 40,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_liquidity_readout": {
+          "ci95_marginal": [
+            0.007465063109010058,
+            0.032727258735781986
+          ],
+          "ci97_5_for_macro_marginal": [
+            0.004878795045614161,
+            0.03395785621420923
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.0018872962759677713,
+            0.03624877476627928
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 40,
+          "coverage_status": "approximate"
+        },
+        "secondary_readout_vs_rw": {
+          "ci95_marginal": [
+            0.33775630738153367,
+            0.44501901622252954
+          ],
+          "ci97_5_for_macro_marginal": [
+            0.326437052121562,
+            0.45187974923196794
+          ],
+          "ci99_583333_for_joint_six_family": [
+            0.3044955817809181,
+            0.46661748192477087
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 40,
+          "coverage_status": "approximate"
+        },
+        "secondary_readout_vs_constant": {
+          "ci95_marginal": [
+            -0.023124409721045097,
+            -0.005902419996493416
+          ],
+          "ci97_5_for_macro_marginal": [
+            -0.023903738936303594,
+            -0.00523792988758418
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.025345355468185424,
+            -0.00400184194285931
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 40,
+          "coverage_status": "approximate"
+        }
+      }
+    },
+    "TIANJIN_MEAN": {
+      "20": {
+        "primary_full_vs_rw": {
+          "ci95_marginal": [
+            -0.5119060472322126,
+            0.0766900278055297
+          ],
+          "ci97_5_for_macro_marginal": [
+            -0.8529889717146345,
+            0.13985774827851272
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -1.7233497436888314,
+            0.2936186295143732
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_shock_size": {
+          "ci95_marginal": [
+            -0.05641190491298236,
+            0.03777437408224647
+          ],
+          "ci97_5_for_macro_marginal": [
+            -0.06991380516379776,
+            0.129553345469546
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.11606311017849105,
+            0.2381640681520616
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_constant": {
+          "ci95_marginal": [
+            -0.12541437542105074,
+            1.617186559954611
+          ],
+          "ci97_5_for_macro_marginal": [
+            -0.21967447527733636,
+            2.0340673529218427
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.6519329205247847,
+            3.201745247632154
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_liquidity_readout": {
+          "ci95_marginal": [
+            -0.044366666657066366,
+            0.6230608005419209
+          ],
+          "ci97_5_for_macro_marginal": [
+            -0.10112722403247393,
+            0.8932080028304298
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.4117132263860709,
+            1.4755656812235713
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "secondary_readout_vs_rw": {
+          "ci95_marginal": [
+            -1.444702980841476,
+            0.06422914720975607
+          ],
+          "ci97_5_for_macro_marginal": [
+            -1.8695383827107932,
+            0.06705650657709211
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -2.658204313698103,
+            0.0795530679063696
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "secondary_readout_vs_constant": {
+          "ci95_marginal": [
+            -0.3291238608051522,
+            0.45093958306658194
+          ],
+          "ci97_5_for_macro_marginal": [
+            -0.45360173514537555,
+            0.6623184833797359
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.7232243205392929,
+            1.3313726549260385
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        }
+      },
+      "40": {
+        "primary_full_vs_rw": {
+          "ci95_marginal": [
+            -0.3745638761495799,
+            0.03970749240138601
+          ],
+          "ci97_5_for_macro_marginal": [
+            -0.5201846398009636,
+            0.06997766207633944
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -1.6852992539813634,
+            0.13583711499247209
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 40,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_shock_size": {
+          "ci95_marginal": [
+            -0.039743099831111045,
+            0.03672617257451144
+          ],
+          "ci97_5_for_macro_marginal": [
+            -0.04477460975360855,
+            0.04592077916511129
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.052825995675108525,
+            0.21339895091218442
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 40,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_constant": {
+          "ci95_marginal": [
+            -0.11824890088327124,
+            1.2853133309450053
+          ],
+          "ci97_5_for_macro_marginal": [
+            -0.16940115394894487,
+            1.8257694665045558
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.4868764625280619,
+            1.9647721755373155
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 40,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_liquidity_readout": {
+          "ci95_marginal": [
+            -0.036312545688850485,
+            0.5152685469686339
+          ],
+          "ci97_5_for_macro_marginal": [
+            -0.04004710485070955,
+            0.795269013262759
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.2530997659109249,
+            0.8844166162736963
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 40,
+          "coverage_status": "approximate"
+        },
+        "secondary_readout_vs_rw": {
+          "ci95_marginal": [
+            -1.2655022777216893,
+            0.05902921112091076
+          ],
+          "ci97_5_for_macro_marginal": [
+            -1.360857799854828,
+            0.06536468436870692
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -1.9052800541871784,
+            0.07133246735070396
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 40,
+          "coverage_status": "approximate"
+        },
+        "secondary_readout_vs_constant": {
+          "ci95_marginal": [
+            -0.09723372803785639,
+            0.30917939452106474
+          ],
+          "ci97_5_for_macro_marginal": [
+            -0.11981581264956868,
+            0.442013715910381
+          ],
+          "ci99_583333_for_joint_six_family": [
+            -0.1611751060028842,
+            0.5095967394994969
+          ],
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 40,
+          "coverage_status": "approximate"
+        }
+      }
+    },
+    "CHONGQING_MEAN": {
+      "20": {
+        "primary_full_vs_rw": {
+          "ci95_marginal": [
+            0.013168421241488435,
+            0.04705696640756932
+          ],
+          "ci97_5_for_macro_marginal": null,
+          "ci99_583333_for_joint_six_family": null,
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_shock_size": {
+          "ci95_marginal": [
+            -0.013793262653678152,
+            -9.36626286289835e-05
+          ],
+          "ci97_5_for_macro_marginal": null,
+          "ci99_583333_for_joint_six_family": null,
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_constant": {
+          "ci95_marginal": [
+            -0.008256268607484397,
+            0.0026126549274952805
+          ],
+          "ci97_5_for_macro_marginal": null,
+          "ci99_583333_for_joint_six_family": null,
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "primary_full_vs_liquidity_readout": {
+          "ci95_marginal": [
+            -0.008318043967821376,
+            0.00013705780524500758
+          ],
+          "ci97_5_for_macro_marginal": null,
+          "ci99_583333_for_joint_six_family": null,
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "secondary_readout_vs_rw": {
+          "ci95_marginal": [
+            -0.008223907395325324,
+            0.021808944793281524
+          ],
+          "ci97_5_for_macro_marginal": null,
+          "ci99_583333_for_joint_six_family": null,
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        },
+        "secondary_readout_vs_constant": {
+          "ci95_marginal": [
+            -0.04426032802872797,
+            -0.005175888071344822
+          ],
+          "ci97_5_for_macro_marginal": null,
+          "ci99_583333_for_joint_six_family": null,
+          "undefined_ratio_resamples": 0,
+          "B": 50000,
+          "block_observed_origins": 20,
+          "coverage_status": "approximate"
+        }
+      }
+    }
+  },
+  "cell_metrics": [
+    {
+      "market": "BEIJING_MEAN",
+      "counts": {
+        "train": 319,
+        "val": 114,
+        "final": 453,
+        "test": 116
+      },
+      "dates": [
+        "2017-01-20",
+        "2017-09-12"
+      ],
+      "source_path_resolved": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/data/sciencedb_819_v1/prepared/BEIJING_MEAN.csv",
+      "source_sha256": "952a69168d396cce3bbd54a5704f861cc459f67e9e121434fd7672e86bf18ed3",
+      "volume_context_reconstruction_sha256": "ecdf9d242c71c2d5dfa9537bc5521943af5ced11d2efbfb1da75bde60b6edeff",
+      "pandas_mean_price_identity_max_absolute_gap": 7.105427357601002e-15,
+      "metrics": {
+        "liquidity_full": {
+          "mean_seed_mse_over_rw": 0.5596041968644265,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.632601868748699,
+              0.5103402798342525,
+              0.5363424038824489
+            ],
+            [
+              0.6319778058511636,
+              0.5095907164660948,
+              0.5355342300994818
+            ],
+            [
+              0.6327565686093104,
+              0.510460915960062,
+              0.5368329823283248
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 0.5596009926959228,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.6324431970696389,
+            0.5101271197847489,
+            0.5362326612333806
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            175.38067122926975,
+            178.34999098826916,
+            171.27336672966806
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            13.243136290389458,
+            13.354773138950527,
+            13.087143463231763
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            13.243136759441464,
+            13.35477408975042,
+            13.087145094697624
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            11.1227306276149,
+            11.848987615012954,
+            11.619646202381636
+          ],
+          "native_ensemble_mse_by_horizon": [
+            175.38005635023916,
+            178.34876116556563,
+            171.27212824866575
+          ],
+          "native_ensemble_mae_by_horizon": [
+            11.122730627614905,
+            11.848987615012966,
+            11.61964620238163
+          ]
+        },
+        "liquidity_readout": {
+          "mean_seed_mse_over_rw": 0.5831345284245579,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.6740533230091603,
+              0.5210455752503995,
+              0.5549619954855762
+            ],
+            [
+              0.6735354834309931,
+              0.5205025554755032,
+              0.5537747722144427
+            ],
+            [
+              0.674061478772465,
+              0.5209961097566074,
+              0.5552794624258733
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 0.5831319481295075,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.6738823206476917,
+            0.5208450520430328,
+            0.5546684716977981
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            186.87166562091818,
+            182.09698377013368,
+            177.16165747809285
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            13.670100928361812,
+            13.494331168413453,
+            13.3102065004624
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            13.670101156206496,
+            13.494331542174798,
+            13.310208769140056
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            10.993640528349866,
+            11.735737231826743,
+            11.511754843214607
+          ],
+          "native_ensemble_mse_by_horizon": [
+            186.87135843380506,
+            182.09592509076134,
+            177.16050604155737
+          ],
+          "native_ensemble_mae_by_horizon": [
+            10.993640528349863,
+            11.735737231826745,
+            11.511743381383939
+          ]
+        },
+        "shock_size_only": {
+          "mean_seed_mse_over_rw": 0.5619289083672183,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.6350312342238978,
+              0.5130202013494324,
+              0.5384582918654925
+            ],
+            [
+              0.6343824226060149,
+              0.5122852619277367,
+              0.5376294355205653
+            ],
+            [
+              0.6350833149745043,
+              0.5127976013615858,
+              0.538672411475734
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 0.5619257444878137,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.6348299069199139,
+            0.5126976585198858,
+            0.5382496680236416
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            176.04257466995898,
+            179.24863920129835,
+            171.9175435017646
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            13.268103239218986,
+            13.38837641602718,
+            13.11173190253946
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            13.268103657642978,
+            13.388377018940659,
+            13.111733047227762
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            11.110067390916205,
+            11.847421062445784,
+            11.621627724303329
+          ],
+          "native_ensemble_mse_by_horizon": [
+            176.0419044181326,
+            179.24746343243046,
+            171.91635802173744
+          ],
+          "native_ensemble_mae_by_horizon": [
+            11.110067390916205,
+            11.847421062445774,
+            11.621627724303329
+          ]
+        },
+        "liquidity_unconstrained": {
+          "mean_seed_mse_over_rw": 0.5779930309052164,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.6558500015053204,
+              0.5332305158420898,
+              0.5449321332056829
+            ],
+            [
+              0.6555042472055559,
+              0.5333704408397316,
+              0.5451514192771675
+            ],
+            [
+              0.6559374879751476,
+              0.532747111252088,
+              0.5452139210441629
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 0.5779891634818077,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.655759486639128,
+            0.533112610711475,
+            0.5450953930948201
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            181.84702185428773,
+            186.3860565505797,
+            174.1040776133926
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            13.485066486859827,
+            13.6523274520329,
+            13.194850339226983
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            13.485066624021096,
+            13.65232788027667,
+            13.194850420273532
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            11.042496416079198,
+            11.85355353591572,
+            11.567239273400785
+          ],
+          "native_ensemble_mse_by_horizon": [
+            181.84579461341033,
+            186.3848636830984,
+            174.10287515713384
+          ],
+          "native_ensemble_mae_by_horizon": [
+            11.042496416079196,
+            11.853553535915728,
+            11.5670119191893
+          ]
+        },
+        "allocation_constant": {
+          "mean_seed_mse_over_rw": 0.5879426393474897,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.6610785142864887,
+              0.540886858411423,
+              0.5633384031756667
+            ],
+            [
+              0.6604896763919154,
+              0.5402100939089222,
+              0.5624104253875019
+            ],
+            [
+              0.6606108313084376,
+              0.5400760853202269,
+              0.5623828659368257
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 0.5879418298310122,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.6607258070878244,
+            0.5403901080835657,
+            0.5627095743216466
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            183.22313117501776,
+            188.9295116742763,
+            179.7291418343281
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            13.535993661803824,
+            13.745162469435064,
+            13.40630873345152
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            13.535993911605374,
+            13.74516321017238,
+            13.406309776904608
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            11.047025098121182,
+            11.89307750111934,
+            11.449311252334065
+          ],
+          "native_ensemble_mse_by_horizon": [
+            183.22298321181947,
+            188.92919545915788,
+            179.72882546597427
+          ],
+          "native_ensemble_mae_by_horizon": [
+            11.04702509812119,
+            11.893077501119338,
+            11.449311252334061
+          ]
+        },
+        "allocation_readout": {
+          "mean_seed_mse_over_rw": 0.6027169805003818,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.706765030546548,
+              0.5392220717731804,
+              0.5607812482880247
+            ],
+            [
+              0.7057216528558843,
+              0.5414244752966886,
+              0.5624607193902457
+            ],
+            [
+              0.7071127496127859,
+              0.5413661572174211,
+              0.5595987195226587
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 0.60249601366109,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.7064515794122692,
+            0.540414785683363,
+            0.5606216758876377
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            195.92561552011958,
+            189.02736539244847,
+            179.16582784383888
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            13.99734193437043,
+            13.748716140707538,
+            13.385276672654918
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            13.99734315933276,
+            13.748722318544676,
+            13.385284003107252
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            10.96554236410145,
+            11.701052687746436,
+            11.496003206979848
+          ],
+          "native_ensemble_mse_by_horizon": [
+            195.90299710725918,
+            188.93782315053457,
+            179.06195297906297
+          ],
+          "native_ensemble_mae_by_horizon": [
+            10.965542364101449,
+            11.701052687746431,
+            11.494995609576643
+          ]
+        },
+        "gru": {
+          "mean_seed_mse_over_rw": 0.6063098295848662,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.7244454895499665,
+              0.5812740626603924,
+              0.5829012513730617
+            ],
+            [
+              0.6948754893689636,
+              0.5546085954299752,
+              0.5568883606403415
+            ],
+            [
+              0.6743348585187163,
+              0.5402592402893395,
+              0.5472011184330388
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 0.6018795886328432,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.6945668349609134,
+            0.5539734425152212,
+            0.5570984884223948
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            193.52751385375427,
+            195.33551509008103,
+            179.6076676087823
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            13.909910461467243,
+            13.974639848439564,
+            13.400582333792778
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            13.911416673141318,
+            13.976248248012807,
+            13.401778524090833
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            11.172258835933837,
+            11.793798119440144,
+            11.434209973494488
+          ],
+          "native_ensemble_mse_by_horizon": [
+            192.60729061338813,
+            193.67815071839902,
+            177.93665073804834
+          ],
+          "native_ensemble_mae_by_horizon": [
+            11.148808505570525,
+            11.790015988083248,
+            11.408330969798476
+          ]
+        },
+        "lstm": {
+          "mean_seed_mse_over_rw": 0.6306336500572042,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.6871134307488476,
+              0.5683533732358085,
+              0.6491087176258198
+            ],
+            [
+              0.6998185011029977,
+              0.5979597904003003,
+              0.5855771106226993
+            ],
+            [
+              0.6981995083747248,
+              0.595540817669395,
+              0.5940316007342447
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 0.6225660516014923,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.6877597982885031,
+            0.5792542979456314,
+            0.6006840585703422
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            192.73955942024028,
+            205.3242958036585,
+            194.6967853511574
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            13.882952520639444,
+            14.328198213349301,
+            13.949707644652676
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            13.883067363527424,
+            14.32914148871657,
+            13.95337899403429
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            10.926010281911223,
+            11.769980340350932,
+            11.766692019448529
+          ],
+          "native_ensemble_mse_by_horizon": [
+            190.7196610512126,
+            202.51675010343456,
+            191.8578343955308
+          ],
+          "native_ensemble_mae_by_horizon": [
+            10.829922239163142,
+            11.729544818889636,
+            11.662186265978885
+          ]
+        },
+        "rw": {
+          "mean_seed_mse_over_rw": 1.0,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0,
+              1.0,
+              1.0
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 1.0,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            16.652496073859833,
+            18.69802957090246,
+            17.871734985391402
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            16.652496073859833,
+            18.69802957090246,
+            17.871734985391402
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            11.546470348732313,
+            14.270271965453528,
+            14.08476416028859
+          ],
+          "native_ensemble_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "native_ensemble_mae_by_horizon": [
+            11.546470348732313,
+            14.270271965453528,
+            14.08476416028859
+          ]
+        },
+        "drift": {
+          "mean_seed_mse_over_rw": 1.0151787924858489,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0017125926735064,
+              1.0089000460785957,
+              1.0349237387054446
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 1.0151787924858489,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.0017125926735064,
+            1.0089000460785957,
+            1.0349237387054446
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            277.7805370724533,
+            352.72791110169703,
+            330.5535155121832
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            16.666749445301363,
+            18.781051916804262,
+            18.18113075449883
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            16.666749445301363,
+            18.781051916804262,
+            18.18113075449883
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            11.55693061858583,
+            14.32966680826912,
+            14.381156145977576
+          ],
+          "native_ensemble_mse_by_horizon": [
+            277.7805370724533,
+            352.72791110169703,
+            330.5535155121832
+          ],
+          "native_ensemble_mae_by_horizon": [
+            11.55693061858583,
+            14.32966680826912,
+            14.381156145977576
+          ]
+        },
+        "ridge_price": {
+          "mean_seed_mse_over_rw": 0.6478864157745966,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.7382688799021035,
+              0.5830419514055112,
+              0.6223484160161751
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 0.6478864157745966,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.7382688799021035,
+            0.5830419514055112,
+            0.6223484160161751
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            204.72611352099332,
+            203.840975529009,
+            198.77740657965168
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            14.308253335784677,
+            14.277288801765165,
+            14.098844157577304
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            14.308253335784677,
+            14.277288801765165,
+            14.098844157577304
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            11.61551366560648,
+            11.866135978149037,
+            12.021625095475951
+          ],
+          "native_ensemble_mse_by_horizon": [
+            204.72611352099332,
+            203.840975529009,
+            198.77740657965168
+          ],
+          "native_ensemble_mae_by_horizon": [
+            11.61551366560648,
+            11.866135978149037,
+            12.021625095475951
+          ]
+        },
+        "ridge_full": {
+          "mean_seed_mse_over_rw": 0.8856169979732065,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.9322706960548642,
+              0.8297868340413445,
+              0.8947934638234106
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 0.8856169979732065,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.9322706960548642,
+            0.8297868340413445,
+            0.8947934638234106
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            258.52390849541456,
+            290.10701086665705,
+            285.7960582623515
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            16.078678692461473,
+            17.032528023363326,
+            16.905503786115087
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            16.078678692461473,
+            17.032528023363326,
+            16.905503786115087
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            12.968361673553957,
+            13.855167082060431,
+            13.543381395956299
+          ],
+          "native_ensemble_mse_by_horizon": [
+            258.52390849541456,
+            290.10701086665705,
+            285.7960582623515
+          ],
+          "native_ensemble_mae_by_horizon": [
+            12.968361673553957,
+            13.855167082060431,
+            13.543381395956299
+          ]
+        },
+        "hgb_full": {
+          "mean_seed_mse_over_rw": 0.8063587639548935,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.8166874812105114,
+              0.7467219214927286,
+              0.8556668891614402
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 0.8063587639548935,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.8166874812105114,
+            0.7467219214927286,
+            0.8556668891614402
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            226.4720328068658,
+            261.0661626646976,
+            273.2990729089744
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            15.048987766852154,
+            16.157541974715635,
+            16.531759522475955
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            15.048987766852154,
+            16.157541974715635,
+            16.531759522475955
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            11.31834621166583,
+            12.905521778437208,
+            13.444029040532937
+          ],
+          "native_ensemble_mse_by_horizon": [
+            226.4720328068658,
+            261.0661626646976,
+            273.2990729089744
+          ],
+          "native_ensemble_mae_by_horizon": [
+            11.31834621166583,
+            12.905521778437208,
+            13.444029040532937
+          ]
+        },
+        "validation_selected_strong": {
+          "mean_seed_mse_over_rw": 0.6063098295848662,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.7244454895499665,
+              0.5812740626603924,
+              0.5829012513730617
+            ],
+            [
+              0.6948754893689636,
+              0.5546085954299752,
+              0.5568883606403415
+            ],
+            [
+              0.6743348585187163,
+              0.5402592402893395,
+              0.5472011184330388
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            277.30562548991713,
+            349.61630983434276,
+            319.398911388063
+          ],
+          "ensemble_mse_over_rw": 0.6018795886328432,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.6945668349609134,
+            0.5539734425152212,
+            0.5570984884223948
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            193.52751385375427,
+            195.33551509008103,
+            179.6076676087823
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            13.909910461467243,
+            13.974639848439564,
+            13.400582333792778
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            13.911416673141318,
+            13.976248248012807,
+            13.401778524090833
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            11.172258835933837,
+            11.793798119440144,
+            11.434209973494488
+          ],
+          "native_ensemble_mse_by_horizon": [
+            192.60729061338813,
+            193.67815071839902,
+            177.93665073804834
+          ],
+          "native_ensemble_mae_by_horizon": [
+            11.148808505570525,
+            11.790015988083248,
+            11.408330969798476
+          ]
+        }
+      }
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "counts": {
+        "train": 190,
+        "val": 71,
+        "final": 281,
+        "test": 72
+      },
+      "dates": [
+        "2015-12-03",
+        "2016-06-22"
+      ],
+      "source_path_resolved": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/data/sciencedb_819_v1/prepared/TIANJIN_MEAN.csv",
+      "source_sha256": "c35e24f047d903f1d1f68513e87900891a89314b0fb91100d57390c34bc27dda",
+      "volume_context_reconstruction_sha256": "49f60de2c0a5b90378cb7faa7deb9167272381c049bdf66498c49045020a8cd0",
+      "pandas_mean_price_identity_max_absolute_gap": 7.105427357601002e-15,
+      "metrics": {
+        "liquidity_full": {
+          "mean_seed_mse_over_rw": 1.060730845140188,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.9407058338782338,
+              1.1730034358116683,
+              1.0686284800333328
+            ],
+            [
+              0.9406917699053513,
+              1.171245689641324,
+              1.0667502381353362
+            ],
+            [
+              0.9403892330701823,
+              1.1748768986038565,
+              1.0702860271824073
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 1.0607295762456224,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.9405952456502504,
+            1.1730400114073651,
+            1.0685534716792515
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            1.8212222342966744,
+            6.151177646145978,
+            30.27048773740209
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.3495266663980388,
+            2.4801562832626916,
+            5.501860949619849
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.3495266704651208,
+            2.4801567785416263,
+            5.501862206326336
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.3708668632818722,
+            0.8895069116112907,
+            3.133838144024856
+          ],
+          "native_ensemble_mse_by_horizon": [
+            1.8212215244032828,
+            6.151167176348254,
+            30.27044684706991
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.3708668632818721,
+            0.8894953635315256,
+            3.1336982704210397
+          ]
+        },
+        "liquidity_readout": {
+          "mean_seed_mse_over_rw": 1.0383605202754693,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.950845381214377,
+              1.1248342436126093,
+              1.0435171205259193
+            ],
+            [
+              0.9508322214925121,
+              1.1223379564296296,
+              1.0409490863386213
+            ],
+            [
+              0.9507708691897513,
+              1.1213667998676269,
+              1.0397910038081775
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 1.0383582247711416,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.9508157542177734,
+            1.122843504551786,
+            1.041415415543865
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            1.8410116991671792,
+            5.887962424411821,
+            29.50177173745634
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.3568388624410763,
+            2.426511886385118,
+            5.43155182755973
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.3568388626388836,
+            2.426512399393793,
+            5.431553344804444
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.37044659249437323,
+            0.8761875745948511,
+            3.1679046680451046
+          ],
+          "native_ensemble_mse_by_horizon": [
+            1.8410109187039663,
+            5.887947591053006,
+            29.50166820608338
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.37044659249437323,
+            0.8761875745948516,
+            3.167723598311328
+          ]
+        },
+        "shock_size_only": {
+          "mean_seed_mse_over_rw": 1.0709134665251594,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.939691849798523,
+              1.1908682046359091,
+              1.0816781808215385
+            ],
+            [
+              0.939614047557032,
+              1.18945153734644,
+              1.0797595028235494
+            ],
+            [
+              0.939379890514782,
+              1.193789908925124,
+              1.0839880763035366
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 1.070911871321023,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.9395614937567938,
+            1.1913673813196164,
+            1.0818067388866588
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            1.8192207722143852,
+            6.2472850472664705,
+            30.645943500999085
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.3487849210151808,
+            2.4994562324852456,
+            5.535876076779811
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.3487849243724461,
+            2.4994569504727364,
+            5.535877843756949
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.3691306980948357,
+            0.8931712729853898,
+            3.164891096686426
+          ],
+          "native_ensemble_mse_by_horizon": [
+            1.8192199289157844,
+            6.247271925663478,
+            30.645891156769608
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.3691273273989955,
+            0.8931115086788081,
+            3.164891096686427
+          ]
+        },
+        "liquidity_unconstrained": {
+          "mean_seed_mse_over_rw": 1.0426739999947552,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.9459338562779074,
+              1.136617542655211,
+              1.0415923531989897
+            ],
+            [
+              0.9460279945681782,
+              1.1361682413338734,
+              1.041313665503515
+            ],
+            [
+              0.9455744894843958,
+              1.142928066527064,
+              1.0479097904036625
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 1.0426684287875772,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.9458434245503227,
+            1.1385622768490467,
+            1.0435995849633621
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            1.8313871927323395,
+            5.9704206497001335,
+            29.563703345788806
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.35328754268578,
+            2.4434421813563834,
+            5.437245667792582
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.3532875499066483,
+            2.443444423288595,
+            5.437251451403439
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.37492880582966004,
+            0.8845435849939483,
+            3.098626915690301
+          ],
+          "native_ensemble_mse_by_horizon": [
+            1.8313832772092127,
+            5.970373420749471,
+            29.56354230604206
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.37491553317726756,
+            0.8845435849939479,
+            3.098575992018885
+          ]
+        },
+        "allocation_constant": {
+          "mean_seed_mse_over_rw": 1.0222456323208833,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.9639853199886186,
+              1.09114664205375,
+              1.012262226286164
+            ],
+            [
+              0.9639135047257966,
+              1.0912352736186335,
+              1.0124774707345485
+            ],
+            [
+              0.9643204895631493,
+              1.0894313074498463,
+              1.0114384564674415
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 1.022243893598682,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.96407280779277,
+            1.0906022711155419,
+            1.0120566018877344
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            1.8666803788402362,
+            5.7188927656627655,
+            28.670057808451805
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.3662651144801599,
+            2.3914204851443843,
+            5.354442679237884
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.366265120260426,
+            2.391420658450279,
+            5.354442810269973
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.3753114594529532,
+            0.8795372603086075,
+            3.178913126872772
+          ],
+          "native_ensemble_mse_by_horizon": [
+            1.8666798038409098,
+            5.7188815618388205,
+            28.66997898151484
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.3753114594529532,
+            0.8795366263929882,
+            3.178883675926718
+          ]
+        },
+        "allocation_readout": {
+          "mean_seed_mse_over_rw": 0.978307523949833,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.9686866228048693,
+              1.0226703183894048,
+              0.948513318182616
+            ],
+            [
+              0.9569379798069036,
+              1.0248739548711967,
+              0.9515547682619409
+            ],
+            [
+              0.9515606801393783,
+              1.0267894932240527,
+              0.9531805798681352
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 0.9782390141339037,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.9589895197853253,
+            1.0246637385814241,
+            0.9510637840349615
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            1.856977196399443,
+            5.373712965070752,
+            26.94268915382737
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.3627000497230763,
+            2.3181262565451015,
+            5.190632069444788
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.362709505507114,
+            2.3181270381648096,
+            5.190634754423333
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.385853632544811,
+            0.87481455371148,
+            3.025181572118147
+          ],
+          "native_ensemble_mse_by_horizon": [
+            1.856837319970497,
+            5.373114211163531,
+            26.94214794657008
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.3858313463609657,
+            0.8745638931838678,
+            3.0251295624313026
+          ]
+        },
+        "gru": {
+          "mean_seed_mse_over_rw": 1.0,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.0,
+              1.0
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 1.0,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734577
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.3914897052480668,
+            2.2899307675224123,
+            5.3224462727898505
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.3914897052480666,
+            2.2899307675224123,
+            5.322446272789851
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.3811486217539883,
+            0.795976359047115,
+            3.0226811218520773
+          ],
+          "native_ensemble_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.3811486217539882,
+            0.7959763590471151,
+            3.0226811218520764
+          ]
+        },
+        "lstm": {
+          "mean_seed_mse_over_rw": 1.0,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.0,
+              1.0
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 1.0,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734577
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.3914897052480668,
+            2.2899307675224123,
+            5.3224462727898505
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.3914897052480666,
+            2.2899307675224123,
+            5.322446272789851
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.3811486217539883,
+            0.795976359047115,
+            3.0226811218520773
+          ],
+          "native_ensemble_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.3811486217539882,
+            0.7959763590471151,
+            3.0226811218520764
+          ]
+        },
+        "rw": {
+          "mean_seed_mse_over_rw": 1.0,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0,
+              1.0,
+              1.0
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 1.0,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.3914897052480666,
+            2.2899307675224123,
+            5.3224462727898505
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.3914897052480666,
+            2.2899307675224123,
+            5.3224462727898505
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.3811486217539882,
+            0.7959763590471151,
+            3.0226811218520764
+          ],
+          "native_ensemble_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.3811486217539882,
+            0.7959763590471151,
+            3.0226811218520764
+          ]
+        },
+        "drift": {
+          "mean_seed_mse_over_rw": 0.9805873433956499,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0015873162969045,
+              0.9808826210528552,
+              0.9592920928371897
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 0.9805873433956499,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.0015873162969045,
+            0.9808826210528552,
+            0.9592920928371897
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            1.9393170308321084,
+            5.143535534846704,
+            27.175243052094096
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.392593634493605,
+            2.267936404497865,
+            5.212987919810874
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.392593634493605,
+            2.267936404497865,
+            5.212987919810874
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.381788477216512,
+            0.8008189299687299,
+            3.0299399524227293
+          ],
+          "native_ensemble_mse_by_horizon": [
+            1.9393170308321084,
+            5.143535534846704,
+            27.175243052094096
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.381788477216512,
+            0.8008189299687299,
+            3.0299399524227293
+          ]
+        },
+        "ridge_price": {
+          "mean_seed_mse_over_rw": 1.002269753152626,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.1392952783632704,
+              0.9833998663313624,
+              0.8841141147632451
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 1.002269753152626,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.1392952783632704,
+            0.9833998663313624,
+            0.8841141147632451
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            2.2059531910261736,
+            5.156735422643706,
+            25.045568637409662
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.4852451619265332,
+            2.270844649605892,
+            5.004554789130564
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.4852451619265332,
+            2.270844649605892,
+            5.004554789130564
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.4361758202645677,
+            1.0289153618069877,
+            3.5628508214856396
+          ],
+          "native_ensemble_mse_by_horizon": [
+            2.2059531910261736,
+            5.156735422643706,
+            25.045568637409662
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.4361758202645677,
+            1.0289153618069877,
+            3.5628508214856396
+          ]
+        },
+        "ridge_full": {
+          "mean_seed_mse_over_rw": 0.9517809397010643,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0821819498735037,
+              1.0184256269315684,
+              0.7547352422981205
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 0.9517809397010643,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.0821819498735037,
+            1.0184256269315684,
+            0.7547352422981205
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            2.09536787427394,
+            5.340402907840678,
+            21.380467745514412
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.4475385570940553,
+            2.3109311776512684,
+            4.6239017880481
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.4475385570940553,
+            2.3109311776512684,
+            4.6239017880481
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.5019672868835106,
+            1.2660894002365302,
+            3.49476317382904
+          ],
+          "native_ensemble_mse_by_horizon": [
+            2.09536787427394,
+            5.340402907840678,
+            21.380467745514412
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.5019672868835106,
+            1.2660894002365302,
+            3.49476317382904
+          ]
+        },
+        "hgb_full": {
+          "mean_seed_mse_over_rw": 0.8820226981878337,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.023509064549229,
+              0.8555929593271957,
+              0.7669660706870763
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 0.8820226981878337,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.023509064549229,
+            0.8555929593271957,
+            0.7669660706870763
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            1.9817628755823478,
+            4.4865437466313765,
+            21.72694796429251
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.4077509991409516,
+            2.118146299628847,
+            4.661217433706833
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.4077509991409516,
+            2.118146299628847,
+            4.661217433706833
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.5374515252596661,
+            1.4158904433520714,
+            3.6293106666378896
+          ],
+          "native_ensemble_mse_by_horizon": [
+            1.9817628755823478,
+            4.4865437466313765,
+            21.72694796429251
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.5374515252596661,
+            1.4158904433520714,
+            3.6293106666378896
+          ]
+        },
+        "validation_selected_strong": {
+          "mean_seed_mse_over_rw": 1.002269753152626,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.1392952783632704,
+              0.9833998663313624,
+              0.8841141147632451
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            1.936243599811351,
+            5.243782920045785,
+            28.328434326734573
+          ],
+          "ensemble_mse_over_rw": 1.002269753152626,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.1392952783632704,
+            0.9833998663313624,
+            0.8841141147632451
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            2.2059531910261736,
+            5.156735422643706,
+            25.045568637409662
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            1.4852451619265332,
+            2.270844649605892,
+            5.004554789130564
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            1.4852451619265332,
+            2.270844649605892,
+            5.004554789130564
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.4361758202645677,
+            1.0289153618069877,
+            3.5628508214856396
+          ],
+          "native_ensemble_mse_by_horizon": [
+            2.2059531910261736,
+            5.156735422643706,
+            25.045568637409662
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.4361758202645677,
+            1.0289153618069877,
+            3.5628508214856396
+          ]
+        }
+      }
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "counts": {
+        "train": 60,
+        "val": 28,
+        "final": 108,
+        "test": 28
+      },
+      "dates": [
+        "2017-09-13",
+        "2017-11-20"
+      ],
+      "source_path_resolved": "/workspace/scratch/562d14c1693a/carbon-research/research/literature_aligned_model_search_20261019d/data/sciencedb_819_v1/prepared/CHONGQING_MEAN.csv",
+      "source_sha256": "0782976147c5e6948a494f34990331e58b2815dcef946fb1fad1ff3fef632e67",
+      "volume_context_reconstruction_sha256": "1c15e91ad4fb1e1909b885de44d255b7b0020b181acb04b08bc52ba651ad5ab5",
+      "pandas_mean_price_identity_max_absolute_gap": 3.552713678800501e-15,
+      "metrics": {
+        "liquidity_full": {
+          "mean_seed_mse_over_rw": 0.973797035221242,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.9854537282621851,
+              1.0107344477838471,
+              0.9252029323894972
+            ],
+            [
+              0.9854537296610786,
+              1.0107344533917746,
+              0.9252029207033254
+            ],
+            [
+              0.9854537255284113,
+              1.0107344545749226,
+              0.9252029246961355
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 0.9737970352212417,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.9854537278172247,
+            1.010734451916848,
+            0.9252029259296527
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.2506501556703113,
+            2.44966294462237,
+            2.318029844993464
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.5006497335166686,
+            1.565139912155578,
+            1.5225077487466079
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.5006497335166686,
+            1.5651399121555778,
+            1.5225077487466079
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.4499831521406025,
+            1.3012424205912185,
+            1.123410036931414
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.25065015567031124,
+            2.44966294462237,
+            2.3180298449934638
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.4499831521406027,
+            1.3012424205912188,
+            1.123410036931414
+          ]
+        },
+        "liquidity_readout": {
+          "mean_seed_mse_over_rw": 0.9692120423595156,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.9721694172015896,
+              1.00825075867845,
+              0.9272159550605868
+            ],
+            [
+              0.9721694184861878,
+              1.0082507568721428,
+              0.927215950412721
+            ],
+            [
+              0.9721694155110838,
+              1.0082507614066774,
+              0.9272159476062012
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 0.9692120423595155,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.9721694170662867,
+            1.0082507589857568,
+            0.927215951026503
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.24727129123081024,
+            2.4436433511202624,
+            2.323073335586115
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.49726380446480345,
+            1.56321570844214,
+            1.5241631591093243
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.4972638044648034,
+            1.5632157084421403,
+            1.524163159109324
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.44931855833607864,
+            1.302180460796189,
+            1.1238496105234286
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.24727129123081015,
+            2.4436433511202624,
+            2.3230733355861153
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.4493185583360786,
+            1.3021804607961893,
+            1.1238496105234286
+          ]
+        },
+        "shock_size_only": {
+          "mean_seed_mse_over_rw": 0.9668390954599076,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.9704312895109336,
+              1.007577542601678,
+              0.9225084549880057
+            ],
+            [
+              0.9704312924498794,
+              1.0075775449909556,
+              0.9225084551506342
+            ],
+            [
+              0.9704312746023835,
+              1.0075775439975632,
+              0.9225084608471344
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 0.9668390954599074,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.9704312855210653,
+            1.007577543863399,
+            0.9225084569952583
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.24682919747228316,
+            2.4420117156932997,
+            2.3112790455404046
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.49681907921524426,
+            1.5626937370109664,
+            1.5202891322180807
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.49681907921524426,
+            1.5626937370109666,
+            1.5202891322180807
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.4482506525562349,
+            1.3015556568035016,
+            1.1213272314157674
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.24682919747228307,
+            2.4420117156932997,
+            2.311279045540405
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.4482506525562349,
+            1.3015556568035014,
+            1.1213272314157678
+          ]
+        },
+        "liquidity_unconstrained": {
+          "mean_seed_mse_over_rw": 0.9709436400374325,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.9798221426874207,
+              1.0141792923732478,
+              0.9188294848672176
+            ],
+            [
+              0.9798221427800291,
+              1.0141792930019025,
+              0.9188294844225712
+            ],
+            [
+              0.9798221427800291,
+              1.0141792930019025,
+              0.9188294844225712
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 0.9709436400374325,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.9798221427491598,
+            1.014179292792351,
+            0.9188294845707867
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.24921776200824888,
+            2.45801202090728,
+            2.302061642914636
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.4992171491527999,
+            1.5678048414605945,
+            1.5172546401031817
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.4992171491527999,
+            1.5678048414605945,
+            1.517254640103182
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.44997344957214985,
+            1.3020575253330258,
+            1.1162446061670273
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.2492177620082489,
+            2.4580120209072795,
+            2.3020616429146363
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.44997344957214985,
+            1.302057525333026,
+            1.1162446061670275
+          ]
+        },
+        "allocation_constant": {
+          "mean_seed_mse_over_rw": 0.970779680393878,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              0.9776612493110923,
+              1.0056958971886825,
+              0.9289818887347662
+            ],
+            [
+              0.9776612588259483,
+              1.0056959033177209,
+              0.9289818844289511
+            ],
+            [
+              0.9776612545472242,
+              1.0056959013323739,
+              0.9289818858581425
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 0.9707796803938781,
+          "ensemble_mse_over_rw_by_horizon": [
+            0.9776612542280885,
+            1.0056959006129258,
+            0.9289818863406198
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.2486681400129144,
+            2.437451277749445,
+            2.327497760377398
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.49866636142105514,
+            1.561233895913564,
+            1.5256138962323982
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.49866636142105514,
+            1.5612338959135639,
+            1.525613896232398
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.44850125525971896,
+            1.2985056341013574,
+            1.1270396778899143
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.24866814001291443,
+            2.437451277749445,
+            2.327497760377398
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.4485012552597189,
+            1.2985056341013572,
+            1.1270396778899145
+          ]
+        },
+        "allocation_readout": {
+          "mean_seed_mse_over_rw": 0.9959286334218775,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0061502563830669,
+              0.9826659355889907,
+              1.000237037400376
+            ],
+            [
+              1.0071725744594073,
+              0.9794654558383715,
+              0.9991637640268112
+            ],
+            [
+              1.0053649483995304,
+              0.9798951137507733,
+              1.0032426149495715
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 0.9959205426733453,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.006220038821947,
+            0.9806703649377416,
+            1.000871224260347
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.25593441221673474,
+            2.376810677345824,
+            2.5076362017340754
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.505899572649645,
+            1.541690447209527,
+            1.5835511793049062
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.5058996068556831,
+            1.5416908501206796,
+            1.5835517679362665
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.44962582152999386,
+            1.276787744407723,
+            1.17652193137614
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.2559320668743624,
+            2.376798227587198,
+            2.507611361582566
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.44962582152999403,
+            1.276787744407723,
+            1.1765219313761404
+          ]
+        },
+        "gru": {
+          "mean_seed_mse_over_rw": 1.0,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.0,
+              1.0
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 1.0,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.5043312403569703,
+            1.5568064839829738,
+            1.5828545642062541
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.5043312403569703,
+            1.5568064839829738,
+            1.5828545642062541
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.44499999999999995,
+            1.2917857142857148,
+            1.1785714285714288
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.44499999999999995,
+            1.2917857142857143,
+            1.1785714285714286
+          ]
+        },
+        "lstm": {
+          "mean_seed_mse_over_rw": 1.0,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.0,
+              1.0
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 1.0,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.5043312403569703,
+            1.5568064839829738,
+            1.5828545642062541
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.5043312403569703,
+            1.5568064839829738,
+            1.5828545642062541
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.44499999999999995,
+            1.2917857142857148,
+            1.1785714285714288
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.44499999999999995,
+            1.2917857142857143,
+            1.1785714285714286
+          ]
+        },
+        "rw": {
+          "mean_seed_mse_over_rw": 1.0,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0,
+              1.0,
+              1.0
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 1.0,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.5043312403569703,
+            1.5568064839829738,
+            1.5828545642062541
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.5043312403569703,
+            1.5568064839829738,
+            1.5828545642062541
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.44499999999999995,
+            1.2917857142857143,
+            1.1785714285714286
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.44499999999999995,
+            1.2917857142857143,
+            1.1785714285714286
+          ]
+        },
+        "drift": {
+          "mean_seed_mse_over_rw": 0.9208187007526337,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.009669941431785,
+              1.0817857300155589,
+              0.6710004308105575
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 0.9208187007526337,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.009669941431785,
+            1.0817857300155589,
+            0.6710004308105575
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.25680954960317465,
+            2.621866121031746,
+            1.6811436507936508
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.5067638006045565,
+            1.6192177497272398,
+            1.296589237497231
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.5067638006045565,
+            1.6192177497272398,
+            1.296589237497231
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.44453571428571426,
+            1.3471428571428574,
+            0.9752380952380951
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.25680954960317465,
+            2.621866121031746,
+            1.6811436507936508
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.44453571428571426,
+            1.3471428571428574,
+            0.9752380952380951
+          ]
+        },
+        "ridge_price": {
+          "mean_seed_mse_over_rw": 2.6260751633424917,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0510614091595305,
+              1.129581338275548,
+              5.697582742592397
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 2.6260751633424917,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.0510614091595305,
+            1.129581338275548,
+            5.697582742592397
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.26733746941972675,
+            2.7377057762924677,
+            14.274886591369349
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.5170468735228236,
+            1.6546013949868614,
+            3.7782120892519186
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.5170468735228236,
+            1.6546013949868614,
+            3.7782120892519186
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.45975072971412123,
+            1.344471826723644,
+            3.5661476172719686
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.26733746941972675,
+            2.7377057762924677,
+            14.274886591369349
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.45975072971412123,
+            1.344471826723644,
+            3.5661476172719686
+          ]
+        },
+        "ridge_full": {
+          "mean_seed_mse_over_rw": 5.27033492425364,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.5447474862280135,
+              2.0910278038486876,
+              12.17522948268422
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 5.27033492425364,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.5447474862280135,
+            2.0910278038486876,
+            12.17522948268422
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.39290652312209545,
+            5.067912068841432,
+            30.504167809616543
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.6268225611144636,
+            2.251202360704482,
+            5.523057831456823
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.6268225611144636,
+            2.251202360704482,
+            5.523057831456823
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.5440261880201953,
+            1.9099921441078187,
+            4.778353191103255
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.39290652312209545,
+            5.067912068841432,
+            30.504167809616543
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.5440261880201953,
+            1.9099921441078187,
+            4.778353191103255
+          ]
+        },
+        "hgb_full": {
+          "mean_seed_mse_over_rw": 6.404708887516764,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              2.0469850500805102,
+              2.0518306210619977,
+              15.115310991407783
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 6.404708887516764,
+          "ensemble_mse_over_rw_by_horizon": [
+            2.0469850500805102,
+            2.0518306210619977,
+            15.115310991407783
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.5206506474879781,
+            4.972911956770409,
+            37.870332023901376
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.7215612569200054,
+            2.2300026808886146,
+            6.153887553725805
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.7215612569200054,
+            2.2300026808886146,
+            6.153887553725805
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.5701787969834736,
+            1.805872709898571,
+            5.43315340817604
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.5206506474879781,
+            4.972911956770409,
+            37.870332023901376
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.5701787969834736,
+            1.805872709898571,
+            5.43315340817604
+          ]
+        },
+        "validation_selected_strong": {
+          "mean_seed_mse_over_rw": 1.0,
+          "seed_mse_over_rw_by_horizon": [
+            [
+              1.0,
+              1.0,
+              1.0
+            ]
+          ],
+          "rw_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "ensemble_mse_over_rw": 1.0,
+          "ensemble_mse_over_rw_by_horizon": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "native_mean_seed_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "native_mean_seed_rmse_by_horizon": [
+            0.5043312403569703,
+            1.5568064839829738,
+            1.5828545642062541
+          ],
+          "native_rmse_of_mean_seed_mse_by_horizon": [
+            0.5043312403569703,
+            1.5568064839829738,
+            1.5828545642062541
+          ],
+          "native_mean_seed_mae_by_horizon": [
+            0.44499999999999995,
+            1.2917857142857143,
+            1.1785714285714286
+          ],
+          "native_ensemble_mse_by_horizon": [
+            0.25435000000000013,
+            2.4236464285714296,
+            2.505428571428571
+          ],
+          "native_ensemble_mae_by_horizon": [
+            0.44499999999999995,
+            1.2917857142857143,
+            1.1785714285714286
+          ]
+        }
+      }
+    }
+  ],
+  "validation_selected_strong": [
+    {
+      "market": "BEIJING_MEAN",
+      "family": "gru",
+      "validation_loss": 6.814640245809069,
+      "pool_validation_losses": {
+        "rw": 8.524296272462331,
+        "drift": 8.614224634497175,
+        "ridge_price": 7.757006871436569,
+        "ridge_full": 8.460345095036123,
+        "hgb_full": 8.15830715172671,
+        "gru": 6.814640245809069,
+        "lstm": 7.085293522956448
+      }
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "family": "ridge_price",
+      "validation_loss": 0.7832533176961345,
+      "pool_validation_losses": {
+        "rw": 0.7990731213918097,
+        "drift": 0.8384485070166662,
+        "ridge_price": 0.7832533176961345,
+        "ridge_full": 0.8366420812167398,
+        "hgb_full": 1.047537683344668,
+        "gru": 0.7990731213918097,
+        "lstm": 0.7990731213918097
+      }
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "family": "rw",
+      "validation_loss": 0.04369512331059598,
+      "pool_validation_losses": {
+        "rw": 0.04369512331059598,
+        "drift": 0.06063921671446192,
+        "ridge_price": 0.27374554855225036,
+        "ridge_full": 0.08749656237194783,
+        "hgb_full": 0.4688706655053701,
+        "gru": 0.04369512331059598,
+        "lstm": 0.04369512331059598
+      }
+    }
+  ],
+  "selected_epochs": [
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_full",
+      "selected_epoch": 80
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_readout",
+      "selected_epoch": 80
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "shock_size_only",
+      "selected_epoch": 80
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_unconstrained",
+      "selected_epoch": 80
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "allocation_constant",
+      "selected_epoch": 80
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "allocation_readout",
+      "selected_epoch": 70
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "gru",
+      "selected_epoch": 8
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "lstm",
+      "selected_epoch": 12
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_full",
+      "selected_epoch": 80
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_readout",
+      "selected_epoch": 80
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "shock_size_only",
+      "selected_epoch": 80
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_unconstrained",
+      "selected_epoch": 61
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "allocation_constant",
+      "selected_epoch": 80
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "allocation_readout",
+      "selected_epoch": 19
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "gru",
+      "selected_epoch": 0
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "lstm",
+      "selected_epoch": 0
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_full",
+      "selected_epoch": 80
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_readout",
+      "selected_epoch": 80
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "shock_size_only",
+      "selected_epoch": 80
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_unconstrained",
+      "selected_epoch": 63
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "allocation_constant",
+      "selected_epoch": 80
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "allocation_readout",
+      "selected_epoch": 10
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "gru",
+      "selected_epoch": 0
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "lstm",
+      "selected_epoch": 0
+    }
+  ],
+  "training_receipt_ledger": [
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 1.8561841815055007,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_full/selection_lr0.003.json",
+      "receipt_sha256": "b2ff04980de3256bdc719c41a7bbfd4f50b7032e0bcd622e88bec8f45c6f95c0",
+      "checkpoint_sha256": "95eadf84471f1f6ee4cfd22d21ca313716bdbe14f3a756212808713d0aa83a33"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 5.3356406399071306,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_full/selection_lr0.01.json",
+      "receipt_sha256": "fe90cd9ca2413673fed9fc1539418b28275ad7d18618546fa7ea599fd142c777",
+      "checkpoint_sha256": "276df191c75547a7c8506c1aa8e66aa41445432ed994883bc88b0c23a67d2711"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 6.497410791169389,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_full/refit_seed17.json",
+      "receipt_sha256": "5d4be7db1c046cc91b37a60e102332769114e6a58846927efceca208022060da",
+      "checkpoint_sha256": "07a7d52ef13628bb653e65ec1fe774ca0fe5c718d73ec2bc742dea566700ee0f"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 6.521100177224322,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_full/refit_seed29.json",
+      "receipt_sha256": "2db3cb5f61bbe1d822dffbfbee5c2eadcfd289c6ef28ae956dce66c8776f7321",
+      "checkpoint_sha256": "4ea54d4f85880cae47f246d0993a0a5d821b49eb7c06a37578223797945c3652"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 6.5217136422019015,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_full/refit_seed43.json",
+      "receipt_sha256": "406606ff1dd574028f3cde1bdc7a66a4840ac0194b2c4560dae3456babb392fd",
+      "checkpoint_sha256": "df120c4d685378238b4a9a39cb1e78ac6562f79ec8fb5025810f8c58e10cd324"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 1.946079229388707,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_readout/selection_lr0.003.json",
+      "receipt_sha256": "328205f4a844cb0619119fd0ac01ea7d9493e4088f0eefbc24125679ed7715cc",
+      "checkpoint_sha256": "5222f22693aed0b2ce84f9ca82def69362f9b616311610cb0ad518ab66742214"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 5.151771185103846,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_readout/selection_lr0.01.json",
+      "receipt_sha256": "936e5e0b3a8a5f7cb472fec0d78acdaebdf17ce5ef0e12a75b5b992c2beb7248",
+      "checkpoint_sha256": "8c8ae4e07e8326374eeb9a110085a27d6344183a2eb0e6cc16041b55d44a1639"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 6.27906953390846,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_readout/refit_seed17.json",
+      "receipt_sha256": "ff8a9c5e3eafb8bcf016c5faa4a087d73ffff4fd1df87b5eb375beee3c04d3fe",
+      "checkpoint_sha256": "92a6d17775bf7d934f1c11055a726ff39413a92752c2e6d54ecaa6db35c5d5af"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 6.287182397168707,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_readout/refit_seed29.json",
+      "receipt_sha256": "5574221e4353645efae4bb367f1d6d1fef2c1f7c1873ac59f0da67579545378a",
+      "checkpoint_sha256": "b9d4f9c83416b5b18ed22e492c35a2a4574b899a48e435070e323f4a1b00c030"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 6.278034815784702,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_readout/refit_seed43.json",
+      "receipt_sha256": "7ff568fda7ed0d05f83f9fbb20f4d0fcdc67f1c630fca71c715d9a69548ad516",
+      "checkpoint_sha256": "13511975bbd0e1163486b429148eb9bfacc75076b7b13a71f3dbdadf5fbbc88a"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 1.8361123896309381,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/shock_size_only/selection_lr0.003.json",
+      "receipt_sha256": "19776ede0242ad3e0f61d17aeab6984eba9dc22bb4a14b51f39494f2286a7dba",
+      "checkpoint_sha256": "b344ed52ee4f976e188b0f70012d61eaa57660313330444a57de2b097c954c84"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 5.448252106357304,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/shock_size_only/selection_lr0.01.json",
+      "receipt_sha256": "e6b35bbc2db8dcd5ea8c3d571b611e76598259fb63e16bcb8a5fd6690a06f327",
+      "checkpoint_sha256": "69eb867af968a9db41994836cc63185d2cacff6a12f2c9b2e6f4fe5785dfa75f"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 6.043520040639042,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/shock_size_only/refit_seed17.json",
+      "receipt_sha256": "012655b10496d279072e3ae03da70f2fdef4542b46a82b542cc0d39cbd3807b8",
+      "checkpoint_sha256": "e47ab725d39e60fcaab8c793d2df370543534ad8f1e2d2513e11f16dbb76b418"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 6.068557730353837,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/shock_size_only/refit_seed29.json",
+      "receipt_sha256": "9d850b9ddf38781582204bed5429117fd2733d5ae1b76b69f026a446f024a8a5",
+      "checkpoint_sha256": "7344e792e412e4d1f2c199f08e18ed70a229f83f98b6e0ee8ac03ed91156706d"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 6.0472177356860355,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/shock_size_only/refit_seed43.json",
+      "receipt_sha256": "1285a311c3a68dcb68d9c23fa9c74fc2188e5ad5967088fa3a095d70b8158da9",
+      "checkpoint_sha256": "bade573ed82a80b8aaba8fb52cee6c3e7c857b59aed8128c7a4af9358dea360c"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 1.712374293603898,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.003.json",
+      "receipt_sha256": "ab4f3ee358cdb698cd1178134cdf503af78da61a034a886746ee27ca3e059201",
+      "checkpoint_sha256": "5ce5fd51883227a6627db9e942b7017edc5a2e31f2eef0e676080b0eee219063"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 4.022614076586914,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.01.json",
+      "receipt_sha256": "3bdc6e4f5bf7d69d0e386bb6d9a40cebf7fa684ffdf4c8baf35097d020515654",
+      "checkpoint_sha256": "219dfd8536936e4b489702b23024d68e5b285cc3554d72be30c10dac10af5157"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 4.74963372795938,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_unconstrained/refit_seed17.json",
+      "receipt_sha256": "dad614339afca17b80ca321a6283e6b1f776ae5244a279fae601996383b4110e",
+      "checkpoint_sha256": "7297ad16216d99199a83c43173c0df6877373da93525faf79cc11646041150f1"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 4.757875497604326,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_unconstrained/refit_seed29.json",
+      "receipt_sha256": "87ea312533bd624e246e8476e427ce50e12093b5ab403bf85b12149a156b1b81",
+      "checkpoint_sha256": "eb06701245a07ad9222f35c9bcb7861c4e641f4364c2535d03fe1d91e5c6d6ce"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 4.741377081820348,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_unconstrained/refit_seed43.json",
+      "receipt_sha256": "949a6bfd5e746be2e366c94c61ebc32bd88281b560da644bbe226433b3533085",
+      "checkpoint_sha256": "fb161391c7f797f304412c5335ed05de4d8c2071e42990a82f541f66c3ac38df"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 1.4167784213307577,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/allocation_constant/selection_lr0.003.json",
+      "receipt_sha256": "d8f15b0438e0c773e702cca78df690938905cb3bb4d314649086262dcf67bfc5",
+      "checkpoint_sha256": "46b13d06e484c4bc3dc7705c87b94b424e91d4669fe81f6f844ebd80c8a291f8"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 4.0523463528663495,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/allocation_constant/selection_lr0.01.json",
+      "receipt_sha256": "e8e70156e25029a90c1d2ab8d75fc14acec5ce7d20f27e223368138d659b8de7",
+      "checkpoint_sha256": "ed1a8e19b4a74eff0fde1ec55200cdbe55df7398d0f1c1d5b77940f2fa17831a"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 5.679282733086239,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/allocation_constant/refit_seed17.json",
+      "receipt_sha256": "8e298ea550da962d84c428cdbb1f57e3aed3582fea05d9def784e2b375dd4a95",
+      "checkpoint_sha256": "6e53ef9a0bfed6192bd34311cdbe9245f09cf3ac2777cd6e30fd7b31ed6b8d92"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 5.691306040000699,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/allocation_constant/refit_seed29.json",
+      "receipt_sha256": "6183c37ced673d30dac67cf4b4e7deab6e184201b1674cd31a0888c1eb944487",
+      "checkpoint_sha256": "0174b4e754f13985f6f56bf066c14b8cea0c30116d9d8d2fbd07af1e6b00db6d"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 320,
+      "optimization_parameter_change_l2_before_selection": 5.692502009707614,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/allocation_constant/refit_seed43.json",
+      "receipt_sha256": "e4b033fa86621dfc53398bb0788f58f64fb60edb937a3d8f07a523eedcd5fde0",
+      "checkpoint_sha256": "300ff519af4bd47ce47c99b9de2e50865c6d777946c6bdbf0ff3cb33c0a5626b"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 3.611247716185832,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/allocation_readout/selection_lr0.003.json",
+      "receipt_sha256": "76ee4fc25409089a9ec18d5d43f7f05f8b28c5e5bd9a8cb16feae1a54383f112",
+      "checkpoint_sha256": "b0d2d76607385a8537a1103f9d453fb264c1796bf2fab14fa61e641b0a27826c"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 70,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 7.31543488222911,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/allocation_readout/selection_lr0.01.json",
+      "receipt_sha256": "350f0f8a84bc1c5f5eb9b8eb3f3eceefed14b3a6864bf9ea5eaa3d232fa2a0c1",
+      "checkpoint_sha256": "3a2c7edb012d1ab23c1255bd798ed7cf1c0bcf87b4fab790a35bfd9797032a59"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 70,
+      "selected_epoch": 70,
+      "gradient_positive_steps": 280,
+      "optimization_parameter_change_l2_before_selection": 5.421061109961513,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/allocation_readout/refit_seed17.json",
+      "receipt_sha256": "19d7e4c2d3cc310b7ed1a4f8d2226ae2aeec537f4c53c8919f1b5f3e449e2bd8",
+      "checkpoint_sha256": "58d3acf405120599a991dbf15081a4b1af4e0cb5bebc7c1041bb71fff4cb5566"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 70,
+      "selected_epoch": 70,
+      "gradient_positive_steps": 280,
+      "optimization_parameter_change_l2_before_selection": 5.257172575955016,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/allocation_readout/refit_seed29.json",
+      "receipt_sha256": "5d4173f77355b928de4fe4f5b2780fa78107c23d3c75e8cb75faab98b8d177c8",
+      "checkpoint_sha256": "5c5e209c89e9ac233adcf014cd1893f13b010a25ddb18239aa7417c3f5d59785"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 70,
+      "selected_epoch": 70,
+      "gradient_positive_steps": 280,
+      "optimization_parameter_change_l2_before_selection": 5.32928379174666,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/allocation_readout/refit_seed43.json",
+      "receipt_sha256": "35473527ce4e6e77795ae7e20570c82249aca0babeaee7a80590a863c5f657bb",
+      "checkpoint_sha256": "b8245d7c3c18608148734e73500e18ca91eebe0260b43417c80f9ed79dc3599d"
+    },
+    {
+      "family": "gru",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 36,
+      "selected_epoch": 24,
+      "gradient_positive_steps": 108,
+      "optimization_parameter_change_l2_before_selection": 6.755001396040157,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/gru/selection_lr0.003.json",
+      "receipt_sha256": "25fd9cb4711af795b529624e52e6fe57300901977db945d5d41692d0139531f1",
+      "checkpoint_sha256": "3545b84999650d4408d74f495e895b79f8d4136a9762a5dbf01cabcd3954286c"
+    },
+    {
+      "family": "gru",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 20,
+      "selected_epoch": 8,
+      "gradient_positive_steps": 60,
+      "optimization_parameter_change_l2_before_selection": 8.859947557135712,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/gru/selection_lr0.01.json",
+      "receipt_sha256": "2be18368a6902de803b5ca68c0ccc3d22858b3b60d60aee03e7eeed9260a1b31",
+      "checkpoint_sha256": "f31d01e838e2480780bf513cede9790cc6956b1db52953fa268cc3be8b1b645e"
+    },
+    {
+      "family": "gru",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 8,
+      "selected_epoch": 8,
+      "gradient_positive_steps": 32,
+      "optimization_parameter_change_l2_before_selection": 5.85496988510191,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/gru/refit_seed17.json",
+      "receipt_sha256": "337b4a13938fbf3b8304d324b53f32ac76a2189ea1d70d1aebba1a68a1a73046",
+      "checkpoint_sha256": "c601508c4c426b8f697496c19c8209b287712a6264b485ac2f45d80312c216bf"
+    },
+    {
+      "family": "gru",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 8,
+      "selected_epoch": 8,
+      "gradient_positive_steps": 32,
+      "optimization_parameter_change_l2_before_selection": 5.7207319077114756,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/gru/refit_seed29.json",
+      "receipt_sha256": "93ce5beee54665ffc58b3ea8b5c9621d020f496bb81e4f478a241135e5ed230b",
+      "checkpoint_sha256": "d82b410368e9df12e9ba1d5ef96b1549d08a63c55a0d5174994d8a97f204d52b"
+    },
+    {
+      "family": "gru",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 8,
+      "selected_epoch": 8,
+      "gradient_positive_steps": 32,
+      "optimization_parameter_change_l2_before_selection": 5.726140214937168,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/gru/refit_seed43.json",
+      "receipt_sha256": "62fd060b78b9824fe95d5c4d1396391940f580a1e0c2396a4a44b6a05e88fa7e",
+      "checkpoint_sha256": "5758a46a7cfa0d9295a4241e7e892c9baffe6894cbcbbe556587e9dd4503a145"
+    },
+    {
+      "family": "lstm",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 55,
+      "selected_epoch": 43,
+      "gradient_positive_steps": 165,
+      "optimization_parameter_change_l2_before_selection": 9.098206712809102,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/lstm/selection_lr0.003.json",
+      "receipt_sha256": "76a0b5f37118c9f4667c5b02814506ed1f9af2d9f939d5cb9dd775c1e1d792c5",
+      "checkpoint_sha256": "02c8492aa7b625328ffffc4084a90ebe2aa1a9244917bd96e00f5060d6d75411"
+    },
+    {
+      "family": "lstm",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 24,
+      "selected_epoch": 12,
+      "gradient_positive_steps": 72,
+      "optimization_parameter_change_l2_before_selection": 10.387585902207052,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/lstm/selection_lr0.01.json",
+      "receipt_sha256": "bac6079508efedeb2fea1a2900ac4f0349d37ce6f263bac0db9cb81b1b909685",
+      "checkpoint_sha256": "66f10c0385a5388704d4109ddbaae8fb81a5cddbdcff09a2d12c425dd0346484"
+    },
+    {
+      "family": "lstm",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 12,
+      "selected_epoch": 12,
+      "gradient_positive_steps": 48,
+      "optimization_parameter_change_l2_before_selection": 8.506743325262542,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/lstm/refit_seed17.json",
+      "receipt_sha256": "764a1105947f8843f172d45819324f3d7b0f074df7731bcd6eebf90f45995d3b",
+      "checkpoint_sha256": "4fac03d3e0c1ed4195c7784b7ded763694ffb7e572c583b8b7fbd670dde3c7b7"
+    },
+    {
+      "family": "lstm",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 12,
+      "selected_epoch": 12,
+      "gradient_positive_steps": 48,
+      "optimization_parameter_change_l2_before_selection": 8.350234811509283,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/lstm/refit_seed29.json",
+      "receipt_sha256": "a8544385b76ade5c8a2b198fae15182cb0d4e7486a03e20f4b8ea920e8039214",
+      "checkpoint_sha256": "0d8f88556d8992faedca466113f4008cf24bbd82c82fc74da1238eb744bed5ba"
+    },
+    {
+      "family": "lstm",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 12,
+      "selected_epoch": 12,
+      "gradient_positive_steps": 48,
+      "optimization_parameter_change_l2_before_selection": 8.580829886012621,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/lstm/refit_seed43.json",
+      "receipt_sha256": "6425b80d6652cd8e7e1998868d3ee310a58b6a052d1d75bb96fbf469c1ebac10",
+      "checkpoint_sha256": "585e3911f4e74011a520e32fa97637472c30b807b33290e29a182cff33d5df97"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 160,
+      "optimization_parameter_change_l2_before_selection": 1.0556912579668973,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_full/selection_lr0.003.json",
+      "receipt_sha256": "cdee78551ed04f92e80cf20c9d1170c11bec51c5804d8f583e99d110111aec22",
+      "checkpoint_sha256": "8dde2075c7a67061a1c4d77868a14e937aa04e603c463672cc0110285002def1"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 160,
+      "optimization_parameter_change_l2_before_selection": 3.5167183473964503,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_full/selection_lr0.01.json",
+      "receipt_sha256": "24601dabc6ae1c5d71080b37214be61f7f3ee59ee9d84a980641c94b645abefa",
+      "checkpoint_sha256": "6cf957828bb10f72674d714b62a0571f01cebf8b27d8d02b0e7034ad542d4414"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 3.939611184926131,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_full/refit_seed17.json",
+      "receipt_sha256": "b39c5b4716b5d7d448d3a30ef51fe03ad717685a9fbef4c35726dfdfc8e15af0",
+      "checkpoint_sha256": "48509de963039230566648ec461f1f1f753f8539a40ab091378e4fa987856f69"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 3.918997633373141,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_full/refit_seed29.json",
+      "receipt_sha256": "90a68dea2cd2eb2a9535cf35ef4aa65e71b03f89ca1e9e2de0d4094f925bf6d6",
+      "checkpoint_sha256": "e31ed334289d3d64363fc98c8ca952a294b2a81b1ce3b6e8386c090264396ba9"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 3.931493137780261,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_full/refit_seed43.json",
+      "receipt_sha256": "21659db456bfdd859d5d4dbf2b8c83ba70db00d72e804b27078a45ea2ce479c5",
+      "checkpoint_sha256": "c09fdeae6c2272f14e06aec8fa6a65f4345a6d6cf93911ebf5d35942397e149d"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 160,
+      "optimization_parameter_change_l2_before_selection": 1.0516408834368773,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_readout/selection_lr0.003.json",
+      "receipt_sha256": "82c2a5e2554c73bf525c10cfdd9d4770bb3461f6c6bdb0467d54f527604b50cb",
+      "checkpoint_sha256": "c40286cd99a459d846b2e056f02ec74a60a69655fcac36177cbc4dd629541f47"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 160,
+      "optimization_parameter_change_l2_before_selection": 3.425620423941105,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_readout/selection_lr0.01.json",
+      "receipt_sha256": "abff378f80fb8a8329261e4bd5065a7b03e4d41e0a2862d025fded8a8801c2a8",
+      "checkpoint_sha256": "e37c8644e5331992f6d754577e60b633485cd84a39a7df153bdc9934562f8494"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 4.507805402077175,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_readout/refit_seed17.json",
+      "receipt_sha256": "81789f2096845aa211fea360982ef0f16326612df4d3686b338d784d8fab2921",
+      "checkpoint_sha256": "c2eda4c2430c38b858d0d016fd11a3f8877603a82cf19544ceedd9f25b5ca911"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 4.545964538131595,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_readout/refit_seed29.json",
+      "receipt_sha256": "d06ff747233872dbff66f5c474a9afcde1209d5e237e443fcb6782a28c19fddc",
+      "checkpoint_sha256": "813578b0fd6f0c97257e86c49bb04f6336fc2d27518ff1406fe778a59f5c747b"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 4.501640238083392,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_readout/refit_seed43.json",
+      "receipt_sha256": "6b20ec02a2374807ce1ecea86243a5c18a26230e313b6276b784c039c7b2877f",
+      "checkpoint_sha256": "b2c3425c352abceccfe0f07cd5fb79f654c8d710c2b01c5695b41f7205b1e1fc"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 160,
+      "optimization_parameter_change_l2_before_selection": 0.9461588285407687,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/shock_size_only/selection_lr0.003.json",
+      "receipt_sha256": "ff703e0a0d4cce3c947d7808c8e3f7f54fa2d48965841c236470234f8e6dfdac",
+      "checkpoint_sha256": "d47872c33a4d9bf686d3468908aa979d4b6f3726c2b81bdc495ad8603fbadadc"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 160,
+      "optimization_parameter_change_l2_before_selection": 3.2521979060670145,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/shock_size_only/selection_lr0.01.json",
+      "receipt_sha256": "f9af5507e08321ef15d4b22da203b82289149a4437ebeb5f51a7069a59602844",
+      "checkpoint_sha256": "0ec5a5d54814d98878ede8187688a8c93fae98e20c267c66f93970b99a594ed8"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 3.685219686452125,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/shock_size_only/refit_seed17.json",
+      "receipt_sha256": "3a591dcf00c594abcffb50afb2b022af201ecd03b9b28efe292c0abe0c7c0d33",
+      "checkpoint_sha256": "589e1c9d695e542034da4324e1b693babc9232042a21ae11f1f450939a8da78d"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 3.688037410174529,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/shock_size_only/refit_seed29.json",
+      "receipt_sha256": "18b84e2a8439f0c5efa47dcecf64454c5001d82dabec606b2cea142e70d0b7bf",
+      "checkpoint_sha256": "6d9cff4a8fcf34ce597e0193764193503df6625b7b24e40e48c2f9b663cccd16"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 3.687402422894674,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/shock_size_only/refit_seed43.json",
+      "receipt_sha256": "588be486df7527ae0d2c8b900dc4c0e5d78de39b23a176cb497af3182d0aa4d1",
+      "checkpoint_sha256": "5b1707164c9046580985e75d6699e9ff25419cedf59f07f768a00dd96e78914f"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 160,
+      "optimization_parameter_change_l2_before_selection": 1.0023933341489943,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.003.json",
+      "receipt_sha256": "abac8e86e7b73de5d895c88f399b1ae87c8d42bcb2018d75731a741e47d61d53",
+      "checkpoint_sha256": "d7447a2e01590e2a0f00bdfdc46e028ea6fc22a94b9584e2cac3cb3ab55ac305"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 73,
+      "selected_epoch": 61,
+      "gradient_positive_steps": 146,
+      "optimization_parameter_change_l2_before_selection": 2.380085272642325,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.01.json",
+      "receipt_sha256": "29466d59e722e98a201d62d0a1c4f0d545aa2079ed7343dea557c9bcc0605f60",
+      "checkpoint_sha256": "a3cbbe854a2e19e74ccf747ce421f4e12c3a8628c6ffba783d9a17f2610f5e32"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 61,
+      "selected_epoch": 61,
+      "gradient_positive_steps": 183,
+      "optimization_parameter_change_l2_before_selection": 2.3817128109316794,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_unconstrained/refit_seed17.json",
+      "receipt_sha256": "f175fab7fba9d7f8ea94ff4b4c53846a0c97cbddffab6e9a197e257cffd3fc5e",
+      "checkpoint_sha256": "8f734c9616a38934a8bf25bf477a707dcb9674259c39d26182f6aff4a0aa86cf"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 61,
+      "selected_epoch": 61,
+      "gradient_positive_steps": 183,
+      "optimization_parameter_change_l2_before_selection": 2.3782763053237908,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_unconstrained/refit_seed29.json",
+      "receipt_sha256": "f8a8b2bd7e75518065a7953d42465e88c2a28379bbbcfbf506133b718f06d072",
+      "checkpoint_sha256": "6ba2c5657e741e06f807ddf1227e57be16314d6d0d3930a4079e4f6cd62ef71e"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 61,
+      "selected_epoch": 61,
+      "gradient_positive_steps": 183,
+      "optimization_parameter_change_l2_before_selection": 2.379316545749299,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_unconstrained/refit_seed43.json",
+      "receipt_sha256": "0d9f27ebbf020654690d8ee3b0e9bade2ed844a6585d1abf6fe9b85e3aa3b478",
+      "checkpoint_sha256": "a6f8ca583da079417721ed6a5deab58b01cbba7246386875e2d12a7f6d1b220d"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 160,
+      "optimization_parameter_change_l2_before_selection": 0.819241922390722,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/allocation_constant/selection_lr0.003.json",
+      "receipt_sha256": "cc5f8fde92c467c2e3eb5c0215b01b92a4d4998018ee3ea993322573525d3441",
+      "checkpoint_sha256": "915d03051e49913b03f47491ac9f3e044a3768914d46627e9b5744d85d6c0672"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 160,
+      "optimization_parameter_change_l2_before_selection": 2.3099958143982673,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/allocation_constant/selection_lr0.01.json",
+      "receipt_sha256": "4742c3f85b7f66c495221faed29236be56e00f56d9a5fd7d653166a93759f014",
+      "checkpoint_sha256": "80ae08ba91d26d8d1e995214c99003eb10cec57b36bc9257c900e1c6c7da21ea"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 3.501334535949967,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/allocation_constant/refit_seed17.json",
+      "receipt_sha256": "87348f2df4302b9c3ce1171ca8314d5e529709d674fc3bf6b0aaf298d49a7b55",
+      "checkpoint_sha256": "a0208c71297b0da2fd05cc931e00f2e8bdda32ea00da6be1bc9bb0a8ecdb6b23"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 3.526596750829406,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/allocation_constant/refit_seed29.json",
+      "receipt_sha256": "45bf7437fbf0c69efcc15359d78d6f262284f14269f3d18a080cf7c9ed4164d6",
+      "checkpoint_sha256": "d5ecde6d433b662a392a427bbe4114db2a08e8e9879a2b3161b7b2d543c7f65f"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 240,
+      "optimization_parameter_change_l2_before_selection": 3.4686602845952774,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/allocation_constant/refit_seed43.json",
+      "receipt_sha256": "1fd004603bbd27e95ed55655199313a03a2f2b39a58e485ba608be0c3890b964",
+      "checkpoint_sha256": "d7846a33fbe44877c3d272c8b72bfc54044de963408ba1f6012ec0b5c03671fc"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 62,
+      "selected_epoch": 50,
+      "gradient_positive_steps": 124,
+      "optimization_parameter_change_l2_before_selection": 2.467906371087717,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/allocation_readout/selection_lr0.003.json",
+      "receipt_sha256": "3aba1503748557dfd93d316ff814e9cdeee0bc47810fd83e3308b19292180f19",
+      "checkpoint_sha256": "a6be03c704ce9751f9dc8c8d0238389f21b854562bc4fea8fbc47a648d80874d"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 31,
+      "selected_epoch": 19,
+      "gradient_positive_steps": 62,
+      "optimization_parameter_change_l2_before_selection": 3.044519983521706,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/allocation_readout/selection_lr0.01.json",
+      "receipt_sha256": "c56178de0f8fac07d2429237e7afd8e53d78e98a3fe1f2b1d29828227288c48c",
+      "checkpoint_sha256": "f2b575954a5d91d4ba87c880e8af562da2e1d556032b3a93d1b538c8890296ed"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 19,
+      "selected_epoch": 19,
+      "gradient_positive_steps": 57,
+      "optimization_parameter_change_l2_before_selection": 2.762635942355225,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/allocation_readout/refit_seed17.json",
+      "receipt_sha256": "6026a5bb99c68641dcb8523e94fcd7915f3ce00792d451f7ce70f71f6a2ac7c7",
+      "checkpoint_sha256": "2be52fa0d5aabaf8c0364559c5c10bee720856d145920463fb07b8256fbc86a8"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 19,
+      "selected_epoch": 19,
+      "gradient_positive_steps": 57,
+      "optimization_parameter_change_l2_before_selection": 2.8848601565486915,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/allocation_readout/refit_seed29.json",
+      "receipt_sha256": "0d8e34a33bad932e95705dad760e7d58d82918665e3e596a641a0743c1fcbadc",
+      "checkpoint_sha256": "1ad3f6ed1642d15f905b48d2f96280353aaef5b1bf5fab4ae65f1cea98c92498"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 19,
+      "selected_epoch": 19,
+      "gradient_positive_steps": 57,
+      "optimization_parameter_change_l2_before_selection": 2.8536751681044983,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/allocation_readout/refit_seed43.json",
+      "receipt_sha256": "05c67a382b17a3bc4cf9907d71c7b46cf3295a2232c36b6032a2069f70844add",
+      "checkpoint_sha256": "47ddb36cd163c735797e11f5203ce0749bc83251a19e5c71946784aae6398ded"
+    },
+    {
+      "family": "gru",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 30,
+      "optimization_parameter_change_l2_before_selection": 3.6102191626000804,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/gru/selection_lr0.003.json",
+      "receipt_sha256": "a8c5e78ed21f3402c743f4c4afeb9ac7fe5930d36ec1d4528b236624fd22237e",
+      "checkpoint_sha256": "1b94c72a6078e4e497f60dce915de7e19e4da238f76273aaa8dd2eaeb3c16e09"
+    },
+    {
+      "family": "gru",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 30,
+      "optimization_parameter_change_l2_before_selection": 7.339855737552391,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/gru/selection_lr0.01.json",
+      "receipt_sha256": "e7d153249ad30320d2cc9178085fb72ea24c86d5bf6882737ce0f6166ed5f16c",
+      "checkpoint_sha256": "5735695e790de5ee1cd1be2eb537e59eafd4aa72b43d471a08f746689d69645b"
+    },
+    {
+      "family": "gru",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/gru/refit_seed17.json",
+      "receipt_sha256": "0d344fbf1fea4ee39bbeb886c8ea29e6570b0463eed2ff4564aff9ff298b412a",
+      "checkpoint_sha256": "dc6ba3c081e74ab7bd4c36c9825d0c8c6a175c49f2620d3146a28b8362098ac7"
+    },
+    {
+      "family": "gru",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/gru/refit_seed29.json",
+      "receipt_sha256": "5350d939d529b9bbdd42b9a23159bd524e0c691cebdac208ec568333224c5b07",
+      "checkpoint_sha256": "2eeba2386b44ef9f1365d581231ab012f65b74406cc426689c235b25d6ce2e9c"
+    },
+    {
+      "family": "gru",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/gru/refit_seed43.json",
+      "receipt_sha256": "576b982943f01f0d038a6279a1a617c661bcd9c750411f35b580db850ee59e83",
+      "checkpoint_sha256": "d737cf6405ee43a1b680edee0c5ee9b88180b034b89b88cfec6f8d178456ef11"
+    },
+    {
+      "family": "lstm",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 30,
+      "optimization_parameter_change_l2_before_selection": 4.103929691171481,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/lstm/selection_lr0.003.json",
+      "receipt_sha256": "0c1bab26c36e10fbd68b16a5a00573b9979ef314a655a67789b36223270d5123",
+      "checkpoint_sha256": "74ca23dd75cfded4851a75675b9d6e15b8f3e3b4f59600423d44845ee2384447"
+    },
+    {
+      "family": "lstm",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 30,
+      "optimization_parameter_change_l2_before_selection": 8.595197883468623,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/lstm/selection_lr0.01.json",
+      "receipt_sha256": "012e1c6c19a2e33ff2fee5bf578f8aaf2f4fc85515f892cbc5bab7e8f53953b0",
+      "checkpoint_sha256": "dffff8240efb4ba4c7e908e8f1a6962edea43bf804c73dbca9ab85c3a4201d56"
+    },
+    {
+      "family": "lstm",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/lstm/refit_seed17.json",
+      "receipt_sha256": "af87ec6f5e8804e55a71971e2866475c5f03c480746542f7ee2d751f36e7afb8",
+      "checkpoint_sha256": "ae2b0fd38412d8729c4b2b7c3c9d24c17a46c3e15d078b584bba081c50528134"
+    },
+    {
+      "family": "lstm",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/lstm/refit_seed29.json",
+      "receipt_sha256": "51da336833789f8da359747ef47874e28e4290e259778c373a6f8cf8b6217d19",
+      "checkpoint_sha256": "2d94267b13419885bbdca6aeb7c9ef3519d166129013272df87aa3bb5c8e0a7a"
+    },
+    {
+      "family": "lstm",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/lstm/refit_seed43.json",
+      "receipt_sha256": "81a9d799d5386f458aee446184d5c97b7b00cb7048e221140276007017599533",
+      "checkpoint_sha256": "1a1603c31ac0e20e0c0cf4e864274570b835b35a29dfa1c0d7985efb054162ec"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 0.7450722409150301,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_full/selection_lr0.003.json",
+      "receipt_sha256": "f086edf1a598309bbce4ded1064b095c11611612cbfc9f5fb983b64d64b8255b",
+      "checkpoint_sha256": "af1320da9162a802455ee95ab7f6476ca3ac77abbf8a5c45743f61f40c62f9e9"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.489391698537904,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_full/selection_lr0.01.json",
+      "receipt_sha256": "3536a3db3ff3948c509d5b7b6b8c6e0b1d543fc41da714571e78b681f61f2665",
+      "checkpoint_sha256": "abdba9aecc1c208a9baf8b194ee6c466494d0e562a213037d9e97148ec485748"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.3997470291062406,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_full/refit_seed17.json",
+      "receipt_sha256": "8dcd3d1f4d968f3c2b01f5112d65f9bc60501be60640a2685f88c18140033a0f",
+      "checkpoint_sha256": "1683745a59558a74c081b557dc1c9db53a8243bf6812eccac22184b71be75c63"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.399747084713759,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_full/refit_seed29.json",
+      "receipt_sha256": "956cce40f3207d85cecb8439db7b4bebbf38bb0d8769be11cb870ca8b48eaf85",
+      "checkpoint_sha256": "028de7b0ac6a3e57da57a826b9e709be2f71eb5a85483257aeeb1785fe03f918"
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.3997472337542067,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_full/refit_seed43.json",
+      "receipt_sha256": "a59a5866580c7705d712d84b24c625e5c9fbeabd4291e0ba8a9533d592f2be98",
+      "checkpoint_sha256": "057dce4b623cbb331bac86ac93f7bf35e6c1283c1bc4bcd8c7d2787315abd11f"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 0.7382718692218646,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_readout/selection_lr0.003.json",
+      "receipt_sha256": "74ac608a6f837f9606d2feff1849fa82f7cadab29e10022921a41776e491ac8d",
+      "checkpoint_sha256": "39c7e933ba2c45221f8ec0fba6ac3bea2686332665fd91ee28df5c200d83adb1"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.265073358876511,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_readout/selection_lr0.01.json",
+      "receipt_sha256": "815888200b9c5d16c5a7038b044a765d59c0fd92a454f22d96cf6e5e74db4c81",
+      "checkpoint_sha256": "5ad790faa19c6616a9f85fab7a2b03bfd78621da602d3f90d7c237eae90536fa"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.2527838957250075,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_readout/refit_seed17.json",
+      "receipt_sha256": "c7d50f958e090364b6d195921bd0b6cba12d428948463fafcdd67bb25a26b6d6",
+      "checkpoint_sha256": "6b043b785277668db8517dbaccf2ac9a82499d693e4c4dd4ea2b67c39ccd4eea"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.2527839072494484,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_readout/refit_seed29.json",
+      "receipt_sha256": "8ac27a1acbc36db16ba8cf6eb94741cee625d2a70c684628ac4c8c248466dba6",
+      "checkpoint_sha256": "0513987a027c19a60ba6afd57aa859bd3f20a7fccc84fff5a75be512d3cffdc1"
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.252783961607983,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_readout/refit_seed43.json",
+      "receipt_sha256": "a615e509a63af392974b22238a7d77e375cbef3023663a2538b9a3621e892cdb",
+      "checkpoint_sha256": "48e8c1b4abb1940513530d320cccc3c1a8bdc277b50e38d4055cdb9f080a8135"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 0.7165757708944375,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/shock_size_only/selection_lr0.003.json",
+      "receipt_sha256": "0f7dc1e053cc50722c8bbaa8b2b08bdba29092af844106c84b845e8eaf863da2",
+      "checkpoint_sha256": "5300f6189974a92f2da4e58e60162900dee6bffc9570924fc0ff7cb2b8bd99bc"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.209359652937454,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/shock_size_only/selection_lr0.01.json",
+      "receipt_sha256": "8854431ea0d8cb55bd8abff9d1df9c4b3a2ccb382cb5539a2df985fb7df939f4",
+      "checkpoint_sha256": "2970583e75352cb1027eb73eba0e092b4643d56434bcaa66458e4065a757a09f"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.2271954781433205,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/shock_size_only/refit_seed17.json",
+      "receipt_sha256": "f4c4126614eecba75f9e62c6bc1c60e7d244a4adc11edcaa294efa04f48f9f30",
+      "checkpoint_sha256": "29948a63c7f3c275ec599b7ff0ad29045047c13fdcd35dd1a345436cdbf2c214"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.2271955024605936,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/shock_size_only/refit_seed29.json",
+      "receipt_sha256": "6258ea1c964d0384fb693a182d2fc0cd30c4fc622e677cd7886804dfad35b446",
+      "checkpoint_sha256": "f42d9300eb9eab7d067ca5139df1d7e524ee6d913003fbe01e7acb7a0cebd94c"
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.2271955438331386,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/shock_size_only/refit_seed43.json",
+      "receipt_sha256": "466fadc8e8ffb24da3f1854c71befc179c4ff622782c8ce10b6abf1d2c564c67",
+      "checkpoint_sha256": "ad25641e66c9e543d7193a9b26b61c69dcb9417bf84a467a4f92ad90810fde10"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 0.7237661362197371,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.003.json",
+      "receipt_sha256": "15841e7263e5bc4efc7a549e9f02e49335dd38ddd6623860a86ca4b5c4ebedc6",
+      "checkpoint_sha256": "960026a36d29c020a157b73f03381f2ec3446ae641f29f0a249bd8f7b9c4f4b0"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 75,
+      "selected_epoch": 63,
+      "gradient_positive_steps": 75,
+      "optimization_parameter_change_l2_before_selection": 2.1307849565101855,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.01.json",
+      "receipt_sha256": "038326182378843aecda78f15e9f59d4e3a849472d6dd5eb03b6f080051acf64",
+      "checkpoint_sha256": "2c5ea671b611c95279688481a50c73f002b1f34867117d46c6eb897f56724145"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 63,
+      "selected_epoch": 63,
+      "gradient_positive_steps": 63,
+      "optimization_parameter_change_l2_before_selection": 1.7274962345119478,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_unconstrained/refit_seed17.json",
+      "receipt_sha256": "5b72887feb293e90f207319e63c659b0d308bffb5e698253ca9227ed5b2a97a4",
+      "checkpoint_sha256": "61a2c72e87860685ad2b96238b571d2ed9a562f9003b80e40d8259623657e8ee"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 63,
+      "selected_epoch": 63,
+      "gradient_positive_steps": 63,
+      "optimization_parameter_change_l2_before_selection": 1.7274962094729314,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_unconstrained/refit_seed29.json",
+      "receipt_sha256": "70301336f43a18b75e01353f726848b9e5a7b476f8047d2a808d749db46f7713",
+      "checkpoint_sha256": "a455c9cccf0fc3f88c0a888990daaaca32d097ed1c5459f5b5125e624c70d0b9"
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 63,
+      "selected_epoch": 63,
+      "gradient_positive_steps": 63,
+      "optimization_parameter_change_l2_before_selection": 1.7274962094729314,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_unconstrained/refit_seed43.json",
+      "receipt_sha256": "ec994709e273b36d6451452dda08d13191a294dded7007c7d2e0e22f58ae8dec",
+      "checkpoint_sha256": "d9f871389784d5e4c3c0a7d103452edcd0e119b9325a39f8c8650c09d2098208"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 0.6605737771440915,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/allocation_constant/selection_lr0.003.json",
+      "receipt_sha256": "07d25fba5e864a93a598e344300553083b41edb9785aece9f77833a60fd27ea0",
+      "checkpoint_sha256": "0638f3bedbd6c835df68d3b3767e809a529ab7817591069ad661c47ff0c22f70"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.0538815283335503,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/allocation_constant/selection_lr0.01.json",
+      "receipt_sha256": "867a6fdb27018d5c270a67da275cd5c30f5179dfe2498fbe9c405d311b38776b",
+      "checkpoint_sha256": "69b8e24cdd78f5bc86352e42bc5d196f12d721ad2561d2cab0922ed8f4109ae9"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.072650279575117,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/allocation_constant/refit_seed17.json",
+      "receipt_sha256": "29ac43494bd820b5c65ed401da35f41d07b03de6ba6ca0b5bff908af92ed1ca6",
+      "checkpoint_sha256": "edc8d43bb3009aad6752b5cb0d420b25143ec52f86a973caaf1ff404de91d505"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.0726501983353467,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/allocation_constant/refit_seed29.json",
+      "receipt_sha256": "67265db076c84c5c0022467598d0627692e7fa4156e11fcad001058c9849437d",
+      "checkpoint_sha256": "0ac3aa365b947687bfe08c732a191c4529141728cc1c809f706fecccd54cd3d5"
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 80,
+      "selected_epoch": 80,
+      "gradient_positive_steps": 80,
+      "optimization_parameter_change_l2_before_selection": 2.0726501976179748,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/allocation_constant/refit_seed43.json",
+      "receipt_sha256": "683eb68698ce6320dcdaca6765a0a7c3f7f705029960bff19420c10fdf86c42d",
+      "checkpoint_sha256": "5dd9237338c241eeda31a8fd36557c2fc4b8d5ecbe87909bb2e2a993e2569f56"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 38,
+      "selected_epoch": 26,
+      "gradient_positive_steps": 38,
+      "optimization_parameter_change_l2_before_selection": 1.3554326069770595,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/allocation_readout/selection_lr0.003.json",
+      "receipt_sha256": "645bd7c5ddb560f850d623753267f2014e9680ea4cb51c21d8e9161b7188cd1a",
+      "checkpoint_sha256": "991a492da16198731c740493de6071601ae26c22b4df71f427d1524557ab91ed"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 22,
+      "selected_epoch": 10,
+      "gradient_positive_steps": 22,
+      "optimization_parameter_change_l2_before_selection": 2.3196029906408846,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/allocation_readout/selection_lr0.01.json",
+      "receipt_sha256": "546c950e98518a9f6788e3dc492bf10730baa246ca0187656b7ce3beb8020c62",
+      "checkpoint_sha256": "45fd0629c3309c816e4a3d5d01fa3d427855e43a14507a995ca5099ba00dff25"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 10,
+      "selected_epoch": 10,
+      "gradient_positive_steps": 10,
+      "optimization_parameter_change_l2_before_selection": 1.0432494720808971,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/allocation_readout/refit_seed17.json",
+      "receipt_sha256": "aa78cb28d7b8a204218f82d6706aa1d1f89c7ec0654ba2ea880a2b61bf617e0a",
+      "checkpoint_sha256": "0721c31d65f213bd57bca6101963b4d6523d4c0d26d8e35a6ff82868aebf022c"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 10,
+      "selected_epoch": 10,
+      "gradient_positive_steps": 10,
+      "optimization_parameter_change_l2_before_selection": 1.0759121536643088,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/allocation_readout/refit_seed29.json",
+      "receipt_sha256": "b0894930a204bab7ef3b0b4fa69422e2be1b87011ab40d8949186ed7824996c9",
+      "checkpoint_sha256": "681575ccdfa0232cfc05d08183121bd5099765fec63abaff56069fb2d0de43ab"
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.01,
+      "epochs_executed": 10,
+      "selected_epoch": 10,
+      "gradient_positive_steps": 10,
+      "optimization_parameter_change_l2_before_selection": 1.0573150009072438,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/allocation_readout/refit_seed43.json",
+      "receipt_sha256": "62899687eea4e790e3746796b9978cdb93398ed349c7ea6067a8fd275f1c3c45",
+      "checkpoint_sha256": "e7915fb9b421abae1644013c3270552c96b1c74a42051deff1dae6cfddf06e1c"
+    },
+    {
+      "family": "gru",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 15,
+      "optimization_parameter_change_l2_before_selection": 2.204238988280533,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/gru/selection_lr0.003.json",
+      "receipt_sha256": "37be14a0c0cdd0789cb42ccc5ac94d6950843eaaec549ee9264785a15f621d11",
+      "checkpoint_sha256": "1b94c72a6078e4e497f60dce915de7e19e4da238f76273aaa8dd2eaeb3c16e09"
+    },
+    {
+      "family": "gru",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 15,
+      "optimization_parameter_change_l2_before_selection": 5.075735023251618,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/gru/selection_lr0.01.json",
+      "receipt_sha256": "0bc883777838e80ba9e9ab3400a993bae2107501544e0eca29aed02fa56ed578",
+      "checkpoint_sha256": "5735695e790de5ee1cd1be2eb537e59eafd4aa72b43d471a08f746689d69645b"
+    },
+    {
+      "family": "gru",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/gru/refit_seed17.json",
+      "receipt_sha256": "b7d3317307a38863517c2fcf0ae1ca337fb20c981d765138b53193af18f067a4",
+      "checkpoint_sha256": "dc6ba3c081e74ab7bd4c36c9825d0c8c6a175c49f2620d3146a28b8362098ac7"
+    },
+    {
+      "family": "gru",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/gru/refit_seed29.json",
+      "receipt_sha256": "5b4e6e386fe69c07bdc8eeab797007b44fec697d59896565ce7061df753cd30d",
+      "checkpoint_sha256": "2eeba2386b44ef9f1365d581231ab012f65b74406cc426689c235b25d6ce2e9c"
+    },
+    {
+      "family": "gru",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/gru/refit_seed43.json",
+      "receipt_sha256": "2db08b6c10cb6d6bf355b68d62436f65a5d275eb73ed58e8770302b88d10449d",
+      "checkpoint_sha256": "d737cf6405ee43a1b680edee0c5ee9b88180b034b89b88cfec6f8d178456ef11"
+    },
+    {
+      "family": "lstm",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 15,
+      "optimization_parameter_change_l2_before_selection": 2.441868776993384,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/lstm/selection_lr0.003.json",
+      "receipt_sha256": "19ccc1b7187dbcb4b13c4c8ead0956aebc766fec968d9d0aac8633545b275df4",
+      "checkpoint_sha256": "74ca23dd75cfded4851a75675b9d6e15b8f3e3b4f59600423d44845ee2384447"
+    },
+    {
+      "family": "lstm",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 15,
+      "optimization_parameter_change_l2_before_selection": 4.967453299076258,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/lstm/selection_lr0.01.json",
+      "receipt_sha256": "41e0551d4bd088419348eafb6146a91978aab6ed5821a1fa9f1c107bac892f07",
+      "checkpoint_sha256": "dffff8240efb4ba4c7e908e8f1a6962edea43bf804c73dbca9ab85c3a4201d56"
+    },
+    {
+      "family": "lstm",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/lstm/refit_seed17.json",
+      "receipt_sha256": "558bede51238e00e735bfc9239da15c9e35cf323bae3d9cf0bc9784171784daf",
+      "checkpoint_sha256": "ae2b0fd38412d8729c4b2b7c3c9d24c17a46c3e15d078b584bba081c50528134"
+    },
+    {
+      "family": "lstm",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/lstm/refit_seed29.json",
+      "receipt_sha256": "b88874d7239ae8355fc65a4685b5c11be4cb69db6adbc716de36961e759bb2e2",
+      "checkpoint_sha256": "2d94267b13419885bbdca6aeb7c9ef3519d166129013272df87aa3bb5c8e0a7a"
+    },
+    {
+      "family": "lstm",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "optimization_parameter_change_l2_before_selection": 0.0,
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/lstm/refit_seed43.json",
+      "receipt_sha256": "c064cdc6f83dff141e0422fae35ea5cefc792434246720b985a14a5e1d98fefd",
+      "checkpoint_sha256": "1a1603c31ac0e20e0c0cf4e864274570b835b35a29dfa1c0d7985efb054162ec"
+    }
+  ],
+  "npz_identity": [
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_full/predictions.npz",
+      "npz_sha256": "7ad9f2d83bc018f522b43c12c6e4f2dbb2f0033848d2c73a593cdb8507a2f23f",
+      "n_origins": 116
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_readout",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_readout/predictions.npz",
+      "npz_sha256": "0a02a4248cc788853a426a83d969df899ba2993b3901dc9f144223a328043be3",
+      "n_origins": 116
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "shock_size_only",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/shock_size_only/predictions.npz",
+      "npz_sha256": "b494106b4c2a2ab3687f559d814522463a56f3adb70771097895adcd346e57b9",
+      "n_origins": 116
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_unconstrained",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/liquidity_unconstrained/predictions.npz",
+      "npz_sha256": "0a44fe187c157155f5c36ffb65a8f5e0ee08464dd7875f1a05d0cbd746813e4d",
+      "n_origins": 116
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "allocation_constant",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/allocation_constant/predictions.npz",
+      "npz_sha256": "5cfafe4f4c9f6a587b76c4dbbdc8bb6318b8cc24880b7ed64e107ad7b63c48bf",
+      "n_origins": 116
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "allocation_readout",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/allocation_readout/predictions.npz",
+      "npz_sha256": "bb2907560e5bc3f16bfc51a963706baa8927ca2b9c498221fa061d0bd015d343",
+      "n_origins": 116
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "gru",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/gru/predictions.npz",
+      "npz_sha256": "b08ede46d702ca93f85be553b2d2cb87f9146c324f9a7c3c5e068a78a77896a1",
+      "n_origins": 116
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "lstm",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/lstm/predictions.npz",
+      "npz_sha256": "0cef25951eb2fb6cac3c5dd574e14b6ad82e5b5f48580a8ac3a68f6d7e9ff800",
+      "n_origins": 116
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "rw",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/rw/predictions.npz",
+      "npz_sha256": "294452bfb3282ebe99022fb55700ac4f948c9f9486d8ffcc04b1b270d29b1b61",
+      "n_origins": 116
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "drift",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/drift/predictions.npz",
+      "npz_sha256": "62120b123ac6943d1f60826c7abb90a87515114bd7ff82f29eeb9e029517f93a",
+      "n_origins": 116
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "ridge_price",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/ridge_price/predictions.npz",
+      "npz_sha256": "8616faa7df179167b7c18a0ec6573b47664d5dabe32514bd599d7d51148c7ace",
+      "n_origins": 116
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "ridge_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/ridge_full/predictions.npz",
+      "npz_sha256": "9308d45ff60e8bb41a26e2f750d1b294c4f552309cafe4ac4e60af0df30d0b74",
+      "n_origins": 116
+    },
+    {
+      "market": "BEIJING_MEAN",
+      "fold": "fixed602020",
+      "family": "hgb_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/BEIJING_MEAN_fixed602020/hgb_full/predictions.npz",
+      "npz_sha256": "acc83162e155160a30b50b584de8e287077de772d8606be0f255f39636a0cb92",
+      "n_origins": 116
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_full/predictions.npz",
+      "npz_sha256": "a747f396608213ccb4b4b9c6fab0029e94d2ffed129bc53710a6c2ae6d302593",
+      "n_origins": 72
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_readout",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_readout/predictions.npz",
+      "npz_sha256": "eeb0045f1778fee20e8f68c61982eeac279cca2573e4e680d3fe4318c3ae815c",
+      "n_origins": 72
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "shock_size_only",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/shock_size_only/predictions.npz",
+      "npz_sha256": "0232a49568f86d6f509045cf2ac4c015f0d1184dd3bd17e93fc8bc9c19728af9",
+      "n_origins": 72
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_unconstrained",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/liquidity_unconstrained/predictions.npz",
+      "npz_sha256": "cb016c2f6740cb6dcdd75ca65d3296bea5529ce427666dd6d4c8f909d0a5cb80",
+      "n_origins": 72
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "allocation_constant",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/allocation_constant/predictions.npz",
+      "npz_sha256": "33f86c9b7a952b849645f1fac4d734576e0a513ecd3c0576867dc5455d6b9340",
+      "n_origins": 72
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "allocation_readout",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/allocation_readout/predictions.npz",
+      "npz_sha256": "8283608bc103b19e63f3f5813dd5bd39f416c9ca0cdc7c980674ddaeb54b8505",
+      "n_origins": 72
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "gru",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/gru/predictions.npz",
+      "npz_sha256": "a39fc3844fd1a426d37286fe1381fcdc427cc5af69ac4ff3f0754532a06f2930",
+      "n_origins": 72
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "lstm",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/lstm/predictions.npz",
+      "npz_sha256": "a39fc3844fd1a426d37286fe1381fcdc427cc5af69ac4ff3f0754532a06f2930",
+      "n_origins": 72
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "rw",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/rw/predictions.npz",
+      "npz_sha256": "ed97bdb73f44fe7948fd8b1010973596194f191232b22ff80ef6699ff5628fd3",
+      "n_origins": 72
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "drift",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/drift/predictions.npz",
+      "npz_sha256": "bce9baf7af71cba980e381a5b5334917dea0ded75226abe8a39a547e2ea673bb",
+      "n_origins": 72
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "ridge_price",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/ridge_price/predictions.npz",
+      "npz_sha256": "59c2bd79cdad6f90df464c8b86c15ca19515dab572b98d6275bf6c0f0cb2a619",
+      "n_origins": 72
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "ridge_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/ridge_full/predictions.npz",
+      "npz_sha256": "8f0939d00d894c5809d0b9f39813f85188f3d374ee7496cda735ed96d77ddd18",
+      "n_origins": 72
+    },
+    {
+      "market": "TIANJIN_MEAN",
+      "fold": "fixed602020",
+      "family": "hgb_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/TIANJIN_MEAN_fixed602020/hgb_full/predictions.npz",
+      "npz_sha256": "ce9011523e9cd1d148db1aa8c689fa89d8c98c8e55945bd828744f7f6136e3b6",
+      "n_origins": 72
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_full/predictions.npz",
+      "npz_sha256": "7edb9c8adf72f83c69dbcf39cce9482143dcd98f5a0e3e9bbc5ba8262244f8c6",
+      "n_origins": 28
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_readout",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_readout/predictions.npz",
+      "npz_sha256": "51c6fe4a5c219f812a7d44a418bd8c401773a1e27e1ce03bc0ba07093b44723c",
+      "n_origins": 28
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "shock_size_only",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/shock_size_only/predictions.npz",
+      "npz_sha256": "014832f882f7189d42ea87013568b47c30aedb9ddc02c68b74e2e247f4b1e2e0",
+      "n_origins": 28
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "liquidity_unconstrained",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/liquidity_unconstrained/predictions.npz",
+      "npz_sha256": "a160105b7c5428e50a3a00c230de4e4e4c9f2eb149057d8ddf4844e34bdd6bac",
+      "n_origins": 28
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "allocation_constant",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/allocation_constant/predictions.npz",
+      "npz_sha256": "c388ef29dc51243aa016dfa863fe7f1441959a2a5021f7f4b45cc0a7f37c2760",
+      "n_origins": 28
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "allocation_readout",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/allocation_readout/predictions.npz",
+      "npz_sha256": "12627ca662cfb1a56fb579c34013a1b8eb6a68bd51c588fd19df4171094b3311",
+      "n_origins": 28
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "gru",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/gru/predictions.npz",
+      "npz_sha256": "dc73181ed3ad8675e4524d7cb43c528d88e8ea7042b95557900628d11c6d4c5a",
+      "n_origins": 28
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "lstm",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/lstm/predictions.npz",
+      "npz_sha256": "dc73181ed3ad8675e4524d7cb43c528d88e8ea7042b95557900628d11c6d4c5a",
+      "n_origins": 28
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "rw",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/rw/predictions.npz",
+      "npz_sha256": "c84c240b229082507b896e21f6b2be9ce6244d7752422244102b18561f95b891",
+      "n_origins": 28
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "drift",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/drift/predictions.npz",
+      "npz_sha256": "9f248a4c93f33da2e2a6c96fcf41051a031213cc5df70be0e2834417a6a468c2",
+      "n_origins": 28
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "ridge_price",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/ridge_price/predictions.npz",
+      "npz_sha256": "6ef7e31e3066f400aae6c86b5b39d495d17f59eb279544b000825e12a90c11fa",
+      "n_origins": 28
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "ridge_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/ridge_full/predictions.npz",
+      "npz_sha256": "195bd1d76c5ff9927cb5f086acde537ba659d41e5b491ec88dd58f3f24984b7c",
+      "n_origins": 28
+    },
+    {
+      "market": "CHONGQING_MEAN",
+      "fold": "fixed602020",
+      "family": "hgb_full",
+      "path": "/tmp/carbon-literature-aligned-runs-20261019d/new_market_v3/CHONGQING_MEAN_fixed602020/hgb_full/predictions.npz",
+      "npz_sha256": "c32927bd05eba1679158c57a2dc044bcdaf90a0fde81329d8066d52580ef23d9",
+      "n_origins": 28
+    }
+  ],
+  "limitations": [
+    "First identified model evaluation on these three markets followed prior source QC and partitioning. After this run their test performance is exposed.",
+    "Authors cleaned daily transaction mean prices; these are not close prices or certified historical vintages.",
+    "BJ/TJ primary macro excludes CQ. Unequal sample counts do not change equal-market weights.",
+    "Four primary contrasts plus two secondary allocation_readout contrasts comprise one six-contrast multiplicity family.",
+    "Macro intervals combine separate-market endpoints using a union bound; no cross-market independence assumption. Short dependent samples still make percentile coverage approximate.",
+    "Length20 and40 results both remain. CQ40 is deliberately omitted because40>=28; CQ20 is only descriptive.",
+    "If any bootstrap denominator is zero, that market/length CI is unavailable rather than silently dropping undefined draws.",
+    "Epoch0 is the native initialization, sometimes already a useful forecast. Positive total gain is not automatically a learned gain.",
+    "Softplus constrained coefficients and affine unconstrained coefficients have unequal initial effective update derivatives; sign restrictions are not isolated.",
+    "Strong validation selector is context, not a replacement for fixed RW/structural comparisons.",
+    "Later SWEWT-GRU supplemental baselines are outside this frozen run/family and are not added to its hypothesis family."
+  ],
+  "scientific_assessment": {
+    "status": "PARTIAL_REPLICATION_WITH_STRUCTURAL_INCREMENT_UNCERTAIN",
+    "primary": "Full improves the Beijing/Tianjin macro ratio overRW by18.983248%, but Beijing and Tianjin directions differ and full is worse than constant in the primary macro. The volume comparison to shock_size has positive point estimates at both primary markets, while frozen block intervals remain wide and cross zero.",
+    "secondary": "The pre-specified allocation_readout has macro risk.790512252 and improves onRW at both markets, but does not beat constant in both. It remains a secondary result within the frozen six-contrast family, not a relabeled primary.",
+    "inference": "All six macro marginal95% and simultaneous95% intervals cross zero under both fixed block lengths. This conservative short-sample result is inconclusive for universal mechanism improvement and is not proof of no predictive value.",
+    "cq": "Chongqing28origins is reported separately as a stress test and excluded from the primary macro and multiplicity family."
+  }
+}

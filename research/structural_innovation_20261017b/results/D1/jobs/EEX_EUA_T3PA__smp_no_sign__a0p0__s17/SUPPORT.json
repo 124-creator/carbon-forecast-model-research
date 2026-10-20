@@ -1,0 +1,67 @@
+{
+  "market": "EEX_EUA_T3PA",
+  "year": 2022,
+  "source_sha256": "5a0c7580edebc2a7a5e66d7487568f6d99a8e08cca0785676c2aaeccad7db6bb",
+  "source_rows": 2255,
+  "train_n": 1647,
+  "validation_n": 80,
+  "evaluation_n": 193,
+  "train_first_origin": 60,
+  "train_last_origin": 1706,
+  "max_train_label": 1726,
+  "first_validation_origin": 1727,
+  "last_validation_origin": 1806,
+  "max_validation_label": 1826,
+  "evaluation_first_origin": 1827,
+  "evaluation_last_origin": 2019,
+  "evaluation_last_label": 2039,
+  "evaluation_first_date": "2022-01-10",
+  "evaluation_last_date": "2022-11-17",
+  "statistics_price_prefix_end_exclusive": 1727,
+  "training_prefix_rms": 0.571937738673919,
+  "scale_floor": 0.00571937738673919,
+  "covariates": [
+    "auction_volume",
+    "cover_ratio",
+    "bidder_count"
+  ],
+  "cov_mean": [
+    14.966949020343025,
+    0.9366586257372465,
+    3.020423766763902
+  ],
+  "cov_std": [
+    0.32226837990072005,
+    0.4215992125050032,
+    0.21601591760214825
+  ],
+  "training_state_counts": [
+    790,
+    18,
+    0,
+    0,
+    0,
+    0,
+    823,
+    16,
+    0
+  ],
+  "current_state_from_full_observed_prefix": true,
+  "future_context_frozen": true,
+  "quote_imputation": false,
+  "feature_clip": [
+    -10,
+    10
+  ],
+  "input_channels": [
+    "increment/origin_scale",
+    "log1p(past_calendar_gap)/log8",
+    "log(origin_scale/training_prefix_rms)",
+    "last_nonzero_sign_at_each_past_token",
+    "capped_zero_run_age_at_each_past_token/2",
+    "auction_volume",
+    "cover_ratio",
+    "bidder_count"
+  ],
+  "evaluation": "same-year complete H20; no training updates during evaluation year"
+}

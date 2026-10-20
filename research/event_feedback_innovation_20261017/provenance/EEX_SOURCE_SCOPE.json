@@ -1,0 +1,41 @@
+{
+  "created_utc": "2026-10-17T09:42:34.184591+00:00",
+  "user_scope_basis": "User requested larger data and an innovative forecasting model on 2026-10-17, and explicitly requested continuation after PR15. This authorizes the next bounded public-data research phase.",
+  "source": "EEX official EU ETS1 primary market auction report archive",
+  "approved_url": "https://www.eex.com/fileadmin/EEX/Downloads/Markets/Environmentals/EUA_Emission_Spot_Primary_Market_Auction_Report/Archive_Reports/emission-spot-primary-market-auction-report-2012-2025-data.zip",
+  "source_years": [
+    2012,
+    2025
+  ],
+  "development_end_exclusive": "2024-01-01",
+  "confirmation_start_inclusive": "2024-01-01",
+  "confirmation_end_exclusive": "2026-01-01",
+  "confirmation_years": [
+    2024,
+    2025
+  ],
+  "2026_not_included": "Data researcher incidentally saw a 2026-07-02 price news search snippet; log exposure and exclude 2026 from this scope.",
+  "numeric_new_auction_data_read_before_this_scope": false,
+  "target_rule": "EUA, not EUAA or UKA; successful primary auctions only. Create a daily auction-volume-weighted EUA clearing-price series if multiple successful auctions occur on one auction date; preserve component auctions in local provenance. Where a report is duplicated, deduplicate by official auction identity before aggregation.",
+  "inclusion_rule": "Date in scope, product identity EUA, final successful auction status, positive finite clearing price and auctioned volume; cancellations/missing results excluded as no realized auction observation, never zero-filled. Do not trim outliers, interpolate, smooth, or backfill.",
+  "aggregation_rule": "For each date sum(price*auctioned_volume)/sum(auctioned_volume); use known reported final auctioned volume, not submitted bid volume. Preserve auction date and original source rows. If field identities cannot be authenticated, stop extraction rather than guess.",
+  "potential_past_covariates": [
+    "auctioned volume",
+    "total submitted bid volume",
+    "cover ratio",
+    "bidder counts",
+    "platform identity",
+    "calendar gaps"
+  ],
+  "covariate_note": "No future auction result or future realized quantity may be used. Model feature set is not yet chosen; source extraction may preserve fields with explicit semantics.",
+  "information_boundaries": "Researcher may mechanically parse all years to split and verify source fidelity, but must not report confirmation prices, distributions or scores to root. Root may read development data only until the next model and inference protocol is frozen. Previously evaluated Shanghai confirmation is now development, not new confirmation.",
+  "primary_horizons_if_sufficient_data": [
+    1,
+    5,
+    20
+  ],
+  "horizon_unit": "observed daily EUA auction-price records, not calendar days",
+  "licensing": "EEX directory terms are not CC BY. Keep source archive, raw/derived auction-price rows and true-target arrays local for personal non-commercial research; publish code, official retrieval links, hashes, and aggregate research results subject to source attribution and actual license terms. No default raw-data redistribution.",
+  "no_new_market_fits_authorized_by_this_file": true,
+  "notes": "This freezes source scope and partitions before acquisition, not the final model or an external preregistration. Rows and field layouts remain unverified until archive inspection."
+}

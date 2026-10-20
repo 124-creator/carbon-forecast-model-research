@@ -1,0 +1,2685 @@
+{
+  "status": "PASS_READ_ONLY_REPLAY",
+  "created_utc": "2026-10-19T10:43:50.328356+00:00",
+  "scope": "Post-result mechanism diagnostic of six fixed structure families; not a new statistical contrast or candidate selection.",
+  "authorship": "Model implementer and v4 adapter author; not external blind review.",
+  "new_fit_count": 0,
+  "new_optimizer_steps": 0,
+  "new_candidate_selections": 0,
+  "new_significance_tests": 0,
+  "market": "TIANJIN_OFFICIAL_MEAN",
+  "fold": "fixed602020",
+  "primary_candidate": "allocation_readout",
+  "secondary_candidate": "liquidity_full",
+  "counts": {
+    "train": 562,
+    "val": 195,
+    "final": 777,
+    "test": 196
+  },
+  "input_manifest": {
+    "market": "TIANJIN_OFFICIAL_MEAN",
+    "fold": "fixed602020",
+    "legacy_year_field_is_fold_id": true,
+    "target": "official TJEA daily total transaction published two-decimal mean, CNY/tonne; not close",
+    "source_processing": "all1077 official daily-total records retained and sorted; no interpolation, deletion, monthly outlier replacement or recomputation from turnover/volume",
+    "source_vintage": "current public historical snapshot; per-day publication vintages unverified",
+    "row_boundaries": [
+      0,
+      646,
+      861,
+      1077
+    ],
+    "counts": {
+      "train": 562,
+      "val": 195,
+      "final": 777,
+      "test": 196
+    },
+    "origin_ranges": {
+      "train": [
+        64,
+        625
+      ],
+      "val": [
+        646,
+        840
+      ],
+      "final": [
+        64,
+        840
+      ],
+      "test": [
+        861,
+        1056
+      ]
+    },
+    "first_train_origin": "2014-04-03",
+    "last_train_label": "2020-10-22",
+    "first_validation_origin": "2020-10-23",
+    "last_validation_label": "2023-04-18",
+    "first_test_origin": "2023-04-19",
+    "last_test_origin": "2026-07-02",
+    "last_test_label": "2026-09-30",
+    "training_rms": [
+      1.3139645907468114,
+      1.9673306591624646,
+      2.031303968871593,
+      0.24610295948376298
+    ],
+    "train_target_second_moment": [
+      1.621859964412811,
+      6.993383096085417,
+      22.16738167259787
+    ],
+    "sources": [
+      {
+        "path": "/tmp/carbon-next-market-data-20261019d/TIANJIN_OFFICIAL_MEAN.csv",
+        "sha256": "85ca07648855db00fbf67c4e1c083db715f62ab829f74c143c3b3f67da21252a",
+        "official_url": "https://www.chinatcx.com.cn/tshq",
+        "source": "first TJEA table, daily-total published rounded mean and total tonnes",
+        "license": "no redistribution license established; raw and prepared source remain private"
+      },
+      {
+        "path": "data/parsed/brent_eia_daily.csv",
+        "sha256": "2f4ef39f7046e5969a1471e2610febae3d57c277d14447b166b83f39d8f2e191"
+      },
+      {
+        "path": "data/parsed/wti_eia_daily.csv",
+        "sha256": "e1a301dbaf422dffd3a8b372e323fc7df182815f0ee61dfcc1db31c39d497d69"
+      },
+      {
+        "path": "data/parsed/henryhub_eia_daily.csv",
+        "sha256": "007ce1868c7966a864d22d2ae6c7a82e02586a3120a86b63b6aadaa5ad9bf5b5"
+      }
+    ],
+    "energy_alignment": [
+      {
+        "series": "brent",
+        "minimum_age_days": 14,
+        "maximum_age_days": 18,
+        "source_missing_price_rows_excluded_before_backward_asof": 0
+      },
+      {
+        "series": "wti",
+        "minimum_age_days": 14,
+        "maximum_age_days": 20,
+        "source_missing_price_rows_excluded_before_backward_asof": 0
+      },
+      {
+        "series": "henryhub",
+        "minimum_age_days": 14,
+        "maximum_age_days": 17,
+        "source_missing_price_rows_excluded_before_backward_asof": 1
+      }
+    ],
+    "volume": {
+      "unit": "tonnes",
+      "valid_rows": 1077,
+      "usable_context_rows": 1067,
+      "normalization": "current log1p total tonnes minus prior60record median, divided by prior std floored.25, clipped[-5,5]; >=10 past observations",
+      "information": "current official price and total volume known after origin report; turnover not an input",
+      "raw_information_span": "64 feature tokens plus up to60 earlier records for volume references"
+    },
+    "role": "fixed later-period replication on one official market; not a cross-market macro"
+  },
+  "aggregation": "Single official Tianjin tail, equal H1/H5/H20 mean of individual-seed MSE/RW; no cross-market macro.",
+  "initialization_interpretation": "All three seeds have identical initial prediction functions; v1 MLP hidden weights remain seed-specific, so numerical state comparisons use the same seed.",
+  "numeric_state_hash_definition": "SHA256 of sorted tensor names/dtypes/shapes JSON headers and contiguous CPU numpy bytes; distinct from serialized pt byte SHA.",
+  "checks": {
+    "checkpoint_count": 30,
+    "selection_checkpoint_count": 12,
+    "refit_checkpoint_count": 18,
+    "maximum_selected_validation_loss_replay_gap": 0.0,
+    "maximum_initial_validation_loss_replay_gap": 0.0,
+    "maximum_original_prediction_replay_gap_native": 0.0,
+    "maximum_initial_prediction_gap_across_seeds": 0.0,
+    "all_saved_state_dicts_equal_same_seed_initial": true,
+    "all_refit_predictions_equal_own_initial": true,
+    "readout_and_constant_predictions_equal": true,
+    "full_and_unconstrained_predictions_equal": true
+  },
+  "original_optimization_counts": {
+    "selection_tasks": 12,
+    "selection_tasks_with_positive_steps": 12,
+    "selection_positive_steps": 900,
+    "selection_tasks_with_nonzero_pre_restore_parameter_change": 12,
+    "refit_constructions": 18,
+    "refit_tasks_with_positive_steps": 0,
+    "refit_positive_steps": 0
+  },
+  "families": {
+    "liquidity_full": {
+      "initial_parameters": {
+        "parameters": 11,
+        "rates": [
+          0.5,
+          0.8999999761581421
+        ],
+        "raw_rates": [
+          0.040821995586156845,
+          1.6094379425048828
+        ],
+        "base_allocation": [
+          0.9000000357627869,
+          0.049999985843896866,
+          0.049999985843896866
+        ],
+        "base_logits": [
+          -2.8332133293151855,
+          -2.8332133293151855
+        ],
+        "beta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "gate": "compact volume/innovation gate",
+        "effective_gamma": [
+          0.10000000149011612,
+          0.10000000149011612
+        ],
+        "effective_delta": [
+          0.10000000149011612,
+          0.10000000149011612
+        ]
+      },
+      "initial_numeric_state_sha256_by_seed": {
+        "17": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "29": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "43": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_risk": {
+        "risk_over_rw": 0.957620696610488,
+        "forecast_energy_penalty": 0.005199974079443788,
+        "outcome_alignment_credit": 0.047579277468956134,
+        "risk_by_seed_horizon": [
+          [
+            0.9676834141180017,
+            0.9440377164803786,
+            0.9611409592330838
+          ]
+        ],
+        "energy_by_seed_horizon": [
+          [
+            0.0015054952331182785,
+            0.006919793877757656,
+            0.00717463312745543
+          ]
+        ],
+        "alignment_by_seed_horizon": [
+          [
+            0.033822081115116254,
+            0.06288207739738035,
+            0.04603367389437182
+          ]
+        ]
+      },
+      "final_risk": {
+        "risk_over_rw": 0.957620696610488,
+        "forecast_energy_penalty": 0.005199974079443788,
+        "outcome_alignment_credit": 0.04757927746895614,
+        "risk_by_seed_horizon": [
+          [
+            0.9676834141180017,
+            0.9440377164803786,
+            0.9611409592330838
+          ],
+          [
+            0.9676834141180017,
+            0.9440377164803786,
+            0.9611409592330838
+          ],
+          [
+            0.9676834141180017,
+            0.9440377164803786,
+            0.9611409592330838
+          ]
+        ],
+        "energy_by_seed_horizon": [
+          [
+            0.0015054952331182785,
+            0.006919793877757656,
+            0.00717463312745543
+          ],
+          [
+            0.0015054952331182785,
+            0.006919793877757656,
+            0.00717463312745543
+          ],
+          [
+            0.0015054952331182785,
+            0.006919793877757656,
+            0.00717463312745543
+          ]
+        ],
+        "alignment_by_seed_horizon": [
+          [
+            0.033822081115116254,
+            0.06288207739738035,
+            0.04603367389437182
+          ],
+          [
+            0.033822081115116254,
+            0.06288207739738035,
+            0.04603367389437182
+          ],
+          [
+            0.033822081115116254,
+            0.06288207739738035,
+            0.04603367389437182
+          ]
+        ]
+      },
+      "learning_improvement_ratio_points": 0.0,
+      "prior_improvement_from_rw_ratio_points": 0.04237930338951201,
+      "selected_lr": 0.003,
+      "selected_epoch": 0,
+      "selection_tasks": 2,
+      "selection_tasks_with_positive_steps": 2,
+      "selection_positive_steps": 150,
+      "refit_constructions": 3,
+      "refit_tasks_with_positive_steps": 0,
+      "refit_positive_steps": 0,
+      "all_five_saved_checkpoints_equal_same_seed_initial": true,
+      "refit_max_forecast_shift_from_initial_normalized": 0.0
+    },
+    "liquidity_readout": {
+      "initial_parameters": {
+        "parameters": 11,
+        "rates": [
+          0.5,
+          0.8999999761581421
+        ],
+        "raw_rates": [
+          0.040821995586156845,
+          1.6094379425048828
+        ],
+        "base_allocation": [
+          0.9000000357627869,
+          0.049999985843896866,
+          0.049999985843896866
+        ],
+        "base_logits": [
+          -2.8332133293151855,
+          -2.8332133293151855
+        ],
+        "beta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "gate": "compact volume/innovation gate",
+        "effective_gamma": [
+          0.10000000149011612,
+          0.10000000149011612
+        ],
+        "effective_delta": [
+          0.10000000149011612,
+          0.10000000149011612
+        ]
+      },
+      "initial_numeric_state_sha256_by_seed": {
+        "17": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "29": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "43": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_risk": {
+        "risk_over_rw": 0.9537541738865363,
+        "forecast_energy_penalty": 0.003344800742694757,
+        "outcome_alignment_credit": 0.049590626856158886,
+        "risk_by_seed_horizon": [
+          [
+            0.9676277353060043,
+            0.939644282856247,
+            0.9539905034973573
+          ]
+        ],
+        "energy_by_seed_horizon": [
+          [
+            0.001062339927489394,
+            0.004593150240384785,
+            0.0043789120602100925
+          ]
+        ],
+        "alignment_by_seed_horizon": [
+          [
+            0.03343460462148582,
+            0.06494886738413788,
+            0.05038840856285296
+          ]
+        ]
+      },
+      "final_risk": {
+        "risk_over_rw": 0.9537541738865362,
+        "forecast_energy_penalty": 0.003344800742694757,
+        "outcome_alignment_credit": 0.049590626856158886,
+        "risk_by_seed_horizon": [
+          [
+            0.9676277353060043,
+            0.939644282856247,
+            0.9539905034973573
+          ],
+          [
+            0.9676277353060043,
+            0.939644282856247,
+            0.9539905034973573
+          ],
+          [
+            0.9676277353060043,
+            0.939644282856247,
+            0.9539905034973573
+          ]
+        ],
+        "energy_by_seed_horizon": [
+          [
+            0.001062339927489394,
+            0.004593150240384785,
+            0.0043789120602100925
+          ],
+          [
+            0.001062339927489394,
+            0.004593150240384785,
+            0.0043789120602100925
+          ],
+          [
+            0.001062339927489394,
+            0.004593150240384785,
+            0.0043789120602100925
+          ]
+        ],
+        "alignment_by_seed_horizon": [
+          [
+            0.03343460462148582,
+            0.06494886738413788,
+            0.05038840856285296
+          ],
+          [
+            0.03343460462148582,
+            0.06494886738413788,
+            0.05038840856285296
+          ],
+          [
+            0.03343460462148582,
+            0.06494886738413788,
+            0.05038840856285296
+          ]
+        ]
+      },
+      "learning_improvement_ratio_points": 1.1102230246251565e-16,
+      "prior_improvement_from_rw_ratio_points": 0.04624582611346373,
+      "selected_lr": 0.003,
+      "selected_epoch": 0,
+      "selection_tasks": 2,
+      "selection_tasks_with_positive_steps": 2,
+      "selection_positive_steps": 150,
+      "refit_constructions": 3,
+      "refit_tasks_with_positive_steps": 0,
+      "refit_positive_steps": 0,
+      "all_five_saved_checkpoints_equal_same_seed_initial": true,
+      "refit_max_forecast_shift_from_initial_normalized": 0.0
+    },
+    "shock_size_only": {
+      "initial_parameters": {
+        "parameters": 9,
+        "rates": [
+          0.5,
+          0.8999999761581421
+        ],
+        "raw_rates": [
+          0.040821995586156845,
+          1.6094379425048828
+        ],
+        "base_allocation": [
+          0.9000000357627869,
+          0.049999985843896866,
+          0.049999985843896866
+        ],
+        "base_logits": [
+          -2.8332133293151855,
+          -2.8332133293151855
+        ],
+        "beta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "gate": "compact volume/innovation gate",
+        "effective_gamma": [
+          0.10000000149011612,
+          0.10000000149011612
+        ],
+        "effective_delta": [
+          0.0,
+          0.0
+        ]
+      },
+      "initial_numeric_state_sha256_by_seed": {
+        "17": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868",
+        "29": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868",
+        "43": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868"
+      },
+      "initial_risk": {
+        "risk_over_rw": 0.9401171993556855,
+        "forecast_energy_penalty": 0.004369614439642087,
+        "outcome_alignment_credit": 0.0642524150839567,
+        "risk_by_seed_horizon": [
+          [
+            0.9577102168644804,
+            0.9198440692101065,
+            0.9427973119924694
+          ]
+        ],
+        "energy_by_seed_horizon": [
+          [
+            0.0013788367958101054,
+            0.006005565538941586,
+            0.005724440984174568
+          ]
+        ],
+        "alignment_by_seed_horizon": [
+          [
+            0.04366861993132953,
+            0.08616149632883467,
+            0.06292712899170587
+          ]
+        ]
+      },
+      "final_risk": {
+        "risk_over_rw": 0.9401171993556855,
+        "forecast_energy_penalty": 0.004369614439642086,
+        "outcome_alignment_credit": 0.06425241508395668,
+        "risk_by_seed_horizon": [
+          [
+            0.9577102168644804,
+            0.9198440692101065,
+            0.9427973119924694
+          ],
+          [
+            0.9577102168644804,
+            0.9198440692101065,
+            0.9427973119924694
+          ],
+          [
+            0.9577102168644804,
+            0.9198440692101065,
+            0.9427973119924694
+          ]
+        ],
+        "energy_by_seed_horizon": [
+          [
+            0.0013788367958101054,
+            0.006005565538941586,
+            0.005724440984174568
+          ],
+          [
+            0.0013788367958101054,
+            0.006005565538941586,
+            0.005724440984174568
+          ],
+          [
+            0.0013788367958101054,
+            0.006005565538941586,
+            0.005724440984174568
+          ]
+        ],
+        "alignment_by_seed_horizon": [
+          [
+            0.04366861993132953,
+            0.08616149632883467,
+            0.06292712899170587
+          ],
+          [
+            0.04366861993132953,
+            0.08616149632883467,
+            0.06292712899170587
+          ],
+          [
+            0.04366861993132953,
+            0.08616149632883467,
+            0.06292712899170587
+          ]
+        ]
+      },
+      "learning_improvement_ratio_points": 0.0,
+      "prior_improvement_from_rw_ratio_points": 0.059882800644314504,
+      "selected_lr": 0.003,
+      "selected_epoch": 0,
+      "selection_tasks": 2,
+      "selection_tasks_with_positive_steps": 2,
+      "selection_positive_steps": 150,
+      "refit_constructions": 3,
+      "refit_tasks_with_positive_steps": 0,
+      "refit_positive_steps": 0,
+      "all_five_saved_checkpoints_equal_same_seed_initial": true,
+      "refit_max_forecast_shift_from_initial_normalized": 0.0
+    },
+    "liquidity_unconstrained": {
+      "initial_parameters": {
+        "parameters": 11,
+        "rates": [
+          0.5,
+          0.8999999761581421
+        ],
+        "raw_rates": [
+          0.040821995586156845,
+          1.6094379425048828
+        ],
+        "base_allocation": [
+          0.9000000357627869,
+          0.049999985843896866,
+          0.049999985843896866
+        ],
+        "base_logits": [
+          -2.8332133293151855,
+          -2.8332133293151855
+        ],
+        "beta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "gate": "compact volume/innovation gate",
+        "effective_gamma": [
+          0.10000000149011612,
+          0.10000000149011612
+        ],
+        "effective_delta": [
+          0.10000000149011612,
+          0.10000000149011612
+        ]
+      },
+      "initial_numeric_state_sha256_by_seed": {
+        "17": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "29": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "43": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_risk": {
+        "risk_over_rw": 0.957620696610488,
+        "forecast_energy_penalty": 0.005199974079443788,
+        "outcome_alignment_credit": 0.047579277468956134,
+        "risk_by_seed_horizon": [
+          [
+            0.9676834141180017,
+            0.9440377164803786,
+            0.9611409592330838
+          ]
+        ],
+        "energy_by_seed_horizon": [
+          [
+            0.0015054952331182785,
+            0.006919793877757656,
+            0.00717463312745543
+          ]
+        ],
+        "alignment_by_seed_horizon": [
+          [
+            0.033822081115116254,
+            0.06288207739738035,
+            0.04603367389437182
+          ]
+        ]
+      },
+      "final_risk": {
+        "risk_over_rw": 0.957620696610488,
+        "forecast_energy_penalty": 0.005199974079443788,
+        "outcome_alignment_credit": 0.04757927746895614,
+        "risk_by_seed_horizon": [
+          [
+            0.9676834141180017,
+            0.9440377164803786,
+            0.9611409592330838
+          ],
+          [
+            0.9676834141180017,
+            0.9440377164803786,
+            0.9611409592330838
+          ],
+          [
+            0.9676834141180017,
+            0.9440377164803786,
+            0.9611409592330838
+          ]
+        ],
+        "energy_by_seed_horizon": [
+          [
+            0.0015054952331182785,
+            0.006919793877757656,
+            0.00717463312745543
+          ],
+          [
+            0.0015054952331182785,
+            0.006919793877757656,
+            0.00717463312745543
+          ],
+          [
+            0.0015054952331182785,
+            0.006919793877757656,
+            0.00717463312745543
+          ]
+        ],
+        "alignment_by_seed_horizon": [
+          [
+            0.033822081115116254,
+            0.06288207739738035,
+            0.04603367389437182
+          ],
+          [
+            0.033822081115116254,
+            0.06288207739738035,
+            0.04603367389437182
+          ],
+          [
+            0.033822081115116254,
+            0.06288207739738035,
+            0.04603367389437182
+          ]
+        ]
+      },
+      "learning_improvement_ratio_points": 0.0,
+      "prior_improvement_from_rw_ratio_points": 0.04237930338951201,
+      "selected_lr": 0.003,
+      "selected_epoch": 0,
+      "selection_tasks": 2,
+      "selection_tasks_with_positive_steps": 2,
+      "selection_positive_steps": 150,
+      "refit_constructions": 3,
+      "refit_tasks_with_positive_steps": 0,
+      "refit_positive_steps": 0,
+      "all_five_saved_checkpoints_equal_same_seed_initial": true,
+      "refit_max_forecast_shift_from_initial_normalized": 0.0
+    },
+    "allocation_constant": {
+      "initial_parameters": {
+        "parameters": 7,
+        "rates": [
+          0.5,
+          0.8999999761581421
+        ],
+        "raw_rates": [
+          0.040821995586156845,
+          1.6094379425048828
+        ],
+        "base_allocation": [
+          0.9000000357627869,
+          0.049999985843896866,
+          0.049999985843896866
+        ],
+        "base_logits": [
+          -2.8332133293151855,
+          -2.8332133293151855
+        ],
+        "beta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "gate": "absent; constant allocation"
+      },
+      "initial_numeric_state_sha256_by_seed": {
+        "17": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0",
+        "29": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0",
+        "43": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0"
+      },
+      "initial_risk": {
+        "risk_over_rw": 0.9599145404148542,
+        "forecast_energy_penalty": 0.001939630704213902,
+        "outcome_alignment_credit": 0.04202509028936005,
+        "risk_by_seed_horizon": [
+          [
+            0.9721879315619572,
+            0.947335671863842,
+            0.9602200178187634
+          ]
+        ],
+        "energy_by_seed_horizon": [
+          [
+            0.0006057898435636341,
+            0.0026552520912652786,
+            0.002557850177812793
+          ]
+        ],
+        "alignment_by_seed_horizon": [
+          [
+            0.02841785828160682,
+            0.05531958022742318,
+            0.042337832359050157
+          ]
+        ]
+      },
+      "final_risk": {
+        "risk_over_rw": 0.9599145404148542,
+        "forecast_energy_penalty": 0.0019396307042139022,
+        "outcome_alignment_credit": 0.04202509028936005,
+        "risk_by_seed_horizon": [
+          [
+            0.9721879315619572,
+            0.947335671863842,
+            0.9602200178187634
+          ],
+          [
+            0.9721879315619572,
+            0.947335671863842,
+            0.9602200178187634
+          ],
+          [
+            0.9721879315619572,
+            0.947335671863842,
+            0.9602200178187634
+          ]
+        ],
+        "energy_by_seed_horizon": [
+          [
+            0.0006057898435636341,
+            0.0026552520912652786,
+            0.002557850177812793
+          ],
+          [
+            0.0006057898435636341,
+            0.0026552520912652786,
+            0.002557850177812793
+          ],
+          [
+            0.0006057898435636341,
+            0.0026552520912652786,
+            0.002557850177812793
+          ]
+        ],
+        "alignment_by_seed_horizon": [
+          [
+            0.02841785828160682,
+            0.05531958022742318,
+            0.042337832359050157
+          ],
+          [
+            0.02841785828160682,
+            0.05531958022742318,
+            0.042337832359050157
+          ],
+          [
+            0.02841785828160682,
+            0.05531958022742318,
+            0.042337832359050157
+          ]
+        ]
+      },
+      "learning_improvement_ratio_points": 0.0,
+      "prior_improvement_from_rw_ratio_points": 0.040085459585145755,
+      "selected_lr": 0.003,
+      "selected_epoch": 0,
+      "selection_tasks": 2,
+      "selection_tasks_with_positive_steps": 2,
+      "selection_positive_steps": 150,
+      "refit_constructions": 3,
+      "refit_tasks_with_positive_steps": 0,
+      "refit_positive_steps": 0,
+      "all_five_saved_checkpoints_equal_same_seed_initial": true,
+      "refit_max_forecast_shift_from_initial_normalized": 0.0
+    },
+    "allocation_readout": {
+      "initial_parameters": {
+        "parameters": 169,
+        "rates": [
+          0.5,
+          0.8999999761581421
+        ],
+        "raw_rates": [
+          0.040821995586156845,
+          1.6094379425048828
+        ],
+        "base_allocation": [
+          0.9000000357627869,
+          0.049999985843896866,
+          0.049999985843896866
+        ],
+        "base_logits": [
+          -2.8332133293151855,
+          -2.8332133293151855
+        ],
+        "beta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "gate": "MLP hidden16; final layer zero, seed-specific hidden weights",
+        "gate_last_layer_weight_max_abs": 0.0,
+        "gate_last_layer_bias_max_abs": 0.0
+      },
+      "initial_numeric_state_sha256_by_seed": {
+        "17": "d67d5458d4ec69e3d757c8924797941de97eafe2b9b7747a5e54693445c1cf31",
+        "29": "9d7fd413297fa5edd8336a00771b0552f5664f22b3a41f6537c1ccf69e15fbc1",
+        "43": "9650cdaa91e100c1a7d129a7bb2d4765c20c98bb3fe5cbb7bfb64a3d7a666652"
+      },
+      "initial_risk": {
+        "risk_over_rw": 0.9599145404148542,
+        "forecast_energy_penalty": 0.001939630704213902,
+        "outcome_alignment_credit": 0.04202509028936005,
+        "risk_by_seed_horizon": [
+          [
+            0.9721879315619572,
+            0.947335671863842,
+            0.9602200178187634
+          ]
+        ],
+        "energy_by_seed_horizon": [
+          [
+            0.0006057898435636341,
+            0.0026552520912652786,
+            0.002557850177812793
+          ]
+        ],
+        "alignment_by_seed_horizon": [
+          [
+            0.02841785828160682,
+            0.05531958022742318,
+            0.042337832359050157
+          ]
+        ]
+      },
+      "final_risk": {
+        "risk_over_rw": 0.9599145404148542,
+        "forecast_energy_penalty": 0.0019396307042139022,
+        "outcome_alignment_credit": 0.04202509028936005,
+        "risk_by_seed_horizon": [
+          [
+            0.9721879315619572,
+            0.947335671863842,
+            0.9602200178187634
+          ],
+          [
+            0.9721879315619572,
+            0.947335671863842,
+            0.9602200178187634
+          ],
+          [
+            0.9721879315619572,
+            0.947335671863842,
+            0.9602200178187634
+          ]
+        ],
+        "energy_by_seed_horizon": [
+          [
+            0.0006057898435636341,
+            0.0026552520912652786,
+            0.002557850177812793
+          ],
+          [
+            0.0006057898435636341,
+            0.0026552520912652786,
+            0.002557850177812793
+          ],
+          [
+            0.0006057898435636341,
+            0.0026552520912652786,
+            0.002557850177812793
+          ]
+        ],
+        "alignment_by_seed_horizon": [
+          [
+            0.02841785828160682,
+            0.05531958022742318,
+            0.042337832359050157
+          ],
+          [
+            0.02841785828160682,
+            0.05531958022742318,
+            0.042337832359050157
+          ],
+          [
+            0.02841785828160682,
+            0.05531958022742318,
+            0.042337832359050157
+          ]
+        ]
+      },
+      "learning_improvement_ratio_points": 0.0,
+      "prior_improvement_from_rw_ratio_points": 0.040085459585145755,
+      "selected_lr": 0.003,
+      "selected_epoch": 0,
+      "selection_tasks": 2,
+      "selection_tasks_with_positive_steps": 2,
+      "selection_positive_steps": 150,
+      "refit_constructions": 3,
+      "refit_tasks_with_positive_steps": 0,
+      "refit_positive_steps": 0,
+      "all_five_saved_checkpoints_equal_same_seed_initial": true,
+      "refit_max_forecast_shift_from_initial_normalized": 0.0
+    }
+  },
+  "checkpoints": [
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "max_gradient_norm_before_clip": 0.0381217896938324,
+      "optimization_parameter_change_before_selection_restore": 0.5236397123388097,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9878529803478374,
+      "checkpoint_exact_fitting_loss": 0.9878529803478374,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "fab0f5bbdb79ba87b1d9fcfb9ef503f6fa600285e1fe83deff8bf1a95d787f80",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/selection_lr0.003.json",
+      "initial_validation_loss_replayed": 1.0448265252021347,
+      "checkpoint_validation_loss_replayed": 1.0448265252021347,
+      "validation_replay_gap": 0.0,
+      "initial_validation_replay_gap": 0.0,
+      "minimum_logged_trained_epoch_validation_loss": 1.0463874609604842,
+      "minimum_logged_trained_validation_minus_initial": 0.0015609357583494798,
+      "logged_first_epoch_minibatch_train_loss": 0.9877339601516724,
+      "logged_last_epoch_minibatch_train_loss": 0.9808114290237426,
+      "logged_last_epoch_validation_loss": 1.0767154015277247,
+      "logged_training_losses_are_not_checkpoint_full_data_risks": true
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "is_original_selected_lr": false,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "max_gradient_norm_before_clip": 0.055388547480106354,
+      "optimization_parameter_change_before_selection_restore": 1.5909311437376996,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9878529803478374,
+      "checkpoint_exact_fitting_loss": 0.9878529803478374,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "e8bbed6bfc91ca757f0b2132f8822c0446ae73cb3b31543510b3fcac6b9496ed",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/selection_lr0.01.json",
+      "initial_validation_loss_replayed": 1.0448265252021347,
+      "checkpoint_validation_loss_replayed": 1.0448265252021347,
+      "validation_replay_gap": 0.0,
+      "initial_validation_replay_gap": 0.0,
+      "minimum_logged_trained_epoch_validation_loss": 1.0501934670663862,
+      "minimum_logged_trained_validation_minus_initial": 0.005366941864251462,
+      "logged_first_epoch_minibatch_train_loss": 0.9873411297798157,
+      "logged_last_epoch_minibatch_train_loss": 0.9653276920318603,
+      "logged_last_epoch_validation_loss": 1.3588787597575298,
+      "logged_training_losses_are_not_checkpoint_full_data_risks": true
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9947792865008479,
+      "checkpoint_exact_fitting_loss": 0.9947792865008479,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "80581a23cb4f4b0e1ea574e4a0590482713bc68f147eb03bfb1f05ec6e9ca298",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/refit_seed17.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9947792865008479,
+      "checkpoint_exact_fitting_loss": 0.9947792865008479,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "07883fbdb6c6dba0d6873651a693620fa20322fd8ca5931ef156bdac6e9cb9b9",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/refit_seed29.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "liquidity_full",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9947792865008479,
+      "checkpoint_exact_fitting_loss": 0.9947792865008479,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "a1a888b58b8cc1e7f855280ec7f4a2618cc9428abb8db9bb22911cb84cd696cd",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/refit_seed43.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "max_gradient_norm_before_clip": 0.03838469460606575,
+      "optimization_parameter_change_before_selection_restore": 0.5223110423154834,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9905836877573841,
+      "checkpoint_exact_fitting_loss": 0.9905836877573841,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "fab0f5bbdb79ba87b1d9fcfb9ef503f6fa600285e1fe83deff8bf1a95d787f80",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/selection_lr0.003.json",
+      "initial_validation_loss_replayed": 1.0438685599608843,
+      "checkpoint_validation_loss_replayed": 1.0438685599608843,
+      "validation_replay_gap": 0.0,
+      "initial_validation_replay_gap": 0.0,
+      "minimum_logged_trained_epoch_validation_loss": 1.0452002567626475,
+      "minimum_logged_trained_validation_minus_initial": 0.0013316968017631492,
+      "logged_first_epoch_minibatch_train_loss": 0.990498149394989,
+      "logged_last_epoch_minibatch_train_loss": 0.9837040662765503,
+      "logged_last_epoch_validation_loss": 1.0733102647250037,
+      "logged_training_losses_are_not_checkpoint_full_data_risks": true
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "is_original_selected_lr": false,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "max_gradient_norm_before_clip": 0.05805455893278122,
+      "optimization_parameter_change_before_selection_restore": 1.6381493900294286,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9905836877573841,
+      "checkpoint_exact_fitting_loss": 0.9905836877573841,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "e8bbed6bfc91ca757f0b2132f8822c0446ae73cb3b31543510b3fcac6b9496ed",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/selection_lr0.01.json",
+      "initial_validation_loss_replayed": 1.0438685599608843,
+      "checkpoint_validation_loss_replayed": 1.0438685599608843,
+      "validation_replay_gap": 0.0,
+      "initial_validation_replay_gap": 0.0,
+      "minimum_logged_trained_epoch_validation_loss": 1.048495502329816,
+      "minimum_logged_trained_validation_minus_initial": 0.004626942368931575,
+      "logged_first_epoch_minibatch_train_loss": 0.9901514649391174,
+      "logged_last_epoch_minibatch_train_loss": 0.9686090588569641,
+      "logged_last_epoch_validation_loss": 1.3408317555361347,
+      "logged_training_losses_are_not_checkpoint_full_data_risks": true
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9967160099948539,
+      "checkpoint_exact_fitting_loss": 0.9967160099948539,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "80581a23cb4f4b0e1ea574e4a0590482713bc68f147eb03bfb1f05ec6e9ca298",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/refit_seed17.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9967160099948539,
+      "checkpoint_exact_fitting_loss": 0.9967160099948539,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "07883fbdb6c6dba0d6873651a693620fa20322fd8ca5931ef156bdac6e9cb9b9",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/refit_seed29.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "liquidity_readout",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9967160099948539,
+      "checkpoint_exact_fitting_loss": 0.9967160099948539,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "a1a888b58b8cc1e7f855280ec7f4a2618cc9428abb8db9bb22911cb84cd696cd",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/refit_seed43.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "max_gradient_norm_before_clip": 0.03893766179680824,
+      "optimization_parameter_change_before_selection_restore": 0.4785794308400482,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868",
+        "checkpoint_numeric_state_sha256": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868"
+      },
+      "initial_exact_fitting_loss": 0.9847803566023882,
+      "checkpoint_exact_fitting_loss": 0.9847803566023882,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "966aae3d25bb305da7cd3268c5ed5dbd1465a7c537e336589dec933c9fedfb49",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/selection_lr0.003.json",
+      "initial_validation_loss_replayed": 1.0403773239606644,
+      "checkpoint_validation_loss_replayed": 1.0403773239606644,
+      "validation_replay_gap": 0.0,
+      "initial_validation_replay_gap": 0.0,
+      "minimum_logged_trained_epoch_validation_loss": 1.0417636876409726,
+      "minimum_logged_trained_validation_minus_initial": 0.0013863636803082002,
+      "logged_first_epoch_minibatch_train_loss": 0.9847084999084472,
+      "logged_last_epoch_minibatch_train_loss": 0.9780096292495728,
+      "logged_last_epoch_validation_loss": 1.0678633399706245,
+      "logged_training_losses_are_not_checkpoint_full_data_risks": true
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "is_original_selected_lr": false,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "max_gradient_norm_before_clip": 0.06925483793020248,
+      "optimization_parameter_change_before_selection_restore": 1.44642019298165,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868",
+        "checkpoint_numeric_state_sha256": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868"
+      },
+      "initial_exact_fitting_loss": 0.9847803566023882,
+      "checkpoint_exact_fitting_loss": 0.9847803566023882,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "d58f6bfda0f96920d7223dc1af6b283987281490bee324f9e931d70ec24bee3b",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/selection_lr0.01.json",
+      "initial_validation_loss_replayed": 1.0403773239606644,
+      "checkpoint_validation_loss_replayed": 1.0403773239606644,
+      "validation_replay_gap": 0.0,
+      "initial_validation_replay_gap": 0.0,
+      "minimum_logged_trained_epoch_validation_loss": 1.0451090916253751,
+      "minimum_logged_trained_validation_minus_initial": 0.004731767664710729,
+      "logged_first_epoch_minibatch_train_loss": 0.9843869924545288,
+      "logged_last_epoch_minibatch_train_loss": 0.9630077958106995,
+      "logged_last_epoch_validation_loss": 1.3247766736596975,
+      "logged_training_losses_are_not_checkpoint_full_data_risks": true
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868",
+        "checkpoint_numeric_state_sha256": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868"
+      },
+      "initial_exact_fitting_loss": 0.9916759606039174,
+      "checkpoint_exact_fitting_loss": 0.9916759606039174,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "26a7e40a73925f7f2f45e529a95c5fdd370e8e39cfed36c3ddb611f3542a40bf",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/refit_seed17.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868",
+        "checkpoint_numeric_state_sha256": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868"
+      },
+      "initial_exact_fitting_loss": 0.9916759606039174,
+      "checkpoint_exact_fitting_loss": 0.9916759606039174,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "269e4d1cb42578180014806f5fe6b203272d65f92a57990bf15f2f1f2cc40f01",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/refit_seed29.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "shock_size_only",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868",
+        "checkpoint_numeric_state_sha256": "64ab14708d8c49a3aa3e3f280376c1906f68c980078b1729a2a0c79a10703868"
+      },
+      "initial_exact_fitting_loss": 0.9916759606039174,
+      "checkpoint_exact_fitting_loss": 0.9916759606039174,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "ae2a212080fd15a94ba59436ee4d7641c40d125ab5cd7181e4dd3f58646b70a5",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/refit_seed43.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "max_gradient_norm_before_clip": 0.20261652767658234,
+      "optimization_parameter_change_before_selection_restore": 0.525602256688975,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9878529803478374,
+      "checkpoint_exact_fitting_loss": 0.9878529803478374,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "fab0f5bbdb79ba87b1d9fcfb9ef503f6fa600285e1fe83deff8bf1a95d787f80",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.003.json",
+      "initial_validation_loss_replayed": 1.0448265252021347,
+      "checkpoint_validation_loss_replayed": 1.0448265252021347,
+      "validation_replay_gap": 0.0,
+      "initial_validation_replay_gap": 0.0,
+      "minimum_logged_trained_epoch_validation_loss": 1.0458723070274414,
+      "minimum_logged_trained_validation_minus_initial": 0.0010457818253066797,
+      "logged_first_epoch_minibatch_train_loss": 0.9876078605651856,
+      "logged_last_epoch_minibatch_train_loss": 0.968353545665741,
+      "logged_last_epoch_validation_loss": 1.0883616035472985,
+      "logged_training_losses_are_not_checkpoint_full_data_risks": true
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "is_original_selected_lr": false,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "max_gradient_norm_before_clip": 0.23717792332172394,
+      "optimization_parameter_change_before_selection_restore": 1.3720216083814136,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9878529803478374,
+      "checkpoint_exact_fitting_loss": 0.9878529803478374,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "e8bbed6bfc91ca757f0b2132f8822c0446ae73cb3b31543510b3fcac6b9496ed",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.01.json",
+      "initial_validation_loss_replayed": 1.0448265252021347,
+      "checkpoint_validation_loss_replayed": 1.0448265252021347,
+      "validation_replay_gap": 0.0,
+      "initial_validation_replay_gap": 0.0,
+      "minimum_logged_trained_epoch_validation_loss": 1.0485617920279158,
+      "minimum_logged_trained_validation_minus_initial": 0.0037352668257810695,
+      "logged_first_epoch_minibatch_train_loss": 0.9869666337966919,
+      "logged_last_epoch_minibatch_train_loss": 0.9330165982246399,
+      "logged_last_epoch_validation_loss": 1.6613264404302162,
+      "logged_training_losses_are_not_checkpoint_full_data_risks": true
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9947792865008479,
+      "checkpoint_exact_fitting_loss": 0.9947792865008479,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "80581a23cb4f4b0e1ea574e4a0590482713bc68f147eb03bfb1f05ec6e9ca298",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/refit_seed17.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9947792865008479,
+      "checkpoint_exact_fitting_loss": 0.9947792865008479,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "07883fbdb6c6dba0d6873651a693620fa20322fd8ca5931ef156bdac6e9cb9b9",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/refit_seed29.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "liquidity_unconstrained",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.gamma_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "gate.delta_raw": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8",
+        "checkpoint_numeric_state_sha256": "4c29521227ba8baff432acb9f6aafddd5177202a7b51cb5dcfc358d573d1fdc8"
+      },
+      "initial_exact_fitting_loss": 0.9947792865008479,
+      "checkpoint_exact_fitting_loss": 0.9947792865008479,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "a1a888b58b8cc1e7f855280ec7f4a2618cc9428abb8db9bb22911cb84cd696cd",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/refit_seed43.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "max_gradient_norm_before_clip": 0.030574079602956772,
+      "optimization_parameter_change_before_selection_restore": 0.41469433057976685,
+      "checkpoint_change": {
+        "groups": {
+          "core.raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0",
+        "checkpoint_numeric_state_sha256": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0"
+      },
+      "initial_exact_fitting_loss": 0.9885784630911376,
+      "checkpoint_exact_fitting_loss": 0.9885784630911376,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "cb550b86bf75fd5ecd87cae7269106353b9ffee71ce43ec1483f5a11e3c6066a",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/selection_lr0.003.json",
+      "initial_validation_loss_replayed": 1.0429118144667215,
+      "checkpoint_validation_loss_replayed": 1.0429118144667215,
+      "validation_replay_gap": 0.0,
+      "initial_validation_replay_gap": 0.0,
+      "minimum_logged_trained_epoch_validation_loss": 1.0440520795131887,
+      "minimum_logged_trained_validation_minus_initial": 0.0011402650464671371,
+      "logged_first_epoch_minibatch_train_loss": 0.9885283470153808,
+      "logged_last_epoch_minibatch_train_loss": 0.9830478668212891,
+      "logged_last_epoch_validation_loss": 1.0640120622611924,
+      "logged_training_losses_are_not_checkpoint_full_data_risks": true
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "is_original_selected_lr": false,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "max_gradient_norm_before_clip": 0.03587229549884796,
+      "optimization_parameter_change_before_selection_restore": 1.273629262619276,
+      "checkpoint_change": {
+        "groups": {
+          "core.raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0",
+        "checkpoint_numeric_state_sha256": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0"
+      },
+      "initial_exact_fitting_loss": 0.9885784630911376,
+      "checkpoint_exact_fitting_loss": 0.9885784630911376,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "2bc95b3684a316c7902916499e0b343c042f959834daf4932641add61654e39a",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/selection_lr0.01.json",
+      "initial_validation_loss_replayed": 1.0429118144667215,
+      "checkpoint_validation_loss_replayed": 1.0429118144667215,
+      "validation_replay_gap": 0.0,
+      "initial_validation_replay_gap": 0.0,
+      "minimum_logged_trained_epoch_validation_loss": 1.0468591535020657,
+      "minimum_logged_trained_validation_minus_initial": 0.003947339035344166,
+      "logged_first_epoch_minibatch_train_loss": 0.9882543563842774,
+      "logged_last_epoch_minibatch_train_loss": 0.9710525751113892,
+      "logged_last_epoch_validation_loss": 1.1840556243198104,
+      "logged_training_losses_are_not_checkpoint_full_data_risks": true
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "core.raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0",
+        "checkpoint_numeric_state_sha256": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0"
+      },
+      "initial_exact_fitting_loss": 0.9951615878422174,
+      "checkpoint_exact_fitting_loss": 0.9951615878422174,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "a0da3e6d40bdef1e4669239dc2782e0834ef58dd7ff347d009ae48d530ad1555",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/refit_seed17.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "core.raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0",
+        "checkpoint_numeric_state_sha256": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0"
+      },
+      "initial_exact_fitting_loss": 0.9951615878422174,
+      "checkpoint_exact_fitting_loss": 0.9951615878422174,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "6c75f7dcc89cd36443e4e88ff12b564e02b720acd074dc6f16cf385468f47df2",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/refit_seed29.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "allocation_constant",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "core.raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0",
+        "checkpoint_numeric_state_sha256": "39358e0bec98dfc124f141a76d21d99498b6858013c8e8cae20f40902e63baf0"
+      },
+      "initial_exact_fitting_loss": 0.9951615878422174,
+      "checkpoint_exact_fitting_loss": 0.9951615878422174,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "bf43142d592040c962731dae895fa23d914b4ef601774c8323690b5e26c56108",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/refit_seed43.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "max_gradient_norm_before_clip": 0.11056539416313171,
+      "optimization_parameter_change_before_selection_restore": 1.5798895467187524,
+      "checkpoint_change": {
+        "groups": {
+          "core.raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.0.weight": {
+            "n_parameters": 112,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.0.bias": {
+            "n_parameters": 16,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.2.weight": {
+            "n_parameters": 32,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.2.bias": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "d67d5458d4ec69e3d757c8924797941de97eafe2b9b7747a5e54693445c1cf31",
+        "checkpoint_numeric_state_sha256": "d67d5458d4ec69e3d757c8924797941de97eafe2b9b7747a5e54693445c1cf31"
+      },
+      "initial_exact_fitting_loss": 0.9885784630911376,
+      "checkpoint_exact_fitting_loss": 0.9885784630911376,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "ec469f83bd8059bb22db49f71fb71c94fab5a02e5b36144ef93ee5c794d1c21b",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/selection_lr0.003.json",
+      "initial_validation_loss_replayed": 1.0429118144667215,
+      "checkpoint_validation_loss_replayed": 1.0429118144667215,
+      "validation_replay_gap": 0.0,
+      "initial_validation_replay_gap": 0.0,
+      "minimum_logged_trained_epoch_validation_loss": 1.0435794397901088,
+      "minimum_logged_trained_validation_minus_initial": 0.0006676253233872664,
+      "logged_first_epoch_minibatch_train_loss": 0.9883808255195617,
+      "logged_last_epoch_minibatch_train_loss": 0.9528517603874207,
+      "logged_last_epoch_validation_loss": 1.1075412635071817,
+      "logged_training_losses_are_not_checkpoint_full_data_risks": true
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "train",
+      "learning_rate": 0.01,
+      "is_original_selected_lr": false,
+      "epochs_executed": 15,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 75,
+      "max_gradient_norm_before_clip": 0.08999311178922653,
+      "optimization_parameter_change_before_selection_restore": 2.708800528002317,
+      "checkpoint_change": {
+        "groups": {
+          "core.raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.0.weight": {
+            "n_parameters": 112,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.0.bias": {
+            "n_parameters": 16,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.2.weight": {
+            "n_parameters": 32,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.2.bias": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "d67d5458d4ec69e3d757c8924797941de97eafe2b9b7747a5e54693445c1cf31",
+        "checkpoint_numeric_state_sha256": "d67d5458d4ec69e3d757c8924797941de97eafe2b9b7747a5e54693445c1cf31"
+      },
+      "initial_exact_fitting_loss": 0.9885784630911376,
+      "checkpoint_exact_fitting_loss": 0.9885784630911376,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "9a5f8a38568223c08b409290641dbed78fa5dd40a6aa43721468075cb339ab4c",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/selection_lr0.01.json",
+      "initial_validation_loss_replayed": 1.0429118144667215,
+      "checkpoint_validation_loss_replayed": 1.0429118144667215,
+      "validation_replay_gap": 0.0,
+      "initial_validation_replay_gap": 0.0,
+      "minimum_logged_trained_epoch_validation_loss": 1.0456810594240742,
+      "minimum_logged_trained_validation_minus_initial": 0.0027692449573526456,
+      "logged_first_epoch_minibatch_train_loss": 0.9877535581588746,
+      "logged_last_epoch_minibatch_train_loss": 0.9356030941009521,
+      "logged_last_epoch_validation_loss": 1.2669349262594756,
+      "logged_training_losses_are_not_checkpoint_full_data_risks": true
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 17,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "core.raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.0.weight": {
+            "n_parameters": 112,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.0.bias": {
+            "n_parameters": 16,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.2.weight": {
+            "n_parameters": 32,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.2.bias": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "d67d5458d4ec69e3d757c8924797941de97eafe2b9b7747a5e54693445c1cf31",
+        "checkpoint_numeric_state_sha256": "d67d5458d4ec69e3d757c8924797941de97eafe2b9b7747a5e54693445c1cf31"
+      },
+      "initial_exact_fitting_loss": 0.9951615878422174,
+      "checkpoint_exact_fitting_loss": 0.9951615878422174,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "d02337470f9ed843ca467310496daade3b842fea68ebc46acf69ebb091eacad2",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/refit_seed17.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 29,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "core.raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.0.weight": {
+            "n_parameters": 112,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.0.bias": {
+            "n_parameters": 16,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.2.weight": {
+            "n_parameters": 32,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.2.bias": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "9d7fd413297fa5edd8336a00771b0552f5664f22b3a41f6537c1ccf69e15fbc1",
+        "checkpoint_numeric_state_sha256": "9d7fd413297fa5edd8336a00771b0552f5664f22b3a41f6537c1ccf69e15fbc1"
+      },
+      "initial_exact_fitting_loss": 0.9951615878422174,
+      "checkpoint_exact_fitting_loss": 0.9951615878422174,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "52b05d018137650dbc097a30fef76386bfba4c3e01de521284328004b7ae9002",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/refit_seed29.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    },
+    {
+      "family": "allocation_readout",
+      "seed": 43,
+      "mode": "final",
+      "learning_rate": 0.003,
+      "is_original_selected_lr": true,
+      "epochs_executed": 0,
+      "selected_epoch": 0,
+      "gradient_positive_steps": 0,
+      "max_gradient_norm_before_clip": 0.0,
+      "optimization_parameter_change_before_selection_restore": 0.0,
+      "checkpoint_change": {
+        "groups": {
+          "core.raw_rates": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.beta": {
+            "n_parameters": 3,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.base_logits": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.0.weight": {
+            "n_parameters": 112,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.0.bias": {
+            "n_parameters": 16,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.2.weight": {
+            "n_parameters": 32,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          },
+          "core.gate.2.bias": {
+            "n_parameters": 2,
+            "change_l2": 0.0,
+            "n_changed_exact": 0
+          }
+        },
+        "parameter_change_l2": 0.0,
+        "all_state_tensors_equal_to_same_seed_initial": true,
+        "initial_numeric_state_sha256": "9650cdaa91e100c1a7d129a7bb2d4765c20c98bb3fe5cbb7bfb64a3d7a666652",
+        "checkpoint_numeric_state_sha256": "9650cdaa91e100c1a7d129a7bb2d4765c20c98bb3fe5cbb7bfb64a3d7a666652"
+      },
+      "initial_exact_fitting_loss": 0.9951615878422174,
+      "checkpoint_exact_fitting_loss": 0.9951615878422174,
+      "fitting_loss_difference": 0.0,
+      "checkpoint_sha256": "56e0243f8d5cd050374f89b3ef64a2003b0d5c7560d26a62e1b498183e0436bd",
+      "receipt": "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/refit_seed43.json",
+      "original_prediction_replay_max_abs_gap_native": 0.0,
+      "forecast_max_abs_shift_from_same_seed_initial_normalized_all_origins": 0.0
+    }
+  ],
+  "source_sha256": {
+    "run_model_search.py": "26347433fe6416298e4969da618cbba291999f3a66131172bc8f2e510f3633bf",
+    "innovation_models.py": "cca83f45474c5110f180ae8b7763131f33596a664939c4ebd34c32db24b4dc1e",
+    "run_liquidity_extension.py": "95665858a1945b00bba6d6233022c34c0a58993899ccadda8c895f64ffe69807",
+    "liquidity_models.py": "91dd66c0b33b8d75100e37cc382f01be44021ae538f6cbbedddda7f9b9386e0b",
+    "run_new_market_replication.py": "8c617a714bb0b47d117b213de9d299c3bd6a534c8211c28c8d039d454df12e56",
+    "literature_diagnostic.py": "e9053bfd34bce9e60c67c0590245271ccecaaf0bcf009a1e715be9abe7ada2e5",
+    "run_swewt_gru_comparison.py": "0b3395f547fad792c6880a9d25819c6e326ab48ef733240ad690e4833b63218d",
+    "run_official_tianjin_extension.py": "2b47055caf840d7fe572365760a8a602edff844df7dc23dc2caf99717fc77e24"
+  },
+  "source_hashes_unchanged": true,
+  "statistics_plan_sha256": "8645aa650d5202852d00700f5bb7a47f907c5c7476db7dd84a923cecc7eae913",
+  "diagnostic_script_sha256": "3071a5f3054772c7b3635a0141761a2ca2cad1663001f9d53db09fe7e12fd860",
+  "helper_script_sha256": "288d78530e5bee0d84aa046c3ae3b8bc82fceda85aee505e4abb118ea3743adf",
+  "source_artifact_hashes_relative_to_run": {
+    "PROTOCOL_BEFORE_RUN.json": "07e77d164eec1b388bf7324aaed47ac3a6d62d3360c003aba15f1d9d17af1741",
+    "EXECUTION_COMPLETE.json": "c4298e13b419222dd930f4488ee1556b7e0a973d09ee03c5f3f1f6391cfc07e9",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/INPUT_MANIFEST.json": "96ce87720b7ee3f583333e6dc0451ceb720505d3ae596bd2e8ffa9bdd3368ab1",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/CHOICE_BEFORE_TEST.json": "4c8ce4985b372ec7f12071e9131cbb5aeb65a486398744588a7d08ca41b6852e",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/SUMMARY.json": "090916e4b4b0b2699349fd791ee230ada85998828d5912bc5823a2cef557571c",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/predictions.npz": "6df3981b11b2d4e8ff689673bec2282c4a09d6d4f56f3e1d1084332c081bebae",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/selection_lr0.003.json": "d826e68b8846db473cbd29bc13602afcf5b9a725bc5bb7a4ad18724ee5ba8f26",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/selection_lr0.003.pt": "fab0f5bbdb79ba87b1d9fcfb9ef503f6fa600285e1fe83deff8bf1a95d787f80",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/selection_lr0.01.json": "ef9826a0166750ffd07a4d37348f8a285d8b811d10d4ca5a116d6855f9a37178",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/selection_lr0.01.pt": "e8bbed6bfc91ca757f0b2132f8822c0446ae73cb3b31543510b3fcac6b9496ed",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/refit_seed17.json": "2c087839ad37f0a24df1be995eb4ccdbf83d02874101423f52089a6690d1df25",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/refit_seed17.pt": "80581a23cb4f4b0e1ea574e4a0590482713bc68f147eb03bfb1f05ec6e9ca298",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/refit_seed29.json": "1d96bfcd2a76490e684b9829e1c2ab84e8a59b80b4fdd2825b9d8e29f89a7c4f",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/refit_seed29.pt": "07883fbdb6c6dba0d6873651a693620fa20322fd8ca5931ef156bdac6e9cb9b9",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/refit_seed43.json": "9137e81e7a3d2bf82f6e551f0c6239e03f5db85349c06eb1c407693321f71c8d",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_full/refit_seed43.pt": "a1a888b58b8cc1e7f855280ec7f4a2618cc9428abb8db9bb22911cb84cd696cd",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/CHOICE_BEFORE_TEST.json": "b0b2bce614b223e6a98375e7dbe0c2a49e400bda052c3fda1bd8556b02e762df",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/SUMMARY.json": "9ac9a0ca5a2fc16c38f3c00d56a384e43e6e52c7901707cd4e697027f243d382",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/predictions.npz": "65d8cc87268ff4af33b9028ef8fdaa72dcc97b2ba2bd14d452a54457e071fbcd",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/selection_lr0.003.json": "3155b5d3a049ccd5460950fbb0f4c04c2b35cf0c22c3850ba5ba7b83d453f548",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/selection_lr0.003.pt": "fab0f5bbdb79ba87b1d9fcfb9ef503f6fa600285e1fe83deff8bf1a95d787f80",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/selection_lr0.01.json": "18233ee30bfd9734660efc092ea71e266d913672c563042bd2c85a16c02a2e7f",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/selection_lr0.01.pt": "e8bbed6bfc91ca757f0b2132f8822c0446ae73cb3b31543510b3fcac6b9496ed",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/refit_seed17.json": "fa233f98423723016e6ed73760b9bd7ad15482b0cadbdc375d689cba08a1eb3b",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/refit_seed17.pt": "80581a23cb4f4b0e1ea574e4a0590482713bc68f147eb03bfb1f05ec6e9ca298",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/refit_seed29.json": "5bf457032f3783dfbf137e4b5df48bcd9e1c33efbfdd2fd130817098abe41bba",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/refit_seed29.pt": "07883fbdb6c6dba0d6873651a693620fa20322fd8ca5931ef156bdac6e9cb9b9",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/refit_seed43.json": "51fdd8b8c29cc9426c2ad8d57e6aaf4abae57a529a972496a47c91733b1e4d74",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_readout/refit_seed43.pt": "a1a888b58b8cc1e7f855280ec7f4a2618cc9428abb8db9bb22911cb84cd696cd",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/CHOICE_BEFORE_TEST.json": "dfb44f2c7fd5e92e57006cc2a731ac11013e75a8e955cf689185927f0924d9f0",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/SUMMARY.json": "a3ec1c719b5e0fc07e1db94b4c883cb7b70955c8bcb3ecd56a40ec0f1e535e08",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/predictions.npz": "8f9a7a6f497c5024d8d47417fe617f475ab5bab3b9d94913bd8230103df8f837",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/selection_lr0.003.json": "7b6948d860d97cfcc6952c1cbf00bc70a693b9042dc5ac14fffdce0ca73b5164",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/selection_lr0.003.pt": "966aae3d25bb305da7cd3268c5ed5dbd1465a7c537e336589dec933c9fedfb49",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/selection_lr0.01.json": "3b74bd5c62e9fec9830187ef46299302cd92c4e6306b555250d9089c8eabb6db",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/selection_lr0.01.pt": "d58f6bfda0f96920d7223dc1af6b283987281490bee324f9e931d70ec24bee3b",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/refit_seed17.json": "7e181c34e67af213b0cd21ad99e5b9c61f5ecaf2854b0841283a943cc2785ee3",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/refit_seed17.pt": "26a7e40a73925f7f2f45e529a95c5fdd370e8e39cfed36c3ddb611f3542a40bf",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/refit_seed29.json": "686d998ad6e70b7059af4981e4c0ff1ca8320933483a0984489023825f09d689",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/refit_seed29.pt": "269e4d1cb42578180014806f5fe6b203272d65f92a57990bf15f2f1f2cc40f01",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/refit_seed43.json": "534cee25e88b1de34895513c61851cabc5ca81de17f1173f07e1dcaf5e7c7cb3",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/shock_size_only/refit_seed43.pt": "ae2a212080fd15a94ba59436ee4d7641c40d125ab5cd7181e4dd3f58646b70a5",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/CHOICE_BEFORE_TEST.json": "a473dc1cb916e9982085a677963abf54d9fcf4a608c37be24d09d1de409517b8",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/SUMMARY.json": "d53fc025aa92052595b0f98b87809175533821cb405d42f46baab6d21523da07",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/predictions.npz": "6df3981b11b2d4e8ff689673bec2282c4a09d6d4f56f3e1d1084332c081bebae",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.003.json": "4b1060f7ee9ba5546bf5d582a109a287c1f5afb542dac6c1d7413450c7ca8088",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.003.pt": "fab0f5bbdb79ba87b1d9fcfb9ef503f6fa600285e1fe83deff8bf1a95d787f80",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.01.json": "381586d224fc8789afc113db04bda806fe246fd1c7fc0300126b881d701743a7",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/selection_lr0.01.pt": "e8bbed6bfc91ca757f0b2132f8822c0446ae73cb3b31543510b3fcac6b9496ed",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/refit_seed17.json": "3b6bbf4fe485a6cef9e092fdee8ce69411527ebacfed75ffd7d5a18a41486de7",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/refit_seed17.pt": "80581a23cb4f4b0e1ea574e4a0590482713bc68f147eb03bfb1f05ec6e9ca298",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/refit_seed29.json": "7b41d2e9cafae77124cd7ee09ac80e9f7a33488344ac2da0e2f9d0d6c9087664",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/refit_seed29.pt": "07883fbdb6c6dba0d6873651a693620fa20322fd8ca5931ef156bdac6e9cb9b9",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/refit_seed43.json": "2d4f8b352b8ec4d059cd2cbeb415992502d7028c99b7425315aedec25cca1741",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/liquidity_unconstrained/refit_seed43.pt": "a1a888b58b8cc1e7f855280ec7f4a2618cc9428abb8db9bb22911cb84cd696cd",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/CHOICE_BEFORE_TEST.json": "1e943a054c918449b0907c957400b7124ed1fd9423cd48caeea5f237d94f7554",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/SUMMARY.json": "a2624746a0cf09392ebf902f0976c222339db77e89ccd1368421ed12e15baa24",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/predictions.npz": "188818d02eee3c5333d8f8d079e4997afaa6d9724f2751e60b0ceb0fd445181c",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/selection_lr0.003.json": "755a8b2bcb4041bf392f20f7408e02117d1c7d648d242e110ae325053932619e",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/selection_lr0.003.pt": "cb550b86bf75fd5ecd87cae7269106353b9ffee71ce43ec1483f5a11e3c6066a",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/selection_lr0.01.json": "be260d4260b78b9c452672c942086a509acaff83c441bc41cf99d4e5fc832d63",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/selection_lr0.01.pt": "2bc95b3684a316c7902916499e0b343c042f959834daf4932641add61654e39a",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/refit_seed17.json": "dcc7284e7258507e03408e69a6dc4a9f21455cb898604903befdcf2a471c6086",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/refit_seed17.pt": "a0da3e6d40bdef1e4669239dc2782e0834ef58dd7ff347d009ae48d530ad1555",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/refit_seed29.json": "815bea157504fe4d2c6aeb501f032fe64bed16496bd5716b41fbbf549530b7ee",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/refit_seed29.pt": "6c75f7dcc89cd36443e4e88ff12b564e02b720acd074dc6f16cf385468f47df2",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/refit_seed43.json": "fd4b7806d0be32a358e509f3091700fcdae337cebf97f4640a45f458ec85765b",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_constant/refit_seed43.pt": "bf43142d592040c962731dae895fa23d914b4ef601774c8323690b5e26c56108",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/CHOICE_BEFORE_TEST.json": "c8bd15e30a94a76f35723cee897dca63c452fa19b89545f459acc40afa4acd08",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/SUMMARY.json": "29df0f4f2c8bd2737a50885c11086bade43120d14fee64ebf0cd0854965f51e7",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/predictions.npz": "188818d02eee3c5333d8f8d079e4997afaa6d9724f2751e60b0ceb0fd445181c",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/selection_lr0.003.json": "ef5cc571071e64cbaf6197a412225864d305b726b9bb8d6c63d2e0fa2cdc2f75",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/selection_lr0.003.pt": "ec469f83bd8059bb22db49f71fb71c94fab5a02e5b36144ef93ee5c794d1c21b",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/selection_lr0.01.json": "d3380eb8b0a55d1e9db6e6f1ce80cf965e5ba6ef6837b1287a93b8605ea40ca7",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/selection_lr0.01.pt": "9a5f8a38568223c08b409290641dbed78fa5dd40a6aa43721468075cb339ab4c",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/refit_seed17.json": "807b96858e6d3fd420d56e03fccb9745965e08cd80f5aecef385e17c036c1dbf",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/refit_seed17.pt": "d02337470f9ed843ca467310496daade3b842fea68ebc46acf69ebb091eacad2",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/refit_seed29.json": "ef5c6298e7acc12d36c29a3548d5e1c0786b7c78722a99f936022879d4147f60",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/refit_seed29.pt": "52b05d018137650dbc097a30fef76386bfba4c3e01de521284328004b7ae9002",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/refit_seed43.json": "c2c6914c3abb099b4cf508656fe39edb589b93f6015da760915104cfd0d1825c",
+    "TIANJIN_OFFICIAL_MEAN_fixed602020/allocation_readout/refit_seed43.pt": "56e0243f8d5cd050374f89b3ef64a2003b0d5c7560d26a62e1b498183e0436bd"
+  },
+  "runtime": {
+    "python_executable": "/tmp/carbon-research-env/bin/python",
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "torch": "2.14.1+cpu"
+  }
+}

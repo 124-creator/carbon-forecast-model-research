@@ -1,0 +1,350 @@
+{
+  "schema_version": 1,
+  "prepared_at_utc": "2026-10-19 14:10:51 UTC",
+  "document": "PUBLISHED_TRICKS_ZH.md",
+  "study": "literature_tricks_primary_model_20261019f",
+  "scope": "Targeted primary-source verification for enhancing the existing signed_context_response; no market fits or forecast scoring were run for this document.",
+  "timing": "Retrieval began across stages e/f; document compiled during stage-f implementation. Exact before-fit status is established by the frozen protocol and execution log, not by an inferred document timestamp.",
+  "exposure": "Both Tianjin and CEA evaluation tails had already been scored. All stage-f outcomes are exposed development.",
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Carbon Price Forecasting Using Optimized Sliding Window Empirical Wavelet Transform and Gated Recurrent Unit Network to Mitigate Data Leakage",
+      "authors": [
+        "Zeyu Zhang",
+        "Xiaoqian Liu",
+        "Xiling Zhang",
+        "Zhishan Yang",
+        "Jian Yao"
+      ],
+      "doi": "10.3390/en17174358",
+      "journal": "Energies",
+      "volume": 17,
+      "issue": 17,
+      "article_number": "4358",
+      "published_date": "2024-08-31",
+      "urls": {
+        "official": "https://www.mdpi.com/1996-1073/17/17/4358",
+        "read_full_text": "https://www.researchgate.net/publication/383685619_Carbon_Price_Forecasting_Using_Optimized_Sliding_Window_Empirical_Wavelet_Transform_and_Gated_Recurrent_Unit_Network_to_Mitigate_Data_Leakage"
+      },
+      "access": {
+        "date": "2026-10-19",
+        "degree": "Full paper supplied by MDPI on ResearchGate read; not a third-party summary",
+        "locations": [
+          "Method/input construction",
+          "Section3.2.2",
+          "Table4",
+          "Section3.4.1/Table5",
+          "Section3.4.2/Table6, PDF pages17-18"
+        ]
+      },
+      "protocol": {
+        "input": "Sliding-window EWT; raw values plus decomposed component tails supplied to GRU",
+        "tail_length": 17,
+        "window_search": [
+          24,
+          64
+        ],
+        "decomposition_scale_search": [
+          2,
+          4
+        ],
+        "tpe_runs": 10,
+        "maximum_epochs": 1000,
+        "patience": 100,
+        "cases": [
+          {
+            "case": 1,
+            "decomposition": "train+validation+test joint",
+            "mae": 1.121,
+            "rmse": 1.594
+          },
+          {
+            "case": 2,
+            "decomposition": "train+validation joint; test sliding",
+            "mae": 6.492,
+            "rmse": 7.106
+          },
+          {
+            "case": 3,
+            "decomposition": "train joint; validation/test sliding",
+            "mae": 5.115,
+            "rmse": 5.998
+          },
+          {
+            "case": 4,
+            "decomposition": "all partitions sliding per origin",
+            "mae": 1.569,
+            "rmse": 2.317
+          }
+        ],
+        "single_gru_rmse_table5": 4.772
+      },
+      "boundaries": [
+        "Case1 is a negative/information-availability comparison, not endorsement of a real-time forecast claim.",
+        "Case2 and Case3 performed worse than Case4.",
+        "The article does not implement the proposed shared-rate conditional-response model.",
+        "This project retains all three analysis components; highest-frequency removal was withdrawn.",
+        "TPE runs=10 is not evidence of ten independently reported seeds.",
+        "Original l=17 was discussed after the ADF procedure; do not say PACF selected17."
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "Onlineforecast: An R Package for Adaptive and Recursive Forecasting",
+      "authors": [
+        "Peder Bacher",
+        "Hjörleifur G. Bergsteinsson",
+        "Linde Frölke",
+        "Mikkel L. Sørensen",
+        "Julian Lemos-Vinasco",
+        "Jon Liisberg",
+        "Jan Kloppenborg Møller",
+        "Henrik Aalborg Nielsen",
+        "Henrik Madsen"
+      ],
+      "doi": "10.32614/RJ-2023-031",
+      "journal": "The R Journal",
+      "volume": 15,
+      "issue": 1,
+      "pages": "173-194",
+      "date_distinction": {
+        "issue_label": "March2023",
+        "web_published_date": "2023-09-07"
+      },
+      "urls": {
+        "official": "https://journal.r-project.org/articles/RJ-2023-031/",
+        "full_pdf": "https://journal.r-project.org/articles/RJ-2023-031/RJ-2023-031.pdf"
+      },
+      "access": {
+        "date": "2026-10-19",
+        "degree": "Official full PDF read in relevant technical sections",
+        "locations": [
+          "Regression",
+          "Model validation",
+          "Appendix Regression pp192-193, Eq40-44"
+        ]
+      },
+      "protocol": {
+        "input_transform": "Nonlinear transformations can be tuned separately from linear regression coefficients.",
+        "label_alignment": "At time t, newly observed y_t is paired with x_{t|t-k} issued k periods earlier.",
+        "forgetting": "R_t=lambda*R_(t-1)+x*x'; lambda=1 gives equal historical weights; lambda<1 increases recent weights.",
+        "horizon_heads": "Separate coefficients for each forecast horizon."
+      },
+      "boundaries": [
+        "Our shared three-coefficient head and joint H20 maturity are adaptations.",
+        "Half-life126 is a project choice, not a carbon-price recommendation from this paper.",
+        "A time-varying head does not imply newly optimized nonlinear dynamics."
+      ]
+    },
+    {
+      "id": "S2a",
+      "title": "Setup and use onlineforecast models",
+      "author": "Peder Bacher",
+      "vignette_date": "2023-10-12",
+      "urls": {
+        "official_author_vignette": "https://www.stat.ethz.ch/CRAN/web/packages/onlineforecast/vignettes/setup-and-use-model.html"
+      },
+      "access": {
+        "date": "2026-10-19",
+        "degree": "Author-written CRAN vignette code and displayed output read; code not executed",
+        "locations": [
+          "Setting up a model",
+          "Tune the parameters",
+          "Input transformations"
+        ]
+      },
+      "protocol": {
+        "estimator": "rls_prm(lambda=0.9)",
+        "lambda_bounds_lower_initial_upper": [
+          0.9,
+          0.99,
+          0.9999
+        ],
+        "illustrative_optimized_lambda": 0.985,
+        "horizons": "1:36"
+      },
+      "boundaries": [
+        "This is a building heat-load illustration.",
+        "The displayed lambda is not evidence of an optimal carbon-price half-life."
+      ]
+    },
+    {
+      "id": "S3",
+      "title": "Forecasting the Price of Carbon with Macroeconomic and Financial variables",
+      "authors": [
+        "Andrea Bastianin",
+        "Elisabetta Mirto",
+        "Yan Qin",
+        "Luca Rossini"
+      ],
+      "journal_doi": "10.1016/j.jedc.2026.105435",
+      "read_version": {
+        "arxiv": "2402.04828v3",
+        "date": "2026-10-03",
+        "title_rendering_note": "The HTML page has a Supplementary Material heading but includes the main text and supplement."
+      },
+      "urls": {
+        "author_full_text": "https://arxiv.org/html/2402.04828v3",
+        "journal_doi": "https://doi.org/10.1016/j.jedc.2026.105435"
+      },
+      "access": {
+        "date": "2026-10-19",
+        "degree": "Author full text and relevant supplementary tables read",
+        "locations": [
+          "Section3.1",
+          "Section3.2",
+          "Section4.5",
+          "SupplementS.4.6/TableS.9"
+        ]
+      },
+      "protocol": {
+        "forecast_update": "Expanding window adds one observation for each new forecast.",
+        "interpolation": "Chow-Lin temporal disaggregation of annual verified emissions using industrial-production indicators.",
+        "sensitivity": "Omit interpolated verified emissions; retain main specification for scenario use after reporting accuracy sensitivity.",
+        "table_s9_bvar1_relative_rmsfe": [
+          {
+            "horizon": 1,
+            "with_emissions": 1.0505,
+            "without_emissions": 1.0498
+          },
+          {
+            "horizon": 12,
+            "with_emissions": 0.9372,
+            "without_emissions": 0.9389
+          }
+        ]
+      },
+      "boundaries": [
+        "This is a specific disclosed historical-data setting, not proof that every look-ahead construction is equivalent.",
+        "This is not evidence that most published studies endorse full-series decomposition.",
+        "Technical claims here are verified against arXiv v3; the periodical cover month is not treated as the online publication date."
+      ]
+    },
+    {
+      "id": "S4",
+      "title": "Are Transformers Effective for Time Series Forecasting?",
+      "authors": [
+        "Ailing Zeng",
+        "Muxi Chen",
+        "Lei Zhang",
+        "Qiang Xu"
+      ],
+      "doi": "10.1609/aaai.v37i9.26317",
+      "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+      "volume": 37,
+      "issue": 9,
+      "pages": "11121-11128",
+      "official_published_date": "2023-06-26",
+      "urls": {
+        "official": "https://ojs.aaai.org/index.php/AAAI/article/view/26317",
+        "author_code": "https://github.com/cure-lab/LTSF-Linear/blob/main/exp/exp_main.py"
+      },
+      "access": {
+        "date": "2026-10-19",
+        "degree": "Official publication metadata and author code read; code not executed",
+        "locations": [
+          "_select_criterion",
+          "train: Linear/DLinear branch and complete pred_len MSE",
+          "test: Linear/DLinear branch"
+        ],
+        "code_revision": "Live main page at access date, not asserted to be an immutable publication-time commit."
+      },
+      "protocol": {
+        "training_objective": "MSE over the complete predicted future horizon.",
+        "linear_forward": "Model receives batch_x; future batch_y is used for loss."
+      },
+      "boundaries": [
+        "Supports standard dense multi-step training, not the claim that our response model is DLinear.",
+        "Our H1..20 train and H1/5/20 validation is a controlled adaptation.",
+        "No teacher network or knowledge-distillation loss is present.",
+        "Additional dependent target coordinates are not additional independent samples."
+      ]
+    }
+  ],
+  "project_adaptations": {
+    "ewt": {
+      "status": "Final design communicated by root; implementation identity is determined by frozen source/plan.",
+      "retained_channels": [
+        "raw",
+        "EWT_analysis_1",
+        "EWT_analysis_2",
+        "EWT_analysis_3"
+      ],
+      "highest_frequency_dropped": false,
+      "shared_nonlinear_dynamics": "Two ordered historical rates and original raw-shock/volume gate shared across four state channels.",
+      "linear_coefficients": 9,
+      "total_fitted_scalars": {
+        "signed_context_response": 15,
+        "static_response": 11,
+        "amplitude_context": 15,
+        "signed_shock_only": 13
+      },
+      "raw_reference_total_fitted_scalars": {
+        "signed_context_response": 9,
+        "static_response": 5,
+        "amplitude_context": 9,
+        "signed_shock_only": 7
+      },
+      "ridge_input_features": 80,
+      "ridge_capacity_note": "80 is input dimensionality, not a universal total parameter count.",
+      "settings": [
+        "raw",
+        "window_past",
+        "train_joint_test_window",
+        "full_series_joint"
+      ],
+      "train_joint_phase_definition": "Training prefix only for selection training features; validation windows. Pretest prefix for final fitting features; test windows.",
+      "label_and_context": "Original official cumulative price changes and original shock/volume context retained.",
+      "identity_note": "Not the author's GRU numerical reproduction; do not describe the EWT model as still9 parameters."
+    },
+    "matured_readout": {
+      "block": "Separate raw input block on frozen stage-e nonlinear dynamics",
+      "update": "Only shared3 linear coefficients re-estimated after allH20 labels mature",
+      "maturity": "origin+20<=issue after observing the current official report",
+      "weighting": "Frozen; equal expanding; exponential half-life126; predeclared rolling windows",
+      "nonlinear_retraining": false,
+      "independent_seed_repetition": false,
+      "scale": "Original target/RMS scales; normalized weighted mean loss and matching weighted column RMS"
+    },
+    "dense_path": {
+      "block": "Separate raw dense-path training",
+      "training_horizons": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "validation_and_evaluation_horizons": [
+        1,
+        5,
+        20
+      ],
+      "primary_total_fitted_scalars": 9,
+      "new_fitted_parameter_dimensions": 0,
+      "mature_boundary_unchanged": true,
+      "future_at_inference": false,
+      "teacher_or_distillation": false,
+      "original_evaluation_coordinate_scales": "Exact original training variances retained",
+      "new_independent_origins": 0,
+      "budget_comparison": "Compare against sparse supervision with matching maximum training budget"
+    }
+  }
+}
+

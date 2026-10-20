@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "created_utc": "2026-10-17",
+  "purpose": "Bounded independent public dataset acquisition after official-endpoint attempts ended",
+  "overrides": "Adds new independent author repositories; does not modify the already frozen official-source scope",
+  "candidates": [
+    {
+      "priority": 1,
+      "id": "mendeley_d4bv52fgmd_v1",
+      "url": "https://data.mendeley.com/datasets/d4bv52fgmd/1",
+      "license_claim": "CC BY 4.0",
+      "target": "Shanghai carbon prices and allowances workbook; exclude futures/equities/weather/energy files from primary"
+    },
+    {
+      "priority": 2,
+      "id": "mendeley_5skvz8sgrz_v1",
+      "url": "https://data.mendeley.com/datasets/5skvz8sgrz/1",
+      "license_claim": "CC BY 4.0",
+      "target": "National carbon price; source/product identity must be checked"
+    },
+    {
+      "priority": 3,
+      "id": "sciencedb_819_v1",
+      "url": "https://www.scidb.cn/en/detail?dataSetId=633694461347495939",
+      "license_claim": "CC BY 4.0",
+      "target": "Seven pilots 2014–2017; evaluate raw-vs-author-cleaned identity; no assumption of closing price"
+    }
+  ],
+  "selection_basis": "Pre-download license/market/history availability; no selection by returns, distributions, or forecast outcomes.",
+  "temporal_partition": "If a series extends to 2024: development <=2023-12-31, confirmation 2024-01-01..2025-12-31, exclude >=2026. If it ends before 2024: ascending observed-date first floor(0.60*n) train, next floor(0.20*n) validation, remainder confirmation; this rule is frozen before reading any price values.",
+  "market_holdout": "Any previously unused new market may support a market-transfer evaluation after root freezes architecture/hyperparameters on existing markets. Do not train method-selection hyperparameters on the new-market confirmation segment.",
+  "observation_policy": "Retain source price fields without price-based deletions. No filling, no futures/spot splicing, no mixing products. Log source-side historical cleaning separately; do not describe transformed/cleaned author quotes as unprocessed originals.",
+  "metadata_only_outputs": "Counts/date bounds/schema/hash/format failures; no price values or distributions or scores emitted.",
+  "public_artifacts": "Metadata/code only; raw and derived daily observations remain local_only until root determines exact release scope."
+}

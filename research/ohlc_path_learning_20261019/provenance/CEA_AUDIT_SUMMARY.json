@@ -1,0 +1,78 @@
+{
+  "parser_version": "1",
+  "row_count": 414,
+  "date_min": "2021-07-16",
+  "date_max": "2023-12-29",
+  "years": {
+    "2021": 114,
+    "2022": 150,
+    "2023": 150
+  },
+  "date_unique_count": 414,
+  "missing_counts": {
+    "open": 1,
+    "high": 1,
+    "low": 1,
+    "close": 0,
+    "listed_volume_tonnes": 0
+  },
+  "nonpositive_ohlc_dates": [],
+  "source_title_date_disagreements": [],
+  "ohlc_containment_violation_dates": [
+    "2023-10-23",
+    "2023-12-05",
+    "2023-12-06",
+    "2023-12-12"
+  ],
+  "zero_listed_volume_dates": [],
+  "scope_first_dates": {
+    "CEA_listed_price": "2021-07-16",
+    "composite_price": "2023-08-28"
+  },
+  "csv_sha256": "174db265f4370fcc49216e40184df648c8a21a5bf0178fcde2a83b537eed31a3",
+  "warnings": [
+    "Not claimed complete until all archive pages are fetched.",
+    "Missing numeric fields are None/empty, never fabricated zero.",
+    "Composite prices are a distinct reporting regime; no OHLC repair is performed."
+  ],
+  "excluded_from_main_experiments": true,
+  "source_spotchecks": [
+    {
+      "date": "2021-07-16",
+      "source_url": "https://overview.cneeex.com/c/2021-07-16/491858.shtml",
+      "source_html_sha256": "9d6aeba310b608e0735873b35557d4b4b895e2f48ce839f8241b37f542fd4516",
+      "finding": "Daily source has close and listed turnover, but no explicit numeric open/high/low; missing values retained. Separate official opening report confirms those fields exist elsewhere; no automatic supplementation."
+    },
+    {
+      "date": "2021-07-20",
+      "source_url": "https://overview.cneeex.com/c/2021-07-20/491860.shtml",
+      "source_html_sha256": "21674405e4906e70ea6e181bb5444cbc709df26d686e8fa16a1e16595f1f788b",
+      "finding": "Official positive decimal listed-volume value contradicts third-party database zero. Official text states no block trades; third-party block amount is also wrong."
+    },
+    {
+      "date": "2022-12-30",
+      "source_url": "https://overview.cneeex.com/c/2022-12-30/493614.shtml",
+      "source_html_sha256": "521acd6b7b03ac10245654a728dcd04834ece4147980f9ccdc61d8dcd3da5905",
+      "finding": "Year-end daily source: complete fields match direct parser; zero range is not zero volume."
+    },
+    {
+      "date": "2023-10-23",
+      "source_url": "https://overview.cneeex.com/c/2023-10-23/494729.shtml",
+      "source_html_sha256": "a636b6ff8951cb4f60f84860ac8ad1382e57cc6b8fdcfe074c5885b71040f8e2",
+      "finding": "Official close is below official low; the direct parser preserves both as reported."
+    },
+    {
+      "date": "2023-12-05",
+      "source_url": "https://overview.cneeex.com/c/2023-12-05/494907.shtml",
+      "source_html_sha256": "3e4a5b6b21a4a878f7b16c00a1e472f163111cc45fbecf9dd7cf38cccb9f8007",
+      "finding": "A second official composite-close-below-low record confirms the issue is not one parser error."
+    },
+    {
+      "date": "2023-12-29",
+      "source_url": "https://overview.cneeex.com/c/2023-12-29/494955.shtml",
+      "source_html_sha256": "3e6631a12b9a546f8d5ca1a22c29f9dce458b13b168d6f0eccf4bd1fb4a7d942",
+      "finding": "Last daily report admitted to this audit; complete composite fields match direct parser."
+    }
+  ],
+  "zero_volume_verification": "No true zero-listed-volume day was found in the 414 accessible official reports. The alleged 2021-07-20 zero is a third-party parser defect, not a verified zero-trading case."
+}
