@@ -1,0 +1,386 @@
+{
+  "checks": {
+    "injective_relu_reconstruction_max_error": 0.0,
+    "injective_hard_shift_defect": 1.1531313651784991,
+    "multiphase_gru_vs_one_sliding_gru_error": 0.45539680349403083,
+    "hard_vs_polyphase_zero_error": 0.0,
+    "seed": 11,
+    "L": 48,
+    "segment_length": 8,
+    "hidden": 16,
+    "dtype": "float64",
+    "polyphase_vs_sliding_embedding_max_error": 0.0,
+    "information_sorted_window_error": 0.0,
+    "learned_pool_vs_ensemble_max_error": 1.6653345369377348e-16,
+    "hard_embedding_shift_defect": 1.1766028755105433,
+    "dense_embedding_shift_defect": 0.0,
+    "full_group_invariance_error": 1.1102230246251565e-16,
+    "phase_mean_not_full_group_error": 0.2054451807258108,
+    "parameter_counts": {
+      "hard": 1793,
+      "phase_mean": 1793,
+      "sliding": 1793,
+      "full_group": 1793
+    },
+    "recurrent_steps_per_sample": {
+      "hard": 6,
+      "phase_mean": 48,
+      "sliding": 48,
+      "full_group": 288
+    },
+    "embedding_weight_rank": 8,
+    "normalization_note": "algebra checks use already-centered synthetic arrays; forecasting probes below have identical zero endpoint, so subtract_last is exactly identity"
+  },
+  "synthetic_probe": [
+    {
+      "seed": 11,
+      "model": "hard",
+      "train_phase": 2,
+      "train_n": 300,
+      "test_n_per_phase": 200,
+      "mse_per_phase": [
+        1.261817807195003,
+        2.269173121411791,
+        0.011505239824842901,
+        1.719776521350602,
+        3.0609335430992983,
+        1.0343739208818574,
+        2.0638691971217464,
+        1.2971407103479136
+      ],
+      "classification_accuracy_per_phase": [
+        0.02,
+        0.0,
+        1.0,
+        0.53,
+        0.0,
+        0.47,
+        0.0,
+        0.47
+      ],
+      "within_example_prediction_std": 0.6122700682652709,
+      "worst_phase_mse": 3.0609335430992983
+    },
+    {
+      "seed": 11,
+      "model": "phase_mean",
+      "train_phase": 2,
+      "train_n": 300,
+      "test_n_per_phase": 200,
+      "mse_per_phase": [
+        0.15022349631548365,
+        0.04395456570466618,
+        0.03394873808300681,
+        0.051365449724517634,
+        0.03448156679816285,
+        0.024646001123557523,
+        0.028280275238289986,
+        0.029477037396806596
+      ],
+      "classification_accuracy_per_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "within_example_prediction_std": 0.12949490664264277,
+      "worst_phase_mse": 0.15022349631548365
+    },
+    {
+      "seed": 11,
+      "model": "sliding",
+      "train_phase": 2,
+      "train_n": 300,
+      "test_n_per_phase": 200,
+      "mse_per_phase": [
+        1.0037339131598586,
+        1.0018792815415067,
+        0.9992337858522837,
+        0.9955055330323226,
+        0.9901902776164941,
+        0.9828443846785262,
+        0.972690977599537,
+        0.9585607318489854
+      ],
+      "classification_accuracy_per_phase": [
+        0.465,
+        0.465,
+        0.47,
+        0.475,
+        0.49,
+        0.495,
+        0.515,
+        0.54
+      ],
+      "within_example_prediction_std": 0.00771751373681459,
+      "worst_phase_mse": 1.0037339131598586
+    },
+    {
+      "seed": 11,
+      "model": "full_group",
+      "train_phase": 2,
+      "train_n": 300,
+      "test_n_per_phase": 200,
+      "mse_per_phase": [
+        0.02410412753596943,
+        0.024178400782083283,
+        0.02408101267254056,
+        0.024410184207983365,
+        0.024132931281262763,
+        0.024239238906830125,
+        0.02428543776109875,
+        0.02373947364581734
+      ],
+      "classification_accuracy_per_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "within_example_prediction_std": 0.008816265668959858,
+      "worst_phase_mse": 0.024410184207983365
+    },
+    {
+      "seed": 22,
+      "model": "hard",
+      "train_phase": 2,
+      "train_n": 300,
+      "test_n_per_phase": 200,
+      "mse_per_phase": [
+        2.5335785651852287,
+        0.958986829541655,
+        0.014562893237794755,
+        2.353696893064003,
+        0.9648423458253739,
+        0.19853025566352442,
+        1.6752509955117287,
+        0.8749110691804595
+      ],
+      "classification_accuracy_per_phase": [
+        0.0,
+        0.47,
+        1.0,
+        0.53,
+        0.615,
+        1.0,
+        0.53,
+        0.75
+      ],
+      "within_example_prediction_std": 0.6385043557120318,
+      "worst_phase_mse": 2.5335785651852287
+    },
+    {
+      "seed": 22,
+      "model": "phase_mean",
+      "train_phase": 2,
+      "train_n": 300,
+      "test_n_per_phase": 200,
+      "mse_per_phase": [
+        0.039295364982292295,
+        0.06145266391512785,
+        0.03480232996034515,
+        0.04132093609941336,
+        0.07961352711272816,
+        0.16359590383119155,
+        0.24470219600942195,
+        0.2764956633730955
+      ],
+      "classification_accuracy_per_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "within_example_prediction_std": 0.2272277444515226,
+      "worst_phase_mse": 0.2764956633730955
+    },
+    {
+      "seed": 22,
+      "model": "sliding",
+      "train_phase": 2,
+      "train_n": 300,
+      "test_n_per_phase": 200,
+      "mse_per_phase": [
+        1.011471314643556,
+        1.009816016722514,
+        1.0075536249238488,
+        1.0043952473883029,
+        1.000061283296212,
+        0.9945955272881699,
+        0.9873376236797792,
+        0.9780598297768743
+      ],
+      "classification_accuracy_per_phase": [
+        0.49,
+        0.49,
+        0.485,
+        0.485,
+        0.495,
+        0.5,
+        0.51,
+        0.535
+      ],
+      "within_example_prediction_std": 0.015607735101037454,
+      "worst_phase_mse": 1.011471314643556
+    },
+    {
+      "seed": 22,
+      "model": "full_group",
+      "train_phase": 2,
+      "train_n": 300,
+      "test_n_per_phase": 200,
+      "mse_per_phase": [
+        0.016680000098023177,
+        0.016837619917049188,
+        0.017073983898590935,
+        0.017084048226249263,
+        0.01723021583237191,
+        0.016629637362884624,
+        0.016724083344795374,
+        0.01668941359900118
+      ],
+      "classification_accuracy_per_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "within_example_prediction_std": 0.011161140137143762,
+      "worst_phase_mse": 0.01723021583237191
+    },
+    {
+      "seed": 33,
+      "model": "hard",
+      "train_phase": 2,
+      "train_n": 300,
+      "test_n_per_phase": 200,
+      "mse_per_phase": [
+        0.6197679993161587,
+        1.2364778270368058,
+        0.01120699623851578,
+        1.5807254639678416,
+        1.7784918649893038,
+        1.0500966573929136,
+        1.6136761379568376,
+        0.6274695463511136
+      ],
+      "classification_accuracy_per_phase": [
+        0.65,
+        0.53,
+        1.0,
+        0.53,
+        0.0,
+        0.47,
+        0.0,
+        0.53
+      ],
+      "within_example_prediction_std": 0.5452558813629126,
+      "worst_phase_mse": 1.7784918649893038
+    },
+    {
+      "seed": 33,
+      "model": "phase_mean",
+      "train_phase": 2,
+      "train_n": 300,
+      "test_n_per_phase": 200,
+      "mse_per_phase": [
+        0.13025210177812632,
+        0.10254843785065246,
+        0.0409860182732556,
+        0.04218807758940407,
+        0.10669443812775778,
+        0.04760125982803434,
+        0.0742278398271404,
+        0.05033915580049006
+      ],
+      "classification_accuracy_per_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "within_example_prediction_std": 0.1348377007910783,
+      "worst_phase_mse": 0.13025210177812632
+    },
+    {
+      "seed": 33,
+      "model": "sliding",
+      "train_phase": 2,
+      "train_n": 300,
+      "test_n_per_phase": 200,
+      "mse_per_phase": [
+        1.0099402195309153,
+        1.0086284529670628,
+        1.006507085802971,
+        1.0031097822735586,
+        0.9977326563690402,
+        0.9893366347232547,
+        0.9767498404768158,
+        0.9585344919347432
+      ],
+      "classification_accuracy_per_phase": [
+        0.475,
+        0.475,
+        0.48,
+        0.48,
+        0.505,
+        0.55,
+        0.625,
+        0.725
+      ],
+      "within_example_prediction_std": 0.014973354866664899,
+      "worst_phase_mse": 1.0099402195309153
+    },
+    {
+      "seed": 33,
+      "model": "full_group",
+      "train_phase": 2,
+      "train_n": 300,
+      "test_n_per_phase": 200,
+      "mse_per_phase": [
+        0.02598962521103532,
+        0.026305246408322963,
+        0.026245415011578736,
+        0.02623267355077007,
+        0.025952772437897797,
+        0.026141295440758903,
+        0.026030864324171853,
+        0.026128039779543526
+      ],
+      "classification_accuracy_per_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "within_example_prediction_std": 0.006852084322109908,
+      "worst_phase_mse": 0.026305246408322963
+    }
+  ],
+  "scope": "Random shared encoder + trained ridge probe; NOT end-to-end SegRNN/PMF, NOT market forecasting evidence. Circular paths only algebra/control; sliding uses finite zero-left-pad.",
+  "decision": "REJECT: learned phase pooling with linear head is exact learned weighted multiphase ensemble; all phase embeddings equal ordinary shared sliding linear/ReLU filter."
+}
