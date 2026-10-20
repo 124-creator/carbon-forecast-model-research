@@ -127,10 +127,11 @@ A("")
 A("The model has three moving parts. The **location block** shrinks the "
   "historical mean toward zero at a market-specific rate $h_0^{(m)}$. The "
   "**scale block** replaces the square-root-of-horizon scaling by a "
-  "market-specific exponent $H_m$, so that $H_m>1/2$ denotes sub-diffusion and "
-  "$H_m<1/2$ super-diffusion. The **shape block** interpolates between the "
-  "empirical shape of daily returns and the Gaussian, with the transition driven "
-  "by the horizon.")
+  "market-specific exponent $H_m$: the predictive standard deviation grows "
+  "like $h^{H_m}$, so $H_m=1/2$ reproduces the random walk, $H_m>1/2$ denotes "
+  "growth faster than a random walk and $H_m<1/2$ growth slower than one. The "
+  "**shape block** interpolates between the empirical shape of daily returns "
+  "and the Gaussian, with the transition driven by the horizon.")
 A("")
 A("Two design choices deserve emphasis because they are what make the model "
   "usable. First, the shape block carries **no fitted quantity of its own**: "
@@ -262,9 +263,10 @@ A("The result against the fixed square-root-of-horizon specification is the "
   f"{-100*f('SD250')['real_mu']:.1f}% of CRPS with a calibrated $p$ of "
   f"{f('SD250')['p']:.4f}. The estimated exponents are market-specific and "
   "economically interpretable: CEA 0.60 is the only market above one half, "
-  "that is, the only market in which prices diffuse *more* than a random walk "
-  "would imply, while Shanghai at 0.30 and Guangzhou at 0.35 are strongly "
-  "sub-diffusive.")
+  "that is, the only market in which the predictive dispersion grows *faster* "
+  "than a random walk would imply, while Shanghai at 0.30 and Guangzhou at 0.35 "
+  "grow markedly more slowly, which is the signature of the price floors and "
+  "administratively paced adjustments that characterise the Chinese pilots.")
 A("")
 A("The improvement against the empirical $h$-step quantile benchmark is **not** "
   f"significant ($p={f('EMP')['p']:.4f}$), and we say so plainly: on permuted "
