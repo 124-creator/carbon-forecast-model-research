@@ -15,6 +15,11 @@
 > $h=60$ 时 3–10 个，$h=120$ 时**每格仅 1.2–4.5 个有效独立观测**。
 > 同一份损失序列，DM 的 Bartlett 带宽从 $L=6$ 换到 $L=40$，"A5 显著优于 RW"的格数就从 **8 格变成 0 格**。
 > **因此：本文长期限结论不是统计显著的。摘要、结论、图注一律不得写 significant；§24.3 与 §24.12 的 Holm 表述按 §24.20(3) 降级。**
+> 补充（§24.21）：把原点加密到 STEP=1 **不会**提高 $n_{\text{eff}}$（$n_{\text{eff}}\approx T_{\text{test}}/h$，与原点密度无关），已实测确认。
+
+> **⚠ 如果只读一节，读 §24.23。** 它是装配图：证据分级（A/B/C）、十个审稿质疑的答复状态、还差什么、以及一段已写好自我约束的英文摘要。
+> **可以进摘要的只有三条**：长期限覆盖率崩塌（机制）、$H$ 是可估市场特征、收益随期限单调——**一条都不依赖 $p$ 值**。
+> 不能进摘要的：统计显著、经济价值、$h_0$ 可识别性。DL 基准已补齐（§24.22，四个设计），但**没有序列架构**，这是当前最大剩余缺口。
 
 **本版与前十版的推翻方式不同。** 前九版每次都是"上一版的主张被更严格的实验否证"；
 第十版（§19–§20）第一次站住（日频锚定，两处 MCS 唯一存活）。
@@ -2575,6 +2580,8 @@ A5 vs RW 显著的格：CEA h=120（0.036）、GZ h=120（0.024）、HUBEI h=120
 
 **诚实结论：对 EMP 有 2–3 格通过 Holm，对 RW 一格都没有。** 在多切分设计下这个结论会变化（见 24.5）。
 
+> **⚠ 这一句已被 §24.20(3) 撤回，两半都错。** 对 EMP 在 $L=6$ 下只有 **1** 格过 Holm（不是 2–3 格）；对 RW 在 $L=6$ 下有 **8** 格过 Holm 且方向为 A5 更优（不是"一格都没有"）。"对 RW 0 格"是 $L=10$ 这一个带宽的产物。**§24.4 的这条结论不得再被引用。**
+
 ### 24.5 多切分稳健性（主结果，最重要）
 
 对每个市场用样本长度 **55% / 65% / 75%** 三个切分点，每个切分**独立重估** $(h_0,H)$（仍只用训练段），再在完全未触碰的测试段评估。共 3 × 5 × 5 = 75 格。
@@ -2694,6 +2701,7 @@ $$
 
 **撑不住的（必须写进 limitation）：**
 1. **对 RW 没有一格通过 Holm**；CEA 整体输给 RW。
+   **（⚠ 已由 §24.20(3)(4) 推翻：这不是局限，而是检验力不足。按 $L\approx h/\text{STEP}$ 取带宽时 $h\ge40$ 一格都不显著，本文与 RW 的关系在这一区间"无法判断"而非"更差"。）**
 2. $h_0$ 不可识别。
 3. 深度基准缺失；竞品未在本协议下复现。
 4. ~~经济价值、MCS、滚动原点、$W$ 迁移四组实验未做。~~ **本轮已完成经济价值、MCS、覆盖率检验、$W$ 迁移四组；仍差滚动原点、竞品复现、深度学习基准、不重叠原点覆盖率。**
@@ -2822,7 +2830,8 @@ A5 通过 POF 的格：CEA h=5/120、GZ h=5/20、SH h=20、HUBEI h=5/60/120、EU
 
 **撑不住的（必须写 limitation，一条不改）：**
 
-1. **对 RW 没有一格通过 Holm**；CEA 整体输给 RW（+7.3%，2/15）。
+1. ~~**对 RW 没有一格通过 Holm**；CEA 整体输给 RW（+7.3%，2/15）。~~
+   **（⚠ 已撤回，见 §24.20(4)：方向反了。理由同上一条；$L=6$ 下 A5 对 RW 有 8 格 Holm 显著更优。正确的局限表述应是"长期限无检验力"，不是"对 RW 无一格显著"。）**
 2. **经济价值上与 RW 不可区分**（+0.004 pp），且在 HUBEI/EU 中长期限显著更差（过度保险）。
 3. **$h_0$ 不可识别**（在网格边界间跳动），位置块只能作为调参。
 4. **独立性检验全部被拒**，需 HAC 修正或不重叠子样本。
@@ -3375,4 +3384,4 @@ $$
 
 > Multi-step probabilistic forecasts of carbon prices are routinely produced by rescaling one-day predictive distributions with $\sqrt{h}$. We show that this convention fails systematically, and we replace it with two estimable parameters. Using daily data from five carbon markets (China's national ETS and three regional pilots, plus EU ETS; 1{,}262--2{,}839 observations each) and a rolling-origin evaluation at horizons of 5 to 120 trading days, the standard empirical-quantile benchmark attains nominal 95\% coverage at short horizons but collapses to 0.393 on average at $h=120$ (0.085 for Shanghai), because a fixed window shape cannot represent how dispersion grows with the horizon. Our specification writes the quantile as a shrunk location plus a scale term $\hat\sigma_{d,t}h^{H}$ with an empirical shape, where $\lambda(h)=h_0/(h_0+h)$ removes window drift and $H$ is estimated once per market. The resulting model attains 0.879 coverage at $h=120$ and passes a HAC-corrected coverage test in 23 of 25 market-horizon cells against 14 of 25 for the benchmark. Estimated $H$ is stable across three split points (range $\le0.05$) and orders the markets interpretably: 0.30--0.35 for the three mean-reverting Chinese regional pilots, 0.45 for EU ETS, and 0.60 for the national ETS, the only super-diffusive market, consistent with its ratcheting cap. CRPS gains are monotone in horizon --- none at five days, decisive beyond forty, with a median 22\% reduction and five of five markets improving at 120 days --- and reproduce under three window lengths, rolling re-estimation, and one-day origin spacing. We also document a limitation of the evaluation protocol: with overlapping origins the effective sample size at 120 days is 1.2--4.5, so our long-horizon results are consistent in sign and mechanism but not statistically significant, and we report them as such. Four neural quantile baselines, including cross-market and cross-horizon pooled training, degrade with horizon where our specification improves, and all four lose at horizons of forty days and beyond.
 
-**这段摘要的自我约束：** 没有 significant 一词；明确写出 $n_{\text{eff}}$ 与"非显著"；没有"最优模型"表述；DL 对比只说"在 $h\ge40$ 上胜出"，不说"优于深度学习"。**摘要里任何一句超出 24.23.2 的 A/B 级，都应在投稿前删掉。**
+**这段摘要的自我约束：** significant 全文只出现一次，且是否定式（not statistically significant）；明确写出 $n_{\text{eff}}$ 的数值区间；没有"最优模型"表述；DL 对比只说"在 $h\ge40$ 上胜出"，不说"优于深度学习"。**摘要里任何一句超出 24.23.2 的 A/B 级，都应在投稿前删掉。**
