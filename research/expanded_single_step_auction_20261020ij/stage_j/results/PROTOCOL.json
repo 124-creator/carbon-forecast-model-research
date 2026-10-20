@@ -1,0 +1,65 @@
+{
+  "stage": "j",
+  "candidate": "signed_coverage_interaction_ridge",
+  "source": {
+    "schema": "EEX T3PA auction clearing price and completed auction published competition",
+    "sha256": "5a0c7580edebc2a7a5e66d7487568f6d99a8e08cca0785676c2aaeccad7db6bb",
+    "rows": 2255,
+    "date_min": "2012-10-26",
+    "date_max": "2023-12-18",
+    "target": "next auction clearing price EUR/tCO2",
+    "known_at_origin": [
+      "current auction price",
+      "current auction cover/bid volumes",
+      "current bidder counts and auction dates"
+    ],
+    "unknown_at_origin": [
+      "future auction cover",
+      "future realized volume",
+      "future bidders",
+      "future future price"
+    ],
+    "policy": "strictly historical completed auction event values"
+  },
+  "source_script_sha256": "81d15cec512f1a9f73155353035d88b3d9dbf1d813186dfd0c15da0543bb9012",
+  "test_years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "lookback": 32,
+  "validation_events": 100,
+  "alphas": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1,
+    10,
+    100
+  ],
+  "shrinks": [
+    0.0,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "models": [
+    "price_response",
+    "signed_price_only",
+    "auction_additive",
+    "signed_coverage_interaction_ridge",
+    "price_ridge32",
+    "auction_ridge32",
+    "quadratic_context_ridge",
+    "auction_hgb",
+    "rw"
+  ],
+  "information_setting": "after current completed auction t, predicting next completed auction t+1",
+  "data_status": "all six older years previously exposed as development, not untouched confirmation",
+  "main_pair": "auction_additive vs signed_coverage_interaction_ridge, both same visible input/same search budget",
+  "legacy": "separate task from old EUA_LONG single-step and national CEA daily price"
+}

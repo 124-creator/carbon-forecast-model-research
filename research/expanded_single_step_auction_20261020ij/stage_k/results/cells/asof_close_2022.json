@@ -1,0 +1,225 @@
+{
+  "year": 2022,
+  "mode": "asof_close",
+  "n_train": 1694,
+  "n_val": 99,
+  "n_test": 212,
+  "source_quote_available_share_test": 1.0,
+  "source_quote_age_days_mean_test": 0.0,
+  "source_quote_age_days_max_test": 0.0,
+  "scale_training_only": 0.5747641336280154,
+  "last_validation_label_date": "2021-12-20",
+  "first_test_origin_date": "2022-01-10",
+  "selection": {
+    "blend_constant": {
+      "blend_weight": 0.75,
+      "validation_loss": 3.6691444500338966,
+      "tested_weights": [
+        0.0,
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ]
+    },
+    "auction_price_only_ridge": {
+      "alpha_mean": 100,
+      "shrink": 1.0,
+      "validation_loss": 10.29230301634792,
+      "trials_count": 28
+    },
+    "additive_spread_ridge": {
+      "alpha_mean": 0.1,
+      "shrink": 1.0,
+      "validation_loss": 3.636458091339137,
+      "trials_count": 28
+    },
+    "spread_context_interaction_ridge": {
+      "alpha_mean": 0.1,
+      "shrink": 1.0,
+      "validation_loss": 3.8839956394359625,
+      "trials_count": 28
+    },
+    "hgb_same_information": {
+      "choice": [
+        5.123229072408038,
+        7,
+        1.0,
+        1.0
+      ],
+      "trials_count": 16
+    },
+    "fixed_spread_gate": {
+      "gamma": 1,
+      "shrink": 1.0,
+      "validation_loss": 3.74264053429407,
+      "trials_count": 20,
+      "final_fit": {
+        "objective": 0.622027840745032,
+        "success": true,
+        "iterations": 13,
+        "coefficients": [
+          3.052130795736416,
+          -0.04795482343217825,
+          -0.010805905434340155,
+          -0.00372873189239064
+        ],
+        "gamma": 1,
+        "conditioned": false,
+        "avg_rate_fit": 0.9548744299553621,
+        "static_initial_k": 0.94900750808846,
+        "gradient_norm": 2.6845680746595546e-06
+      }
+    },
+    "bounded_depth_conditioned_spread_gate": {
+      "gamma": 1,
+      "shrink": 1.0,
+      "validation_loss": 3.742640527847236,
+      "trials_count": 20,
+      "final_fit": {
+        "objective": 0.6220088343732059,
+        "success": true,
+        "iterations": 16,
+        "coefficients": [
+          3.0432393132937983,
+          0.0014626531659169037,
+          -0.0038549573929794394,
+          0.001094154200598785,
+          0.0008803187252666804,
+          -9.984593256268488e-06,
+          -0.047913329984076554,
+          -0.010794809207766144,
+          -0.003725504231207426
+        ],
+        "gamma": 1,
+        "conditioned": true,
+        "avg_rate_fit": 0.954485498456582,
+        "static_initial_k": 0.94900750808846,
+        "gradient_norm": 2.112569174084894e-06
+      }
+    }
+  },
+  "scores": {
+    "rw": {
+      "MSE": 7.36764669811321,
+      "RMSE": 2.7143409325494114,
+      "MAE": 1.8988207547169815,
+      "MAPE_percent": 2.4247762574974914,
+      "R2_price": 0.8795360911066639,
+      "Q_MSE_RW": 1.0
+    },
+    "reference_direct": {
+      "MSE": 3.680886320754718,
+      "RMSE": 1.9185636087330329,
+      "MAE": 1.355141509433962,
+      "MAPE_percent": 1.7210325255889707,
+      "R2_price": 0.9398160671162913,
+      "Q_MSE_RW": 0.4996013614085704
+    },
+    "blend_constant": {
+      "MSE": 3.9109846108490567,
+      "RMSE": 1.9776209472113346,
+      "MAE": 1.37127358490566,
+      "MAPE_percent": 1.7448384030655522,
+      "R2_price": 0.9360538699602393,
+      "Q_MSE_RW": 0.5308322685791416
+    },
+    "auction_price_only_ridge": {
+      "MSE": 7.368463452124937,
+      "RMSE": 2.7144913800056423,
+      "MAE": 1.8945566490293373,
+      "MAPE_percent": 2.4202150043866393,
+      "R2_price": 0.8795227368587081,
+      "Q_MSE_RW": 1.0001108568373585
+    },
+    "auction_price_only_ridge_unshrunk": {
+      "MSE": 7.368463452124937,
+      "RMSE": 2.7144913800056423,
+      "MAE": 1.8945566490293373,
+      "MAPE_percent": 2.4202150043866393,
+      "R2_price": 0.8795227368587081,
+      "Q_MSE_RW": 1.0001108568373585
+    },
+    "additive_spread_ridge": {
+      "MSE": 3.728380989953875,
+      "RMSE": 1.930901600277413,
+      "MAE": 1.3406819369787812,
+      "MAPE_percent": 1.7050842443516752,
+      "R2_price": 0.939039510674627,
+      "Q_MSE_RW": 0.506047743970769
+    },
+    "additive_spread_ridge_unshrunk": {
+      "MSE": 3.728380989953875,
+      "RMSE": 1.930901600277413,
+      "MAE": 1.3406819369787812,
+      "MAPE_percent": 1.7050842443516752,
+      "R2_price": 0.939039510674627,
+      "Q_MSE_RW": 0.506047743970769
+    },
+    "spread_context_interaction_ridge": {
+      "MSE": 3.636133959272646,
+      "RMSE": 1.9068649556989203,
+      "MAE": 1.3271698967827195,
+      "MAPE_percent": 1.6849823958861632,
+      "R2_price": 0.9405477857528158,
+      "Q_MSE_RW": 0.4935271882952569
+    },
+    "spread_context_interaction_ridge_unshrunk": {
+      "MSE": 3.636133959272646,
+      "RMSE": 1.9068649556989203,
+      "MAE": 1.3271698967827195,
+      "MAPE_percent": 1.6849823958861632,
+      "R2_price": 0.9405477857528158,
+      "Q_MSE_RW": 0.4935271882952569
+    },
+    "hgb_same_information": {
+      "MSE": 4.91146017439001,
+      "RMSE": 2.2161814398622712,
+      "MAE": 1.4676697833302024,
+      "MAPE_percent": 1.8784806865983197,
+      "R2_price": 0.9196957026817689,
+      "Q_MSE_RW": 0.6666253656880415
+    },
+    "hgb_same_information_unshrunk": {
+      "MSE": 4.91146017439001,
+      "RMSE": 2.2161814398622712,
+      "MAE": 1.4676697833302024,
+      "MAPE_percent": 1.8784806865983197,
+      "R2_price": 0.9196957026817689,
+      "Q_MSE_RW": 0.6666253656880415
+    },
+    "fixed_spread_gate": {
+      "MSE": 3.6668042226039987,
+      "RMSE": 1.9148901332985135,
+      "MAE": 1.344936378925725,
+      "MAPE_percent": 1.7085644377193965,
+      "R2_price": 0.9400463149360041,
+      "Q_MSE_RW": 0.4976900186518221
+    },
+    "fixed_spread_gate_unshrunk": {
+      "MSE": 3.6668042226039987,
+      "RMSE": 1.9148901332985135,
+      "MAE": 1.344936378925725,
+      "MAPE_percent": 1.7085644377193965,
+      "R2_price": 0.9400463149360041,
+      "Q_MSE_RW": 0.4976900186518221
+    },
+    "bounded_depth_conditioned_spread_gate": {
+      "MSE": 3.6666543870292507,
+      "RMSE": 1.9148510090942457,
+      "MAE": 1.344819405803498,
+      "MAPE_percent": 1.7084210714999184,
+      "R2_price": 0.9400487648063311,
+      "Q_MSE_RW": 0.49766968168658915
+    },
+    "bounded_depth_conditioned_spread_gate_unshrunk": {
+      "MSE": 3.6666543870292507,
+      "RMSE": 1.9148510090942457,
+      "MAE": 1.344819405803498,
+      "MAPE_percent": 1.7084210714999184,
+      "R2_price": 0.9400487648063311,
+      "Q_MSE_RW": 0.49766968168658915
+    }
+  }
+}
