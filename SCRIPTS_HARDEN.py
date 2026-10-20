@@ -98,7 +98,7 @@ for m in SPLITS:
               + f"{'最优':>7}   DAT vs EMP / DAT0 vs EMP")
         for h in HOR:
             ts_tr = [t for t in range(W + h + 5, t0 - h - 1, STEP) if t in cache]
-            ts_te = [t for t in range(W + h + 5, len(lp) - h, STEP) if t in cache]
+            ts_te = [t for t in range(max(W + h + 5, t0), len(lp) - h, STEP) if t in cache]
             if len(ts_tr) < 30 or len(ts_te) < 30:
                 print(f"{h:>4}  SKIP {len(ts_tr)}/{len(ts_te)}"); continue
 

@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 单一收缩参数 c 的联合检验（修正 shrink1.py 的设计错误）
 =====================================================
@@ -76,7 +76,7 @@ for m in MK:
     for h in HOR:
         neff = W / h
         ts_tr = [t for t in range(W + h + 5, t0 - h - 1, STEP) if t in st]
-        ts_te = [t for t in range(W + h + 5, len(lp) - h, STEP) if t in st]
+        ts_te = [t for t in range(max(W + h + 5, t0), len(lp) - h, STEP) if t in st]
         if len(ts_tr) < 30 or len(ts_te) < 30:
             continue
         y_tr = lp[np.array(ts_tr) + h] - lp[ts_tr]

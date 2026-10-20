@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 经济价值：合规采购的储备决策
 =============================
@@ -101,7 +101,7 @@ for m in CUT:
     ALL[m] = {}
     for h in HOR:
         ts_tr = [t for t in range(W + h + 5, t0 - h - 1, STEP) if t in cache]
-        ts_te = [t for t in range(W + h + 5, len(lp) - h, STEP) if t in cache]
+        ts_te = [t for t in range(max(W + h + 5, t0), len(lp) - h, STEP) if t in cache]
         if len(ts_tr) < 30 or len(ts_te) < 30:
             print(f"{h:>4}  SKIP {len(ts_tr)}/{len(ts_te)}"); continue
         Xh, Yh = [], []
