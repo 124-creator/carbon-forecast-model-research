@@ -1,0 +1,64 @@
+name: Pro overlap memory full replay 20261016
+on:
+  push:
+    branches: [research/pro-overlap-memory-20261016]
+    paths:
+      - '.github/workflows/pro-overlap-memory-20261016.yml'
+      - 'research/pro_overlap_memory_20261016/core.py'
+      - 'research/pro_overlap_memory_20261016/experiment.py'
+      - 'research/pro_overlap_memory_20261016/baselines.py'
+      - 'research/pro_overlap_memory_20261016/analyze.py'
+      - 'research/pro_overlap_memory_20261016/audit.py'
+      - 'research/pro_overlap_memory_20261016/run_all.py'
+      - 'research/pro_overlap_memory_20261016/test_core.py'
+      - 'research/pro_overlap_memory_20261016/requirements.txt'
+permissions:
+  contents: write
+concurrency:
+  group: pro-overlap-memory-20261016
+  cancel-in-progress: false
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/pro-overlap-memory-20261016
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.5'
+      - name: Install pinned standalone CPU dependencies
+        run: python -m pip install -r research/pro_overlap_memory_20261016/requirements.txt
+      - name: Execute frozen protocol using the existing approved prefix
+        run: python -u research/pro_overlap_memory_20261016/run_all.py --out research/pro_overlap_memory_20261016/results_remote --workers 2
+      - name: Archive full arrays, parameters and training logs in this branch
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os,json
+          from pathlib import Path
+          p=Path('research/pro_overlap_memory_20261016')
+          r=json.loads((p/'results_remote/RESULTS.json').read_text())
+          receipt={'run_id':os.environ['GITHUB_RUN_ID'],'executed_commit':os.environ['GITHUB_SHA'],'workflow_success':True,'scientific_status':r['status'],'scope':'Complete fixed replay; numerical comparison with first local execution still required.'}
+          (p/'REMOTE_EXECUTION.json').write_text(json.dumps(receipt,indent=2))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f research/pro_overlap_memory_20261016/results_remote research/pro_overlap_memory_20261016/REMOTE_EXECUTION.json
+          git commit -m 'Archive complete Stage K forecasts, retrieval weights, parameters and traces [skip ci]'
+          git fetch origin research/pro-overlap-memory-20261016
+          git rebase origin/research/pro-overlap-memory-20261016
+          git push origin HEAD:research/pro-overlap-memory-20261016
+      - name: Upload complete replay snapshot and diagnostic files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pro-overlap-memory-complete-20261016
+          path: research/pro_overlap_memory_20261016/
+          retention-days: 14
