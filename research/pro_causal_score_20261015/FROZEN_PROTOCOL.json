@@ -1,0 +1,22 @@
+{
+  "stage": "L",
+  "date": "2026-10-15",
+  "source_main": "13e7a6bf129916df5807746664b30df1c1936e73",
+  "candidate": "CAUSAL: alternating causal estimating-equation recurrent feature learner; novelty unverified",
+  "full_protocol_sha256": "3d1a1aa178cb7303f9959793366e0a39a48665f5e155e445b267e39941fc3aa4",
+  "full_protocol_path": "research/pro_causal_score_20261015/PROTOCOL.md",
+  "chronology": "Cryptographic commitment to the already written full protocol before all new candidate fits. Preliminary initial-training diagnostics only have been computed.",
+  "data": {"prefix_bytes":29204,"rows":950,"last_date":"2021-12-31","sha256":"1366ca4814dcdb8aa43296eb64768d1336d6f0fc9088648d6d7ccdbe43318070","read_suffix":false,"new_prices":false,"new_markets":false},
+  "evaluation": {"origins":451,"years":[2020,2021],"counts":[224,227],"horizons":[1,5,20],"target":"original price net changes, all20 horizons trained","primary":"equal mean of six year/horizon MSE-to-RW ratios; mean seed loss separate from prediction ensemble","scope":"repeatedly exposed development, not independent confirmation"},
+  "model": {"encoder":"full-prefix GRU(1,16), zero initial state, causal outputs at each origin","features":"8 learned tanh features using hidden state and three ordinary reference-state coordinates","analytic_head":20,"estimated_coefficients":1232,"reference":"same31-member causal reference, W240, no historical forecast overwrite","kernel":"Omega_h(i,j)=max(0,h-|i-j|)/h; C=.5I+.5Omega; P=C^-1 normalized to trace n","causal_operator":"U=diag(P)+2*strict_upper(P); Sym(U)=P positive definite","head":"B_h=(G^T U_h G/n + gamma G^T G/n + alpha I)^-1 G^T U_h E_h/n","encoder_update":"hold B fixed; derivative of predictions paired with stop_gradient(U*(prediction-target)+gamma*prediction); do not differentiate the nonsymmetric profiled solution","alpha":0.01,"gamma":1.0,"limits":"GLS/GMM/IV/analytic heads are not new. Pointwise valid moments under a correctly represented full-history conditional mean do not guarantee finite-sample unbiasedness, neural convergence or future risk."},
+  "modes":["CAUSAL","IDENTITY","SYMMETRIC","SHUFFLED","FROZEN","FULL_WINDOW","GRU_WINDOW"],
+  "seeds":[17,29,41,53],
+  "refits":{"first":459,"spacing":40,"count":12,"max_supervised_origins":480,"validation_origins":60,"purge":20,"labels":"origin+20<fit_end"},
+  "budget":{"records":336,"encoder_optimization_fits":288,"frozen_head_only":48,"optimizer":"AdamW","lr":0.003,"weight_decay":0.001,"clip_norm":1,"max_epochs":80,"patience":12,"minimum_validation_improvement":0.000001,"epoch0_allowed":true,"workers_max":3,"dtype":"float64","mkldnn":false,"new_grid_search":false},
+  "controls":"ID analytic ridge, symmetric GLS, support-permuted then causalized precision, fixed random recurrent features; fresh window FULL/GRU, RW/MLE/drift/Ridge/tree and mature/fixed reference-GRU combinations",
+  "preliminary_gate":"Exact known-null population score at n256 h1/5/20: causal and ID numerators zero; retain symmetric GLS counterexample. 32 fixed Gaussian null and AR(.5) replicated scalar-estimator controls,300 fitting+300 independent check, require null candidate relative MSE<=1.05. No market data or neural scores in this gate.",
+  "development_gate":"CAUSAL beats ID/SYMMETRIC/SHUFFLED mean-seed scores by>=1% each, ID paired wins>=3/4, beats FROZEN, RW improvement>=2%, beats best fresh noncandidate pool>=1%, same-four-prediction ensemble beats corresponding pool, no year>5% worse thanRW. Thresholds are project rules, not journal standards.",
+  "uncertainty":{"paired_within_year_blocks":[20,40,60],"replications":2000,"confirmatory":false},
+  "reading":"Actual primary HTML reading of arXiv2402.01000v3 intro and sections3-4; publisher summaries for Lai/Small2007 and Pepe/Anderson1994. Current2026 article abstracts are leads only. No full-text or original-code reproduction inflation.",
+  "finish":"Preserve all results and failures; push complete source/tests/protocol/numeric results/logs/audit on this branch. Do not merge main, change visibility, publish unapproved price suffix or third-party full texts. If gate fails, stop without rescue parameters or new historical periods."
+}
