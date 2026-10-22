@@ -1,0 +1,242 @@
+{
+  "config": {
+    "markets": [
+      "CEA"
+    ],
+    "seeds": [
+      11
+    ],
+    "epochs": 3,
+    "models": [
+      "observation_gate",
+      "event_count",
+      "no_carry"
+    ],
+    "tag": "exposure_round13_smoke"
+  },
+  "status": "EXPLORATORY; all historical tests reused",
+  "horizons": [
+    1,
+    5,
+    20
+  ],
+  "mechanism": "last refresh time mixture versus event-count mixture with latent calendar variance",
+  "no_trade_assumption": "zero price changes are observed indicators, not proven absence of trading",
+  "selection": "validation CRPS on standardized returns; epoch selection followed by pre-cut refit",
+  "source_sha256": "1e1cd57f768a9cb02079c02c97b51b316e008fc6767a3ceffa16390a3900f3b8",
+  "panel_sha256": "d470238386e201e68f07b033f5a34591af89b57f1546ea79b699e763d228b56c",
+  "checks": {
+    "CRPS_known_cases": true,
+    "last_refresh_variance_MC": 6.00955,
+    "analytic": 6.0102525
+  },
+  "markets": {
+    "CEA": {
+      "audit": {
+        "cut": 597,
+        "validation_start": 447,
+        "max_training_label_end": 446,
+        "max_refit_label_end": 596,
+        "first_test_origin": 598,
+        "counts": {
+          "tr": 283,
+          "va": 211,
+          "rf": 494,
+          "te": 984
+        }
+      },
+      "controls": {
+        "QRF_selection": {
+          "leaf": 15,
+          "val_CRPS_normalized": 0.7616421888533276
+        },
+        "QRF_trials": [
+          {
+            "leaf": 15,
+            "val_CRPS_normalized": 0.7616421888533276
+          },
+          {
+            "leaf": 30,
+            "val_CRPS_normalized": 0.7659137238180173
+          }
+        ]
+      },
+      "fits": {
+        "observation_gate": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 3,
+            "val_CRPS_normalized": 0.666448712348938,
+            "parameters": 284,
+            "mean_gate": 0.4987958073616028,
+            "mean_refresh": 0.8863301873207092,
+            "history": [
+              [
+                1,
+                0.666448712348938
+              ],
+              [
+                2,
+                0.6668416261672974
+              ],
+              [
+                3,
+                0.6673884987831116
+              ]
+            ]
+          }
+        ],
+        "event_count": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 3,
+            "val_CRPS_normalized": 0.6661745309829712,
+            "parameters": 284,
+            "mean_gate": 0.0,
+            "mean_refresh": 0.8863469362258911,
+            "history": [
+              [
+                1,
+                0.6661745309829712
+              ],
+              [
+                2,
+                0.6664629578590393
+              ],
+              [
+                3,
+                0.6668780446052551
+              ]
+            ]
+          }
+        ],
+        "no_carry": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 3,
+            "val_CRPS_normalized": 0.6654826998710632,
+            "parameters": 284,
+            "mean_gate": 0.5001575946807861,
+            "mean_refresh": 0.8863545656204224,
+            "history": [
+              [
+                1,
+                0.6654826998710632
+              ],
+              [
+                2,
+                0.6657895445823669
+              ],
+              [
+                3,
+                0.6661946177482605
+              ]
+            ]
+          }
+        ]
+      },
+      "scores": {
+        "1": {
+          "QRF": {
+            "n": 332,
+            "MQS": 0.007237549552109406,
+            "CRPS": 0.008180231855371629,
+            "MAE_median": 0.010121543176566076
+          },
+          "empirical": {
+            "n": 332,
+            "MQS": 0.0074393443293180195,
+            "CRPS": 0.00830326816747693,
+            "MAE_median": 0.010121543176566076
+          },
+          "observation_gate": {
+            "n": 332,
+            "MQS": 0.007097882318689564,
+            "CRPS": 0.008084219800171702,
+            "MAE_median": 0.010121543176566076
+          },
+          "event_count": {
+            "n": 332,
+            "MQS": 0.00709485032376808,
+            "CRPS": 0.00808184597842424,
+            "MAE_median": 0.010121543176566076
+          },
+          "no_carry": {
+            "n": 332,
+            "MQS": 0.00707942255531585,
+            "CRPS": 0.00806601499991391,
+            "MAE_median": 0.010121543176566076
+          }
+        },
+        "5": {
+          "QRF": {
+            "n": 330,
+            "MQS": 0.01748179948901552,
+            "CRPS": 0.02005920209596718,
+            "MAE_median": 0.026233949313149152
+          },
+          "empirical": {
+            "n": 330,
+            "MQS": 0.01776408729681764,
+            "CRPS": 0.020226125773863637,
+            "MAE_median": 0.0260796953756383
+          },
+          "observation_gate": {
+            "n": 330,
+            "MQS": 0.017049290504948557,
+            "CRPS": 0.019698478498645068,
+            "MAE_median": 0.025991966447446696
+          },
+          "event_count": {
+            "n": 330,
+            "MQS": 0.017043576479975613,
+            "CRPS": 0.019694691933627956,
+            "MAE_median": 0.02599199532525471
+          },
+          "no_carry": {
+            "n": 330,
+            "MQS": 0.0170346517208865,
+            "CRPS": 0.019686369685179707,
+            "MAE_median": 0.025991638972962118
+          }
+        },
+        "20": {
+          "QRF": {
+            "n": 322,
+            "MQS": 0.05111133431640953,
+            "CRPS": 0.05698965244260926,
+            "MAE_median": 0.07012534943656298
+          },
+          "empirical": {
+            "n": 322,
+            "MQS": 0.04608170566194792,
+            "CRPS": 0.0526959182879006,
+            "MAE_median": 0.06838410058728599
+          },
+          "observation_gate": {
+            "n": 322,
+            "MQS": 0.04603897234964988,
+            "CRPS": 0.05247057537275036,
+            "MAE_median": 0.06836138475961989
+          },
+          "event_count": {
+            "n": 322,
+            "MQS": 0.04603240874649435,
+            "CRPS": 0.052465030651664565,
+            "MAE_median": 0.06836150338369607
+          },
+          "no_carry": {
+            "n": 322,
+            "MQS": 0.046036158122736606,
+            "CRPS": 0.05246798677679853,
+            "MAE_median": 0.06836325077386016
+          }
+        }
+      }
+    }
+  },
+  "elapsed_seconds": 6.236717939376831
+}

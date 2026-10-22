@@ -1,0 +1,69 @@
+{
+  "created_utc": "2026-10-21T14:14:39.216598+00:00",
+  "instrument": {
+    "symbol": "KRBN",
+    "name": "KraneShares Global Carbon Strategy ETF",
+    "instrument_type": "ETF",
+    "venue": "NYSEArca",
+    "currency": "USD",
+    "price_unit": "USD per ETF share",
+    "volume_unit": "ETF shares",
+    "exchange_timezone": "America/New_York",
+    "exposure": "Portfolio of carbon-allowance futures across multiple cap-and-trade markets; issuer benchmarks to S&P Global Carbon Credit Index.",
+    "not_equivalent_to": "EUA spot, EUA physical allowance price, or a single EUA futures contract",
+    "identity_source_urls": [
+      "https://kraneshares.com/etf/krbn/",
+      "https://kraneshares.com/etf/keua/"
+    ],
+    "vendor_identity": {
+      "symbol": "KRBN",
+      "longName": "KraneShares Global Carbon ETF",
+      "shortName": "KraneShares Global Carbon Strat",
+      "instrumentType": "ETF",
+      "currency": "USD",
+      "fullExchangeName": "NYSEArca",
+      "exchangeTimezoneName": "America/New_York"
+    }
+  },
+  "dataset": {
+    "file": "KRBN_ETF_USD_daily_completed_20240102_20261020.csv",
+    "rows": 703,
+    "start": "2024-01-02",
+    "end": "2026-10-20",
+    "frequency": "Trading-day daily",
+    "retrieved_utc": "2026-10-21T14:11:14.667661+00:00",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/KRBN?period1=1704067200&period2=1792627200&interval=1d&events=div%2Csplits",
+    "ohlc_adjustment": "Provider quote open/high/low/close as returned; no manual adjustment or synthetic reconstruction. Separate adj_close is Yahoo dividend/split-adjusted field and must not be mixed with unadjusted OHLC for candlestick arithmetic.",
+    "current_session_excluded": true,
+    "raw_snapshot_retained": "yahoo_KRBN_raw.json",
+    "recommended_use": "Independent instrument OHLCV robustness/identification experiment. Report KRBN separately from EUA; avoid treating it as an extension or replacement of existing EUA close series."
+  },
+  "attempts": [
+    {
+      "source": "Yahoo Finance",
+      "symbols": [
+        "CFI=F",
+        "KEUA",
+        "KRBN"
+      ],
+      "result": "KRBN OHLCV acquired; CFI=F and KEUA returned HTTP404 No data found, symbol may be delisted. CFI=F carbon identity not established and not used."
+    },
+    {
+      "source": "Stooq",
+      "symbols": [
+        "CK.F"
+      ],
+      "identity_evidence_url": "https://stooq.com/q/?s=ck.f",
+      "result": "Public search listing identifies ICE CO2 EU Allowances. Direct page and CSV returned HTTP200 HTML JavaScript proof-of-work browser-verification pages, not quotes. No browser-check bypass or data fabricated."
+    },
+    {
+      "source": "KraneShares issuer",
+      "symbols": [
+        "KRBN",
+        "KEUA"
+      ],
+      "result": "Issuer identity HTML acquired. KEUA issuer closure announcement: regular trading ceased 2026-03-13; liquidation date 2026-03-20. KRBN distinct global portfolio ETF confirmed."
+    }
+  ],
+  "scope": "Three independent public source groups maximum. No packages installed; no login, payment, messages to third parties, or legacy modifications."
+}

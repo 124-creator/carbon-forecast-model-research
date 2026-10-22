@@ -1,0 +1,82 @@
+{
+  "created_utc": "2026-10-21T15:23:56.256756+00:00",
+  "all_checks_passed": true,
+  "hashes_verified": 6,
+  "same_path_and_unit_variance_sanity": [
+    {
+      "sample": "grid512_train",
+      "same_path_prefix128_exactly_reproduced": true,
+      "endpoint_mean_z": 1.8855060608890053,
+      "endpoint_second_moment_z": 0.33746993532980135
+    },
+    {
+      "sample": "grid512_heldout",
+      "same_path_prefix128_exactly_reproduced": true,
+      "endpoint_mean_z": -0.6059809841495911,
+      "endpoint_second_moment_z": 2.056945486923256
+    },
+    {
+      "sample": "grid2048_train",
+      "same_path_prefix128_exactly_reproduced": true,
+      "endpoint_mean_z": 0.6918038675471909,
+      "endpoint_second_moment_z": 1.6400997927491279
+    },
+    {
+      "sample": "grid2048_heldout",
+      "same_path_prefix128_exactly_reproduced": true,
+      "endpoint_mean_z": -0.6264096261013579,
+      "endpoint_second_moment_z": -0.8544743847124249
+    }
+  ],
+  "training_only_calibration_checks": [
+    {
+      "model": "grid512",
+      "train_cell_count_min": 1181,
+      "train_cell_count_max": 3663,
+      "all_parameters_exactly_recomputed_from_train": true,
+      "R_min": 0.2012729344928644,
+      "R_max": 0.3579636089354341,
+      "fallback_cells": 0
+    },
+    {
+      "model": "grid2048",
+      "train_cell_count_min": 442,
+      "train_cell_count_max": 1080,
+      "all_parameters_exactly_recomputed_from_train": true,
+      "R_min": 0.19767079431520657,
+      "R_max": 0.3220781863290403,
+      "fallback_cells": 0
+    }
+  ],
+  "strong_control_and_score_checks": [
+    {
+      "evaluation": "eval512",
+      "same_shape_bias_error_for_B_and_C_verified": true,
+      "score_delta_is_only_R_change_verified": true,
+      "reported_delta_reproduced": true,
+      "boundary_heldout_paths": 29,
+      "precision_delta_excluding_boundary_scoring_only": -0.015880859572670922,
+      "boundary_check_does_not_refit_any_parameter": true
+    },
+    {
+      "evaluation": "eval2048",
+      "same_shape_bias_error_for_B_and_C_verified": true,
+      "score_delta_is_only_R_change_verified": true,
+      "reported_delta_reproduced": true,
+      "boundary_heldout_paths": 7,
+      "precision_delta_excluding_boundary_scoring_only": -0.015116823698204378,
+      "boundary_check_does_not_refit_any_parameter": true
+    },
+    {
+      "evaluation": "frozen512_on2048",
+      "same_shape_bias_error_for_B_and_C_verified": true,
+      "score_delta_is_only_R_change_verified": true,
+      "reported_delta_reproduced": true,
+      "boundary_heldout_paths": 7,
+      "precision_delta_excluding_boundary_scoring_only": -0.01651787746133229,
+      "boundary_check_does_not_refit_any_parameter": true
+    }
+  ],
+  "verifier_sha256": "2c71f2995f48c7ef3476b84828eb281df872df5f6318aa1ed83ea01c83de19b4",
+  "scope": "Only synthetic-directory config, models, outputs, NPZ, and artifact hashes read. No real market file, test target, score, external model, or search accessed."
+}

@@ -1,0 +1,232 @@
+{
+  "status": "exploratory; reused tests; not a publication claim",
+  "config": {
+    "epochs": 3,
+    "markets": [
+      "CEA"
+    ],
+    "seeds": [
+      11
+    ],
+    "variants": [
+      "dual_route"
+    ],
+    "lrs": [
+      0.0003
+    ],
+    "tag": "multiscale_round2_aligned_smoke"
+  },
+  "expert_context": "horizon only; shared market state is exclusive to routers",
+  "training": "raw pinball with fixed training-horizon risk normalizers and auxiliary expert loss",
+  "selection": "mean log relative RAW quantile risk over horizons",
+  "refit": true,
+  "panel_sha256": "d470238386e201e68f07b033f5a34591af89b57f1546ea79b699e763d228b56c",
+  "source_sha256": "962d2ff46413b3b92b2e18be1d526b37eac8cf78eaa8dcdccd9e9d4359818017",
+  "markets": {
+    "CEA": {
+      "audit": {
+        "cut_index": 597,
+        "validation_start": 447,
+        "last_refit_target": 596,
+        "counts": {
+          "train": {
+            "1": 98,
+            "5": 96,
+            "10": 94,
+            "20": 89
+          },
+          "validation": {
+            "1": 74,
+            "5": 72,
+            "10": 70,
+            "20": 65
+          },
+          "test": {
+            "1": 332,
+            "5": 330,
+            "10": 327,
+            "20": 322
+          },
+          "development": {
+            "1": 173,
+            "5": 171,
+            "10": 169,
+            "20": 164
+          }
+        }
+      },
+      "fits": {
+        "dual_route": {
+          "selected": {
+            "best_epoch": 0,
+            "validation_log_relative_raw_MQS": 0.0,
+            "epochs_run": 3,
+            "lr": 0.0003,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 0,
+              "validation_log_relative_raw_MQS": 0.0,
+              "epochs_run": 3,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11
+          ]
+        }
+      },
+      "by_horizon": {
+        "1": {
+          "n": 332,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.007444895803928375,
+              "WIS": 0.006523823831230402,
+              "MAE": 0.010121968574821949
+            },
+            "gaussian_rw": {
+              "MQS": 0.007720231056219906,
+              "WIS": 0.006678311397542419,
+              "MAE": 0.01012154316522794
+            },
+            "ridge_quantile": {
+              "MQS": 0.007801888353940321,
+              "WIS": 0.006771333111769994,
+              "MAE": 0.010995218907697515
+            },
+            "hgb_quantile": {
+              "MQS": 0.007592325247506339,
+              "WIS": 0.006657070952037114,
+              "MAE": 0.010115415172485199
+            },
+            "dual_route": {
+              "MQS": 0.007444895803928375,
+              "WIS": 0.006523824762552977,
+              "MAE": 0.010121968574821949
+            }
+          }
+        },
+        "5": {
+          "n": 330,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.01774841733276844,
+              "WIS": 0.015115216374397278,
+              "MAE": 0.025993358343839645
+            },
+            "gaussian_rw": {
+              "MQS": 0.017818789220565102,
+              "WIS": 0.015183839560194617,
+              "MAE": 0.025991201464101762
+            },
+            "ridge_quantile": {
+              "MQS": 0.017647537342176552,
+              "WIS": 0.015098559472887645,
+              "MAE": 0.025897907065673003
+            },
+            "hgb_quantile": {
+              "MQS": 0.019053696493612087,
+              "WIS": 0.016487727805262743,
+              "MAE": 0.02715766266313522
+            },
+            "dual_route": {
+              "MQS": 0.01774841733276844,
+              "WIS": 0.015115216374397278,
+              "MAE": 0.025993358343839645
+            }
+          }
+        },
+        "10": {
+          "n": 327,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.02757982723414898,
+              "WIS": 0.023765651509165764,
+              "MAE": 0.03967910259962082
+            },
+            "gaussian_rw": {
+              "MQS": 0.027371921859859125,
+              "WIS": 0.023577656710761598,
+              "MAE": 0.03967695074944133
+            },
+            "ridge_quantile": {
+              "MQS": 0.026509459001017074,
+              "WIS": 0.022955898324562466,
+              "MAE": 0.03788584698613203
+            },
+            "hgb_quantile": {
+              "MQS": 0.029639436954609494,
+              "WIS": 0.026039384621106037,
+              "MAE": 0.04119498499171296
+            },
+            "dual_route": {
+              "MQS": 0.02757982723414898,
+              "WIS": 0.023765651509165764,
+              "MAE": 0.03967910259962082
+            }
+          }
+        },
+        "20": {
+          "n": 322,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.046409010887145996,
+              "WIS": 0.039641812443733215,
+              "MAE": 0.06838210672140121
+            },
+            "gaussian_rw": {
+              "MQS": 0.04472831470976928,
+              "WIS": 0.03794616492784843,
+              "MAE": 0.06838410055486815
+            },
+            "ridge_quantile": {
+              "MQS": 0.044601672090534644,
+              "WIS": 0.03831494408183811,
+              "MAE": 0.06419365224663474
+            },
+            "hgb_quantile": {
+              "MQS": 0.04835788669205793,
+              "WIS": 0.04220129249692126,
+              "MAE": 0.06776271274021621
+            },
+            "dual_route": {
+              "MQS": 0.046409010887145996,
+              "WIS": 0.03964180871844292,
+              "MAE": 0.06838210672140121
+            }
+          }
+        }
+      }
+    }
+  },
+  "summary": {
+    "dual_route_vs_empirical_anchor": {
+      "mean_log_MQS_ratio": 0.0,
+      "geometric_MQS_gain_percent": 0.0,
+      "wins": 0,
+      "cells": 4
+    },
+    "dual_route_vs_gaussian_rw": {
+      "mean_log_MQS_ratio": 0.0010452552166204492,
+      "geometric_MQS_gain_percent": -0.10458016862378017,
+      "wins": 2,
+      "cells": 4
+    },
+    "dual_route_vs_ridge_quantile": {
+      "mean_log_MQS_ratio": 0.00954206441826345,
+      "geometric_MQS_gain_percent": -0.9587735063440572,
+      "wins": 1,
+      "cells": 4
+    },
+    "dual_route_vs_hgb_quantile": {
+      "mean_log_MQS_ratio": -0.05093272203149121,
+      "geometric_MQS_gain_percent": 4.9657394498419105,
+      "wins": 4,
+      "cells": 4
+    }
+  },
+  "elapsed_seconds": 3.074844300048426
+}

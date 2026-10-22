@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+	<meta charset="UTF-8" />
+<script type="text/javascript">
+/* <![CDATA[ */
+
+//----------------------------------------------------------
+//------ JAVASCRIPT HOOK FUNCTIONS FOR GRAVITY FORMS -------
+//----------------------------------------------------------
+
+if ( ! gform ) {
+	document.addEventListener( 'gform_main_scripts_loaded', function() { gform.scriptsLoaded = true; } );
+	document.addEventListener( 'gform/theme/scripts_loaded', function() { gform.themeScriptsLoaded = true; } );
+	window.addEventListener( 'DOMContentLoaded', function() { gform.domLoaded = true; } );
+
+	var gform = {
+		domLoaded: false,
+		scriptsLoaded: false,
+		themeScriptsLoaded: false,
+		isFormEditor: () => typeof InitializeEditor === 'function',
+
+		/**
+		 * @deprecated 2.9 the use of initializeOnLoaded in the form editor context is deprecated.
+		 * @remove-in 4.0 this function will not check for gform.isFormEditor().
+		 */
+		callIfLoaded: function ( fn ) {
+			if ( gform.domLoaded && gform.scriptsLoaded && ( gform.themeScriptsLoaded || gform.isFormEditor() ) ) {
+				if ( gform.isFormEditor() ) {
+					console.warn( 'The use of gform.initializeOnLoaded() is deprecated in the form editor context and will be removed in Gravity Forms 3.1.' );
+				}
+				fn();
+				return true;
+			}
+			return false;
+		},
+
+		/**
+		 * Call a function when all scripts are loaded
+		 *
+		 * @param function fn the callback function to call when all scripts are loaded
+		 *
+		 * @returns void
+		 */
+		initializeOnLoaded: function( fn ) {
+			if ( ! gform.callIfLoaded( fn ) ) {
+				document.addEventListener( 'gform_main_scripts_loaded', () => { gform.scriptsLoaded = true; gform.callIfLoaded( fn ); } );
+				document.addEventListener( 'gform/theme/scripts_loaded', () => { gform.themeScriptsLoaded = true; gform.callIfLoaded( fn ); } );
+				window.addEventListener( 'DOMContentLoaded', () => { gform.domLoaded = true; gform.callIfLoaded( fn ); } );
+			}
+		},
+
+		hooks: { action: {}, filter: {} },
+		addAction: function( action, callable, priority, tag ) {
+			gform.addHook( 'action', action, callable, priority, tag );
+		},
+		addFilter: function( action, callable, priority, tag ) {
+			gform.addHook( 'filter', action, callable, priority, tag );
+		},
+		doAction: function( action ) {
+			gform.doHook( 'action', action, arguments );
+		},
+		applyFilters: function( action ) {
+			return gform.doHook( 'filter', action, arguments );
+		},
+		removeAction: function( action, tag ) {
+			gform.removeHook( 'action', action, tag );
+		},
+		removeFilter: function( action, priority, tag ) {
+			gform.removeHook( 'filter', action, priority, tag );
+		},
+		addHook: function( hookType, action, callable, priority, tag ) {
+			if ( undefined == gform.hooks[hookType][action] ) {
+				gform.hooks[hookType][action] = [];
+			}
+			var hooks = gform.hooks[hookType][action];
+			if ( undefined == tag ) {
+				tag = action + '_' + hooks.length;
+			}
+			if( priority == undefined ){
+				priority = 10;
+			}
+
+			gform.hooks[hookType][action].push( { tag:tag, callable:callable, priority:priority } );
+		},
+		doHook: function( hookType, action, args ) {
+
+			// splice args from object into array and remove first index which is the hook name
+			args = Array.prototype.slice.call(args, 1);
+
+			if ( undefined != gform.hooks[hookType][action] ) {
+				var hooks = gform.hooks[hookType][action], hook;
+				//sort by priority
+				hooks.sort(function(a,b){return a["priority"]-b["priority"]});
+
+				hooks.forEach( function( hookItem ) {
+					hook = hookItem.callable;
+
+					if(typeof hook != 'function')
+						hook = window[hook];
+					if ( 'action' == hookType ) {
+						hook.apply(null, args);
+					} else {
+						args[0] = hook.apply(null, args);
+					}
+				} );
+			}
+			if ( 'filter'==hookType ) {
+				return args[0];
+			}
+		},
+		removeHook: function( hookType, action, priority, tag ) {
+			if ( undefined != gform.hooks[hookType][action] ) {
+				var hooks = gform.hooks[hookType][action];
+				hooks = hooks.filter( function(hook, index, arr) {
+					var removeHook = (undefined==tag||tag==hook.tag) && (undefined==priority||priority==hook.priority);
+					return !removeHook;
+				} );
+				gform.hooks[hookType][action] = hooks;
+			}
+		}
+	};
+}
+
+/* ]]> */
+</script>
+
+	<meta name="viewport" content="width = device-width, initial-scale=1, user-scalable = yes">
+	<!--[if IE]>
+	<meta http-equiv="cleartype" content="on">
+	<![endif]-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Global X Investments Canada Inc. Announces Final Valuation for the Terminating ETFs &#x2d; Global X Investments Canada Inc.">
+	<meta name="mobile-web-app-capable" content="yes">
+		<title>Global X Investments Canada Inc. Announces Final Valuation for the Terminating ETFs &#x2d; Global X Investments Canada Inc.</title>
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+<!-- The SEO Framework by Sybre Waaijer -->
+<meta name="robots" content="max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+<link rel="canonical" href="https://www.globalx.ca/news/press-releases/global-x-investments-canada-inc-announces-final-valuation-for-the-terminating-etfs" />
+<meta name="description" content="TORONTO &ndash; March 24, 2025 &ndash; Global X Investments Canada Inc. (the &ldquo;Manager&rdquo;) previously announced, by way of a press release dated January 10, 2025&#8230;" />
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="en_GB" />
+<meta property="og:site_name" content="Global X Investments Canada Inc." />
+<meta property="og:title" content="Global X Investments Canada Inc. Announces Final Valuation for the Terminating ETFs" />
+<meta property="og:description" content="TORONTO &ndash; March 24, 2025 &ndash; Global X Investments Canada Inc. (the &ldquo;Manager&rdquo;) previously announced, by way of a press release dated January 10, 2025, that the exchange traded funds (the &ldquo;ETFs&rdquo;) listed&#8230;" />
+<meta property="og:url" content="https://www.globalx.ca/news/press-releases/global-x-investments-canada-inc-announces-final-valuation-for-the-terminating-etfs" />
+<meta property="og:image" content="https://www.globalx.ca/wp-content/uploads/2024/04/cropped-Open-Graph-1.png" />
+<meta property="og:image:width" content="1199" />
+<meta property="og:image:height" content="629" />
+<meta property="article:published_time" content="2025-03-24T21:22:08+00:00" />
+<meta property="article:modified_time" content="2025-03-25T14:27:38+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Global X Investments Canada Inc. Announces Final Valuation for the Terminating ETFs" />
+<meta name="twitter:description" content="TORONTO &ndash; March 24, 2025 &ndash; Global X Investments Canada Inc. (the &ldquo;Manager&rdquo;) previously announced, by way of a press release dated January 10, 2025, that the exchange traded funds (the &ldquo;ETFs&rdquo;) listed&#8230;" />
+<meta name="twitter:image" content="https://www.globalx.ca/wp-content/uploads/2024/04/cropped-Open-Graph-1.png" />
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebSite",
+            "@id": "https://www.globalx.ca/#/schema/WebSite",
+            "url": "https://www.globalx.ca/",
+            "name": "Global X Investments Canada Inc.",
+            "description": "Innovation meets Investing",
+            "inLanguage": "en-CA",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "https://www.globalx.ca/search/{search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://www.globalx.ca/#/schema/Organization",
+                "name": "Global X Investments Canada Inc.",
+                "url": "https://www.globalx.ca/",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1.png",
+                    "contentUrl": "https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1.png",
+                    "width": 512,
+                    "height": 512,
+                    "contentSize": "14592"
+                }
+            }
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://www.globalx.ca/news/press-releases/global-x-investments-canada-inc-announces-final-valuation-for-the-terminating-etfs",
+            "url": "https://www.globalx.ca/news/press-releases/global-x-investments-canada-inc-announces-final-valuation-for-the-terminating-etfs",
+            "name": "Global X Investments Canada Inc. Announces Final Valuation for the Terminating ETFs &#x2d; Global X Investments Canada Inc.",
+            "description": "TORONTO &ndash; March 24, 2025 &ndash; Global X Investments Canada Inc. (the &ldquo;Manager&rdquo;) previously announced, by way of a press release dated January 10, 2025&#8230;",
+            "inLanguage": "en-CA",
+            "isPartOf": {
+                "@id": "https://www.globalx.ca/#/schema/WebSite"
+            },
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "@id": "https://www.globalx.ca/#/schema/BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "item": "https://www.globalx.ca/",
+                        "name": "Global X Investments Canada Inc."
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "item": "https://www.globalx.ca/category/news",
+                        "name": "Category: News"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "item": "https://www.globalx.ca/category/news/press-releases",
+                        "name": "Category: Press Releases"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 4,
+                        "name": "Global X Investments Canada Inc. Announces Final Valuation for the Terminating ETFs"
+                    }
+                ]
+            },
+            "potentialAction": {
+                "@type": "ReadAction",
+                "target": "https://www.globalx.ca/news/press-releases/global-x-investments-canada-inc-announces-final-valuation-for-the-terminating-etfs"
+            },
+            "datePublished": "2025-03-24T21:22:08+00:00",
+            "dateModified": "2025-03-25T14:27:38+00:00",
+            "author": {
+                "@type": "Person",
+                "@id": "https://www.globalx.ca/#/schema/Person/3ab2a518c2649248c2f465202f5e0375",
+                "name": "Global X"
+            }
+        }
+    ]
+}</script>
+<!-- / The SEO Framework by Sybre Waaijer | 7.04ms meta | 0.95ms boot -->
+
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='dns-prefetch' href='//code.highcharts.com' />
+<link rel='dns-prefetch' href='//ssl.geoplugin.net' />
+<link rel='dns-prefetch' href='//cdn.bttrack.com' />
+<link rel='stylesheet' id='wp-block-library-css' href='https://www.globalx.ca/wp-includes/css/dist/block-library/style.css?ver=6.8.3' type='text/css' media='all' />
+<style id='wp-block-library-theme-inline-css' type='text/css'>
+.wp-block-audio :where(figcaption){
+  color:#555;
+  font-size:13px;
+  text-align:center;
+}
+.is-dark-theme .wp-block-audio :where(figcaption){
+  color:#ffffffa6;
+}
+
+.wp-block-audio{
+  margin:0 0 1em;
+}
+
+.wp-block-code{
+  border:1px solid #ccc;
+  border-radius:4px;
+  font-family:Menlo,Consolas,monaco,monospace;
+  padding:.8em 1em;
+}
+
+.wp-block-embed :where(figcaption){
+  color:#555;
+  font-size:13px;
+  text-align:center;
+}
+.is-dark-theme .wp-block-embed :where(figcaption){
+  color:#ffffffa6;
+}
+
+.wp-block-embed{
+  margin:0 0 1em;
+}
+
+.blocks-gallery-caption{
+  color:#555;
+  font-size:13px;
+  text-align:center;
+}
+.is-dark-theme .blocks-gallery-caption{
+  color:#ffffffa6;
+}
+
+:root :where(.wp-block-image figcaption){
+  color:#555;
+  font-size:13px;
+  text-align:center;
+}
+.is-dark-theme :root :where(.wp-block-image figcaption){
+  color:#ffffffa6;
+}
+
+.wp-block-image{
+  margin:0 0 1em;
+}
+
+.wp-block-pullquote{
+  border-bottom:4px solid;
+  border-top:4px solid;
+  color:currentColor;
+  margin-bottom:1.75em;
+}
+.wp-block-pullquote cite,.wp-block-pullquote footer,.wp-block-pullquote__citation{
+  color:currentColor;
+  font-size:.8125em;
+  font-style:normal;
+  text-transform:uppercase;
+}
+
+.wp-block-quote{
+  border-left:.25em solid;
+  margin:0 0 1.75em;
+  padding-left:1em;
+}
+.wp-block-quote cite,.wp-block-quote footer{
+  color:currentColor;
+  font-size:.8125em;
+  font-style:normal;
+  position:relative;
+}
+.wp-block-quote:where(.has-text-align-right){
+  border-left:none;
+  border-right:.25em solid;
+  padding-left:0;
+  padding-right:1em;
+}
+.wp-block-quote:where(.has-text-align-center){
+  border:none;
+  padding-left:0;
+}
+.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote:where(.is-style-plain){
+  border:none;
+}
+
+.wp-block-search .wp-block-search__label{
+  font-weight:700;
+}
+
+.wp-block-search__button{
+  border:1px solid #ccc;
+  padding:.375em .625em;
+}
+
+:where(.wp-block-group.has-background){
+  padding:1.25em 2.375em;
+}
+
+.wp-block-separator.has-css-opacity{
+  opacity:.4;
+}
+
+.wp-block-separator{
+  border:none;
+  border-bottom:2px solid;
+  margin-left:auto;
+  margin-right:auto;
+}
+.wp-block-separator.has-alpha-channel-opacity{
+  opacity:1;
+}
+.wp-block-separator:not(.is-style-wide):not(.is-style-dots){
+  width:100px;
+}
+.wp-block-separator.has-background:not(.is-style-dots){
+  border-bottom:none;
+  height:1px;
+}
+.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){
+  height:2px;
+}
+
+.wp-block-table{
+  margin:0 0 1em;
+}
+.wp-block-table td,.wp-block-table th{
+  word-break:normal;
+}
+.wp-block-table :where(figcaption){
+  color:#555;
+  font-size:13px;
+  text-align:center;
+}
+.is-dark-theme .wp-block-table :where(figcaption){
+  color:#ffffffa6;
+}
+
+.wp-block-video :where(figcaption){
+  color:#555;
+  font-size:13px;
+  text-align:center;
+}
+.is-dark-theme .wp-block-video :where(figcaption){
+  color:#ffffffa6;
+}
+
+.wp-block-video{
+  margin:0 0 1em;
+}
+
+:root :where(.wp-block-template-part.has-background){
+  margin-bottom:0;
+  margin-top:0;
+  padding:1.25em 2.375em;
+}
+</style>
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/**
+ * These rules are needed for backwards compatibility.
+ * They should match the button element rules in the base theme.json file.
+ */
+.wp-block-button__link {
+	color: #ffffff;
+	background-color: #32373c;
+	border-radius: 9999px; /* 100% causes an oval, but any explicit but really high value retains the pill shape. */
+
+	/* This needs a low specificity so it won't override the rules from the button element if defined in theme.json. */
+	box-shadow: none;
+	text-decoration: none;
+
+	/* The extra 2px are added to size solids the same as the outline versions.*/
+	padding: calc(0.667em + 2px) calc(1.333em + 2px);
+
+	font-size: 1.125em;
+}
+
+.wp-block-file__button {
+	background: #32373c;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+</style>
+<style id='ctb-countdown-time-style-inline-css' type='text/css'>
+.wp-block-ctb-countdown-time{display:flex;transition:opacity .3s ease-in-out,transform 8s ease-in-out}.wp-block-ctb-countdown-time *{box-sizing:border-box}.wp-block-ctb-countdown-time .ctbCountdownTime{align-items:center;display:inline-flex;max-width:100%;position:relative}.wp-block-ctb-countdown-time .ctbCountdownTime .prefixText{margin:0!important}.wp-block-ctb-countdown-time .ctbCountdownTime .suffixButton{text-decoration:none}.wp-block-ctb-countdown-time .ctbCountdownTime .countdownClose{fill:#333;cursor:pointer;outline:0;position:absolute;right:4px;top:3px;z-index:10}.wp-block-ctb-countdown-time .countdownItems{align-items:center;display:flex;flex-grow:1;max-width:100%}.wp-block-ctb-countdown-time .countdownItems .countdownItem{align-items:center;display:flex;flex-direction:column;justify-content:center}.wp-block-ctb-countdown-time .countdownItems .countdownItem .digit{display:block;font-weight:400}.wp-block-ctb-countdown-time .countdownItems .countdownItem .label{display:block;font-style:normal;line-height:100%;text-decoration:initial;text-transform:none}.wp-block-ctb-countdown-time .countdownItems .countdownItem.inline{flex-direction:row;justify-content:center}.wp-block-ctb-countdown-time .countdownItems .countdownItem.inline .digit{display:flex;flex:1 1 0%;justify-content:center}.wp-block-ctb-countdown-time .countdownItems .countdownItem.inline .label{display:flex;flex:1 1 0%}.wp-block-ctb-countdown-time .countdownItems .separator{position:relative}.wp-block-ctb-countdown-time .countdownItems .separator:before{line-height:100%;position:absolute;top:50%;transform:translate(-50%,-65%)}.wp-block-ctb-countdown-time .countdownItems .countdownItem.inline~.separator:before{transform:translate(-50%,-60%)}.wp-block-ctb-countdown-time.transformHidden{opacity:0;transform:translateY(-9999px)}@media(max-width:575px){.wp-block-ctb-countdown-time .countdownItems.ctbResponsive{flex-direction:column}.wp-block-ctb-countdown-time .countdownItems.ctbResponsive .separator{transform:rotate(90deg)}}
+
+</style>
+<link rel='stylesheet' id='gx-homepage-insights-style-css' href='https://www.globalx.ca/wp-content/plugins/gx-homepage-insights/blocks/insights/style.css?ver=1.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='psx-style-css' href='https://www.globalx.ca/wp-content/plugins/powerstock-exposure/assets/powerstock.css?ver=1791994347' type='text/css' media='all' />
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #FFFFFF;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--orange: #FF5400;--wp--preset--color--blue-light: #8EB1B1;--wp--preset--color--gray-lighter: #E5E6E5;--wp--preset--color--gray-lightest: #F4F4F4;--wp--preset--color--black-light: #606060;--wp--preset--color--blue: #002F37;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='cookie-notice-front-css' href='https://www.globalx.ca/wp-content/plugins/cookie-notice/css/front.css?ver=2.5.7' type='text/css' media='all' />
+<link rel='stylesheet' id='uikit-css' href='https://www.globalx.ca/wp-content/themes/gxca/assets/css/uikit.css?ver=6.8.3' type='text/css' media='all' />
+<link rel='stylesheet' id='output-css' href='https://www.globalx.ca/wp-content/themes/gxca/assets/css/style.css?ver=1792422066' type='text/css' media='all' />
+<link rel='stylesheet' id='slick-css' href='https://www.globalx.ca/wp-content/themes/gxca/assets/css/slick.min.css?ver=6.8.3' type='text/css' media='all' />
+<link rel='stylesheet' id='slick-theme-css' href='https://www.globalx.ca/wp-content/themes/gxca/assets/css/slick-theme.min.css?ver=6.8.3' type='text/css' media='all' />
+<link rel='stylesheet' id='animate-css' href='https://www.globalx.ca/wp-content/themes/gxca/assets/css/animate.css?ver=6.8.3' type='text/css' media='all' />
+<link rel='stylesheet' id='slick-accessible-theme-css' href='https://www.globalx.ca/wp-content/themes/gxca/assets/css/accessible-slick-theme.min.css?ver=6.8.3' type='text/css' media='all' />
+<script type="text/javascript" id="cookie-notice-front-js-before">
+/* <![CDATA[ */
+var cnArgs = {"ajaxUrl":"https:\/\/www.globalx.ca\/wp-admin\/admin-ajax.php","nonce":"40b2886327","hideEffect":"fade","position":"bottom","onScroll":false,"onScrollOffset":100,"onClick":false,"cookieName":"cookie_notice_accepted","cookieTime":2592000,"cookieTimeRejected":2592000,"globalCookie":false,"redirection":false,"cache":false,"revokeCookies":false,"revokeCookiesOpt":"automatic"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.globalx.ca/wp-content/plugins/cookie-notice/js/front.js?ver=2.5.7" id="cookie-notice-front-js"></script>
+<script type="text/javascript" src="https://www.globalx.ca/wp-includes/js/jquery/jquery.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://www.globalx.ca/wp-includes/js/jquery/jquery-migrate.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<link rel="https://api.w.org/" href="https://www.globalx.ca/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.globalx.ca/wp-json/wp/v2/posts/14441" /><link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.globalx.ca/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.globalx.ca%2Fnews%2Fpress-releases%2Fglobal-x-investments-canada-inc-announces-final-valuation-for-the-terminating-etfs" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.globalx.ca/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.globalx.ca%2Fnews%2Fpress-releases%2Fglobal-x-investments-canada-inc-announces-final-valuation-for-the-terminating-etfs&#038;format=xml" />
+<script type="application/ld+json">
+            {
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://www.globalx.ca/news/press-releases/global-x-investments-canada-inc-announces-final-valuation-for-the-terminating-etfs"
+            },
+            "headline": "Global X Investments Canada Inc. Announces Final Valuation for the Terminating ETFs",
+            "image": [""],
+            "datePublished": "2025-03-24T17:22:08-04:00",
+            "dateModified": "2025-03-25T10:27:38-04:00",
+            "author": {
+                "@type": "Organization",
+                "name": "Global X"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Global X",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.globalx.ca/wp-content/uploads/2025/05/globalx-logo.png"
+                }
+            },
+            "description": "TORONTO – March 24, 2025 – Global X Investments Canada Inc. (the “Manager”) previously announced, by way of a press release dated January 10, 2025, that the exchange traded funds (the “ETFs”) listed in the table below would be delisted from the Toronto Stock Exchange at the close of business on March 18, 2025, and [&hellip;]"
+            }
+            </script>
+					<script>
+						(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+						new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+						j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+						'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+						})(window,document,'script','dataLayer','GTM-NTJG8H4');
+					</script>
+					<link rel="icon" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-270x270.png" />
+<link rel="shortcut icon" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-57x57.png" sizes="57x57" />
+<link rel="shortcut icon" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-196x196.png" sizes="196x196" />
+<link rel="apple-touch-icon" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1.png" />
+<link rel="apple-touch-icon" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-152x152.png" sizes="152x152" />
+<link rel="apple-touch-icon" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-120x120.png" sizes="120x120" />
+<link rel="apple-touch-icon-precomposed" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1.png" />
+<link rel="apple-touch-icon-precomposed" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-144x144.png" sizes="144x144" />
+<link rel="apple-touch-icon-precomposed" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-120x120.png" sizes="120x120" />
+<link rel="apple-touch-icon-precomposed" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-114x114.png" sizes="114x114" />
+<link rel="apple-touch-icon-precomposed" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-72x72.png" sizes="72x72" />
+<link rel="apple-touch-icon-precomposed" href="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-57x57.png" sizes="57x57" />
+<meta name="msapplication-TileImage" content="https://www.globalx.ca/wp-content/uploads/2025/05/cropped-favicon-512x512-1-144x144.png" />
+		<style type="text/css" id="wp-custom-css">
+			body:not(.admin-bar).page-id-353 #product-filter-button {
+/* 	display:none; */
+}		</style>
+		</head>
+<body class="wp-singular post-template-default single single-post postid-14441 single-format-standard wp-theme-gxca cookies-not-set">
+<div class="relative">
+	<a
+		href="#main-content"
+		class="w-full bg-orange text-white text-center font-brown-std p-5 fixed -top-20 focus:top-0 transition-all duration-200 z-50">
+		Skip To Main Content	</a>
+
+	<a
+		href="#"
+		id="js-automatic-location-trigger"
+		class="text-[0px] invisible"
+		aria-hidden="true"
+		tabindex="-1"
+		data-drawer-id="#drawer-country-selector"
+		data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-country&quot;}">
+		Location Automatic Trigger
+	</a>
+
+	<div class="absolute top-0 left-0 w-full z-30 header">
+
+		<!-- Header Notice -->
+				<!--  -->
+
+		<!-- Top Nav Header -->
+		<div class="flex justify-between items-center bg-blue-dark px-6 md:px-8 py-2.5 text-white">
+			<div class="flex items-center text-xs">
+				<a
+					id="country-selector-trigger"
+					href="#"
+					class="[&_svg]:fill-white flex justify-center items-center gap-x-2"
+					data-drawer-id="#drawer-country-selector"
+					data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-country&quot;}">
+					<span
+						role="img"
+						aria-label="Location Pin">
+						<svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M4.38 7C2.93 7 1.76 5.82 1.76 4.38C1.76 2.94 2.93 1.75 4.38 1.75C5.83 1.75 7 2.93 7 4.37C7 5.81 5.82 6.99 4.38 6.99V7ZM4.38 0C1.96 0 0 1.96 0 4.38C0 8.75 4.38 14 4.38 14C4.38 14 8.76 8.75 8.76 4.38C8.76 1.96 6.8 0 4.38 0Z" fill="inherit" />
+</svg>
+					</span>
+					Canada				</a>
+				<div class="flex ml-5 lang">
+					<div class="hover:text-orange-dark transition duration-200 flex gap-x-3 first:mr-3 first:after:!border-white first:after:border focus:orange"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="https://www.globalx.ca/news/press-releases/global-x-investments-canada-inc-announces-final-valuation-for-the-terminating-etfs" class="menu-item-link">EN</a></li></ul></div>				</div>
+			</div>
+			<nav class="flex items-center text">
+				<ul id="menu-pre-header" class="site-header-menu hidden md:flex justify-center items-center"><li class="inline-block text-xs ml-4 relative after:w-0.5 after:h-3 after:ml-4 after:border menu-item menu-item-0"><a href="https://www.globalx.ca/betapro" class="menu-item-link">BetaPro</a></li><li class="inline-block text-xs ml-4 relative after:w-0.5 after:h-3 after:ml-4 after:border menu-item menu-item-0"><a href="https://www.globalx.ca/category/news" class="menu-item-link">News</a></li></ul>									<a
+						href="/contact"
+						class="[&_svg]:fill-white flex items-center text-xs pl-4 gap-x-2">
+						Contact						<span>
+							<svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<mask id="mask0_58_110" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-1" y="0" width="15" height="10">
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M-0.00268555 0.156616H14V9.8433H-0.00268555V0.156616Z" fill="white"/>
+	</mask>
+	<g mask="url(#mask0_58_110)">
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M9.23165 3.54312L13.0694 1.616C12.6494 0.841851 11.6859 -1.37352 5.22916 1.8713C-1.22753 5.11611 -0.058075 7.14207 0.345468 8.0068L4.17501 6.08791C3.56558 4.84434 8.57281 2.33249 9.23165 3.54312ZM5.05622 7.97386L4.46326 6.78794L0.691362 8.68212L1.27609 9.84333L5.05622 7.97386ZM10.2199 5.37142L9.6352 4.21844L13.3741 2.32425L14.0001 3.47723L10.2199 5.37142Z" fill="inherit"/>
+	</g>
+</svg>
+						</span>
+					</a>
+													<!-- <a
+						id="pre-header-search-trigger"
+						href="#"
+						class="flex xl:hidden [&_svg]:fill-white items-center gap-x-3 ml-3 text-white text-xs before:h-4 before:!border-white before:border"
+						data-drawer-id="#drawer-off-canvas-search"
+						data-toggle-drawer="">
+													<span class="[&_svg]:fill-white [&_svg]:transition [&_svg]:duration-200 group-hover:[&_svg]:fill-orange transition duration-200 ml-[-5px]">
+															</span>
+					</a> -->
+									<a
+						id="header_search_new"
+						href="#"
+						class="flex xl:hidden [&_svg]:fill-white items-center gap-x-3 ml-3 text-white text-xs before:h-4 before:!border-white before:border">
+						Search						<span class="[&_svg]:fill-white [&_svg]:transition [&_svg]:duration-200 group-hover:[&_svg]:fill-orange transition duration-200 ml-[-5px]">
+							<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M10.8405 12.2546L11.9722 11.123L16 15.1508L14.8684 16.2824L10.8405 12.2546ZM5.88847 10.5021C3.52028 10.4842 1.61485 8.54998 1.63213 6.18179C1.65005 3.8136 3.58429 1.90816 5.95248 1.92545C8.30851 1.94337 10.2088 3.85776 10.2088 6.21379C10.2267 8.58198 8.32131 10.5162 5.95248 10.5341C5.93135 10.5341 5.90959 10.5341 5.88847 10.5341V10.5021ZM5.88847 0.325317C2.63637 0.325317 0 2.96169 0 6.21379C0 9.46589 2.63637 12.1023 5.88847 12.1023C9.14057 12.1023 11.7769 9.46589 11.7769 6.21379C11.784 2.96873 9.15913 0.332358 5.91407 0.325317C5.90575 0.325317 5.89679 0.325317 5.88847 0.325317Z" fill="inherit"/>
+</svg>
+						</span>
+					</a>
+							</nav>
+		</div>
+
+
+
+		<div class="header-main w-full fixed top-9 [.admin-bar_&]:top-[69px]">
+		<!-- Main Header -->
+			<header class="flex justify-between items-center py-5 xl:py-0 max-w-screen-xl mx-auto px-6 md:px-8  !bg-transparent">
+			<div class="w-1/4">
+				<a href="https://www.globalx.ca" title="Global X Investments Canada Inc." aria-label="Global X Investments Canada Inc." class="block max-w-[275px] [&_svg]:h-[20px] sm:[&_svg]:h-[25px]">
+					<svg viewBox="0 0 284 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M62.1139 3.24071C67.0459 3.26771 71.0219 7.28771 70.9949 12.2197C70.9949 12.2467 70.9939 12.2737 70.9939 12.3007C71.1589 17.2077 67.3139 21.3187 62.4069 21.4837C57.4999 21.6487 53.3889 17.8037 53.2239 12.8967C53.2169 12.6987 53.2169 12.4997 53.2239 12.3007C53.1519 7.36971 57.0919 3.31371 62.0229 3.24171C62.0529 3.24071 62.0839 3.24071 62.1139 3.24071ZM62.1139 0.000709175C55.3209 0.000709175 49.8139 5.50771 49.8139 12.3007C49.8139 19.0937 55.3209 24.6007 62.1139 24.6007C68.9069 24.6007 74.4139 19.0937 74.4139 12.3007C74.4079 5.50971 68.9049 0.00670917 62.1139 0.000709175ZM37.1939 24.2207H45.7539V20.8007H37.1939V24.2207ZM30.3639 0.340709H33.7839V24.2607H30.3639V0.340709ZM21.6939 20.1607C19.4069 22.9427 16.0049 24.5677 12.4039 24.6007C5.77986 24.8237 0.229857 19.6347 0.00685714 13.0117C-0.00114286 12.7747 -0.00214286 12.5377 0.00385714 12.3007C-0.162143 5.67571 5.07486 0.169709 11.6999 0.00370917C11.8309 0.000709174 11.9629 -0.000290825 12.0939 0.000709175C15.3959 -0.0352908 18.5649 1.30071 20.8439 3.69071L18.5239 5.94071C16.8159 4.21671 14.4909 3.24571 12.0639 3.24071C7.24786 3.27571 3.37286 7.20771 3.40786 12.0237C3.40786 12.1157 3.40986 12.2087 3.41386 12.3007C3.21786 17.1067 6.95486 21.1627 11.7619 21.3587C11.9789 21.3677 12.1969 21.3677 12.4139 21.3607C14.5899 21.4157 16.7009 20.6147 18.2939 19.1307V12.9807H11.4439V9.74071H21.6939V20.1607ZM142.834 24.2207H151.394V20.8007H142.834V24.2207ZM136.004 24.2607H139.424V0.340709H136.004V24.2607ZM178.854 6.26071L176.444 8.68071L170.444 2.63071L172.804 0.210709L178.854 6.26071ZM170.394 24.3907V19.5607L189.744 0.210709L192.154 2.63071L170.394 24.3907ZM192.154 24.3907L183.694 15.9307L186.104 13.5107L192.104 19.5607L192.154 24.3907ZM120.914 18.1107H110.824L108.334 24.2607H104.784L114.694 0.340709H117.084L126.994 24.2607H123.434L120.914 18.1107ZM112.194 14.8607H119.574L115.884 5.98071L112.194 14.8607ZM81.9339 24.2607V0.340709H90.0639C91.8599 0.228709 93.6269 0.828709 94.9839 2.01071C96.2579 3.18071 96.9829 4.83071 96.9839 6.56071C96.9459 8.17171 96.2609 9.69971 95.0839 10.8007C98.5769 12.5217 100.013 16.7477 98.2919 20.2407C97.8379 21.1637 97.1859 21.9757 96.3839 22.6207C94.8999 23.7867 93.0369 24.3597 91.1539 24.2307L81.9339 24.2607ZM89.4439 9.74071C91.3639 9.74071 92.1839 9.36071 92.7239 8.74071C93.2479 8.17571 93.5339 7.43071 93.5239 6.66071C93.5289 5.88771 93.2349 5.14271 92.7039 4.58071C92.1639 3.96071 91.3439 3.58071 89.4239 3.58071H85.3239V9.74071H89.4439ZM90.5239 21.0207C92.6739 21.0207 93.6939 20.5407 94.4439 19.7807C95.1719 19.0307 95.5779 18.0257 95.5739 16.9807C95.5699 15.9457 95.1649 14.9527 94.4439 14.2107C93.6939 13.4607 92.6739 12.9807 90.5239 12.9807H85.3239V20.9807L90.5239 21.0207Z" fill="#FF5400"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M205.314 12.5107C205.346 13.0887 205.215 13.6647 204.934 14.1707C204.671 14.5527 204.227 14.7697 203.764 14.7407C203.257 14.7997 202.756 14.5827 202.454 14.1707C202.194 13.6647 202.073 13.0987 202.104 12.5307C202.07 11.9257 202.216 11.3237 202.524 10.8007C202.829 10.4067 203.319 10.2017 203.814 10.2607C204.834 10.3007 205.354 11.0407 205.354 12.5107H205.314ZM201.144 7.18066V15.4307H201.834L202.024 14.6907H202.104C202.285 14.9377 202.517 15.1427 202.784 15.2907C203.131 15.4637 203.516 15.5467 203.904 15.5307C204.57 15.5567 205.211 15.2767 205.644 14.7707C206.13 14.1257 206.365 13.3257 206.304 12.5207C206.365 11.7157 206.13 10.9157 205.644 10.2707C204.901 9.52766 203.768 9.33866 202.824 9.80066C202.552 9.95166 202.319 10.1637 202.144 10.4207H202.084C202.093 10.2507 202.093 10.0807 202.084 9.91066V7.23066L201.144 7.18066ZM209.524 15.4507L209.224 16.2207C209.115 16.5017 208.948 16.7577 208.734 16.9707C208.514 17.1657 208.227 17.2657 207.934 17.2507H207.574L207.294 17.2007V17.9607C207.401 17.9937 207.512 18.0137 207.624 18.0207C207.777 18.0327 207.931 18.0327 208.084 18.0207C208.573 18.0497 209.052 17.8717 209.404 17.5307C209.756 17.1537 210.025 16.7077 210.194 16.2207L212.704 9.60066H211.704L210.524 12.9107L210.224 13.7907C210.134 14.0907 210.064 14.3207 210.024 14.5007C209.981 14.2457 209.917 13.9957 209.834 13.7507C209.744 13.4907 209.654 13.2207 209.544 12.9207L208.284 9.61066H207.284L209.524 15.4507ZM223.664 7.67066L221.524 13.6907L219.524 7.69066H217.524V15.5307H218.864V9.27066L220.934 15.4407H222.234L224.404 9.22066V15.4407H225.824V7.63066L223.664 7.67066ZM227.944 15.5107H229.404V9.51066H227.944V15.5107ZM228.674 8.80066C228.874 8.80766 229.071 8.74766 229.234 8.63066C229.412 8.48466 229.506 8.25966 229.484 8.03066C229.506 7.80466 229.412 7.58166 229.234 7.44066C229.068 7.32966 228.873 7.27066 228.674 7.27066C228.474 7.26566 228.278 7.32566 228.114 7.44066C227.94 7.58466 227.849 7.80566 227.874 8.03066C227.85 8.25766 227.94 8.48266 228.114 8.63066C228.275 8.75066 228.473 8.81066 228.674 8.80066ZM235.334 9.47066H234.724C234.337 9.46366 233.957 9.58266 233.644 9.81066C233.352 10.0187 233.11 10.2887 232.934 10.6007L232.734 9.60066H231.524V15.6007H232.974V12.3807C232.96 12.0587 233.04 11.7387 233.204 11.4607C233.344 11.2297 233.549 11.0457 233.794 10.9307C234.044 10.8117 234.317 10.7497 234.594 10.7507H235.114L235.244 9.39066L235.334 9.47066ZM239.274 12.7307C238.847 12.7157 238.425 12.8197 238.054 13.0307C237.836 13.2007 237.714 13.4647 237.724 13.7407C237.702 13.9567 237.788 14.1697 237.954 14.3107C238.136 14.4337 238.354 14.4937 238.574 14.4807C238.936 14.4947 239.291 14.3767 239.574 14.1507C239.852 13.8957 239.995 13.5267 239.964 13.1507V12.6907L239.274 12.7307ZM241.394 11.5007V15.5007H240.394L240.124 14.7007C239.909 14.9817 239.636 15.2137 239.324 15.3807C238.958 15.5487 238.557 15.6277 238.154 15.6107C237.666 15.6257 237.19 15.4627 236.814 15.1507C236.43 14.7867 236.232 14.2677 236.274 13.7407C236.241 13.1847 236.503 12.6537 236.964 12.3407C237.56 11.9947 238.235 11.8087 238.924 11.8007H239.924V11.5507C239.953 11.2707 239.862 10.9907 239.674 10.7807C239.466 10.6187 239.207 10.5377 238.944 10.5507C238.66 10.5487 238.377 10.5897 238.104 10.6707C237.834 10.7607 237.564 10.8607 237.294 10.9807L236.844 9.98066C237.161 9.81466 237.497 9.68766 237.844 9.60066C238.231 9.50866 238.627 9.46166 239.024 9.46066C239.653 9.41666 240.276 9.59766 240.784 9.97066C241.174 10.3737 241.377 10.9207 241.344 11.4807L241.394 11.5007ZM245.054 10.8507C244.814 11.1297 244.68 11.4827 244.674 11.8507H247.104C247.108 11.5167 247.002 11.1897 246.804 10.9207C246.592 10.6497 246.256 10.5057 245.914 10.5407C245.587 10.4917 245.255 10.5867 245.004 10.8007L245.054 10.8507ZM248.524 12.8507H244.644C244.636 13.2777 244.789 13.6927 245.074 14.0107C245.377 14.3077 245.79 14.4637 246.214 14.4407C246.551 14.4447 246.887 14.4047 247.214 14.3207C247.534 14.2437 247.845 14.1367 248.144 14.0007H248.204V15.1907C247.915 15.3327 247.609 15.4367 247.294 15.5007C246.922 15.5737 246.543 15.6077 246.164 15.6007C245.628 15.6127 245.096 15.4957 244.614 15.2607C244.168 15.0417 243.798 14.6937 243.554 14.2607C243.285 13.7357 243.154 13.1507 243.174 12.5607C243.119 11.7157 243.391 10.8807 243.934 10.2307C244.453 9.68466 245.182 9.38966 245.934 9.42066C246.643 9.38566 247.335 9.64666 247.844 10.1407C248.332 10.6887 248.584 11.4077 248.544 12.1407L248.524 12.8507ZM256.034 10.1307L255.364 12.0707H257.424L256.774 10.1307C256.774 10.0307 256.694 9.90066 256.644 9.72066C256.594 9.54066 256.524 9.36066 256.474 9.18066C256.424 9.00066 256.424 8.97066 256.394 8.88066L256.294 9.23066L256.144 9.76066C256.064 10.0007 256.034 10.1207 256.004 10.2007L256.034 10.1307ZM260.094 15.4007H258.524L257.834 13.4007H254.924L254.234 15.4507H252.664L255.524 7.60066H257.174L260.094 15.4007ZM265.244 12.8007C265.09 12.5707 264.884 12.3787 264.644 12.2407C264.35 12.0777 264.046 11.9347 263.734 11.8107C263.384 11.6707 263.114 11.5607 262.914 11.4607C262.774 11.3907 262.646 11.2997 262.534 11.1907C262.463 11.1147 262.424 11.0147 262.424 10.9107C262.424 10.5907 262.704 10.4407 263.284 10.4407C263.552 10.4407 263.818 10.4807 264.074 10.5607C264.334 10.6407 264.594 10.7407 264.874 10.8507L265.344 9.76066C265.023 9.61566 264.688 9.50466 264.344 9.43066C264.015 9.36066 263.68 9.32366 263.344 9.32066C262.756 9.29466 262.174 9.43666 261.664 9.73066C261.238 9.99566 260.989 10.4697 261.014 10.9707C261.001 11.2627 261.067 11.5527 261.204 11.8107C261.353 12.0377 261.551 12.2297 261.784 12.3707C262.106 12.5477 262.44 12.7017 262.784 12.8307C263.077 12.9427 263.361 13.0767 263.634 13.2307C263.772 13.3027 263.897 13.3977 264.004 13.5107C264.06 13.5927 264.088 13.6907 264.084 13.7907C264.091 13.9657 264.003 14.1297 263.854 14.2207C263.616 14.3527 263.345 14.4117 263.074 14.3907C262.736 14.3867 262.4 14.3397 262.074 14.2507C261.747 14.1647 261.429 14.0477 261.124 13.9007H261.064V15.1707C261.344 15.2907 261.635 15.3807 261.934 15.4407C262.283 15.5057 262.639 15.5357 262.994 15.5307C263.644 15.5697 264.291 15.4057 264.844 15.0607C265.282 14.7367 265.526 14.2137 265.494 13.6707C265.476 13.3837 265.379 13.1067 265.214 12.8707L265.244 12.8007ZM271.044 12.8007C270.892 12.5677 270.686 12.3757 270.444 12.2407C270.152 12.0737 269.848 11.9307 269.534 11.8107C269.194 11.6707 268.914 11.5607 268.724 11.4607C268.58 11.3937 268.448 11.3017 268.334 11.1907C268.266 11.1137 268.23 11.0137 268.234 10.9107C268.234 10.5907 268.514 10.4407 269.084 10.4407C269.352 10.4397 269.618 10.4807 269.874 10.5607C270.134 10.6407 270.404 10.7407 270.674 10.8507L271.144 9.76066C270.823 9.61566 270.488 9.50466 270.144 9.43066C269.815 9.35966 269.48 9.32266 269.144 9.32066C268.553 9.29466 267.967 9.43666 267.454 9.73066C267.031 9.99866 266.784 10.4707 266.804 10.9707C266.794 11.2637 266.863 11.5537 267.004 11.8107C267.151 12.0407 267.349 12.2327 267.584 12.3707C267.887 12.5437 268.201 12.6977 268.524 12.8307C268.818 12.9407 269.102 13.0747 269.374 13.2307C269.515 13.2967 269.642 13.3927 269.744 13.5107C269.803 13.5917 269.835 13.6897 269.834 13.7907C269.837 13.9647 269.75 14.1267 269.604 14.2207C269.363 14.3527 269.088 14.4117 268.814 14.3907C268.476 14.3867 268.14 14.3397 267.814 14.2507C267.486 14.1677 267.167 14.0507 266.864 13.9007H266.794V15.1707C267.071 15.2887 267.359 15.3797 267.654 15.4407C268.007 15.5057 268.365 15.5357 268.724 15.5307C269.371 15.5687 270.014 15.4037 270.564 15.0607C271.007 14.7407 271.256 14.2167 271.224 13.6707C271.226 13.3897 271.154 13.1137 271.014 12.8707L271.044 12.8007ZM274.524 10.8007C274.28 11.0767 274.145 11.4327 274.144 11.8007H276.524C276.518 11.4677 276.413 11.1447 276.224 10.8707C276.007 10.6067 275.675 10.4647 275.334 10.4907C275.033 10.4797 274.741 10.5917 274.524 10.8007ZM277.954 12.8507H274.074C274.07 13.2767 274.223 13.6897 274.504 14.0107C274.808 14.3057 275.221 14.4617 275.644 14.4407C275.981 14.4437 276.317 14.4037 276.644 14.3207C276.963 14.2427 277.274 14.1357 277.574 14.0007H277.634V15.1907C277.346 15.3337 277.04 15.4387 276.724 15.5007C276.355 15.5737 275.98 15.6077 275.604 15.6007C275.067 15.6147 274.535 15.4977 274.054 15.2607C273.606 15.0457 273.235 14.6957 272.994 14.2607C272.725 13.7357 272.595 13.1507 272.614 12.5607C272.554 11.7147 272.826 10.8787 273.374 10.2307C273.892 9.68366 274.621 9.38866 275.374 9.42066C276.08 9.38366 276.77 9.64466 277.274 10.1407C277.766 10.6867 278.018 11.4067 277.974 12.1407L277.954 12.8507ZM283.044 14.2107V15.3207C282.859 15.4037 282.664 15.4607 282.464 15.4907C282.224 15.5397 281.979 15.5627 281.734 15.5607C281.413 15.5637 281.094 15.5067 280.794 15.3907C280.512 15.2777 280.278 15.0687 280.134 14.8007C279.947 14.4367 279.861 14.0297 279.884 13.6207V10.6207H279.094V9.95066L279.974 9.47066L280.404 8.21066H281.344V9.50066H283.014V10.6207H281.324V13.6207C281.279 13.9987 281.549 14.3427 281.927 14.3877C281.972 14.3937 282.018 14.3947 282.064 14.3907C282.224 14.4057 282.384 14.4057 282.544 14.3907C282.704 14.3907 282.854 14.3207 282.994 14.2707L283.044 14.2107Z" fill="white"/>
+</svg>
+				</a>
+			</div>
+			<div class="flex justify-center items-center text-white xl:w-2/3">
+				<div class="menu-open max-xl:bg-white max-xl:hidden max-xl:absolute max-xl:top-[100%] max-xl:left-0 max-xl:w-full max-xl:overflow-y-auto">
+					<div class="drilldown max-xl:bg-white max-xl:relative" id="header_search">
+						<form class="bg-white p-4 xl:hidden max-xl:sticky max-xl:top-0 max-xl:z-[2] header-search-form">
+							<div class="relative">
+								<input class="bg-black-black05 font-brown-std font-normal w-full text-base !text-black-light h-12 p-4 rounded outline-none bg-black-black5 header-search-input" type="text" placeholder="Search...">
+								<button class="h-3 w-3 absolute top-0 bottom-0 my-auto right-4 header-search-icon" type="submit">
+									<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<g clip-path="url(#clip0_56573_175)">
+											<path d="M5.5 9.5C7.70914 9.5 9.5 7.70914 9.5 5.5C9.5 3.29086 7.70914 1.5 5.5 1.5C3.29086 1.5 1.5 3.29086 1.5 5.5C1.5 7.70914 3.29086 9.5 5.5 9.5Z" stroke="#002F37" stroke-width="1.6" />
+											<path d="M10.5001 10.5L8.3501 8.35" stroke="#002F37" stroke-width="1.6" />
+										</g>
+										<defs>
+											<clipPath id="clip0_56573_175">
+												<rect width="12" height="12" fill="white" />
+											</clipPath>
+										</defs>
+									</svg>
+								</button>
+							</div>
+						</form>
+						<div class="w-full h-[calc(100vh-265px)] relative js-search-loader hidden">
+							<div class="absolute left-1/2 -translate-x-1/2 top-28 flex flex-col items-center justify-center">
+								
+	<span class="w-16 h-16 border-8 border-blue-dark border-b-orange rounded-[50%] inline-block box-border animate-loader">
+	</span>
+
+								<span class="block text-lg font-brown-std text-gray-dark mt-6">
+									Search...
+								</span>
+							</div>
+						</div>
+						<div class="xl:hidden max-xl:border-t max-xl:border-solid max-xl:border-blue-blue20 header-search-body">
+							<div class="py-6 px-4 header-search-message hidden">
+								<p class="text-blue font-brown-std font-normal text-base leading-normal m-0">Explore research, content or product pages within our site.</p>
+							</div>
+							<div class="flex flex-col header-search-body">
+
+							</div>
+						</div>
+						<nav class="drilldown-container xl:flex font-brown-std mob-menu">
+										<ul id="menu-main-menu" class="menu"><li class="inline-block mx-1 first:ml-0 group max-xl:mx-0 menu-item menu-item-0  group-dropdown"><a href="https://www.globalx.ca/products" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12  dropdown-toggle">Our ETFs<span class="dropdown-toggle-arrow"></span></a>
+    <div class="megamenu-new xl:!w-full drilldown-sub absolute w-full xl:group-hover:block left-1/2 -translate-x-1/2 bg-white max-xl:left-[unset] max-xl:translate-x-0 max-xl:mt-[-70px] max-xl:relative max-xl:z-10 overflow-hidden">
+        <div class="drilldown-back xl:hidden">
+            <a class="flex items-center gap-2 text-black-light font-brown-std font-bold text-base leading-[1] py-6 px-4" href="https://www.globalx.ca/products">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.99992 5.33334L1.33325 8L3.99992 10.6667" stroke="#FF5400" stroke-width="1.6" />
+                    <path d="M1.33325 8H14.6666" stroke="#FF5400" stroke-width="1.6" />
+                </svg>
+                <span>Our ETFs</span>
+            </a>
+        </div>
+        <div class="flex w-full gap-[60px] max-w-[1270px] mx-auto justify-between max-xl:flex-col max-xl:gap-0">
+
+                                                                        <div class="flex flex-col gap-6 w-[15%] max-xl:w-full max-xl:gap-0 max-xl:border-t max-xl:border-solid max-xl:border-blue-blue12 py-10 max-xl:p-0">
+                            <h4 class="mobilesub-open font-brown-std text-orange font-bold text-base uppercase max-xl:py-6 max-xl:px-4">Explore by Suite</h4>
+
+                            
+                                <div class="mobilesub-body max-xl:hidden">
+                                    <ul class="p-0 m-0 flex flex-col gap-5 max-xl:pt-0 max-xl:gap-0">
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/asset-allocation-etfs">Asset Allocations</a>
+                                            </li>
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/covered-call-etfs">Covered Call</a>
+                                            </li>
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/enhanced-growth-etfs">Enhanced Growth</a>
+                                            </li>
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/equity-essentials">Equity Essentials</a>
+                                            </li>
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/precious-metals-etfs">Precious Metals</a>
+                                            </li>
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/commodity-etfs">Commodities</a>
+                                            </li>
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/premium-yield-etfs">Premium Yield</a>
+                                            </li>
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/thematic-etfs">Thematic</a>
+                                            </li>
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/best-of-canada-etfs">Best of Canada</a>
+                                            </li>
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/powerstock-etfs">PowerStock™ Suite</a>
+                                            </li>
+                                                                            </ul>
+                                </div>
+
+                            
+                        </div>
+
+                    
+                    
+                                                                            
+                                            <div class="flex flex-col gap-6 w-[20%] max-xl:w-full max-xl:gap-0 max-xl:border-t max-xl:border-solid max-xl:border-blue-blue12 py-10 max-xl:p-0">
+                            <h4 class="mobilesub-open font-brown-std text-orange font-bold text-base uppercase max-xl:py-6 max-xl:px-4">Explore by Asset Class</h4>
+                                                            <div class="mobilesub-body max-xl:hidden">
+                                    <ul class="p-0 m-0 flex flex-col gap-5 max-xl:pt-0 max-xl:gap-0">
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/products?class=equity">Equity</a>
+                                            </li>
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/products?class=fixed-income">Fixed Income</a>
+                                            </li>
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/products?class=alternatives">Alternatives</a>
+                                            </li>
+                                                                                    <li class="list-none max-xl:px-4">
+                                                <a class="text-gray-granite font-brown-std font-bold text-base transition duration-500 hover:text-orange max-xl:w-full max-xl:py-5 max-xl:inline-block max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12" href="https://www.globalx.ca/products?class=multi-asset">Multi-Asset</a>
+                                            </li>
+                                        
+                                    </ul>
+                                </div>
+                                                        
+                            <a href="/products" class="text-orange-dark items-center group/button font-brown-std hidden xl:flex">
+                                <strong>View All ETFs</strong>
+                                <span class="relative group-hover/button:left-4 transition-all duration-400 ease-in left-2">
+                                    <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.696 4.72H0.96V2.96H7.696L4.976 0.24H7.472L10.496 3.28V4.4L7.472 7.44H4.976L7.696 4.72Z" fill="#FF5400"/>
+</svg>
+                                </span>
+                            </a>
+                        </div>
+                    
+                                                                            
+                    
+                                            <div class="flex flex-col gap-6 w-[28%] max-xl:w-full max-xl:gap-0 max-xl:border-t max-xl:border-solid max-xl:border-blue-blue12 py-10 max-xl:p-0">
+                            <h4 class="mobilesub-open font-brown-std text-orange font-bold text-base uppercase max-xl:py-6 max-xl:px-4">Featured Funds</h4>
+                                                            <div class="mobilesub-body max-xl:hidden">
+                                    <div class="flex flex-col gap-2 max-xl:pb-6 max-xl:px-4">
+                                                                                                                                <div style="background-image: url(https://www.globalx.ca/wp-content/uploads/2026/04/precious-bg.jpg);" class="bg-no-repeat bg-cover rounded overflow-hidden flex justify-between items-end p-4 w-full min-w-[300px] h-[100px]">
+                                                <a class="rounded flex justify-between items-end w-full" href="https://www.globalx.ca/thematic-etfs">
+                                                    <div class="flex flex-col">
+                                                        <span class="font-brown-std text-orange font-bold text-base">—</span>
+                                                        <span class="font-brown-std text-white font-bold text-base">Thematic</span>
+                                                    </div>
+                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect width="20" height="20" rx="10" fill="white" />
+                                                        <path d="M6.5 10H13.5" stroke="#002F37" stroke-width="1.6" />
+                                                        <path d="M10 6.5L13.5 10L10 13.5" stroke="#002F37" stroke-width="1.6" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                                                                                                                <div style="background-image: url(https://www.globalx.ca/wp-content/uploads/2026/04/precious-bg.jpg);" class="bg-no-repeat bg-cover rounded overflow-hidden flex justify-between items-end p-4 w-full min-w-[300px] h-[100px]">
+                                                <a class="rounded flex justify-between items-end w-full" href="https://www.globalx.ca/precious-metals-etfs">
+                                                    <div class="flex flex-col">
+                                                        <span class="font-brown-std text-orange font-bold text-base">—</span>
+                                                        <span class="font-brown-std text-white font-bold text-base">Precious Metals</span>
+                                                    </div>
+                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect width="20" height="20" rx="10" fill="white" />
+                                                        <path d="M6.5 10H13.5" stroke="#002F37" stroke-width="1.6" />
+                                                        <path d="M10 6.5L13.5 10L10 13.5" stroke="#002F37" stroke-width="1.6" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                                                                                                                <div style="background-image: url(https://www.globalx.ca/wp-content/uploads/2026/04/precious-bg.jpg);" class="bg-no-repeat bg-cover rounded overflow-hidden flex justify-between items-end p-4 w-full min-w-[300px] h-[100px]">
+                                                <a class="rounded flex justify-between items-end w-full" href="https://www.globalx.ca/new-funds">
+                                                    <div class="flex flex-col">
+                                                        <span class="font-brown-std text-orange font-bold text-base">—</span>
+                                                        <span class="font-brown-std text-white font-bold text-base">New Funds</span>
+                                                    </div>
+                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect width="20" height="20" rx="10" fill="white" />
+                                                        <path d="M6.5 10H13.5" stroke="#002F37" stroke-width="1.6" />
+                                                        <path d="M10 6.5L13.5 10L10 13.5" stroke="#002F37" stroke-width="1.6" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                                                            </div>
+                                </div>
+                                                    </div>
+                                                                            
+                    
+                                                                <div class="newfunds-bg bg-gray-lightest py-10 px-5 relative flex flex-col gap-6 w-[37%] max-xl:p-0 max-xl:w-full max-xl:gap-0 max-xl:border-t max-xl:border-solid max-xl:border-blue-blue12 max-xl:bg-white">
+                            <h4 class="mobilesub-open font-brown-std text-orange font-bold text-base uppercase max-xl:py-6 max-xl:px-4">New Funds</h4>
+                            <div class="mobilesub-body max-xl:hidden">
+                                <div class="w-full max-xl:p-4 max-xl:bg-gray-lightest">
+                                    <ul class="m-0 p-0 grid grid-cols-2 gap-2">
+                                                                                    <!-- product_ticker -->
+                                            <li class="list-none">
+                                                <a class="bg-white rounded p-4 h-full flex flex-col justify-between gap-[18px] min-h-[100px]" href="https://www.globalx.ca/product/dram">
+                                                    <h3 class="font-brown-std font-bold text-orange text-2xl leading-[1] uppercase">DRAM</h3>
+                                                    <span class="font-brown-std font-bold text-blue text-xs leading-[1.1]">Global X Artificial Intelligence Memory Index ETF</span>
+                                                </a>
+                                            </li>
+                                                                                    <!-- product_ticker -->
+                                            <li class="list-none">
+                                                <a class="bg-white rounded p-4 h-full flex flex-col justify-between gap-[18px] min-h-[100px]" href="https://www.globalx.ca/product/achp">
+                                                    <h3 class="font-brown-std font-bold text-orange text-2xl leading-[1] uppercase">ACHP</h3>
+                                                    <span class="font-brown-std font-bold text-blue text-xs leading-[1.1]">Global X Asia Semiconductor Index ETF</span>
+                                                </a>
+                                            </li>
+                                                                                    <!-- product_ticker -->
+                                            <li class="list-none">
+                                                <a class="bg-white rounded p-4 h-full flex flex-col justify-between gap-[18px] min-h-[100px]" href="https://www.globalx.ca/product/cndc">
+                                                    <h3 class="font-brown-std font-bold text-orange text-2xl leading-[1] uppercase">CNDC</h3>
+                                                    <span class="font-brown-std font-bold text-blue text-xs leading-[1.1]">Global X S&#038;P/TSX Capped Composite Index ETF</span>
+                                                </a>
+                                            </li>
+                                                                                    <!-- product_ticker -->
+                                            <li class="list-none">
+                                                <a class="bg-white rounded p-4 h-full flex flex-col justify-between gap-[18px] min-h-[100px]" href="https://www.globalx.ca/product/tmtx">
+                                                    <h3 class="font-brown-std font-bold text-orange text-2xl leading-[1] uppercase">TMTX</h3>
+                                                    <span class="font-brown-std font-bold text-blue text-xs leading-[1.1]">Global X 3-10 Year U.S. Treasury Bond Index ETF</span>
+                                                </a>
+                                            </li>
+                                                                                    <!-- product_ticker -->
+                                            <li class="list-none">
+                                                <a class="bg-white rounded p-4 h-full flex flex-col justify-between gap-[18px] min-h-[100px]" href="https://www.globalx.ca/product/aggx">
+                                                    <h3 class="font-brown-std font-bold text-orange text-2xl leading-[1] uppercase">AGGX</h3>
+                                                    <span class="font-brown-std font-bold text-blue text-xs leading-[1.1]">Global X Canadian Universe Bond Index ETF</span>
+                                                </a>
+                                            </li>
+                                                                                    <!-- product_ticker -->
+                                            <li class="list-none">
+                                                <a class="bg-white rounded p-4 h-full flex flex-col justify-between gap-[18px] min-h-[100px]" href="https://www.globalx.ca/product/gcig">
+                                                    <h3 class="font-brown-std font-bold text-orange text-2xl leading-[1] uppercase">GCIG</h3>
+                                                    <span class="font-brown-std font-bold text-blue text-xs leading-[1.1]">Global X 1-10 Year Canadian Corporate Bond Index ETF</span>
+                                                </a>
+                                            </li>
+                                                                                    <!-- product_ticker -->
+                                            <li class="list-none">
+                                                <a class="bg-white rounded p-4 h-full flex flex-col justify-between gap-[18px] min-h-[100px]" href="https://www.globalx.ca/product/korx">
+                                                    <h3 class="font-brown-std font-bold text-orange text-2xl leading-[1] uppercase">KORX</h3>
+                                                    <span class="font-brown-std font-bold text-blue text-xs leading-[1.1]">Global X Korea KOSPI 200 Index ETF</span>
+                                                </a>
+                                            </li>
+                                                                            </ul>
+                                </div>
+                            </div>
+                        </div>
+                                    
+                <!-- View all ETFs btn mobile -->
+                        <div class="border-t border-solid border-blue-blue12">
+                            <a class="flex xl:hidden items-center justify-start font-brown-std text-orange font-bold text-base uppercase max-xl:py-6 max-xl:px-4
+                                " href="/products">
+                                <span>View All ETFs</span>
+                                <span class="relative left-2">
+                                    <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.696 4.72H0.96V2.96H7.696L4.976 0.24H7.472L10.496 3.28V4.4L7.472 7.44H4.976L7.696 4.72Z" fill="#FF5400"/>
+</svg>
+                                </span>
+                            </a>
+                        </div>
+                    
+
+                                                                                    </div>
+    </div>
+    <!-- end dropdown wrapper  -->
+<ul class=" flex flex-wrap absolute top-10 left-6 -ml-12 bg-white transition-all duration-200 text-blue border-t-2 border-orange pt-6 pb-2 invisible opacity-0 group dropdown-menu menu-children menu-children menu-children-0"><li class=" menu-item menu-item-1 basis-3/6"><a href="#" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 mb-4 block uppercase text-sm text-black font-proxima-nova tracking-widest hover:!text-black max-w-80">Explore by Suite</a><ul class="  menu-children menu-children menu-children-1"><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/asset-allocation-etfs" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Asset Allocations</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/covered-call-etfs" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Covered Call</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/enhanced-growth-etfs" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Enhanced Growth</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/equity-essentials" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Equity Essentials</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/precious-metals-etfs" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Precious Metals</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/commodity-etfs" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Commodities</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/premium-yield-etfs" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Premium Yield</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/thematic-etfs" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Thematic</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/best-of-canada-etfs" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Best of Canada</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/powerstock-etfs" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">PowerStock™ Suite</a></li></ul></li><li class=" menu-item menu-item-1 basis-3/6"><a href="#" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 mb-4 block uppercase text-sm text-black font-proxima-nova tracking-widest hover:!text-black max-w-80">Explore by Asset Class</a><ul class="  menu-children menu-children menu-children-1"><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/products?class=equity" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Equity</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/products?class=fixed-income" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Fixed Income</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/products?class=alternatives" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Alternatives</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/products?class=multi-asset" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Multi-Asset</a></li></ul></li><li class=" menu-item menu-item-1 basis-3/6"><a href="#" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 mb-4 block uppercase text-sm text-black font-proxima-nova tracking-widest hover:!text-black max-w-80">Featured Funds</a><ul class="  menu-children menu-children menu-children-1"><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/thematic-etfs" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Thematic</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/precious-metals-etfs" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Precious Metals</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/new-funds" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">New Funds</a></li></ul></li><li class=" menu-item menu-item-1 basis-3/6"><a href="#" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 mb-4 block uppercase text-sm text-black font-proxima-nova tracking-widest hover:!text-black max-w-80">New Funds</a><ul class="  menu-children menu-children menu-children-1"><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/product/dram" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Global X Artificial Intelligence Memory Index ETF</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/product/achp" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Global X Asia Semiconductor Index ETF</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/product/cndc" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Global X S&#038;P/TSX Capped Composite Index ETF</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/product/tmtx" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Global X 3-10 Year U.S. Treasury Bond Index ETF</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/product/aggx" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Global X Canadian Universe Bond Index ETF</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/product/gcig" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Global X 1-10 Year Canadian Corporate Bond Index ETF</a></li><li class=" menu-item menu-item-2 basis-full mx-6"><a href="https://www.globalx.ca/product/korx" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 font-brown-std font-bold text-blue-dark mb-4 block max-w-80">Global X Korea KOSPI 200 Index ETF</a></li></ul></li></ul></li><li class="inline-block mx-1 first:ml-0 group max-xl:mx-0 menu-item menu-item-0 "><a href="https://www.globalx.ca/how-to-invest" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 ">How to Invest</a></li><li class="inline-block mx-1 first:ml-0 group max-xl:mx-0 menu-item menu-item-0 "><a href="https://www.globalx.ca/category/insights" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 ">Insights</a></li><li class="inline-block mx-1 first:ml-0 group max-xl:mx-0 menu-item menu-item-0 "><a href="/about-us" class="menu-item-link hover:text-orange-dark transition duration-200 px-4 xl:py-12 inline-block max-xl:text-blue max-xl:w-full max-xl:leading-5 max-xl:py-6 max-xl:px-4 max-xl:border-b max-xl:border-solid max-xl:border-blue-blue12 ">About Us</a></li></ul>						</nav>
+					</div>
+				</div>
+				<ul class="ml-4 flex gap-4">
+					<li>
+						<a
+							id="header-search-trigger"
+							href="#"
+							class="hidden xl:flex [&_svg]:fill-white justify-center items-center gap-x-2 text-white font-brown-std hover:text-orange-dark transition duration-200 group"
+							data-drawer-id="#drawer-off-canvas-search"
+							data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-search&quot;,&quot;callback&quot;:&quot;searchForm()&quot;}">
+							Search							<span class="[&_svg]:fill-white [&_svg]:transition [&_svg]:duration-200 group-hover:[&_svg]:fill-orange transition duration-200">
+								<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M10.8405 12.2546L11.9722 11.123L16 15.1508L14.8684 16.2824L10.8405 12.2546ZM5.88847 10.5021C3.52028 10.4842 1.61485 8.54998 1.63213 6.18179C1.65005 3.8136 3.58429 1.90816 5.95248 1.92545C8.30851 1.94337 10.2088 3.85776 10.2088 6.21379C10.2267 8.58198 8.32131 10.5162 5.95248 10.5341C5.93135 10.5341 5.90959 10.5341 5.88847 10.5341V10.5021ZM5.88847 0.325317C2.63637 0.325317 0 2.96169 0 6.21379C0 9.46589 2.63637 12.1023 5.88847 12.1023C9.14057 12.1023 11.7769 9.46589 11.7769 6.21379C11.784 2.96873 9.15913 0.332358 5.91407 0.325317C5.90575 0.325317 5.89679 0.325317 5.88847 0.325317Z" fill="inherit"/>
+</svg>
+							</span>
+						</a>
+					</li>
+										<!-- <li>
+						<a
+							href="#"
+							data-drawer-id="#drawer-off-canvas-menu"
+							data-toggle-drawer=""
+							aria-label="Open Menu"
+							title="Open menu"
+							class="block xl:hidden [&_svg]:fill-white"
+						>
+												</a>
+					</li> -->
+										<li class="flex items-center xl:hidden">
+						<button class="toggle-menu-btn bg-transparent" type="button">
+							<svg class="hamburger-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M3.33325 10H16.6666" stroke="white" stroke-width="1.6" />
+								<path d="M3.33325 5H16.6666" stroke="white" stroke-width="1.6" />
+								<path d="M3.33325 15H16.6666" stroke="white" stroke-width="1.6" />
+							</svg>
+							<svg class="close-icon hidden" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M5 5L15 15" stroke="white" stroke-width="1.6" />
+								<path d="M5 15L15 5" stroke="white" stroke-width="1.6" />
+							</svg>
+
+						</button>
+						<button class="bg-transparent mobile-search-close hidden" type="button">
+							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M7.49992 11.6667L3.33325 7.5L7.49992 3.33333" stroke="white" stroke-width="1.6" />
+								<path d="M3.33325 7.5H12.0833C12.6851 7.5 13.2811 7.61855 13.8372 7.84889C14.3933 8.07922 14.8986 8.41683 15.3242 8.84243C15.7498 9.26803 16.0874 9.77329 16.3177 10.3294C16.548 10.8854 16.6666 11.4814 16.6666 12.0833C16.6666 12.6852 16.548 13.2812 16.3177 13.8373C16.0874 14.3934 15.7498 14.8986 15.3242 15.3242C14.8986 15.7498 14.3933 16.0874 13.8372 16.3178C13.2811 16.5481 12.6851 16.6667 12.0833 16.6667H9.16659" stroke="white" stroke-width="1.6" />
+							</svg>
+						</button>
+					</li>
+									</ul>
+			</div>
+			<div class="hidden xl:flex justify-end items-center w-1/4">
+				<button
+					id="header-newsletter-trigger"
+					class="text-orange-dark items-center group flex font-brown-std"
+					data-drawer-id="#header-newsletter-modal"
+					data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-newsletter&quot;}">
+					<strong>Subscribe to Updates</strong>
+					<span class="relative left-2 group-hover:left-4 transition-all duration-400 ease-in">
+						<svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.696 4.72H0.96V2.96H7.696L4.976 0.24H7.472L10.496 3.28V4.4L7.472 7.44H4.976L7.696 4.72Z" fill="#FF5400"/>
+</svg>
+					</span>
+				</button>
+			</div>
+		</header>
+	</div>
+	</div>
+
+
+<div
+	id="main-content"
+	class="hero bg-blue bg-center bg-cover mb-8 pt-36 xl:pt-52  "
+	style="background-image: url(https://www.globalx.ca/wp-content/themes/gxca/assets/images/post-background-texture.png)"
+>
+	<div class="bg-white w-full pt-12">
+		<div class="max-w-screen-xl mx-auto px-6 md:px-8">
+			<div class="border border-dashed border-gray border-t-0 border-l-0 border-r-0 pb-8">
+								<a
+					href="https://www.globalx.ca/category/news"
+					class="text-orange-dark font-bold font-brown-std flex items-center [&_svg]:!fill-orange mb-8"
+				>
+					<span class="-rotate-180 pl-1 pr-0.5">
+						<svg width="11" height="8" viewBox="0 0 11 8" fill="white" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.696 4.72H0.96V2.96H7.696L4.976 0.24H7.472L10.496 3.28V4.4L7.472 7.44H4.976L7.696 4.72Z"/>
+</svg>
+					</span>
+					<span class="uppercase">
+						News					</span>
+				</a>
+												<h1
+					class="text-blue text-4xl font-brown-std font-bold md:w-7/12 mb-6"
+				>
+					Global X Investments Canada Inc. Announces Final Valuation for the Terminating ETFs				</h1>
+													<p class="text-sm text-gray-darker">
+						24/03/25 - 5:22 pm					</p>
+								
+								<div class="pills flex flex row gap-2 bg-white pt-3">
+					<p class="category-tag--articles bg-blue text-white w-fit rounded-2xl px-3 py-1 pt-[0.4rem] text-[10px] font-brown-std font-bold uppercase hover:bg-orange">press-releases</p>
+													
+					
+				</div>
+							</div>
+		</div>
+	</div>
+</div>
+</div>
+<main class="single-post-content overflow-x-hidden">
+	
+		<div class="single-post-content-body md:grid grid-cols-12 max-w-screen-xl mx-auto">
+			<div class="mb-10 col-span-8">
+
+				
+				
+				<!-- Video Embed -->
+								
+				<!-- Post Content -->
+									<div class="block-wrapper block-wrapper-paragraph max-w-screen-xl mx-auto px-6 md:px-8 mb-6">
+<p><strong>TORONTO – March 24, 2025</strong> – Global X Investments Canada Inc. (the “<strong>Manager</strong>”) previously announced, by way of a press release dated January 10, 2025, that the exchange traded funds (the “<strong>ETFs</strong>”) listed in the table below would be delisted from the Toronto Stock Exchange at the close of business on March 18, 2025, and terminated effective upon the close of business today, March 24, 2025. The ETFs’ final net asset value (“NAV”), distribution and termination proceeds per security are as follows:</p>
+</div>
+
+<div class="block-wrapper block-wrapper-table max-w-screen-xl mx-auto px-6 md:px-8 mb-8">
+<figure class="wp-block-table"><table><thead><tr><th><strong>ETF</strong></th><th><strong>Ticker</strong></th><th><strong>Ex- Distribution NAV</strong><br><strong>per security</strong></th><th>&nbsp;<strong>Income</strong> <strong>Distribution</strong><br><strong>per security</strong></th><th>Final Net Proceeds of<br>Termination per security</th><th><strong>Currency of Final NAV</strong></th></tr></thead><tbody><tr><td>Global X Carbon Credits ETF</td><td>CARB</td><td>7.11651356</td><td>&#8211;</td><td>7.11651356</td><td>CAD</td></tr><tr><td>Global X ReSolve Adaptive Asset Allocation Corporate Class ETF</td><td>HRAA</td><td>12.16144649</td><td>&#8211;</td><td>12.16144649</td><td>CAD</td></tr><tr><td>Global X S&amp;P Green Bond Index ETF</td><td>HGGB</td><td>21.44665031</td><td>0.19869406</td><td>21.64534437</td><td>CAD</td></tr><tr><td>Global X Metaverse ETF</td><td>MTAV</td><td>29.70729839</td><td>&#8211;</td><td>29.70729839</td><td>CAD</td></tr></tbody></table></figure>
+</div>
+
+<div class="block-wrapper block-wrapper-paragraph max-w-screen-xl mx-auto px-6 md:px-8 mb-6">
+<p>Securityholders will receive the proceeds from the liquidation of the assets, less all liabilities and all expenses incurred in connection with the dissolution of the applicable ETF(s). These proceeds will be paid to the holders of the remaining outstanding securities of the applicable ETF(s) on a pro-rata basis, at the rate shown above, without further action by those securityholders.</p>
+</div>
+
+<div class="block-wrapper block-wrapper-paragraph max-w-screen-xl mx-auto px-6 md:px-8 mb-6">
+<p>Income distributions, if any, are indicated in the table above. The net proceeds of termination paid to each securityholder is the sum of the ex-distribution NAV per security plus the income distributions per security indicated in the table above and represents the remaining net assets of the applicable ETF(s).</p>
+</div>
+
+<div class="block-wrapper block-wrapper-paragraph max-w-screen-xl mx-auto px-6 md:px-8 mb-6">
+<p><strong>About Global X Investments Canada Inc. (</strong><a href="https://www.GlobalX.ca/"><strong>www.GlobalX.ca</strong><strong>)</strong></a><strong></strong></p>
+</div>
+
+<div class="block-wrapper block-wrapper-paragraph max-w-screen-xl mx-auto px-6 md:px-8 mb-6">
+<p>Global X Investments Canada Inc. is an innovative financial services company and offers one of the largest suites of exchange traded funds in Canada. The Global X Fund family includes a broadly diversified range of solutions for investors of all experience levels to meet their investment objectives in a variety of market conditions. Global X has more than $40 billion of assets under management and 131 ETFs listed on major Canadian stock exchanges. Global X is a wholly-owned subsidiary of the Mirae Asset Financial Group, which manages more than $800 billion of assets across 19 countries and global markets around the world.</p>
+</div>
+
+<div class="block-wrapper block-wrapper-paragraph max-w-screen-xl mx-auto px-6 md:px-8 mb-6">
+<p><strong>For investor inquiries: </strong>Please contact Global X at 1-866-641-5739 (toll-free) or (416) 933-5745<br><a href="/cdn-cgi/l/email-protection#cfa6a1a9a08f88a3a0adaea397e1acae"><strong><span class="__cf_email__" data-cfemail="84edeae2ebc4c3e8ebe6e5e8dcaae7e5">[email&#160;protected]</span></strong></a></p>
+</div>
+
+<div class="block-wrapper block-wrapper-paragraph max-w-screen-xl mx-auto px-6 md:px-8 mb-6">
+<p><strong>For media inquiries: </strong>Contact Jonathan McGuire Vice President, Communications Global X Investments Canada Inc. (647) 289-3324 <br><a href="/cdn-cgi/l/email-protection#452f282622302c37200502292a2724291d6b2624"><strong><span class="__cf_email__" data-cfemail="4b2126282c3e22392e0b0c2724292a271365282a">[email&#160;protected]</span></strong></a></p>
+</div>
+
+<div class="block-wrapper block-wrapper-paragraph max-w-screen-xl mx-auto px-6 md:px-8 mb-6">
+<p class="has-small-font-size">Commissions, management fees, and expenses all may be associated with an investment in products (the “Global X Funds”) managed by Global X Investments Canada Inc. The Global X Funds are not guaranteed, their values change frequently, and past performance may not be repeated. Certain Global X Funds may have exposure to leveraged investment techniques that magnify gains and losses which may result in greater volatility in value and could be subject to aggressive investment risk and price volatility risk. Such risks are described in the prospectus. The Global X Money Market Funds are not covered by the Canada Deposit Insurance Corporation, the Federal Deposit Insurance Corporation, or any other government deposit insurer. There can be no assurances that the money market fund will be able to maintain its net asset value per security at a constant amount or that the full amount of your investment in the Funds will be returned to you. Past performance may not be repeated. The prospectus contains important detailed information about the Global X Funds. <strong>Please read the relevant prospectus before investing.</strong></p>
+</div>					
+
+				<!-- Related Products -->
+				
+				<!-- Categories and Tags -->
+				<div class="px-6 md:px-8">	
+										<p class="font-brown-std tracking-wide font-bold text-gray-granite text-sm">
+						Categories:
+													<a
+								href="/category/news"
+								class="text-orange-dark"
+							>
+								News,							</a>
+													<a
+								href="/category/press-releases"
+								class="text-orange-dark"
+							>
+								Press Releases							</a>
+											</p>
+															<p class="font-brown-std tracking-wide font-bold text-gray-granite text-sm">
+						Topics:
+													<a
+								href="/tag/notice"
+								class="text-orange-dark"
+							>
+								Notice,							</a>
+													<a
+								href="/tag/terminations"
+								class="text-orange-dark"
+							>
+								Terminations							</a>
+											</p>
+									</div>
+
+			</div>
+
+						<div class="col-span-4">
+				<div id="sidebar-primary" class="sidebar">
+					
+	<div
+		class="w-full"
+	>
+		<div class="block-wrapper block-wrapper-spacer">
+<div style="height:10px" aria-hidden="true" class="wp-block-spacer"></div>
+</div>
+
+<div class="block-wrapper block-wrapper-trending max-w-screen-xl mx-auto px-6 lg:px-8">	<div id="block_97d3771dacbff3281bdca84bd5e14a0c">
+				<h2 class="text-lg text-blue font-brown-std font-bold mb-14">
+			What&#8217;s Trending		</h2>
+						<ul>
+						<li class="mb-12">
+				<a
+					href="https://www.globalx.ca/insights/videos/why-memory-and-asia-matter-to-the-ai-boom"
+				>
+					<span class="block text-xs text-blue font-proxima-nova mb-6">
+						22/09/26					</span>
+					<span class="block text-lg text-blue font-brown-std">
+						Why Memory and Asia Matter to the AI Boom					</span>
+				</a>
+			</li>
+						<li class="mb-12">
+				<a
+					href="https://www.globalx.ca/insights/articles/why-korea-semiconductors-strategic-manufacturing-and-the-kospi-200"
+				>
+					<span class="block text-xs text-blue font-proxima-nova mb-6">
+						22/09/26					</span>
+					<span class="block text-lg text-blue font-brown-std">
+						Why Korea? Semiconductors, Strategic Manufacturing and the KOSPI 200					</span>
+				</a>
+			</li>
+						<li class="mb-12">
+				<a
+					href="https://www.globalx.ca/insights/articles/canadas-financial-sector-is-among-the-worlds-best-in-2026"
+				>
+					<span class="block text-xs text-blue font-proxima-nova mb-6">
+						24/08/26					</span>
+					<span class="block text-lg text-blue font-brown-std">
+						Canada’s Financial Sector is Among the World’s Best in 2026					</span>
+				</a>
+			</li>
+					</ul>
+			</div>
+
+</div>
+
+<div class="block-wrapper block-wrapper-section">
+	<div
+		id="section-block_ee60a74fbfa351c5159d6156290061a9"
+		class=" bg-gradient-to-b from-gray-lighter to-gray-lighter from-0% to-0%"
+	>
+		<div
+			class="w-full bg-center bg-cover   pb-[1px] "
+			style=""
+		>
+		<div
+			class="max-w-screen-xl mx-auto "
+		>
+				
+<div class="block-wrapper block-wrapper-spacer">
+<div style="height:30px" aria-hidden="true" class="wp-block-spacer"></div>
+</div>
+
+<div class="block-wrapper block-wrapper-heading max-w-screen-xl mx-auto px-6 md:px-8 mb-8">
+<h2 class="wp-block-heading has-blue-color has-text-color has-link-color has-medium-font-size wp-elements-bd42bdb1dc72bf0b9bea84a4bdfd9116">How Canadian Investors Use Finfluencers to Learn About Investing</h2>
+</div>
+
+<div class="block-wrapper block-wrapper-buttons max-w-screen-xl mx-auto px-6 md:px-8">
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex"><div class="block-wrapper block-wrapper-button">
+<div class="wp-block-button is-style-download-icon download-icon-orange"><a class="wp-block-button__link wp-element-button" href="https://www.globalx.ca/wp-content/uploads/2026/01/Global-X-Finfluencer-Infographic-EN.pdf">Download PDF</a></div>
+</div></div>
+</div>
+
+<div class="block-wrapper block-wrapper-spacer">
+<div style="height:30px" aria-hidden="true" class="wp-block-spacer"></div>
+</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div class="block-wrapper block-wrapper-spacer">
+<div style="height:30px" aria-hidden="true" class="wp-block-spacer"></div>
+</div>
+
+<div class="block-wrapper block-wrapper-cta max-w-screen-xl mx-auto px-6 lg:px-8 mb-8"><div id="cta-block_1db33c20a3bb25f76165d1477702eed3" class="bg-blue p-8">
+		<h2 class="text-white text-2xl mb-5">
+		Not ready to invest, but curious to learn more?	</h2>
+			<p class="text-gray mb-5">
+		Subscribe for research perspectives, market commentary, and charts of the trends shaping global markets. We promise not to overwhelm you – updates will be periodic and timely.	</p>
+		<div class="flex text-white items-center">
+				<div class="pr-4" aria-hidden="true">
+			<div
+				class="h-6 w-6 [&#038;_svg]:!fill-orange flex items-center justify-center"
+			>
+				<svg width="21" height="17" viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0.12838V16.8716H21V0.12838H0ZM19.5811 1.5473V4.38514L10.5 10.6284L1.41892 4.38514V1.5473H19.5811ZM1.41892 6.08784V15.4527H19.5811V6.08784L10.5 12.3311L1.41892 6.08784Z" fill="#FF5400"/>
+</svg>
+			</div>
+		</div>
+									<button
+				id="block_1db33c20a3bb25f76165d1477702eed3-cta-trigger"
+				class="button-secondary button-secondary-white"
+				data-drawer-id=#drawer-block_1db33c20a3bb25f76165d1477702eed3				data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-newsletter&quot;}"
+			>
+				<span class="font-bold font-brown-std">
+					Subscribe to Updates				</span>
+				<svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.696 4.72H0.96V2.96H7.696L4.976 0.24H7.472L10.496 3.28V4.4L7.472 7.44H4.976L7.696 4.72Z" fill="#FF5400"/>
+</svg>
+			</button>
+													</div>
+</div>
+
+</div>	</div>
+
+				</div>
+			</div>
+					</div>
+
+		<!-- OLD Not used -->
+		
+		
+</main>
+
+		<div
+			id="drawer-country"
+			role="dialog"
+			  			aria-labelledby="drawer-country-title"
+						class="z-50 invisible fixed top-0 left-0 w-screen h-screen"
+		>
+			<div class="transition-all duration-200 absolute top-0 -right-full h-full w-full lg:w-1/2 xl:w-5/12 bg-blue z-20 p-7 md:p-10 drawer overflow-x-hidden overflow-y-hidden hide-scrollbar ">
+				<div class="flex justify-end mb-2.5">
+					<button
+						id="drawer-country-close"
+						aria-label="close drawer"
+						class="w-6 h-6 [&_svg]:w-6 [&_svg]:h-6 js-close-drawer"
+						data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-country&quot;}"
+					>
+						<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M16.6643 17.4142L0.664307 1.41421L2.07852 8.82855e-07L18.0785 16L16.6643 17.4142Z" fill="white"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M17.6642 1.41421L1.66421 17.4142L0.25 16L16.25 0L17.6642 1.41421Z" fill="white"/>
+</svg>
+					</button>
+				</div>
+									<div
+						class="w-8 h-2 bg-orange mb-2.5"
+					>
+					</div>
+					<h2
+						class="text-white text-2xl md:text-3xl mb-4 font-proxima-nova"
+						id="drawer-country-title"
+					>
+						Select Your Location					</h2>
+												<div class="overflow-y-scroll h-[calc(100vh-145px)] pb-8 overflow-x-hidden hide-scrollbar">
+								<div>
+									<div
+						id="wrong-location-notice"
+						class="text-white bg-orange p-4 space-y-3 rounded hidden"
+					>
+												<h3 class="text-base">
+							Looks like you’re not browsing from Canada						</h3>
+																		<p>
+							Are you looking for Global X in a different country?						</p>
+																		<p>
+							<button
+
+								class="js-approve-location button button-primary-white"
+							>
+								I'm on the right site							</button>
+						</p>
+											</div>
+								<ul class="js-country-list pt-6">
+																		<li class="block mb-6">
+																<a
+									href="https://www.globalxetfs.com.au/"
+									data-notice="#281-notice-text"
+									class="captitalize text-white js-country-link font-brown-std font-bold hover:text-orange-dark transition-colors duration-200"
+								>
+									Australia								</a>
+															</li>
+													<li class="block mb-6">
+																<a
+									href="https://globalxetfs.com.br/"
+									data-notice="#283-notice-text"
+									class="captitalize text-white js-country-link font-brown-std font-bold hover:text-orange-dark transition-colors duration-200"
+								>
+									Brazil								</a>
+															</li>
+													<li class="block mb-6">
+																<div class="captitalize font-brown-std font-bold text-orange-dark">
+									Canada								</div>
+															</li>
+													<li class="block mb-6">
+																<a
+									href="https://globalxetfs.co/"
+									data-notice="#285-notice-text"
+									class="captitalize text-white js-country-link font-brown-std font-bold hover:text-orange-dark transition-colors duration-200"
+								>
+									Colombia								</a>
+															</li>
+													<li class="block mb-6">
+																<a
+									href="https://globalxetfs.eu/"
+									data-notice="#3866-notice-text"
+									class="captitalize text-white js-country-link font-brown-std font-bold hover:text-orange-dark transition-colors duration-200"
+								>
+									Europe								</a>
+															</li>
+													<li class="block mb-6">
+																<a
+									href="https://www.globalxetfs.com.hk/"
+									data-notice="#287-notice-text"
+									class="captitalize text-white js-country-link font-brown-std font-bold hover:text-orange-dark transition-colors duration-200"
+								>
+									Hong Kong (SAR)								</a>
+															</li>
+													<li class="block mb-6">
+																<a
+									href="https://globalxetfs.co.jp/"
+									data-notice="#289-notice-text"
+									class="captitalize text-white js-country-link font-brown-std font-bold hover:text-orange-dark transition-colors duration-200"
+								>
+									Japan								</a>
+															</li>
+													<li class="block mb-6">
+																<a
+									href="https://globalxetfs.sg/"
+									data-notice="#291-notice-text"
+									class="captitalize text-white js-country-link font-brown-std font-bold hover:text-orange-dark transition-colors duration-200"
+								>
+									Singapore								</a>
+															</li>
+													<li class="block mb-6">
+																<a
+									href="https://www.globalxetfs.com/"
+									data-notice="#279-notice-text"
+									class="captitalize text-white js-country-link font-brown-std font-bold hover:text-orange-dark transition-colors duration-200"
+								>
+									United States								</a>
+															</li>
+															</ul>
+				<div class="js-country-notice hidden text-white">
+										<p class="mb-4 general-notice-text notice-text country-notice-text hidden">
+						<strong>You Are Now Leaving the Canadian Website of Global X ETFs</strong><br />
+Clicking “Confirm” below will take you to a different website, intended for jurisdictions outside Canada. Such links are provided as a convenience. Global X Management Company LLC disclaims responsibility for information, services or products found on the websites linked hereto.<br />
+<br />
+The subsequent website(s) may be governed by different privacy policies, terms and conditions, or regulatory restrictions. Links to these websites are not intended for any person in any jurisdiction where – by reason of that person's nationality, residence or otherwise – the publication or availability of the website is prohibited. Persons in respect of whom such prohibitions apply should not access these websites.					</p>
+																																																																																																																		<a
+						href='#'
+						class='button button-primary !bg-orange !text-white js-country-redirect'
+						target='_blank'
+					>
+						Confirm					</a>
+				</div>
+			</div>
+
+							</div>
+							</div>
+			<button
+				aria-hidden="true"
+				aria-label="close drawer"
+				class="transition-all duration-200 w-full h-full bg-black/40 absolute top-0 left-0 opacity-0 js-drawer-overlay"
+				data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-country&quot;}"
+			>
+			</button>
+		</div>
+
+	
+		<div
+			id="drawer-menu"
+			role="dialog"
+						class="z-50 invisible fixed top-0 left-0 w-screen h-screen"
+		>
+			<div class="transition-all duration-200 absolute top-0 -right-full h-full w-full lg:w-1/2 xl:w-5/12 bg-blue z-20 p-7 md:p-10 drawer overflow-x-hidden overflow-y-hidden hide-scrollbar ">
+				<div class="flex justify-end mb-2.5">
+					<button
+						id="drawer-menu-close"
+						aria-label="close drawer"
+						class="w-6 h-6 [&_svg]:w-6 [&_svg]:h-6 js-close-drawer"
+						data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-menu&quot;}"
+					>
+						<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M16.6643 17.4142L0.664307 1.41421L2.07852 8.82855e-07L18.0785 16L16.6643 17.4142Z" fill="white"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M17.6642 1.41421L1.66421 17.4142L0.25 16L16.25 0L17.6642 1.41421Z" fill="white"/>
+</svg>
+					</button>
+				</div>
+												<div class="overflow-y-scroll h-[calc(100vh-145px)] pb-8 overflow-x-hidden hide-scrollbar">
+									<ul id="menu-main-menu-1" class="off-canvas-menu-nav"><li class="text-white menu-item menu-item-0"><a  href="https://www.globalx.ca/products"data-toggle="dropdown"role="button"aria-haspopup="true"aria-expanded="false" class="menu-item-link peer off-canvas-dropdown">Our ETFs</a><ul class="menu-children hidden pl-8 menu-children menu-children-0"><li class="text-white menu-item menu-item-1"><a  href="#"data-toggle="dropdown"role="button"aria-haspopup="true"aria-expanded="false" class="menu-item-link peer off-canvas-dropdown">Explore by Suite</a><ul class="menu-children hidden pl-8 menu-children menu-children-1"><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/asset-allocation-etfs" class="menu-item-link">Asset Allocations</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/covered-call-etfs" class="menu-item-link">Covered Call</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/enhanced-growth-etfs" class="menu-item-link">Enhanced Growth</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/equity-essentials" class="menu-item-link">Equity Essentials</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/precious-metals-etfs" class="menu-item-link">Precious Metals</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/commodity-etfs" class="menu-item-link">Commodities</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/premium-yield-etfs" class="menu-item-link">Premium Yield</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/thematic-etfs" class="menu-item-link">Thematic</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/best-of-canada-etfs" class="menu-item-link">Best of Canada</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/powerstock-etfs" class="menu-item-link">PowerStock™ Suite</a></li></ul></li><li class="text-white menu-item menu-item-1"><a  href="#"data-toggle="dropdown"role="button"aria-haspopup="true"aria-expanded="false" class="menu-item-link peer off-canvas-dropdown">Explore by Asset Class</a><ul class="menu-children hidden pl-8 menu-children menu-children-1"><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/products?class=equity" class="menu-item-link">Equity</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/products?class=fixed-income" class="menu-item-link">Fixed Income</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/products?class=alternatives" class="menu-item-link">Alternatives</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/products?class=multi-asset" class="menu-item-link">Multi-Asset</a></li></ul></li><li class="text-white menu-item menu-item-1"><a  href="#"data-toggle="dropdown"role="button"aria-haspopup="true"aria-expanded="false" class="menu-item-link peer off-canvas-dropdown">Featured Funds</a><ul class="menu-children hidden pl-8 menu-children menu-children-1"><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/thematic-etfs" class="menu-item-link">Thematic</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/precious-metals-etfs" class="menu-item-link">Precious Metals</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/new-funds" class="menu-item-link">New Funds</a></li></ul></li><li class="text-white menu-item menu-item-1"><a  href="#"data-toggle="dropdown"role="button"aria-haspopup="true"aria-expanded="false" class="menu-item-link peer off-canvas-dropdown">New Funds</a><ul class="menu-children hidden pl-8 menu-children menu-children-1"><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/product/dram" class="menu-item-link">Global X Artificial Intelligence Memory Index ETF</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/product/achp" class="menu-item-link">Global X Asia Semiconductor Index ETF</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/product/cndc" class="menu-item-link">Global X S&#038;P/TSX Capped Composite Index ETF</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/product/tmtx" class="menu-item-link">Global X 3-10 Year U.S. Treasury Bond Index ETF</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/product/aggx" class="menu-item-link">Global X Canadian Universe Bond Index ETF</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/product/gcig" class="menu-item-link">Global X 1-10 Year Canadian Corporate Bond Index ETF</a></li><li class="text-white menu-item menu-item-2"><a  href="https://www.globalx.ca/product/korx" class="menu-item-link">Global X Korea KOSPI 200 Index ETF</a></li></ul></li></ul></li><li class="text-white menu-item menu-item-0"><a  href="https://www.globalx.ca/how-to-invest" class="menu-item-link">How to Invest</a></li><li class="text-white menu-item menu-item-0"><a  href="https://www.globalx.ca/category/insights" class="menu-item-link">Insights</a></li><li class="text-white menu-item menu-item-0"><a  href="/about-us" class="menu-item-link">About Us</a></li></ul>				<ul id="menu-pre-header-1" class="site-header-menu flex flex-col text-xl font-brown-std font-bold capitalize space-y-2 mb-2"><li class="text-white menu-item menu-item-0"><a  href="https://www.globalx.ca/betapro" class="menu-item-link">BetaPro</a></li><li class="text-white menu-item menu-item-0"><a  href="https://www.globalx.ca/category/news" class="menu-item-link">News</a></li></ul>				<div >
+											<a
+							href="/contact"
+							class="text-xl font-brown-std font-bold capitalize text-white"
+						>
+							Contact
+						</a>
+									</div>
+				<div class="flex flex-col">
+					<a
+						id="off-canvas-search-trigger"
+						href="#"
+						class="my-2 text-xl font-brown-std font-bold inline-flex [&_svg]:fill-white items-center gap-x-2 text-white hover:text-orange-dark transition duration-200 group"
+						data-drawer-id="#drawer-off-canvas-search"
+						data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-search&quot;,&quot;callback&quot;:&quot;searchForm()&quot;}"
+					>
+							Search						<span class="[&_svg]:fill-white [&_svg]:transition [&_svg]:duration-200 group-hover:[&_svg]:fill-orange transition duration-200">
+							<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M10.8405 12.2546L11.9722 11.123L16 15.1508L14.8684 16.2824L10.8405 12.2546ZM5.88847 10.5021C3.52028 10.4842 1.61485 8.54998 1.63213 6.18179C1.65005 3.8136 3.58429 1.90816 5.95248 1.92545C8.30851 1.94337 10.2088 3.85776 10.2088 6.21379C10.2267 8.58198 8.32131 10.5162 5.95248 10.5341C5.93135 10.5341 5.90959 10.5341 5.88847 10.5341V10.5021ZM5.88847 0.325317C2.63637 0.325317 0 2.96169 0 6.21379C0 9.46589 2.63637 12.1023 5.88847 12.1023C9.14057 12.1023 11.7769 9.46589 11.7769 6.21379C11.784 2.96873 9.15913 0.332358 5.91407 0.325317C5.90575 0.325317 5.89679 0.325317 5.88847 0.325317Z" fill="inherit"/>
+</svg>
+						</span>
+					</a>
+				</div>
+				<button
+					id="off-canvas-newsletter-trigger"
+					class="text-orange-dark items-center flex group text-xl font-brown-std"
+					data-drawer-id="#header-newsletter-modal"
+					data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-newsletter&quot;}"
+				>
+					<strong>Subscribe to Updates</strong>
+					<span class="relative left-2 group-hover:left-4 transition-all duration-400 ease-in">
+						<svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.696 4.72H0.96V2.96H7.696L4.976 0.24H7.472L10.496 3.28V4.4L7.472 7.44H4.976L7.696 4.72Z" fill="#FF5400"/>
+</svg>
+					</span>
+				</button>
+								</div>
+							</div>
+			<button
+				aria-hidden="true"
+				aria-label="close drawer"
+				class="transition-all duration-200 w-full h-full bg-black/40 absolute top-0 left-0 opacity-0 js-drawer-overlay"
+				data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-menu&quot;}"
+			>
+			</button>
+		</div>
+
+	
+		<div
+			id="drawer-newsletter"
+			role="dialog"
+			  			aria-labelledby="drawer-newsletter-title"
+						class="z-50 invisible fixed top-0 left-0 w-screen h-screen"
+		>
+			<div class="transition-all duration-200 absolute top-0 -right-full h-full w-full lg:w-1/2 xl:w-5/12 bg-blue z-20 p-7 md:p-10 drawer overflow-x-hidden overflow-y-hidden hide-scrollbar ">
+				<div class="flex justify-end mb-2.5">
+					<button
+						id="drawer-newsletter-close"
+						aria-label="close drawer"
+						class="w-6 h-6 [&_svg]:w-6 [&_svg]:h-6 js-close-drawer"
+						data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-newsletter&quot;}"
+					>
+						<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M16.6643 17.4142L0.664307 1.41421L2.07852 8.82855e-07L18.0785 16L16.6643 17.4142Z" fill="white"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M17.6642 1.41421L1.66421 17.4142L0.25 16L16.25 0L17.6642 1.41421Z" fill="white"/>
+</svg>
+					</button>
+				</div>
+									<div
+						class="w-8 h-2 bg-orange mb-2.5"
+					>
+					</div>
+					<h2
+						class="text-white text-2xl md:text-3xl mb-4 font-proxima-nova"
+						id="drawer-newsletter-title"
+					>
+						Subscribe					</h2>
+												<div class="overflow-y-scroll h-[calc(100vh-145px)] pb-8 overflow-x-hidden hide-scrollbar">
+											<div>
+							
+                <div class='gf_browser_unknown gform_wrapper gform-theme gform-theme--foundation gform-theme--framework gform-theme--orbital' data-form-theme='orbital' data-form-index='0' id='gform_wrapper_4' ><style>#gform_wrapper_4[data-form-index="0"].gform-theme,[data-parent-form="4_0"]{--gf-color-primary: #204ce5;--gf-color-primary-rgb: 32, 76, 229;--gf-color-primary-contrast: #fff;--gf-color-primary-contrast-rgb: 255, 255, 255;--gf-color-primary-darker: #001AB3;--gf-color-primary-lighter: #527EFF;--gf-color-secondary: #fff;--gf-color-secondary-rgb: 255, 255, 255;--gf-color-secondary-contrast: #112337;--gf-color-secondary-contrast-rgb: 17, 35, 55;--gf-color-secondary-darker: #F5F5F5;--gf-color-secondary-lighter: #FFFFFF;--gf-color-out-ctrl-light: rgba(17, 35, 55, 0.1);--gf-color-out-ctrl-light-rgb: 17, 35, 55;--gf-color-out-ctrl-light-darker: rgba(104, 110, 119, 0.35);--gf-color-out-ctrl-light-lighter: #F5F5F5;--gf-color-out-ctrl-dark: #585e6a;--gf-color-out-ctrl-dark-rgb: 88, 94, 106;--gf-color-out-ctrl-dark-darker: #112337;--gf-color-out-ctrl-dark-lighter: rgba(17, 35, 55, 0.65);--gf-color-in-ctrl: #fff;--gf-color-in-ctrl-rgb: 255, 255, 255;--gf-color-in-ctrl-contrast: #112337;--gf-color-in-ctrl-contrast-rgb: 17, 35, 55;--gf-color-in-ctrl-darker: #F5F5F5;--gf-color-in-ctrl-lighter: #FFFFFF;--gf-color-in-ctrl-primary: #204ce5;--gf-color-in-ctrl-primary-rgb: 32, 76, 229;--gf-color-in-ctrl-primary-contrast: #fff;--gf-color-in-ctrl-primary-contrast-rgb: 255, 255, 255;--gf-color-in-ctrl-primary-darker: #001AB3;--gf-color-in-ctrl-primary-lighter: #527EFF;--gf-color-in-ctrl-light: rgba(17, 35, 55, 0.1);--gf-color-in-ctrl-light-rgb: 17, 35, 55;--gf-color-in-ctrl-light-darker: rgba(104, 110, 119, 0.35);--gf-color-in-ctrl-light-lighter: #F5F5F5;--gf-color-in-ctrl-dark: #585e6a;--gf-color-in-ctrl-dark-rgb: 88, 94, 106;--gf-color-in-ctrl-dark-darker: #112337;--gf-color-in-ctrl-dark-lighter: rgba(17, 35, 55, 0.65);--gf-radius: 3px;--gf-font-size-secondary: 14px;--gf-font-size-tertiary: 13px;--gf-icon-ctrl-number: url("data:image/svg+xml,%3Csvg width='8' height='14' viewBox='0 0 8 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4 0C4.26522 5.96046e-08 4.51957 0.105357 4.70711 0.292893L7.70711 3.29289C8.09763 3.68342 8.09763 4.31658 7.70711 4.70711C7.31658 5.09763 6.68342 5.09763 6.29289 4.70711L4 2.41421L1.70711 4.70711C1.31658 5.09763 0.683417 5.09763 0.292893 4.70711C-0.0976311 4.31658 -0.097631 3.68342 0.292893 3.29289L3.29289 0.292893C3.48043 0.105357 3.73478 0 4 0ZM0.292893 9.29289C0.683417 8.90237 1.31658 8.90237 1.70711 9.29289L4 11.5858L6.29289 9.29289C6.68342 8.90237 7.31658 8.90237 7.70711 9.29289C8.09763 9.68342 8.09763 10.3166 7.70711 10.7071L4.70711 13.7071C4.31658 14.0976 3.68342 14.0976 3.29289 13.7071L0.292893 10.7071C-0.0976311 10.3166 -0.0976311 9.68342 0.292893 9.29289Z' fill='rgba(17, 35, 55, 0.65)'/%3E%3C/svg%3E");--gf-icon-ctrl-select: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0.292893 0.292893C0.683417 -0.097631 1.31658 -0.097631 1.70711 0.292893L5 3.58579L8.29289 0.292893C8.68342 -0.0976311 9.31658 -0.0976311 9.70711 0.292893C10.0976 0.683417 10.0976 1.31658 9.70711 1.70711L5.70711 5.70711C5.31658 6.09763 4.68342 6.09763 4.29289 5.70711L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683418 0.292893 0.292893Z' fill='rgba(17, 35, 55, 0.65)'/%3E%3C/svg%3E");--gf-icon-ctrl-search: url("data:image/svg+xml,%3Csvg width='640' height='640' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M256 128c-70.692 0-128 57.308-128 128 0 70.691 57.308 128 128 128 70.691 0 128-57.309 128-128 0-70.692-57.309-128-128-128zM64 256c0-106.039 85.961-192 192-192s192 85.961 192 192c0 41.466-13.146 79.863-35.498 111.248l154.125 154.125c12.496 12.496 12.496 32.758 0 45.254s-32.758 12.496-45.254 0L367.248 412.502C335.862 434.854 297.467 448 256 448c-106.039 0-192-85.962-192-192z' fill='rgba(17, 35, 55, 0.65)'/%3E%3C/svg%3E");--gf-label-space-y-secondary: var(--gf-label-space-y-md-secondary);--gf-ctrl-border-color: #686e77;--gf-ctrl-size: var(--gf-ctrl-size-md);--gf-ctrl-label-color-primary: #112337;--gf-ctrl-label-color-secondary: #112337;--gf-ctrl-choice-size: var(--gf-ctrl-choice-size-md);--gf-ctrl-checkbox-check-size: var(--gf-ctrl-checkbox-check-size-md);--gf-ctrl-radio-check-size: var(--gf-ctrl-radio-check-size-md);--gf-ctrl-btn-font-size: var(--gf-ctrl-btn-font-size-md);--gf-ctrl-btn-padding-x: var(--gf-ctrl-btn-padding-x-md);--gf-ctrl-btn-size: var(--gf-ctrl-btn-size-md);--gf-ctrl-btn-border-color-secondary: #686e77;--gf-ctrl-file-btn-bg-color-hover: #EBEBEB;--gf-field-img-choice-size: var(--gf-field-img-choice-size-md);--gf-field-img-choice-card-space: var(--gf-field-img-choice-card-space-md);--gf-field-img-choice-check-ind-size: var(--gf-field-img-choice-check-ind-size-md);--gf-field-img-choice-check-ind-icon-size: var(--gf-field-img-choice-check-ind-icon-size-md);--gf-field-pg-steps-number-color: rgba(17, 35, 55, 0.8);}</style><div id='gf_4' class='gform_anchor' tabindex='-1'></div>
+                        <div class='gform_heading'>
+                            <p class='gform_description'>Why subscribe? By subscribing to email updates you can expect thoroughly researched perspectives and market commentary on the trends shaping global markets. Topics may span disruptive tech, income strategies, and emerging economies. We adhere to a strict Privacy Policy governing the handling of your information. And you can, of course, opt-out any time.</p>
+							<p class='gform_required_legend'>&quot;<span class="gfield_required gfield_required_asterisk">*</span>&quot; indicates required fields</p>
+                        </div><form method='post' enctype='multipart/form-data' target='gform_ajax_frame_4' id='gform_4'  action='/news/press-releases/global-x-investments-canada-inc-announces-final-valuation-for-the-terminating-etfs#gf_4' data-formid='4' novalidate>
+                        <div class='gform-body gform_body'><div id='gform_fields_4' class='gform_fields top_label form_sublabel_below description_below validation_below'><div id="field_4_7" class="gfield gfield--type-honeypot gform_validation_container field_sublabel_below gfield--has-description field_description_below field_validation_below gfield_visibility_visible"  ><label class='gfield_label gform-field-label' for='input_4_7'>Facebook</label><div class='ginput_container'><input name='input_7' id='input_4_7' type='text' value='' autocomplete='new-password'/></div><div class='gfield_description' id='gfield_description_4_7'>This field is for validation purposes and should be left unchanged.</div></div><div id="field_4_5" class="gfield gfield--type-text gfield--input-type-text gfield--width-half gfield_contains_required field_sublabel_below gfield--no-description field_description_below field_validation_below gfield_visibility_visible"  ><label class='gfield_label gform-field-label' for='input_4_5'>First Name<span class="gfield_required"><span class="gfield_required gfield_required_asterisk">*</span></span></label><div class='ginput_container ginput_container_text'><input name='input_5' id='input_4_5' type='text' value='' class='large'     aria-required="true" aria-invalid="false"   /></div></div><div id="field_4_6" class="gfield gfield--type-text gfield--input-type-text gfield--width-half gfield_contains_required field_sublabel_below gfield--no-description field_description_below field_validation_below gfield_visibility_visible"  ><label class='gfield_label gform-field-label' for='input_4_6'>Last Name<span class="gfield_required"><span class="gfield_required gfield_required_asterisk">*</span></span></label><div class='ginput_container ginput_container_text'><input name='input_6' id='input_4_6' type='text' value='' class='large'     aria-required="true" aria-invalid="false"   /></div></div><div id="field_4_3" class="gfield gfield--type-email gfield--input-type-email gfield--width-full gfield_contains_required field_sublabel_below gfield--no-description field_description_below field_validation_below gfield_visibility_visible"  ><label class='gfield_label gform-field-label' for='input_4_3'>Email<span class="gfield_required"><span class="gfield_required gfield_required_asterisk">*</span></span></label><div class='ginput_container ginput_container_email'>
+                            <input name='input_3' id='input_4_3' type='email' value='' class='large'    aria-required="true" aria-invalid="false"  />
+                        </div></div><fieldset id="field_4_4" class="gfield gfield--type-radio gfield--type-choice gfield--input-type-radio gfield--width-full gfield_contains_required field_sublabel_below gfield--no-description field_description_below field_validation_below gfield_visibility_visible"  ><legend class='gfield_label gform-field-label' >Please select whether you are an...<span class="gfield_required"><span class="gfield_required gfield_required_asterisk">*</span></span></legend><div class='ginput_container ginput_container_radio'><div class='gfield_radio' id='input_4_4'>
+			<div class='gchoice gchoice_4_4_0'>
+					<input class='gfield-choice-input' name='input_4' type='radio' value='Investor'  id='choice_4_4_0' onchange='gformToggleRadioOther( this )'    />
+					<label for='choice_4_4_0' id='label_4_4_0' class='gform-field-label gform-field-label--type-inline'>Investor</label>
+			</div>
+			<div class='gchoice gchoice_4_4_1'>
+					<input class='gfield-choice-input' name='input_4' type='radio' value='Advisor'  id='choice_4_4_1' onchange='gformToggleRadioOther( this )'    />
+					<label for='choice_4_4_1' id='label_4_4_1' class='gform-field-label gform-field-label--type-inline'>Advisor</label>
+			</div></div></div></fieldset></div></div>
+        <div class='gform-footer gform_footer top_label'> <input type='submit' id='gform_submit_button_4' class='gform_button button' onclick='gform.submission.handleButtonClick(this);' data-submission-type='submit' value='Subscribe'  /> <input type='hidden' name='gform_ajax' value='form_id=4&amp;title=&amp;description=1&amp;tabindex=0&amp;theme=orbital&amp;hash=719dfe54dd5857ea3acfe5230c1e35d2' />
+            <input type='hidden' class='gform_hidden' name='gform_submission_method' data-js='gform_submission_method_4' value='iframe' />
+            <input type='hidden' class='gform_hidden' name='gform_theme' data-js='gform_theme_4' id='gform_theme_4' value='orbital' />
+            <input type='hidden' class='gform_hidden' name='gform_style_settings' data-js='gform_style_settings_4' id='gform_style_settings_4' value='' />
+            <input type='hidden' class='gform_hidden' name='is_submit_4' value='1' />
+            <input type='hidden' class='gform_hidden' name='gform_submit' value='4' />
+            
+            <input type='hidden' class='gform_hidden' name='gform_currency' data-currency='CAD' value='QteIAgBpsADnd4V4W7/ppa9TLqiUEgmjQ8KMTQDULvb3/zHdWo9gPxeC8qXvggRmTihprCoRK9oMvfGtiwTdPtmJOlLBgIr4GhW2yMubyDj4/F0=' />
+            <input type='hidden' class='gform_hidden' name='gform_unique_id' value='' />
+            <input type='hidden' class='gform_hidden' name='state_4' value='WyJ7XCI0XCI6W1wiNmVlMGY5NzIwN2Q2NWYwZmYyZTAxYzM0NmNjNWE5MDRcIixcImMwMzA0NmIxYWU3OGI0ZjI4NWQ3OGFiOGQ2ZTliNjM0XCJdfSIsImFiYTc1ZDU4ZTcwM2Q4ODc5N2ZlNjE0YTY3NDY4ZTllIl0=' />
+            <input type='hidden' autocomplete='off' class='gform_hidden' name='gform_target_page_number_4' id='gform_target_page_number_4' value='0' />
+            <input type='hidden' autocomplete='off' class='gform_hidden' name='gform_source_page_number_4' id='gform_source_page_number_4' value='1' />
+            <input type='hidden' name='gform_field_values' value='' />
+            
+        </div>
+                        </form>
+                        </div>
+		                <iframe style='display:none;width:0px;height:0px;' src='about:blank' name='gform_ajax_frame_4' id='gform_ajax_frame_4' title='This iframe contains the logic required to handle Ajax powered Gravity Forms.'></iframe>
+		                <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+/* <![CDATA[ */
+ gform.initializeOnLoaded( function() {gformInitSpinner( 4, 'https://www.globalx.ca/wp-content/plugins/gravityforms/images/spinner.svg', false );jQuery('#gform_ajax_frame_4').on('load',function(){var contents = jQuery(this).contents().find('*').html();var is_postback = contents.indexOf('GF_AJAX_POSTBACK') >= 0;if(!is_postback){return;}var form_content = jQuery(this).contents().find('#gform_wrapper_4');var is_confirmation = jQuery(this).contents().find('#gform_confirmation_wrapper_4').length > 0;var is_redirect = contents.indexOf('gformRedirect(){') >= 0;var is_form = form_content.length > 0 && ! is_redirect && ! is_confirmation;var mt = parseInt(jQuery('html').css('margin-top'), 10) + parseInt(jQuery('body').css('margin-top'), 10) + 100;if(is_form){jQuery('#gform_wrapper_4').html(form_content.html());if(form_content.hasClass('gform_validation_error')){jQuery('#gform_wrapper_4').addClass('gform_validation_error');} else {jQuery('#gform_wrapper_4').removeClass('gform_validation_error');}setTimeout( function() { /* delay the scroll by 50 milliseconds to fix a bug in chrome */ jQuery(document).scrollTop(jQuery('#gform_wrapper_4').offset().top - mt); }, 50 );if(window['gformInitDatepicker']) {gformInitDatepicker();}if(window['gformInitPriceFields']) {gformInitPriceFields();}var current_page = jQuery('#gform_source_page_number_4').val();gformInitSpinner( 4, 'https://www.globalx.ca/wp-content/plugins/gravityforms/images/spinner.svg', false );jQuery(document).trigger('gform_page_loaded', [4, current_page]);window['gf_submitting_4'] = false;}else if(!is_redirect){var confirmation_content = jQuery(this).contents().find('.GF_AJAX_POSTBACK').html();if(!confirmation_content){confirmation_content = contents;}jQuery('#gform_wrapper_4').replaceWith(confirmation_content);jQuery(document).scrollTop(jQuery('#gf_4').offset().top - mt);jQuery(document).trigger('gform_confirmation_loaded', [4]);window['gf_submitting_4'] = false;wp.a11y.speak(jQuery('#gform_confirmation_message_4').text());}else{jQuery('#gform_4').append(contents);if(window['gformRedirect']) {gformRedirect();}}jQuery(document).trigger("gform_pre_post_render", [{ formId: "4", currentPage: "current_page", abort: function() { this.preventDefault(); } }]);        if (event && event.defaultPrevented) {                return;        }        const gformWrapperDiv = document.getElementById( "gform_wrapper_4" );        if ( gformWrapperDiv ) {            const visibilitySpan = document.createElement( "span" );            visibilitySpan.id = "gform_visibility_test_4";            gformWrapperDiv.insertAdjacentElement( "afterend", visibilitySpan );        }        const visibilityTestDiv = document.getElementById( "gform_visibility_test_4" );        let postRenderFired = false;        function triggerPostRender() {            if ( postRenderFired ) {                return;            }            postRenderFired = true;            gform.core.triggerPostRenderEvents( 4, current_page );            if ( visibilityTestDiv ) {                visibilityTestDiv.parentNode.removeChild( visibilityTestDiv );            }        }        function debounce( func, wait, immediate ) {            var timeout;            return function() {                var context = this, args = arguments;                var later = function() {                    timeout = null;                    if ( !immediate ) func.apply( context, args );                };                var callNow = immediate && !timeout;                clearTimeout( timeout );                timeout = setTimeout( later, wait );                if ( callNow ) func.apply( context, args );            };        }        const debouncedTriggerPostRender = debounce( function() {            triggerPostRender();        }, 200 );        if ( visibilityTestDiv && visibilityTestDiv.offsetParent === null ) {            const observer = new MutationObserver( ( mutations ) => {                mutations.forEach( ( mutation ) => {                    if ( mutation.type === 'attributes' && visibilityTestDiv.offsetParent !== null ) {                        debouncedTriggerPostRender();                        observer.disconnect();                    }                });            });            observer.observe( document.body, {                attributes: true,                childList: false,                subtree: true,                attributeFilter: [ 'style', 'class' ],            });        } else {            triggerPostRender();        }    } );} ); 
+/* ]]> */
+</script>
+						</div>
+									</div>
+							</div>
+			<button
+				aria-hidden="true"
+				aria-label="close drawer"
+				class="transition-all duration-200 w-full h-full bg-black/40 absolute top-0 left-0 opacity-0 js-drawer-overlay"
+				data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-newsletter&quot;}"
+			>
+			</button>
+		</div>
+
+	
+		<div
+			id="drawer-search"
+			role="dialog"
+			  			aria-labelledby="drawer-search-title"
+						class="z-50 invisible fixed top-0 left-0 w-screen h-screen"
+		>
+			<div class="transition-all duration-200 absolute top-0 -right-full h-full w-full lg:w-1/2 xl:w-5/12 bg-blue z-20 p-7 md:p-10 drawer overflow-x-hidden overflow-y-hidden hide-scrollbar ">
+				<div class="flex justify-end mb-2.5">
+					<button
+						id="drawer-search-close"
+						aria-label="close drawer"
+						class="w-6 h-6 [&_svg]:w-6 [&_svg]:h-6 js-close-drawer"
+						data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-search&quot;}"
+					>
+						<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M16.6643 17.4142L0.664307 1.41421L2.07852 8.82855e-07L18.0785 16L16.6643 17.4142Z" fill="white"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M17.6642 1.41421L1.66421 17.4142L0.25 16L16.25 0L17.6642 1.41421Z" fill="white"/>
+</svg>
+					</button>
+				</div>
+									<div
+						class="w-8 h-2 bg-orange mb-2.5"
+					>
+					</div>
+					<h2
+						class="text-white text-2xl md:text-3xl mb-4 font-proxima-nova"
+						id="drawer-search-title"
+					>
+						Search					</h2>
+												<div class="overflow-y-scroll h-[calc(100vh-145px)] pb-8 overflow-x-hidden hide-scrollbar">
+								<div>
+				<p class="text-white text-sm font-brown-std font-bold mb-1">
+					Explore research, content or product pages within our site				</p>
+				<form class="off-canvas-search-form relative">
+					<label
+						class="text-white text-lg block mb-2 text-[0px] opacity-0 h-0"
+						for="off-canvas-search-input"
+					>
+						Search					</label>
+					<input
+						type="text"
+						class="off-canvas-search-input block mb-8 rounded-md w-full py-2.5 px-5 font-brown-std !text-blue placeholder:text-gray-granite focus:outline-0 focus:outline-none  focus:ring-0 bg-gray-lighter focus:bg-white"
+						id="off-canvas-search-input"
+						placeholder="Enter a Search Term"
+						required autocomplete="off"
+					/>
+					<div
+						class="off-canvas-search-icon text-white w-6 absolute top-[22px] right-[10px] [&_svg]:fill-orange"
+						aria-hidden="true"
+					>
+						<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M10.8405 12.2546L11.9722 11.123L16 15.1508L14.8684 16.2824L10.8405 12.2546ZM5.88847 10.5021C3.52028 10.4842 1.61485 8.54998 1.63213 6.18179C1.65005 3.8136 3.58429 1.90816 5.95248 1.92545C8.30851 1.94337 10.2088 3.85776 10.2088 6.21379C10.2267 8.58198 8.32131 10.5162 5.95248 10.5341C5.93135 10.5341 5.90959 10.5341 5.88847 10.5341V10.5021ZM5.88847 0.325317C2.63637 0.325317 0 2.96169 0 6.21379C0 9.46589 2.63637 12.1023 5.88847 12.1023C9.14057 12.1023 11.7769 9.46589 11.7769 6.21379C11.784 2.96873 9.15913 0.332358 5.91407 0.325317C5.90575 0.325317 5.89679 0.325317 5.88847 0.325317Z" fill="inherit"/>
+</svg>
+					</div>
+					<button
+						class="button-clear-search text-white mb-4 [&_path]:!fill-blue w-6 absolute top-5 right-[16px] flex justify-center hidden"
+						type="button"
+						aria-label="Clear search"
+					>
+						<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M16.6643 17.4142L0.664307 1.41421L2.07852 8.82855e-07L18.0785 16L16.6643 17.4142Z" fill="white"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M17.6642 1.41421L1.66421 17.4142L0.25 16L16.25 0L17.6642 1.41421Z" fill="white"/>
+</svg>
+					</button>
+					<input type="hidden" id="form_search_nonce" name="form_search_nonce" value="80f934a709" /><input type="hidden" name="_wp_http_referer" value="/news/press-releases/global-x-investments-canada-inc-announces-final-valuation-for-the-terminating-etfs" />				</form>
+			</div>
+			<div class="w-full h-[calc(100vh-265px)] relative js-search-loader hidden">
+				<div class="absolute left-1/2 -translate-x-1/2 top-28 flex flex-col items-center justify-center">
+					
+	<span class="w-16 h-16 border-8 border-blue-dark border-b-orange rounded-[50%] inline-block box-border animate-loader">
+	</span>
+
+					<span class="block text-lg font-brown-std text-gray-dark mt-6">
+						Search...
+					</span>
+				</div>
+			</div>
+			<div
+				class="off-canvas-search-body w-full overflow-y-scroll h-[calc(100vh-265px)] hidden hide-scrollbar"
+				aria-live="polite"
+			>
+			</div>
+
+							</div>
+							</div>
+			<button
+				aria-hidden="true"
+				aria-label="close drawer"
+				class="transition-all duration-200 w-full h-full bg-black/40 absolute top-0 left-0 opacity-0 js-drawer-overlay"
+				data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-search&quot;}"
+			>
+			</button>
+		</div>
+
+			<!-- <button
+		id="active-popup-trigger"
+		class="text-[0px] hidden"
+		aria-hidden="true"
+		data-toggle-modal=""
+	>
+		Active Popup trigger button
+	</button> -->
+		
+	
+		<footer class="bg-blue">
+			<div class="max-w-screen-xl mx-auto px-6 md:px-8">
+				<div class="lg:flex pt-14 pb-10 border-b border-blue-transparent">
+					<div class="flex flex-col lg:flex-row lg:space-x-20 xl:space-x-36 text-blue-text font-brown-std">
+						<a class="hidden lg:block" href="https://www.globalx.ca" title="Global X Investments Canada Inc.">
+							<svg width="60" height="67" viewBox="0 0 60 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M23.3272 16.5654L16.682 23.1916L0.137873 6.62617L6.64523 0L23.3272 16.5654ZM0 66.2069V52.9819L53.3548 0L60 6.62617L0 66.2069ZM60 66.2069L36.6728 43.0427L43.318 36.4165L59.8621 52.9819L60 66.2069Z" fill="#FF5400"/>
+</svg>
+						</a>
+						<div class="space-y-3 mb-3 lg:mb-0">
+							<div class="hover:text-orange-dark transition duration-200 text-sm uppercase"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="https://www.globalx.ca/products" class="menu-item-link">OUR ETFS</a></li></ul></div><div class="hover:text-orange-dark transition duration-200 text-sm uppercase"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="https://www.globalx.ca/category/insights" class="menu-item-link">INSIGHTS</a></li></ul></div><div class="hover:text-orange-dark transition duration-200 text-sm uppercase"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="https://www.globalx.ca/about-us" class="menu-item-link">ABOUT US</a></li></ul></div><div class="hover:text-orange-dark transition duration-200 text-sm uppercase"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="/faq" class="menu-item-link">FAQ</a></li></ul></div>						</div>
+						<div class="space-y-3">
+							<div class="hover:text-orange-dark transition duration-200 text-sm uppercase"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="/contact" class="menu-item-link">CONTACT</a></li></ul></div><div class="hover:text-orange-dark transition duration-200 text-sm uppercase"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="https://www.globalx.ca/category/news" class="menu-item-link">NEWS</a></li></ul></div><div class="hover:text-orange-dark transition duration-200 text-sm uppercase"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="/careers" class="menu-item-link">CAREERS</a></li></ul></div>						</div>
+					</div>
+					<div class="pl-0 lg:pl-32 xl:pl-44 space-y-6 border-t lg:border-t-0 border-blue-transparent pt-8 lg:pt-0 mt-8 lg:mt-0">
+						<div class="flex text-white items-center">
+							<div class="pr-4"><svg width="21" height="17" viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0.12838V16.8716H21V0.12838H0ZM19.5811 1.5473V4.38514L10.5 10.6284L1.41892 4.38514V1.5473H19.5811ZM1.41892 6.08784V15.4527H19.5811V6.08784L10.5 12.3311L1.41892 6.08784Z" fill="#FF5400"/>
+</svg>
+</div>
+							<button
+								id="footer-newsletter-trigger"
+								class="button-secondary button-secondary-white"
+								data-drawer-id="#footer-newsletter-modal"
+								data-toggle-drawer="{&quot;id&quot;:&quot;#drawer-newsletter&quot;}"
+							>
+								<strong>Subscribe to Updates</strong>
+								<svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.696 4.72H0.96V2.96H7.696L4.976 0.24H7.472L10.496 3.28V4.4L7.472 7.44H4.976L7.696 4.72Z" fill="#FF5400"/>
+</svg>
+							</button>
+						</div>
+												<div class="-ml-1.5">
+							<ul class="flex gap-x-2">
+																<li>
+									<a
+										href="https://www.linkedin.com/company/globalxca/"
+										aria-label="Link To: linkedin_url"
+										target="_blank"
+										class="[&_svg]:fill-blue-light hover:[&_svg]:fill-white [&_svg]:transition [&_svg]:duration-200"
+									>
+										<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.6678 10.9768H17.6778V12.9768H17.7279C18.1484 12.3301 18.7318 11.805 19.4197 11.454C20.1076 11.103 20.8759 10.9385 21.6477 10.9768C25.8281 10.9768 26.6 13.5768 26.6 16.9768V23.8667H22.4296V17.7668C22.4296 16.3068 22.4296 14.4368 20.2843 14.4368C18.1389 14.4368 17.7981 16.0168 17.7981 17.6568V23.8667H13.6678V10.9768Z" />
+<path d="M6.51003 10.9768H10.8108V23.8367H6.51003V10.9768Z" />
+<path d="M10.8107 7.40677C10.8107 7.83199 10.6843 8.24767 10.4475 8.60124C10.2107 8.95481 9.87404 9.23038 9.4802 9.3931C9.08636 9.55583 8.65298 9.59841 8.23488 9.51545C7.81678 9.43249 7.43273 9.22773 7.13129 8.92704C6.82986 8.62636 6.62458 8.24327 6.54142 7.82621C6.45825 7.40915 6.50093 6.97686 6.66407 6.584C6.8272 6.19114 7.10346 5.85535 7.45791 5.61911C7.81236 5.38286 8.22908 5.25677 8.65537 5.25677C8.93879 5.25544 9.21967 5.31015 9.48177 5.41773C9.74387 5.52531 9.982 5.68363 10.1824 5.88354C10.3828 6.08345 10.5415 6.32099 10.6494 6.58243C10.7572 6.84388 10.8121 7.12405 10.8107 7.40677Z" />
+</svg>
+									</a>
+								</li>
+																<li>
+									<a
+										href="https://twitter.com/globalxca/"
+										aria-label="Link To: x_url"
+										target="_blank"
+										class="[&_svg]:fill-blue-light hover:[&_svg]:fill-white [&_svg]:transition [&_svg]:duration-200"
+									>
+										<svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_59_244)">
+<path d="M18.1547 13.7264L25.6013 5.25674H23.8373L17.3687 12.6093L12.206 5.25674H6.25L14.0587 16.3761L6.25 25.2567H8.014L14.8407 17.4905L20.294 25.2567H26.25M8.65067 6.55833H11.3607L23.836 24.0191H21.1253" />
+</g>
+<defs>
+<clipPath id="clip0_59_244">
+<rect width="30" height="30" transform="translate(0.75)"/>
+</clipPath>
+</defs>
+</svg>
+									</a>
+								</li>
+																<li>
+									<a
+										href="https://www.facebook.com/globalxca/"
+										aria-label="Link To: facebook_url"
+										target="_blank"
+										class="[&_svg]:fill-blue-light hover:[&_svg]:fill-white [&_svg]:transition [&_svg]:duration-200"
+									>
+										<svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_59_247)">
+<path d="M18.13 9.00674H21.25V5.25674H18.13C16.9684 5.25674 15.8543 5.71821 15.0329 6.53962C14.2115 7.36103 13.75 8.4751 13.75 9.63674V11.5067H11.25V15.2567H13.75V25.2567H17.5V15.2567H20.63L21.25 11.5067H17.5V9.63674C17.5026 9.47046 17.5698 9.31171 17.6874 9.19412C17.805 9.07653 17.9637 9.00932 18.13 9.00674Z" />
+</g>
+<defs>
+<clipPath id="clip0_59_247">
+<rect width="30" height="30" transform="translate(0.75)"/>
+</clipPath>
+</defs>
+</svg>
+									</a>
+								</li>
+																<li>
+									<a
+										href="https://www.instagram.com/globalxca/"
+										aria-label="Link To: instagram_url"
+										target="_blank"
+										class="[&_svg]:fill-blue-light hover:[&_svg]:fill-white [&_svg]:transition [&_svg]:duration-200"
+									>
+										<svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_59_246)">
+<path d="M16.26 7.05674C18.93 7.05674 19.26 7.05674 20.26 7.11674C20.8919 7.11972 21.5183 7.23484 22.11 7.45674C22.5462 7.61449 22.9398 7.87121 23.26 8.20674C23.5939 8.52832 23.8503 8.92155 24.01 9.35674C24.2454 9.94639 24.3774 10.5722 24.4 11.2067C24.4 12.2667 24.46 12.5767 24.46 15.2067C24.46 17.8367 24.46 18.2067 24.4 19.2567C24.3901 19.8889 24.2718 20.5147 24.05 21.1067C23.8865 21.5387 23.6336 21.9312 23.3079 22.2586C22.9822 22.586 22.591 22.841 22.16 23.0067C21.5643 23.2281 20.9354 23.3465 20.3 23.3567C19.25 23.3567 18.93 23.4067 16.3 23.4067C13.67 23.4067 13.3 23.4067 12.3 23.3567C11.6534 23.3651 11.0104 23.2602 10.4 23.0467C9.95424 22.8895 9.54814 22.637 9.21 22.3067C8.88374 21.9789 8.62844 21.5875 8.46 21.1567C8.24553 20.563 8.13065 19.9379 8.12 19.3067C8.07 18.2467 8.06 17.9367 8.06 15.3067C8.06 12.6767 8.06 12.3067 8.12 11.3067C8.12728 10.672 8.24225 10.043 8.46 9.44674C8.60711 8.97932 8.86432 8.55406 9.21 8.20674C9.54305 7.86773 9.95048 7.61095 10.4 7.45674C10.9917 7.23484 11.6181 7.11972 12.25 7.11674C13.27 7.06674 13.58 7.05674 16.26 7.05674ZM16.26 5.25674C13.54 5.30674 13.2 5.30674 12.13 5.30674C11.3024 5.32372 10.4838 5.48269 9.71 5.77674C9.03882 6.02828 8.43115 6.4243 7.93 6.93674C7.41776 7.43416 7.02166 8.03855 6.77 8.70674C6.48469 9.48264 6.32927 10.3003 6.31 11.1267C6.26 12.2067 6.25 12.5467 6.25 15.3067C6.25 18.0667 6.25 18.3667 6.31 19.4367C6.33469 20.2464 6.49003 21.0467 6.77 21.8067C7.02469 22.4763 7.42028 23.0834 7.93 23.5867C8.42965 24.0939 9.03361 24.4863 9.7 24.7367C10.4776 25.0296 11.2993 25.1886 12.13 25.2067C13.2 25.2067 13.54 25.2567 16.25 25.2567C18.96 25.2567 19.31 25.2567 20.38 25.2067C21.2076 25.1898 22.0262 25.0308 22.8 24.7367C23.4677 24.4889 24.0722 24.0961 24.57 23.5867C25.0785 23.0863 25.4741 22.4828 25.73 21.8167C26.0141 21.0371 26.1695 20.2163 26.19 19.3867C26.24 18.3167 26.25 17.9767 26.25 15.2667C26.25 12.5567 26.25 12.2067 26.19 11.1367C26.1707 10.3103 26.0153 9.49264 25.73 8.71674C25.4885 8.04297 25.0949 7.43389 24.58 6.93674C24.0826 6.4245 23.4782 6.02841 22.81 5.77674C22.0375 5.49031 21.2235 5.33157 20.4 5.30674C19.31 5.30674 18.97 5.30674 16.26 5.30674V5.25674Z" />
+<path d="M16.2599 10.1167C15.2454 10.1168 14.2537 10.417 13.4095 10.9796C12.5654 11.5423 11.9066 12.3421 11.5161 13.2784C11.1256 14.2147 11.021 15.2456 11.2153 16.2413C11.4096 17.2369 11.8942 18.1528 12.608 18.8736C13.3219 19.5944 14.2331 20.0879 15.2268 20.2918C16.2206 20.4957 17.2524 20.4011 18.1925 20.0197C19.1325 19.6383 19.9387 18.9873 20.5094 18.1486C21.0802 17.31 21.39 16.3212 21.3999 15.3067C21.4065 14.6276 21.2784 13.9538 21.0231 13.3244C20.7677 12.695 20.3902 12.1225 19.9122 11.6399C19.4342 11.1572 18.8654 10.7742 18.2385 10.5127C17.6116 10.2513 16.9391 10.1167 16.2599 10.1167ZM16.2599 18.5967C15.5968 18.5987 14.9481 18.4031 14.3965 18.0351C13.8448 17.667 13.4153 17.1431 13.1625 16.53C12.9097 15.917 12.8451 15.2426 12.9769 14.5927C13.1088 13.9428 13.4311 13.3469 13.9028 12.8808C14.3746 12.4147 14.9743 12.0996 15.6258 11.9757C16.2772 11.8517 16.9508 11.9244 17.5608 12.1846C18.1707 12.4448 18.6894 12.8807 19.0508 13.4367C19.4121 13.9927 19.5998 14.6437 19.5899 15.3067C19.5899 16.1908 19.2394 17.0389 18.6152 17.665C17.9909 18.291 17.144 18.6441 16.2599 18.6467V18.5967Z" />
+<path d="M22.7999 9.91675C22.7999 10.1541 22.7295 10.3861 22.5977 10.5834C22.4658 10.7808 22.2784 10.9346 22.0591 11.0254C21.8399 11.1162 21.5986 11.14 21.3658 11.0937C21.133 11.0474 20.9192 10.9331 20.7514 10.7653C20.5836 10.5975 20.4693 10.3836 20.423 10.1509C20.3767 9.91808 20.4004 9.6768 20.4912 9.45753C20.5821 9.23826 20.7359 9.05085 20.9332 8.91899C21.1306 8.78713 21.3626 8.71675 21.5999 8.71675C21.7575 8.71675 21.9135 8.74779 22.0591 8.8081C22.2047 8.8684 22.337 8.95679 22.4484 9.06822C22.5599 9.17965 22.6483 9.31194 22.7086 9.45753C22.7689 9.60312 22.7999 9.75916 22.7999 9.91675Z"/>
+</g>
+<defs>
+<clipPath id="clip0_59_246">
+<rect width="30" height="30" transform="translate(0.75)"/>
+</clipPath>
+</defs>
+</svg>
+									</a>
+								</li>
+																<li>
+									<a
+										href="https://www.youtube.com/@globalxca"
+										aria-label="Link To: youtube_url"
+										target="_blank"
+										class="[&_svg]:fill-blue-light hover:[&_svg]:fill-white [&_svg]:transition [&_svg]:duration-200"
+									>
+										<svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_59_248)">
+<path d="M26.05 11.3067C25.9569 10.5831 25.6816 9.89495 25.25 9.30674C24.7211 8.7713 24.0025 8.4659 23.25 8.45674C20.45 8.25674 16.25 8.25674 16.25 8.25674C16.25 8.25674 12.05 8.25674 9.25 8.45674C8.49791 8.46804 7.78009 8.77311 7.25 9.30674C6.8164 9.89387 6.54093 10.5826 6.45 11.3067C6.32728 12.3658 6.26052 13.4306 6.25 14.4967V16.0167C6.25897 17.0962 6.32573 18.1744 6.45 19.2467C6.54055 19.9693 6.8123 20.6573 7.24 21.2467C7.84815 21.7905 8.63425 22.0928 9.45 22.0967C11.05 22.2567 16.25 22.2967 16.25 22.2967C16.25 22.2967 20.45 22.2967 23.25 22.0967C24.0025 22.0876 24.7211 21.7822 25.25 21.2467C25.6836 20.6596 25.9591 19.9709 26.05 19.2467C26.1747 18.1745 26.2415 17.0962 26.25 16.0167V14.4967C26.2395 13.4306 26.1727 12.3658 26.05 11.3067ZM14.15 17.8567V12.2267L19.55 15.0467L14.15 17.8567Z" />
+</g>
+<defs>
+<clipPath id="clip0_59_248">
+<rect width="30" height="30" fill="white" transform="translate(0.75)"/>
+</clipPath>
+</defs>
+</svg>
+									</a>
+								</li>
+															</ul>
+						</div>
+											</div>
+				</div>
+				<div class="bg-blue text-blue-text pb-14 pt-10 flex flex-col md:flex-row gap-y-3 gap-x-14">
+					<div class="hover:text-orange-dark transition duration-200  text-sm uppercase font-brown-std"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="https://www.globalx.ca/privacy-policy" class="menu-item-link">Privacy and Cookie Policies</a></li></ul></div><div class="hover:text-orange-dark transition duration-200  text-sm uppercase font-brown-std"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="https://www.globalx.ca/legal-regulatory" class="menu-item-link">Legal &amp; Regulatory</a></li></ul></div><div class="hover:text-orange-dark transition duration-200  text-sm uppercase font-brown-std"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="https://www.globalx.ca/disclaimers" class="menu-item-link">Disclaimers</a></li></ul></div><div class="hover:text-orange-dark transition duration-200  text-sm uppercase font-brown-std"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="https://www.globalx.ca/accessibility" class="menu-item-link">Accessibility</a></li></ul></div><div class="hover:text-orange-dark transition duration-200  text-sm uppercase font-brown-std"><ul class="menu-parent"><li class="menu-item menu-item-0"><a href="https://www.globalx.ca/terms-of-use" class="menu-item-link">Terms of Use</a></li></ul></div>				</div>
+			</div>
+		</footer>
+					<div class="bg-blue-dark pb-1 pt-14 text-blue-text tracking-wider font-brown-std">
+				<div class="max-w-screen-xl mx-auto px-6 md:px-8">
+					<div class="text-sm">
+						Commissions, management fees, and expenses all may be associated with an investment in products (the "Global X Funds") managed by Global X Investments Canada Inc. The Global X Funds are not guaranteed, their values change frequently and past performance may not be repeated.  Certain Global X Funds may have exposure to leveraged investment techniques that magnify gains and losses which may result in greater volatility in value and could be subject to aggressive investment risk and price volatility risk. Such risks are described in the prospectus. The Global X Money Market Funds are not covered by the Canada Deposit Insurance Corporation, the Federal Deposit Insurance Corporation, or any other government deposit insurer. There can be no assurances that the money market fund will be able to maintain its net asset value per security at a constant amount or that the full amount of your investment in the Funds will be returned to you. Past performance may not be repeated. The prospectus contains important detailed information about the Global X Funds. <strong>Please read the relevant prospectus before investing</strong>.<br />
+<br />
+Global X Investments Canada Inc. ("Global X") is a wholly-owned subsidiary of Mirae Asset Global Investments Co., Ltd. ("Mirae Asset"), the Korea-based asset management entity of Mirae Asset Financial Group.  Global X is a corporation existing under the laws of Canada and is the manager, investment manager and trustee of the Global X Funds.<br />
+<br />
+&copy; 2026 Global X Investments Canada Inc. All Rights Reserved.					</div>
+					<button
+						class="back-to-top button-link mt-14 mb-7"
+					>
+						<svg width="8" height="10" viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.72 2.804V9.54H2.96V2.804L0.24 5.524V3.028L3.28 0.00399971H4.4L7.44 3.028V5.524L4.72 2.804Z" fill="#8EB1B1"/>
+</svg>
+						Back To Top					</button>
+				</div>
+			</div>
+			<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/gxca\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script type="importmap" id="wp-importmap">
+{"imports":{"web-vitals":"https:\/\/unpkg.com\/web-vitals@4\/dist\/web-vitals.attribution.js?module"}}
+</script>
+<script type="module" src="https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js?module" id="web-vitals-js-module"></script>
+<script type="module" src="https://www.globalx.ca/wp-content/themes/gxca/assets/js/web-vitals-ga.js" id="web-vitals-ga-js-module"></script>
+            <script>
+			// End Quantcast Tag
+			window._qevents = window._qevents || [];
+            (function() {
+                var elem = document.createElement('script');
+                elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+                elem.async = true;
+                elem.type = "text/javascript";
+                var scpt = document.getElementsByTagName('script')[0];
+                scpt.parentNode.insertBefore(elem, scpt);
+            })();
+
+            window._qevents.push({
+                "qacct": "p-48fw9SpU270Z4",
+                "labels": "_fp.event.PageView"
+            });
+			// End Quantcast Tag
+            </script>
+            <link rel='stylesheet' id='gravity_forms_theme_reset-css' href='https://www.globalx.ca/wp-content/plugins/gravityforms/assets/css/dist/gravity-forms-theme-reset.min.css?ver=2.10.4' type='text/css' media='all' />
+<link rel='stylesheet' id='gravity_forms_theme_foundation-css' href='https://www.globalx.ca/wp-content/plugins/gravityforms/assets/css/dist/gravity-forms-theme-foundation.min.css?ver=2.10.4' type='text/css' media='all' />
+<link rel='stylesheet' id='gravity_forms_theme_framework-css' href='https://www.globalx.ca/wp-content/plugins/gravityforms/assets/css/dist/gravity-forms-theme-framework.min.css?ver=2.10.4' type='text/css' media='all' />
+<link rel='stylesheet' id='gravity_forms_orbital_theme-css' href='https://www.globalx.ca/wp-content/plugins/gravityforms/assets/css/dist/gravity-forms-orbital-theme.min.css?ver=2.10.4' type='text/css' media='all' />
+<style id='core-block-supports-inline-css' type='text/css'>
+/**
+ * Core styles: block-supports
+ */
+.wp-elements-bd42bdb1dc72bf0b9bea84a4bdfd9116 a:where(:not(.wp-element-button)) {
+	color: var(--wp--preset--color--blue);
+}
+
+</style>
+<script type="text/javascript" src="https://www.globalx.ca/wp-content/themes/gxca/assets/js/slick.min.js?ver=6.8.3" id="slick-js"></script>
+<script type="text/javascript" src="https://www.globalx.ca/wp-content/themes/gxca/assets/js/wow.js?ver=1790774630" id="wow-js"></script>
+<script type="text/javascript" src="https://www.globalx.ca/wp-content/themes/gxca/assets/js/uikit.js?ver=6.8.3" id="uikit-js"></script>
+<script type="text/javascript" src="https://www.globalx.ca/wp-content/themes/gxca/assets/js/uikit-icons.js?ver=6.8.3" id="uikit-icons-js"></script>
+<script type="text/javascript" src="https://www.globalx.ca/wp-content/themes/gxca/assets/js/jquery.drilldown.js?ver=6.8.3" id="drilldown-js"></script>
+<script type="text/javascript" id="theme-js-extra">
+/* <![CDATA[ */
+var themeJS = {"ajaxurl":"https:\/\/www.globalx.ca\/wp-admin\/admin-ajax.php","directory":"https:\/\/www.globalx.ca\/wp-content\/themes\/gxca"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.globalx.ca/wp-content/themes/gxca/assets/js/theme.js?ver=1791950136" id="theme-js"></script>
+<script type="text/javascript" id="theme-js-after">
+/* <![CDATA[ */
+var piAId="148371";var piCId="1271";var piHostname="go.globalx.ca";(function(){function async_load(){var s=document.createElement('script');s.type='text/javascript';s.src=('https:'==document.location.protocol?'https://':'http://')+piHostname+'/pd.js';var c=document.getElementsByTagName('script')[0];c.parentNode.insertBefore(s,c)}if(window.attachEvent){window.attachEvent('onload',async_load)}else{window.addEventListener('load',async_load,!1)}})()
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js?ver=1.0" id="algolia-js"></script>
+<script type="text/javascript" id="algolia-js-after">
+/* <![CDATA[ */
+var algoliaClient = algoliasearch( "9NJK20JJI6", "529c99be8169e100374499e7af2d0731" );var algoliaIndex = algoliaClient.initIndex( "gxca_production" )
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://code.highcharts.com/12.6.0/highcharts.js?ver=6.8.3" id="highcharts-js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/stock/12.6.0/modules/stock.js?ver=6.8.3" id="highchartsStock-js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/12.6.0/modules/accessibility.js?ver=6.8.3" id="highchartsAccessibility-js"></script>
+<script type="text/javascript" src="https://ssl.geoplugin.net/javascript.gp?k=9c6eef12f872ef87&amp;ver=6.8.3" id="geoplugin-js"></script>
+<script type="text/javascript" src="https://cdn.bttrack.com/js/16415/analytics/1.0/analytics.min.js" id="bttrack-js"></script>
+<script type="text/javascript" src="https://www.globalx.ca/wp-includes/js/dist/dom-ready.js?ver=5b9fa8df0892dc9a7c41" id="wp-dom-ready-js"></script>
+<script type="text/javascript" src="https://www.globalx.ca/wp-includes/js/dist/hooks.js?ver=be67dc331e61e06d52fa" id="wp-hooks-js"></script>
+<script type="text/javascript" src="https://www.globalx.ca/wp-includes/js/dist/i18n.js?ver=5edc734adb78e0d7d00e" id="wp-i18n-js"></script>
+<script type="text/javascript" id="wp-i18n-js-after">
+/* <![CDATA[ */
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+/* ]]> */
+</script>
+<script type="text/javascript" id="wp-a11y-js-translations">
+/* <![CDATA[ */
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", {"translation-revision-date":"2025-11-13 14:36:03+0000","generator":"GlotPress\/4.0.3","domain":"messages","locale_data":{"messages":{"":{"domain":"messages","plural-forms":"nplurals=2; plural=n != 1;","lang":"en_CA"},"Notifications":["Notifications"]}},"comment":{"reference":"wp-includes\/js\/dist\/a11y.js"}} );
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.globalx.ca/wp-includes/js/dist/a11y.js?ver=604a4359a838a9073d9f" id="wp-a11y-js"></script>
+<script type="text/javascript" defer='defer' src="https://www.globalx.ca/wp-content/plugins/gravityforms/js/jquery.json.js?ver=2.10.4" id="gform_json-js"></script>
+<script type="text/javascript" id="gform_gravityforms-js-extra">
+/* <![CDATA[ */
+var gform_i18n = {"datepicker":{"days":{"monday":"Mo","tuesday":"Tu","wednesday":"We","thursday":"Th","friday":"Fr","saturday":"Sa","sunday":"Su"},"months":{"january":"January","february":"February","march":"March","april":"April","may":"May","june":"June","july":"July","august":"August","september":"September","october":"October","november":"November","december":"December"},"firstDay":1,"iconText":"Select date"}};
+var gf_legacy_multi = [];
+var gform_gravityforms = {"strings":{"invalid_file_extension":"This type of file is not allowed. Must be one of the following:","file_uploaded":"File uploaded","delete_file":"Delete this file","in_progress":"in progress","file_exceeds_limit":"File exceeds size limit","illegal_extension":"This type of file is not allowed.","max_reached":"Maximum number of files reached","unknown_error":"There was a problem while saving the file on the server","currently_uploading":"Please wait for the uploading to complete","cancel":"Cancel","cancel_upload":"Cancel this upload","cancelled":"Cancelled","error":"Error","message":"Message"},"vars":{"images_url":"https:\/\/www.globalx.ca\/wp-content\/plugins\/gravityforms\/images"}};
+var gf_global = {"gf_currency_config":{"name":"Canadian Dollar","symbol_left":"$","symbol_right":"CAD","symbol_padding":" ","thousand_separator":",","decimal_separator":".","decimals":2,"code":"CAD"},"base_url":"https:\/\/www.globalx.ca\/wp-content\/plugins\/gravityforms","number_formats":[],"spinnerUrl":"https:\/\/www.globalx.ca\/wp-content\/plugins\/gravityforms\/images\/spinner.svg","version_hash":"26588e711e89c40460d88f341d252261","strings":{"newRowAdded":"New row added.","rowRemoved":"Row removed","formSaved":"The form has been saved.  The content contains the link to return and complete the form."}};
+/* ]]> */
+</script>
+<script type="text/javascript" defer='defer' src="https://www.globalx.ca/wp-content/plugins/gravityforms/js/gravityforms.js?ver=2.10.4" id="gform_gravityforms-js"></script>
+<script type="text/javascript" defer='defer' src="https://www.globalx.ca/wp-content/plugins/gravityforms/assets/js/dist/utils.min.js?ver=3f278756f0a3032bed328ff6a9f6c01d" id="gform_gravityforms_utils-js"></script>
+<script type="text/javascript" defer='defer' src="https://www.globalx.ca/wp-content/plugins/gravityforms/assets/js/dist/vendor-theme.min.js?ver=7c651d0ba638ce98b9c65141edddd567" id="gform_gravityforms_theme_vendors-js"></script>
+<script type="text/javascript" id="gform_gravityforms_theme-js-extra">
+/* <![CDATA[ */
+var gform_theme_config = {"common":{"form":{"honeypot":{"version_hash":"26588e711e89c40460d88f341d252261"},"ajax":{"ajaxurl":"https:\/\/www.globalx.ca\/wp-admin\/admin-ajax.php","ajax_submission_nonce":"57cbaffa98","i18n":{"step_announcement":"Step %1$s of %2$s, %3$s","unknown_error":"There was an unknown error processing your request. Please try again.","error_403":"The request was blocked (403 error) for unknown security reasons. Remove any code-like text (scripts or DB queries) and try again."}}}},"hmr_dev":"","public_path":"https:\/\/www.globalx.ca\/wp-content\/plugins\/gravityforms\/assets\/js\/dist\/","config_nonce":"4b2725a96c"};
+/* ]]> */
+</script>
+<script type="text/javascript" defer='defer' src="https://www.globalx.ca/wp-content/plugins/gravityforms/assets/js/dist/scripts-theme.min.js?ver=301fdc9aa6144168f3b854c4c2c8f6d3" id="gform_gravityforms_theme-js"></script>
+<script type='text/javascript'>var gfZeroSpamConfig = {"forms":[{"ajaxUrl":"https:\/\/www.globalx.ca\/wp-admin\/admin-ajax.php","fallbackToken":"NHwxNzkyNjE2ODkzfDE3OTMyMjE2OTN8NTJjMzJhODY5YzZkMzlmMjhmZmNlMjI2NmI4M2I4Nzd8MQ.NGVjMTA4NjhkYjU1ODRhMjkxYjgxNTQ4ZmFhYWNhNjc2YTJiYWM2MWEyNDYwMTA0ZWMxOGY3NDA4NWMyMjhiMA","formId":4,"timeout":3000}],"debug":true};</script>
+<script type="text/javascript" defer='defer' src="https://www.globalx.ca/wp-content/plugins/gravity-forms-zero-spam/dist/js/gf-zero-spam.js?ver=1782744017" id="gf-zero-spam-js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+ gform.initializeOnLoaded( function() { jQuery(document).on('gform_post_render', function(event, formId, currentPage){if(formId == 4) {} } );jQuery(document).on('gform_post_conditional_logic', function(event, formId, fields, isInit){} ) } ); 
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+ gform.initializeOnLoaded( function() {jQuery(document).trigger("gform_pre_post_render", [{ formId: "4", currentPage: "1", abort: function() { this.preventDefault(); } }]);        if (event && event.defaultPrevented) {                return;        }        const gformWrapperDiv = document.getElementById( "gform_wrapper_4" );        if ( gformWrapperDiv ) {            const visibilitySpan = document.createElement( "span" );            visibilitySpan.id = "gform_visibility_test_4";            gformWrapperDiv.insertAdjacentElement( "afterend", visibilitySpan );        }        const visibilityTestDiv = document.getElementById( "gform_visibility_test_4" );        let postRenderFired = false;        function triggerPostRender() {            if ( postRenderFired ) {                return;            }            postRenderFired = true;            gform.core.triggerPostRenderEvents( 4, 1 );            if ( visibilityTestDiv ) {                visibilityTestDiv.parentNode.removeChild( visibilityTestDiv );            }        }        function debounce( func, wait, immediate ) {            var timeout;            return function() {                var context = this, args = arguments;                var later = function() {                    timeout = null;                    if ( !immediate ) func.apply( context, args );                };                var callNow = immediate && !timeout;                clearTimeout( timeout );                timeout = setTimeout( later, wait );                if ( callNow ) func.apply( context, args );            };        }        const debouncedTriggerPostRender = debounce( function() {            triggerPostRender();        }, 200 );        if ( visibilityTestDiv && visibilityTestDiv.offsetParent === null ) {            const observer = new MutationObserver( ( mutations ) => {                mutations.forEach( ( mutation ) => {                    if ( mutation.type === 'attributes' && visibilityTestDiv.offsetParent !== null ) {                        debouncedTriggerPostRender();                        observer.disconnect();                    }                });            });            observer.observe( document.body, {                attributes: true,                childList: false,                subtree: true,                attributeFilter: [ 'style', 'class' ],            });        } else {            triggerPostRender();        }    } ); 
+/* ]]> */
+</script>
+
+		<!-- Cookie Notice plugin v2.5.7 by Hu-manity.co https://hu-manity.co/ -->
+		<div id="cookie-notice" role="dialog" class="cookie-notice-hidden cookie-revoke-hidden cn-position-bottom" aria-label="Cookie Notice" style="background-color: rgba(0,47,55,0.9);"><div class="cookie-notice-container" style="color: #fff"><span id="cn-notice-text" class="cn-text-container"><span class="font-brown-std text-sm">By visiting our site, you consent to the use of cookies. Click here to view our <a href="/privacy-policy">Privacy and Cookie Policies</a></span>.</span><span id="cn-notice-buttons" class="cn-buttons-container"><button id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button" aria-label="Continue" style="background-color: #e94d00">Continue</button></span><span id="cn-close-notice" data-cookie-set="accept" class="cn-close-icon" title="No"></span></div>
+			
+		</div>
+		<!-- / Cookie Notice plugin --><script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4e33c7b3ff112bb',t:'MTc5MjYxNjg5Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

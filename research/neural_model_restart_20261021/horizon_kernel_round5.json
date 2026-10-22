@@ -1,0 +1,1235 @@
+{
+  "status": "exploratory horizon-aware borrowed-label density model",
+  "config": {
+    "markets": [
+      "CEA",
+      "GUANGZHOU",
+      "SHANGHAI",
+      "HUBEI",
+      "EU"
+    ],
+    "tag": "horizon_kernel_round5"
+  },
+  "bandwidth_grid": [
+    0.25,
+    0.5,
+    1.0,
+    2.0,
+    null
+  ],
+  "null_bandwidth": "None=infinity, original pooled model",
+  "selection": "one bandwidth per market using inner equal-h normalized MQS; no test selection",
+  "inner_forest": {
+    "n_estimators": 80,
+    "min_samples_leaf": 25,
+    "criterion": "squared_error",
+    "max_features": 1.0,
+    "bootstrap": true,
+    "n_jobs": 2,
+    "max_depth": 8,
+    "random_state": 11
+  },
+  "final_forest": "frozen five-seed pooled_MSE probabilities, normalized once after horizon weighting",
+  "frozen_before": {
+    "mixed_cdf_forest_round4.py": "37cf80f82814b0b06a14693194f8a64217bd3026b46efcc0defa355d2cbe0b7c",
+    "mixed_cdf_forest_round4_predictions.npz": "c90e0468043b027943f878a26fb44269fbfedf9cb9f2b53a21deda474dd8487b",
+    "qrf_round4.py": "baedecda3315dde9b79c9d7c4bf32d8553b771561f7e102d09ef7e0737e31cac",
+    "qrf_round4_probability_control_predictions.npz": "e26b0af859ccebae1ecad64cf2ecd230882ea485884abc8e008f329c50cfeb74"
+  },
+  "markets": {
+    "CEA": {
+      "selected": {
+        "tau": null,
+        "validation_normalized_MQS": 0.5911278555277503
+      },
+      "trials": [
+        {
+          "tau": 0.25,
+          "validation_normalized_MQS": 0.6066759719304842
+        },
+        {
+          "tau": 0.5,
+          "validation_normalized_MQS": 0.6041304359406522
+        },
+        {
+          "tau": 1.0,
+          "validation_normalized_MQS": 0.6002168833587451
+        },
+        {
+          "tau": 2.0,
+          "validation_normalized_MQS": 0.5964666301173106
+        },
+        {
+          "tau": null,
+          "validation_normalized_MQS": 0.5911278555277503
+        }
+      ],
+      "audit": {
+        "cut_index": 597,
+        "validation_start_index": 447,
+        "lookback": 128,
+        "step": 2,
+        "train": 621,
+        "validation": 281,
+        "refit": 921,
+        "test": 1311,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 446,
+        "last_refit_target": 596,
+        "test_zero_share": {
+          "1": 0.08734939759036145,
+          "5": 0.006060606060606061,
+          "10": 0.01529051987767584,
+          "20": 0.003105590062111801
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "probability_control": {
+        "dummy_zero_added": false,
+        "zero_mass_fallback_queries": 0,
+        "nonzero_mass_fallback_queries": 0,
+        "nonzero_mark_preservation_max_error": 1.2933849026508515e-09,
+        "total_mass_max_error": 1.8585978978080675e-08,
+        "p_rule_max_error": 1.8489572539692745e-08,
+        "zero_mass_max_error": 3.3760443329811096e-09,
+        "original_zero_support_count": 184,
+        "support_size": 921
+      },
+      "by_horizon": {
+        "1": {
+          "n": 332,
+          "borrowed_mass_mean": 0.7311954151791601,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.008055591935599514,
+              "CRPS": 0.009065069872398015,
+              "WIS": 0.006998966006509362
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.007937901606977701,
+              "CRPS": 0.008879773700137211,
+              "WIS": 0.006954288431261789
+            },
+            "pooled_original": {
+              "MQS": 0.008055591935599514,
+              "CRPS": 0.009065069872398015,
+              "WIS": 0.006998966006509362
+            },
+            "qrf": {
+              "MQS": 0.007436934202565419,
+              "CRPS": 0.008347353590855628,
+              "WIS": 0.0064902245854613514
+            },
+            "rule_qrf": {
+              "MQS": 0.007503253589123214,
+              "CRPS": 0.008410747043653344,
+              "WIS": 0.006551276220026806
+            },
+            "lstm_qr": {
+              "MQS": 0.007324217563017597,
+              "CRPS": null,
+              "WIS": 0.006353339935554191
+            }
+          }
+        },
+        "5": {
+          "n": 330,
+          "borrowed_mass_mean": 0.7358235662011517,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.0187626595682856,
+              "CRPS": 0.021333454549794042,
+              "WIS": 0.016076448531519065
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.01869969422224248,
+              "CRPS": 0.021298245920297484,
+              "WIS": 0.015968083321136483
+            },
+            "pooled_original": {
+              "MQS": 0.0187626595682856,
+              "CRPS": 0.021333454549794042,
+              "WIS": 0.016076448531519065
+            },
+            "qrf": {
+              "MQS": 0.017915392437274382,
+              "CRPS": 0.020267559239897606,
+              "WIS": 0.01539152352614979
+            },
+            "rule_qrf": {
+              "MQS": 0.017782325104181818,
+              "CRPS": 0.020104328999355953,
+              "WIS": 0.015244498620134604
+            },
+            "lstm_qr": {
+              "MQS": 0.018002449669562503,
+              "CRPS": null,
+              "WIS": 0.015492075423978924
+            }
+          }
+        },
+        "10": {
+          "n": 327,
+          "borrowed_mass_mean": 0.7377548206178771,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.028447647023070496,
+              "CRPS": 0.03207886399165614,
+              "WIS": 0.02461297256320584
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.0283088545178342,
+              "CRPS": 0.031984592420842846,
+              "WIS": 0.024358634751704508
+            },
+            "pooled_original": {
+              "MQS": 0.028447647023070496,
+              "CRPS": 0.03207886399165614,
+              "WIS": 0.02461297256320584
+            },
+            "qrf": {
+              "MQS": 0.028150835427919442,
+              "CRPS": 0.03141961787076583,
+              "WIS": 0.024668812212381253
+            },
+            "rule_qrf": {
+              "MQS": 0.027778774759782566,
+              "CRPS": 0.03121061805208693,
+              "WIS": 0.0242074865762903
+            },
+            "lstm_qr": {
+              "MQS": 0.028101499970014626,
+              "CRPS": null,
+              "WIS": 0.02451643060238066
+            }
+          }
+        },
+        "20": {
+          "n": 322,
+          "borrowed_mass_mean": 0.7536372834216303,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.04582679278472901,
+              "CRPS": 0.05137266664763964,
+              "WIS": 0.03998810845304979
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.04546759758174207,
+              "CRPS": 0.051027345866582155,
+              "WIS": 0.03945541268288546
+            },
+            "pooled_original": {
+              "MQS": 0.04582679278472901,
+              "CRPS": 0.05137266664763964,
+              "WIS": 0.03998810845304979
+            },
+            "qrf": {
+              "MQS": 0.048460445604208376,
+              "CRPS": 0.05416873477231047,
+              "WIS": 0.042532298066873024
+            },
+            "rule_qrf": {
+              "MQS": 0.04788396246012984,
+              "CRPS": 0.05360955793035859,
+              "WIS": 0.04179913120444717
+            },
+            "lstm_qr": {
+              "MQS": 0.04775872251480199,
+              "CRPS": null,
+              "WIS": 0.04153114444652695
+            }
+          }
+        }
+      }
+    },
+    "GUANGZHOU": {
+      "selected": {
+        "tau": null,
+        "validation_normalized_MQS": 0.47212444136164855
+      },
+      "trials": [
+        {
+          "tau": 0.25,
+          "validation_normalized_MQS": 0.4773729081690036
+        },
+        {
+          "tau": 0.5,
+          "validation_normalized_MQS": 0.4752272902183412
+        },
+        {
+          "tau": 1.0,
+          "validation_normalized_MQS": 0.4730411619771596
+        },
+        {
+          "tau": 2.0,
+          "validation_normalized_MQS": 0.47226672325223307
+        },
+        {
+          "tau": null,
+          "validation_normalized_MQS": 0.47212444136164855
+        }
+      ],
+      "audit": {
+        "cut_index": 2178,
+        "validation_start_index": 1633,
+        "lookback": 128,
+        "step": 2,
+        "train": 2993,
+        "validation": 1071,
+        "refit": 4083,
+        "test": 1305,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 1632,
+        "last_refit_target": 2177,
+        "test_zero_share": {
+          "1": 0.18787878787878787,
+          "5": 0.012195121951219513,
+          "10": 0.006134969325153374,
+          "20": 0.009345794392523364
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "probability_control": {
+        "dummy_zero_added": false,
+        "zero_mass_fallback_queries": 0,
+        "nonzero_mass_fallback_queries": 0,
+        "nonzero_mark_preservation_max_error": 4.1959827799809e-10,
+        "total_mass_max_error": 4.504897788137896e-09,
+        "p_rule_max_error": 3.6807250580750406e-09,
+        "zero_mass_max_error": 3.7962308852002025e-09,
+        "original_zero_support_count": 46,
+        "support_size": 4083
+      },
+      "by_horizon": {
+        "1": {
+          "n": 330,
+          "borrowed_mass_mean": 0.720768879852191,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.015954288054062,
+              "CRPS": 0.018194890501689813,
+              "WIS": 0.013645019589021474
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.01588940308236076,
+              "CRPS": 0.018064707937202787,
+              "WIS": 0.013656492602420297
+            },
+            "pooled_original": {
+              "MQS": 0.015954288054062,
+              "CRPS": 0.018194890501689813,
+              "WIS": 0.013645019589021474
+            },
+            "qrf": {
+              "MQS": 0.01550101423904383,
+              "CRPS": 0.017862103076786946,
+              "WIS": 0.013010717583899076
+            },
+            "rule_qrf": {
+              "MQS": 0.015434074830346345,
+              "CRPS": 0.01777797305715284,
+              "WIS": 0.012966810010693488
+            },
+            "lstm_qr": {
+              "MQS": 0.01644777675631927,
+              "CRPS": null,
+              "WIS": 0.01406077779496225
+            }
+          }
+        },
+        "5": {
+          "n": 328,
+          "borrowed_mass_mean": 0.7433000203693814,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.023939481006279864,
+              "CRPS": 0.02735491303921486,
+              "WIS": 0.020363636578726165
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.023958407662644673,
+              "CRPS": 0.027370849697679472,
+              "WIS": 0.020387124303968655
+            },
+            "pooled_original": {
+              "MQS": 0.023939481006279864,
+              "CRPS": 0.02735491303921486,
+              "WIS": 0.020363636578726165
+            },
+            "qrf": {
+              "MQS": 0.023789395748000708,
+              "CRPS": 0.027291412007720995,
+              "WIS": 0.020104673059491016
+            },
+            "rule_qrf": {
+              "MQS": 0.023776180766039476,
+              "CRPS": 0.027292182755196237,
+              "WIS": 0.02009032003765831
+            },
+            "lstm_qr": {
+              "MQS": 0.024798634914166923,
+              "CRPS": null,
+              "WIS": 0.0211096198011404
+            }
+          }
+        },
+        "10": {
+          "n": 326,
+          "borrowed_mass_mean": 0.7435214353056026,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.02792691518560832,
+              "CRPS": 0.030652263748777674,
+              "WIS": 0.02513711832614448
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.02798790369501537,
+              "CRPS": 0.030714015824990438,
+              "WIS": 0.025189607690949647
+            },
+            "pooled_original": {
+              "MQS": 0.02792691518560832,
+              "CRPS": 0.030652263748777674,
+              "WIS": 0.02513711832614448
+            },
+            "qrf": {
+              "MQS": 0.02633544329658136,
+              "CRPS": 0.02946980515378495,
+              "WIS": 0.02298156871197809
+            },
+            "rule_qrf": {
+              "MQS": 0.02631571997753006,
+              "CRPS": 0.029455746637537646,
+              "WIS": 0.022961717544022806
+            },
+            "lstm_qr": {
+              "MQS": 0.027799223006842278,
+              "CRPS": null,
+              "WIS": 0.02464087052665416
+            }
+          }
+        },
+        "20": {
+          "n": 321,
+          "borrowed_mass_mean": 0.7435036854725492,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.03753202490756289,
+              "CRPS": 0.0409327127555158,
+              "WIS": 0.034052705151020074
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.03766108954201535,
+              "CRPS": 0.04107428017449931,
+              "WIS": 0.03415803533696785
+            },
+            "pooled_original": {
+              "MQS": 0.03753202490756289,
+              "CRPS": 0.0409327127555158,
+              "WIS": 0.034052705151020074
+            },
+            "qrf": {
+              "MQS": 0.03461141249175321,
+              "CRPS": 0.039459568569117136,
+              "WIS": 0.029440233723379432
+            },
+            "rule_qrf": {
+              "MQS": 0.034564780231483135,
+              "CRPS": 0.039397672945507424,
+              "WIS": 0.029407445513995857
+            },
+            "lstm_qr": {
+              "MQS": 0.03808903486882782,
+              "CRPS": null,
+              "WIS": 0.03390154339698489
+            }
+          }
+        }
+      }
+    },
+    "SHANGHAI": {
+      "selected": {
+        "tau": 0.5,
+        "validation_normalized_MQS": 0.30529448584305047
+      },
+      "trials": [
+        {
+          "tau": 0.25,
+          "validation_normalized_MQS": 0.305540118638988
+        },
+        {
+          "tau": 0.5,
+          "validation_normalized_MQS": 0.30529448584305047
+        },
+        {
+          "tau": 1.0,
+          "validation_normalized_MQS": 0.30574395077652816
+        },
+        {
+          "tau": 2.0,
+          "validation_normalized_MQS": 0.3069652740457469
+        },
+        {
+          "tau": null,
+          "validation_normalized_MQS": 0.3119347744865191
+        }
+      ],
+      "audit": {
+        "cut_index": 1507,
+        "validation_start_index": 1130,
+        "lookback": 128,
+        "step": 2,
+        "train": 1987,
+        "validation": 737,
+        "refit": 2741,
+        "test": 503,
+        "boundary_rows_recovered_for_refit": 17,
+        "last_train_target": 1129,
+        "last_refit_target": 1506,
+        "test_zero_share": {
+          "1": 0.13076923076923078,
+          "5": 0.0703125,
+          "10": 0.008,
+          "20": 0.008333333333333333
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "probability_control": {
+        "dummy_zero_added": false,
+        "zero_mass_fallback_queries": 0,
+        "nonzero_mass_fallback_queries": 0,
+        "nonzero_mark_preservation_max_error": 1.7737176935539445e-09,
+        "total_mass_max_error": 6.7568848294286e-09,
+        "p_rule_max_error": 7.457323647486191e-09,
+        "zero_mass_max_error": 2.7248034939475474e-09,
+        "original_zero_support_count": 134,
+        "support_size": 2741
+      },
+      "by_horizon": {
+        "1": {
+          "n": 130,
+          "borrowed_mass_mean": 0.04387412498900253,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.013303955559529335,
+              "CRPS": 0.0149583826572951,
+              "WIS": 0.011597484664661461
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.013231104238006684,
+              "CRPS": 0.014829024930184087,
+              "WIS": 0.011540745774128105
+            },
+            "pooled_original": {
+              "MQS": 0.013736705232781756,
+              "CRPS": 0.015293919571054394,
+              "WIS": 0.012107283367135869
+            },
+            "qrf": {
+              "MQS": 0.012843851545272282,
+              "CRPS": 0.014465249241087021,
+              "WIS": 0.011142132008028063
+            },
+            "rule_qrf": {
+              "MQS": 0.012823405388582973,
+              "CRPS": 0.01442564064023586,
+              "WIS": 0.011128804286769113
+            },
+            "lstm_qr": {
+              "MQS": 0.013428721390319314,
+              "CRPS": null,
+              "WIS": 0.011810448237322716
+            }
+          }
+        },
+        "5": {
+          "n": 128,
+          "borrowed_mass_mean": 0.2547760556285811,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.021526990649504668,
+              "CRPS": 0.02443206086914361,
+              "WIS": 0.018538376814097285
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.021464504996155997,
+              "CRPS": 0.02432840241254669,
+              "WIS": 0.01853294134338166
+            },
+            "pooled_original": {
+              "MQS": 0.021412595265280006,
+              "CRPS": 0.024268828822870805,
+              "WIS": 0.018430164445919217
+            },
+            "qrf": {
+              "MQS": 0.020762724383664832,
+              "CRPS": 0.02357786649282418,
+              "WIS": 0.01775010157203329
+            },
+            "rule_qrf": {
+              "MQS": 0.020752824259465383,
+              "CRPS": 0.023572792404832812,
+              "WIS": 0.017809801367889046
+            },
+            "lstm_qr": {
+              "MQS": 0.020871210662508716,
+              "CRPS": null,
+              "WIS": 0.018107806976290185
+            }
+          }
+        },
+        "10": {
+          "n": 125,
+          "borrowed_mass_mean": 0.3333589941626849,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.02753282840758116,
+              "CRPS": 0.030784370497927562,
+              "WIS": 0.02410942822774198
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.027507646724115976,
+              "CRPS": 0.03075922785334273,
+              "WIS": 0.024097276655602306
+            },
+            "pooled_original": {
+              "MQS": 0.027025176134075814,
+              "CRPS": 0.03040470058058532,
+              "WIS": 0.02350432726294561
+            },
+            "qrf": {
+              "MQS": 0.0279147390138525,
+              "CRPS": 0.031115644820833437,
+              "WIS": 0.02462784473223584
+            },
+            "rule_qrf": {
+              "MQS": 0.02793636289173259,
+              "CRPS": 0.031133568472818056,
+              "WIS": 0.02464906090140316
+            },
+            "lstm_qr": {
+              "MQS": 0.02560832216030372,
+              "CRPS": null,
+              "WIS": 0.022350403930157605
+            }
+          }
+        },
+        "20": {
+          "n": 120,
+          "borrowed_mass_mean": 0.23947927877086336,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.037043709484122604,
+              "CRPS": 0.04179216659856957,
+              "WIS": 0.03207639990040039
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.036988062116091514,
+              "CRPS": 0.041735970099933975,
+              "WIS": 0.03205439577659609
+            },
+            "pooled_original": {
+              "MQS": 0.03619835042595677,
+              "CRPS": 0.04134167112822795,
+              "WIS": 0.030838479747320197
+            },
+            "qrf": {
+              "MQS": 0.0373470770692788,
+              "CRPS": 0.041964876960592735,
+              "WIS": 0.03242585409061975
+            },
+            "rule_qrf": {
+              "MQS": 0.037348424265466675,
+              "CRPS": 0.04194965087847525,
+              "WIS": 0.032450051755434535
+            },
+            "lstm_qr": {
+              "MQS": 0.03328520708889316,
+              "CRPS": null,
+              "WIS": 0.028362528177148648
+            }
+          }
+        }
+      }
+    },
+    "HUBEI": {
+      "selected": {
+        "tau": null,
+        "validation_normalized_MQS": 0.4651632028558721
+      },
+      "trials": [
+        {
+          "tau": 0.25,
+          "validation_normalized_MQS": 0.47031969837683535
+        },
+        {
+          "tau": 0.5,
+          "validation_normalized_MQS": 0.46928144532648913
+        },
+        {
+          "tau": 1.0,
+          "validation_normalized_MQS": 0.4675639964481404
+        },
+        {
+          "tau": 2.0,
+          "validation_normalized_MQS": 0.4664900389706295
+        },
+        {
+          "tau": null,
+          "validation_normalized_MQS": 0.4651632028558721
+        }
+      ],
+      "audit": {
+        "cut_index": 1173,
+        "validation_start_index": 879,
+        "lookback": 128,
+        "step": 2,
+        "train": 1485,
+        "validation": 569,
+        "refit": 2073,
+        "test": 567,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 878,
+        "last_refit_target": 1172,
+        "test_zero_share": {
+          "1": 0.0547945205479452,
+          "5": 0.006944444444444444,
+          "10": 0.014184397163120567,
+          "20": 0.007352941176470588
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "probability_control": {
+        "dummy_zero_added": false,
+        "zero_mass_fallback_queries": 0,
+        "nonzero_mass_fallback_queries": 0,
+        "nonzero_mark_preservation_max_error": 4.800089683371089e-10,
+        "total_mass_max_error": 5.424226401373744e-09,
+        "p_rule_max_error": 5.540641723200679e-09,
+        "zero_mass_max_error": 1.140506356023252e-09,
+        "original_zero_support_count": 33,
+        "support_size": 2073
+      },
+      "by_horizon": {
+        "1": {
+          "n": 146,
+          "borrowed_mass_mean": 0.7239519655299073,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.010671405247471925,
+              "CRPS": 0.01217488990119072,
+              "WIS": 0.009100978496229614
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.010682589064632857,
+              "CRPS": 0.012175769391987386,
+              "WIS": 0.009119073882941952
+            },
+            "pooled_original": {
+              "MQS": 0.010671405247471925,
+              "CRPS": 0.01217488990119072,
+              "WIS": 0.009100978496229614
+            },
+            "qrf": {
+              "MQS": 0.010282407308423601,
+              "CRPS": 0.011747403728642726,
+              "WIS": 0.008742608526369607
+            },
+            "rule_qrf": {
+              "MQS": 0.010280390129303374,
+              "CRPS": 0.011745464328952888,
+              "WIS": 0.008737888832758008
+            },
+            "lstm_qr": {
+              "MQS": 0.010637582552278332,
+              "CRPS": null,
+              "WIS": 0.009151694182314284
+            }
+          }
+        },
+        "5": {
+          "n": 144,
+          "borrowed_mass_mean": 0.738317439092092,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.014281861983431256,
+              "CRPS": 0.016408713038347286,
+              "WIS": 0.012048261737985209
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.014288086458443884,
+              "CRPS": 0.01641773455970855,
+              "WIS": 0.01205366591642109
+            },
+            "pooled_original": {
+              "MQS": 0.014281861983431256,
+              "CRPS": 0.016408713038347286,
+              "WIS": 0.012048261737985209
+            },
+            "qrf": {
+              "MQS": 0.013550303868798115,
+              "CRPS": 0.015494369978857959,
+              "WIS": 0.011521458116440992
+            },
+            "rule_qrf": {
+              "MQS": 0.013554728009360847,
+              "CRPS": 0.015499811168359733,
+              "WIS": 0.011523585804990667
+            },
+            "lstm_qr": {
+              "MQS": 0.014187110561560115,
+              "CRPS": null,
+              "WIS": 0.012102479354976553
+            }
+          }
+        },
+        "10": {
+          "n": 141,
+          "borrowed_mass_mean": 0.7423278918668881,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.016370104524712166,
+              "CRPS": 0.018539948770360096,
+              "WIS": 0.01407669816563612
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.016383806853503616,
+              "CRPS": 0.01856510070655341,
+              "WIS": 0.014082228097609112
+            },
+            "pooled_original": {
+              "MQS": 0.016370104524712166,
+              "CRPS": 0.018539948770360096,
+              "WIS": 0.01407669816563612
+            },
+            "qrf": {
+              "MQS": 0.016524274941429364,
+              "CRPS": 0.01886808342426627,
+              "WIS": 0.01404692553828311
+            },
+            "rule_qrf": {
+              "MQS": 0.016531399641756404,
+              "CRPS": 0.018874169841523597,
+              "WIS": 0.01404843044285949
+            },
+            "lstm_qr": {
+              "MQS": 0.01618679729597227,
+              "CRPS": null,
+              "WIS": 0.013688809257628502
+            }
+          }
+        },
+        "20": {
+          "n": 136,
+          "borrowed_mass_mean": 0.7430367569247196,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.02059799575824861,
+              "CRPS": 0.022701245673505628,
+              "WIS": 0.018392166914874157
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.020631797014063303,
+              "CRPS": 0.02275655927291908,
+              "WIS": 0.018415315300973806
+            },
+            "pooled_original": {
+              "MQS": 0.02059799575824861,
+              "CRPS": 0.022701245673505628,
+              "WIS": 0.018392166914874157
+            },
+            "qrf": {
+              "MQS": 0.021787806026487954,
+              "CRPS": 0.024649624916156968,
+              "WIS": 0.018856150007836768
+            },
+            "rule_qrf": {
+              "MQS": 0.021729886505886715,
+              "CRPS": 0.024563681846564395,
+              "WIS": 0.018807985772655418
+            },
+            "lstm_qr": {
+              "MQS": 0.019876213092465265,
+              "CRPS": null,
+              "WIS": 0.01733168740108691
+            }
+          }
+        }
+      }
+    },
+    "EU": {
+      "selected": {
+        "tau": null,
+        "validation_normalized_MQS": 0.5203527425308251
+      },
+      "trials": [
+        {
+          "tau": 0.25,
+          "validation_normalized_MQS": 0.52445781194532
+        },
+        {
+          "tau": 0.5,
+          "validation_normalized_MQS": 0.523676200873508
+        },
+        {
+          "tau": 1.0,
+          "validation_normalized_MQS": 0.5227658745905271
+        },
+        {
+          "tau": 2.0,
+          "validation_normalized_MQS": 0.522154815103462
+        },
+        {
+          "tau": null,
+          "validation_normalized_MQS": 0.5203527425308251
+        }
+      ],
+      "audit": {
+        "cut_index": 1257,
+        "validation_start_index": 942,
+        "lookback": 128,
+        "step": 2,
+        "train": 1611,
+        "validation": 613,
+        "refit": 2241,
+        "test": 621,
+        "boundary_rows_recovered_for_refit": 17,
+        "last_train_target": 941,
+        "last_refit_target": 1256,
+        "test_zero_share": {
+          "1": 0.006289308176100629,
+          "5": 0.0,
+          "10": 0.0,
+          "20": 0.0
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "probability_control": {
+        "dummy_zero_added": false,
+        "zero_mass_fallback_queries": 8,
+        "nonzero_mass_fallback_queries": 0,
+        "nonzero_mark_preservation_max_error": 9.87930411089355e-10,
+        "total_mass_max_error": 9.984432836063206e-09,
+        "p_rule_max_error": 9.984432836063206e-09,
+        "zero_mass_max_error": 5.238689482212067e-10,
+        "original_zero_support_count": 4,
+        "support_size": 2241
+      },
+      "by_horizon": {
+        "1": {
+          "n": 159,
+          "borrowed_mass_mean": 0.7382324862262079,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.011352684588961312,
+              "CRPS": 0.013252064044753903,
+              "WIS": 0.009316949783371112
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.011347065188435094,
+              "CRPS": 0.013236085114825985,
+              "WIS": 0.009315039190539316
+            },
+            "pooled_original": {
+              "MQS": 0.011352684588961312,
+              "CRPS": 0.013252064044753903,
+              "WIS": 0.009316949783371112
+            },
+            "qrf": {
+              "MQS": 0.010752459834297292,
+              "CRPS": 0.01262230502638772,
+              "WIS": 0.008785221600663674
+            },
+            "rule_qrf": {
+              "MQS": 0.010755833615675172,
+              "CRPS": 0.012624863102875637,
+              "WIS": 0.008787425842377504
+            },
+            "lstm_qr": {
+              "MQS": 0.010791494570094002,
+              "CRPS": null,
+              "WIS": 0.008783075979517437
+            }
+          }
+        },
+        "5": {
+          "n": 157,
+          "borrowed_mass_mean": 0.7437910541646496,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.024742070462831042,
+              "CRPS": 0.0292441922198079,
+              "WIS": 0.019904676300078
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.024721952035839396,
+              "CRPS": 0.0292323510795603,
+              "WIS": 0.01987879130488891
+            },
+            "pooled_original": {
+              "MQS": 0.024742070462831042,
+              "CRPS": 0.0292441922198079,
+              "WIS": 0.019904676300078
+            },
+            "qrf": {
+              "MQS": 0.02555748420890611,
+              "CRPS": 0.030175167693950695,
+              "WIS": 0.020632587912525337
+            },
+            "rule_qrf": {
+              "MQS": 0.02557763998431386,
+              "CRPS": 0.030178639157009243,
+              "WIS": 0.020644334764474127
+            },
+            "lstm_qr": {
+              "MQS": 0.025549073003414132,
+              "CRPS": null,
+              "WIS": 0.020633439938710915
+            }
+          }
+        },
+        "10": {
+          "n": 155,
+          "borrowed_mass_mean": 0.7444832403953056,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.033745985248536885,
+              "CRPS": 0.039962815162920794,
+              "WIS": 0.02717844079066223
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.03376239324606436,
+              "CRPS": 0.039959710790821175,
+              "WIS": 0.027175972239674676
+            },
+            "pooled_original": {
+              "MQS": 0.033745985248536885,
+              "CRPS": 0.039962815162920794,
+              "WIS": 0.02717844079066223
+            },
+            "qrf": {
+              "MQS": 0.03608597912994133,
+              "CRPS": 0.04151668960961463,
+              "WIS": 0.030258462348906865
+            },
+            "rule_qrf": {
+              "MQS": 0.03607730270041863,
+              "CRPS": 0.041519321319738026,
+              "WIS": 0.030244975555218098
+            },
+            "lstm_qr": {
+              "MQS": 0.037303266839183176,
+              "CRPS": null,
+              "WIS": 0.03042488932529184
+            }
+          }
+        },
+        "20": {
+          "n": 150,
+          "borrowed_mass_mean": 0.7525537046626505,
+          "scores": {
+            "horizon_kernel": {
+              "MQS": 0.040376642937865435,
+              "CRPS": 0.047295175250205934,
+              "WIS": 0.03306091845239715
+            },
+            "horizon_kernel_rule": {
+              "MQS": 0.04034276810239108,
+              "CRPS": 0.04724681786758292,
+              "WIS": 0.03304977505625078
+            },
+            "pooled_original": {
+              "MQS": 0.040376642937865435,
+              "CRPS": 0.047295175250205934,
+              "WIS": 0.03306091845239715
+            },
+            "qrf": {
+              "MQS": 0.045339562607799165,
+              "CRPS": 0.05210619853707253,
+              "WIS": 0.03843070598460506
+            },
+            "rule_qrf": {
+              "MQS": 0.045268085906585265,
+              "CRPS": 0.052030687920556096,
+              "WIS": 0.038422665692502925
+            },
+            "lstm_qr": {
+              "MQS": 0.04629476294332352,
+              "CRPS": null,
+              "WIS": 0.03773483993172005
+            }
+          }
+        }
+      }
+    }
+  },
+  "summary": {
+    "horizon_kernel": {
+      "pooled_original": {
+        "MQS": {
+          "geometric_gain_percent": -0.0750948163227072,
+          "wins": 1,
+          "cells": 20
+        },
+        "CRPS": {
+          "geometric_gain_percent": -0.038846687466476126,
+          "wins": 1,
+          "cells": 20
+        }
+      },
+      "qrf": {
+        "MQS": {
+          "geometric_gain_percent": -0.8437558631968045,
+          "wins": 8,
+          "cells": 20
+        },
+        "CRPS": {
+          "geometric_gain_percent": -0.6424896537344349,
+          "wins": 8,
+          "cells": 20
+        }
+      },
+      "rule_qrf": {
+        "MQS": {
+          "geometric_gain_percent": -1.01991470520153,
+          "wins": 8,
+          "cells": 20
+        },
+        "CRPS": {
+          "geometric_gain_percent": -0.7991538212251292,
+          "wins": 8,
+          "cells": 20
+        }
+      },
+      "lstm_qr": {
+        "MQS": {
+          "geometric_gain_percent": -0.35580183545926847,
+          "wins": 8,
+          "cells": 20
+        }
+      }
+    },
+    "horizon_kernel_rule": {
+      "pooled_original": {
+        "MQS": {
+          "geometric_gain_percent": 0.11001224774203067,
+          "wins": 9,
+          "cells": 20
+        },
+        "CRPS": {
+          "geometric_gain_percent": 0.1936016757610015,
+          "wins": 10,
+          "cells": 20
+        }
+      },
+      "qrf": {
+        "MQS": {
+          "geometric_gain_percent": -0.6572270209173281,
+          "wins": 8,
+          "cells": 20
+        },
+        "CRPS": {
+          "geometric_gain_percent": -0.40863867718095026,
+          "wins": 8,
+          "cells": 20
+        }
+      },
+      "rule_qrf": {
+        "MQS": {
+          "geometric_gain_percent": -0.833060025148824,
+          "wins": 8,
+          "cells": 20
+        },
+        "CRPS": {
+          "geometric_gain_percent": -0.5649388227889851,
+          "wins": 8,
+          "cells": 20
+        }
+      },
+      "lstm_qr": {
+        "MQS": {
+          "geometric_gain_percent": -0.1701755527790505,
+          "wins": 8,
+          "cells": 20
+        }
+      }
+    }
+  },
+  "frozen_after": {
+    "mixed_cdf_forest_round4.py": "37cf80f82814b0b06a14693194f8a64217bd3026b46efcc0defa355d2cbe0b7c",
+    "mixed_cdf_forest_round4_predictions.npz": "c90e0468043b027943f878a26fb44269fbfedf9cb9f2b53a21deda474dd8487b",
+    "qrf_round4.py": "baedecda3315dde9b79c9d7c4bf32d8553b771561f7e102d09ef7e0737e31cac",
+    "qrf_round4_probability_control_predictions.npz": "e26b0af859ccebae1ecad64cf2ecd230882ea485884abc8e008f329c50cfeb74"
+  },
+  "elapsed_seconds": 17.73881909996271
+}

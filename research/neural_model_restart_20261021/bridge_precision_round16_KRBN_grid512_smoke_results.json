@@ -1,0 +1,620 @@
+{
+  "config": {
+    "instrument": "KRBN",
+    "reference_grid": 512,
+    "seeds": [
+      11
+    ],
+    "epochs": 3,
+    "chunk": 128,
+    "tag": "bridge_precision_round16_KRBN_grid512_smoke",
+    "check_only": false
+  },
+  "status": "DEVELOPMENT ONLY; 2025 validation selection; 2026 unused",
+  "audit": {
+    "development_rows": 1362,
+    "first": "2020-07-31",
+    "last": "2025-12-31",
+    "validation_start": "2025-01-01",
+    "training_rows": 3008,
+    "validation_rows": 722,
+    "withheld_period_used": false,
+    "target": "future mean Parkinson intraday-range proxy; not true QV or return RV",
+    "feature_names": [
+      "logrange1",
+      "logrange5",
+      "logrange22",
+      "r1",
+      "r5",
+      "r22",
+      "intraday",
+      "logovernightvar",
+      "logreturnvar",
+      "logvolume",
+      "volume_ratio",
+      "range_ratio"
+    ],
+    "common_h22_origins": true,
+    "train_common_origins": 990,
+    "validation_common_origins": 228,
+    "last_training_origin": "2024-11-27",
+    "last_training_label": "2024-12-31",
+    "first_validation_origin": "2025-01-02",
+    "last_validation_label": "2025-12-31",
+    "initial_mu": -9.450057101002354,
+    "initialization_observations": 1108,
+    "neural_features": [
+      "abs_eta",
+      "abs_xi/(1-abs_eta)",
+      "log(volume/past22_mean_volume)"
+    ],
+    "neural_mean": [
+      0.47492727538873963,
+      0.5867042385811942,
+      -0.15583254511968794
+    ],
+    "neural_std": [
+      0.27447969473988865,
+      0.3487824417030357,
+      0.6347206963029088
+    ],
+    "normalization": "pre2025 nonzero-range observations only; missing feature becomes normalized zero",
+    "imputed_feature_entries": 21,
+    "zero_range_observations": 4,
+    "reference_grid": 512,
+    "reference_label": "grid512_train",
+    "global_b": -0.238660878921314,
+    "global_R": 0.35199231725707575,
+    "shape_bias_constant_R": 0.2747201728687599,
+    "calibration": "fixed synthetic table; no real-data fitting of b_cell or R_cell"
+  },
+  "hashes": {
+    "script": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_round16.py",
+      "sha256": "9ac2704711779ace771c64a6807a074c006850d294c96d2fdd48f3fbe95a273a"
+    },
+    "range_clock_script": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\range_clock_round14.py",
+      "sha256": "08e4e6f23e426b6a84ab6913881ae43666ef6b0ca4fa929cc4d48bbdeac4dc7a"
+    },
+    "brownian_calibration": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_shape_models.json",
+      "sha256": "edd1de40ec9732ed1ad927370ce7293fdf162479f88b8f4dce16135b6fc36542"
+    },
+    "csv": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\data_acquisition_round13\\KRBN_ETF_USD_daily_completed_20200731_20261020.csv",
+      "sha256": "ff99c14e84153717be0d72506b0c8b581605495288849823e4bf219ab1462f11"
+    }
+  },
+  "modes": [
+    "raw_constant",
+    "bias_constant",
+    "fixed_precision",
+    "neural_precision",
+    "neural_constant_precision"
+  ],
+  "horizons": [
+    1,
+    5,
+    22
+  ],
+  "checks": {
+    "market_data_opened": false,
+    "calibration_file_opened": false,
+    "reference_cell_mapping": true,
+    "positive_variance_and_state_covariance": true,
+    "future_mutation_prefix_invariant": true,
+    "zero_range_is_skipped_not_logEPS": true,
+    "lognormal_mean_includes_half_variance": true,
+    "zero_neural_nests_fixed_precision": true,
+    "zero_neural_nests_shape_bias_constant": true,
+    "differentiable_filter_gradients_finite": true,
+    "zero_training_gradient_to_future_observations": true,
+    "synthetic_tbptt_and_maturity_checked": true,
+    "reflected_geometry_is_even": true,
+    "positive_shared_daily_curve": true
+  },
+  "dynamics": "same bounded AR1 form, boundaries, initial values, optimizer and training schedule; separately fitted parameters per mode",
+  "bounds": {
+    "mu": "pre2025 initial_mu + 3*tanh(raw)",
+    "phi": ".995*sigmoid(raw)",
+    "Q": "0.02*exp(2*tanh(raw))",
+    "s_R": "2*tanh(raw)",
+    "neural_log_R_tilt": "1.5*tanh(g_even)"
+  },
+  "initialization": "common pre2025 mean(logP-global_b), phi=.95, Q=.02, s_R=0, stationary P; neural output head=0",
+  "modes_definition": {
+    "raw_constant": "global b and global R",
+    "bias_constant": "cell b and synthetic shape-corrected residual-best constant R",
+    "fixed_precision": "cell b and cell R",
+    "neural_precision": "cell b; cell R*exp(s_R+1.5*tanh(g_even))",
+    "neural_constant_precision": "cell b; residual-best constant R*exp(s_R+1.5*tanh(g_even))"
+  },
+  "train": "chronological TBPTT; all observations strictly before 2025; detach state at chunk boundaries; supervised origins require t+22<cut",
+  "selection": "epoch0 included; mean same-direction QLIKE across h1/5/22 common 2025 origins; known EWMA22 log constant subtracted",
+  "validation": "fresh chronological filtering from first observation, no_grad, fixed parameters; validation prices update state only",
+  "forecasting": "propagate AR1 m/P for k1..22; exp(m_k+P_k/2); all h average the same positive daily curve",
+  "baselines": "EWMA22, fixed-spec Poisson HGB and log-linear HAR extension; common mature origins and same geometry inputs",
+  "information": "raw Parkinson proxy only; real quadratic variation is not identified; calibration is a diffusion reference, not verified true measurement noise",
+  "seed_note": "non-neural modes fit only the first seed; later seed slots explicitly reuse that deterministic fit and are not independent repeats; both neural modes fit every seed; seeds never constitute independent datasets",
+  "outputs": {
+    "manifest": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_round16_KRBN_grid512_smoke_manifest.json",
+    "results": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_round16_KRBN_grid512_smoke_results.json",
+    "predictions": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_round16_KRBN_grid512_smoke_validation_predictions.npz"
+  },
+  "fits": {
+    "raw_constant": [
+      {
+        "seed": 11,
+        "mode": "raw_constant",
+        "best_epoch": 1,
+        "epochs_run": 3,
+        "best_validation_QLIKE_known_scale": 1.0423790484465432,
+        "returned_validation_QLIKE_known_scale": 1.0423790484465432,
+        "parameters": 4,
+        "dynamics": {
+          "mu": -9.415336303872337,
+          "phi": 0.9504797335804576,
+          "Q": 0.02038383765107715,
+          "s_R": -0.008291714165038109
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0424178047269248,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0423790484465432,
+            "training_QLIKE_known_scale": 1.1072760800470636
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0424521138085734,
+            "training_QLIKE_known_scale": 1.1051271605410988
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0425950133594515,
+            "training_QLIKE_known_scale": 1.1035455538371641
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null,
+        "effective_fit_seed": 11,
+        "independent_repeat": false
+      }
+    ],
+    "bias_constant": [
+      {
+        "seed": 11,
+        "mode": "bias_constant",
+        "best_epoch": 0,
+        "epochs_run": 3,
+        "best_validation_QLIKE_known_scale": 1.0455879077777035,
+        "returned_validation_QLIKE_known_scale": 1.0455879077777035,
+        "parameters": 4,
+        "dynamics": {
+          "mu": -9.450057101002354,
+          "phi": 0.95,
+          "Q": 0.02,
+          "s_R": 0.0
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0455879077777035,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0456492359410605,
+            "training_QLIKE_known_scale": 1.104366548891831
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0457566472863031,
+            "training_QLIKE_known_scale": 1.1024364639381512
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0459148806678968,
+            "training_QLIKE_known_scale": 1.101016227564376
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null,
+        "effective_fit_seed": 11,
+        "independent_repeat": false
+      }
+    ],
+    "fixed_precision": [
+      {
+        "seed": 11,
+        "mode": "fixed_precision",
+        "best_epoch": 0,
+        "epochs_run": 3,
+        "best_validation_QLIKE_known_scale": 1.0426640729961476,
+        "returned_validation_QLIKE_known_scale": 1.0426640729961476,
+        "parameters": 4,
+        "dynamics": {
+          "mu": -9.450057101002354,
+          "phi": 0.95,
+          "Q": 0.02,
+          "s_R": 0.0
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0426640729961476,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0428992028482802,
+            "training_QLIKE_known_scale": 1.1048233580351638
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0431362948226022,
+            "training_QLIKE_known_scale": 1.1028671361390048
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0434165397373365,
+            "training_QLIKE_known_scale": 1.1014280965452816
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null,
+        "effective_fit_seed": 11,
+        "independent_repeat": false
+      }
+    ],
+    "neural_precision": [
+      {
+        "seed": 11,
+        "mode": "neural_precision",
+        "best_epoch": 1,
+        "epochs_run": 3,
+        "best_validation_QLIKE_known_scale": 1.0425088521802932,
+        "returned_validation_QLIKE_known_scale": 1.0425088521802932,
+        "parameters": 45,
+        "dynamics": {
+          "mu": -9.415063585958698,
+          "phi": 0.9504640272479685,
+          "Q": 0.020368101575043734,
+          "s_R": -0.00014975898799385415
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0426640729961476,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0425088521802932,
+            "training_QLIKE_known_scale": 1.1049217804847187
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0425255598697531,
+            "training_QLIKE_known_scale": 1.102442994467788
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0426286542945278,
+            "training_QLIKE_known_scale": 1.100665172494301
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null,
+        "effective_fit_seed": 11,
+        "independent_repeat": false
+      }
+    ],
+    "neural_constant_precision": [
+      {
+        "seed": 11,
+        "mode": "neural_constant_precision",
+        "best_epoch": 3,
+        "epochs_run": 3,
+        "best_validation_QLIKE_known_scale": 1.044739812157053,
+        "returned_validation_QLIKE_known_scale": 1.044739812157053,
+        "parameters": 45,
+        "dynamics": {
+          "mu": -9.367039442580415,
+          "phi": 0.9512268266043731,
+          "Q": 0.020799455270951703,
+          "s_R": 0.00904106848970751
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0455879077777035,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0450895156713145,
+            "training_QLIKE_known_scale": 1.1044378370994508
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0448674302113163,
+            "training_QLIKE_known_scale": 1.101945438016453
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.044739812157053,
+            "training_QLIKE_known_scale": 1.100150832635486
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null,
+        "effective_fit_seed": 11,
+        "independent_repeat": false
+      }
+    ]
+  },
+  "scores": {
+    "1": {
+      "EWMA22": {
+        "n": 228,
+        "mean_QLIKE": -8.546472629936193,
+        "loss_difference_vs_EWMA22": 0.0,
+        "MSE": 1.4344013851499607e-08
+      },
+      "HAR_geometry": {
+        "n": 228,
+        "mean_QLIKE": -8.607205149149285,
+        "loss_difference_vs_EWMA22": -0.06073251921309169,
+        "MSE": 1.3536938771555726e-08
+      },
+      "HGB_geometry": {
+        "n": 228,
+        "mean_QLIKE": -8.582951004968242,
+        "loss_difference_vs_EWMA22": -0.03647837503204847,
+        "MSE": 1.3568566441462542e-08
+      },
+      "raw_constant_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.597125451490149,
+        "loss_difference_vs_EWMA22": -0.05065282155395537,
+        "MSE": 1.354563422864839e-08
+      },
+      "raw_constant": {
+        "n": 228,
+        "mean_QLIKE": -8.597125451490149,
+        "loss_difference_vs_EWMA22": -0.05065282155395537,
+        "MSE": 1.354563422864839e-08
+      },
+      "bias_constant_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.591246563784738,
+        "loss_difference_vs_EWMA22": -0.04477393384854323,
+        "MSE": 1.3469813604143188e-08
+      },
+      "bias_constant": {
+        "n": 228,
+        "mean_QLIKE": -8.591246563784738,
+        "loss_difference_vs_EWMA22": -0.04477393384854323,
+        "MSE": 1.3469813604143188e-08
+      },
+      "fixed_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.59575409237526,
+        "loss_difference_vs_EWMA22": -0.04928146243906792,
+        "MSE": 1.3403370235825128e-08
+      },
+      "fixed_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.59575409237526,
+        "loss_difference_vs_EWMA22": -0.04928146243906792,
+        "MSE": 1.3403370235825128e-08
+      },
+      "neural_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.596345493534544,
+        "loss_difference_vs_EWMA22": -0.04987286359835041,
+        "MSE": 1.3401864135591626e-08
+      },
+      "neural_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.596345493534544,
+        "loss_difference_vs_EWMA22": -0.04987286359835041,
+        "MSE": 1.3401864135591626e-08
+      },
+      "neural_constant_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.593180495700482,
+        "loss_difference_vs_EWMA22": -0.04670786576428785,
+        "MSE": 1.346147231333234e-08
+      },
+      "neural_constant_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.593180495700482,
+        "loss_difference_vs_EWMA22": -0.04670786576428785,
+        "MSE": 1.346147231333234e-08
+      }
+    },
+    "5": {
+      "EWMA22": {
+        "n": 228,
+        "mean_QLIKE": -8.503098621460655,
+        "loss_difference_vs_EWMA22": 0.0,
+        "MSE": 4.6746849261158176e-09
+      },
+      "HAR_geometry": {
+        "n": 228,
+        "mean_QLIKE": -8.537421765051144,
+        "loss_difference_vs_EWMA22": -0.034323143590490705,
+        "MSE": 4.248288754609671e-09
+      },
+      "HGB_geometry": {
+        "n": 228,
+        "mean_QLIKE": -8.525667287689805,
+        "loss_difference_vs_EWMA22": -0.022568666229149784,
+        "MSE": 5.438488986784945e-09
+      },
+      "raw_constant_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.54770602513356,
+        "loss_difference_vs_EWMA22": -0.044607403672905215,
+        "MSE": 3.926416713994762e-09
+      },
+      "raw_constant": {
+        "n": 228,
+        "mean_QLIKE": -8.54770602513356,
+        "loss_difference_vs_EWMA22": -0.044607403672905215,
+        "MSE": 3.926416713994762e-09
+      },
+      "bias_constant_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.545593329831837,
+        "loss_difference_vs_EWMA22": -0.04249470837118299,
+        "MSE": 3.926721567477575e-09
+      },
+      "bias_constant": {
+        "n": 228,
+        "mean_QLIKE": -8.545593329831837,
+        "loss_difference_vs_EWMA22": -0.04249470837118299,
+        "MSE": 3.926721567477575e-09
+      },
+      "fixed_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.550564655836352,
+        "loss_difference_vs_EWMA22": -0.0474660343756967,
+        "MSE": 3.893851157805086e-09
+      },
+      "fixed_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.550564655836352,
+        "loss_difference_vs_EWMA22": -0.0474660343756967,
+        "MSE": 3.893851157805086e-09
+      },
+      "neural_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.551698817719139,
+        "loss_difference_vs_EWMA22": -0.0486001962584845,
+        "MSE": 3.900178548435305e-09
+      },
+      "neural_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.551698817719139,
+        "loss_difference_vs_EWMA22": -0.0486001962584845,
+        "MSE": 3.900178548435305e-09
+      },
+      "neural_constant_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.54906886070791,
+        "loss_difference_vs_EWMA22": -0.04597023924725628,
+        "MSE": 3.933773858349641e-09
+      },
+      "neural_constant_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.54906886070791,
+        "loss_difference_vs_EWMA22": -0.04597023924725628,
+        "MSE": 3.933773858349641e-09
+      }
+    },
+    "22": {
+      "EWMA22": {
+        "n": 228,
+        "mean_QLIKE": -8.550134968193209,
+        "loss_difference_vs_EWMA22": 0.0,
+        "MSE": 1.4592502630506829e-09
+      },
+      "HAR_geometry": {
+        "n": 228,
+        "mean_QLIKE": -8.55630025725723,
+        "loss_difference_vs_EWMA22": -0.006165289064020372,
+        "MSE": 1.2864945164901966e-09
+      },
+      "HGB_geometry": {
+        "n": 228,
+        "mean_QLIKE": -8.541733175521399,
+        "loss_difference_vs_EWMA22": 0.008401792671811134,
+        "MSE": 2.3920456128734777e-09
+      },
+      "raw_constant_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.571616966105742,
+        "loss_difference_vs_EWMA22": -0.021481997912530776,
+        "MSE": 9.56833841705946e-10
+      },
+      "raw_constant": {
+        "n": 228,
+        "mean_QLIKE": -8.571616966105742,
+        "loss_difference_vs_EWMA22": -0.021481997912530776,
+        "MSE": 9.56833841705946e-10
+      },
+      "bias_constant_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.569981971119395,
+        "loss_difference_vs_EWMA22": -0.019847002926184226,
+        "MSE": 9.7704786005621e-10
+      },
+      "bias_constant": {
+        "n": 228,
+        "mean_QLIKE": -8.569981971119395,
+        "loss_difference_vs_EWMA22": -0.019847002926184226,
+        "MSE": 9.7704786005621e-10
+      },
+      "fixed_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.569274620869024,
+        "loss_difference_vs_EWMA22": -0.019139652675813187,
+        "MSE": 9.928881944696505e-10
+      },
+      "fixed_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.569274620869024,
+        "loss_difference_vs_EWMA22": -0.019139652675813187,
+        "MSE": 9.928881944696505e-10
+      },
+      "neural_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.568014720274517,
+        "loss_difference_vs_EWMA22": -0.01787975208130606,
+        "MSE": 1.025081449298705e-09
+      },
+      "neural_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.568014720274517,
+        "loss_difference_vs_EWMA22": -0.01787975208130606,
+        "MSE": 1.025081449298705e-09
+      },
+      "neural_constant_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.567116795189527,
+        "loss_difference_vs_EWMA22": -0.016981826996317437,
+        "MSE": 1.050957455511015e-09
+      },
+      "neural_constant_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.567116795189527,
+        "loss_difference_vs_EWMA22": -0.016981826996317437,
+        "MSE": 1.050957455511015e-09
+      }
+    }
+  },
+  "elapsed_seconds": 13.426509857177734
+}

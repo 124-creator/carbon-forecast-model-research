@@ -1,0 +1,2600 @@
+{
+  "config": {
+    "instrument": "KRBN",
+    "reference_grid": 512,
+    "seeds": [
+      11,
+      22,
+      33
+    ],
+    "epochs": 100,
+    "chunk": 128,
+    "tag": null,
+    "check_only": false
+  },
+  "status": "DEVELOPMENT ONLY; no 2026 forecasts or targets",
+  "audit": {
+    "development_rows": 1362,
+    "first": "2020-07-31",
+    "last": "2025-12-31",
+    "validation_start": "2025-01-01",
+    "training_rows": 3008,
+    "validation_rows": 722,
+    "withheld_period_used": false,
+    "target": "future mean Parkinson intraday-range proxy; not true QV or return RV",
+    "feature_names": [
+      "logrange1",
+      "logrange5",
+      "logrange22",
+      "r1",
+      "r5",
+      "r22",
+      "intraday",
+      "logovernightvar",
+      "logreturnvar",
+      "logvolume",
+      "volume_ratio",
+      "range_ratio"
+    ],
+    "common_h22_origins": true,
+    "train_common_origins": 990,
+    "validation_common_origins": 228,
+    "last_training_origin": "2024-11-27",
+    "last_training_label": "2024-12-31",
+    "first_validation_origin": "2025-01-02",
+    "last_validation_label": "2025-12-31",
+    "initial_mu": -9.508986276641561,
+    "initialization_observations": 1108,
+    "neural_features": [
+      "abs_eta",
+      "abs_xi/(1-abs_eta)",
+      "log(volume/past22_mean_volume)"
+    ],
+    "neural_mean": [
+      0.47492727538873963,
+      0.5867042385811942,
+      -0.15583254511968794
+    ],
+    "neural_std": [
+      0.27447969473988865,
+      0.3487824417030357,
+      0.6347206963029088
+    ],
+    "normalization": "pre2025 nonzero-range observations only; missing feature becomes normalized zero",
+    "imputed_feature_entries": 21,
+    "zero_range_observations": 4,
+    "reference_grid": 512,
+    "reference_label": "grid512_train",
+    "global_b": -0.17973170328210689,
+    "global_R": 0.35199231725707575,
+    "shape_bias_constant_R": 0.2747201728687599,
+    "calibration": "fixed synthetic table; no real-data fitting of b_cell or R_cell",
+    "state_frame": "log of conditional mean Parkinson proxy in the reference model",
+    "reference_train_mean_proxy": 0.9427735381258473,
+    "known_log_frame_shift": -0.058929175639207104
+  },
+  "hashes": {
+    "runner": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_proxy_round16.py",
+      "sha256": "958f49be8ff17002ee2b4e2e059f49c9eabe3c68abc288e0009c07dd71c945f1"
+    },
+    "filter": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_round16.py",
+      "sha256": "9ac2704711779ace771c64a6807a074c006850d294c96d2fdd48f3fbe95a273a"
+    },
+    "range_clock": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\range_clock_round14.py",
+      "sha256": "08e4e6f23e426b6a84ab6913881ae43666ef6b0ca4fa929cc4d48bbdeac4dc7a"
+    },
+    "reference_models": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_shape_models.json",
+      "sha256": "edd1de40ec9732ed1ad927370ce7293fdf162479f88b8f4dce16135b6fc36542"
+    },
+    "reference_results": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_reference_results.json",
+      "sha256": "1a9124466d98de76199ae0671421b0808ec112e312da425930056ce35a23c303"
+    },
+    "csv": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\data_acquisition_round13\\KRBN_ETF_USD_daily_completed_20200731_20261020.csv",
+      "sha256": "ff99c14e84153717be0d72506b0c8b581605495288849823e4bf219ab1462f11"
+    }
+  },
+  "frame": "common simulation-train conversion; cell_b/global_b minus log(c), initial_mu plus log(c)",
+  "frame_note": "equivalent to predicting c*exp(latent m+P/2); c is not estimated on market validation; actual diffusion assumptions unverified",
+  "primary": "same QLIKE mean across h1/5/22 common origins; per-mode validation epoch including zero",
+  "target": "future Parkinson proxy mean, not true integrated variance",
+  "checks": {
+    "market_data_opened": false,
+    "reference_file_opened": false,
+    "same_proxy_frame_for_every_mode": true,
+    "log_state_translation": true,
+    "covariance_gain_precision_unchanged": true,
+    "forecasts_equal_c_times_latent_mean": true,
+    "nonzero_neural_output_checked": true
+  },
+  "fits": {
+    "raw_constant": [
+      {
+        "seed": 11,
+        "mode": "raw_constant",
+        "best_epoch": 7,
+        "epochs_run": 22,
+        "best_validation_QLIKE_known_scale": 1.0445936450225723,
+        "returned_validation_QLIKE_known_scale": 1.0445936450225723,
+        "parameters": 4,
+        "dynamics": {
+          "mu": -9.311833761064085,
+          "phi": 0.9523782537444371,
+          "Q": 0.021907718268828535,
+          "s_R": 0.010386886977581748
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0468504647097299,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.046062380870652,
+            "training_QLIKE_known_scale": 1.1198720025900424
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0455544747525107,
+            "training_QLIKE_known_scale": 1.1167222596285793
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0451758541036205,
+            "training_QLIKE_known_scale": 1.1142336681114589
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.0449033523949987,
+            "training_QLIKE_known_scale": 1.112036892902678
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.0447228646367415,
+            "training_QLIKE_known_scale": 1.110073239241511
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0446229177827886,
+            "training_QLIKE_known_scale": 1.10831371812624
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0445936450225723,
+            "training_QLIKE_known_scale": 1.1067361948182368
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0446265301204005,
+            "training_QLIKE_known_scale": 1.105321335024996
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.0447142362444664,
+            "training_QLIKE_known_scale": 1.1040518975921252
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.0448504258544662,
+            "training_QLIKE_known_scale": 1.10291260207419
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0450295801757805,
+            "training_QLIKE_known_scale": 1.1018900070735518
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.0452468338257852,
+            "training_QLIKE_known_scale": 1.100972329841603
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.0454978328744224,
+            "training_QLIKE_known_scale": 1.1001492346828388
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.0457786187793197,
+            "training_QLIKE_known_scale": 1.099411620865881
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.046085537547862,
+            "training_QLIKE_known_scale": 1.0987514282666493
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0464151720602486,
+            "training_QLIKE_known_scale": 1.098161468633878
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0467642948304883,
+            "training_QLIKE_known_scale": 1.0976352842059431
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0471298381320475,
+            "training_QLIKE_known_scale": 1.0971670322376341
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.0475088782179547,
+            "training_QLIKE_known_scale": 1.0967513925572063
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.0478986303083266,
+            "training_QLIKE_known_scale": 1.0963834947562348
+          },
+          {
+            "epoch": 21,
+            "validation_QLIKE_known_scale": 1.048296451124703,
+            "training_QLIKE_known_scale": 1.0960588615720936
+          },
+          {
+            "epoch": 22,
+            "validation_QLIKE_known_scale": 1.0486998460271402,
+            "training_QLIKE_known_scale": 1.095773365226834
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null
+      },
+      {
+        "seed": 22,
+        "mode": "raw_constant",
+        "best_epoch": 7,
+        "epochs_run": 22,
+        "best_validation_QLIKE_known_scale": 1.0445936450225723,
+        "returned_validation_QLIKE_known_scale": 1.0445936450225723,
+        "parameters": 4,
+        "dynamics": {
+          "mu": -9.311833761064085,
+          "phi": 0.9523782537444371,
+          "Q": 0.021907718268828535,
+          "s_R": 0.010386886977581748
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0468504647097299,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.046062380870652,
+            "training_QLIKE_known_scale": 1.1198720025900424
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0455544747525107,
+            "training_QLIKE_known_scale": 1.1167222596285793
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0451758541036205,
+            "training_QLIKE_known_scale": 1.1142336681114589
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.0449033523949987,
+            "training_QLIKE_known_scale": 1.112036892902678
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.0447228646367415,
+            "training_QLIKE_known_scale": 1.110073239241511
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0446229177827886,
+            "training_QLIKE_known_scale": 1.10831371812624
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0445936450225723,
+            "training_QLIKE_known_scale": 1.1067361948182368
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0446265301204005,
+            "training_QLIKE_known_scale": 1.105321335024996
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.0447142362444664,
+            "training_QLIKE_known_scale": 1.1040518975921252
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.0448504258544662,
+            "training_QLIKE_known_scale": 1.10291260207419
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0450295801757805,
+            "training_QLIKE_known_scale": 1.1018900070735518
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.0452468338257852,
+            "training_QLIKE_known_scale": 1.100972329841603
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.0454978328744224,
+            "training_QLIKE_known_scale": 1.1001492346828388
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.0457786187793197,
+            "training_QLIKE_known_scale": 1.099411620865881
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.046085537547862,
+            "training_QLIKE_known_scale": 1.0987514282666493
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0464151720602486,
+            "training_QLIKE_known_scale": 1.098161468633878
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0467642948304883,
+            "training_QLIKE_known_scale": 1.0976352842059431
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0471298381320475,
+            "training_QLIKE_known_scale": 1.0971670322376341
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.0475088782179547,
+            "training_QLIKE_known_scale": 1.0967513925572063
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.0478986303083266,
+            "training_QLIKE_known_scale": 1.0963834947562348
+          },
+          {
+            "epoch": 21,
+            "validation_QLIKE_known_scale": 1.048296451124703,
+            "training_QLIKE_known_scale": 1.0960588615720936
+          },
+          {
+            "epoch": 22,
+            "validation_QLIKE_known_scale": 1.0486998460271402,
+            "training_QLIKE_known_scale": 1.095773365226834
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": false,
+        "deterministic_reuse_from_seed": 11
+      },
+      {
+        "seed": 33,
+        "mode": "raw_constant",
+        "best_epoch": 7,
+        "epochs_run": 22,
+        "best_validation_QLIKE_known_scale": 1.0445936450225723,
+        "returned_validation_QLIKE_known_scale": 1.0445936450225723,
+        "parameters": 4,
+        "dynamics": {
+          "mu": -9.311833761064085,
+          "phi": 0.9523782537444371,
+          "Q": 0.021907718268828535,
+          "s_R": 0.010386886977581748
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0468504647097299,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.046062380870652,
+            "training_QLIKE_known_scale": 1.1198720025900424
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0455544747525107,
+            "training_QLIKE_known_scale": 1.1167222596285793
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0451758541036205,
+            "training_QLIKE_known_scale": 1.1142336681114589
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.0449033523949987,
+            "training_QLIKE_known_scale": 1.112036892902678
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.0447228646367415,
+            "training_QLIKE_known_scale": 1.110073239241511
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0446229177827886,
+            "training_QLIKE_known_scale": 1.10831371812624
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0445936450225723,
+            "training_QLIKE_known_scale": 1.1067361948182368
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0446265301204005,
+            "training_QLIKE_known_scale": 1.105321335024996
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.0447142362444664,
+            "training_QLIKE_known_scale": 1.1040518975921252
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.0448504258544662,
+            "training_QLIKE_known_scale": 1.10291260207419
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0450295801757805,
+            "training_QLIKE_known_scale": 1.1018900070735518
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.0452468338257852,
+            "training_QLIKE_known_scale": 1.100972329841603
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.0454978328744224,
+            "training_QLIKE_known_scale": 1.1001492346828388
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.0457786187793197,
+            "training_QLIKE_known_scale": 1.099411620865881
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.046085537547862,
+            "training_QLIKE_known_scale": 1.0987514282666493
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0464151720602486,
+            "training_QLIKE_known_scale": 1.098161468633878
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0467642948304883,
+            "training_QLIKE_known_scale": 1.0976352842059431
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0471298381320475,
+            "training_QLIKE_known_scale": 1.0971670322376341
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.0475088782179547,
+            "training_QLIKE_known_scale": 1.0967513925572063
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.0478986303083266,
+            "training_QLIKE_known_scale": 1.0963834947562348
+          },
+          {
+            "epoch": 21,
+            "validation_QLIKE_known_scale": 1.048296451124703,
+            "training_QLIKE_known_scale": 1.0960588615720936
+          },
+          {
+            "epoch": 22,
+            "validation_QLIKE_known_scale": 1.0486998460271402,
+            "training_QLIKE_known_scale": 1.095773365226834
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": false,
+        "deterministic_reuse_from_seed": 11
+      }
+    ],
+    "bias_constant": [
+      {
+        "seed": 11,
+        "mode": "bias_constant",
+        "best_epoch": 7,
+        "epochs_run": 22,
+        "best_validation_QLIKE_known_scale": 1.0479559998520382,
+        "returned_validation_QLIKE_known_scale": 1.0479559998520382,
+        "parameters": 4,
+        "dynamics": {
+          "mu": -9.31446338903885,
+          "phi": 0.9523558889359719,
+          "Q": 0.02170214776900497,
+          "s_R": 0.05013563527380781
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0499533956483278,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0493112130267055,
+            "training_QLIKE_known_scale": 1.1165147614903714
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0488707257082628,
+            "training_QLIKE_known_scale": 1.113656579076567
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0485335828538354,
+            "training_QLIKE_known_scale": 1.1113904699499608
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.0482830388342639,
+            "training_QLIKE_known_scale": 1.1093733073493741
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.0481087323584493,
+            "training_QLIKE_known_scale": 1.1075538484025378
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0480021720730859,
+            "training_QLIKE_known_scale": 1.1059088657615763
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0479559998520382,
+            "training_QLIKE_known_scale": 1.1044213774019642
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0479637928173755,
+            "training_QLIKE_known_scale": 1.1030765852030888
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.0480199314445913,
+            "training_QLIKE_known_scale": 1.1018611037166828
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.048119469044943,
+            "training_QLIKE_known_scale": 1.1007628365930207
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0482580064758575,
+            "training_QLIKE_known_scale": 1.0997709188374316
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.048431580547399,
+            "training_QLIKE_known_scale": 1.0988756241554192
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.0486365700898748,
+            "training_QLIKE_known_scale": 1.098068244262925
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.0488696202699719,
+            "training_QLIKE_known_scale": 1.0973409604869395
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.0491275841453784,
+            "training_QLIKE_known_scale": 1.0966867218209484
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0494074798314263,
+            "training_QLIKE_known_scale": 1.0960991365279855
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0497064614105627,
+            "training_QLIKE_known_scale": 1.0955723797209995
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0500218015681175,
+            "training_QLIKE_known_scale": 1.0951011167769966
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.0503508838147375,
+            "training_QLIKE_known_scale": 1.0946804411726352
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.0506912020797134,
+            "training_QLIKE_known_scale": 1.094305824788052
+          },
+          {
+            "epoch": 21,
+            "validation_QLIKE_known_scale": 1.0510403654743417,
+            "training_QLIKE_known_scale": 1.0939730785762867
+          },
+          {
+            "epoch": 22,
+            "validation_QLIKE_known_scale": 1.0513961061577595,
+            "training_QLIKE_known_scale": 1.0936783215578254
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null
+      },
+      {
+        "seed": 22,
+        "mode": "bias_constant",
+        "best_epoch": 7,
+        "epochs_run": 22,
+        "best_validation_QLIKE_known_scale": 1.0479559998520382,
+        "returned_validation_QLIKE_known_scale": 1.0479559998520382,
+        "parameters": 4,
+        "dynamics": {
+          "mu": -9.31446338903885,
+          "phi": 0.9523558889359719,
+          "Q": 0.02170214776900497,
+          "s_R": 0.05013563527380781
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0499533956483278,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0493112130267055,
+            "training_QLIKE_known_scale": 1.1165147614903714
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0488707257082628,
+            "training_QLIKE_known_scale": 1.113656579076567
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0485335828538354,
+            "training_QLIKE_known_scale": 1.1113904699499608
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.0482830388342639,
+            "training_QLIKE_known_scale": 1.1093733073493741
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.0481087323584493,
+            "training_QLIKE_known_scale": 1.1075538484025378
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0480021720730859,
+            "training_QLIKE_known_scale": 1.1059088657615763
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0479559998520382,
+            "training_QLIKE_known_scale": 1.1044213774019642
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0479637928173755,
+            "training_QLIKE_known_scale": 1.1030765852030888
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.0480199314445913,
+            "training_QLIKE_known_scale": 1.1018611037166828
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.048119469044943,
+            "training_QLIKE_known_scale": 1.1007628365930207
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0482580064758575,
+            "training_QLIKE_known_scale": 1.0997709188374316
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.048431580547399,
+            "training_QLIKE_known_scale": 1.0988756241554192
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.0486365700898748,
+            "training_QLIKE_known_scale": 1.098068244262925
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.0488696202699719,
+            "training_QLIKE_known_scale": 1.0973409604869395
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.0491275841453784,
+            "training_QLIKE_known_scale": 1.0966867218209484
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0494074798314263,
+            "training_QLIKE_known_scale": 1.0960991365279855
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0497064614105627,
+            "training_QLIKE_known_scale": 1.0955723797209995
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0500218015681175,
+            "training_QLIKE_known_scale": 1.0951011167769966
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.0503508838147375,
+            "training_QLIKE_known_scale": 1.0946804411726352
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.0506912020797134,
+            "training_QLIKE_known_scale": 1.094305824788052
+          },
+          {
+            "epoch": 21,
+            "validation_QLIKE_known_scale": 1.0510403654743417,
+            "training_QLIKE_known_scale": 1.0939730785762867
+          },
+          {
+            "epoch": 22,
+            "validation_QLIKE_known_scale": 1.0513961061577595,
+            "training_QLIKE_known_scale": 1.0936783215578254
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": false,
+        "deterministic_reuse_from_seed": 11
+      },
+      {
+        "seed": 33,
+        "mode": "bias_constant",
+        "best_epoch": 7,
+        "epochs_run": 22,
+        "best_validation_QLIKE_known_scale": 1.0479559998520382,
+        "returned_validation_QLIKE_known_scale": 1.0479559998520382,
+        "parameters": 4,
+        "dynamics": {
+          "mu": -9.31446338903885,
+          "phi": 0.9523558889359719,
+          "Q": 0.02170214776900497,
+          "s_R": 0.05013563527380781
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0499533956483278,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0493112130267055,
+            "training_QLIKE_known_scale": 1.1165147614903714
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0488707257082628,
+            "training_QLIKE_known_scale": 1.113656579076567
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0485335828538354,
+            "training_QLIKE_known_scale": 1.1113904699499608
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.0482830388342639,
+            "training_QLIKE_known_scale": 1.1093733073493741
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.0481087323584493,
+            "training_QLIKE_known_scale": 1.1075538484025378
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0480021720730859,
+            "training_QLIKE_known_scale": 1.1059088657615763
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0479559998520382,
+            "training_QLIKE_known_scale": 1.1044213774019642
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0479637928173755,
+            "training_QLIKE_known_scale": 1.1030765852030888
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.0480199314445913,
+            "training_QLIKE_known_scale": 1.1018611037166828
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.048119469044943,
+            "training_QLIKE_known_scale": 1.1007628365930207
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0482580064758575,
+            "training_QLIKE_known_scale": 1.0997709188374316
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.048431580547399,
+            "training_QLIKE_known_scale": 1.0988756241554192
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.0486365700898748,
+            "training_QLIKE_known_scale": 1.098068244262925
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.0488696202699719,
+            "training_QLIKE_known_scale": 1.0973409604869395
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.0491275841453784,
+            "training_QLIKE_known_scale": 1.0966867218209484
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0494074798314263,
+            "training_QLIKE_known_scale": 1.0960991365279855
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0497064614105627,
+            "training_QLIKE_known_scale": 1.0955723797209995
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0500218015681175,
+            "training_QLIKE_known_scale": 1.0951011167769966
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.0503508838147375,
+            "training_QLIKE_known_scale": 1.0946804411726352
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.0506912020797134,
+            "training_QLIKE_known_scale": 1.094305824788052
+          },
+          {
+            "epoch": 21,
+            "validation_QLIKE_known_scale": 1.0510403654743417,
+            "training_QLIKE_known_scale": 1.0939730785762867
+          },
+          {
+            "epoch": 22,
+            "validation_QLIKE_known_scale": 1.0513961061577595,
+            "training_QLIKE_known_scale": 1.0936783215578254
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": false,
+        "deterministic_reuse_from_seed": 11
+      }
+    ],
+    "fixed_precision": [
+      {
+        "seed": 11,
+        "mode": "fixed_precision",
+        "best_epoch": 5,
+        "epochs_run": 20,
+        "best_validation_QLIKE_known_scale": 1.044751799053912,
+        "returned_validation_QLIKE_known_scale": 1.044751799053912,
+        "parameters": 4,
+        "dynamics": {
+          "mu": -9.360262397413182,
+          "phi": 0.9517890969504031,
+          "Q": 0.021351646228399652,
+          "s_R": 0.03097492500259578
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0458485398447865,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0453877065991697,
+            "training_QLIKE_known_scale": 1.1169683166136566
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0450932727022724,
+            "training_QLIKE_known_scale": 1.1140675740477775
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0448983248629107,
+            "training_QLIKE_known_scale": 1.1117659066549117
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.044787959125332,
+            "training_QLIKE_known_scale": 1.1097216831952466
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.044751799053912,
+            "training_QLIKE_known_scale": 1.1078827656785908
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0447809880725576,
+            "training_QLIKE_known_scale": 1.1062250461117562
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0448677566530171,
+            "training_QLIKE_known_scale": 1.1047306615542922
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0450052886861785,
+            "training_QLIKE_known_scale": 1.1033839612059733
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.0451875954867829,
+            "training_QLIKE_known_scale": 1.1021707566732353
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.0454093807595548,
+            "training_QLIKE_known_scale": 1.1010782074190393
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0456659128562282,
+            "training_QLIKE_known_scale": 1.1000947646540962
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.0459529146925308,
+            "training_QLIKE_known_scale": 1.0992100773779974
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.04626647437249,
+            "training_QLIKE_known_scale": 1.098414869760746
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.046602975730992,
+            "training_QLIKE_known_scale": 1.0977008110457218
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.0469590465586693,
+            "training_QLIKE_known_scale": 1.0970603922682516
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0473315219128536,
+            "training_QLIKE_known_scale": 1.0964868167237871
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0477174199322732,
+            "training_QLIKE_known_scale": 1.0959739063839513
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0481139276765488,
+            "training_QLIKE_known_scale": 1.0955160239085668
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.048518394631975,
+            "training_QLIKE_known_scale": 1.0951080086939255
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.0489283316712428,
+            "training_QLIKE_known_scale": 1.0947451249273357
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null
+      },
+      {
+        "seed": 22,
+        "mode": "fixed_precision",
+        "best_epoch": 5,
+        "epochs_run": 20,
+        "best_validation_QLIKE_known_scale": 1.044751799053912,
+        "returned_validation_QLIKE_known_scale": 1.044751799053912,
+        "parameters": 4,
+        "dynamics": {
+          "mu": -9.360262397413182,
+          "phi": 0.9517890969504031,
+          "Q": 0.021351646228399652,
+          "s_R": 0.03097492500259578
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0458485398447865,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0453877065991697,
+            "training_QLIKE_known_scale": 1.1169683166136566
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0450932727022724,
+            "training_QLIKE_known_scale": 1.1140675740477775
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0448983248629107,
+            "training_QLIKE_known_scale": 1.1117659066549117
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.044787959125332,
+            "training_QLIKE_known_scale": 1.1097216831952466
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.044751799053912,
+            "training_QLIKE_known_scale": 1.1078827656785908
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0447809880725576,
+            "training_QLIKE_known_scale": 1.1062250461117562
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0448677566530171,
+            "training_QLIKE_known_scale": 1.1047306615542922
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0450052886861785,
+            "training_QLIKE_known_scale": 1.1033839612059733
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.0451875954867829,
+            "training_QLIKE_known_scale": 1.1021707566732353
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.0454093807595548,
+            "training_QLIKE_known_scale": 1.1010782074190393
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0456659128562282,
+            "training_QLIKE_known_scale": 1.1000947646540962
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.0459529146925308,
+            "training_QLIKE_known_scale": 1.0992100773779974
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.04626647437249,
+            "training_QLIKE_known_scale": 1.098414869760746
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.046602975730992,
+            "training_QLIKE_known_scale": 1.0977008110457218
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.0469590465586693,
+            "training_QLIKE_known_scale": 1.0970603922682516
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0473315219128536,
+            "training_QLIKE_known_scale": 1.0964868167237871
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0477174199322732,
+            "training_QLIKE_known_scale": 1.0959739063839513
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0481139276765488,
+            "training_QLIKE_known_scale": 1.0955160239085668
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.048518394631975,
+            "training_QLIKE_known_scale": 1.0951080086939255
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.0489283316712428,
+            "training_QLIKE_known_scale": 1.0947451249273357
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": false,
+        "deterministic_reuse_from_seed": 11
+      },
+      {
+        "seed": 33,
+        "mode": "fixed_precision",
+        "best_epoch": 5,
+        "epochs_run": 20,
+        "best_validation_QLIKE_known_scale": 1.044751799053912,
+        "returned_validation_QLIKE_known_scale": 1.044751799053912,
+        "parameters": 4,
+        "dynamics": {
+          "mu": -9.360262397413182,
+          "phi": 0.9517890969504031,
+          "Q": 0.021351646228399652,
+          "s_R": 0.03097492500259578
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0458485398447865,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0453877065991697,
+            "training_QLIKE_known_scale": 1.1169683166136566
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0450932727022724,
+            "training_QLIKE_known_scale": 1.1140675740477775
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0448983248629107,
+            "training_QLIKE_known_scale": 1.1117659066549117
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.044787959125332,
+            "training_QLIKE_known_scale": 1.1097216831952466
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.044751799053912,
+            "training_QLIKE_known_scale": 1.1078827656785908
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0447809880725576,
+            "training_QLIKE_known_scale": 1.1062250461117562
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0448677566530171,
+            "training_QLIKE_known_scale": 1.1047306615542922
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0450052886861785,
+            "training_QLIKE_known_scale": 1.1033839612059733
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.0451875954867829,
+            "training_QLIKE_known_scale": 1.1021707566732353
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.0454093807595548,
+            "training_QLIKE_known_scale": 1.1010782074190393
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0456659128562282,
+            "training_QLIKE_known_scale": 1.1000947646540962
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.0459529146925308,
+            "training_QLIKE_known_scale": 1.0992100773779974
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.04626647437249,
+            "training_QLIKE_known_scale": 1.098414869760746
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.046602975730992,
+            "training_QLIKE_known_scale": 1.0977008110457218
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.0469590465586693,
+            "training_QLIKE_known_scale": 1.0970603922682516
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0473315219128536,
+            "training_QLIKE_known_scale": 1.0964868167237871
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0477174199322732,
+            "training_QLIKE_known_scale": 1.0959739063839513
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0481139276765488,
+            "training_QLIKE_known_scale": 1.0955160239085668
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.048518394631975,
+            "training_QLIKE_known_scale": 1.0951080086939255
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.0489283316712428,
+            "training_QLIKE_known_scale": 1.0947451249273357
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": false,
+        "deterministic_reuse_from_seed": 11
+      }
+    ],
+    "neural_precision": [
+      {
+        "seed": 11,
+        "mode": "neural_precision",
+        "best_epoch": 7,
+        "epochs_run": 22,
+        "best_validation_QLIKE_known_scale": 1.0425902602147188,
+        "returned_validation_QLIKE_known_scale": 1.0425902602147188,
+        "parameters": 45,
+        "dynamics": {
+          "mu": -9.314486488352816,
+          "phi": 0.9523558902112602,
+          "Q": 0.02169304065356463,
+          "s_R": 0.051857580655007486
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0458485398447865,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0447688183051935,
+            "training_QLIKE_known_scale": 1.1170073027013159
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0440732769849623,
+            "training_QLIKE_known_scale": 1.1133785047941491
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.043527285377741,
+            "training_QLIKE_known_scale": 1.1105539710237111
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.0431111805477487,
+            "training_QLIKE_known_scale": 1.1080616318582397
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.0428194000376998,
+            "training_QLIKE_known_scale": 1.1058396371836428
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0426476516556202,
+            "training_QLIKE_known_scale": 1.10386392865412
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0425902602147188,
+            "training_QLIKE_known_scale": 1.102117492112459
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0426395970817377,
+            "training_QLIKE_known_scale": 1.1005839638042942
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.04278622700812,
+            "training_QLIKE_known_scale": 1.0992462626187531
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.0430193655690634,
+            "training_QLIKE_known_scale": 1.0980866010733237
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0433274502369074,
+            "training_QLIKE_known_scale": 1.0970869055157553
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.0436987033068963,
+            "training_QLIKE_known_scale": 1.0962293244146655
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.0441216133929119,
+            "training_QLIKE_known_scale": 1.0954966942255608
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.044585301222387,
+            "training_QLIKE_known_scale": 1.0948729049647967
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.0450797647361394,
+            "training_QLIKE_known_scale": 1.0943431462810642
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0455960169036536,
+            "training_QLIKE_known_scale": 1.0938940388840217
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0461261382980618,
+            "training_QLIKE_known_scale": 1.0935136699106502
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0466632680094268,
+            "training_QLIKE_known_scale": 1.0931915563133348
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.0472015538696093,
+            "training_QLIKE_known_scale": 1.0929185600950022
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.047736078616922,
+            "training_QLIKE_known_scale": 1.0926867756956
+          },
+          {
+            "epoch": 21,
+            "validation_QLIKE_known_scale": 1.0482627741014665,
+            "training_QLIKE_known_scale": 1.092489405064156
+          },
+          {
+            "epoch": 22,
+            "validation_QLIKE_known_scale": 1.0487783317237451,
+            "training_QLIKE_known_scale": 1.0923206312439748
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null
+      },
+      {
+        "seed": 22,
+        "mode": "neural_precision",
+        "best_epoch": 7,
+        "epochs_run": 22,
+        "best_validation_QLIKE_known_scale": 1.0437528555562945,
+        "returned_validation_QLIKE_known_scale": 1.0437528555562945,
+        "parameters": 45,
+        "dynamics": {
+          "mu": -9.313373604766591,
+          "phi": 0.9523665970285802,
+          "Q": 0.021727976211442065,
+          "s_R": 0.050323586145389836
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0458485398447865,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0450996291529115,
+            "training_QLIKE_known_scale": 1.1171954488497287
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0446493792010687,
+            "training_QLIKE_known_scale": 1.113589008221541
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.044302182429846,
+            "training_QLIKE_known_scale": 1.1106990476546132
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.0440403261606015,
+            "training_QLIKE_known_scale": 1.1081098527976718
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.0438610220533886,
+            "training_QLIKE_known_scale": 1.1057657504675227
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0437649834455498,
+            "training_QLIKE_known_scale": 1.103645264510676
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0437528555562945,
+            "training_QLIKE_known_scale": 1.1017363779746165
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0438238127463477,
+            "training_QLIKE_known_scale": 1.1000300147604363
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.0439749327092975,
+            "training_QLIKE_known_scale": 1.0985174771125383
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.0442010512757895,
+            "training_QLIKE_known_scale": 1.0971891923432284
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0444949805427541,
+            "training_QLIKE_known_scale": 1.096034152219309
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.0448479761274443,
+            "training_QLIKE_known_scale": 1.0950398362488387
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.0452503316964645,
+            "training_QLIKE_known_scale": 1.0941924711564268
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.0456919898124355,
+            "training_QLIKE_known_scale": 1.0934774856964906
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.0461630854564974,
+            "training_QLIKE_known_scale": 1.0928800362586861
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.046654372714414,
+            "training_QLIKE_known_scale": 1.0923855090308854
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.047157516934264,
+            "training_QLIKE_known_scale": 1.0919799399052441
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0476652586177402,
+            "training_QLIKE_known_scale": 1.091650325304636
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.0481714697428355,
+            "training_QLIKE_known_scale": 1.0913848210382902
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.0486711292446833,
+            "training_QLIKE_known_scale": 1.0911728412182222
+          },
+          {
+            "epoch": 21,
+            "validation_QLIKE_known_scale": 1.0491602443770154,
+            "training_QLIKE_known_scale": 1.0910050765200323
+          },
+          {
+            "epoch": 22,
+            "validation_QLIKE_known_scale": 1.049635741116498,
+            "training_QLIKE_known_scale": 1.090873452881814
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null
+      },
+      {
+        "seed": 33,
+        "mode": "neural_precision",
+        "best_epoch": 6,
+        "epochs_run": 21,
+        "best_validation_QLIKE_known_scale": 1.0421472331524708,
+        "returned_validation_QLIKE_known_scale": 1.0421472331524708,
+        "parameters": 45,
+        "dynamics": {
+          "mu": -9.339269758938178,
+          "phi": 0.9520890120673025,
+          "Q": 0.02148052084643894,
+          "s_R": 0.042625975220481546
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0458485398447865,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.044533278288003,
+            "training_QLIKE_known_scale": 1.1167419311978735
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0436907562389939,
+            "training_QLIKE_known_scale": 1.112786841235878
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0430515438745012,
+            "training_QLIKE_known_scale": 1.1097330139090467
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.0425887215700709,
+            "training_QLIKE_known_scale": 1.107066908082612
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.042290847344085,
+            "training_QLIKE_known_scale": 1.1047216270987252
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0421472331524708,
+            "training_QLIKE_known_scale": 1.1026683311175174
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0421450257675877,
+            "training_QLIKE_known_scale": 1.100883964534661
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0422690155611287,
+            "training_QLIKE_known_scale": 1.0993451117887305
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.0425023832490934,
+            "training_QLIKE_known_scale": 1.0980272536631928
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.042827713068801,
+            "training_QLIKE_known_scale": 1.0969054184445235
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0432279367723125,
+            "training_QLIKE_known_scale": 1.0959551028245922
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.0436870521338082,
+            "training_QLIKE_known_scale": 1.0951530827602
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.0441905762436703,
+            "training_QLIKE_known_scale": 1.0944779884731404
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.0447257622861128,
+            "training_QLIKE_known_scale": 1.0939106278883812
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.0452816380688095,
+            "training_QLIKE_known_scale": 1.0934340949522832
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0458489280041174,
+            "training_QLIKE_known_scale": 1.0930337192328599
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0464199101052165,
+            "training_QLIKE_known_scale": 1.0926969138061713
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.046988245122053,
+            "training_QLIKE_known_scale": 1.0924129690010012
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.047548801465977,
+            "training_QLIKE_known_scale": 1.0921728267807478
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.048097489187184,
+            "training_QLIKE_known_scale": 1.0919688583846285
+          },
+          {
+            "epoch": 21,
+            "validation_QLIKE_known_scale": 1.0486311092322782,
+            "training_QLIKE_known_scale": 1.0917946581378535
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null
+      }
+    ],
+    "neural_constant_precision": [
+      {
+        "seed": 11,
+        "mode": "neural_constant_precision",
+        "best_epoch": 9,
+        "epochs_run": 24,
+        "best_validation_QLIKE_known_scale": 1.044400393533091,
+        "returned_validation_QLIKE_known_scale": 1.044400393533091,
+        "parameters": 45,
+        "dynamics": {
+          "mu": -9.275986001677634,
+          "phi": 0.9529340530108272,
+          "Q": 0.021998348073483786,
+          "s_R": 0.06784765305601624
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0499533956483278,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.048512000630457,
+            "training_QLIKE_known_scale": 1.1165303468214136
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.047546488414438,
+            "training_QLIKE_known_scale": 1.1129027917616348
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0467317732709924,
+            "training_QLIKE_known_scale": 1.1100747697991693
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.0460440432873217,
+            "training_QLIKE_known_scale": 1.1075672266067418
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.0454789334405699,
+            "training_QLIKE_known_scale": 1.1053232506892334
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0450352516009633,
+            "training_QLIKE_known_scale": 1.1033229852947681
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0447108931715092,
+            "training_QLIKE_known_scale": 1.101553267322706
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0445015347215818,
+            "training_QLIKE_known_scale": 1.1000009490704394
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.044400393533091,
+            "training_QLIKE_known_scale": 1.098651236557291
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.044398533674976,
+            "training_QLIKE_known_scale": 1.09748757777239
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0444854620009576,
+            "training_QLIKE_known_scale": 1.096492148710052
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.0446498257780519,
+            "training_QLIKE_known_scale": 1.0956465623444456
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.0448800722353988,
+            "training_QLIKE_known_scale": 1.094932595302696
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.0451649854973672,
+            "training_QLIKE_known_scale": 1.094332809718603
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.0454940681273879,
+            "training_QLIKE_known_scale": 1.093831009785437
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0458577724142055,
+            "training_QLIKE_known_scale": 1.093412520847005
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0462476076047713,
+            "training_QLIKE_known_scale": 1.09306431080702
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0466561563643544,
+            "training_QLIKE_known_scale": 1.0927749893594305
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.0470770318838036,
+            "training_QLIKE_known_scale": 1.0925347237301852
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.0475048009532966,
+            "training_QLIKE_known_scale": 1.0923351052097765
+          },
+          {
+            "epoch": 21,
+            "validation_QLIKE_known_scale": 1.0479348912348814,
+            "training_QLIKE_known_scale": 1.09216899305124
+          },
+          {
+            "epoch": 22,
+            "validation_QLIKE_known_scale": 1.0483634946552363,
+            "training_QLIKE_known_scale": 1.0920303542107872
+          },
+          {
+            "epoch": 23,
+            "validation_QLIKE_known_scale": 1.0487874739745786,
+            "training_QLIKE_known_scale": 1.0919141104477899
+          },
+          {
+            "epoch": 24,
+            "validation_QLIKE_known_scale": 1.04920427620061,
+            "training_QLIKE_known_scale": 1.0918159990171434
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null
+      },
+      {
+        "seed": 22,
+        "mode": "neural_constant_precision",
+        "best_epoch": 10,
+        "epochs_run": 25,
+        "best_validation_QLIKE_known_scale": 1.045784988438177,
+        "returned_validation_QLIKE_known_scale": 1.045784988438177,
+        "parameters": 45,
+        "dynamics": {
+          "mu": -9.252748818456212,
+          "phi": 0.9531683365333649,
+          "Q": 0.022219817857046627,
+          "s_R": 0.0771578840645036
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0499533956483278,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0488877958318858,
+            "training_QLIKE_known_scale": 1.1167376665091322
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0482279341536667,
+            "training_QLIKE_known_scale": 1.1133568805423122
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0476563305782447,
+            "training_QLIKE_known_scale": 1.110685604114399
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.0471559497414307,
+            "training_QLIKE_known_scale": 1.108290109484094
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.046727657213073,
+            "training_QLIKE_known_scale": 1.1061039299152784
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0463752799243609,
+            "training_QLIKE_known_scale": 1.1041038642736087
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.0461028284511604,
+            "training_QLIKE_known_scale": 1.1022789991520874
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.045913255509023,
+            "training_QLIKE_known_scale": 1.1006231720531374
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.0458076885365748,
+            "training_QLIKE_known_scale": 1.0991319342575068
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.045784988438177,
+            "training_QLIKE_known_scale": 1.0978008732092661
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0458416261388226,
+            "training_QLIKE_known_scale": 1.0966245877709713
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.0459718573912153,
+            "training_QLIKE_known_scale": 1.095596137966506
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.0461681357001087,
+            "training_QLIKE_known_scale": 1.0947068886211437
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.0464216723139659,
+            "training_QLIKE_known_scale": 1.0939466617852778
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.0467230438754767,
+            "training_QLIKE_known_scale": 1.093304097487875
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.047062761525649,
+            "training_QLIKE_known_scale": 1.0927671211171772
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0474317417270373,
+            "training_QLIKE_known_scale": 1.0923234302178915
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.047821648975198,
+            "training_QLIKE_known_scale": 1.0919609372302133
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.0482251064937294,
+            "training_QLIKE_known_scale": 1.0916681301572433
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.0486357893602176,
+            "training_QLIKE_known_scale": 1.0914343350894984
+          },
+          {
+            "epoch": 21,
+            "validation_QLIKE_known_scale": 1.049048424827613,
+            "training_QLIKE_known_scale": 1.0912498807218025
+          },
+          {
+            "epoch": 22,
+            "validation_QLIKE_known_scale": 1.0494587280882013,
+            "training_QLIKE_known_scale": 1.0911061755224278
+          },
+          {
+            "epoch": 23,
+            "validation_QLIKE_known_scale": 1.049863300101549,
+            "training_QLIKE_known_scale": 1.0909957141000757
+          },
+          {
+            "epoch": 24,
+            "validation_QLIKE_known_scale": 1.0502595092096056,
+            "training_QLIKE_known_scale": 1.0909120316075989
+          },
+          {
+            "epoch": 25,
+            "validation_QLIKE_known_scale": 1.0506453719456825,
+            "training_QLIKE_known_scale": 1.0908496244981907
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null
+      },
+      {
+        "seed": 33,
+        "mode": "neural_constant_precision",
+        "best_epoch": 8,
+        "epochs_run": 23,
+        "best_validation_QLIKE_known_scale": 1.0440913630532356,
+        "returned_validation_QLIKE_known_scale": 1.0440913630532356,
+        "parameters": 45,
+        "dynamics": {
+          "mu": -9.299741955059032,
+          "phi": 0.9526833081496802,
+          "Q": 0.021766979409311868,
+          "s_R": 0.06023570720800238
+        },
+        "history": [
+          {
+            "epoch": 0,
+            "validation_QLIKE_known_scale": 1.0499533956483278,
+            "training_QLIKE_known_scale": null
+          },
+          {
+            "epoch": 1,
+            "validation_QLIKE_known_scale": 1.0482950300014895,
+            "training_QLIKE_known_scale": 1.116230743769254
+          },
+          {
+            "epoch": 2,
+            "validation_QLIKE_known_scale": 1.0471665596001263,
+            "training_QLIKE_known_scale": 1.112232800070102
+          },
+          {
+            "epoch": 3,
+            "validation_QLIKE_known_scale": 1.0462410494156789,
+            "training_QLIKE_known_scale": 1.10914056125092
+          },
+          {
+            "epoch": 4,
+            "validation_QLIKE_known_scale": 1.0454910141402554,
+            "training_QLIKE_known_scale": 1.106432504593486
+          },
+          {
+            "epoch": 5,
+            "validation_QLIKE_known_scale": 1.044908654909536,
+            "training_QLIKE_known_scale": 1.104044672730283
+          },
+          {
+            "epoch": 6,
+            "validation_QLIKE_known_scale": 1.0444877108933945,
+            "training_QLIKE_known_scale": 1.101951968044793
+          },
+          {
+            "epoch": 7,
+            "validation_QLIKE_known_scale": 1.044219333328378,
+            "training_QLIKE_known_scale": 1.1001347059519078
+          },
+          {
+            "epoch": 8,
+            "validation_QLIKE_known_scale": 1.0440913630532356,
+            "training_QLIKE_known_scale": 1.0985718684791894
+          },
+          {
+            "epoch": 9,
+            "validation_QLIKE_known_scale": 1.044088939178953,
+            "training_QLIKE_known_scale": 1.097240141075659
+          },
+          {
+            "epoch": 10,
+            "validation_QLIKE_known_scale": 1.044195616233192,
+            "training_QLIKE_known_scale": 1.0961146367452597
+          },
+          {
+            "epoch": 11,
+            "validation_QLIKE_known_scale": 1.0443945291650893,
+            "training_QLIKE_known_scale": 1.095170067159079
+          },
+          {
+            "epoch": 12,
+            "validation_QLIKE_known_scale": 1.044669355052369,
+            "training_QLIKE_known_scale": 1.094381869235266
+          },
+          {
+            "epoch": 13,
+            "validation_QLIKE_known_scale": 1.0450049750186858,
+            "training_QLIKE_known_scale": 1.0937270782370407
+          },
+          {
+            "epoch": 14,
+            "validation_QLIKE_known_scale": 1.0453878429959698,
+            "training_QLIKE_known_scale": 1.093184885222451
+          },
+          {
+            "epoch": 15,
+            "validation_QLIKE_known_scale": 1.0458061210951055,
+            "training_QLIKE_known_scale": 1.0927369006074188
+          },
+          {
+            "epoch": 16,
+            "validation_QLIKE_known_scale": 1.0462496560261445,
+            "training_QLIKE_known_scale": 1.0923671866933395
+          },
+          {
+            "epoch": 17,
+            "validation_QLIKE_known_scale": 1.0467098629449165,
+            "training_QLIKE_known_scale": 1.092062132974597
+          },
+          {
+            "epoch": 18,
+            "validation_QLIKE_known_scale": 1.0471795659047314,
+            "training_QLIKE_known_scale": 1.0918102409015895
+          },
+          {
+            "epoch": 19,
+            "validation_QLIKE_known_scale": 1.0476528265197087,
+            "training_QLIKE_known_scale": 1.0916018695107361
+          },
+          {
+            "epoch": 20,
+            "validation_QLIKE_known_scale": 1.048124778559809,
+            "training_QLIKE_known_scale": 1.0914289767303378
+          },
+          {
+            "epoch": 21,
+            "validation_QLIKE_known_scale": 1.0485914768492708,
+            "training_QLIKE_known_scale": 1.0912848769195673
+          },
+          {
+            "epoch": 22,
+            "validation_QLIKE_known_scale": 1.0490497632977394,
+            "training_QLIKE_known_scale": 1.0911640246576313
+          },
+          {
+            "epoch": 23,
+            "validation_QLIKE_known_scale": 1.0494971499862202,
+            "training_QLIKE_known_scale": 1.0910618279046298
+          }
+        ],
+        "training_observation_stop_exclusive": 1112,
+        "max_training_target_end": 1111,
+        "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+        "fit_executed": true,
+        "deterministic_reuse_from_seed": null
+      }
+    ]
+  },
+  "scores": {
+    "1": {
+      "EWMA22": {
+        "n": 228,
+        "mean_QLIKE": -8.546472629936193,
+        "loss_difference_vs_EWMA22": 0.0,
+        "MSE": 1.4344013851499607e-08
+      },
+      "HAR_geometry": {
+        "n": 228,
+        "mean_QLIKE": -8.607205149149285,
+        "loss_difference_vs_EWMA22": -0.06073251921309169,
+        "MSE": 1.3536938771555726e-08
+      },
+      "HGB_geometry": {
+        "n": 228,
+        "mean_QLIKE": -8.582951004968242,
+        "loss_difference_vs_EWMA22": -0.03647837503204847,
+        "MSE": 1.3568566441462542e-08
+      },
+      "raw_constant_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.594904655233131,
+        "loss_difference_vs_EWMA22": -0.04843202529693897,
+        "MSE": 1.355938846934525e-08
+      },
+      "raw_constant_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.594904655233131,
+        "loss_difference_vs_EWMA22": -0.04843202529693897,
+        "MSE": 1.355938846934525e-08
+      },
+      "raw_constant_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.594904655233131,
+        "loss_difference_vs_EWMA22": -0.04843202529693897,
+        "MSE": 1.355938846934525e-08
+      },
+      "raw_constant": {
+        "n": 228,
+        "mean_QLIKE": -8.594904655233131,
+        "loss_difference_vs_EWMA22": -0.04843202529693897,
+        "MSE": 1.355938846934525e-08
+      },
+      "bias_constant_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.588831091775736,
+        "loss_difference_vs_EWMA22": -0.042358461839542214,
+        "MSE": 1.3480434424556705e-08
+      },
+      "bias_constant_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.588831091775736,
+        "loss_difference_vs_EWMA22": -0.042358461839542214,
+        "MSE": 1.3480434424556705e-08
+      },
+      "bias_constant_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.588831091775736,
+        "loss_difference_vs_EWMA22": -0.042358461839542214,
+        "MSE": 1.3480434424556705e-08
+      },
+      "bias_constant": {
+        "n": 228,
+        "mean_QLIKE": -8.588831091775736,
+        "loss_difference_vs_EWMA22": -0.042358461839542214,
+        "MSE": 1.3480434424556705e-08
+      },
+      "fixed_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.593293586328047,
+        "loss_difference_vs_EWMA22": -0.04682095639185307,
+        "MSE": 1.3414381851913623e-08
+      },
+      "fixed_precision_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.593293586328047,
+        "loss_difference_vs_EWMA22": -0.04682095639185307,
+        "MSE": 1.3414381851913623e-08
+      },
+      "fixed_precision_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.593293586328047,
+        "loss_difference_vs_EWMA22": -0.04682095639185307,
+        "MSE": 1.3414381851913623e-08
+      },
+      "fixed_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.593293586328047,
+        "loss_difference_vs_EWMA22": -0.04682095639185307,
+        "MSE": 1.3414381851913623e-08
+      },
+      "neural_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.59586700184428,
+        "loss_difference_vs_EWMA22": -0.04939437190808546,
+        "MSE": 1.3409495947334764e-08
+      },
+      "neural_precision_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.594104431146738,
+        "loss_difference_vs_EWMA22": -0.04763180121054364,
+        "MSE": 1.3423526535735911e-08
+      },
+      "neural_precision_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.596240402970931,
+        "loss_difference_vs_EWMA22": -0.04976777303473743,
+        "MSE": 1.3410260931292927e-08
+      },
+      "neural_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.595465715808817,
+        "loss_difference_vs_EWMA22": -0.04899308587262334,
+        "MSE": 1.3413488582818666e-08
+      },
+      "neural_constant_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.5929111782445,
+        "loss_difference_vs_EWMA22": -0.04643854830830519,
+        "MSE": 1.3468386242011475e-08
+      },
+      "neural_constant_precision_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.591653080395526,
+        "loss_difference_vs_EWMA22": -0.0451804504593316,
+        "MSE": 1.3481500703308118e-08
+      },
+      "neural_constant_precision_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.593103084532276,
+        "loss_difference_vs_EWMA22": -0.046630454596082116,
+        "MSE": 1.347938733653353e-08
+      },
+      "neural_constant_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.592612541087929,
+        "loss_difference_vs_EWMA22": -0.04613991115173562,
+        "MSE": 1.3475355008361667e-08
+      }
+    },
+    "5": {
+      "EWMA22": {
+        "n": 228,
+        "mean_QLIKE": -8.503098621460655,
+        "loss_difference_vs_EWMA22": 0.0,
+        "MSE": 4.6746849261158176e-09
+      },
+      "HAR_geometry": {
+        "n": 228,
+        "mean_QLIKE": -8.537421765051144,
+        "loss_difference_vs_EWMA22": -0.034323143590490705,
+        "MSE": 4.248288754609671e-09
+      },
+      "HGB_geometry": {
+        "n": 228,
+        "mean_QLIKE": -8.525667287689805,
+        "loss_difference_vs_EWMA22": -0.022568666229149784,
+        "MSE": 5.438488986784945e-09
+      },
+      "raw_constant_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.545759561355128,
+        "loss_difference_vs_EWMA22": -0.04266093989447367,
+        "MSE": 3.943331012854464e-09
+      },
+      "raw_constant_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.545759561355128,
+        "loss_difference_vs_EWMA22": -0.04266093989447367,
+        "MSE": 3.943331012854464e-09
+      },
+      "raw_constant_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.545759561355128,
+        "loss_difference_vs_EWMA22": -0.04266093989447367,
+        "MSE": 3.943331012854464e-09
+      },
+      "raw_constant": {
+        "n": 228,
+        "mean_QLIKE": -8.545759561355128,
+        "loss_difference_vs_EWMA22": -0.04266093989447367,
+        "MSE": 3.943331012854464e-09
+      },
+      "bias_constant_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.544131377021492,
+        "loss_difference_vs_EWMA22": -0.04103275556083866,
+        "MSE": 3.944753610310592e-09
+      },
+      "bias_constant_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.544131377021492,
+        "loss_difference_vs_EWMA22": -0.04103275556083866,
+        "MSE": 3.944753610310592e-09
+      },
+      "bias_constant_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.544131377021492,
+        "loss_difference_vs_EWMA22": -0.04103275556083866,
+        "MSE": 3.944753610310592e-09
+      },
+      "bias_constant": {
+        "n": 228,
+        "mean_QLIKE": -8.544131377021492,
+        "loss_difference_vs_EWMA22": -0.04103275556083866,
+        "MSE": 3.944753610310592e-09
+      },
+      "fixed_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.548491746663064,
+        "loss_difference_vs_EWMA22": -0.04539312520241048,
+        "MSE": 3.904392875041988e-09
+      },
+      "fixed_precision_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.548491746663064,
+        "loss_difference_vs_EWMA22": -0.04539312520241048,
+        "MSE": 3.904392875041988e-09
+      },
+      "fixed_precision_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.548491746663064,
+        "loss_difference_vs_EWMA22": -0.04539312520241048,
+        "MSE": 3.904392875041988e-09
+      },
+      "fixed_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.548491746663064,
+        "loss_difference_vs_EWMA22": -0.04539312520241048,
+        "MSE": 3.904392875041988e-09
+      },
+      "neural_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.554004271401938,
+        "loss_difference_vs_EWMA22": -0.05090564994128315,
+        "MSE": 3.878286952663646e-09
+      },
+      "neural_precision_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.551895008390302,
+        "loss_difference_vs_EWMA22": -0.048796386929647266,
+        "MSE": 3.885645578291553e-09
+      },
+      "neural_precision_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.55417484598459,
+        "loss_difference_vs_EWMA22": -0.05107622452393669,
+        "MSE": 3.884795612246969e-09
+      },
+      "neural_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.553410756361432,
+        "loss_difference_vs_EWMA22": -0.0503121349007784,
+        "MSE": 3.882187880800002e-09
+      },
+      "neural_constant_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.552289173998968,
+        "loss_difference_vs_EWMA22": -0.04919055253831446,
+        "MSE": 3.904392139546128e-09
+      },
+      "neural_constant_precision_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.550524906150908,
+        "loss_difference_vs_EWMA22": -0.04742628469025399,
+        "MSE": 3.915144490343647e-09
+      },
+      "neural_constant_precision_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.552389144593924,
+        "loss_difference_vs_EWMA22": -0.04929052313326895,
+        "MSE": 3.921639167643645e-09
+      },
+      "neural_constant_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.551776499553405,
+        "loss_difference_vs_EWMA22": -0.04867787809275171,
+        "MSE": 3.912964005657714e-09
+      }
+    },
+    "22": {
+      "EWMA22": {
+        "n": 228,
+        "mean_QLIKE": -8.550134968193209,
+        "loss_difference_vs_EWMA22": 0.0,
+        "MSE": 1.4592502630506829e-09
+      },
+      "HAR_geometry": {
+        "n": 228,
+        "mean_QLIKE": -8.55630025725723,
+        "loss_difference_vs_EWMA22": -0.006165289064020372,
+        "MSE": 1.2864945164901966e-09
+      },
+      "HGB_geometry": {
+        "n": 228,
+        "mean_QLIKE": -8.541733175521399,
+        "loss_difference_vs_EWMA22": 0.008401792671811134,
+        "MSE": 2.3920456128734777e-09
+      },
+      "raw_constant_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.569140436413102,
+        "loss_difference_vs_EWMA22": -0.01900546821989176,
+        "MSE": 1.0122357384883004e-09
+      },
+      "raw_constant_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.569140436413102,
+        "loss_difference_vs_EWMA22": -0.01900546821989176,
+        "MSE": 1.0122357384883004e-09
+      },
+      "raw_constant_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.569140436413102,
+        "loss_difference_vs_EWMA22": -0.01900546821989176,
+        "MSE": 1.0122357384883004e-09
+      },
+      "raw_constant": {
+        "n": 228,
+        "mean_QLIKE": -8.569140436413102,
+        "loss_difference_vs_EWMA22": -0.01900546821989176,
+        "MSE": 1.0122357384883004e-09
+      },
+      "bias_constant_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.566755119715737,
+        "loss_difference_vs_EWMA22": -0.01662015152252571,
+        "MSE": 1.0557185066552161e-09
+      },
+      "bias_constant_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.566755119715737,
+        "loss_difference_vs_EWMA22": -0.01662015152252571,
+        "MSE": 1.0557185066552161e-09
+      },
+      "bias_constant_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.566755119715737,
+        "loss_difference_vs_EWMA22": -0.01662015152252571,
+        "MSE": 1.0557185066552161e-09
+      },
+      "bias_constant": {
+        "n": 228,
+        "mean_QLIKE": -8.566755119715737,
+        "loss_difference_vs_EWMA22": -0.01662015152252571,
+        "MSE": 1.0557185066552161e-09
+      },
+      "fixed_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.567544857916232,
+        "loss_difference_vs_EWMA22": -0.01740988972302227,
+        "MSE": 1.0359872964276731e-09
+      },
+      "fixed_precision_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.567544857916232,
+        "loss_difference_vs_EWMA22": -0.01740988972302227,
+        "MSE": 1.0359872964276731e-09
+      },
+      "fixed_precision_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.567544857916232,
+        "loss_difference_vs_EWMA22": -0.01740988972302227,
+        "MSE": 1.0359872964276731e-09
+      },
+      "fixed_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.567544857916232,
+        "loss_difference_vs_EWMA22": -0.01740988972302227,
+        "MSE": 1.0359872964276731e-09
+      },
+      "neural_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.565943534178706,
+        "loss_difference_vs_EWMA22": -0.015808565985495827,
+        "MSE": 1.0807174305538285e-09
+      },
+      "neural_precision_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.566327581863156,
+        "loss_difference_vs_EWMA22": -0.01619261366994646,
+        "MSE": 1.0684456807916147e-09
+      },
+      "neural_precision_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.566728639656144,
+        "loss_difference_vs_EWMA22": -0.0165936714629348,
+        "MSE": 1.068932163080893e-09
+      },
+      "neural_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.566349933798937,
+        "loss_difference_vs_EWMA22": -0.016214965605727397,
+        "MSE": 1.0723447190986668e-09
+      },
+      "neural_constant_precision_seed11": {
+        "n": 228,
+        "mean_QLIKE": -8.56518405522634,
+        "loss_difference_vs_EWMA22": -0.01504908703312891,
+        "MSE": 1.10250974781637e-09
+      },
+      "neural_constant_precision_seed22": {
+        "n": 228,
+        "mean_QLIKE": -8.564052636208116,
+        "loss_difference_vs_EWMA22": -0.013917668014905165,
+        "MSE": 1.117458892708175e-09
+      },
+      "neural_constant_precision_seed33": {
+        "n": 228,
+        "mean_QLIKE": -8.565819269783175,
+        "loss_difference_vs_EWMA22": -0.015684301589963326,
+        "MSE": 1.097468900619755e-09
+      },
+      "neural_constant_precision": {
+        "n": 228,
+        "mean_QLIKE": -8.565040312449694,
+        "loss_difference_vs_EWMA22": -0.0149053442564853,
+        "MSE": 1.1053500826309177e-09
+      }
+    }
+  },
+  "elapsed_seconds": 119.8113694190979
+}

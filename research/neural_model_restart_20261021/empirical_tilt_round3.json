@@ -1,0 +1,2699 @@
+{
+  "status": "exploratory; reused historical tests; no publication or novelty claim",
+  "config": {
+    "markets": [
+      "CEA",
+      "GUANGZHOU",
+      "SHANGHAI",
+      "HUBEI",
+      "EU"
+    ],
+    "modes": [
+      "uniform_static",
+      "uniform_rule",
+      "tilt_static",
+      "tilt_rule",
+      "tilt_neural",
+      "probability_only",
+      "tilt_neural_no_context"
+    ],
+    "seeds": [
+      11,
+      22
+    ],
+    "epochs": 64,
+    "tag": "empirical_tilt_round3"
+  },
+  "sanity": {
+    "weighted_ECDF_CRPS_matches_pairwise": 1.1102230246251565e-16,
+    "gradients_finite": true
+  },
+  "horizons": [
+    1,
+    5,
+    10,
+    20
+  ],
+  "geometry": "weighted empirical nonzero returns plus explicit zero atom; exact finite-distribution CRPS",
+  "training": "causally matured support labels; bounded 5-basis log-weight transport; small L2 penalty",
+  "selection": "inner equal-horizon normalized pinball; epoch0 eligible; refit all precut labels",
+  "ensemble": "average seed probabilities on the same refit support, coherent mixture CRPS and quantiles",
+  "panel_sha256": "d470238386e201e68f07b033f5a34591af89b57f1546ea79b699e763d228b56c",
+  "source_sha256": "c71a66b29aa5614963e3ec7408fdae33e58e957c45cc8e52af5d57dfd4a0bd62",
+  "markets": {
+    "CEA": {
+      "audit": {
+        "cut_index": 597,
+        "validation_start_index": 447,
+        "lookback": 128,
+        "step": 2,
+        "train": 621,
+        "validation": 281,
+        "refit": 921,
+        "test": 1311,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 446,
+        "last_refit_target": 596,
+        "test_zero_share": {
+          "1": 0.08734939759036145,
+          "5": 0.006060606060606061,
+          "10": 0.01529051987767584,
+          "20": 0.003105590062111801
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "fits": {
+        "uniform_static": [
+          {
+            "seed": 11,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          }
+        ],
+        "uniform_rule": [
+          {
+            "seed": 11,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          }
+        ],
+        "tilt_static": [
+          {
+            "seed": 11,
+            "best_epoch": 23,
+            "validation_normalized_macro_pinball": 0.28033047914505005,
+            "epochs_run": 39,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 20,
+            "validation_normalized_macro_pinball": 0.27942052483558655,
+            "epochs_run": 36,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_rule": [
+          {
+            "seed": 11,
+            "best_epoch": 23,
+            "validation_normalized_macro_pinball": 0.2789713144302368,
+            "epochs_run": 39,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 19,
+            "validation_normalized_macro_pinball": 0.27842625975608826,
+            "epochs_run": 35,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_neural": [
+          {
+            "seed": 11,
+            "best_epoch": 24,
+            "validation_normalized_macro_pinball": 0.2790192663669586,
+            "epochs_run": 40,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 16,
+            "validation_normalized_macro_pinball": 0.27816715836524963,
+            "epochs_run": 32,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "probability_only": [
+          {
+            "seed": 11,
+            "best_epoch": 37,
+            "validation_normalized_macro_pinball": 0.27882635593414307,
+            "epochs_run": 53,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 44,
+            "validation_normalized_macro_pinball": 0.27823275327682495,
+            "epochs_run": 60,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_neural_no_context": [
+          {
+            "seed": 11,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": 0.27902674674987793,
+            "epochs_run": 30,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 8,
+            "validation_normalized_macro_pinball": 0.2789953947067261,
+            "epochs_run": 30,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 332,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.007325421973395726,
+              "CRPS": 0.008239690035625018,
+              "WIS": 0.006353508633553778,
+              "MAE": 0.010121543176566076,
+              "coverage80": 0.7771084337349398,
+              "coverage95": 0.9307228915662651,
+              "Brier": 0.1518562039020777
+            },
+            "gaussian_constant": {
+              "MQS": 0.007792367212486881,
+              "CRPS": 0.008807975213082924,
+              "WIS": 0.0067118877755137744,
+              "MAE": 0.010374164565659994,
+              "coverage80": 0.8795180722891566,
+              "coverage95": 0.9457831325301205,
+              "Brier": 0.08734939759036145
+            },
+            "uniform_static": {
+              "MQS": 0.0073265568127000745,
+              "CRPS": 0.008239690137792941,
+              "WIS": 0.006354837417662473,
+              "MAE": 0.010121543176566076,
+              "coverage80": 0.7771084337349398,
+              "coverage95": 0.9307228915662651,
+              "Brier": 0.1511962865808631
+            },
+            "uniform_rule": {
+              "MQS": 0.007298207316748721,
+              "CRPS": 0.008205226780062316,
+              "WIS": 0.00635996817705369,
+              "MAE": 0.010121543176566076,
+              "coverage80": 0.8283132530120482,
+              "coverage95": 0.9367469879518072,
+              "Brier": 0.08459344218495134
+            },
+            "tilt_static": {
+              "MQS": 0.007350734606365031,
+              "CRPS": 0.008257379149743758,
+              "WIS": 0.006390184841559689,
+              "MAE": 0.010121543176566076,
+              "coverage80": 0.7771084337349398,
+              "coverage95": 0.927710843373494,
+              "Brier": 0.1511962865808631
+            },
+            "tilt_rule": {
+              "MQS": 0.007345846550468682,
+              "CRPS": 0.00824958060331583,
+              "WIS": 0.0064173231712749855,
+              "MAE": 0.01011563767449847,
+              "coverage80": 0.8253012048192772,
+              "coverage95": 0.9397590361445783,
+              "Brier": 0.08459344218495134
+            },
+            "tilt_neural": {
+              "MQS": 0.007328620272012001,
+              "CRPS": 0.008229031032830385,
+              "WIS": 0.006401516017845446,
+              "MAE": 0.01011214123517948,
+              "coverage80": 0.8253012048192772,
+              "coverage95": 0.9397590361445783,
+              "Brier": 0.0832646802363185
+            },
+            "probability_only": {
+              "MQS": 0.007284680301325657,
+              "CRPS": 0.008193786705891317,
+              "WIS": 0.0063479543133682865,
+              "MAE": 0.010120704186591322,
+              "coverage80": 0.8283132530120482,
+              "coverage95": 0.9367469879518072,
+              "Brier": 0.08419787260237276
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.0073176932019222455,
+              "CRPS": 0.00821711495444797,
+              "WIS": 0.00638527215183106,
+              "MAE": 0.010121543176566076,
+              "coverage80": 0.8283132530120482,
+              "coverage95": 0.9367469879518072,
+              "Brier": 0.08441239201576149
+            }
+          }
+        },
+        "5": {
+          "n": 330,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.018004516793989,
+              "CRPS": 0.02031885056359136,
+              "WIS": 0.015493269696346327,
+              "MAE": 0.025991201440663952,
+              "coverage80": 0.6333333333333333,
+              "coverage95": 0.8454545454545455,
+              "Brier": 0.03463663591868722
+            },
+            "gaussian_constant": {
+              "MQS": 0.01758939557797618,
+              "CRPS": 0.01999464846899168,
+              "WIS": 0.015025567468610713,
+              "MAE": 0.02602923906587214,
+              "coverage80": 0.7333333333333333,
+              "coverage95": 0.8545454545454545,
+              "Brier": 0.006060606060606061
+            },
+            "uniform_static": {
+              "MQS": 0.01794536863111971,
+              "CRPS": 0.02031885160875534,
+              "WIS": 0.015415788450257279,
+              "MAE": 0.025991201440663952,
+              "coverage80": 0.6333333333333333,
+              "coverage95": 0.8515151515151516,
+              "Brier": 0.03369724906440652
+            },
+            "uniform_rule": {
+              "MQS": 0.01782168324809848,
+              "CRPS": 0.020142856187270568,
+              "WIS": 0.0153005960174463,
+              "MAE": 0.026133581980039792,
+              "coverage80": 0.6787878787878788,
+              "coverage95": 0.8515151515151516,
+              "Brier": 0.007344682230445249
+            },
+            "tilt_static": {
+              "MQS": 0.017710035987682636,
+              "CRPS": 0.020145984611482863,
+              "WIS": 0.015128913865411991,
+              "MAE": 0.026027099043631704,
+              "coverage80": 0.6848484848484848,
+              "coverage95": 0.8727272727272727,
+              "Brier": 0.03369724906440652
+            },
+            "tilt_rule": {
+              "MQS": 0.017562231854903323,
+              "CRPS": 0.019990801006550624,
+              "WIS": 0.014979964559001661,
+              "MAE": 0.0260375023750191,
+              "coverage80": 0.7121212121212122,
+              "coverage95": 0.8757575757575757,
+              "Brier": 0.007344682230445249
+            },
+            "tilt_neural": {
+              "MQS": 0.01760709747973178,
+              "CRPS": 0.020020173380254934,
+              "WIS": 0.015034753443647629,
+              "MAE": 0.0260583966633248,
+              "coverage80": 0.7,
+              "coverage95": 0.8696969696969697,
+              "Brier": 0.007356245392338958
+            },
+            "probability_only": {
+              "MQS": 0.017801614238840763,
+              "CRPS": 0.020141758218429746,
+              "WIS": 0.015275777461715814,
+              "MAE": 0.026191296980046963,
+              "coverage80": 0.6787878787878788,
+              "coverage95": 0.8575757575757575,
+              "Brier": 0.007355635190046719
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.01781809758275529,
+              "CRPS": 0.02014890528197259,
+              "WIS": 0.015288175783021782,
+              "MAE": 0.026174913457489034,
+              "coverage80": 0.6787878787878788,
+              "coverage95": 0.8545454545454545,
+              "Brier": 0.007328522638202725
+            }
+          }
+        },
+        "10": {
+          "n": 327,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.02810462262311627,
+              "CRPS": 0.03143032681981785,
+              "WIS": 0.024518791806331527,
+              "MAE": 0.039676950678162924,
+              "coverage80": 0.5412844036697247,
+              "coverage95": 0.8165137614678899,
+              "Brier": 0.03462366412491319
+            },
+            "gaussian_constant": {
+              "MQS": 0.02782623442253147,
+              "CRPS": 0.031206514379220802,
+              "WIS": 0.024211951422303056,
+              "MAE": 0.03985886588265187,
+              "coverage80": 0.6207951070336392,
+              "coverage95": 0.7981651376146789,
+              "Brier": 0.01529051987767584
+            },
+            "uniform_static": {
+              "MQS": 0.02806886226706024,
+              "CRPS": 0.03143032578613694,
+              "WIS": 0.024465777025621447,
+              "MAE": 0.039676950678162924,
+              "coverage80": 0.5382262996941896,
+              "coverage95": 0.8226299694189603,
+              "Brier": 0.03379378958934558
+            },
+            "uniform_rule": {
+              "MQS": 0.027780183620417575,
+              "CRPS": 0.03114435733047732,
+              "WIS": 0.02418363294604971,
+              "MAE": 0.03974594045633593,
+              "coverage80": 0.5626911314984709,
+              "coverage95": 0.8226299694189603,
+              "Brier": 0.015967222227274896
+            },
+            "tilt_static": {
+              "MQS": 0.027371914889207982,
+              "CRPS": 0.030727092113132688,
+              "WIS": 0.023781904942883007,
+              "MAE": 0.03941923302837167,
+              "coverage80": 0.6238532110091743,
+              "coverage95": 0.8440366972477065,
+              "Brier": 0.03379378958934558
+            },
+            "tilt_rule": {
+              "MQS": 0.027094556517572654,
+              "CRPS": 0.030507490952854294,
+              "WIS": 0.02348966475313541,
+              "MAE": 0.03928584481736168,
+              "coverage80": 0.6483180428134556,
+              "coverage95": 0.8440366972477065,
+              "Brier": 0.015967222227274896
+            },
+            "tilt_neural": {
+              "MQS": 0.027218790635194733,
+              "CRPS": 0.03063527774169719,
+              "WIS": 0.023599885392580715,
+              "MAE": 0.03934991125564299,
+              "coverage80": 0.6085626911314985,
+              "coverage95": 0.8440366972477065,
+              "Brier": 0.015982904182468997
+            },
+            "probability_only": {
+              "MQS": 0.02776787250654745,
+              "CRPS": 0.03114052952047402,
+              "WIS": 0.024174549532113225,
+              "MAE": 0.039663416474867416,
+              "coverage80": 0.5626911314984709,
+              "coverage95": 0.8226299694189603,
+              "Brier": 0.016112617466202437
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.027706384732172473,
+              "CRPS": 0.03110722430332476,
+              "WIS": 0.024089847884198667,
+              "MAE": 0.03974396683644888,
+              "coverage80": 0.5718654434250765,
+              "coverage95": 0.8348623853211009,
+              "Brier": 0.0159507370279113
+            }
+          }
+        },
+        "20": {
+          "n": 322,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.04776616049028883,
+              "CRPS": 0.053864330553473484,
+              "WIS": 0.04153763343545894,
+              "MAE": 0.0683720261919509,
+              "coverage80": 0.4472049689440994,
+              "coverage95": 0.7732919254658385,
+              "Brier": 0.016514188657439362
+            },
+            "gaussian_constant": {
+              "MQS": 0.047262664641811405,
+              "CRPS": 0.05300071932188905,
+              "WIS": 0.041164713776840424,
+              "MAE": 0.06776705815058573,
+              "coverage80": 0.5186335403726708,
+              "coverage95": 0.7329192546583851,
+              "Brier": 0.003105590062111801
+            },
+            "uniform_static": {
+              "MQS": 0.04764597296919912,
+              "CRPS": 0.05386432922284383,
+              "WIS": 0.041378042160836244,
+              "MAE": 0.06837202619199644,
+              "coverage80": 0.4472049689440994,
+              "coverage95": 0.7888198757763976,
+              "Brier": 0.015740946605972212
+            },
+            "uniform_rule": {
+              "MQS": 0.047234764581417045,
+              "CRPS": 0.053313213317122306,
+              "WIS": 0.0409416840238216,
+              "MAE": 0.06782606560555714,
+              "coverage80": 0.4782608695652174,
+              "coverage95": 0.7888198757763976,
+              "Brier": 0.003919996938543174
+            },
+            "tilt_static": {
+              "MQS": 0.04564306902107131,
+              "CRPS": 0.05162438190988365,
+              "WIS": 0.039271136061904875,
+              "MAE": 0.06607126945899088,
+              "coverage80": 0.5341614906832298,
+              "coverage95": 0.8012422360248447,
+              "Brier": 0.015740946605972212
+            },
+            "tilt_rule": {
+              "MQS": 0.0450267951162963,
+              "CRPS": 0.05106011375006762,
+              "WIS": 0.03860225397988722,
+              "MAE": 0.06633864314699449,
+              "coverage80": 0.546583850931677,
+              "coverage95": 0.8012422360248447,
+              "Brier": 0.003919996938543174
+            },
+            "tilt_neural": {
+              "MQS": 0.0454483343950997,
+              "CRPS": 0.05160705336041287,
+              "WIS": 0.0389454524055423,
+              "MAE": 0.066533457709754,
+              "coverage80": 0.5217391304347826,
+              "coverage95": 0.8012422360248447,
+              "Brier": 0.003910128011690941
+            },
+            "probability_only": {
+              "MQS": 0.047235167626126284,
+              "CRPS": 0.05331473592664383,
+              "WIS": 0.04094182132718339,
+              "MAE": 0.06782551322850541,
+              "coverage80": 0.4782608695652174,
+              "coverage95": 0.7888198757763976,
+              "Brier": 0.003984941261349723
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.0471290456207962,
+              "CRPS": 0.05316047197657542,
+              "WIS": 0.04080212191804568,
+              "MAE": 0.06781203001154242,
+              "coverage80": 0.484472049689441,
+              "coverage95": 0.7981366459627329,
+              "Brier": 0.003905753056365313
+            }
+          }
+        }
+      },
+      "uniform_ecdf_CRPS_max_error": 2.9512874005765966e-08
+    },
+    "GUANGZHOU": {
+      "audit": {
+        "cut_index": 2178,
+        "validation_start_index": 1633,
+        "lookback": 128,
+        "step": 2,
+        "train": 2993,
+        "validation": 1071,
+        "refit": 4083,
+        "test": 1305,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 1632,
+        "last_refit_target": 2177,
+        "test_zero_share": {
+          "1": 0.18787878787878787,
+          "5": 0.012195121951219513,
+          "10": 0.006134969325153374,
+          "20": 0.009345794392523364
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "fits": {
+        "uniform_static": [
+          {
+            "seed": 11,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          }
+        ],
+        "uniform_rule": [
+          {
+            "seed": 11,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          }
+        ],
+        "tilt_static": [
+          {
+            "seed": 11,
+            "best_epoch": 8,
+            "validation_normalized_macro_pinball": 0.2161032259464264,
+            "epochs_run": 30,
+            "eligible_training_queries": 2849,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 11,
+            "validation_normalized_macro_pinball": 0.2132570594549179,
+            "epochs_run": 30,
+            "eligible_training_queries": 2849,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_rule": [
+          {
+            "seed": 11,
+            "best_epoch": 8,
+            "validation_normalized_macro_pinball": 0.21624045073986053,
+            "epochs_run": 30,
+            "eligible_training_queries": 2849,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 11,
+            "validation_normalized_macro_pinball": 0.21344062685966492,
+            "epochs_run": 30,
+            "eligible_training_queries": 2849,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_neural": [
+          {
+            "seed": 11,
+            "best_epoch": 8,
+            "validation_normalized_macro_pinball": 0.2162903994321823,
+            "epochs_run": 30,
+            "eligible_training_queries": 2849,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 11,
+            "validation_normalized_macro_pinball": 0.21346928179264069,
+            "epochs_run": 30,
+            "eligible_training_queries": 2849,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "probability_only": [
+          {
+            "seed": 11,
+            "best_epoch": 21,
+            "validation_normalized_macro_pinball": 0.21754437685012817,
+            "epochs_run": 37,
+            "eligible_training_queries": 2849,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 25,
+            "validation_normalized_macro_pinball": 0.21754397451877594,
+            "epochs_run": 41,
+            "eligible_training_queries": 2849,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_neural_no_context": [
+          {
+            "seed": 11,
+            "best_epoch": 5,
+            "validation_normalized_macro_pinball": 0.21673496067523956,
+            "epochs_run": 30,
+            "eligible_training_queries": 2849,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 10,
+            "validation_normalized_macro_pinball": 0.21430149674415588,
+            "epochs_run": 30,
+            "eligible_training_queries": 2849,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 330,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.016464158265310874,
+              "CRPS": 0.018725135345011402,
+              "WIS": 0.01412448148791218,
+              "MAE": 0.022850698401253523,
+              "coverage80": 0.8181818181818182,
+              "coverage95": 0.9181818181818182,
+              "Brier": 0.1759359010415917
+            },
+            "gaussian_constant": {
+              "MQS": 0.016911744588398676,
+              "CRPS": 0.019348667221335082,
+              "WIS": 0.01432293147290157,
+              "MAE": 0.02293577045317377,
+              "coverage80": 0.8121212121212121,
+              "coverage95": 0.9121212121212121,
+              "Brier": 0.18787878787878787
+            },
+            "uniform_static": {
+              "MQS": 0.016464224551743258,
+              "CRPS": 0.018725136241558298,
+              "WIS": 0.014123787005376691,
+              "MAE": 0.022850698401253523,
+              "coverage80": 0.8181818181818182,
+              "coverage95": 0.9181818181818182,
+              "Brier": 0.176214005710943
+            },
+            "uniform_rule": {
+              "MQS": 0.01629728965105034,
+              "CRPS": 0.018509388445232665,
+              "WIS": 0.014012673905925681,
+              "MAE": 0.022850698401253523,
+              "coverage80": 0.8,
+              "coverage95": 0.9181818181818182,
+              "Brier": 0.15130448517114503
+            },
+            "tilt_static": {
+              "MQS": 0.0159809402009893,
+              "CRPS": 0.018267810991000045,
+              "WIS": 0.013586123304731409,
+              "MAE": 0.02290749217433365,
+              "coverage80": 0.7727272727272727,
+              "coverage95": 0.906060606060606,
+              "Brier": 0.176214005710943
+            },
+            "tilt_rule": {
+              "MQS": 0.015896134649983063,
+              "CRPS": 0.018167116039220027,
+              "WIS": 0.013541354053111434,
+              "MAE": 0.022842625710073977,
+              "coverage80": 0.7636363636363637,
+              "coverage95": 0.906060606060606,
+              "Brier": 0.15130448517114503
+            },
+            "tilt_neural": {
+              "MQS": 0.01588141501495992,
+              "CRPS": 0.018154865577322016,
+              "WIS": 0.013524197980971766,
+              "MAE": 0.022837628823102512,
+              "coverage80": 0.7696969696969697,
+              "coverage95": 0.906060606060606,
+              "Brier": 0.1512171561336476
+            },
+            "probability_only": {
+              "MQS": 0.01633133757380819,
+              "CRPS": 0.018576118117591713,
+              "WIS": 0.013999333093172613,
+              "MAE": 0.02285143441889652,
+              "coverage80": 0.8121212121212121,
+              "coverage95": 0.9181818181818182,
+              "Brier": 0.16894032894540773
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.01594763769367024,
+              "CRPS": 0.018209763272111032,
+              "WIS": 0.013598212100067217,
+              "MAE": 0.0228426879969651,
+              "coverage80": 0.7636363636363637,
+              "coverage95": 0.906060606060606,
+              "Brier": 0.1507957187212304
+            }
+          }
+        },
+        "5": {
+          "n": 328,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.025349274823524972,
+              "CRPS": 0.028946782543482808,
+              "WIS": 0.021652735400832426,
+              "MAE": 0.03736157761584576,
+              "coverage80": 0.8262195121951219,
+              "coverage95": 0.9603658536585366,
+              "Brier": 0.012099940511600238
+            },
+            "gaussian_constant": {
+              "MQS": 0.026597994425319377,
+              "CRPS": 0.03037753598717172,
+              "WIS": 0.02265645758787722,
+              "MAE": 0.03769340205705713,
+              "coverage80": 0.8658536585365854,
+              "coverage95": 0.9573170731707317,
+              "Brier": 0.012195121951219513
+            },
+            "uniform_static": {
+              "MQS": 0.025356417177757575,
+              "CRPS": 0.02894678024716482,
+              "WIS": 0.02166128961311408,
+              "MAE": 0.0373615776301803,
+              "coverage80": 0.8262195121951219,
+              "coverage95": 0.9634146341463414,
+              "Brier": 0.01211504312551569
+            },
+            "uniform_rule": {
+              "MQS": 0.025339368363066685,
+              "CRPS": 0.02892237459096675,
+              "WIS": 0.02164397102955828,
+              "MAE": 0.03726347236287519,
+              "coverage80": 0.8262195121951219,
+              "coverage95": 0.9603658536585366,
+              "Brier": 0.012178658146846757
+            },
+            "tilt_static": {
+              "MQS": 0.02446112888820932,
+              "CRPS": 0.028112879082288,
+              "WIS": 0.02061266724469675,
+              "MAE": 0.03706664359017699,
+              "coverage80": 0.8170731707317073,
+              "coverage95": 0.9390243902439024,
+              "Brier": 0.01211504312551569
+            },
+            "tilt_rule": {
+              "MQS": 0.024446525581185912,
+              "CRPS": 0.028095409514279954,
+              "WIS": 0.02060222891922213,
+              "MAE": 0.03702658892488179,
+              "coverage80": 0.8201219512195121,
+              "coverage95": 0.9390243902439024,
+              "Brier": 0.012178658146846757
+            },
+            "tilt_neural": {
+              "MQS": 0.024445614802658118,
+              "CRPS": 0.02809383764468707,
+              "WIS": 0.02060232939700788,
+              "MAE": 0.03702676210961191,
+              "coverage80": 0.8201219512195121,
+              "coverage95": 0.9390243902439024,
+              "Brier": 0.012165007241075514
+            },
+            "probability_only": {
+              "MQS": 0.025341769520712987,
+              "CRPS": 0.028923163277737075,
+              "WIS": 0.02164848658444421,
+              "MAE": 0.03732956105961513,
+              "coverage80": 0.8262195121951219,
+              "coverage95": 0.9634146341463414,
+              "Brier": 0.012096380983887493
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.0247881131824803,
+              "CRPS": 0.028463739105735218,
+              "WIS": 0.020952223224735785,
+              "MAE": 0.037340595979693414,
+              "coverage80": 0.801829268292683,
+              "coverage95": 0.9390243902439024,
+              "Brier": 0.012183437019355724
+            }
+          }
+        },
+        "10": {
+          "n": 326,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.02875845953457394,
+              "CRPS": 0.032058001847733615,
+              "WIS": 0.02534485698893364,
+              "MAE": 0.03941540431905518,
+              "coverage80": 0.8834355828220859,
+              "coverage95": 0.9631901840490797,
+              "Brier": 0.006097401240047541
+            },
+            "gaussian_constant": {
+              "MQS": 0.03139403484156123,
+              "CRPS": 0.03518604373553314,
+              "WIS": 0.027494257521634622,
+              "MAE": 0.040936215139442275,
+              "coverage80": 0.9079754601226994,
+              "coverage95": 0.9570552147239264,
+              "Brier": 0.006134969325153374
+            },
+            "uniform_static": {
+              "MQS": 0.028800038948966076,
+              "CRPS": 0.032057999381600366,
+              "WIS": 0.02539589128431886,
+              "MAE": 0.03942217529495075,
+              "coverage80": 0.8834355828220859,
+              "coverage95": 0.9631901840490797,
+              "Brier": 0.006098851824061854
+            },
+            "uniform_rule": {
+              "MQS": 0.028734933008284645,
+              "CRPS": 0.03200961160078554,
+              "WIS": 0.02532821215688172,
+              "MAE": 0.03938331003647433,
+              "coverage80": 0.8834355828220859,
+              "coverage95": 0.9631901840490797,
+              "Brier": 0.006118139397822794
+            },
+            "tilt_static": {
+              "MQS": 0.027210044412643013,
+              "CRPS": 0.030618783435422074,
+              "WIS": 0.02360797977667656,
+              "MAE": 0.03897525400623156,
+              "coverage80": 0.8803680981595092,
+              "coverage95": 0.950920245398773,
+              "Brier": 0.006098851824061854
+            },
+            "tilt_rule": {
+              "MQS": 0.027235299213105264,
+              "CRPS": 0.030621378028152083,
+              "WIS": 0.02365102028813409,
+              "MAE": 0.0388868861281482,
+              "coverage80": 0.8803680981595092,
+              "coverage95": 0.950920245398773,
+              "Brier": 0.006118139397822794
+            },
+            "tilt_neural": {
+              "MQS": 0.027243874573747075,
+              "CRPS": 0.030627982818415684,
+              "WIS": 0.023662440425338365,
+              "MAE": 0.03887888365449922,
+              "coverage80": 0.8803680981595092,
+              "coverage95": 0.950920245398773,
+              "Brier": 0.006116601602958814
+            },
+            "probability_only": {
+              "MQS": 0.0287605900095058,
+              "CRPS": 0.032025515358940375,
+              "WIS": 0.02536250186787793,
+              "MAE": 0.039392866704854465,
+              "coverage80": 0.8865030674846626,
+              "coverage95": 0.9631901840490797,
+              "Brier": 0.006153139713859336
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.02777560761162066,
+              "CRPS": 0.031244866758430457,
+              "WIS": 0.024100125989887776,
+              "MAE": 0.03960129533171075,
+              "coverage80": 0.8834355828220859,
+              "coverage95": 0.9447852760736196,
+              "Brier": 0.006124240833243336
+            }
+          }
+        },
+        "20": {
+          "n": 321,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.039862923426927384,
+              "CRPS": 0.044413151217012524,
+              "WIS": 0.035063010112718444,
+              "MAE": 0.05454297750443206,
+              "coverage80": 0.8785046728971962,
+              "coverage95": 0.956386292834891,
+              "Brier": 0.009299358592294242
+            },
+            "gaussian_constant": {
+              "MQS": 0.043690562938899835,
+              "CRPS": 0.0491768296255996,
+              "WIS": 0.03807585882384809,
+              "MAE": 0.05925559640572335,
+              "coverage80": 0.9127725856697819,
+              "coverage95": 0.9626168224299065,
+              "Brier": 0.009345794392523364
+            },
+            "uniform_static": {
+              "MQS": 0.03988160466695979,
+              "CRPS": 0.044413149966218396,
+              "WIS": 0.03509439347444942,
+              "MAE": 0.054542977634522684,
+              "coverage80": 0.8785046728971962,
+              "coverage95": 0.956386292834891,
+              "Brier": 0.009312845930304488
+            },
+            "uniform_rule": {
+              "MQS": 0.039791142820216764,
+              "CRPS": 0.04432494711825652,
+              "WIS": 0.034997021870090274,
+              "MAE": 0.054278639717095165,
+              "coverage80": 0.8785046728971962,
+              "coverage95": 0.956386292834891,
+              "Brier": 0.009289167578040587
+            },
+            "tilt_static": {
+              "MQS": 0.037354090580660304,
+              "CRPS": 0.04204590092506896,
+              "WIS": 0.032391088882325024,
+              "MAE": 0.05355009983276846,
+              "coverage80": 0.8660436137071651,
+              "coverage95": 0.9345794392523364,
+              "Brier": 0.009312845930304488
+            },
+            "tilt_rule": {
+              "MQS": 0.037383911525318066,
+              "CRPS": 0.04204844410316806,
+              "WIS": 0.0324463766041612,
+              "MAE": 0.053327058815128094,
+              "coverage80": 0.8722741433021807,
+              "coverage95": 0.9345794392523364,
+              "Brier": 0.009289167578040587
+            },
+            "tilt_neural": {
+              "MQS": 0.037400669545064505,
+              "CRPS": 0.04206323963843976,
+              "WIS": 0.03246504183312953,
+              "MAE": 0.05333864666279742,
+              "coverage80": 0.8722741433021807,
+              "coverage95": 0.9345794392523364,
+              "Brier": 0.009284722044026802
+            },
+            "probability_only": {
+              "MQS": 0.03984635366988594,
+              "CRPS": 0.04435256632580344,
+              "WIS": 0.03505214291800623,
+              "MAE": 0.05435203579235842,
+              "coverage80": 0.8785046728971962,
+              "coverage95": 0.956386292834891,
+              "Brier": 0.00927120058924725
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.03844938556235308,
+              "CRPS": 0.043191796976157555,
+              "WIS": 0.03330818650229776,
+              "MAE": 0.054495536398732856,
+              "coverage80": 0.8598130841121495,
+              "coverage95": 0.9283489096573209,
+              "Brier": 0.009285257707358472
+            }
+          }
+        }
+      },
+      "uniform_ecdf_CRPS_max_error": 3.513816998479413e-08
+    },
+    "SHANGHAI": {
+      "audit": {
+        "cut_index": 1507,
+        "validation_start_index": 1130,
+        "lookback": 128,
+        "step": 2,
+        "train": 1987,
+        "validation": 737,
+        "refit": 2741,
+        "test": 503,
+        "boundary_rows_recovered_for_refit": 17,
+        "last_train_target": 1129,
+        "last_refit_target": 1506,
+        "test_zero_share": {
+          "1": 0.13076923076923078,
+          "5": 0.0703125,
+          "10": 0.008,
+          "20": 0.008333333333333333
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "fits": {
+        "uniform_static": [
+          {
+            "seed": 11,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          }
+        ],
+        "uniform_rule": [
+          {
+            "seed": 11,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          }
+        ],
+        "tilt_static": [
+          {
+            "seed": 11,
+            "best_epoch": 17,
+            "validation_normalized_macro_pinball": 0.14197731018066406,
+            "epochs_run": 33,
+            "eligible_training_queries": 1826,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 12,
+            "validation_normalized_macro_pinball": 0.1443224549293518,
+            "epochs_run": 30,
+            "eligible_training_queries": 1826,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_rule": [
+          {
+            "seed": 11,
+            "best_epoch": 17,
+            "validation_normalized_macro_pinball": 0.14100606739521027,
+            "epochs_run": 33,
+            "eligible_training_queries": 1826,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 12,
+            "validation_normalized_macro_pinball": 0.1432492583990097,
+            "epochs_run": 30,
+            "eligible_training_queries": 1826,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_neural": [
+          {
+            "seed": 11,
+            "best_epoch": 16,
+            "validation_normalized_macro_pinball": 0.14150168001651764,
+            "epochs_run": 32,
+            "eligible_training_queries": 1826,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 11,
+            "validation_normalized_macro_pinball": 0.1433628648519516,
+            "epochs_run": 30,
+            "eligible_training_queries": 1826,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "probability_only": [
+          {
+            "seed": 11,
+            "best_epoch": 17,
+            "validation_normalized_macro_pinball": 0.1456024944782257,
+            "epochs_run": 33,
+            "eligible_training_queries": 1826,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 18,
+            "validation_normalized_macro_pinball": 0.14555712044239044,
+            "epochs_run": 34,
+            "eligible_training_queries": 1826,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_neural_no_context": [
+          {
+            "seed": 11,
+            "best_epoch": 19,
+            "validation_normalized_macro_pinball": 0.14110000431537628,
+            "epochs_run": 35,
+            "eligible_training_queries": 1826,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 16,
+            "validation_normalized_macro_pinball": 0.14194193482398987,
+            "epochs_run": 32,
+            "eligible_training_queries": 1826,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 130,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.013760715185290233,
+              "CRPS": 0.01508117786886689,
+              "WIS": 0.012384842894849363,
+              "MAE": 0.017606065913047662,
+              "coverage80": 0.7846153846153846,
+              "coverage95": 0.8615384615384616,
+              "Brier": 0.11378213518926973
+            },
+            "gaussian_constant": {
+              "MQS": 0.014408678893590626,
+              "CRPS": 0.016066124589557668,
+              "WIS": 0.012621937289039943,
+              "MAE": 0.017669503760919626,
+              "coverage80": 0.8,
+              "coverage95": 0.8615384615384616,
+              "Brier": 0.13076923076923078
+            },
+            "uniform_static": {
+              "MQS": 0.01376162489104301,
+              "CRPS": 0.015081177997336586,
+              "WIS": 0.012384722977431926,
+              "MAE": 0.017606065913047662,
+              "coverage80": 0.7846153846153846,
+              "coverage95": 0.8615384615384616,
+              "Brier": 0.11380684634435913
+            },
+            "uniform_rule": {
+              "MQS": 0.01369651706060654,
+              "CRPS": 0.01502416078363818,
+              "WIS": 0.012314537446229627,
+              "MAE": 0.017606065913047662,
+              "coverage80": 0.7769230769230769,
+              "coverage95": 0.8615384615384616,
+              "Brier": 0.11517594025239009
+            },
+            "tilt_static": {
+              "MQS": 0.013102400755661355,
+              "CRPS": 0.014695204386158576,
+              "WIS": 0.011480358947429825,
+              "MAE": 0.017680828824848803,
+              "coverage80": 0.8,
+              "coverage95": 0.9307692307692308,
+              "Brier": 0.11380684634435913
+            },
+            "tilt_rule": {
+              "MQS": 0.01305707651576822,
+              "CRPS": 0.014655038047898524,
+              "WIS": 0.011424780508832291,
+              "MAE": 0.017681156978814103,
+              "coverage80": 0.7923076923076923,
+              "coverage95": 0.9384615384615385,
+              "Brier": 0.11517594025239009
+            },
+            "tilt_neural": {
+              "MQS": 0.01305160948839579,
+              "CRPS": 0.014644374912443862,
+              "WIS": 0.011425651513362178,
+              "MAE": 0.017691733550447772,
+              "coverage80": 0.7923076923076923,
+              "coverage95": 0.9384615384615385,
+              "Brier": 0.11668386067002062
+            },
+            "probability_only": {
+              "MQS": 0.013543660391834295,
+              "CRPS": 0.014902956842610969,
+              "WIS": 0.012119039525324752,
+              "MAE": 0.017606065913047662,
+              "coverage80": 0.7692307692307693,
+              "coverage95": 0.8615384615384616,
+              "Brier": 0.1237303086597342
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.013092448550943648,
+              "CRPS": 0.014700189110550543,
+              "WIS": 0.011414977371886615,
+              "MAE": 0.017831692112821502,
+              "coverage80": 0.8076923076923077,
+              "coverage95": 0.9538461538461539,
+              "Brier": 0.11705645665539954
+            }
+          }
+        },
+        "5": {
+          "n": 128,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.021841575857894827,
+              "CRPS": 0.024324808469346988,
+              "WIS": 0.01923774679850177,
+              "MAE": 0.029555951440876548,
+              "coverage80": 0.7734375,
+              "coverage95": 0.890625,
+              "Brier": 0.06608534605062763
+            },
+            "gaussian_constant": {
+              "MQS": 0.022542578700590052,
+              "CRPS": 0.025271338749936968,
+              "WIS": 0.019613553887602574,
+              "MAE": 0.029635258279226244,
+              "coverage80": 0.8046875,
+              "coverage95": 0.890625,
+              "Brier": 0.0703125
+            },
+            "uniform_static": {
+              "MQS": 0.021842003873457833,
+              "CRPS": 0.02432480928883986,
+              "WIS": 0.019239299924021284,
+              "MAE": 0.029555951440876548,
+              "coverage80": 0.7734375,
+              "coverage95": 0.890625,
+              "Brier": 0.06615825976576062
+            },
+            "uniform_rule": {
+              "MQS": 0.021838144114707667,
+              "CRPS": 0.024329044264971154,
+              "WIS": 0.019238314319310286,
+              "MAE": 0.029555951440876548,
+              "coverage80": 0.7734375,
+              "coverage95": 0.890625,
+              "Brier": 0.06633106157218949
+            },
+            "tilt_static": {
+              "MQS": 0.02111316548392921,
+              "CRPS": 0.02387474371188378,
+              "WIS": 0.018231361278109325,
+              "MAE": 0.029717325260064986,
+              "coverage80": 0.8046875,
+              "coverage95": 0.9375,
+              "Brier": 0.06615825976576062
+            },
+            "tilt_rule": {
+              "MQS": 0.021156157089955455,
+              "CRPS": 0.023917667251507246,
+              "WIS": 0.018279280537616314,
+              "MAE": 0.029718401198167363,
+              "coverage80": 0.7890625,
+              "coverage95": 0.9375,
+              "Brier": 0.06633106157218949
+            },
+            "tilt_neural": {
+              "MQS": 0.021131847154579247,
+              "CRPS": 0.023876917210714953,
+              "WIS": 0.018249515188718902,
+              "MAE": 0.029713914062978086,
+              "coverage80": 0.78125,
+              "coverage95": 0.9375,
+              "Brier": 0.06594236455836833
+            },
+            "probability_only": {
+              "MQS": 0.02172997775703528,
+              "CRPS": 0.024239569461596715,
+              "WIS": 0.019101352137073833,
+              "MAE": 0.029555951440876548,
+              "coverage80": 0.78125,
+              "coverage95": 0.8984375,
+              "Brier": 0.06584659742358523
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.021357646031682616,
+              "CRPS": 0.02418301065750937,
+              "WIS": 0.018415605268202795,
+              "MAE": 0.030095664584898832,
+              "coverage80": 0.7890625,
+              "coverage95": 0.9375,
+              "Brier": 0.06586129942172983
+            }
+          }
+        },
+        "10": {
+          "n": 125,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.02789887807275388,
+              "CRPS": 0.03094712999364753,
+              "WIS": 0.02471673524626922,
+              "MAE": 0.038318697640324535,
+              "coverage80": 0.768,
+              "coverage95": 0.904,
+              "Brier": 0.008216404043485906
+            },
+            "gaussian_constant": {
+              "MQS": 0.0288567239802069,
+              "CRPS": 0.03205793968191529,
+              "WIS": 0.025516562484279432,
+              "MAE": 0.038333939823211635,
+              "coverage80": 0.84,
+              "coverage95": 0.888,
+              "Brier": 0.008
+            },
+            "uniform_static": {
+              "MQS": 0.02789639089996096,
+              "CRPS": 0.030947130094042374,
+              "WIS": 0.02471277361451867,
+              "MAE": 0.03831869764168682,
+              "coverage80": 0.776,
+              "coverage95": 0.904,
+              "Brier": 0.008171858623112399
+            },
+            "uniform_rule": {
+              "MQS": 0.027913056419141248,
+              "CRPS": 0.030948411816047638,
+              "WIS": 0.024736768406031586,
+              "MAE": 0.03833546294469626,
+              "coverage80": 0.776,
+              "coverage95": 0.904,
+              "Brier": 0.008156207992617794
+            },
+            "tilt_static": {
+              "MQS": 0.027082780636299163,
+              "CRPS": 0.030306984098037903,
+              "WIS": 0.02371126159265224,
+              "MAE": 0.03798006574580602,
+              "coverage80": 0.816,
+              "coverage95": 0.904,
+              "Brier": 0.008171858623112399
+            },
+            "tilt_rule": {
+              "MQS": 0.027116545253151252,
+              "CRPS": 0.030362585396664483,
+              "WIS": 0.02373598842826024,
+              "MAE": 0.038082716208378664,
+              "coverage80": 0.816,
+              "coverage95": 0.904,
+              "Brier": 0.008156207992617794
+            },
+            "tilt_neural": {
+              "MQS": 0.02715552330458168,
+              "CRPS": 0.03038769718709721,
+              "WIS": 0.023768242495765736,
+              "MAE": 0.03820069854583124,
+              "coverage80": 0.816,
+              "coverage95": 0.904,
+              "Brier": 0.008153782668364584
+            },
+            "probability_only": {
+              "MQS": 0.027829716556802775,
+              "CRPS": 0.030921039507172655,
+              "WIS": 0.024630279946348137,
+              "MAE": 0.038380015215138286,
+              "coverage80": 0.776,
+              "coverage95": 0.912,
+              "Brier": 0.008270975908442182
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.027158379900692965,
+              "CRPS": 0.030450871762643588,
+              "WIS": 0.023736581698825664,
+              "MAE": 0.0380725443625234,
+              "coverage80": 0.824,
+              "coverage95": 0.912,
+              "Brier": 0.008176074921738235
+            }
+          }
+        },
+        "20": {
+          "n": 120,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.034825104717496884,
+              "CRPS": 0.03912072295531876,
+              "WIS": 0.030281504691559324,
+              "MAE": 0.04980270488340474,
+              "coverage80": 0.7583333333333333,
+              "coverage95": 0.875,
+              "Brier": 0.00827542762790138
+            },
+            "gaussian_constant": {
+              "MQS": 0.035339556627778844,
+              "CRPS": 0.03974030425375137,
+              "WIS": 0.03069773079089897,
+              "MAE": 0.04969153429740774,
+              "coverage80": 0.775,
+              "coverage95": 0.8666666666666667,
+              "Brier": 0.008333333333333333
+            },
+            "uniform_static": {
+              "MQS": 0.03484168854876534,
+              "CRPS": 0.03912072077439258,
+              "WIS": 0.030303798234035072,
+              "MAE": 0.04977773361401467,
+              "coverage80": 0.7583333333333333,
+              "coverage95": 0.875,
+              "Brier": 0.008267733649262017
+            },
+            "uniform_rule": {
+              "MQS": 0.03484718726758898,
+              "CRPS": 0.039131991373936185,
+              "WIS": 0.030314307003128222,
+              "MAE": 0.049761082401766285,
+              "coverage80": 0.7583333333333333,
+              "coverage95": 0.875,
+              "Brier": 0.008520698813305512
+            },
+            "tilt_static": {
+              "MQS": 0.03506731114754271,
+              "CRPS": 0.03978889646686753,
+              "WIS": 0.030143456127554025,
+              "MAE": 0.051572830228130626,
+              "coverage80": 0.775,
+              "coverage95": 0.8833333333333333,
+              "Brier": 0.008267733649262017
+            },
+            "tilt_rule": {
+              "MQS": 0.03508374442505265,
+              "CRPS": 0.03980753225474598,
+              "WIS": 0.030160158711764504,
+              "MAE": 0.05160421892177092,
+              "coverage80": 0.775,
+              "coverage95": 0.8833333333333333,
+              "Brier": 0.008520698813305512
+            },
+            "tilt_neural": {
+              "MQS": 0.03494694446737842,
+              "CRPS": 0.039637948941588945,
+              "WIS": 0.030071160072400873,
+              "MAE": 0.05146523137762609,
+              "coverage80": 0.775,
+              "coverage95": 0.8833333333333333,
+              "Brier": 0.008508195375803022
+            },
+            "probability_only": {
+              "MQS": 0.03478996585481206,
+              "CRPS": 0.03910024194659651,
+              "WIS": 0.030243704487527435,
+              "MAE": 0.05004699078241468,
+              "coverage80": 0.7583333333333333,
+              "coverage95": 0.875,
+              "Brier": 0.008622101446408662
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.035828696304486575,
+              "CRPS": 0.040691483555907466,
+              "WIS": 0.030789051120313923,
+              "MAE": 0.05234532992053067,
+              "coverage80": 0.75,
+              "coverage95": 0.8916666666666667,
+              "Brier": 0.008536647914671925
+            }
+          }
+        }
+      },
+      "uniform_ecdf_CRPS_max_error": 4.270140435691516e-08
+    },
+    "HUBEI": {
+      "audit": {
+        "cut_index": 1173,
+        "validation_start_index": 879,
+        "lookback": 128,
+        "step": 2,
+        "train": 1485,
+        "validation": 569,
+        "refit": 2073,
+        "test": 567,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 878,
+        "last_refit_target": 1172,
+        "test_zero_share": {
+          "1": 0.0547945205479452,
+          "5": 0.006944444444444444,
+          "10": 0.014184397163120567,
+          "20": 0.007352941176470588
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "fits": {
+        "uniform_static": [
+          {
+            "seed": 11,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          }
+        ],
+        "uniform_rule": [
+          {
+            "seed": 11,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          }
+        ],
+        "tilt_static": [
+          {
+            "seed": 11,
+            "best_epoch": 4,
+            "validation_normalized_macro_pinball": 0.23185484111309052,
+            "epochs_run": 30,
+            "eligible_training_queries": 1340,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 6,
+            "validation_normalized_macro_pinball": 0.23195116221904755,
+            "epochs_run": 30,
+            "eligible_training_queries": 1340,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_rule": [
+          {
+            "seed": 11,
+            "best_epoch": 4,
+            "validation_normalized_macro_pinball": 0.23191991448402405,
+            "epochs_run": 30,
+            "eligible_training_queries": 1340,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 5,
+            "validation_normalized_macro_pinball": 0.23207898437976837,
+            "epochs_run": 30,
+            "eligible_training_queries": 1340,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_neural": [
+          {
+            "seed": 11,
+            "best_epoch": 4,
+            "validation_normalized_macro_pinball": 0.23190723359584808,
+            "epochs_run": 30,
+            "eligible_training_queries": 1340,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 5,
+            "validation_normalized_macro_pinball": 0.23206010460853577,
+            "epochs_run": 30,
+            "eligible_training_queries": 1340,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "probability_only": [
+          {
+            "seed": 11,
+            "best_epoch": 26,
+            "validation_normalized_macro_pinball": 0.23185281455516815,
+            "epochs_run": 42,
+            "eligible_training_queries": 1340,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 28,
+            "validation_normalized_macro_pinball": 0.23180168867111206,
+            "epochs_run": 44,
+            "eligible_training_queries": 1340,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_neural_no_context": [
+          {
+            "seed": 11,
+            "best_epoch": 20,
+            "validation_normalized_macro_pinball": 0.23137211799621582,
+            "epochs_run": 36,
+            "eligible_training_queries": 1340,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": 0.23212158679962158,
+            "epochs_run": 30,
+            "eligible_training_queries": 1340,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 146,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.010852571844236374,
+              "CRPS": 0.012304251235951913,
+              "WIS": 0.009350194396272755,
+              "MAE": 0.01549152800060233,
+              "coverage80": 0.7191780821917808,
+              "coverage95": 0.958904109589041,
+              "Brier": 0.05191092138673784
+            },
+            "gaussian_constant": {
+              "MQS": 0.010949048065134836,
+              "CRPS": 0.01248816790178843,
+              "WIS": 0.00934243114914455,
+              "MAE": 0.015485808375344948,
+              "coverage80": 0.8287671232876712,
+              "coverage95": 0.9383561643835616,
+              "Brier": 0.0547945205479452
+            },
+            "uniform_static": {
+              "MQS": 0.010851800063865583,
+              "CRPS": 0.012304250479481927,
+              "WIS": 0.00934934966813194,
+              "MAE": 0.01549152800060233,
+              "coverage80": 0.7191780821917808,
+              "coverage95": 0.958904109589041,
+              "Brier": 0.05195207600756763
+            },
+            "uniform_rule": {
+              "MQS": 0.010840608108694218,
+              "CRPS": 0.012286923057094975,
+              "WIS": 0.009338033366861573,
+              "MAE": 0.01549152800060233,
+              "coverage80": 0.7191780821917808,
+              "coverage95": 0.958904109589041,
+              "Brier": 0.05136535937471155
+            },
+            "tilt_static": {
+              "MQS": 0.010832845235891453,
+              "CRPS": 0.012284766416788677,
+              "WIS": 0.009327163954361345,
+              "MAE": 0.01549152800060233,
+              "coverage80": 0.726027397260274,
+              "coverage95": 0.958904109589041,
+              "Brier": 0.05195207600756763
+            },
+            "tilt_rule": {
+              "MQS": 0.010823339717509225,
+              "CRPS": 0.012272992341683686,
+              "WIS": 0.009318049883956308,
+              "MAE": 0.01549152800060233,
+              "coverage80": 0.726027397260274,
+              "coverage95": 0.958904109589041,
+              "Brier": 0.05136535937471155
+            },
+            "tilt_neural": {
+              "MQS": 0.010823658292224038,
+              "CRPS": 0.012272758149205275,
+              "WIS": 0.009318383193266784,
+              "MAE": 0.01549152800060233,
+              "coverage80": 0.726027397260274,
+              "coverage95": 0.958904109589041,
+              "Brier": 0.051376143810829895
+            },
+            "probability_only": {
+              "MQS": 0.010837694512642063,
+              "CRPS": 0.012287778194472318,
+              "WIS": 0.009332985645036977,
+              "MAE": 0.01549152800060233,
+              "coverage80": 0.7191780821917808,
+              "coverage95": 0.958904109589041,
+              "Brier": 0.05395208806065645
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.010634391978829488,
+              "CRPS": 0.012105750369987222,
+              "WIS": 0.009106246649963252,
+              "MAE": 0.015439755990127965,
+              "coverage80": 0.7602739726027398,
+              "coverage95": 0.9657534246575342,
+              "Brier": 0.05125665874296746
+            }
+          }
+        },
+        "5": {
+          "n": 144,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.014656527521390498,
+              "CRPS": 0.01673976999684026,
+              "WIS": 0.012494947846099443,
+              "MAE": 0.021403036354446577,
+              "coverage80": 0.7986111111111112,
+              "coverage95": 0.9722222222222222,
+              "Brier": 0.006916919892544147
+            },
+            "gaussian_constant": {
+              "MQS": 0.01586009044658972,
+              "CRPS": 0.01811926878684139,
+              "WIS": 0.013511605729844202,
+              "MAE": 0.022229983968410656,
+              "coverage80": 0.8888888888888888,
+              "coverage95": 0.9791666666666666,
+              "Brier": 0.006944444444444444
+            },
+            "uniform_static": {
+              "MQS": 0.01466987626307729,
+              "CRPS": 0.016739771810243224,
+              "WIS": 0.012507008436211648,
+              "MAE": 0.021414495121111973,
+              "coverage80": 0.7986111111111112,
+              "coverage95": 0.9722222222222222,
+              "Brier": 0.00690335293473786
+            },
+            "uniform_rule": {
+              "MQS": 0.014661186202923844,
+              "CRPS": 0.016733965869686653,
+              "WIS": 0.012505742224845545,
+              "MAE": 0.021437143878800982,
+              "coverage80": 0.7986111111111112,
+              "coverage95": 0.9791666666666666,
+              "Brier": 0.006957748488442365
+            },
+            "tilt_static": {
+              "MQS": 0.014573656708691929,
+              "CRPS": 0.01666574166030181,
+              "WIS": 0.012404205217530839,
+              "MAE": 0.021369607673667395,
+              "coverage80": 0.7986111111111112,
+              "coverage95": 0.9722222222222222,
+              "Brier": 0.00690335293473786
+            },
+            "tilt_rule": {
+              "MQS": 0.01457840196111546,
+              "CRPS": 0.016667918535389105,
+              "WIS": 0.012409818029028062,
+              "MAE": 0.021397044761172095,
+              "coverage80": 0.7916666666666666,
+              "coverage95": 0.9722222222222222,
+              "Brier": 0.006957748488442365
+            },
+            "tilt_neural": {
+              "MQS": 0.014576518449216501,
+              "CRPS": 0.016667732950143555,
+              "WIS": 0.012407068502377347,
+              "MAE": 0.02139299921783733,
+              "coverage80": 0.7916666666666666,
+              "coverage95": 0.9722222222222222,
+              "Brier": 0.0069666411822019774
+            },
+            "probability_only": {
+              "MQS": 0.01464705823513008,
+              "CRPS": 0.016722347716590723,
+              "WIS": 0.012484899110697762,
+              "MAE": 0.021454306823374736,
+              "coverage80": 0.7986111111111112,
+              "coverage95": 0.9722222222222222,
+              "Brier": 0.0073679614213133515
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.014405927822180463,
+              "CRPS": 0.016459180634802856,
+              "WIS": 0.012226747588026554,
+              "MAE": 0.021342568103451268,
+              "coverage80": 0.8333333333333334,
+              "coverage95": 0.9791666666666666,
+              "Brier": 0.0069652025927863116
+            }
+          }
+        },
+        "10": {
+          "n": 141,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.01670567589561366,
+              "CRPS": 0.019234514826113148,
+              "WIS": 0.014089148762296687,
+              "MAE": 0.02535523362797787,
+              "coverage80": 0.8156028368794326,
+              "coverage95": 1.0,
+              "Brier": 0.013990201015569267
+            },
+            "gaussian_constant": {
+              "MQS": 0.018065030982732454,
+              "CRPS": 0.02079983156360267,
+              "WIS": 0.015211223383216173,
+              "MAE": 0.02652582171656043,
+              "coverage80": 0.9432624113475178,
+              "coverage95": 1.0,
+              "Brier": 0.014184397163120567
+            },
+            "uniform_static": {
+              "MQS": 0.016764753371640052,
+              "CRPS": 0.019234515296770633,
+              "WIS": 0.01416971073890009,
+              "MAE": 0.025336195975117513,
+              "coverage80": 0.8156028368794326,
+              "coverage95": 1.0,
+              "Brier": 0.01400373817397306
+            },
+            "uniform_rule": {
+              "MQS": 0.01673932741855102,
+              "CRPS": 0.019236943033888974,
+              "WIS": 0.014126029464296985,
+              "MAE": 0.025318613134630796,
+              "coverage80": 0.8156028368794326,
+              "coverage95": 1.0,
+              "Brier": 0.014106346418460458
+            },
+            "tilt_static": {
+              "MQS": 0.016579669040726365,
+              "CRPS": 0.019092938104354678,
+              "WIS": 0.013938184741425406,
+              "MAE": 0.025279853122305435,
+              "coverage80": 0.8156028368794326,
+              "coverage95": 1.0,
+              "Brier": 0.01400373817397306
+            },
+            "tilt_rule": {
+              "MQS": 0.01657956082682413,
+              "CRPS": 0.019100563174672482,
+              "WIS": 0.013929904830743104,
+              "MAE": 0.025217606283723656,
+              "coverage80": 0.8014184397163121,
+              "coverage95": 1.0,
+              "Brier": 0.014106346418460458
+            },
+            "tilt_neural": {
+              "MQS": 0.016579015479300505,
+              "CRPS": 0.01910090628759596,
+              "WIS": 0.013928560565812553,
+              "MAE": 0.02521511252657753,
+              "coverage80": 0.8014184397163121,
+              "coverage95": 1.0,
+              "Brier": 0.014110234881647428
+            },
+            "probability_only": {
+              "MQS": 0.016726520414505733,
+              "CRPS": 0.019232219589372133,
+              "WIS": 0.014106787602703329,
+              "MAE": 0.02530241939209572,
+              "coverage80": 0.8014184397163121,
+              "coverage95": 1.0,
+              "Brier": 0.014562062832317082
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.017119988203688315,
+              "CRPS": 0.019522104326839727,
+              "WIS": 0.01457901090212643,
+              "MAE": 0.02538522232918365,
+              "coverage80": 0.8368794326241135,
+              "coverage95": 1.0,
+              "Brier": 0.01405502584917154
+            }
+          }
+        },
+        "20": {
+          "n": 136,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.020605731884895888,
+              "CRPS": 0.023101202645605987,
+              "WIS": 0.017899768243125214,
+              "MAE": 0.029275966141497394,
+              "coverage80": 0.8897058823529411,
+              "coverage95": 0.9926470588235294,
+              "Brier": 0.007310912488286857
+            },
+            "gaussian_constant": {
+              "MQS": 0.022921705411521217,
+              "CRPS": 0.026100479087665173,
+              "WIS": 0.019693716893561114,
+              "MAE": 0.03233887730782541,
+              "coverage80": 0.9411764705882353,
+              "coverage95": 0.9852941176470589,
+              "Brier": 0.007352941176470588
+            },
+            "uniform_static": {
+              "MQS": 0.020665887380357958,
+              "CRPS": 0.023101202111952997,
+              "WIS": 0.017979589554845667,
+              "MAE": 0.02927596621229623,
+              "coverage80": 0.8897058823529411,
+              "coverage95": 0.9926470588235294,
+              "Brier": 0.007328074659145547
+            },
+            "uniform_rule": {
+              "MQS": 0.02062261211301104,
+              "CRPS": 0.023050990084357653,
+              "WIS": 0.017912694846059205,
+              "MAE": 0.029087116355790688,
+              "coverage80": 0.8897058823529411,
+              "coverage95": 0.9852941176470589,
+              "Brier": 0.007352899553321844
+            },
+            "tilt_static": {
+              "MQS": 0.02030705671933164,
+              "CRPS": 0.022822251728134537,
+              "WIS": 0.01755438310722048,
+              "MAE": 0.029158274182414103,
+              "coverage80": 0.8897058823529411,
+              "coverage95": 0.9926470588235294,
+              "Brier": 0.007328074659145547
+            },
+            "tilt_rule": {
+              "MQS": 0.020238840545576817,
+              "CRPS": 0.02277932162843039,
+              "WIS": 0.017490321308002932,
+              "MAE": 0.028923289551522197,
+              "coverage80": 0.8897058823529411,
+              "coverage95": 0.9926470588235294,
+              "Brier": 0.007352899553321844
+            },
+            "tilt_neural": {
+              "MQS": 0.020237171051002062,
+              "CRPS": 0.022779604116755028,
+              "WIS": 0.017488055745657725,
+              "MAE": 0.028920966299749162,
+              "coverage80": 0.8897058823529411,
+              "coverage95": 0.9926470588235294,
+              "Brier": 0.007347846207661934
+            },
+            "probability_only": {
+              "MQS": 0.020558285997739234,
+              "CRPS": 0.023015373642814932,
+              "WIS": 0.017852788993407157,
+              "MAE": 0.029085800009718464,
+              "coverage80": 0.8897058823529411,
+              "coverage95": 0.9926470588235294,
+              "Brier": 0.007381212011696385
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.02105289319573699,
+              "CRPS": 0.023513663784239996,
+              "WIS": 0.01844133023174206,
+              "MAE": 0.029155933475121902,
+              "coverage80": 0.9044117647058824,
+              "coverage95": 0.9926470588235294,
+              "Brier": 0.007326513970431727
+            }
+          }
+        }
+      },
+      "uniform_ecdf_CRPS_max_error": 1.1856824862210846e-08
+    },
+    "EU": {
+      "audit": {
+        "cut_index": 1257,
+        "validation_start_index": 942,
+        "lookback": 128,
+        "step": 2,
+        "train": 1611,
+        "validation": 613,
+        "refit": 2241,
+        "test": 621,
+        "boundary_rows_recovered_for_refit": 17,
+        "last_train_target": 941,
+        "last_refit_target": 1256,
+        "test_zero_share": {
+          "1": 0.006289308176100629,
+          "5": 0.0,
+          "10": 0.0,
+          "20": 0.0
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "fits": {
+        "uniform_static": [
+          {
+            "seed": 11,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          }
+        ],
+        "uniform_rule": [
+          {
+            "seed": 11,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": null,
+            "epochs_run": 0,
+            "eligible_training_queries": null,
+            "fit_kind": "fixed statistical control"
+          }
+        ],
+        "tilt_static": [
+          {
+            "seed": 11,
+            "best_epoch": 7,
+            "validation_normalized_macro_pinball": 0.2383241206407547,
+            "epochs_run": 30,
+            "eligible_training_queries": 1468,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": 0.23857447504997253,
+            "epochs_run": 30,
+            "eligible_training_queries": 1468,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_rule": [
+          {
+            "seed": 11,
+            "best_epoch": 3,
+            "validation_normalized_macro_pinball": 0.2382858246564865,
+            "epochs_run": 30,
+            "eligible_training_queries": 1468,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": 0.2385057657957077,
+            "epochs_run": 30,
+            "eligible_training_queries": 1468,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_neural": [
+          {
+            "seed": 11,
+            "best_epoch": 3,
+            "validation_normalized_macro_pinball": 0.23828473687171936,
+            "epochs_run": 30,
+            "eligible_training_queries": 1468,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": 0.2385057657957077,
+            "epochs_run": 30,
+            "eligible_training_queries": 1468,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "probability_only": [
+          {
+            "seed": 11,
+            "best_epoch": 30,
+            "validation_normalized_macro_pinball": 0.23843517899513245,
+            "epochs_run": 46,
+            "eligible_training_queries": 1468,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 27,
+            "validation_normalized_macro_pinball": 0.23845279216766357,
+            "epochs_run": 43,
+            "eligible_training_queries": 1468,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_neural_no_context": [
+          {
+            "seed": 11,
+            "best_epoch": 3,
+            "validation_normalized_macro_pinball": 0.2384461909532547,
+            "epochs_run": 30,
+            "eligible_training_queries": 1468,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          },
+          {
+            "seed": 22,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": 0.2385057657957077,
+            "epochs_run": 30,
+            "eligible_training_queries": 1468,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 159,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.010724129513051512,
+              "CRPS": 0.012596115768855023,
+              "WIS": 0.008737300450642605,
+              "MAE": 0.017459892416004978,
+              "coverage80": 0.7421383647798742,
+              "coverage95": 0.9622641509433962,
+              "Brier": 0.006250357797704772
+            },
+            "gaussian_constant": {
+              "MQS": 0.010640440067024408,
+              "CRPS": 0.012516525174555693,
+              "WIS": 0.008662842115644028,
+              "MAE": 0.017338808453656932,
+              "coverage80": 0.7924528301886793,
+              "coverage95": 0.9622641509433962,
+              "Brier": 0.006289308176100629
+            },
+            "uniform_static": {
+              "MQS": 0.010724052024666097,
+              "CRPS": 0.012596115784156833,
+              "WIS": 0.008736760071173588,
+              "MAE": 0.017443170444221494,
+              "coverage80": 0.7421383647798742,
+              "coverage95": 0.9622641509433962,
+              "Brier": 0.00625069393112268
+            },
+            "uniform_rule": {
+              "MQS": 0.010725199025935056,
+              "CRPS": 0.012598636439008281,
+              "WIS": 0.008737241099692199,
+              "MAE": 0.017436167261810444,
+              "coverage80": 0.7421383647798742,
+              "coverage95": 0.9622641509433962,
+              "Brier": 0.0062761145681604034
+            },
+            "tilt_static": {
+              "MQS": 0.010774088730341807,
+              "CRPS": 0.012674379798840542,
+              "WIS": 0.008759784075485944,
+              "MAE": 0.017535992664060664,
+              "coverage80": 0.7421383647798742,
+              "coverage95": 0.9622641509433962,
+              "Brier": 0.00625069393112268
+            },
+            "tilt_rule": {
+              "MQS": 0.010734982582023699,
+              "CRPS": 0.012616130492398077,
+              "WIS": 0.008739185131129902,
+              "MAE": 0.01746129679556216,
+              "coverage80": 0.7421383647798742,
+              "coverage95": 0.9622641509433962,
+              "Brier": 0.0062761145681604034
+            },
+            "tilt_neural": {
+              "MQS": 0.010735321065470173,
+              "CRPS": 0.012616062637370732,
+              "WIS": 0.008739389782415024,
+              "MAE": 0.017460235683993908,
+              "coverage80": 0.7421383647798742,
+              "coverage95": 0.9622641509433962,
+              "Brier": 0.006275419467131067
+            },
+            "probability_only": {
+              "MQS": 0.010721564473261265,
+              "CRPS": 0.012596184310506195,
+              "WIS": 0.008737707438088585,
+              "MAE": 0.017469775665715687,
+              "coverage80": 0.7421383647798742,
+              "coverage95": 0.9622641509433962,
+              "Brier": 0.006307365892239474
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.01073401125792504,
+              "CRPS": 0.012611391812446856,
+              "WIS": 0.008740672179384559,
+              "MAE": 0.017461058940393948,
+              "coverage80": 0.7421383647798742,
+              "coverage95": 0.9622641509433962,
+              "Brier": 0.006275181591402818
+            }
+          }
+        },
+        "5": {
+          "n": 157,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.025507969520760822,
+              "CRPS": 0.03008334293403916,
+              "WIS": 0.02060096846462515,
+              "MAE": 0.04251252832526756,
+              "coverage80": 0.6942675159235668,
+              "coverage95": 0.9299363057324841,
+              "Brier": 3.1437050450177666e-06
+            },
+            "gaussian_constant": {
+              "MQS": 0.025116366559216625,
+              "CRPS": 0.029685656793620604,
+              "WIS": 0.020222844945713733,
+              "MAE": 0.04225701093273183,
+              "coverage80": 0.7770700636942676,
+              "coverage95": 0.9363057324840764,
+              "Brier": 0.0
+            },
+            "uniform_static": {
+              "MQS": 0.025496458726974543,
+              "CRPS": 0.030083342009124447,
+              "WIS": 0.020593225611020376,
+              "MAE": 0.042509425145491705,
+              "coverage80": 0.6942675159235668,
+              "coverage95": 0.9299363057324841,
+              "Brier": 0.0
+            },
+            "uniform_rule": {
+              "MQS": 0.02552686666727068,
+              "CRPS": 0.03008531128010404,
+              "WIS": 0.020613140687240617,
+              "MAE": 0.0424584537131682,
+              "coverage80": 0.6942675159235668,
+              "coverage95": 0.9299363057324841,
+              "Brier": 8.807107544905242e-05
+            },
+            "tilt_static": {
+              "MQS": 0.025600989026918257,
+              "CRPS": 0.030196930176677784,
+              "WIS": 0.02068563879872693,
+              "MAE": 0.04257695591496627,
+              "coverage80": 0.7006369426751592,
+              "coverage95": 0.9299363057324841,
+              "Brier": 0.0
+            },
+            "tilt_rule": {
+              "MQS": 0.02554119236172636,
+              "CRPS": 0.03011827196615698,
+              "WIS": 0.020621431336720942,
+              "MAE": 0.042461191781184966,
+              "coverage80": 0.6942675159235668,
+              "coverage95": 0.9299363057324841,
+              "Brier": 8.807107544905242e-05
+            },
+            "tilt_neural": {
+              "MQS": 0.025541420544143233,
+              "CRPS": 0.03011817690673179,
+              "WIS": 0.020621503880383044,
+              "MAE": 0.04246199146311671,
+              "coverage80": 0.6942675159235668,
+              "coverage95": 0.9299363057324841,
+              "Brier": 8.815985947520746e-05
+            },
+            "probability_only": {
+              "MQS": 0.025510204377599186,
+              "CRPS": 0.030080334575706188,
+              "WIS": 0.02059727140608902,
+              "MAE": 0.04246188513138996,
+              "coverage80": 0.6942675159235668,
+              "coverage95": 0.9299363057324841,
+              "Brier": 8.085945086867079e-05
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.025537099940142877,
+              "CRPS": 0.030109297261721277,
+              "WIS": 0.020620714359435424,
+              "MAE": 0.04245829422898518,
+              "coverage80": 0.6942675159235668,
+              "coverage95": 0.9299363057324841,
+              "Brier": 8.779677819343418e-05
+            }
+          }
+        },
+        "10": {
+          "n": 155,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.0374427247554566,
+              "CRPS": 0.04387953469373032,
+              "WIS": 0.030485299058817906,
+              "MAE": 0.061867060592080365,
+              "coverage80": 0.6709677419354839,
+              "coverage95": 0.9096774193548387,
+              "Brier": 3.1661199832830634e-06
+            },
+            "gaussian_constant": {
+              "MQS": 0.03667746002907178,
+              "CRPS": 0.043224951909227954,
+              "WIS": 0.02968111900778509,
+              "MAE": 0.061314326353994884,
+              "coverage80": 0.7419354838709677,
+              "coverage95": 0.9225806451612903,
+              "Brier": 0.0
+            },
+            "uniform_static": {
+              "MQS": 0.03734382712523545,
+              "CRPS": 0.04387953512481007,
+              "WIS": 0.030374185791077608,
+              "MAE": 0.061860922598657955,
+              "coverage80": 0.6774193548387096,
+              "coverage95": 0.9096774193548387,
+              "Brier": 0.0
+            },
+            "uniform_rule": {
+              "MQS": 0.037460974035372296,
+              "CRPS": 0.04388717833253995,
+              "WIS": 0.03049515306598959,
+              "MAE": 0.061845066633570506,
+              "coverage80": 0.6709677419354839,
+              "coverage95": 0.9096774193548387,
+              "Brier": 4.371306437178646e-05
+            },
+            "tilt_static": {
+              "MQS": 0.037405569120819916,
+              "CRPS": 0.04389828575636135,
+              "WIS": 0.030438348901187576,
+              "MAE": 0.061798296748009414,
+              "coverage80": 0.6709677419354839,
+              "coverage95": 0.9096774193548387,
+              "Brier": 0.0
+            },
+            "tilt_rule": {
+              "MQS": 0.03746766399388891,
+              "CRPS": 0.04390256374515078,
+              "WIS": 0.030494592557620867,
+              "MAE": 0.061812905239999716,
+              "coverage80": 0.6709677419354839,
+              "coverage95": 0.9096774193548387,
+              "Brier": 4.371306437178646e-05
+            },
+            "tilt_neural": {
+              "MQS": 0.037467283821384076,
+              "CRPS": 0.04390234895172896,
+              "WIS": 0.030494556862166018,
+              "MAE": 0.061812905239999716,
+              "coverage80": 0.6709677419354839,
+              "coverage95": 0.9096774193548387,
+              "Brier": 4.376342130702751e-05
+            },
+            "probability_only": {
+              "MQS": 0.037450782760537094,
+              "CRPS": 0.043871529331026546,
+              "WIS": 0.030492379403702176,
+              "MAE": 0.06179279753924565,
+              "coverage80": 0.6709677419354839,
+              "coverage95": 0.9096774193548387,
+              "Brier": 3.336974293626513e-05
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.03745524688418023,
+              "CRPS": 0.043896573007299905,
+              "WIS": 0.030501121501845262,
+              "MAE": 0.06178347115139508,
+              "coverage80": 0.6709677419354839,
+              "coverage95": 0.9096774193548387,
+              "Brier": 4.366858903130646e-05
+            }
+          }
+        },
+        "20": {
+          "n": 150,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.046465263213164326,
+              "CRPS": 0.05467819791887531,
+              "WIS": 0.03781692203155434,
+              "MAE": 0.07625600817671385,
+              "coverage80": 0.7333333333333333,
+              "coverage95": 0.9066666666666666,
+              "Brier": 1.2892869920611931e-05
+            },
+            "gaussian_constant": {
+              "MQS": 0.04571296095323503,
+              "CRPS": 0.05359281835867949,
+              "WIS": 0.03733072934119879,
+              "MAE": 0.07513706468674135,
+              "coverage80": 0.7933333333333333,
+              "coverage95": 0.9066666666666666,
+              "Brier": 0.0
+            },
+            "uniform_static": {
+              "MQS": 0.046412194776750855,
+              "CRPS": 0.054678195001512137,
+              "WIS": 0.03775647035028881,
+              "MAE": 0.07625600804739588,
+              "coverage80": 0.74,
+              "coverage95": 0.9066666666666666,
+              "Brier": 3.2464429047251997e-06
+            },
+            "uniform_rule": {
+              "MQS": 0.04643097915576446,
+              "CRPS": 0.0546240854483439,
+              "WIS": 0.03781881400543142,
+              "MAE": 0.07577576948657717,
+              "coverage80": 0.74,
+              "coverage95": 0.9066666666666666,
+              "Brier": 0.00011523724775543087
+            },
+            "tilt_static": {
+              "MQS": 0.04687151725432622,
+              "CRPS": 0.05518451623124636,
+              "WIS": 0.03814574592625555,
+              "MAE": 0.07710856187027627,
+              "coverage80": 0.7533333333333333,
+              "coverage95": 0.9066666666666666,
+              "Brier": 3.2464429047251997e-06
+            },
+            "tilt_rule": {
+              "MQS": 0.04650476608863837,
+              "CRPS": 0.05475036712521856,
+              "WIS": 0.03786073434937865,
+              "MAE": 0.07595498173298908,
+              "coverage80": 0.7333333333333333,
+              "coverage95": 0.9066666666666666,
+              "Brier": 0.00011523724775543087
+            },
+            "tilt_neural": {
+              "MQS": 0.04650515536138402,
+              "CRPS": 0.05475009881296375,
+              "WIS": 0.037860337153923035,
+              "MAE": 0.07595110422259387,
+              "coverage80": 0.7333333333333333,
+              "coverage95": 0.9066666666666666,
+              "Brier": 0.00011420877388438554
+            },
+            "probability_only": {
+              "MQS": 0.046392956648021656,
+              "CRPS": 0.054646187464739385,
+              "WIS": 0.037745615697716485,
+              "MAE": 0.0760237438470073,
+              "coverage80": 0.7333333333333333,
+              "coverage95": 0.9066666666666666,
+              "Brier": 5.3091313700003674e-05
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.04648622496789122,
+              "CRPS": 0.05472840512051788,
+              "WIS": 0.037843655182731924,
+              "MAE": 0.07592197754690763,
+              "coverage80": 0.7333333333333333,
+              "coverage95": 0.9066666666666666,
+              "Brier": 0.00011396465042452065
+            }
+          }
+        }
+      },
+      "uniform_ecdf_CRPS_max_error": 3.3027502094329364e-08
+    }
+  },
+  "summary": {
+    "tilt_neural_vs_empirical_constant": {
+      "MQS": {
+        "geometric_gain_percent": 2.1428856975308164,
+        "wins": 14,
+        "cells": 20
+      },
+      "CRPS": {
+        "geometric_gain_percent": 1.5958321164063372,
+        "wins": 15,
+        "cells": 20
+      }
+    },
+    "tilt_neural_vs_gaussian_constant": {
+      "MQS": {
+        "geometric_gain_percent": 5.08463621999401,
+        "wins": 15,
+        "cells": 20
+      },
+      "CRPS": {
+        "geometric_gain_percent": 4.9581474414610245,
+        "wins": 15,
+        "cells": 20
+      }
+    },
+    "tilt_neural_vs_uniform_static": {
+      "MQS": {
+        "geometric_gain_percent": 2.1369249078717956,
+        "wins": 14,
+        "cells": 20
+      },
+      "CRPS": {
+        "geometric_gain_percent": 1.5958313024387882,
+        "wins": 15,
+        "cells": 20
+      }
+    },
+    "tilt_neural_vs_uniform_rule": {
+      "MQS": {
+        "geometric_gain_percent": 1.8931213677150338,
+        "wins": 14,
+        "cells": 20
+      },
+      "CRPS": {
+        "geometric_gain_percent": 1.3204742612561993,
+        "wins": 14,
+        "cells": 20
+      }
+    },
+    "tilt_neural_vs_tilt_static": {
+      "MQS": {
+        "geometric_gain_percent": 0.21550762502289267,
+        "wins": 14,
+        "cells": 20
+      },
+      "CRPS": {
+        "geometric_gain_percent": 0.20508593972040634,
+        "wins": 13,
+        "cells": 20
+      }
+    },
+    "tilt_neural_vs_tilt_rule": {
+      "MQS": {
+        "geometric_gain_percent": -0.048414722614142924,
+        "wins": 10,
+        "cells": 20
+      },
+      "CRPS": {
+        "geometric_gain_percent": -0.03876773601261263,
+        "wins": 12,
+        "cells": 20
+      }
+    },
+    "tilt_neural_vs_probability_only": {
+      "MQS": {
+        "geometric_gain_percent": 1.7606691627603532,
+        "wins": 14,
+        "cells": 20
+      },
+      "CRPS": {
+        "geometric_gain_percent": 1.2562699978486913,
+        "wins": 14,
+        "cells": 20
+      }
+    },
+    "tilt_neural_vs_tilt_neural_no_context": {
+      "MQS": {
+        "geometric_gain_percent": 1.0421132442882453,
+        "wins": 13,
+        "cells": 20
+      },
+      "CRPS": {
+        "geometric_gain_percent": 0.9123887590157476,
+        "wins": 13,
+        "cells": 20
+      }
+    }
+  },
+  "elapsed_seconds": 159.44223579997197
+}

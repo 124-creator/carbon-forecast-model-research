@@ -1,0 +1,33 @@
+{
+  "status": "exploratory low-capacity decoder experiment; all two arms and seeds retained",
+  "config": {
+    "markets": [
+      "CEA",
+      "GUANGZHOU",
+      "SHANGHAI",
+      "HUBEI",
+      "EU"
+    ],
+    "tag": "additive_transport_round5",
+    "min_epochs": 30,
+    "patience": 16,
+    "epochs": 64,
+    "seeds": [
+      11,
+      22,
+      33,
+      44,
+      55
+    ]
+  },
+  "models": "linear40->4(164params), additive[40 linear+40x5 Gaussian basis]->4(964params), allzerohead",
+  "basis": "fixed standardized centers -2,-1,0,1,2 width1; no data/test knot search",
+  "loss": "same exactCRPS plus beta regularization; original normalized selector, rawrelative diagnostic",
+  "reference": "honest prefix training u, unchanged fullphase validation/test u; no added external inputs",
+  "frozen_before": {
+    "prior_readout_transport_round5.py": "d5e2282853c24e1d181b97938156247f666b141f7d2c8c18dfbb50bbdcdddfc7",
+    "prior_readout_transport_round5_predictions.npz": "2ab039abb75e5534f7b5965e95328da6c055e0f1dce4f40a71c84c7e1e830c4d",
+    "forest_transport_round5.py": "a49cf6b55c0d3ed2d86ccba891aa8a4eae85054aab3badfa0f7d33e9c7f8faa9"
+  },
+  "markets": {}
+}

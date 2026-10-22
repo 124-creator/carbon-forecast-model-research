@@ -1,0 +1,128 @@
+{
+  "status": "conditional uncertainty diagnostics for exploratory frozen ensembles; no significance declaration or candidate switch",
+  "B": 2000,
+  "block_lengths": [
+    5,
+    10
+  ],
+  "rng_seed": 20261021,
+  "bit_generator": "PCG64",
+  "rng_order": "one Generator; block length 5 then10, markets CEA/GUANGZHOU/SHANGHAI/HUBEI/EU",
+  "resampling": "noncircular overlapping moving-origin blocks; ceil(N/L) uniformly sampled starts in [0,N-L], concatenate and truncate to N",
+  "block_units": "observed unique sorted test origins, not calendar days",
+  "pairing": "one sampled-origin index/count matrix per market/length shared by every model and all horizons",
+  "missing_h": "missing end-of-series h rows remain missing; weighted sums divided by resampled valid count in each market/h",
+  "estimand": "per-cell raw mean score then equal-weight market x h geometric ratio; no pooling sample counts across cells",
+  "market_sampling": "markets never resampled or pooled; independent origin-block draws within each market, fixed five markets",
+  "metrics": [
+    "MQS:2*mean15pinball per origin on stored raw Q and canonical y",
+    "CRPS:stored raw per-origin score"
+  ],
+  "intervals": "95% percentile, np.quantile(method=linear); P_boot(gain>0) is a resample fraction, not a p-value",
+  "models": [
+    [
+      "rule_qrf",
+      "prior",
+      "rule_qrf"
+    ],
+    [
+      "qrf_original",
+      "prior",
+      "qrf_original"
+    ],
+    [
+      "honest_no_readout",
+      "prior",
+      "honest_no_readout"
+    ],
+    [
+      "forest_reference_only",
+      "prior",
+      "forest_reference_only"
+    ],
+    [
+      "rbf_additive",
+      "additive",
+      "rbf_prior"
+    ],
+    [
+      "forest_transport",
+      "forest",
+      "forest_transport"
+    ],
+    [
+      "matched_insample_no_readout",
+      "matched",
+      "matched_insample_no_readout"
+    ],
+    [
+      "matched_honest_no_readout_reweight_only",
+      "matched",
+      "matched_honest_no_readout_reweight_only"
+    ]
+  ],
+  "comparisons": [
+    [
+      "honest_no_readout",
+      "rule_qrf"
+    ],
+    [
+      "forest_reference_only",
+      "rule_qrf"
+    ],
+    [
+      "rbf_additive",
+      "rule_qrf"
+    ],
+    [
+      "forest_transport",
+      "rule_qrf"
+    ],
+    [
+      "matched_insample_no_readout",
+      "rule_qrf"
+    ],
+    [
+      "matched_honest_no_readout_reweight_only",
+      "rule_qrf"
+    ],
+    [
+      "rule_qrf",
+      "qrf_original"
+    ],
+    [
+      "honest_no_readout",
+      "forest_reference_only"
+    ],
+    [
+      "rbf_additive",
+      "forest_reference_only"
+    ],
+    [
+      "honest_no_readout",
+      "matched_insample_no_readout"
+    ],
+    [
+      "honest_no_readout",
+      "matched_honest_no_readout_reweight_only"
+    ]
+  ],
+  "skipped": [],
+  "source_sha256_before": {
+    "prior_readout_transport_round5.py": "d5e2282853c24e1d181b97938156247f666b141f7d2c8c18dfbb50bbdcdddfc7",
+    "prior_readout_transport_round5.json": "6f227ae4a2646dcfa7a46bd1bd9f18bd8b1d2cca6cb9179ad7adc4f88d4f3486",
+    "prior_readout_transport_round5_predictions.npz": "2ab039abb75e5534f7b5965e95328da6c055e0f1dce4f40a71c84c7e1e830c4d",
+    "forest_transport_round5.py": "a49cf6b55c0d3ed2d86ccba891aa8a4eae85054aab3badfa0f7d33e9c7f8faa9",
+    "forest_transport_round5.json": "192209de3e60cd2c0c1f835b77c8399952d0b603aec6c1902bcf8156a0bd8033",
+    "forest_transport_round5_predictions.npz": "29df6d924339de00cd864807fbc1c56a59692c526b5ee2e66f08a32ee62ef13a",
+    "additive_transport_round5.py": "aa43527ef84c01faa18245bbf623adde161ee19b18ccd762f3710a39d63a6845",
+    "additive_transport_round5.json": "9cad9c9ed6fd9619486f407b1ecbe9f06472981222e6904159faa69ed19bd46b",
+    "additive_transport_round5_predictions.npz": "e6c4bf33916dfea47d8a6aea6127497f2adc13b014b721f09b9bad2bcfe5153a",
+    "prefix_transport_controls_round5.py": "4db9d9ece79aa57e93fc2fc2798a78bf5aec7b4edaf103e18b1770d6a9bdcef5",
+    "prefix_transport_controls_round5.json": "1b3c92ac181a81193594b0f9d89ee200d50d5eeb113710b0cfd6eb3d5421998c",
+    "prefix_transport_controls_round5_predictions.npz": "dad2afdfba7e42fcf01428ac4ec06df8ecc3f0a597ae5bbdb38f84bb8e522041"
+  },
+  "no_training": true,
+  "no_seed_selection": true,
+  "no_full_F_reconstruction": true
+}

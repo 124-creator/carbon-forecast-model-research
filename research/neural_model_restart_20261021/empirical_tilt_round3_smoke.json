@@ -1,0 +1,298 @@
+{
+  "status": "exploratory; reused historical tests; no publication or novelty claim",
+  "config": {
+    "markets": [
+      "CEA"
+    ],
+    "modes": [
+      "tilt_neural",
+      "tilt_neural_no_context"
+    ],
+    "seeds": [
+      11
+    ],
+    "epochs": 3,
+    "tag": "empirical_tilt_round3_smoke"
+  },
+  "sanity": {
+    "weighted_ECDF_CRPS_matches_pairwise": 1.1102230246251565e-16,
+    "gradients_finite": true
+  },
+  "horizons": [
+    1,
+    5,
+    10,
+    20
+  ],
+  "geometry": "weighted empirical nonzero returns plus explicit zero atom; exact finite-distribution CRPS",
+  "training": "causally matured support labels; bounded 5-basis log-weight transport; small L2 penalty",
+  "selection": "inner equal-horizon normalized pinball; epoch0 eligible; refit all precut labels",
+  "ensemble": "average seed probabilities on the same refit support, coherent mixture CRPS and quantiles",
+  "panel_sha256": "d470238386e201e68f07b033f5a34591af89b57f1546ea79b699e763d228b56c",
+  "source_sha256": "b103ccd477fdc4963fb63b9288e93b8fff606abb5488bd2a99f180d7dc53ddec",
+  "markets": {
+    "CEA": {
+      "audit": {
+        "cut_index": 597,
+        "validation_start_index": 447,
+        "lookback": 128,
+        "step": 2,
+        "train": 621,
+        "validation": 281,
+        "refit": 921,
+        "test": 1311,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 446,
+        "last_refit_target": 596,
+        "test_zero_share": {
+          "1": 0.08734939759036145,
+          "5": 0.006060606060606061,
+          "10": 0.01529051987767584,
+          "20": 0.003105590062111801
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "fits": {
+        "tilt_neural": [
+          {
+            "seed": 11,
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": 0.27902674674987793,
+            "epochs_run": 3,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ],
+        "tilt_neural_no_context": [
+          {
+            "seed": 11,
+            "best_epoch": 3,
+            "validation_normalized_macro_pinball": 0.27897268533706665,
+            "epochs_run": 3,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32"
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 332,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.007325421973395726,
+              "CRPS": 0.008239690035625018,
+              "WIS": 0.006353508633553778,
+              "MAE": 0.010121543176566076,
+              "coverage80": 0.7771084337349398,
+              "coverage95": 0.9307228915662651,
+              "Brier": 0.1518562039020777
+            },
+            "gaussian_constant": {
+              "MQS": 0.007792367212486881,
+              "CRPS": 0.008807975213082924,
+              "WIS": 0.0067118877755137744,
+              "MAE": 0.010374164565659994,
+              "coverage80": 0.8795180722891566,
+              "coverage95": 0.9457831325301205,
+              "Brier": 0.08734939759036145
+            },
+            "tilt_neural": {
+              "MQS": 0.007298207316748721,
+              "CRPS": 0.008205226713568617,
+              "WIS": 0.00635996817705369,
+              "MAE": 0.010121543176566076,
+              "coverage80": 0.8283132530120482,
+              "coverage95": 0.9367469879518072,
+              "Brier": 0.08459344493213043
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.007302787344018277,
+              "CRPS": 0.008207762356206013,
+              "WIS": 0.00636594650057969,
+              "MAE": 0.010121543176566076,
+              "coverage80": 0.8283132530120482,
+              "coverage95": 0.9367469879518072,
+              "Brier": 0.08445806876042655
+            }
+          }
+        },
+        "5": {
+          "n": 330,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.018004516793989,
+              "CRPS": 0.02031885056359136,
+              "WIS": 0.015493269696346327,
+              "MAE": 0.025991201440663952,
+              "coverage80": 0.6333333333333333,
+              "coverage95": 0.8454545454545455,
+              "Brier": 0.03463663591868722
+            },
+            "gaussian_constant": {
+              "MQS": 0.01758939557797618,
+              "CRPS": 0.01999464846899168,
+              "WIS": 0.015025567468610713,
+              "MAE": 0.02602923906587214,
+              "coverage80": 0.7333333333333333,
+              "coverage95": 0.8545454545454545,
+              "Brier": 0.006060606060606061
+            },
+            "tilt_neural": {
+              "MQS": 0.01782168324809848,
+              "CRPS": 0.020142856187270568,
+              "WIS": 0.0153005960174463,
+              "MAE": 0.026133581980039792,
+              "coverage80": 0.6787878787878788,
+              "coverage95": 0.8515151515151516,
+              "Brier": 0.007344682230445249
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.017781669613491157,
+              "CRPS": 0.020129046069639216,
+              "WIS": 0.015246550902813445,
+              "MAE": 0.026105492976304646,
+              "coverage80": 0.6848484848484848,
+              "coverage95": 0.8606060606060606,
+              "Brier": 0.007327067251473699
+            }
+          }
+        },
+        "10": {
+          "n": 327,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.02810462262311627,
+              "CRPS": 0.03143032681981785,
+              "WIS": 0.024518791806331527,
+              "MAE": 0.039676950678162924,
+              "coverage80": 0.5412844036697247,
+              "coverage95": 0.8165137614678899,
+              "Brier": 0.03462366412491319
+            },
+            "gaussian_constant": {
+              "MQS": 0.02782623442253147,
+              "CRPS": 0.031206514379220802,
+              "WIS": 0.024211951422303056,
+              "MAE": 0.03985886588265187,
+              "coverage80": 0.6207951070336392,
+              "coverage95": 0.7981651376146789,
+              "Brier": 0.01529051987767584
+            },
+            "tilt_neural": {
+              "MQS": 0.027780183620417575,
+              "CRPS": 0.031144357321722195,
+              "WIS": 0.02418363294604971,
+              "MAE": 0.03974594045633593,
+              "coverage80": 0.5626911314984709,
+              "coverage95": 0.8226299694189603,
+              "Brier": 0.015967223341373203
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.027716739748628847,
+              "CRPS": 0.03110469016604833,
+              "WIS": 0.024095392427211124,
+              "MAE": 0.039745423202368534,
+              "coverage80": 0.5626911314984709,
+              "coverage95": 0.8409785932721713,
+              "Brier": 0.015955646075483505
+            }
+          }
+        },
+        "20": {
+          "n": 322,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.04776616049028883,
+              "CRPS": 0.053864330553473484,
+              "WIS": 0.04153763343545894,
+              "MAE": 0.0683720261919509,
+              "coverage80": 0.4472049689440994,
+              "coverage95": 0.7732919254658385,
+              "Brier": 0.016514188657439362
+            },
+            "gaussian_constant": {
+              "MQS": 0.047262664641811405,
+              "CRPS": 0.05300071932188905,
+              "WIS": 0.041164713776840424,
+              "MAE": 0.06776705815058573,
+              "coverage80": 0.5186335403726708,
+              "coverage95": 0.7329192546583851,
+              "Brier": 0.003105590062111801
+            },
+            "tilt_neural": {
+              "MQS": 0.047234764581417045,
+              "CRPS": 0.05331321019323596,
+              "WIS": 0.0409416840238216,
+              "MAE": 0.06782606560555714,
+              "coverage80": 0.4782608695652174,
+              "coverage95": 0.7888198757763976,
+              "Brier": 0.003919994311872572
+            },
+            "tilt_neural_no_context": {
+              "MQS": 0.04712375146674855,
+              "CRPS": 0.053161578516416806,
+              "WIS": 0.040795957706648185,
+              "MAE": 0.067815029256842,
+              "coverage80": 0.4782608695652174,
+              "coverage95": 0.7950310559006211,
+              "Brier": 0.003909325170770274
+            }
+          }
+        }
+      }
+    }
+  },
+  "summary": {
+    "tilt_neural_vs_empirical_constant": {
+      "MQS": {
+        "geometric_gain_percent": 0.9139778703251222,
+        "wins": 4,
+        "cells": 4
+      },
+      "CRPS": {
+        "geometric_gain_percent": 0.80462637545059,
+        "wins": 4,
+        "cells": 4
+      }
+    },
+    "tilt_neural_vs_gaussian_constant": {
+      "MQS": {
+        "geometric_gain_percent": 1.3567883661382174,
+        "wins": 3,
+        "cells": 4
+      },
+      "CRPS": {
+        "geometric_gain_percent": 1.4793563962412937,
+        "wins": 2,
+        "cells": 4
+      }
+    },
+    "tilt_neural_vs_tilt_neural_no_context": {
+      "MQS": {
+        "geometric_gain_percent": -0.1566172480594652,
+        "wins": 1,
+        "cells": 4
+      },
+      "CRPS": {
+        "geometric_gain_percent": -0.1125520345669484,
+        "wins": 1,
+        "cells": 4
+      }
+    }
+  },
+  "elapsed_seconds": 2.3154594000661746
+}

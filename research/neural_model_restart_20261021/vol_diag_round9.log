@@ -1,0 +1,47 @@
+﻿sample 2013-01-31 -> 2026-04-13  n=3399
+auction days in sample: 1281
+
+--- 1. persistence of the target ---
+  lrv1    acf1=0.080  acf5=0.050  sd=3.263
+  lrv5    acf1=0.889  acf5=0.501  sd=1.089
+  lrv22   acf1=0.991  acf5=0.940  sd=0.893
+  ly5     acf1=0.887  acf5=0.498  sd=1.081
+
+--- 2. out-of-sample: HAR vs EWMA vs random walk ---
+  n_test=1096
+  HAR     OOS R2=+0.3191   MSE=0.60595
+  EWMA22  OOS R2=+0.2117   MSE=0.70155
+  RW5     OOS R2=-0.0233   MSE=0.91064
+
+--- 3. do auction days differ? (same-day) ---
+  2020+ n=1613  auction days=1281
+        size   mean  median    std
+is_auc                            
+0.0      332 -9.091  -8.539  2.929
+1.0     1281 -8.868  -8.494  2.299
+  mean |r| auction=188.5bp  non-auction=186.8bp
+
+--- 4. auction timing beyond HAR components ---
+  is_auc    coef=-0.0701  t=-1.38  R2 0.2633 -> 0.2642
+python : Traceback (most recent call last):
+所在位置 行:2 字符: 8
++ $out = python vol_diag_round9.py 2>&1
++        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "E:\Agent员工\碳价格预测研究\独立数据归档\carbon-forecast-model-research\research\neural_model_restart_20261021\vol_diag_round9
+.py", line 125, in <module>
+    main()
+  File "E:\Agent员工\碳价格预测研究\独立数据归档\carbon-forecast-model-research\research\neural_model_restart_20261021\vol_diag_round9
+.py", line 119, in main
+    tstat = b1[-1] / np.sqrt(np.sum(r1 ** 2) / (n - k) * np.linalg.inv(Z.T @ Z)[-1, -1])
+                                                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Dreamboat\AppData\Local\hermes\hermes-agent-v0.21.5\venv\Lib\site-packages\numpy\linalg\_linalg.py", l
+ine 647, in inv
+    ainv = _umath_linalg.inv(a, signature=signature)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Dreamboat\AppData\Local\hermes\hermes-agent-v0.21.5\venv\Lib\site-packages\numpy\linalg\_linalg.py", l
+ine 144, in _raise_linalgerror_singular
+    raise LinAlgError("Singular matrix")
+numpy.linalg.LinAlgError: Singular matrix

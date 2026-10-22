@@ -1,0 +1,40 @@
+{
+  "status": "exploratory horizon-aware borrowed-label density model",
+  "config": {
+    "markets": [
+      "CEA",
+      "GUANGZHOU",
+      "SHANGHAI",
+      "HUBEI",
+      "EU"
+    ],
+    "tag": "horizon_kernel_round5"
+  },
+  "bandwidth_grid": [
+    0.25,
+    0.5,
+    1.0,
+    2.0,
+    null
+  ],
+  "null_bandwidth": "None=infinity, original pooled model",
+  "selection": "one bandwidth per market using inner equal-h normalized MQS; no test selection",
+  "inner_forest": {
+    "n_estimators": 80,
+    "min_samples_leaf": 25,
+    "criterion": "squared_error",
+    "max_features": 1.0,
+    "bootstrap": true,
+    "n_jobs": 2,
+    "max_depth": 8,
+    "random_state": 11
+  },
+  "final_forest": "frozen five-seed pooled_MSE probabilities, normalized once after horizon weighting",
+  "frozen_before": {
+    "mixed_cdf_forest_round4.py": "37cf80f82814b0b06a14693194f8a64217bd3026b46efcc0defa355d2cbe0b7c",
+    "mixed_cdf_forest_round4_predictions.npz": "c90e0468043b027943f878a26fb44269fbfedf9cb9f2b53a21deda474dd8487b",
+    "qrf_round4.py": "baedecda3315dde9b79c9d7c4bf32d8553b771561f7e102d09ef7e0737e31cac",
+    "qrf_round4_probability_control_predictions.npz": "e26b0af859ccebae1ecad64cf2ecd230882ea485884abc8e008f329c50cfeb74"
+  },
+  "markets": {}
+}

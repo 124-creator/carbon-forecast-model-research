@@ -1,0 +1,1746 @@
+{
+  "status": "exploratory; reused tests; not a publication claim",
+  "config": {
+    "epochs": 160,
+    "markets": [
+      "CEA",
+      "GUANGZHOU",
+      "SHANGHAI",
+      "HUBEI",
+      "EU"
+    ],
+    "seeds": [
+      11,
+      22
+    ],
+    "variants": [
+      "uniform",
+      "shared_route",
+      "dual_route",
+      "single_scale"
+    ],
+    "lrs": [
+      0.0003,
+      0.001
+    ],
+    "tag": "multiscale_round2_aligned"
+  },
+  "expert_context": "horizon only; shared market state is exclusive to routers",
+  "training": "raw pinball with fixed training-horizon risk normalizers and auxiliary expert loss",
+  "selection": "mean log relative RAW quantile risk over horizons",
+  "refit": true,
+  "panel_sha256": "d470238386e201e68f07b033f5a34591af89b57f1546ea79b699e763d228b56c",
+  "source_sha256": "962d2ff46413b3b92b2e18be1d526b37eac8cf78eaa8dcdccd9e9d4359818017",
+  "markets": {
+    "CEA": {
+      "audit": {
+        "cut_index": 597,
+        "validation_start": 447,
+        "last_refit_target": 596,
+        "counts": {
+          "train": {
+            "1": 98,
+            "5": 96,
+            "10": 94,
+            "20": 89
+          },
+          "validation": {
+            "1": 74,
+            "5": 72,
+            "10": 70,
+            "20": 65
+          },
+          "test": {
+            "1": 332,
+            "5": 330,
+            "10": 327,
+            "20": 322
+          },
+          "development": {
+            "1": 173,
+            "5": 171,
+            "10": 169,
+            "20": 164
+          }
+        }
+      },
+      "fits": {
+        "uniform": {
+          "selected": {
+            "best_epoch": 71,
+            "validation_log_relative_raw_MQS": -0.0048508853651583195,
+            "epochs_run": 101,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 0,
+              "validation_log_relative_raw_MQS": 0.0,
+              "epochs_run": 50,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 71,
+              "validation_log_relative_raw_MQS": -0.0048508853651583195,
+              "epochs_run": 101,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "shared_route": {
+          "selected": {
+            "best_epoch": 82,
+            "validation_log_relative_raw_MQS": -0.013763895258307457,
+            "epochs_run": 112,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 0,
+              "validation_log_relative_raw_MQS": 0.0,
+              "epochs_run": 50,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 82,
+              "validation_log_relative_raw_MQS": -0.013763895258307457,
+              "epochs_run": 112,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "dual_route": {
+          "selected": {
+            "best_epoch": 79,
+            "validation_log_relative_raw_MQS": -0.006881049834191799,
+            "epochs_run": 109,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 0,
+              "validation_log_relative_raw_MQS": 0.0,
+              "epochs_run": 50,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 79,
+              "validation_log_relative_raw_MQS": -0.006881049834191799,
+              "epochs_run": 109,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "single_scale": {
+          "selected": {
+            "best_epoch": 55,
+            "validation_log_relative_raw_MQS": -0.036304179579019547,
+            "epochs_run": 85,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 0,
+              "validation_log_relative_raw_MQS": 0.0,
+              "epochs_run": 50,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 55,
+              "validation_log_relative_raw_MQS": -0.036304179579019547,
+              "epochs_run": 85,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        }
+      },
+      "by_horizon": {
+        "1": {
+          "n": 332,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.007444895803928375,
+              "WIS": 0.006523823831230402,
+              "MAE": 0.010121968574821949
+            },
+            "gaussian_rw": {
+              "MQS": 0.007720231056219906,
+              "WIS": 0.006678311397542419,
+              "MAE": 0.01012154316522794
+            },
+            "ridge_quantile": {
+              "MQS": 0.007801888353940321,
+              "WIS": 0.006771333111769994,
+              "MAE": 0.010995218907697515
+            },
+            "hgb_quantile": {
+              "MQS": 0.007592325247506339,
+              "WIS": 0.006657070952037114,
+              "MAE": 0.010115415172485199
+            },
+            "uniform": {
+              "MQS": 0.008412673138082027,
+              "WIS": 0.007165972143411636,
+              "MAE": 0.012062925845384598
+            },
+            "shared_route": {
+              "MQS": 0.009519709274172783,
+              "WIS": 0.008190496824681759,
+              "MAE": 0.013373554684221745
+            },
+            "dual_route": {
+              "MQS": 0.008939912542700768,
+              "WIS": 0.007717233616858721,
+              "MAE": 0.012485798448324203
+            },
+            "single_scale": {
+              "MQS": 0.00852171890437603,
+              "WIS": 0.007217790931463242,
+              "MAE": 0.012282516807317734
+            }
+          }
+        },
+        "5": {
+          "n": 330,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.01774841733276844,
+              "WIS": 0.015115216374397278,
+              "MAE": 0.025993358343839645
+            },
+            "gaussian_rw": {
+              "MQS": 0.017818789220565102,
+              "WIS": 0.015183839560194617,
+              "MAE": 0.025991201464101762
+            },
+            "ridge_quantile": {
+              "MQS": 0.017647537342176552,
+              "WIS": 0.015098559472887645,
+              "MAE": 0.025897907065673003
+            },
+            "hgb_quantile": {
+              "MQS": 0.019053696493612087,
+              "WIS": 0.016487727805262743,
+              "MAE": 0.02715766266313522
+            },
+            "uniform": {
+              "MQS": 0.019833296537399292,
+              "WIS": 0.01721305027604103,
+              "MAE": 0.028438430279493332
+            },
+            "shared_route": {
+              "MQS": 0.022622492164373398,
+              "WIS": 0.01982579194009304,
+              "MAE": 0.031645797193050385
+            },
+            "dual_route": {
+              "MQS": 0.021402327343821526,
+              "WIS": 0.018751271069049835,
+              "MAE": 0.029953667894005775
+            },
+            "single_scale": {
+              "MQS": 0.019688451662659645,
+              "WIS": 0.016939837485551834,
+              "MAE": 0.028395306318998337
+            }
+          }
+        },
+        "10": {
+          "n": 327,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.02757982723414898,
+              "WIS": 0.023765651509165764,
+              "MAE": 0.03967910259962082
+            },
+            "gaussian_rw": {
+              "MQS": 0.027371921859859125,
+              "WIS": 0.023577656710761598,
+              "MAE": 0.03967695074944133
+            },
+            "ridge_quantile": {
+              "MQS": 0.026509459001017074,
+              "WIS": 0.022955898324562466,
+              "MAE": 0.03788584698613203
+            },
+            "hgb_quantile": {
+              "MQS": 0.029639436954609494,
+              "WIS": 0.026039384621106037,
+              "MAE": 0.04119498499171296
+            },
+            "uniform": {
+              "MQS": 0.030285174027085304,
+              "WIS": 0.026373673230409622,
+              "MAE": 0.042769163846969604
+            },
+            "shared_route": {
+              "MQS": 0.03445778042078018,
+              "WIS": 0.03005199320614338,
+              "MAE": 0.048544928431510925
+            },
+            "dual_route": {
+              "MQS": 0.03258747607469559,
+              "WIS": 0.028544483706355095,
+              "MAE": 0.04547557607293129
+            },
+            "single_scale": {
+              "MQS": 0.029855191707611084,
+              "WIS": 0.02617252804338932,
+              "MAE": 0.04145565256476402
+            }
+          }
+        },
+        "20": {
+          "n": 322,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.046409010887145996,
+              "WIS": 0.039641812443733215,
+              "MAE": 0.06838210672140121
+            },
+            "gaussian_rw": {
+              "MQS": 0.04472831470976928,
+              "WIS": 0.03794616492784843,
+              "MAE": 0.06838410055486815
+            },
+            "ridge_quantile": {
+              "MQS": 0.044601672090534644,
+              "WIS": 0.03831494408183811,
+              "MAE": 0.06419365224663474
+            },
+            "hgb_quantile": {
+              "MQS": 0.04835788669205793,
+              "WIS": 0.04220129249692126,
+              "MAE": 0.06776271274021621
+            },
+            "uniform": {
+              "MQS": 0.04928131029009819,
+              "WIS": 0.04284015670418739,
+              "MAE": 0.06989860534667969
+            },
+            "shared_route": {
+              "MQS": 0.055302295833826065,
+              "WIS": 0.04839697107672691,
+              "MAE": 0.07779935002326965
+            },
+            "dual_route": {
+              "MQS": 0.05258158594369888,
+              "WIS": 0.04601608216762543,
+              "MAE": 0.07381416857242584
+            },
+            "single_scale": {
+              "MQS": 0.04790563881397247,
+              "WIS": 0.041880395263433456,
+              "MAE": 0.06699708104133606
+            }
+          }
+        }
+      }
+    },
+    "GUANGZHOU": {
+      "audit": {
+        "cut_index": 2178,
+        "validation_start": 1633,
+        "last_refit_target": 2177,
+        "counts": {
+          "train": {
+            "1": 691,
+            "5": 689,
+            "10": 687,
+            "20": 682
+          },
+          "validation": {
+            "1": 272,
+            "5": 270,
+            "10": 267,
+            "20": 262
+          },
+          "test": {
+            "1": 330,
+            "5": 328,
+            "10": 326,
+            "20": 321
+          },
+          "development": {
+            "1": 964,
+            "5": 962,
+            "10": 959,
+            "20": 954
+          }
+        }
+      },
+      "fits": {
+        "uniform": {
+          "selected": {
+            "best_epoch": 25,
+            "validation_log_relative_raw_MQS": -0.00726741086691618,
+            "epochs_run": 55,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 20,
+              "validation_log_relative_raw_MQS": -0.004231584258377552,
+              "epochs_run": 50,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 25,
+              "validation_log_relative_raw_MQS": -0.00726741086691618,
+              "epochs_run": 55,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "shared_route": {
+          "selected": {
+            "best_epoch": 78,
+            "validation_log_relative_raw_MQS": -0.06311069428920746,
+            "epochs_run": 108,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 157,
+              "validation_log_relative_raw_MQS": -0.05614587292075157,
+              "epochs_run": 160,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 78,
+              "validation_log_relative_raw_MQS": -0.06311069428920746,
+              "epochs_run": 108,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "dual_route": {
+          "selected": {
+            "best_epoch": 60,
+            "validation_log_relative_raw_MQS": -0.04867442697286606,
+            "epochs_run": 90,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 146,
+              "validation_log_relative_raw_MQS": -0.04492182657122612,
+              "epochs_run": 160,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 60,
+              "validation_log_relative_raw_MQS": -0.04867442697286606,
+              "epochs_run": 90,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "single_scale": {
+          "selected": {
+            "best_epoch": 21,
+            "validation_log_relative_raw_MQS": -0.042032063007354736,
+            "epochs_run": 51,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 61,
+              "validation_log_relative_raw_MQS": -0.0341465100646019,
+              "epochs_run": 91,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 21,
+              "validation_log_relative_raw_MQS": -0.042032063007354736,
+              "epochs_run": 51,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        }
+      },
+      "by_horizon": {
+        "1": {
+          "n": 330,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.01672208681702614,
+              "WIS": 0.014453220181167126,
+              "MAE": 0.022850697860121727
+            },
+            "gaussian_rw": {
+              "MQS": 0.01725020320520246,
+              "WIS": 0.014680505435638012,
+              "MAE": 0.02285069833116281
+            },
+            "ridge_quantile": {
+              "MQS": 0.016513006688826912,
+              "WIS": 0.014205156909295464,
+              "MAE": 0.02354110606683014
+            },
+            "hgb_quantile": {
+              "MQS": 0.016736331107381142,
+              "WIS": 0.014418332056757932,
+              "MAE": 0.023130706457701218
+            },
+            "uniform": {
+              "MQS": 0.015594951808452606,
+              "WIS": 0.013037831522524357,
+              "MAE": 0.0236682016402483
+            },
+            "shared_route": {
+              "MQS": 0.016126565635204315,
+              "WIS": 0.013521972112357616,
+              "MAE": 0.024438275024294853
+            },
+            "dual_route": {
+              "MQS": 0.015881815925240517,
+              "WIS": 0.013198956847190857,
+              "MAE": 0.0244289580732584
+            },
+            "single_scale": {
+              "MQS": 0.01556224375963211,
+              "WIS": 0.01294429786503315,
+              "MAE": 0.02402443252503872
+            }
+          }
+        },
+        "5": {
+          "n": 328,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.02560466155409813,
+              "WIS": 0.021880213171243668,
+              "MAE": 0.037421051412820816
+            },
+            "gaussian_rw": {
+              "MQS": 0.028005982461065382,
+              "WIS": 0.02408907672307394,
+              "MAE": 0.037101941518435856
+            },
+            "ridge_quantile": {
+              "MQS": 0.024533361257232458,
+              "WIS": 0.020944366670208166,
+              "MAE": 0.03581922428699994
+            },
+            "hgb_quantile": {
+              "MQS": 0.02597859018853809,
+              "WIS": 0.021701840379683375,
+              "MAE": 0.03628126017784594
+            },
+            "uniform": {
+              "MQS": 0.023508498445153236,
+              "WIS": 0.019635288044810295,
+              "MAE": 0.03608125448226929
+            },
+            "shared_route": {
+              "MQS": 0.024844907224178314,
+              "WIS": 0.020635925233364105,
+              "MAE": 0.038809582591056824
+            },
+            "dual_route": {
+              "MQS": 0.024438852444291115,
+              "WIS": 0.020277762785553932,
+              "MAE": 0.03827383369207382
+            },
+            "single_scale": {
+              "MQS": 0.024447357282042503,
+              "WIS": 0.0204179547727108,
+              "MAE": 0.03757817670702934
+            }
+          }
+        },
+        "10": {
+          "n": 326,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.028395360335707664,
+              "WIS": 0.02480536699295044,
+              "MAE": 0.039428260177373886
+            },
+            "gaussian_rw": {
+              "MQS": 0.03414581724714857,
+              "WIS": 0.030440725999140356,
+              "MAE": 0.03833379344330841
+            },
+            "ridge_quantile": {
+              "MQS": 0.027289821250601688,
+              "WIS": 0.023869389395523206,
+              "MAE": 0.037582634690031445
+            },
+            "hgb_quantile": {
+              "MQS": 0.02837346110113342,
+              "WIS": 0.024111079492378874,
+              "MAE": 0.041471401286111376
+            },
+            "uniform": {
+              "MQS": 0.026308417320251465,
+              "WIS": 0.022563651204109192,
+              "MAE": 0.03894306719303131
+            },
+            "shared_route": {
+              "MQS": 0.028677083551883698,
+              "WIS": 0.02406555600464344,
+              "MAE": 0.0437643900513649
+            },
+            "dual_route": {
+              "MQS": 0.028010578826069832,
+              "WIS": 0.02368922531604767,
+              "MAE": 0.04205746948719025
+            },
+            "single_scale": {
+              "MQS": 0.02852589078247547,
+              "WIS": 0.0244312584400177,
+              "MAE": 0.04241690784692764
+            }
+          }
+        },
+        "20": {
+          "n": 321,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.03925839811563492,
+              "WIS": 0.03439042717218399,
+              "MAE": 0.054723817855119705
+            },
+            "gaussian_rw": {
+              "MQS": 0.046595247074308295,
+              "WIS": 0.04179710475058159,
+              "MAE": 0.050866373940759026
+            },
+            "ridge_quantile": {
+              "MQS": 0.036689770280178634,
+              "WIS": 0.032124429519895095,
+              "MAE": 0.05123259299553041
+            },
+            "hgb_quantile": {
+              "MQS": 0.040815696438451066,
+              "WIS": 0.03353380783265689,
+              "MAE": 0.07257785743447812
+            },
+            "uniform": {
+              "MQS": 0.03585716709494591,
+              "WIS": 0.03109085187315941,
+              "MAE": 0.05255390703678131
+            },
+            "shared_route": {
+              "MQS": 0.038248658180236816,
+              "WIS": 0.03203186020255089,
+              "MAE": 0.05928388237953186
+            },
+            "dual_route": {
+              "MQS": 0.037891607731580734,
+              "WIS": 0.03223726153373718,
+              "MAE": 0.05672454088926315
+            },
+            "single_scale": {
+              "MQS": 0.038601648062467575,
+              "WIS": 0.03360612690448761,
+              "MAE": 0.05617951601743698
+            }
+          }
+        }
+      }
+    },
+    "SHANGHAI": {
+      "audit": {
+        "cut_index": 1507,
+        "validation_start": 1130,
+        "last_refit_target": 1506,
+        "counts": {
+          "train": {
+            "1": 440,
+            "5": 438,
+            "10": 435,
+            "20": 430
+          },
+          "validation": {
+            "1": 188,
+            "5": 186,
+            "10": 184,
+            "20": 179
+          },
+          "test": {
+            "1": 130,
+            "5": 128,
+            "10": 125,
+            "20": 120
+          },
+          "development": {
+            "1": 628,
+            "5": 626,
+            "10": 624,
+            "20": 619
+          }
+        }
+      },
+      "fits": {
+        "uniform": {
+          "selected": {
+            "best_epoch": 29,
+            "validation_log_relative_raw_MQS": -0.07112512737512589,
+            "epochs_run": 59,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 77,
+              "validation_log_relative_raw_MQS": -0.06621614843606949,
+              "epochs_run": 107,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 29,
+              "validation_log_relative_raw_MQS": -0.07112512737512589,
+              "epochs_run": 59,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "shared_route": {
+          "selected": {
+            "best_epoch": 123,
+            "validation_log_relative_raw_MQS": -0.12137626111507416,
+            "epochs_run": 153,
+            "lr": 0.0003,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 123,
+              "validation_log_relative_raw_MQS": -0.12137626111507416,
+              "epochs_run": 153,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 46,
+              "validation_log_relative_raw_MQS": -0.12121507525444031,
+              "epochs_run": 76,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "dual_route": {
+          "selected": {
+            "best_epoch": 40,
+            "validation_log_relative_raw_MQS": -0.11874816566705704,
+            "epochs_run": 70,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 123,
+              "validation_log_relative_raw_MQS": -0.11775796860456467,
+              "epochs_run": 153,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 40,
+              "validation_log_relative_raw_MQS": -0.11874816566705704,
+              "epochs_run": 70,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "single_scale": {
+          "selected": {
+            "best_epoch": 55,
+            "validation_log_relative_raw_MQS": -0.09475074708461761,
+            "epochs_run": 85,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 158,
+              "validation_log_relative_raw_MQS": -0.09281019121408463,
+              "epochs_run": 160,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 55,
+              "validation_log_relative_raw_MQS": -0.09475074708461761,
+              "epochs_run": 85,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        }
+      },
+      "by_horizon": {
+        "1": {
+          "n": 130,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.01397615671157837,
+              "WIS": 0.012701869010925293,
+              "MAE": 0.017606066539883614
+            },
+            "gaussian_rw": {
+              "MQS": 0.014628521382232529,
+              "WIS": 0.012970993737258957,
+              "MAE": 0.017606065906539486
+            },
+            "ridge_quantile": {
+              "MQS": 0.014347357295758747,
+              "WIS": 0.01273756162024924,
+              "MAE": 0.019588854972523852
+            },
+            "hgb_quantile": {
+              "MQS": 0.013171285588318375,
+              "WIS": 0.011325243897537553,
+              "MAE": 0.01885339154389321
+            },
+            "uniform": {
+              "MQS": 0.013673387467861176,
+              "WIS": 0.011952107772231102,
+              "MAE": 0.018976528197526932
+            },
+            "shared_route": {
+              "MQS": 0.013339601457118988,
+              "WIS": 0.011510040611028671,
+              "MAE": 0.01900511048734188
+            },
+            "dual_route": {
+              "MQS": 0.013429487124085426,
+              "WIS": 0.011623845435678959,
+              "MAE": 0.019042473286390305
+            },
+            "single_scale": {
+              "MQS": 0.013476318679749966,
+              "WIS": 0.011732691898941994,
+              "MAE": 0.01894446462392807
+            }
+          }
+        },
+        "5": {
+          "n": 128,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.021993957459926605,
+              "WIS": 0.019498750567436218,
+              "MAE": 0.029555950313806534
+            },
+            "gaussian_rw": {
+              "MQS": 0.024020195252980533,
+              "WIS": 0.020881411374969176,
+              "MAE": 0.029555951346196707
+            },
+            "ridge_quantile": {
+              "MQS": 0.022247271469779596,
+              "WIS": 0.01965043084052654,
+              "MAE": 0.03088628930191817
+            },
+            "hgb_quantile": {
+              "MQS": 0.021675493711416645,
+              "WIS": 0.01848530017806493,
+              "MAE": 0.032984388383622734
+            },
+            "uniform": {
+              "MQS": 0.021608280017971992,
+              "WIS": 0.018514633178710938,
+              "MAE": 0.031607192009687424
+            },
+            "shared_route": {
+              "MQS": 0.021464720368385315,
+              "WIS": 0.018309839069843292,
+              "MAE": 0.031794287264347076
+            },
+            "dual_route": {
+              "MQS": 0.021470922976732254,
+              "WIS": 0.018290435895323753,
+              "MAE": 0.03192659094929695
+            },
+            "single_scale": {
+              "MQS": 0.020855747163295746,
+              "WIS": 0.01752423122525215,
+              "MAE": 0.03155556321144104
+            }
+          }
+        },
+        "10": {
+          "n": 125,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.02806836925446987,
+              "WIS": 0.024945547804236412,
+              "MAE": 0.0383092500269413
+            },
+            "gaussian_rw": {
+              "MQS": 0.031662496357305045,
+              "WIS": 0.027929357051070153,
+              "MAE": 0.03827248445944861
+            },
+            "ridge_quantile": {
+              "MQS": 0.026720369781408116,
+              "WIS": 0.0232922619840744,
+              "MAE": 0.03782493480446283
+            },
+            "hgb_quantile": {
+              "MQS": 0.02884490523213545,
+              "WIS": 0.024910341500156568,
+              "MAE": 0.04280893344009854
+            },
+            "uniform": {
+              "MQS": 0.02784671261906624,
+              "WIS": 0.02409571036696434,
+              "MAE": 0.03971089795231819
+            },
+            "shared_route": {
+              "MQS": 0.027239730581641197,
+              "WIS": 0.023392003029584885,
+              "MAE": 0.03982839733362198
+            },
+            "dual_route": {
+              "MQS": 0.027148937806487083,
+              "WIS": 0.023285074159502983,
+              "MAE": 0.03981572762131691
+            },
+            "single_scale": {
+              "MQS": 0.026340890675783157,
+              "WIS": 0.02249968610703945,
+              "MAE": 0.03878308832645416
+            }
+          }
+        },
+        "20": {
+          "n": 120,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.034725651144981384,
+              "WIS": 0.029917938634753227,
+              "MAE": 0.04994618520140648
+            },
+            "gaussian_rw": {
+              "MQS": 0.039199627632375916,
+              "WIS": 0.03400752031987532,
+              "MAE": 0.04945332474077683
+            },
+            "ridge_quantile": {
+              "MQS": 0.03665378845488336,
+              "WIS": 0.030870691666198335,
+              "MAE": 0.05601671137713614
+            },
+            "hgb_quantile": {
+              "MQS": 0.040230839990716645,
+              "WIS": 0.034726850343380404,
+              "MAE": 0.056734076294048856
+            },
+            "uniform": {
+              "MQS": 0.035242900252342224,
+              "WIS": 0.02950039692223072,
+              "MAE": 0.0539822094142437
+            },
+            "shared_route": {
+              "MQS": 0.0361512191593647,
+              "WIS": 0.029887890443205833,
+              "MAE": 0.05635438114404678
+            },
+            "dual_route": {
+              "MQS": 0.03575507923960686,
+              "WIS": 0.029422825202345848,
+              "MAE": 0.05624641850590706
+            },
+            "single_scale": {
+              "MQS": 0.03657209873199463,
+              "WIS": 0.03063908778131008,
+              "MAE": 0.05532588064670563
+            }
+          }
+        }
+      }
+    },
+    "HUBEI": {
+      "audit": {
+        "cut_index": 1173,
+        "validation_start": 879,
+        "last_refit_target": 1172,
+        "counts": {
+          "train": {
+            "1": 314,
+            "5": 312,
+            "10": 310,
+            "20": 305
+          },
+          "validation": {
+            "1": 146,
+            "5": 144,
+            "10": 142,
+            "20": 137
+          },
+          "test": {
+            "1": 146,
+            "5": 144,
+            "10": 141,
+            "20": 136
+          },
+          "development": {
+            "1": 461,
+            "5": 459,
+            "10": 457,
+            "20": 452
+          }
+        }
+      },
+      "fits": {
+        "uniform": {
+          "selected": {
+            "best_epoch": 11,
+            "validation_log_relative_raw_MQS": -0.0028561947401612997,
+            "epochs_run": 50,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 27,
+              "validation_log_relative_raw_MQS": -0.0024263947270810604,
+              "epochs_run": 57,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 11,
+              "validation_log_relative_raw_MQS": -0.0028561947401612997,
+              "epochs_run": 50,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "shared_route": {
+          "selected": {
+            "best_epoch": 11,
+            "validation_log_relative_raw_MQS": -0.0026620549615472555,
+            "epochs_run": 50,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 27,
+              "validation_log_relative_raw_MQS": -0.002278560306876898,
+              "epochs_run": 57,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 11,
+              "validation_log_relative_raw_MQS": -0.0026620549615472555,
+              "epochs_run": 50,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "dual_route": {
+          "selected": {
+            "best_epoch": 11,
+            "validation_log_relative_raw_MQS": -0.0027365395799279213,
+            "epochs_run": 50,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 27,
+              "validation_log_relative_raw_MQS": -0.002378719160333276,
+              "epochs_run": 57,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 11,
+              "validation_log_relative_raw_MQS": -0.0027365395799279213,
+              "epochs_run": 50,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "single_scale": {
+          "selected": {
+            "best_epoch": 7,
+            "validation_log_relative_raw_MQS": -0.0005389202851802111,
+            "epochs_run": 50,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 16,
+              "validation_log_relative_raw_MQS": -0.0003446419141255319,
+              "epochs_run": 50,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 7,
+              "validation_log_relative_raw_MQS": -0.0005389202851802111,
+              "epochs_run": 50,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        }
+      },
+      "by_horizon": {
+        "1": {
+          "n": 146,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.011017914861440659,
+              "WIS": 0.009554455988109112,
+              "MAE": 0.015491528436541557
+            },
+            "gaussian_rw": {
+              "MQS": 0.010929945602470025,
+              "WIS": 0.009376117916538146,
+              "MAE": 0.015491527921144615
+            },
+            "ridge_quantile": {
+              "MQS": 0.010759856513244742,
+              "WIS": 0.009288762188614687,
+              "MAE": 0.015483252618700857
+            },
+            "hgb_quantile": {
+              "MQS": 0.010178908707249997,
+              "WIS": 0.008807212488374865,
+              "MAE": 0.015078686112705051
+            },
+            "uniform": {
+              "MQS": 0.010880665853619576,
+              "WIS": 0.009411935694515705,
+              "MAE": 0.015427584759891033
+            },
+            "shared_route": {
+              "MQS": 0.010869372636079788,
+              "WIS": 0.009398666210472584,
+              "MAE": 0.015422710217535496
+            },
+            "dual_route": {
+              "MQS": 0.010866841301321983,
+              "WIS": 0.00939510390162468,
+              "MAE": 0.015424227342009544
+            },
+            "single_scale": {
+              "MQS": 0.010904500260949135,
+              "WIS": 0.009420221671462059,
+              "MAE": 0.015463109128177166
+            }
+          }
+        },
+        "5": {
+          "n": 144,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.014288836158812046,
+              "WIS": 0.012037273496389389,
+              "MAE": 0.02136140875518322
+            },
+            "gaussian_rw": {
+              "MQS": 0.01502661120976672,
+              "WIS": 0.012660860367863326,
+              "MAE": 0.02154169340044771
+            },
+            "ridge_quantile": {
+              "MQS": 0.014463316541547058,
+              "WIS": 0.012012894436447319,
+              "MAE": 0.022626467404064796
+            },
+            "hgb_quantile": {
+              "MQS": 0.014606556939060008,
+              "WIS": 0.01260572625103173,
+              "MAE": 0.02199914176847424
+            },
+            "uniform": {
+              "MQS": 0.014094889163970947,
+              "WIS": 0.011877053417265415,
+              "MAE": 0.021084822714328766
+            },
+            "shared_route": {
+              "MQS": 0.014083236455917358,
+              "WIS": 0.011864621192216873,
+              "MAE": 0.02107638120651245
+            },
+            "dual_route": {
+              "MQS": 0.014085196889936924,
+              "WIS": 0.011866888962686062,
+              "MAE": 0.021080566570162773
+            },
+            "single_scale": {
+              "MQS": 0.01419922336935997,
+              "WIS": 0.011963057331740856,
+              "MAE": 0.02123514749109745
+            }
+          }
+        },
+        "10": {
+          "n": 141,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.015977684408426285,
+              "WIS": 0.01317194290459156,
+              "MAE": 0.02515546604990959
+            },
+            "gaussian_rw": {
+              "MQS": 0.01766943395825393,
+              "WIS": 0.01505850591584993,
+              "MAE": 0.024815494870000804
+            },
+            "ridge_quantile": {
+              "MQS": 0.01751663964339866,
+              "WIS": 0.014358254335311451,
+              "MAE": 0.028194326454854975
+            },
+            "hgb_quantile": {
+              "MQS": 0.017822168361793598,
+              "WIS": 0.014939293660365375,
+              "MAE": 0.02724695768420016
+            },
+            "uniform": {
+              "MQS": 0.015932779759168625,
+              "WIS": 0.013144352473318577,
+              "MAE": 0.025155914947390556
+            },
+            "shared_route": {
+              "MQS": 0.015924783423542976,
+              "WIS": 0.013139059767127037,
+              "MAE": 0.025145046412944794
+            },
+            "dual_route": {
+              "MQS": 0.015929006040096283,
+              "WIS": 0.013143479824066162,
+              "MAE": 0.025154944509267807
+            },
+            "single_scale": {
+              "MQS": 0.015950733795762062,
+              "WIS": 0.013177366927266121,
+              "MAE": 0.025017816573381424
+            }
+          }
+        },
+        "20": {
+          "n": 136,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.01935371197760105,
+              "WIS": 0.016445545479655266,
+              "MAE": 0.028989529237151146
+            },
+            "gaussian_rw": {
+              "MQS": 0.022885117525478754,
+              "WIS": 0.020143643716184503,
+              "MAE": 0.02767011970664659
+            },
+            "ridge_quantile": {
+              "MQS": 0.025590153329982407,
+              "WIS": 0.0206798887836853,
+              "MAE": 0.040893862538723624
+            },
+            "hgb_quantile": {
+              "MQS": 0.02517852225351587,
+              "WIS": 0.021754692504422204,
+              "MAE": 0.039626321245992635
+            },
+            "uniform": {
+              "MQS": 0.019222300499677658,
+              "WIS": 0.016323069110512733,
+              "MAE": 0.028989342972636223
+            },
+            "shared_route": {
+              "MQS": 0.019214192405343056,
+              "WIS": 0.016312936320900917,
+              "MAE": 0.028984224423766136
+            },
+            "dual_route": {
+              "MQS": 0.019225433468818665,
+              "WIS": 0.016326282173395157,
+              "MAE": 0.02900296077132225
+            },
+            "single_scale": {
+              "MQS": 0.019309790804982185,
+              "WIS": 0.016439363360404968,
+              "MAE": 0.028743036091327667
+            }
+          }
+        }
+      }
+    },
+    "EU": {
+      "audit": {
+        "cut_index": 1257,
+        "validation_start": 942,
+        "last_refit_target": 1256,
+        "counts": {
+          "train": {
+            "1": 346,
+            "5": 344,
+            "10": 341,
+            "20": 336
+          },
+          "validation": {
+            "1": 157,
+            "5": 155,
+            "10": 153,
+            "20": 148
+          },
+          "test": {
+            "1": 159,
+            "5": 157,
+            "10": 155,
+            "20": 150
+          },
+          "development": {
+            "1": 503,
+            "5": 501,
+            "10": 499,
+            "20": 494
+          }
+        }
+      },
+      "fits": {
+        "uniform": {
+          "selected": {
+            "best_epoch": 18,
+            "validation_log_relative_raw_MQS": -0.018658950924873352,
+            "epochs_run": 50,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 50,
+              "validation_log_relative_raw_MQS": -0.017736807465553284,
+              "epochs_run": 80,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 18,
+              "validation_log_relative_raw_MQS": -0.018658950924873352,
+              "epochs_run": 50,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "shared_route": {
+          "selected": {
+            "best_epoch": 18,
+            "validation_log_relative_raw_MQS": -0.02100900188088417,
+            "epochs_run": 50,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 52,
+              "validation_log_relative_raw_MQS": -0.020615600049495697,
+              "epochs_run": 82,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 18,
+              "validation_log_relative_raw_MQS": -0.02100900188088417,
+              "epochs_run": 50,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "dual_route": {
+          "selected": {
+            "best_epoch": 18,
+            "validation_log_relative_raw_MQS": -0.019971288740634918,
+            "epochs_run": 50,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 50,
+              "validation_log_relative_raw_MQS": -0.018884968012571335,
+              "epochs_run": 80,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 18,
+              "validation_log_relative_raw_MQS": -0.019971288740634918,
+              "epochs_run": 50,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        },
+        "single_scale": {
+          "selected": {
+            "best_epoch": 14,
+            "validation_log_relative_raw_MQS": -0.0028297866228967905,
+            "epochs_run": 50,
+            "lr": 0.001,
+            "aux_weight": 0.5
+          },
+          "trials": [
+            {
+              "best_epoch": 40,
+              "validation_log_relative_raw_MQS": -0.0025769686326384544,
+              "epochs_run": 70,
+              "lr": 0.0003,
+              "aux_weight": 0.5
+            },
+            {
+              "best_epoch": 14,
+              "validation_log_relative_raw_MQS": -0.0028297866228967905,
+              "epochs_run": 50,
+              "lr": 0.001,
+              "aux_weight": 0.5
+            }
+          ],
+          "refit_seeds": [
+            11,
+            22
+          ]
+        }
+      },
+      "by_horizon": {
+        "1": {
+          "n": 159,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.010741040110588074,
+              "WIS": 0.008781700395047665,
+              "MAE": 0.017399953678250313
+            },
+            "gaussian_rw": {
+              "MQS": 0.010604998224179816,
+              "WIS": 0.008690335254452883,
+              "MAE": 0.017069317898881452
+            },
+            "ridge_quantile": {
+              "MQS": 0.010913326024168018,
+              "WIS": 0.008918915017349262,
+              "MAE": 0.01755818093367149
+            },
+            "hgb_quantile": {
+              "MQS": 0.010772113183985818,
+              "WIS": 0.008789056158690325,
+              "MAE": 0.017620676027753322
+            },
+            "uniform": {
+              "MQS": 0.01120800245553255,
+              "WIS": 0.009256434626877308,
+              "MAE": 0.01777776889503002
+            },
+            "shared_route": {
+              "MQS": 0.011350475251674652,
+              "WIS": 0.009392168372869492,
+              "MAE": 0.017982861027121544
+            },
+            "dual_route": {
+              "MQS": 0.011324315331876278,
+              "WIS": 0.009352504275739193,
+              "MAE": 0.0180060975253582
+            },
+            "single_scale": {
+              "MQS": 0.010712092742323875,
+              "WIS": 0.008751052431762218,
+              "MAE": 0.017419157549738884
+            }
+          }
+        },
+        "5": {
+          "n": 157,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.02550659142434597,
+              "WIS": 0.020605364814400673,
+              "MAE": 0.0425567552447319
+            },
+            "gaussian_rw": {
+              "MQS": 0.02472284082272302,
+              "WIS": 0.019944720911831814,
+              "MAE": 0.041394891730468175
+            },
+            "ridge_quantile": {
+              "MQS": 0.026891325585713118,
+              "WIS": 0.02176010827454358,
+              "MAE": 0.0445679864174372
+            },
+            "hgb_quantile": {
+              "MQS": 0.025908245376820176,
+              "WIS": 0.020852180422137514,
+              "MAE": 0.04465371630076897
+            },
+            "uniform": {
+              "MQS": 0.025391967967152596,
+              "WIS": 0.020725024864077568,
+              "MAE": 0.04186192899942398
+            },
+            "shared_route": {
+              "MQS": 0.025737665593624115,
+              "WIS": 0.02105111815035343,
+              "MAE": 0.04227594658732414
+            },
+            "dual_route": {
+              "MQS": 0.025704199448227882,
+              "WIS": 0.020990587770938873,
+              "MAE": 0.042336009442806244
+            },
+            "single_scale": {
+              "MQS": 0.0247645303606987,
+              "WIS": 0.01990330033004284,
+              "MAE": 0.04168231040239334
+            }
+          }
+        },
+        "10": {
+          "n": 155,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.03720438852906227,
+              "WIS": 0.030261682346463203,
+              "MAE": 0.061725445091724396
+            },
+            "gaussian_rw": {
+              "MQS": 0.035888105233793204,
+              "WIS": 0.029096681504092767,
+              "MAE": 0.06004228453009179
+            },
+            "ridge_quantile": {
+              "MQS": 0.0396893039157549,
+              "WIS": 0.032624904285405244,
+              "MAE": 0.06414546221757549
+            },
+            "hgb_quantile": {
+              "MQS": 0.03546138092590582,
+              "WIS": 0.02857748076330333,
+              "MAE": 0.056809812576729256
+            },
+            "uniform": {
+              "MQS": 0.036269377917051315,
+              "WIS": 0.029551438987255096,
+              "MAE": 0.060380008071660995
+            },
+            "shared_route": {
+              "MQS": 0.036916837096214294,
+              "WIS": 0.030135979875922203,
+              "MAE": 0.06125028058886528
+            },
+            "dual_route": {
+              "MQS": 0.03683638945221901,
+              "WIS": 0.030034763738512993,
+              "MAE": 0.06125446408987045
+            },
+            "single_scale": {
+              "MQS": 0.0359993502497673,
+              "WIS": 0.02911452390253544,
+              "MAE": 0.060171205550432205
+            }
+          }
+        },
+        "20": {
+          "n": 150,
+          "scores": {
+            "empirical_anchor": {
+              "MQS": 0.04658288136124611,
+              "WIS": 0.03777313604950905,
+              "MAE": 0.07768688350915909
+            },
+            "gaussian_rw": {
+              "MQS": 0.04332538525993791,
+              "WIS": 0.03576158600601085,
+              "MAE": 0.06868269663459312
+            },
+            "ridge_quantile": {
+              "MQS": 0.05978068915385758,
+              "WIS": 0.04884641566404202,
+              "MAE": 0.09696637446836878
+            },
+            "hgb_quantile": {
+              "MQS": 0.04953746655504785,
+              "WIS": 0.040769913162994394,
+              "MAE": 0.07728570259546262
+            },
+            "uniform": {
+              "MQS": 0.04673078656196594,
+              "WIS": 0.03826940059661865,
+              "MAE": 0.07604166120290756
+            },
+            "shared_route": {
+              "MQS": 0.04763118177652359,
+              "WIS": 0.03920399397611618,
+              "MAE": 0.07665856927633286
+            },
+            "dual_route": {
+              "MQS": 0.047510791569948196,
+              "WIS": 0.03901698440313339,
+              "MAE": 0.07676266133785248
+            },
+            "single_scale": {
+              "MQS": 0.045414999127388,
+              "WIS": 0.03661607578396797,
+              "MAE": 0.07657387107610703
+            }
+          }
+        }
+      }
+    }
+  },
+  "summary": {
+    "dual_route_vs_empirical_anchor": {
+      "mean_log_MQS_ratio": 0.02395701007790658,
+      "geometric_MQS_gain_percent": -2.4246284676153307,
+      "wins": 12,
+      "cells": 20
+    },
+    "dual_route_vs_gaussian_rw": {
+      "mean_log_MQS_ratio": -0.026334595383743616,
+      "geometric_MQS_gain_percent": 2.599086388014582,
+      "wins": 12,
+      "cells": 20
+    },
+    "dual_route_vs_ridge_quantile": {
+      "mean_log_MQS_ratio": -0.0052538800947224094,
+      "geometric_MQS_gain_percent": 0.5240102605682972,
+      "wins": 11,
+      "cells": 20
+    },
+    "dual_route_vs_hgb_quantile": {
+      "mean_log_MQS_ratio": -0.01128938406129421,
+      "geometric_MQS_gain_percent": 1.1225898095458375,
+      "wins": 12,
+      "cells": 20
+    },
+    "dual_route_vs_uniform": {
+      "mean_log_MQS_ratio": 0.023359417742578055,
+      "geometric_MQS_gain_percent": -2.363438579819177,
+      "wins": 6,
+      "cells": 20
+    },
+    "dual_route_vs_shared_route": {
+      "mean_log_MQS_ratio": -0.015206115222681471,
+      "geometric_MQS_gain_percent": 1.5091086039678236,
+      "wins": 15,
+      "cells": 20
+    },
+    "dual_route_vs_single_scale": {
+      "mean_log_MQS_ratio": 0.023606459051425784,
+      "geometric_MQS_gain_percent": -2.388729701511383,
+      "wins": 9,
+      "cells": 20
+    }
+  },
+  "elapsed_seconds": 237.40542189998087
+}

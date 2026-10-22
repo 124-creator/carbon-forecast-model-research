@@ -1,0 +1,72 @@
+{
+  "status": "PURE TORCH PATH-TILT MATH VALIDATION",
+  "source_sha256": "30c24dfd921ff6a2f5d2fbfb916ed3ccf8f265d705a66f6e1f45bc171ed43b30",
+  "checks": {
+    "enumerated_state_paths": 16,
+    "enumerated_quote_paths": 8,
+    "total_paths_per_origin": 128,
+    "output_max_absolute_errors": {
+      "E_S": 2.220446049250313e-16,
+      "E_Z": 2.220446049250313e-16,
+      "E_SZ": 1.1102230246251565e-16,
+      "Cov_SZ": 1.8735013540549517e-16,
+      "state_marginals": 2.220446049250313e-16,
+      "active_prob_given_state": 2.220446049250313e-16,
+      "logZ": 1.942890293094024e-16,
+      "KL": 1.6653345369377348e-16
+    },
+    "full_path_probability_error": 2.7755575615628914e-17,
+    "coefficient_gradient_error": 1.3877787807814457e-16,
+    "zero_anchor_errors": {
+      "state": 0.0,
+      "ES": 0.0,
+      "ESZ": 1.1102230246251565e-16,
+      "KL": 0.0,
+      "logZ": 0.0
+    },
+    "zero_head_each_channel_gradient_nonzero": true,
+    "c0_covariance_exact_zero": true,
+    "positive_c_positive_covariance": true,
+    "negative_c_negative_covariance": true,
+    "b_only_changes_observability": true,
+    "a_only_changes_risk": true,
+    "endpoints_exact": true,
+    "endpoint_probability_and_coefficient_gradients_match_enumeration": true,
+    "reference_support_zeros_exact": true,
+    "scale_units_equivariant_with_same_psi": true,
+    "baseline_cache_identical": true,
+    "coefficient_gradcheck": true,
+    "KL_matches_direct_relative_entropy": true,
+    "minimum_test_KL": 0.03895621042303377,
+    "stateless_no_parameters": true,
+    "positive_c_covariance": [
+      [
+        0.059736427691674164,
+        0.08281623505614286,
+        0.06776824901346824
+      ],
+      [
+        0.029340361327476725,
+        0.03334172345518317,
+        0.0795783738880242
+      ]
+    ],
+    "zero_head_channel_gradient_abs_sums": [
+      2.807121015474723,
+      1.1440858687500002,
+      0.34716652780579044
+    ]
+  },
+  "reference": "p(S0)*prod T(Sprevious,Sday); origin-conditional independent Bernoulli quote resolution byday",
+  "supported_domain": "finite positive state values, monotone bounded psi[-1,1], nonnegative normalized p0/T, p in[0,1], coefficients[-3,3]; zero reference support remains zero",
+  "time_index": "potential at S1..SK after each transition; no potential at S0",
+  "numerics": "daywise logg shift and normalization; backward common max rescaling cancels in smoothed marginals; no probability log/clamp, no KL clamp",
+  "scale_note": "unit scaling of state_values requires invariant psi, e.g. scaling mu in tanh(log(S/mu)) too",
+  "cache_note": "caller supplies baseline cache only for identical fixed reference/horizon; no automatic detach",
+  "market_data_read": false,
+  "real2026_data_read": false,
+  "checkpoint_read": false,
+  "training_executed": false,
+  "old_files_modified": false,
+  "interpretation": "Feynman-Kac/Doob/KL are known; no economic IV or true quote/trading mechanism identification"
+}

@@ -1,0 +1,51 @@
+﻿==============================================================================
+SAMPLE
+  auctions 1281  2020-01-07 -> 2025-12-15
+date
+2020    209
+2021    223
+2022    211
+2023    214
+2024    212
+2025    212
+
+==============================================================================
+GAP LEVEL (basis points of price)
+  gap_same   mean +163.60bp  sd 233.00  q05 -153.02  q50 +142.67  q95 +582.12  P(>0) 0.801
+  gap_prev   mean +151.35bp  sd 202.55  q05 -143.50  q50 +135.07  q95 +516.29  P(>0) 0.782
+  disc_prev  mean -151.35bp  sd 202.55  q05 -516.29  q50 -135.07  q95 +143.50  P(>0) 0.216
+
+==============================================================================
+PERSISTENCE
+  gap_same   ACF L1=+0.236  L2=+0.326  L3=+0.300  L5=+0.245  L10=+0.222  L22=+0.267
+  gap_prev   ACF L1=+0.280  L2=+0.387  L3=+0.341  L5=+0.332  L10=+0.292  L22=+0.280
+  disc_prev  ACF L1=+0.280  L2=+0.387  L3=+0.341  L5=+0.332  L10=+0.292  L22=+0.280
+
+==============================================================================
+EX-ANTE DRIVERS (known before the auction) vs gap_prev
+  corr(gap_prev, ret_prev   ) = +0.059   rank +0.059   n=1280
+  corr(gap_prev, logV       ) = +0.158   rank +0.125   n=1281
+  corr(gap_prev, days_since ) = +0.042   rank +0.035   n=1280
+  corr(gap_prev, disc_prev  ) = -1.000   rank -1.000   n=1281
+
+==============================================================================
+EX-POST DRIVERS (auction outcomes) vs gap_same
+  rank corr(gap_same, R                                 ) = -0.012
+  rank corr(gap_same, sd_B                              ) = +0.012
+  rank corr(gap_same, mu_B                              ) = +0.036
+  rank corr(gap_same, N                                 ) = +0.077
+  rank corr(gap_same, S                                 ) = +0.026
+  rank corr(gap_same, bid_price_spread_eur_per_tco2     ) = -0.136
+
+==============================================================================
+NAIVE OUT-OF-SAMPLE BENCHMARKS for gap_prev (2023+ holdout)
+  zero                   n=638  MAE 172.94bp  RMSE 222.43  R2 -0.6531
+  train_mean             n=638  MAE 135.61bp  RMSE 174.52  R2 -0.0177
+  prev_gap (AR1)         n=637  MAE 143.69bp  RMSE 192.27  R2 -0.2340
+  prev_gap x train_rho   n=637  MAE 151.79bp  RMSE 195.94  R2 -0.2815
+
+==============================================================================
+ECONOMIC SCALE
+  EUR/tCO2 gap: mean +0.880  sd 1.399
+  value at stake per auction (gap x volume): mean EUR 3,231,641
+  test-window (2023+) total abs value at stake: EUR 2,254,252,245

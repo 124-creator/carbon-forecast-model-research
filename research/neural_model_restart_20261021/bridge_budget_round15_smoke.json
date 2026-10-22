@@ -1,0 +1,265 @@
+{
+  "config": {
+    "epochs": 3,
+    "seeds": [
+      11
+    ],
+    "tag": "bridge_budget_round15_smoke"
+  },
+  "status": "DEVELOPMENT ONLY; no 2026 targets or forecasts",
+  "audit": {
+    "development_rows": 1362,
+    "first": "2020-07-31",
+    "last": "2025-12-31",
+    "validation_start": "2025-01-01",
+    "training_rows": 3008,
+    "validation_rows": 722,
+    "withheld_period_used": false,
+    "target": "3 future sums of Parkinson intraday range variance; bucket lengths 1/4/17",
+    "feature_names": [
+      "logrange1",
+      "logrange5",
+      "logrange22",
+      "r1",
+      "r5",
+      "r22",
+      "intraday",
+      "logovernightvar",
+      "logreturnvar",
+      "logvolume",
+      "volume_ratio",
+      "range_ratio"
+    ],
+    "all_horizons_common_origins": true,
+    "geometry": "eta=r/(u-l), xi=(u+l-r)/(u-l)",
+    "geometry_domain": "abs(eta)+abs(xi)<=1",
+    "background_information": "the prior 12 inputs already include range and body returns; not strictly shape-free; extra wick geometry is conditional on that information",
+    "total_risk": "frozen sum of 3 common-input HGB forecasts"
+  },
+  "source_sha256": "ff99c14e84153717be0d72506b0c8b581605495288849823e4bf219ab1462f11",
+  "script_sha256": "9c215c33e809eff765ed77138db3ea4d5d0671a5cebd2ef505ff49bedb46e576",
+  "checks": {
+    "zero_tilt_recovers_baseline": true,
+    "positive_conservative_operator": true,
+    "gradient_check": true
+  },
+  "background_trace": [
+    {
+      "prediction_year": 2022,
+      "training_targets": 237,
+      "last_training_label": "2021-12-31",
+      "predicted_origins": 251
+    },
+    {
+      "prediction_year": 2023,
+      "training_targets": 488,
+      "last_training_label": "2022-12-30",
+      "predicted_origins": 250
+    },
+    {
+      "prediction_year": 2024,
+      "training_targets": 738,
+      "last_training_label": "2023-12-29",
+      "predicted_origins": 230
+    },
+    {
+      "prediction_year": 2025,
+      "training_targets": 990,
+      "last_training_label": "2024-12-31",
+      "predicted_origins": 228
+    }
+  ],
+  "head_training_origins": 731,
+  "validation_origins": 228,
+  "selection": "2025 mean standard-direction QLIKE difference, h=1/5 only; h22 fixed",
+  "models": [
+    "bridge_transport",
+    "flat_shape",
+    "context_transport"
+  ],
+  "fits": {
+    "bridge_transport": [
+      {
+        "seed": 11,
+        "best_epoch": 3,
+        "epochs_run": 4,
+        "validation_short_loss_diff": -0.0017072317423298955,
+        "parameters": 362,
+        "mean_abs_edge_tilt": 0.0592140331864357,
+        "history": [
+          [
+            0,
+            -8.365564241330503e-09
+          ],
+          [
+            1,
+            -0.00042635935824364424
+          ],
+          [
+            2,
+            -0.0010379385203123093
+          ],
+          [
+            3,
+            -0.0017072317423298955
+          ]
+        ]
+      }
+    ],
+    "flat_shape": [
+      {
+        "seed": 11,
+        "best_epoch": 3,
+        "epochs_run": 4,
+        "validation_short_loss_diff": -0.0020125319715589285,
+        "parameters": 362,
+        "mean_abs_edge_tilt": 0.05362040549516678,
+        "history": [
+          [
+            0,
+            9.411259327407606e-09
+          ],
+          [
+            1,
+            -0.0005013503250665963
+          ],
+          [
+            2,
+            -0.0012604520888999104
+          ],
+          [
+            3,
+            -0.0020125319715589285
+          ]
+        ]
+      }
+    ],
+    "context_transport": [
+      {
+        "seed": 11,
+        "best_epoch": 1,
+        "epochs_run": 4,
+        "validation_short_loss_diff": -0.00045695118024013937,
+        "parameters": 362,
+        "mean_abs_edge_tilt": 0.038193970918655396,
+        "history": [
+          [
+            0,
+            -8.365564241330503e-09
+          ],
+          [
+            1,
+            -0.00045695118024013937
+          ],
+          [
+            2,
+            7.53005369915627e-05
+          ],
+          [
+            3,
+            0.003268452128395438
+          ]
+        ]
+      }
+    ]
+  },
+  "scores": {
+    "1": {
+      "level_allocator": {
+        "n": 228,
+        "loss_difference_vs_level": 0.0,
+        "MSE": 1.3710018243114861e-08
+      },
+      "uniform": {
+        "n": 228,
+        "loss_difference_vs_level": 0.022027131849700687,
+        "MSE": 1.4377275622077042e-08
+      },
+      "HGB_full_allocator": {
+        "n": 228,
+        "loss_difference_vs_level": 0.004405078029801875,
+        "MSE": 1.3559642056618847e-08
+      },
+      "bridge_transport": {
+        "n": 228,
+        "loss_difference_vs_level": -0.0022662270968728158,
+        "MSE": 1.3644473811122742e-08
+      },
+      "flat_shape": {
+        "n": 228,
+        "loss_difference_vs_level": -0.0031867411958558032,
+        "MSE": 1.3626385427471976e-08
+      },
+      "context_transport": {
+        "n": 228,
+        "loss_difference_vs_level": -0.0008771728107977896,
+        "MSE": 1.36780651872353e-08
+      }
+    },
+    "5": {
+      "level_allocator": {
+        "n": 228,
+        "loss_difference_vs_level": 0.0,
+        "MSE": 4.931155571957409e-09
+      },
+      "uniform": {
+        "n": 228,
+        "loss_difference_vs_level": 0.018287146304892112,
+        "MSE": 4.832305521347569e-09
+      },
+      "HGB_full_allocator": {
+        "n": 228,
+        "loss_difference_vs_level": -4.7700469261356316e-05,
+        "MSE": 4.925792228728282e-09
+      },
+      "bridge_transport": {
+        "n": 228,
+        "loss_difference_vs_level": -0.0011482484489926976,
+        "MSE": 4.703637328414918e-09
+      },
+      "flat_shape": {
+        "n": 228,
+        "loss_difference_vs_level": -0.0008382755452489994,
+        "MSE": 4.753475152082124e-09
+      },
+      "context_transport": {
+        "n": 228,
+        "loss_difference_vs_level": -3.674035206894419e-05,
+        "MSE": 4.832667816534461e-09
+      }
+    },
+    "22": {
+      "level_allocator": {
+        "n": 228,
+        "loss_difference_vs_level": 0.0,
+        "MSE": 2.097679886714227e-09
+      },
+      "uniform": {
+        "n": 228,
+        "loss_difference_vs_level": 0.0,
+        "MSE": 2.097679886714227e-09
+      },
+      "HGB_full_allocator": {
+        "n": 228,
+        "loss_difference_vs_level": 0.0,
+        "MSE": 2.097679886714227e-09
+      },
+      "bridge_transport": {
+        "n": 228,
+        "loss_difference_vs_level": 0.0,
+        "MSE": 2.097679886714227e-09
+      },
+      "flat_shape": {
+        "n": 228,
+        "loss_difference_vs_level": 0.0,
+        "MSE": 2.097679886714227e-09
+      },
+      "context_transport": {
+        "n": 228,
+        "loss_difference_vs_level": 0.0,
+        "MSE": 2.097679886714227e-09
+      }
+    }
+  },
+  "elapsed_seconds": 1.3094069957733154
+}

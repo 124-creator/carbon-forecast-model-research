@@ -1,0 +1,380 @@
+{
+  "status": "new exploratory architecture; same historical tests reused",
+  "config": {
+    "markets": [
+      "CEA"
+    ],
+    "variants": [
+      "uniform_prior",
+      "state_kernel",
+      "response_only"
+    ],
+    "seeds": [
+      11
+    ],
+    "epochs": 2,
+    "tag": "kernel_memory_round4_smoke"
+  },
+  "architecture": "class-frequency prior times learned query-key group-similarity, age, and response energies",
+  "zero_mass": "actual zero memories retained; explicit zero prior when no matured zero case exists",
+  "causality": "support label maturity mask; fit-partition model statistics are fitted normally",
+  "groups": [
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    [
+      24,
+      25,
+      27
+    ],
+    [
+      28,
+      29,
+      30,
+      31
+    ],
+    [
+      32,
+      33,
+      34,
+      35
+    ]
+  ],
+  "similarity_bandwidth": "exp(-mean standardized squared group distance/2); age exp(-steps/252)",
+  "same_training_queries": "minimum32 matured NONZERO scenarios, matching frozen tilt",
+  "source_sha256": "e00fac76ec681c5ae28f7694a5f8ed7ef8d5fa2f06a765d80e83fb1a70fb0e31",
+  "panel_sha256": "d470238386e201e68f07b033f5a34591af89b57f1546ea79b699e763d228b56c",
+  "markets": {
+    "CEA": {
+      "audit": {
+        "cut_index": 597,
+        "validation_start_index": 447,
+        "lookback": 128,
+        "step": 2,
+        "train": 621,
+        "validation": 281,
+        "refit": 921,
+        "test": 1311,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 446,
+        "last_refit_target": 596,
+        "test_zero_share": {
+          "1": 0.08734939759036145,
+          "5": 0.006060606060606061,
+          "10": 0.01529051987767584,
+          "20": 0.003105590062111801
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "fits": {
+        "uniform_prior": [
+          {
+            "best_epoch": 0,
+            "epochs_run": 0,
+            "fixed_control": true,
+            "seed": 11,
+            "allocated_parameters": 1424
+          }
+        ],
+        "state_kernel": [
+          {
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": 0.27902674674987793,
+            "epochs_run": 2,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32",
+            "seed": 11,
+            "allocated_parameters": 1424
+          }
+        ],
+        "response_only": [
+          {
+            "best_epoch": 0,
+            "validation_normalized_macro_pinball": 0.27902674674987793,
+            "epochs_run": 2,
+            "eligible_training_queries": 435,
+            "training_memory": "only nonzero outcomes with t_key+h<=query_origin; minimum32",
+            "seed": 11,
+            "allocated_parameters": 1424
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 332,
+          "scores": {
+            "uniform_prior": {
+              "MQS": 0.007298207316748721,
+              "CRPS": 0.008205226738238567,
+              "Brier": 0.08459344318836741
+            },
+            "state_kernel": {
+              "MQS": 0.007298207316748721,
+              "CRPS": 0.008205226738238567,
+              "Brier": 0.08459344318836741
+            },
+            "response_only": {
+              "MQS": 0.007298207316748721,
+              "CRPS": 0.008205226738238567,
+              "Brier": 0.08459344318836741
+            },
+            "frozen_tilt": {
+              "MQS": 0.007341988430294455,
+              "CRPS": 0.008240468366526399,
+              "Brier": 0.08459344218495134
+            },
+            "uniform_rule": {
+              "MQS": 0.007298207316748721,
+              "CRPS": 0.008205226780062316,
+              "Brier": 0.08459344218495134
+            },
+            "uniform_static": {
+              "MQS": 0.0073265568127000745,
+              "CRPS": 0.008239690137792941,
+              "Brier": 0.1511962865808631
+            },
+            "qrf": {
+              "MQS": 0.007436934202565419,
+              "CRPS": 0.008347353590855628,
+              "Brier": 0.12603541572585106
+            }
+          }
+        },
+        "5": {
+          "n": 330,
+          "scores": {
+            "uniform_prior": {
+              "MQS": 0.01782168324809848,
+              "CRPS": 0.020142855243161235,
+              "Brier": 0.007344682230445249
+            },
+            "state_kernel": {
+              "MQS": 0.01782168324809848,
+              "CRPS": 0.020142855243161235,
+              "Brier": 0.007344682230445249
+            },
+            "response_only": {
+              "MQS": 0.01782168324809848,
+              "CRPS": 0.020142855243161235,
+              "Brier": 0.007344682230445249
+            },
+            "frozen_tilt": {
+              "MQS": 0.01761651410357675,
+              "CRPS": 0.020032058885106275,
+              "Brier": 0.007344682230445249
+            },
+            "uniform_rule": {
+              "MQS": 0.01782168324809848,
+              "CRPS": 0.020142856187270568,
+              "Brier": 0.007344682230445249
+            },
+            "uniform_static": {
+              "MQS": 0.01794536863111971,
+              "CRPS": 0.02031885160875534,
+              "Brier": 0.03369724906440652
+            },
+            "qrf": {
+              "MQS": 0.017915392437274382,
+              "CRPS": 0.020267559239897606,
+              "Brier": 0.03340516541346224
+            }
+          }
+        },
+        "10": {
+          "n": 327,
+          "scores": {
+            "uniform_prior": {
+              "MQS": 0.027780183620417575,
+              "CRPS": 0.031144356899770423,
+              "Brier": 0.015967222227274896
+            },
+            "state_kernel": {
+              "MQS": 0.027780183620417575,
+              "CRPS": 0.031144356899770423,
+              "Brier": 0.015967222227274896
+            },
+            "response_only": {
+              "MQS": 0.027780183620417575,
+              "CRPS": 0.031144356899770423,
+              "Brier": 0.015967222227274896
+            },
+            "frozen_tilt": {
+              "MQS": 0.027234900937620578,
+              "CRPS": 0.03065300254527576,
+              "Brier": 0.015967222227274896
+            },
+            "uniform_rule": {
+              "MQS": 0.027780183620417575,
+              "CRPS": 0.03114435733047732,
+              "Brier": 0.015967222227274896
+            },
+            "uniform_static": {
+              "MQS": 0.02806886226706024,
+              "CRPS": 0.03143032578613694,
+              "Brier": 0.03379378958934558
+            },
+            "qrf": {
+              "MQS": 0.028150835427919442,
+              "CRPS": 0.03141961787076583,
+              "Brier": 0.033654189014104316
+            }
+          }
+        },
+        "20": {
+          "n": 322,
+          "scores": {
+            "uniform_prior": {
+              "MQS": 0.047234764581417045,
+              "CRPS": 0.05331321140702476,
+              "Brier": 0.003919996938543174
+            },
+            "state_kernel": {
+              "MQS": 0.047234764581417045,
+              "CRPS": 0.05331321140702476,
+              "Brier": 0.003919996938543174
+            },
+            "response_only": {
+              "MQS": 0.047234764581417045,
+              "CRPS": 0.05331321140702476,
+              "Brier": 0.003919996938543174
+            },
+            "frozen_tilt": {
+              "MQS": 0.04547985711582899,
+              "CRPS": 0.05162612955861831,
+              "Brier": 0.003919996938543174
+            },
+            "uniform_rule": {
+              "MQS": 0.047234764581417045,
+              "CRPS": 0.053313213317122306,
+              "Brier": 0.003919996938543174
+            },
+            "uniform_static": {
+              "MQS": 0.04764597296919912,
+              "CRPS": 0.05386432922284383,
+              "Brier": 0.015740946605972212
+            },
+            "qrf": {
+              "MQS": 0.048460445604208376,
+              "CRPS": 0.05416873477231047,
+              "Brier": 0.01583463808061511
+            }
+          }
+        }
+      }
+    }
+  },
+  "summary": {
+    "state_kernel_vs_uniform_prior": {
+      "MQS": {
+        "geometric_gain_percent": 0.0,
+        "wins": 0,
+        "cells": 4
+      },
+      "CRPS": {
+        "geometric_gain_percent": 0.0,
+        "wins": 0,
+        "cells": 4
+      }
+    },
+    "state_kernel_vs_response_only": {
+      "MQS": {
+        "geometric_gain_percent": 0.0,
+        "wins": 0,
+        "cells": 4
+      },
+      "CRPS": {
+        "geometric_gain_percent": 0.0,
+        "wins": 0,
+        "cells": 4
+      }
+    },
+    "state_kernel_vs_frozen_tilt": {
+      "MQS": {
+        "geometric_gain_percent": -1.594642194333007,
+        "wins": 1,
+        "cells": 4
+      },
+      "CRPS": {
+        "geometric_gain_percent": -1.2398374427014192,
+        "wins": 1,
+        "cells": 4
+      }
+    },
+    "state_kernel_vs_uniform_rule": {
+      "MQS": {
+        "geometric_gain_percent": 0.0,
+        "wins": 0,
+        "cells": 4
+      },
+      "CRPS": {
+        "geometric_gain_percent": 2.540627597191758e-06,
+        "wins": 4,
+        "cells": 4
+      }
+    },
+    "state_kernel_vs_uniform_static": {
+      "MQS": {
+        "geometric_gain_percent": 0.7422063757492992,
+        "wins": 4,
+        "cells": 4
+      },
+      "CRPS": {
+        "geometric_gain_percent": 0.8046273895114253,
+        "wins": 4,
+        "cells": 4
+      }
+    },
+    "state_kernel_vs_qrf": {
+      "MQS": {
+        "geometric_gain_percent": 1.561336900310173,
+        "wins": 4,
+        "cells": 4
+      },
+      "CRPS": {
+        "geometric_gain_percent": 1.1944148835157598,
+        "wins": 4,
+        "cells": 4
+      }
+    }
+  },
+  "elapsed_seconds": 2.5871781000168994
+}

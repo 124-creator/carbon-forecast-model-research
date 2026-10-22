@@ -1,0 +1,315 @@
+{
+  "asset": "GRN",
+  "assets": [
+    "GRN"
+  ],
+  "rows": 1581,
+  "cut": 1331,
+  "test_cut": 1581,
+  "first_date": "2019-09-18",
+  "last_date": "2025-12-31",
+  "train": {
+    "rows": 1158,
+    "origin_first": "2020-02-11",
+    "origin_last": "2024-11-27",
+    "label_end_first": "2020-03-13",
+    "label_end_last": "2024-12-31",
+    "zero_targets_by_h": {
+      "1": 167,
+      "5": 65,
+      "22": 17
+    }
+  },
+  "validation": {
+    "rows": 228,
+    "origin_first": "2025-01-02",
+    "origin_last": "2025-11-28",
+    "label_end_first": "2025-02-05",
+    "label_end_last": "2025-12-31",
+    "zero_targets_by_h": {
+      "1": 33,
+      "5": 0,
+      "22": 0
+    }
+  },
+  "test_origins": 0,
+  "geometry_feature_order": [
+    "2*a-1",
+    "2*z-1",
+    "standalone_pre25_normalized_log_volume_ratio"
+  ],
+  "target": "raw Parkinson mean of following1/5/22 retained bars, including real zero-range bars; not true QV",
+  "proxy_zero_count": 342,
+  "zero_range_by_EPS": 342,
+  "quote_zero_range_with_positive_volume": 240,
+  "proxy_raw_floored_or_imputed": false,
+  "OHLC_missing_imputed_or_rows_deleted": false,
+  "zero_range_meaning": "no resolvable daily quote range; neither no trading nor zero true volatility",
+  "raw_volume_missing": 0,
+  "raw_volume_zero": 102,
+  "flags": {
+    "first21": {
+      "all_rows": 21,
+      "pre25": 21,
+      "validation2025": 0
+    },
+    "raw_volume_missing": {
+      "all_rows": 0,
+      "pre25": 0,
+      "validation2025": 0
+    },
+    "raw_volume_zero": {
+      "all_rows": 102,
+      "pre25": 102,
+      "validation2025": 0
+    },
+    "volume_logratio_invalid": {
+      "all_rows": 117,
+      "pre25": 117,
+      "validation2025": 0
+    },
+    "volume_feature_imputed": {
+      "all_rows": 117,
+      "pre25": 117,
+      "validation2025": 0
+    },
+    "quote_H_equals_L": {
+      "all_rows": 342,
+      "pre25": 302,
+      "validation2025": 40
+    },
+    "context12_nonfinite": {
+      "all_rows": 118,
+      "pre25": 118,
+      "validation2025": 0
+    }
+  },
+  "first21_explanation": "rolling22 volume denominator unavailable on first21 rows; mask can overlap other flags",
+  "origin_exclusions": {
+    "first100_lookback_rows": 100,
+    "final22_unmatured_rows": 22,
+    "eligible_nonfinite_context": 51,
+    "eligible_purge_boundary": 22,
+    "rule": "HB origin finite-context filter preserved; rejected origins do not delete observations/zero-range target contributions"
+  },
+  "normalization": {
+    "asset_weight": 1.0,
+    "asset_moments": {
+      "GRN": {
+        "n": 1022,
+        "mean": -0.26638669173617463,
+        "variance": 0.8238986246204004
+      }
+    },
+    "pooled_mean": -0.26638669173617463,
+    "pooled_variance": 0.8238986246204004,
+    "pooled_std": 0.9076886165532762,
+    "rule": "GRN alone; finite volume-logratio on pre25 resolvable-range rows only; invalid feature filled with fixed GRN pre25 mean",
+    "geometry": "fixed 2*a-1 and 2*z-1",
+    "missing_volume_normalized_value": 0.0,
+    "scope": "STANDALONE_GRN_PRE2025",
+    "legacy_pooled_key_names_only": true,
+    "original_two_ETF_pooled_stats_used": false
+  },
+  "F16_mean": [
+    0.5655151432475204,
+    0.6134735766937552,
+    -0.26638669173617463
+  ],
+  "F16_std": [
+    0.3202936419786508,
+    0.40630875823519685,
+    0.9076986165532761
+  ],
+  "bank": {
+    "n": 1022,
+    "first_row": 22,
+    "last_row": 1330,
+    "first_date": "2019-10-18",
+    "last_date": "2024-12-31",
+    "volume_imputed_bank_rows": 0,
+    "rule": "pre25 resolvable-range rows with index>=21 only"
+  },
+  "initial_mu": -9.565931062042035,
+  "proxy_c512": 0.9427735381258473,
+  "fixed_preprocessing": {
+    "GRN": {
+      "scale": 0.00012127499090214088,
+      "scale_n": 1331,
+      "scale_includes_zero": true,
+      "hurdle": {
+        "intercept": -1.3029315587044947,
+        "slope": -0.3712702584930811,
+        "n": 1331,
+        "zeros": 302,
+        "ridge": 0.01,
+        "pseudocount_each": 0.5,
+        "pseudocount_volume": 0.0,
+        "objective": 0.5209322439549524,
+        "newton_steps": 5,
+        "meaning": "no resolvable range; not zero true volatility or no trading"
+      },
+      "volume_AR": {
+        "n_rows": 1331,
+        "n_pairs": 1330,
+        "first_row": 0,
+        "last_row": 1330,
+        "raw_rho": 0.27598500250098795,
+        "rho": 0.27598500250098795,
+        "intercept": -0.07513442593975433,
+        "mu": -0.10377468173904349,
+        "residual_std": 1.0139342202292236,
+        "residual_variance_ddof": 2,
+        "data": "all consecutive t<cut F17 volumeZ; fixed S17 normalizer/imputation",
+        "slope_clip": [
+          -0.95,
+          0.95
+        ],
+        "intercept_rule": "refit at clipped slope"
+      }
+    }
+  },
+  "Gamma_or_neural_training_performed": false,
+  "hurdle_and_AR_are_fixed_preprocessing_only": true,
+  "iver": "schema-compatible GRN data; no model or forecast created",
+  "interface_gaps": [
+    "R21.make_tensors delegates to S17 hardcoded ASSETS; use this generic make_tensors or a private namespace wrapper.",
+    "R21.preprocessing calls R20.fit_volume_ar hardcoded assets; use this fixed_preprocessing private clone.",
+    "R21 training/evaluation/main loops and default assets remain two-ETF; future wrapper must explicitly pass assets=(GRN,) and adapt private evaluation loops.",
+    "StandaloneGRN normalization differs from original two-ETF pooledstats; direct checkpoint transfer requires a separately declared mapping/normalization contract."
+  ],
+  "created_at_utc": "2026-10-21T23:51:44.903000+00:00",
+  "source_hashes": {
+    "builder": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\grn_range_development_builder.py",
+      "sha256": "78e55425a0e6a9a04476dbb4dbaa2cb0a1f210e268c3d8a6cfb6ee18f085eb12"
+    },
+    "HB": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\holdout_2026_range_builder.py",
+      "sha256": "18b10a95cb63974e0f7805ce97abf4d43c5acbafc1b73ba49ae90dc435878ed1"
+    },
+    "S17": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round17_shared_precision.py",
+      "sha256": "d6bfe2efd40186a5c0d7c37b4aebd343122feeedbd29f6e3e440dbeea35ac8f4"
+    },
+    "B16": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_round16.py",
+      "sha256": "9ac2704711779ace771c64a6807a074c006850d294c96d2fdd48f3fbe95a273a"
+    },
+    "proxy": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_proxy_round16.py",
+      "sha256": "958f49be8ff17002ee2b4e2e059f49c9eabe3c68abc288e0009c07dd71c945f1"
+    },
+    "R20": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round20_observation_operator_gru.py",
+      "sha256": "0d9c5df74700d7b7f61cca6614b87f2b562a93522f28660fc901f63da28c8131"
+    },
+    "R21": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round21_gamma_observation_filter.py",
+      "sha256": "86941e4ddb0806ca5a77d1014c750da71a34cbbf6f663f68383c4fe6a930d5db"
+    },
+    "simulation_reference": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_shape_models.json",
+      "sha256": "edd1de40ec9732ed1ad927370ce7293fdf162479f88b8f4dce16135b6fc36542"
+    },
+    "simulation_moments": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_reference_results.json",
+      "sha256": "1a9124466d98de76199ae0671421b0808ec112e312da425930056ce35a23c303"
+    },
+    "GRN_pre2026_csv": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\data_acquisition_round13\\GRN_ETN_USD_available_history_20190918_20251231_round17.csv",
+      "sha256": "52cba5fd28beb71995ce4b0092cd7b0b41ece97aa1b28c0d369d90cd04c57e9b"
+    },
+    "GRN_identity": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\data_acquisition_round13\\GRN_regulatory_identity_round17_webfetch_excerpt.json",
+      "sha256": "9d5b9607ea97be0468cd8f673bff4bd8bfe15b520b351ec4da9d6e2acf4cf115"
+    },
+    "GRN_vendor_splits": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\data_acquisition_round13\\GRN_corporate_actions_round17_vendor_unmodified.json",
+      "sha256": "99d77dd05ee64ee54e38954a8299a84262bc8c3fdc37266368f28adce35d1624"
+    }
+  },
+  "checks": {
+    "pre25_normalizer_hurdle_AR_scale_bank_validation_mutation_invariant": true,
+    "pre25_F17_and_training_targets_exact": true,
+    "raw_proxy_zero_preserved": true,
+    "original_modules_ASSETS_SOURCES_unchanged": true,
+    "all_targets_pre2026_and_common_h22_mature": true,
+    "te_always_empty": true,
+    "no_model_training_or_forecasts": true
+  },
+  "output_npz": {
+    "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\grn_range_development.npz",
+    "sha256": "acd4a33c31a49c62563a7eae2dcaa236e27a1a0432c3dab42f015d8969d47a3f"
+  },
+  "tensor_shapes": {
+    "GRN": {
+      "log_proxy": [
+        1581
+      ],
+      "even": [
+        1581,
+        3
+      ],
+      "cell_b": [
+        1581
+      ],
+      "cell_R": [
+        1581
+      ],
+      "y": [
+        1386,
+        3
+      ],
+      "ewma": [
+        1386
+      ],
+      "F17": [
+        1581,
+        3
+      ],
+      "proxy_raw": [
+        1581
+      ]
+    }
+  },
+  "data_IO": "Only approved1581-row GRN pre2026 CSV; no other market CSV, no2026 raw/labels/scores, no model checkpoints or results.",
+  "simulation_calibration_IO": "Existing Brownian grid512 and simulation-train c512 JSON only; no real-market fit chosen here.",
+  "identity": {
+    "document_date": "2019-09-09",
+    "issuer": "Barclays Bank PLC",
+    "name": "iPath Series B Carbon ETN",
+    "cusip": "06747C322",
+    "isin": "US06747C3227",
+    "inception_first_sold": "2019-09-09",
+    "first_issued": "2019-09-11",
+    "maturity": "2049-09-08",
+    "exchange": "NYSE Arca",
+    "ticker": "GRN",
+    "currency": "USD",
+    "benchmark": "Barclays Global Carbon II TR USD Index",
+    "exposure_at_2019_filing": "ICE carbon futures: EU ETS >99.9%, CDM <0.1%; index in USD, components in EUR; not spot allowances",
+    "instrument_structure": "Senior unsecured debt obligation; Barclays issuer credit and bail-in risk; indicative value is not exchange market price"
+  },
+  "vendor_actions_unchanged": [
+    {
+      "event_type": "splits",
+      "date": 1622813400,
+      "numerator": 1.0,
+      "denominator": 5.0,
+      "splitRatio": "1:5",
+      "event_date_exchange_local": "2021-06-04"
+    }
+  ],
+  "source_limitations": [
+    "First-sale2019-09-09/expectedlisting09-10 precede availablefirstbar09-18; missing head not filled.",
+    "Vendor quote OHLC and split-adjustment/volume units not independently reconciled to exchange/issuer corporate actions.",
+    "ETN is Barclays unsecured obligation with issuer credit/bail-in risk; not a fund directly holding allowances.",
+    "Underlying EU carbon futures materially overlap existing funds; not independent macro-market."
+  ],
+  "old_source_files_modified": false,
+  "model_training_performed": false,
+  "model_predictions_or_scores_constructed": false,
+  "heldout2026_file_opened": false,
+  "standalone_normalization_not_twoETF_transfer": true
+}

@@ -1,0 +1,31 @@
+{
+  "status": "ongoing",
+  "goal_round": 5,
+  "objective_complete": false,
+  "completed": {
+    "forest_prior_round5": "five markets, inner/final caches; 200 needed RF reconstructions/72.543s; gamma0 reproduces all frozen rule-QRF quantiles and MQS exactly; test NZ raw leaf weights maxerror0; proper phase/maturity/sid/source-row readback complete",
+    "forest_transport_round5": "75 learned configs/389.70s; main NN vs fixed smoothed reference MQS -0.49922%, CRPS -0.49850%; vs rule-QRF -.39604/-.42545%; vs LSTM MQS +.26397%; no neural improvement over reference; floor/collision0; all jobs collected",
+    "forest_reference_only": "gamma.05 reference vs rule-QRF MQS +.102666%, CRPS +.072680%; this is smoothing, not NN benefit",
+    "horizon_kernel_round5": "5 inner pooled forests choose one log-h bandwidth/market; only SH picks .5, others infinity. Kernel+rule p vs rule-QRF MQS -.83306%, CRPS -.56494%; no win; all jobs collected",
+    "forest_transport_rawselect_round5": "secondary prescribed raw-validation epoch selection from saved visited traces; only8 changed full refits,17 reused states,0 new innerfits; raw vs normalized NN MQS +.394754%, CRPS +.325069%; vs rule-QRF MQS +.000276% numerical tie, CRPS -.099003%; vs fixed reference still -.102495/-.171808%; all jobs collected",
+    "prior_art": "forest_transport_round5_PRIOR_ART_ZH.md: Meucci entropy pooling, Gelbrich moment W2 bound, DRF2022, DRN2024. DRN Eq17 already baseline mass times exp(NN logits); cannot claim that as first. Mark-branch moment projection only, not global OT of zero-mixture."
+  },
+  "active_children": {
+    "4bafa75d-aec3-4ff0-b9f8-e4da9c9a4501": {
+      "prefix": "forest_prior_honest_round5",
+      "task": "New cache from old immutable forest_prior_round5. For each inner/final phase replace reference ONLY training query sid t<boundary with expanding-prefix forest predictions. Four blocks from min fit origin128 to phase boundary at fractions0,.25,.5,.75,1; trees for a block fit only phase labels t_i+h_i<block_begin. First block/insufficient data/zero NZ mass fallback current matured NZuniform. Prefix scaler on all prefix cases acrossh. Same selectedleaf/seeds/80trees. Stable D-index map into original fullphase nonzero bank; gamma=.05. Keep query t>=phase boundary (inner va and finaltest) u bitwise identical old full-phase cache. Keep old bank support/phi/scaler/NN x/allowed/count/fitindices. Same count>=32 NN eligibility; no extra sample deletion. Add block/source/scaler/maturity/fallback metadata. Save forest_prior_honest_round5_{MARKET}.pt atomically, notify parent per market for relay."
+    },
+    "911fc401-f6fd-4413-b13a-4157a8b8c759": {
+      "prefix": "prior_readout_transport_round5",
+      "task": "4 learned variants x5markets x5seeds (100 configs). Add prior-readout Linear4->8 Tanh to LSTM16+ctx16; concat40->shared16->4 zerohead,2636 allocatedparams. Prior features clip(m0/s0),clip(logs0),log((ESS+1)/(count+1)),clip(skew_u); scaler only eligible current fit rows; no-readout zeros after scaling. Variants honest_readout(main),honest_no_readout,insample_readout(oldcache),honest_readout_reweight_only. Honest variants train using new prefixcache; va/test originalfullphase reference same. Metadata/checkpoints/true query-specific5seed mixture and all scores, old source/cache SHA immutable. Main norm selector unchanged, visited raw-relative histories/best_raw_epoch diagnostic only. Agent waiting per-market newcache while writing/testing network."
+    }
+  },
+  "parent_jobs": {
+    "pwsh-f47383ef35fb4608": "completed and collected, horizon CEA smoke",
+    "pwsh-4e18470d569844a2": "completed and collected, horizon full",
+    "pwsh-bf3c6f958920476d": "completed and collected, rawselected refits"
+  },
+  "communication": "Sibling send_message rejected as another parent; parent must relay CACHE_READY/schema between these two children.",
+  "current_model_hypothesis": "NN currently never sees reference moments/concentration and must infer relative residual coordinates from price x alone. Give explicit prior readout, and use prefix-trained base references for training residuals to reduce in-sample reference bias. This does not declare earlier evaluations invalid; do not claim full historical vintage of NN/scaler/phi.",
+  "next": "Relay honest cache readiness immediately; complete and verify prior-readout models. If needed, refit rawselect for all matching variants from pre-recorded trajectories without duplicate inner training. Stay on model innovation, no evaluation-paper pivot or data-ceiling claims."
+}

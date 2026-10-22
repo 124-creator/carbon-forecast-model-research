@@ -1,0 +1,70 @@
+{
+  "created_utc": "2026-10-21T15:21:39.796993+00:00",
+  "pure_synthetic": true,
+  "market_data_files_read": 0,
+  "model_prediction_or_test_target_files_read": 0,
+  "process": "W_0=0, increments iid N(0,1/steps), daily variance=1, drift=0",
+  "O": 0,
+  "q": "H-L",
+  "r": "C",
+  "eta": "r/q",
+  "xi": "(H+L-r)/q",
+  "second_shape_coordinate": "abs(xi)/(1-abs(eta)); choose 0 on the finite-grid boundary abs(eta)=1,xi=0",
+  "P": "q^2/(4 log 2)",
+  "y": "log(P)",
+  "true_log_integrated_variance": 0,
+  "configs": [
+    {
+      "name": "grid512_train",
+      "steps": 512,
+      "n": 60000,
+      "seed": 2026102116
+    },
+    {
+      "name": "grid512_heldout",
+      "steps": 512,
+      "n": 20000,
+      "seed": 2026102117
+    },
+    {
+      "name": "grid2048_train",
+      "steps": 2048,
+      "n": 20000,
+      "seed": 2026102118
+    },
+    {
+      "name": "grid2048_heldout",
+      "steps": 2048,
+      "n": 10000,
+      "seed": 2026102119
+    }
+  ],
+  "batch_paths": 1024,
+  "bin_edges_a": [
+    0.0,
+    0.2,
+    0.4,
+    0.6000000000000001,
+    0.8,
+    1.0
+  ],
+  "bin_edges_z": [
+    0.0,
+    0.2,
+    0.4,
+    0.6000000000000001,
+    0.8,
+    1.0
+  ],
+  "min_train_cell": 250,
+  "R_floor": 1e-08,
+  "fallback": "For training cells below 250 paths, use training global mean(y) and var(y,ddof=1); flag cells and paths",
+  "symmetry": "Absolute eta and xi quotient is justified only for this zero-drift Brownian reference by path reflection and time reversal, not asserted for drifting/jumping markets.",
+  "mesh_limitation": "H/L are same-path extrema on a finite grid including O/C, not exact continuous Brownian extrema. No separate bridge-extremum formulas used.",
+  "rng": "numpy default_rng PCG64, independent explicit seeds per split and resolution",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "scope": "Read no files outside this newly created synthetic-experiment directory; no real quotes, scores or labels; no other models or searches."
+}

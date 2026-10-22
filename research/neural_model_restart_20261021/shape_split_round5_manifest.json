@@ -1,0 +1,31 @@
+{
+  "experiment": "shape_split_round5",
+  "status": "fixed before any fitting",
+  "arms": {
+    "mse_y": "legacy name; fit response is original standardized float32 z, exactly frozen QRF; per-market/h leaf fixed from qrf_round4.json",
+    "mse_abs": "fit abs(z), retain original signed scalar z for leaf prediction",
+    "rank_score": "fit ndtri((average_rank(z)-0.5)/n) from fit-partition labels only; zero ties share average rank; retain original z for prediction",
+    "mse_z2": "fit z squared, retain original signed scalar z for prediction"
+  },
+  "markets": ["CEA", "GUANGZHOU", "SHANGHAI", "HUBEI", "EU"],
+  "horizons": [1, 5, 10, 20],
+  "final_seeds": [11, 22, 33, 44, 55],
+  "inner_selection_seed": 11,
+  "forest": {"n_estimators": 80, "max_depth": 6, "criterion": "squared_error", "max_features": 1.0, "bootstrap": true, "n_jobs": 2},
+  "leaf_grid_BCD": [10, 25, 50],
+  "leaf_selection": "one leaf size per market-arm for B/C/D minimizing mean_h log(raw-return MQS_valid_arm_h / MQS_valid_A_seed11_h); A fixed old per-h leaves and no search",
+  "composite_selection": "one arm per market from inner chosen-leaf macro log MQS; deterministic A,B,C,D tie order; secondary reference only; all four arms still evaluated on test",
+  "features": "same36 context columns and phase-fitted scaler/clip as frozen QRF; no new feature, no NN",
+  "leaf_probabilities": "Q.leaf_weights original-row uniform membership, bootstrap affects partitions only",
+  "ensemble": "equal raw leaf probability mean across five seeds INCLUDING zero rows, then nonzero conditioning, then rule p and gamma; final conditional seed mixing weights proportional to each seed raw NZ mass",
+  "extra_ensemble_diagnostic": "equal mixture of five separately conditioned fixed-p/smoothed final Fs, secondary only, not canonical anchor",
+  "zero_branch": "p_rule=.8*origin local+.2*fit nonzero frequency, unchanged",
+  "gamma": 0.05,
+  "fallback": "zero NZ leaf mass -> currently matured nonzero uniform; all response keys require own target maturity<=query origin",
+  "transport": "identity a=1,b=0; exact weighted ECDF CRPS; raw inverse transform exactly once",
+  "anchor_checks": "A raw seed/ensemble weights exactly frozen QRF by source D-index; gamma0 via frozen probability-control evaluator exactly frozen rule-QRF; gamma.05 via frozen identity-reference evaluator exactly forest_reference_only; stop on mismatch",
+  "data": "same canonical panel/cuts/origins/targets/scales and separate inner Dtr/final Drf; no test memory appending",
+  "baselines": ["rule_qrf", "qrf_original", "forest_reference_only", "honest_no_readout", "rbf_additive", "lstm_qr", "ess_selected"],
+  "primary_reporting": "each arm retained with all seeds plus canonical ensemble; all market/h scores and gains, never promote composite or a selected seed after test",
+  "claim_scope": "scalar transformed-response split mechanism, not a full-distribution impurity or new forest family; reused historical test is developmental"
+}

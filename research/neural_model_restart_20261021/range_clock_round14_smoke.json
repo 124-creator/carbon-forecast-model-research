@@ -1,0 +1,248 @@
+{
+  "config": {
+    "epochs": 3,
+    "seeds": [
+      11
+    ],
+    "tag": "range_clock_round14_smoke"
+  },
+  "status": "DEVELOPMENT ONLY; no 2026 test access",
+  "audit": {
+    "development_rows": 1362,
+    "first": "2020-07-31",
+    "last": "2025-12-31",
+    "validation_start": "2025-01-01",
+    "training_rows": 3008,
+    "validation_rows": 722,
+    "withheld_period_used": false,
+    "target": "future mean Parkinson high-low intraday variance",
+    "feature_names": [
+      "logrange1",
+      "logrange5",
+      "logrange22",
+      "r1",
+      "r5",
+      "r22",
+      "intraday",
+      "logovernightvar",
+      "logreturnvar",
+      "logvolume",
+      "volume_ratio",
+      "range_ratio"
+    ]
+  },
+  "source_sha256": "ff99c14e84153717be0d72506b0c8b581605495288849823e4bf219ab1462f11",
+  "script_sha256": "08e4e6f23e426b6a84ab6913881ae43666ef6b0ca4fa929cc4d48bbdeac4dc7a",
+  "hypotheses": "state-dependent risk relaxation versus direct heads and fixed relaxation",
+  "horizons": [
+    1,
+    5,
+    22
+  ],
+  "fits": {
+    "direct": [
+      {
+        "seed": 11,
+        "best_epoch": 3,
+        "epochs_run": 3,
+        "validation_loss": -8.563764572143555,
+        "parameters": 287,
+        "history": [
+          [
+            1,
+            -8.557087898254395
+          ],
+          [
+            2,
+            -8.560309410095215
+          ],
+          [
+            3,
+            -8.563764572143555
+          ]
+        ]
+      }
+    ],
+    "fixed_decay": [
+      {
+        "seed": 11,
+        "best_epoch": 3,
+        "epochs_run": 3,
+        "validation_loss": -8.566609382629395,
+        "parameters": 287,
+        "history": [
+          [
+            1,
+            -8.544395446777344
+          ],
+          [
+            2,
+            -8.558509826660156
+          ],
+          [
+            3,
+            -8.566609382629395
+          ]
+        ]
+      }
+    ],
+    "adaptive_decay": [
+      {
+        "seed": 11,
+        "best_epoch": 3,
+        "epochs_run": 3,
+        "validation_loss": -8.566581726074219,
+        "parameters": 287,
+        "history": [
+          [
+            1,
+            -8.546427726745605
+          ],
+          [
+            2,
+            -8.560505867004395
+          ],
+          [
+            3,
+            -8.566581726074219
+          ]
+        ]
+      }
+    ]
+  },
+  "scores": {
+    "1": {
+      "EWMA22": {
+        "n": 249,
+        "mean_logscore": -8.571470260620117,
+        "loss_difference_vs_EWMA22": 0.0,
+        "MSE": 1.3365959894429125e-08
+      },
+      "HAR_range": {
+        "n": 249,
+        "mean_logscore": -8.599473214502135,
+        "loss_difference_vs_EWMA22": -0.028002806426350356,
+        "MSE": 1.3025767414232978e-08
+      },
+      "HGB_poisson": {
+        "n": 249,
+        "mean_logscore": -8.602981124219268,
+        "loss_difference_vs_EWMA22": -0.03151071614348483,
+        "MSE": 1.2910594951830804e-08
+      },
+      "fixed_curve_untrained": {
+        "n": 249,
+        "mean_logscore": -8.555753893166163,
+        "loss_difference_vs_EWMA22": 0.015716514909621466,
+        "MSE": 1.4397841171138e-08
+      },
+      "direct": {
+        "n": 249,
+        "mean_logscore": -8.581951141357422,
+        "loss_difference_vs_EWMA22": -0.010480365715920925,
+        "MSE": 1.3317587033156997e-08
+      },
+      "fixed_decay": {
+        "n": 249,
+        "mean_logscore": -8.596097946166992,
+        "loss_difference_vs_EWMA22": -0.02462782710790634,
+        "MSE": 1.3846713109444408e-08
+      },
+      "adaptive_decay": {
+        "n": 249,
+        "mean_logscore": -8.59682846069336,
+        "loss_difference_vs_EWMA22": -0.025358138605952263,
+        "MSE": 1.3863668435476484e-08
+      }
+    },
+    "5": {
+      "EWMA22": {
+        "n": 245,
+        "mean_logscore": -8.537454605102539,
+        "loss_difference_vs_EWMA22": 0.0,
+        "MSE": 4.413066356789841e-09
+      },
+      "HAR_range": {
+        "n": 245,
+        "mean_logscore": -8.561406477268727,
+        "loss_difference_vs_EWMA22": -0.02395190136029929,
+        "MSE": 4.156825618026686e-09
+      },
+      "HGB_poisson": {
+        "n": 245,
+        "mean_logscore": -8.568943983154037,
+        "loss_difference_vs_EWMA22": -0.03148940724560954,
+        "MSE": 5.041815458181926e-09
+      },
+      "fixed_curve_untrained": {
+        "n": 245,
+        "mean_logscore": -8.504951039640963,
+        "loss_difference_vs_EWMA22": 0.03250353626746495,
+        "MSE": 5.8442673927147e-09
+      },
+      "direct": {
+        "n": 245,
+        "mean_logscore": -8.55324649810791,
+        "loss_difference_vs_EWMA22": -0.015791309997439384,
+        "MSE": 4.339712589285227e-09
+      },
+      "fixed_decay": {
+        "n": 245,
+        "mean_logscore": -8.557633399963379,
+        "loss_difference_vs_EWMA22": -0.02017826959490776,
+        "MSE": 5.093917732068576e-09
+      },
+      "adaptive_decay": {
+        "n": 245,
+        "mean_logscore": -8.558306694030762,
+        "loss_difference_vs_EWMA22": -0.020850880071520805,
+        "MSE": 5.13175724137227e-09
+      }
+    },
+    "22": {
+      "EWMA22": {
+        "n": 228,
+        "mean_logscore": -8.550134658813477,
+        "loss_difference_vs_EWMA22": 0.0,
+        "MSE": 1.4592503871924123e-09
+      },
+      "HAR_range": {
+        "n": 228,
+        "mean_logscore": -8.558781203546328,
+        "loss_difference_vs_EWMA22": -0.008646145277162613,
+        "MSE": 1.3370243976923565e-09
+      },
+      "HGB_poisson": {
+        "n": 228,
+        "mean_logscore": -8.542320863805376,
+        "loss_difference_vs_EWMA22": 0.007814194463790223,
+        "MSE": 2.3173041486111864e-09
+      },
+      "fixed_curve_untrained": {
+        "n": 228,
+        "mean_logscore": -8.526351766288307,
+        "loss_difference_vs_EWMA22": 0.02378329198085947,
+        "MSE": 2.3600520643490344e-09
+      },
+      "direct": {
+        "n": 228,
+        "mean_logscore": -8.555205345153809,
+        "loss_difference_vs_EWMA22": -0.005069550592452288,
+        "MSE": 1.5205784409388912e-09
+      },
+      "fixed_decay": {
+        "n": 228,
+        "mean_logscore": -8.544051170349121,
+        "loss_difference_vs_EWMA22": 0.006083072163164616,
+        "MSE": 2.021932621332212e-09
+      },
+      "adaptive_decay": {
+        "n": 228,
+        "mean_logscore": -8.542442321777344,
+        "loss_difference_vs_EWMA22": 0.007692247163504362,
+        "MSE": 2.0902717334791987e-09
+      }
+    }
+  },
+  "elapsed_seconds": 2.4203131198883057
+}

@@ -1,0 +1,1506 @@
+{
+  "created_utc": "2026-10-21T17:33:18.108644+00:00",
+  "status": "PRE2026 DEVELOPMENT;2025 per-asset epoch selection;2026 prices unread",
+  "protocol": {
+    "methods": [
+      "GK",
+      "RS"
+    ],
+    "seed": 11,
+    "epochs": 100,
+    "chunk": 128,
+    "underlying_filter_mode": "raw_constant",
+    "parameters_per_fit": 4,
+    "target": "UNCHANGED future mean Parkinson proxy; not trueIV or returnRV",
+    "variance_ddof": 1,
+    "selection": "B16.train_one per-asset2025 epoch0..100, patience15 min20 improvement1e-5; same as old raw comparator",
+    "only_D_fields_changed": [
+      "log_proxy",
+      "observed",
+      "global_b",
+      "global_R",
+      "initial_mu"
+    ],
+    "frame": "log(cP*sigma²); observation bias=b_estimator-log(cP); cP from512 TRAIN P only",
+    "no_theta_filter": "No angular/near-unit filtering; update iff estimator>EPS. All original label rows/origins retained."
+  },
+  "formulas": {
+    "GK": ".5*log(H/L)^2-(2log2-1)*log(C/O)^2",
+    "RS": "log(H/O)*(log(H/O)-log(C/O))+log(L/O)*(log(L/O)-log(C/O))"
+  },
+  "calibration": {
+    "source": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_reference_samples.npz",
+    "sha256": "67a9432b6fddadb56f504129195f81e5f1155908ae4f1592d01271316c151baa",
+    "keys_opened": [
+      "grid512_train__P",
+      "grid512_train__eta",
+      "grid512_train__xi",
+      "grid512_train__H",
+      "grid512_train__L",
+      "grid512_train__C"
+    ],
+    "samples": "grid512 TRAIN only; no heldout or grid2048 array opened",
+    "cP": 0.9427735381258473,
+    "log_cP": -0.058929175639207104,
+    "EPS": 1e-12,
+    "estimators": {
+      "GK": {
+        "n_synthetic_train": 60000,
+        "positive_gt_EPS": 60000,
+        "skipped_le_EPS": 0,
+        "negative_roundoff_count": 0,
+        "raw_min": 0.06655523715795153,
+        "b_log_estimator": -0.2194277460433659,
+        "global_R": 0.2798240949993747,
+        "variance_ddof": 1,
+        "observation_bias_for_log_cP_sigma2": -0.1604985704041588,
+        "frame_formula": "b_estimator - log(cP), NOT b_estimator-log(c_estimator)",
+        "positive_conditioning": "global moments of positive estimator only; zero/tiny values skipped"
+      },
+      "RS": {
+        "n_synthetic_train": 60000,
+        "positive_gt_EPS": 59880,
+        "skipped_le_EPS": 120,
+        "negative_roundoff_count": 0,
+        "raw_min": 0.0,
+        "b_log_estimator": -0.2738781144951019,
+        "global_R": 0.4491439096599402,
+        "variance_ddof": 1,
+        "observation_bias_for_log_cP_sigma2": -0.2149489388558948,
+        "frame_formula": "b_estimator - log(cP), NOT b_estimator-log(c_estimator)",
+        "positive_conditioning": "global moments of positive estimator only; zero/tiny values skipped"
+      }
+    }
+  },
+  "checks": {
+    "market_files_opened": false,
+    "same_path_OHLC_direct_vs_geometry": true,
+    "calibration_only_512train": true,
+    "cP_from_512train_P_only": true,
+    "reflection_and_degree2_homogeneity": true,
+    "flat_bar_GK_RS_skipped": true,
+    "monotone_nonzero_range_RS_skipped": true,
+    "near_unit_geometry_retained_when_estimator_positive": true,
+    "zero_RS_not_logEPS": true,
+    "missing_update_K_zero_and_prediction_step_only": true,
+    "frame_bias_parentheses_checked": true,
+    "variance_ddof": 1
+  },
+  "sources_hashes": {
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements.py": "31e7af243b9aff045a366700cb3e5137e2841b1bd1ea7d4f16abe603cfc7b2cb",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_round16.py": "9ac2704711779ace771c64a6807a074c006850d294c96d2fdd48f3fbe95a273a",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\range_clock_round14.py": "08e4e6f23e426b6a84ab6913881ae43666ef6b0ca4fa929cc4d48bbdeac4dc7a",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_shape_models.json": "edd1de40ec9732ed1ad927370ce7293fdf162479f88b8f4dce16135b6fc36542",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_reference_samples.npz": "67a9432b6fddadb56f504129195f81e5f1155908ae4f1592d01271316c151baa",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_frozen_moments_development_results.json": "f44bd6b93483d989d4ec91c4e4617ee74a42bb3a62bdbb401e87bfae5adb91fb",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_frozen_moments_development_validation_predictions.npz": "946f46a0459188e7e005cfb8eef863a1f0c5f34c4a31e71b9f588d9f8c1c0e9c",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_proxy_round16_KRBN_grid512_development_results.json": "1d99cb92a1dc11436ce1f32a11301b351e9041162420b19daad87dec7c4d586b",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_proxy_round16_KRBN_grid512_development_validation_predictions.npz": "d56edfc6d38466692ed2ad200f8e34b8c94028420f3ea8d1358c39136d72ccfe",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_proxy_round16_KCCA_grid512_development_results.json": "eb7bad38fdba47b5e6b9b7797f09a9b8e22dbce682db24feef14142ed0e2ac87",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_proxy_round16_KCCA_grid512_development_validation_predictions.npz": "6be1da0ac8c76ed110be8054f12368e5b3b865b5dcac0ad972fe0deae980d095",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_inputs\\KRBN_pre2026.csv": "801e88c6263a9063c6281cd30a7401f9f8b4c9b7bbcf1c21449f9388b4d5b725",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_inputs\\KCCA_pre2026.csv": "926418551bb5d6a98a1468ad3599b511b8cafb384845cdd1eaad5ffcfb3b6452"
+  },
+  "development_prefix_audit": {
+    "KRBN": {
+      "original_path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\data_acquisition_round13\\KRBN_ETF_USD_daily_completed_20200731_20261020.csv",
+      "development_prefix_path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_inputs\\KRBN_pre2026.csv",
+      "rows": 1362,
+      "first": "2020-07-31",
+      "last": "2025-12-31",
+      "boundary_date_prefix_only": "2026-01-02",
+      "no2026_OHLC_bytes_read": true,
+      "verbatim_source_byte_prefix": true,
+      "prefix_bytes": 160595,
+      "source_prefix_end_byte_offset": 160595,
+      "prefix_sha256": "801e88c6263a9063c6281cd30a7401f9f8b4c9b7bbcf1c21449f9388b4d5b725",
+      "original_full_CSV_rehashed": false,
+      "note": "Original full-file hash not recomputed because that would read reserved2026 OHLC bytes",
+      "original_acquisition_declared_hash": "ff99c14e84153717be0d72506b0c8b581605495288849823e4bf219ab1462f11"
+    },
+    "KCCA": {
+      "original_path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\data_acquisition_round13\\KCCA_ETF_USD_daily_completed_20211005_20261020.csv",
+      "development_prefix_path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_inputs\\KCCA_pre2026.csv",
+      "rows": 1065,
+      "first": "2021-10-05",
+      "last": "2025-12-31",
+      "boundary_date_prefix_only": "2026-01-02",
+      "no2026_OHLC_bytes_read": true,
+      "verbatim_source_byte_prefix": true,
+      "prefix_bytes": 126712,
+      "source_prefix_end_byte_offset": 126712,
+      "prefix_sha256": "926418551bb5d6a98a1468ad3599b511b8cafb384845cdd1eaad5ffcfb3b6452",
+      "original_full_CSV_rehashed": false,
+      "note": "Original full-file hash not recomputed because that would read reserved2026 OHLC bytes",
+      "original_acquisition_declared_hash": "17c93aeca744b91b041a419413fae105c80aca8c9b214c625c7ab6b47d2cae68"
+    }
+  },
+  "prepare_audit": {
+    "KRBN": {
+      "development_rows": 1362,
+      "first": "2020-07-31",
+      "last": "2025-12-31",
+      "validation_start": "2025-01-01",
+      "training_rows": 3008,
+      "validation_rows": 722,
+      "withheld_period_used": false,
+      "target": "future mean Parkinson intraday-range proxy; not true QV or return RV",
+      "feature_names": [
+        "logrange1",
+        "logrange5",
+        "logrange22",
+        "r1",
+        "r5",
+        "r22",
+        "intraday",
+        "logovernightvar",
+        "logreturnvar",
+        "logvolume",
+        "volume_ratio",
+        "range_ratio"
+      ],
+      "common_h22_origins": true,
+      "train_common_origins": 990,
+      "validation_common_origins": 228,
+      "last_training_origin": "2024-11-27",
+      "last_training_label": "2024-12-31",
+      "first_validation_origin": "2025-01-02",
+      "last_validation_label": "2025-12-31",
+      "initial_mu": -9.450057101002354,
+      "initialization_observations": 1108,
+      "neural_features": [
+        "abs_eta",
+        "abs_xi/(1-abs_eta)",
+        "log(volume/past22_mean_volume)"
+      ],
+      "neural_mean": [
+        0.47492727538873963,
+        0.5867042385811942,
+        -0.15583254511968794
+      ],
+      "neural_std": [
+        0.27447969473988865,
+        0.3487824417030357,
+        0.6347206963029088
+      ],
+      "normalization": "pre2025 nonzero-range observations only; missing feature becomes normalized zero",
+      "imputed_feature_entries": 21,
+      "zero_range_observations": 4,
+      "reference_grid": 512,
+      "reference_label": "grid512_train",
+      "global_b": -0.238660878921314,
+      "global_R": 0.35199231725707575,
+      "shape_bias_constant_R": 0.2747201728687599,
+      "calibration": "fixed synthetic table; no real-data fitting of b_cell or R_cell"
+    },
+    "KCCA": {
+      "development_rows": 1065,
+      "first": "2021-10-05",
+      "last": "2025-12-31",
+      "validation_start": "2025-01-01",
+      "training_rows": 2117,
+      "validation_rows": 722,
+      "withheld_period_used": false,
+      "target": "future mean Parkinson intraday-range proxy; not true QV or return RV",
+      "feature_names": [
+        "logrange1",
+        "logrange5",
+        "logrange22",
+        "r1",
+        "r5",
+        "r22",
+        "intraday",
+        "logovernightvar",
+        "logreturnvar",
+        "logvolume",
+        "volume_ratio",
+        "range_ratio"
+      ],
+      "common_h22_origins": true,
+      "train_common_origins": 693,
+      "validation_common_origins": 228,
+      "last_training_origin": "2024-11-27",
+      "last_training_label": "2024-12-31",
+      "first_validation_origin": "2025-01-02",
+      "last_validation_label": "2025-12-31",
+      "initial_mu": -9.383784578340691,
+      "initialization_observations": 814,
+      "neural_features": [
+        "abs_eta",
+        "abs_xi/(1-abs_eta)",
+        "log(volume/past22_mean_volume)"
+      ],
+      "neural_mean": [
+        0.5118988029213476,
+        0.6362360274115957,
+        -0.4818584878180489
+      ],
+      "neural_std": [
+        0.28491792707069413,
+        0.3645565237334495,
+        1.0076351541044055
+      ],
+      "normalization": "pre2025 nonzero-range observations only; missing feature becomes normalized zero",
+      "imputed_feature_entries": 21,
+      "zero_range_observations": 1,
+      "reference_grid": 512,
+      "reference_label": "grid512_train",
+      "global_b": -0.238660878921314,
+      "global_R": 0.35199231725707575,
+      "shape_bias_constant_R": 0.2747201728687599,
+      "calibration": "fixed synthetic table; no real-data fitting of b_cell or R_cell"
+    }
+  },
+  "fits": {
+    "KRBN_GK": {
+      "seed": 11,
+      "mode": "raw_constant",
+      "best_epoch": 11,
+      "epochs_run": 26,
+      "best_validation_QLIKE_known_scale": 1.0563101132717412,
+      "returned_validation_QLIKE_known_scale": 1.0563101132717412,
+      "parameters": 4,
+      "dynamics": {
+        "mu": -9.236797768080468,
+        "phi": 0.9532884202124202,
+        "Q": 0.022201404282097548,
+        "s_R": 0.1498397966398483
+      },
+      "history": [
+        {
+          "epoch": 0,
+          "validation_QLIKE_known_scale": 1.0600704533183813,
+          "training_QLIKE_known_scale": null
+        },
+        {
+          "epoch": 1,
+          "validation_QLIKE_known_scale": 1.0592648910274352,
+          "training_QLIKE_known_scale": 1.1183570009551171
+        },
+        {
+          "epoch": 2,
+          "validation_QLIKE_known_scale": 1.0586376136195934,
+          "training_QLIKE_known_scale": 1.1153548417586312
+        },
+        {
+          "epoch": 3,
+          "validation_QLIKE_known_scale": 1.0581084931582863,
+          "training_QLIKE_known_scale": 1.112947402362789
+        },
+        {
+          "epoch": 4,
+          "validation_QLIKE_known_scale": 1.057662214983366,
+          "training_QLIKE_known_scale": 1.110786536721918
+        },
+        {
+          "epoch": 5,
+          "validation_QLIKE_known_scale": 1.0572903701147038,
+          "training_QLIKE_known_scale": 1.108822888161774
+        },
+        {
+          "epoch": 6,
+          "validation_QLIKE_known_scale": 1.056986390792013,
+          "training_QLIKE_known_scale": 1.1070351579225102
+        },
+        {
+          "epoch": 7,
+          "validation_QLIKE_known_scale": 1.0567446661661588,
+          "training_QLIKE_known_scale": 1.1054080201660839
+        },
+        {
+          "epoch": 8,
+          "validation_QLIKE_known_scale": 1.0565602896644202,
+          "training_QLIKE_known_scale": 1.1039279977373413
+        },
+        {
+          "epoch": 9,
+          "validation_QLIKE_known_scale": 1.0564289253827666,
+          "training_QLIKE_known_scale": 1.1025827053818515
+        },
+        {
+          "epoch": 10,
+          "validation_QLIKE_known_scale": 1.056346701129749,
+          "training_QLIKE_known_scale": 1.101360770537288
+        },
+        {
+          "epoch": 11,
+          "validation_QLIKE_known_scale": 1.0563101132717412,
+          "training_QLIKE_known_scale": 1.100251826433489
+        },
+        {
+          "epoch": 12,
+          "validation_QLIKE_known_scale": 1.056315941918955,
+          "training_QLIKE_known_scale": 1.0992464660434702
+        },
+        {
+          "epoch": 13,
+          "validation_QLIKE_known_scale": 1.0563611766000875,
+          "training_QLIKE_known_scale": 1.0983361600582335
+        },
+        {
+          "epoch": 14,
+          "validation_QLIKE_known_scale": 1.0564429527932861,
+          "training_QLIKE_known_scale": 1.0975131588903964
+        },
+        {
+          "epoch": 15,
+          "validation_QLIKE_known_scale": 1.0565584999585407,
+          "training_QLIKE_known_scale": 1.0967703939445708
+        },
+        {
+          "epoch": 16,
+          "validation_QLIKE_known_scale": 1.0567051018550269,
+          "training_QLIKE_known_scale": 1.0961013867356362
+        },
+        {
+          "epoch": 17,
+          "validation_QLIKE_known_scale": 1.0568800696830467,
+          "training_QLIKE_known_scale": 1.0955001697397275
+        },
+        {
+          "epoch": 18,
+          "validation_QLIKE_known_scale": 1.0570807279437944,
+          "training_QLIKE_known_scale": 1.09496122007019
+        },
+        {
+          "epoch": 19,
+          "validation_QLIKE_known_scale": 1.0573044120301516,
+          "training_QLIKE_known_scale": 1.0944794055270797
+        },
+        {
+          "epoch": 20,
+          "validation_QLIKE_known_scale": 1.0575484756996096,
+          "training_QLIKE_known_scale": 1.0940499417622673
+        },
+        {
+          "epoch": 21,
+          "validation_QLIKE_known_scale": 1.0578103059589796,
+          "training_QLIKE_known_scale": 1.0936683589260847
+        },
+        {
+          "epoch": 22,
+          "validation_QLIKE_known_scale": 1.0580873426305297,
+          "training_QLIKE_known_scale": 1.0933304760451088
+        },
+        {
+          "epoch": 23,
+          "validation_QLIKE_known_scale": 1.058377099972667,
+          "training_QLIKE_known_scale": 1.0930323814275784
+        },
+        {
+          "epoch": 24,
+          "validation_QLIKE_known_scale": 1.058677188108974,
+          "training_QLIKE_known_scale": 1.0927704175429591
+        },
+        {
+          "epoch": 25,
+          "validation_QLIKE_known_scale": 1.0589853325534486,
+          "training_QLIKE_known_scale": 1.0925411690331013
+        },
+        {
+          "epoch": 26,
+          "validation_QLIKE_known_scale": 1.0592993906896493,
+          "training_QLIKE_known_scale": 1.0923414527517818
+        }
+      ],
+      "training_observation_stop_exclusive": 1112,
+      "max_training_target_end": 1111,
+      "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+      "measurement": "GK",
+      "fit_executed": true,
+      "deterministic_single_seed": true,
+      "target_unchanged": true
+    },
+    "KRBN_RS": {
+      "seed": 11,
+      "mode": "raw_constant",
+      "best_epoch": 0,
+      "epochs_run": 20,
+      "best_validation_QLIKE_known_scale": 1.0585389021134848,
+      "returned_validation_QLIKE_known_scale": 1.0585389021134848,
+      "parameters": 4,
+      "dynamics": {
+        "mu": -9.448092633674477,
+        "phi": 0.95,
+        "Q": 0.02,
+        "s_R": 0.0
+      },
+      "history": [
+        {
+          "epoch": 0,
+          "validation_QLIKE_known_scale": 1.0585389021134848,
+          "training_QLIKE_known_scale": null
+        },
+        {
+          "epoch": 1,
+          "validation_QLIKE_known_scale": 1.0591375277112256,
+          "training_QLIKE_known_scale": 1.1078902890676048
+        },
+        {
+          "epoch": 2,
+          "validation_QLIKE_known_scale": 1.0596307509952256,
+          "training_QLIKE_known_scale": 1.1055768869527611
+        },
+        {
+          "epoch": 3,
+          "validation_QLIKE_known_scale": 1.0601349579546837,
+          "training_QLIKE_known_scale": 1.1038939888214054
+        },
+        {
+          "epoch": 4,
+          "validation_QLIKE_known_scale": 1.0606529599434222,
+          "training_QLIKE_known_scale": 1.1024437175515474
+        },
+        {
+          "epoch": 5,
+          "validation_QLIKE_known_scale": 1.0611808264383262,
+          "training_QLIKE_known_scale": 1.1011651481714813
+        },
+        {
+          "epoch": 6,
+          "validation_QLIKE_known_scale": 1.0617143477389888,
+          "training_QLIKE_known_scale": 1.1000314040416255
+        },
+        {
+          "epoch": 7,
+          "validation_QLIKE_known_scale": 1.062250199567887,
+          "training_QLIKE_known_scale": 1.099024202585639
+        },
+        {
+          "epoch": 8,
+          "validation_QLIKE_known_scale": 1.0627859888963345,
+          "training_QLIKE_known_scale": 1.098128659412915
+        },
+        {
+          "epoch": 9,
+          "validation_QLIKE_known_scale": 1.0633200402884575,
+          "training_QLIKE_known_scale": 1.097331977955012
+        },
+        {
+          "epoch": 10,
+          "validation_QLIKE_known_scale": 1.0638511688656571,
+          "training_QLIKE_known_scale": 1.096623023873472
+        },
+        {
+          "epoch": 11,
+          "validation_QLIKE_known_scale": 1.064378502815038,
+          "training_QLIKE_known_scale": 1.0959920905328377
+        },
+        {
+          "epoch": 12,
+          "validation_QLIKE_known_scale": 1.0649013594597034,
+          "training_QLIKE_known_scale": 1.0954307033449782
+        },
+        {
+          "epoch": 13,
+          "validation_QLIKE_known_scale": 1.0654191635657708,
+          "training_QLIKE_known_scale": 1.0949314409656596
+        },
+        {
+          "epoch": 14,
+          "validation_QLIKE_known_scale": 1.0659313956571805,
+          "training_QLIKE_known_scale": 1.094487776053336
+        },
+        {
+          "epoch": 15,
+          "validation_QLIKE_known_scale": 1.0664375608740748,
+          "training_QLIKE_known_scale": 1.094093938613299
+        },
+        {
+          "epoch": 16,
+          "validation_QLIKE_known_scale": 1.0669371717899414,
+          "training_QLIKE_known_scale": 1.093744801847088
+        },
+        {
+          "epoch": 17,
+          "validation_QLIKE_known_scale": 1.0674297407302795,
+          "training_QLIKE_known_scale": 1.0934357883211079
+        },
+        {
+          "epoch": 18,
+          "validation_QLIKE_known_scale": 1.0679147785230196,
+          "training_QLIKE_known_scale": 1.0931627934210248
+        },
+        {
+          "epoch": 19,
+          "validation_QLIKE_known_scale": 1.0683917974791863,
+          "training_QLIKE_known_scale": 1.0929221229948325
+        },
+        {
+          "epoch": 20,
+          "validation_QLIKE_known_scale": 1.0688603169601973,
+          "training_QLIKE_known_scale": 1.09271044239564
+        }
+      ],
+      "training_observation_stop_exclusive": 1112,
+      "max_training_target_end": 1111,
+      "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+      "measurement": "RS",
+      "fit_executed": true,
+      "deterministic_single_seed": true,
+      "target_unchanged": true
+    },
+    "KCCA_GK": {
+      "seed": 11,
+      "mode": "raw_constant",
+      "best_epoch": 30,
+      "epochs_run": 45,
+      "best_validation_QLIKE_known_scale": 1.0972256185434632,
+      "returned_validation_QLIKE_known_scale": 1.0972256185434632,
+      "parameters": 4,
+      "dynamics": {
+        "mu": -8.657613678517514,
+        "phi": 0.9421658080507891,
+        "Q": 0.013795786396540718,
+        "s_R": 0.5191942939350426
+      },
+      "history": [
+        {
+          "epoch": 0,
+          "validation_QLIKE_known_scale": 1.1907626978216266,
+          "training_QLIKE_known_scale": null
+        },
+        {
+          "epoch": 1,
+          "validation_QLIKE_known_scale": 1.1838254912262762,
+          "training_QLIKE_known_scale": 1.3831092634879874
+        },
+        {
+          "epoch": 2,
+          "validation_QLIKE_known_scale": 1.1774377361403263,
+          "training_QLIKE_known_scale": 1.3724352535999342
+        },
+        {
+          "epoch": 3,
+          "validation_QLIKE_known_scale": 1.1713350944461403,
+          "training_QLIKE_known_scale": 1.3619778033215026
+        },
+        {
+          "epoch": 4,
+          "validation_QLIKE_known_scale": 1.1655104391267286,
+          "training_QLIKE_known_scale": 1.3517736869691366
+        },
+        {
+          "epoch": 5,
+          "validation_QLIKE_known_scale": 1.159958308158077,
+          "training_QLIKE_known_scale": 1.3418481283816988
+        },
+        {
+          "epoch": 6,
+          "validation_QLIKE_known_scale": 1.1546716847424965,
+          "training_QLIKE_known_scale": 1.3322103417440354
+        },
+        {
+          "epoch": 7,
+          "validation_QLIKE_known_scale": 1.1496429650491726,
+          "training_QLIKE_known_scale": 1.3228638158912456
+        },
+        {
+          "epoch": 8,
+          "validation_QLIKE_known_scale": 1.144865018491314,
+          "training_QLIKE_known_scale": 1.3138104141852054
+        },
+        {
+          "epoch": 9,
+          "validation_QLIKE_known_scale": 1.1403318370456306,
+          "training_QLIKE_known_scale": 1.3050522073132547
+        },
+        {
+          "epoch": 10,
+          "validation_QLIKE_known_scale": 1.1360387897848074,
+          "training_QLIKE_known_scale": 1.2965922203501796
+        },
+        {
+          "epoch": 11,
+          "validation_QLIKE_known_scale": 1.1319826021659132,
+          "training_QLIKE_known_scale": 1.2884346058905536
+        },
+        {
+          "epoch": 12,
+          "validation_QLIKE_known_scale": 1.1281611726859126,
+          "training_QLIKE_known_scale": 1.2805845157802438
+        },
+        {
+          "epoch": 13,
+          "validation_QLIKE_known_scale": 1.1245733065114365,
+          "training_QLIKE_known_scale": 1.2730478239929333
+        },
+        {
+          "epoch": 14,
+          "validation_QLIKE_known_scale": 1.1212184151868294,
+          "training_QLIKE_known_scale": 1.2658307846218493
+        },
+        {
+          "epoch": 15,
+          "validation_QLIKE_known_scale": 1.1180962104854906,
+          "training_QLIKE_known_scale": 1.2589396699002833
+        },
+        {
+          "epoch": 16,
+          "validation_QLIKE_known_scale": 1.1152064080506976,
+          "training_QLIKE_known_scale": 1.2523804120802415
+        },
+        {
+          "epoch": 17,
+          "validation_QLIKE_known_scale": 1.112548449982059,
+          "training_QLIKE_known_scale": 1.2461582624521856
+        },
+        {
+          "epoch": 18,
+          "validation_QLIKE_known_scale": 1.1101212525343065,
+          "training_QLIKE_known_scale": 1.2402774760306532
+        },
+        {
+          "epoch": 19,
+          "validation_QLIKE_known_scale": 1.1079229839054534,
+          "training_QLIKE_known_scale": 1.2347410285816758
+        },
+        {
+          "epoch": 20,
+          "validation_QLIKE_known_scale": 1.1059508766399695,
+          "training_QLIKE_known_scale": 1.2295503720640057
+        },
+        {
+          "epoch": 21,
+          "validation_QLIKE_known_scale": 1.1042010788437686,
+          "training_QLIKE_known_scale": 1.2247052342715112
+        },
+        {
+          "epoch": 22,
+          "validation_QLIKE_known_scale": 1.1026685478708074,
+          "training_QLIKE_known_scale": 1.2202034680058351
+        },
+        {
+          "epoch": 23,
+          "validation_QLIKE_known_scale": 1.1013469892465138,
+          "training_QLIKE_known_scale": 1.216040954239416
+        },
+        {
+          "epoch": 24,
+          "validation_QLIKE_known_scale": 1.1002288423110587,
+          "training_QLIKE_known_scale": 1.212211562371472
+        },
+        {
+          "epoch": 25,
+          "validation_QLIKE_known_scale": 1.099305312449507,
+          "training_QLIKE_known_scale": 1.208707168863881
+        },
+        {
+          "epoch": 26,
+          "validation_QLIKE_known_scale": 1.0985664479395347,
+          "training_QLIKE_known_scale": 1.2055177333783353
+        },
+        {
+          "epoch": 27,
+          "validation_QLIKE_known_scale": 1.0980012575432663,
+          "training_QLIKE_known_scale": 1.2026314291848343
+        },
+        {
+          "epoch": 28,
+          "validation_QLIKE_known_scale": 1.0975978631686945,
+          "training_QLIKE_known_scale": 1.2000348222715906
+        },
+        {
+          "epoch": 29,
+          "validation_QLIKE_known_scale": 1.0973436803955798,
+          "training_QLIKE_known_scale": 1.1977130914644494
+        },
+        {
+          "epoch": 30,
+          "validation_QLIKE_known_scale": 1.0972256185434632,
+          "training_QLIKE_known_scale": 1.1956502801504227
+        },
+        {
+          "epoch": 31,
+          "validation_QLIKE_known_scale": 1.0972302913560927,
+          "training_QLIKE_known_scale": 1.1938295690464333
+        },
+        {
+          "epoch": 32,
+          "validation_QLIKE_known_scale": 1.0973442293333935,
+          "training_QLIKE_known_scale": 1.1922335589546655
+        },
+        {
+          "epoch": 33,
+          "validation_QLIKE_known_scale": 1.097554085247053,
+          "training_QLIKE_known_scale": 1.1908445526263791
+        },
+        {
+          "epoch": 34,
+          "validation_QLIKE_known_scale": 1.0978468253625386,
+          "training_QLIKE_known_scale": 1.1896448256744518
+        },
+        {
+          "epoch": 35,
+          "validation_QLIKE_known_scale": 1.0982099002496486,
+          "training_QLIKE_known_scale": 1.1886168778296473
+        },
+        {
+          "epoch": 36,
+          "validation_QLIKE_known_scale": 1.0986313906597083,
+          "training_QLIKE_known_scale": 1.1877436575813278
+        },
+        {
+          "epoch": 37,
+          "validation_QLIKE_known_scale": 1.0991001256359507,
+          "training_QLIKE_known_scale": 1.187008755212138
+        },
+        {
+          "epoch": 38,
+          "validation_QLIKE_known_scale": 1.0996057716689687,
+          "training_QLIKE_known_scale": 1.1863965612584364
+        },
+        {
+          "epoch": 39,
+          "validation_QLIKE_known_scale": 1.100138893198213,
+          "training_QLIKE_known_scale": 1.1858923893516322
+        },
+        {
+          "epoch": 40,
+          "validation_QLIKE_known_scale": 1.1006909860111806,
+          "training_QLIKE_known_scale": 1.1854825640987912
+        },
+        {
+          "epoch": 41,
+          "validation_QLIKE_known_scale": 1.1012544860562974,
+          "training_QLIKE_known_scale": 1.1851544760611314
+        },
+        {
+          "epoch": 42,
+          "validation_QLIKE_known_scale": 1.1018227568483487,
+          "training_QLIKE_known_scale": 1.1848966069437235
+        },
+        {
+          "epoch": 43,
+          "validation_QLIKE_known_scale": 1.1023900590191684,
+          "training_QLIKE_known_scale": 1.1846985288125624
+        },
+        {
+          "epoch": 44,
+          "validation_QLIKE_known_scale": 1.1029515056841062,
+          "training_QLIKE_known_scale": 1.1845508815295036
+        },
+        {
+          "epoch": 45,
+          "validation_QLIKE_known_scale": 1.1035030072023113,
+          "training_QLIKE_known_scale": 1.184445332685174
+        }
+      ],
+      "training_observation_stop_exclusive": 815,
+      "max_training_target_end": 814,
+      "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+      "measurement": "GK",
+      "fit_executed": true,
+      "deterministic_single_seed": true,
+      "target_unchanged": true
+    },
+    "KCCA_RS": {
+      "seed": 11,
+      "mode": "raw_constant",
+      "best_epoch": 25,
+      "epochs_run": 40,
+      "best_validation_QLIKE_known_scale": 1.1039690156642668,
+      "returned_validation_QLIKE_known_scale": 1.1039690156642668,
+      "parameters": 4,
+      "dynamics": {
+        "mu": -8.73386342496145,
+        "phi": 0.9457402129650785,
+        "Q": 0.016175134125017,
+        "s_R": 0.4146920985026086
+      },
+      "history": [
+        {
+          "epoch": 0,
+          "validation_QLIKE_known_scale": 1.1671320712016173,
+          "training_QLIKE_known_scale": null
+        },
+        {
+          "epoch": 1,
+          "validation_QLIKE_known_scale": 1.1612992989401112,
+          "training_QLIKE_known_scale": 1.320212959045206
+        },
+        {
+          "epoch": 2,
+          "validation_QLIKE_known_scale": 1.155919049924358,
+          "training_QLIKE_known_scale": 1.3116053544038453
+        },
+        {
+          "epoch": 3,
+          "validation_QLIKE_known_scale": 1.1508565109900637,
+          "training_QLIKE_known_scale": 1.3032414461266209
+        },
+        {
+          "epoch": 4,
+          "validation_QLIKE_known_scale": 1.146108312645259,
+          "training_QLIKE_known_scale": 1.295179535014275
+        },
+        {
+          "epoch": 5,
+          "validation_QLIKE_known_scale": 1.1416672348569517,
+          "training_QLIKE_known_scale": 1.2874432736583656
+        },
+        {
+          "epoch": 6,
+          "validation_QLIKE_known_scale": 1.1375232132975968,
+          "training_QLIKE_known_scale": 1.2800386082410729
+        },
+        {
+          "epoch": 7,
+          "validation_QLIKE_known_scale": 1.1336652195212757,
+          "training_QLIKE_known_scale": 1.2729649816447648
+        },
+        {
+          "epoch": 8,
+          "validation_QLIKE_known_scale": 1.1300825646524049,
+          "training_QLIKE_known_scale": 1.2662197357956382
+        },
+        {
+          "epoch": 9,
+          "validation_QLIKE_known_scale": 1.12676557127043,
+          "training_QLIKE_known_scale": 1.2598000493067076
+        },
+        {
+          "epoch": 10,
+          "validation_QLIKE_known_scale": 1.1237057685213832,
+          "training_QLIKE_known_scale": 1.2537036858901636
+        },
+        {
+          "epoch": 11,
+          "validation_QLIKE_known_scale": 1.1208957893181204,
+          "training_QLIKE_known_scale": 1.2479291180117125
+        },
+        {
+          "epoch": 12,
+          "validation_QLIKE_known_scale": 1.1183291108904654,
+          "training_QLIKE_known_scale": 1.24247533395527
+        },
+        {
+          "epoch": 13,
+          "validation_QLIKE_known_scale": 1.1159997325875803,
+          "training_QLIKE_known_scale": 1.2373415042184361
+        },
+        {
+          "epoch": 14,
+          "validation_QLIKE_known_scale": 1.113901847210408,
+          "training_QLIKE_known_scale": 1.2325266057900013
+        },
+        {
+          "epoch": 15,
+          "validation_QLIKE_known_scale": 1.1120295374308853,
+          "training_QLIKE_known_scale": 1.2280290579267141
+        },
+        {
+          "epoch": 16,
+          "validation_QLIKE_known_scale": 1.1103765142673598,
+          "training_QLIKE_known_scale": 1.223846398056082
+        },
+        {
+          "epoch": 17,
+          "validation_QLIKE_known_scale": 1.108935906453546,
+          "training_QLIKE_known_scale": 1.2199750130476903
+        },
+        {
+          "epoch": 18,
+          "validation_QLIKE_known_scale": 1.1077001049793227,
+          "training_QLIKE_known_scale": 1.2164099339420886
+        },
+        {
+          "epoch": 19,
+          "validation_QLIKE_known_scale": 1.1066606642506407,
+          "training_QLIKE_known_scale": 1.2131446980956782
+        },
+        {
+          "epoch": 20,
+          "validation_QLIKE_known_scale": 1.1058082591860514,
+          "training_QLIKE_known_scale": 1.2101712798357191
+        },
+        {
+          "epoch": 21,
+          "validation_QLIKE_known_scale": 1.1051326956576049,
+          "training_QLIKE_known_scale": 1.2074800882659646
+        },
+        {
+          "epoch": 22,
+          "validation_QLIKE_known_scale": 1.1046229698436483,
+          "training_QLIKE_known_scale": 1.205060028495819
+        },
+        {
+          "epoch": 23,
+          "validation_QLIKE_known_scale": 1.1042673703241956,
+          "training_QLIKE_known_scale": 1.2028986202561274
+        },
+        {
+          "epoch": 24,
+          "validation_QLIKE_known_scale": 1.1040536152367935,
+          "training_QLIKE_known_scale": 1.2009821657345994
+        },
+        {
+          "epoch": 25,
+          "validation_QLIKE_known_scale": 1.1039690156642668,
+          "training_QLIKE_known_scale": 1.199295956691496
+        },
+        {
+          "epoch": 26,
+          "validation_QLIKE_known_scale": 1.1040006557655155,
+          "training_QLIKE_known_scale": 1.1978245096727986
+        },
+        {
+          "epoch": 27,
+          "validation_QLIKE_known_scale": 1.104135580057366,
+          "training_QLIKE_known_scale": 1.196551817547432
+        },
+        {
+          "epoch": 28,
+          "validation_QLIKE_known_scale": 1.1043609787178887,
+          "training_QLIKE_known_scale": 1.1954616057101313
+        },
+        {
+          "epoch": 29,
+          "validation_QLIKE_known_scale": 1.1046643627560513,
+          "training_QLIKE_known_scale": 1.1945375820871822
+        },
+        {
+          "epoch": 30,
+          "validation_QLIKE_known_scale": 1.1050337222735491,
+          "training_QLIKE_known_scale": 1.1937636714621152
+        },
+        {
+          "epoch": 31,
+          "validation_QLIKE_known_scale": 1.105457662692529,
+          "training_QLIKE_known_scale": 1.1931242264522652
+        },
+        {
+          "epoch": 32,
+          "validation_QLIKE_known_scale": 1.1059255155846286,
+          "training_QLIKE_known_scale": 1.1926042095345735
+        },
+        {
+          "epoch": 33,
+          "validation_QLIKE_known_scale": 1.1064274224658253,
+          "training_QLIKE_known_scale": 1.1921893426549337
+        },
+        {
+          "epoch": 34,
+          "validation_QLIKE_known_scale": 1.1069543914946218,
+          "training_QLIKE_known_scale": 1.1918662229923482
+        },
+        {
+          "epoch": 35,
+          "validation_QLIKE_known_scale": 1.1074983283377533,
+          "training_QLIKE_known_scale": 1.1916224052536804
+        },
+        {
+          "epoch": 36,
+          "validation_QLIKE_known_scale": 1.1080520434951198,
+          "training_QLIKE_known_scale": 1.1914464523565331
+        },
+        {
+          "epoch": 37,
+          "validation_QLIKE_known_scale": 1.1086092390869973,
+          "training_QLIKE_known_scale": 1.1913279574711428
+        },
+        {
+          "epoch": 38,
+          "validation_QLIKE_known_scale": 1.1091644785148842,
+          "training_QLIKE_known_scale": 1.1912575411318163
+        },
+        {
+          "epoch": 39,
+          "validation_QLIKE_known_scale": 1.109713142547995,
+          "training_QLIKE_known_scale": 1.1912268275212485
+        },
+        {
+          "epoch": 40,
+          "validation_QLIKE_known_scale": 1.1102513753091037,
+          "training_QLIKE_known_scale": 1.1912284041258878
+        }
+      ],
+      "training_observation_stop_exclusive": 815,
+      "max_training_target_end": 814,
+      "validation": "from first observation with frozen parameters, no_grad; current observed prices update state only",
+      "measurement": "RS",
+      "fit_executed": true,
+      "deterministic_single_seed": true,
+      "target_unchanged": true
+    }
+  },
+  "observation_audit": {
+    "KRBN_GK": {
+      "n_rows": 1362,
+      "updates": 1358,
+      "skipped": 4,
+      "skipped_pre2025": 4,
+      "skipped2025": 0,
+      "zero_or_small_with_nonzero_P_range": 0,
+      "observed_at_common_origins": 228,
+      "common_origins_unchanged": 228,
+      "initial_mu": -9.519276868583333,
+      "global_b": -0.1604985704041588,
+      "global_R": 0.2798240949993747,
+      "target_hash_before": {
+        "shape": [
+          1218,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "056df2343fd891c5028a2592eaeb3bbf8a32afb5ecfb14e73264e9072d09457b"
+      },
+      "target_hash_after_copy": {
+        "shape": [
+          1218,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "056df2343fd891c5028a2592eaeb3bbf8a32afb5ecfb14e73264e9072d09457b"
+      },
+      "no_logEPS_observations": true
+    },
+    "KRBN_RS": {
+      "n_rows": 1362,
+      "updates": 1325,
+      "skipped": 37,
+      "skipped_pre2025": 30,
+      "skipped2025": 7,
+      "zero_or_small_with_nonzero_P_range": 33,
+      "observed_at_common_origins": 223,
+      "common_origins_unchanged": 228,
+      "initial_mu": -9.448092633674477,
+      "global_b": -0.2149489388558948,
+      "global_R": 0.4491439096599402,
+      "target_hash_before": {
+        "shape": [
+          1218,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "056df2343fd891c5028a2592eaeb3bbf8a32afb5ecfb14e73264e9072d09457b"
+      },
+      "target_hash_after_copy": {
+        "shape": [
+          1218,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "056df2343fd891c5028a2592eaeb3bbf8a32afb5ecfb14e73264e9072d09457b"
+      },
+      "no_logEPS_observations": true
+    },
+    "KCCA_GK": {
+      "n_rows": 1065,
+      "updates": 1064,
+      "skipped": 1,
+      "skipped_pre2025": 1,
+      "skipped2025": 0,
+      "zero_or_small_with_nonzero_P_range": 0,
+      "observed_at_common_origins": 228,
+      "common_origins_unchanged": 228,
+      "initial_mu": -9.513369783016795,
+      "global_b": -0.1604985704041588,
+      "global_R": 0.2798240949993747,
+      "target_hash_before": {
+        "shape": [
+          921,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "45909f4454042eaf69ee96dc60104a0dbacbbf6b5b9b4061eaa4bdc3f112fbbe"
+      },
+      "target_hash_after_copy": {
+        "shape": [
+          921,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "45909f4454042eaf69ee96dc60104a0dbacbbf6b5b9b4061eaa4bdc3f112fbbe"
+      },
+      "no_logEPS_observations": true
+    },
+    "KCCA_RS": {
+      "n_rows": 1065,
+      "updates": 1025,
+      "skipped": 40,
+      "skipped_pre2025": 37,
+      "skipped2025": 3,
+      "zero_or_small_with_nonzero_P_range": 39,
+      "observed_at_common_origins": 225,
+      "common_origins_unchanged": 228,
+      "initial_mu": -9.4262847859795,
+      "global_b": -0.2149489388558948,
+      "global_R": 0.4491439096599402,
+      "target_hash_before": {
+        "shape": [
+          921,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "45909f4454042eaf69ee96dc60104a0dbacbbf6b5b9b4061eaa4bdc3f112fbbe"
+      },
+      "target_hash_after_copy": {
+        "shape": [
+          921,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "45909f4454042eaf69ee96dc60104a0dbacbbf6b5b9b4061eaa4bdc3f112fbbe"
+      },
+      "no_logEPS_observations": true
+    }
+  },
+  "comparisons": {
+    "KRBN": {
+      "R18_shared_mean": {
+        "raw_QLIKE": -8.569711939854264,
+        "normalized_QLIKE": 0.24861661902102009,
+        "MSE": 6.1200188176807264e-09,
+        "per_h": {
+          "1": {
+            "n": 228,
+            "raw_QLIKE": -8.592744324209628,
+            "normalized_QLIKE": 0.4337996277773355,
+            "MSE": 1.3423313806122733e-08
+          },
+          "5": {
+            "n": 228,
+            "raw_QLIKE": -8.548431056207036,
+            "normalized_QLIKE": 0.22711051548042113,
+            "MSE": 3.906848043106105e-09
+          },
+          "22": {
+            "n": 228,
+            "raw_QLIKE": -8.567960439146127,
+            "normalized_QLIKE": 0.08493971380530362,
+            "MSE": 1.029894603813346e-09
+          }
+        }
+      },
+      "Parkinson_raw_KF": {
+        "raw_QLIKE": -8.569934884333787,
+        "normalized_QLIKE": 0.24839367454149586,
+        "MSE": 6.171651740229338e-09,
+        "per_h": {
+          "1": {
+            "n": 228,
+            "raw_QLIKE": -8.594904655233131,
+            "normalized_QLIKE": 0.4316392967538301,
+            "MSE": 1.355938846934525e-08
+          },
+          "5": {
+            "n": 228,
+            "raw_QLIKE": -8.545759561355128,
+            "normalized_QLIKE": 0.22978201033232887,
+            "MSE": 3.943331012854464e-09
+          },
+          "22": {
+            "n": 228,
+            "raw_QLIKE": -8.569140436413102,
+            "normalized_QLIKE": 0.0837597165383286,
+            "MSE": 1.0122357384883004e-09
+          }
+        }
+      },
+      "Parkinson_fixed_KF": {
+        "raw_QLIKE": -8.569776730302447,
+        "normalized_QLIKE": 0.2485518285728354,
+        "MSE": 6.118254007794428e-09,
+        "per_h": {
+          "1": {
+            "n": 228,
+            "raw_QLIKE": -8.593293586328047,
+            "normalized_QLIKE": 0.43325036565891595,
+            "MSE": 1.3414381851913623e-08
+          },
+          "5": {
+            "n": 228,
+            "raw_QLIKE": -8.548491746663064,
+            "normalized_QLIKE": 0.22704982502439205,
+            "MSE": 3.904392875041988e-09
+          },
+          "22": {
+            "n": 228,
+            "raw_QLIKE": -8.567544857916232,
+            "normalized_QLIKE": 0.08535529503519812,
+            "MSE": 1.0359872964276731e-09
+          }
+        }
+      },
+      "GK_global_KF": {
+        "raw_QLIKE": -8.55821841608462,
+        "normalized_QLIKE": 0.260110142790665,
+        "MSE": 6.245413943428836e-09,
+        "per_h": {
+          "1": {
+            "n": 228,
+            "raw_QLIKE": -8.575632836045513,
+            "normalized_QLIKE": 0.45091111594145095,
+            "MSE": 1.3598374994936934e-08
+          },
+          "5": {
+            "n": 228,
+            "raw_QLIKE": -8.537003072046883,
+            "normalized_QLIKE": 0.23853849964057486,
+            "MSE": 4.009526463892493e-09
+          },
+          "22": {
+            "n": 228,
+            "raw_QLIKE": -8.562019340161461,
+            "normalized_QLIKE": 0.09088081278996914,
+            "MSE": 1.1283403714570775e-09
+          }
+        }
+      },
+      "RS_global_KF": {
+        "raw_QLIKE": -8.555989627242877,
+        "normalized_QLIKE": 0.26233893163240846,
+        "MSE": 6.239934903242022e-09,
+        "per_h": {
+          "1": {
+            "n": 228,
+            "raw_QLIKE": -8.568005034613643,
+            "normalized_QLIKE": 0.45853891737331964,
+            "MSE": 1.3719638082927269e-08
+          },
+          "5": {
+            "n": 228,
+            "raw_QLIKE": -8.5335453856871,
+            "normalized_QLIKE": 0.24199618600035558,
+            "MSE": 4.01884073187668e-09
+          },
+          "22": {
+            "n": 228,
+            "raw_QLIKE": -8.566418461427881,
+            "normalized_QLIKE": 0.0864816915235501,
+            "MSE": 9.813258949221162e-10
+          }
+        }
+      },
+      "mean_minus_classical": {
+        "GK": {
+          "1": {
+            "QLIKE": -0.01711148816411523,
+            "MSE": -1.7506118881420158e-10
+          },
+          "5": {
+            "QLIKE": -0.01142798416015367,
+            "MSE": -1.0267842078638809e-10
+          },
+          "22": {
+            "QLIKE": -0.005941098984665771,
+            "MSE": -9.844576764373155e-11
+          }
+        },
+        "RS": {
+          "1": {
+            "QLIKE": -0.024739289595984815,
+            "MSE": -2.9632427680453606e-10
+          },
+          "5": {
+            "QLIKE": -0.014885670519936056,
+            "MSE": -1.1199268877057545e-10
+          },
+          "22": {
+            "QLIKE": -0.0015419777182454908,
+            "MSE": 4.856870889122975e-11
+          }
+        }
+      }
+    },
+    "KCCA": {
+      "R18_shared_mean": {
+        "raw_QLIKE": -8.054075509606653,
+        "normalized_QLIKE": 0.4507954929319463,
+        "MSE": 4.070736953078877e-08,
+        "per_h": {
+          "1": {
+            "n": 228,
+            "raw_QLIKE": -8.078417992783608,
+            "normalized_QLIKE": 0.6988711210468437,
+            "MSE": 8.869616018237793e-08
+          },
+          "5": {
+            "n": 228,
+            "raw_QLIKE": -8.01798668919041,
+            "normalized_QLIKE": 0.42540381791175513,
+            "MSE": 2.6553173684113186e-08
+          },
+          "22": {
+            "n": 228,
+            "raw_QLIKE": -8.065821846845946,
+            "normalized_QLIKE": 0.22811153983724022,
+            "MSE": 6.872774725875184e-09
+          }
+        }
+      },
+      "Parkinson_raw_KF": {
+        "raw_QLIKE": -8.044437267144053,
+        "normalized_QLIKE": 0.46043373539454774,
+        "MSE": 4.1269327631503805e-08,
+        "per_h": {
+          "1": {
+            "n": 228,
+            "raw_QLIKE": -8.06604990377053,
+            "normalized_QLIKE": 0.711239210059922,
+            "MSE": 8.930784727528754e-08
+          },
+          "5": {
+            "n": 228,
+            "raw_QLIKE": -8.002856636625653,
+            "normalized_QLIKE": 0.4405338704765109,
+            "MSE": 2.7504641382164734e-08
+          },
+          "22": {
+            "n": 228,
+            "raw_QLIKE": -8.064405261035976,
+            "normalized_QLIKE": 0.22952812564721045,
+            "MSE": 6.9954942370591484e-09
+          }
+        }
+      },
+      "Parkinson_fixed_KF": {
+        "raw_QLIKE": -8.040900823040811,
+        "normalized_QLIKE": 0.4639701794977892,
+        "MSE": 4.145138415518547e-08,
+        "per_h": {
+          "1": {
+            "n": 228,
+            "raw_QLIKE": -8.065452267196575,
+            "normalized_QLIKE": 0.711836846633877,
+            "MSE": 8.947939443337242e-08
+          },
+          "5": {
+            "n": 228,
+            "raw_QLIKE": -7.998171778758499,
+            "normalized_QLIKE": 0.4452187283436662,
+            "MSE": 2.7681016767894682e-08
+          },
+          "22": {
+            "n": 228,
+            "raw_QLIKE": -8.059078423167362,
+            "normalized_QLIKE": 0.2348549635158241,
+            "MSE": 7.1937412642893085e-09
+          }
+        }
+      },
+      "GK_global_KF": {
+        "raw_QLIKE": -8.039230572892658,
+        "normalized_QLIKE": 0.46564042964594304,
+        "MSE": 4.153782990605655e-08,
+        "per_h": {
+          "1": {
+            "n": 228,
+            "raw_QLIKE": -8.05826661349127,
+            "normalized_QLIKE": 0.7190225003391822,
+            "MSE": 8.977765990836306e-08
+          },
+          "5": {
+            "n": 228,
+            "raw_QLIKE": -7.997733708090233,
+            "normalized_QLIKE": 0.4456567990119327,
+            "MSE": 2.7736363827985957e-08
+          },
+          "22": {
+            "n": 228,
+            "raw_QLIKE": -8.061691397096473,
+            "normalized_QLIKE": 0.23224198958671424,
+            "MSE": 7.099465981820621e-09
+          }
+        }
+      },
+      "RS_global_KF": {
+        "raw_QLIKE": -8.032487175771855,
+        "normalized_QLIKE": 0.4723838267667465,
+        "MSE": 4.1765915193276105e-08,
+        "per_h": {
+          "1": {
+            "n": 228,
+            "raw_QLIKE": -8.04183989842976,
+            "normalized_QLIKE": 0.73544921540069,
+            "MSE": 9.036210225232951e-08
+          },
+          "5": {
+            "n": 228,
+            "raw_QLIKE": -7.995646046397557,
+            "normalized_QLIKE": 0.4477444607046079,
+            "MSE": 2.7806517267574234e-08
+          },
+          "22": {
+            "n": 228,
+            "raw_QLIKE": -8.059975582488244,
+            "normalized_QLIKE": 0.23395780419494197,
+            "MSE": 7.1291260599245495e-09
+          }
+        }
+      },
+      "mean_minus_classical": {
+        "GK": {
+          "1": {
+            "QLIKE": -0.020151379292338234,
+            "MSE": -1.0814997259851282e-09
+          },
+          "5": {
+            "QLIKE": -0.02025298110017726,
+            "MSE": -1.1831901438727704e-09
+          },
+          "22": {
+            "QLIKE": -0.004130449749473186,
+            "MSE": -2.2669125594543691e-10
+          }
+        },
+        "RS": {
+          "1": {
+            "QLIKE": -0.036578094353847845,
+            "MSE": -1.6659420699515786e-09
+          },
+          "5": {
+            "QLIKE": -0.022340642792853416,
+            "MSE": -1.2533435834610481e-09
+          },
+          "22": {
+            "QLIKE": -0.005846264357701969,
+            "MSE": -2.563513340493657e-10
+          }
+        }
+      }
+    }
+  },
+  "environment": {
+    "python": "C:\\Users\\Dreamboat\\AppData\\Local\\hermes\\hermes-agent-v0.21.5\\venv\\Scripts\\python.exe",
+    "numpy": "2.4.6",
+    "torch": "2.14.1+cpu"
+  },
+  "original_CSV_full_hash_note": "Declared acquisition hash retained, never rehashed or parsed reserved rows",
+  "outputs": {
+    "manifest": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_manifest.json",
+    "results": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_results.json",
+    "predictions": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_validation_predictions.npz"
+  },
+  "joint_equal_asset_horizon": {
+    "R18_shared_mean": {
+      "raw_QLIKE": -8.311893724730458,
+      "normalized_QLIKE": 0.3497060559764832,
+      "MSE": 2.341369417423475e-08
+    },
+    "Parkinson_raw_KF": {
+      "raw_QLIKE": -8.307186075738919,
+      "normalized_QLIKE": 0.3544137049680218,
+      "MSE": 2.3720489685866573e-08
+    },
+    "Parkinson_fixed_KF": {
+      "raw_QLIKE": -8.30533877667163,
+      "normalized_QLIKE": 0.3562610040353123,
+      "MSE": 2.378481908148995e-08
+    },
+    "GK_global_KF": {
+      "raw_QLIKE": -8.298724494488638,
+      "normalized_QLIKE": 0.362875286218304,
+      "MSE": 2.3891621924742693e-08
+    },
+    "RS_global_KF": {
+      "raw_QLIKE": -8.294238401507366,
+      "normalized_QLIKE": 0.36736137919957745,
+      "MSE": 2.4002925048259063e-08
+    }
+  },
+  "elapsed_seconds": 38.295371770858765,
+  "interpretation": "Classical OHLC measurement+global-noise log-variance filter for identical future Parkinson target, not return-GARCH;2025 epoch-selected development only",
+  "predictions_sha256": "0003d1ee13ab88d0a22ceb2432b2959d54e2bf6896cd6e730f392319453dfa8f"
+}

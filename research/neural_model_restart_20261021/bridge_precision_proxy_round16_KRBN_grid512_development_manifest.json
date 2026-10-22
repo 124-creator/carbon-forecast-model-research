@@ -1,0 +1,117 @@
+{
+  "config": {
+    "instrument": "KRBN",
+    "reference_grid": 512,
+    "seeds": [
+      11,
+      22,
+      33
+    ],
+    "epochs": 100,
+    "chunk": 128,
+    "tag": null,
+    "check_only": false
+  },
+  "status": "DEVELOPMENT ONLY; no 2026 forecasts or targets",
+  "audit": {
+    "development_rows": 1362,
+    "first": "2020-07-31",
+    "last": "2025-12-31",
+    "validation_start": "2025-01-01",
+    "training_rows": 3008,
+    "validation_rows": 722,
+    "withheld_period_used": false,
+    "target": "future mean Parkinson intraday-range proxy; not true QV or return RV",
+    "feature_names": [
+      "logrange1",
+      "logrange5",
+      "logrange22",
+      "r1",
+      "r5",
+      "r22",
+      "intraday",
+      "logovernightvar",
+      "logreturnvar",
+      "logvolume",
+      "volume_ratio",
+      "range_ratio"
+    ],
+    "common_h22_origins": true,
+    "train_common_origins": 990,
+    "validation_common_origins": 228,
+    "last_training_origin": "2024-11-27",
+    "last_training_label": "2024-12-31",
+    "first_validation_origin": "2025-01-02",
+    "last_validation_label": "2025-12-31",
+    "initial_mu": -9.508986276641561,
+    "initialization_observations": 1108,
+    "neural_features": [
+      "abs_eta",
+      "abs_xi/(1-abs_eta)",
+      "log(volume/past22_mean_volume)"
+    ],
+    "neural_mean": [
+      0.47492727538873963,
+      0.5867042385811942,
+      -0.15583254511968794
+    ],
+    "neural_std": [
+      0.27447969473988865,
+      0.3487824417030357,
+      0.6347206963029088
+    ],
+    "normalization": "pre2025 nonzero-range observations only; missing feature becomes normalized zero",
+    "imputed_feature_entries": 21,
+    "zero_range_observations": 4,
+    "reference_grid": 512,
+    "reference_label": "grid512_train",
+    "global_b": -0.17973170328210689,
+    "global_R": 0.35199231725707575,
+    "shape_bias_constant_R": 0.2747201728687599,
+    "calibration": "fixed synthetic table; no real-data fitting of b_cell or R_cell",
+    "state_frame": "log of conditional mean Parkinson proxy in the reference model",
+    "reference_train_mean_proxy": 0.9427735381258473,
+    "known_log_frame_shift": -0.058929175639207104
+  },
+  "hashes": {
+    "runner": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_proxy_round16.py",
+      "sha256": "958f49be8ff17002ee2b4e2e059f49c9eabe3c68abc288e0009c07dd71c945f1"
+    },
+    "filter": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_round16.py",
+      "sha256": "9ac2704711779ace771c64a6807a074c006850d294c96d2fdd48f3fbe95a273a"
+    },
+    "range_clock": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\range_clock_round14.py",
+      "sha256": "08e4e6f23e426b6a84ab6913881ae43666ef6b0ca4fa929cc4d48bbdeac4dc7a"
+    },
+    "reference_models": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_shape_models.json",
+      "sha256": "edd1de40ec9732ed1ad927370ce7293fdf162479f88b8f4dce16135b6fc36542"
+    },
+    "reference_results": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_reference_results.json",
+      "sha256": "1a9124466d98de76199ae0671421b0808ec112e312da425930056ce35a23c303"
+    },
+    "csv": {
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\data_acquisition_round13\\KRBN_ETF_USD_daily_completed_20200731_20261020.csv",
+      "sha256": "ff99c14e84153717be0d72506b0c8b581605495288849823e4bf219ab1462f11"
+    }
+  },
+  "frame": "common simulation-train conversion; cell_b/global_b minus log(c), initial_mu plus log(c)",
+  "frame_note": "equivalent to predicting c*exp(latent m+P/2); c is not estimated on market validation; actual diffusion assumptions unverified",
+  "primary": "same QLIKE mean across h1/5/22 common origins; per-mode validation epoch including zero",
+  "target": "future Parkinson proxy mean, not true integrated variance",
+  "checks": {
+    "market_data_opened": false,
+    "reference_file_opened": false,
+    "same_proxy_frame_for_every_mode": true,
+    "log_state_translation": true,
+    "covariance_gain_precision_unchanged": true,
+    "forecasts_equal_c_times_latent_mean": true,
+    "nonzero_neural_output_checked": true
+  },
+  "fits": {},
+  "scores": {}
+}

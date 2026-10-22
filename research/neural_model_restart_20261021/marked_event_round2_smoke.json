@@ -1,0 +1,1117 @@
+{
+  "status": "exploratory; reused historical test periods; not publication success",
+  "config": {
+    "markets": [
+      "CEA"
+    ],
+    "seeds": [
+      11
+    ],
+    "epochs": 8,
+    "tag": "marked_event_round2_smoke"
+  },
+  "horizons": [
+    1,
+    5,
+    10,
+    20
+  ],
+  "quantiles": [
+    0.02500000037252903,
+    0.05000000074505806,
+    0.10000000149011612,
+    0.15000000596046448,
+    0.20000000298023224,
+    0.30000001192092896,
+    0.4000000059604645,
+    0.5,
+    0.6000000238418579,
+    0.699999988079071,
+    0.800000011920929,
+    0.8500000238418579,
+    0.8999999761581421,
+    0.949999988079071,
+    0.9750000238418579
+  ],
+  "horizon_unit": "observed daily-panel steps",
+  "target": "direct marginal log return; endpoint zero is not no-intervening-update",
+  "architecture": "matched shared 24/16 MLP + 5 signed-center normal-mixture mark parameters; gate/residual prior head",
+  "local_prior": "Beta(1,1) smoothed h-return nonzero proportion in lp[t-128:t+1]",
+  "feature_policy": "all variants receive identical features including logit(local prior)",
+  "training_objectives": [
+    "mixed NLL",
+    "exact analytic atom+normal-mixture CRPS on standardized returns"
+  ],
+  "selection": "same normalized validation MQS; full precut fixed selected epoch refit",
+  "ensemble": "equal probability mixture of seed distributions; coherent CDF-MQS/closed-form CRPS/Brier",
+  "round1_ensemble_difference": "round1 averaged seed quantiles; compare architecture increments primarily within this round",
+  "loss_sanity": {
+    "standard_normal_at_zero": 0.23369497725510913,
+    "point_mass_error": 2.0,
+    "gradcheck": true,
+    "CDF_integral": 0.24738031344461786,
+    "closed_form": 0.24738031344461797
+  },
+  "panel_sha256": "d470238386e201e68f07b033f5a34591af89b57f1546ea79b699e763d228b56c",
+  "python": "3.11.15",
+  "torch": "2.14.1+cpu",
+  "markets": {
+    "CEA": {
+      "audit": {
+        "cut_index": 597,
+        "validation_start_index": 447,
+        "lookback": 128,
+        "step": 2,
+        "train": 621,
+        "validation": 281,
+        "refit": 921,
+        "test": 1311,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 446,
+        "last_refit_target": 596,
+        "test_zero_share": {
+          "1": 0.08734939759036145,
+          "5": 0.006060606060606061,
+          "10": 0.01529051987767584,
+          "20": 0.003105590062111801
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "fits": {
+        "static_prior_nll": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 8,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5451349943078992,
+            "validation_history": [
+              [
+                1,
+                0.5451349943078992
+              ],
+              [
+                2,
+                0.5460330749928276
+              ],
+              [
+                4,
+                0.5486601287816082
+              ],
+              [
+                6,
+                0.5528313609147185
+              ],
+              [
+                8,
+                0.5575130925897256
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.0,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.7978405952453613
+          }
+        ],
+        "static_prior_crps": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 8,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5453121224966002,
+            "validation_history": [
+              [
+                1,
+                0.5453121224966002
+              ],
+              [
+                2,
+                0.5464238526412399
+              ],
+              [
+                4,
+                0.5504383924827672
+              ],
+              [
+                6,
+                0.5576531187479404
+              ],
+              [
+                8,
+                0.567505746594986
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.0,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.7978405952453613
+          }
+        ],
+        "rolling_rule_prior_nll": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 8,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5446973643541387,
+            "validation_history": [
+              [
+                1,
+                0.5446973643541387
+              ],
+              [
+                2,
+                0.5452375168812033
+              ],
+              [
+                4,
+                0.547028689627289
+              ],
+              [
+                6,
+                0.5503584138842806
+              ],
+              [
+                8,
+                0.5542215413801369
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.800000011920929,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.9348793625831604
+          }
+        ],
+        "rolling_rule_prior_crps": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 8,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5449903643262733,
+            "validation_history": [
+              [
+                1,
+                0.5449903643262733
+              ],
+              [
+                2,
+                0.5460423907664597
+              ],
+              [
+                4,
+                0.5504207367162514
+              ],
+              [
+                6,
+                0.5582873442584168
+              ],
+              [
+                8,
+                0.5690203886718808
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.800000011920929,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.9348793625831604
+          }
+        ],
+        "rolling_neural_prior_nll": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 8,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5447223635259629,
+            "validation_history": [
+              [
+                1,
+                0.5447223635259629
+              ],
+              [
+                2,
+                0.5453181290420651
+              ],
+              [
+                4,
+                0.5472383022685967
+              ],
+              [
+                6,
+                0.5507220668461077
+              ],
+              [
+                8,
+                0.5547806040600366
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.7983465194702148,
+            "mean_prior_logit_residual": -0.0014266271609812975,
+            "mean_nonzero_probability": 0.9345089793205261
+          }
+        ],
+        "rolling_neural_prior_crps": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 8,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5450422017612055,
+            "validation_history": [
+              [
+                1,
+                0.5450422017612055
+              ],
+              [
+                2,
+                0.5461768916637806
+              ],
+              [
+                4,
+                0.5507776827129643
+              ],
+              [
+                6,
+                0.5591980414531681
+              ],
+              [
+                8,
+                0.5702780927661621
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.7961030006408691,
+            "mean_prior_logit_residual": -0.00900917686522007,
+            "mean_nonzero_probability": 0.9336833953857422
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 332,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.007325421973395726,
+              "WIS": 0.006353508633553778,
+              "CRPS": 0.008239690035625018,
+              "Brier": 0.1518562039020777,
+              "log_loss_nonzero": 0.4917550430289901,
+              "coverage80": 0.7771084337349398,
+              "coverage95": 0.9307228915662651,
+              "MAE_median": 0.010121543176566076,
+              "mean_nonzero_probability": 0.6440677966101694,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "gaussian_constant": {
+              "MQS": 0.007792367212486881,
+              "WIS": 0.0067118877755137744,
+              "CRPS": 0.008807975213082924,
+              "Brier": 0.08734939759036145,
+              "log_loss_nonzero": 2.4135549816241277,
+              "coverage80": 0.8795180722891566,
+              "coverage95": 0.9457831325301205,
+              "MAE_median": 0.010374164565659994,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "static_prior_nll": {
+              "MQS": 0.007458491894330306,
+              "WIS": 0.006546448322987399,
+              "CRPS": 0.008327610849978719,
+              "Brier": 0.151856221267538,
+              "log_loss_nonzero": 0.491755075393671,
+              "coverage80": 0.8554216867469879,
+              "coverage95": 0.9457831325301205,
+              "MAE_median": 0.010121543176566076,
+              "mean_nonzero_probability": 0.6440677642822266,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "static_prior_crps": {
+              "MQS": 0.007447230404546787,
+              "WIS": 0.006532445297779856,
+              "CRPS": 0.008318559650915623,
+              "Brier": 0.151856221267538,
+              "log_loss_nonzero": 0.491755075393671,
+              "coverage80": 0.8554216867469879,
+              "coverage95": 0.9427710843373494,
+              "MAE_median": 0.010121543176566076,
+              "mean_nonzero_probability": 0.6440677642822266,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "rolling_rule_prior_nll": {
+              "MQS": 0.00782435087976917,
+              "WIS": 0.0069212634465678794,
+              "CRPS": 0.008701786394954097,
+              "Brier": 0.08461941172439347,
+              "log_loss_nonzero": 0.3152828896754836,
+              "coverage80": 0.8975903614457831,
+              "coverage95": 0.9578313253012049,
+              "MAE_median": 0.010277268802710798,
+              "mean_nonzero_probability": 0.859805166721344,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "rolling_rule_prior_crps": {
+              "MQS": 0.00778887499567957,
+              "WIS": 0.006880503949531085,
+              "CRPS": 0.008672902976954769,
+              "Brier": 0.08461941172439347,
+              "log_loss_nonzero": 0.3152828896754836,
+              "coverage80": 0.8795180722891566,
+              "coverage95": 0.9548192771084337,
+              "MAE_median": 0.01026513775359176,
+              "mean_nonzero_probability": 0.859805166721344,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "rolling_neural_prior_nll": {
+              "MQS": 0.00782212459509525,
+              "WIS": 0.006919070941291842,
+              "CRPS": 0.008699506802802615,
+              "Brier": 0.08463934731845271,
+              "log_loss_nonzero": 0.3153575015849019,
+              "coverage80": 0.8975903614457831,
+              "coverage95": 0.9578313253012049,
+              "MAE_median": 0.010272064088475228,
+              "mean_nonzero_probability": 0.8592190146446228,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "rolling_neural_prior_crps": {
+              "MQS": 0.007782605931246424,
+              "WIS": 0.006874798774792466,
+              "CRPS": 0.008666373974081681,
+              "Brier": 0.08480714072204981,
+              "log_loss_nonzero": 0.315989296501839,
+              "coverage80": 0.8795180722891566,
+              "coverage95": 0.9548192771084337,
+              "MAE_median": 0.010253470746501368,
+              "mean_nonzero_probability": 0.8577760457992554,
+              "empirical_nonzero_rate": 0.9126506024096386
+            }
+          }
+        },
+        "5": {
+          "n": 330,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.018004516793989,
+              "WIS": 0.015493269696346327,
+              "CRPS": 0.02031885056359136,
+              "Brier": 0.03463663591868722,
+              "log_loss_nonzero": 0.2020195211328194,
+              "coverage80": 0.6333333333333333,
+              "coverage95": 0.8454545454545455,
+              "MAE_median": 0.025991201440663952,
+              "mean_nonzero_probability": 0.8247863247863247,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "gaussian_constant": {
+              "MQS": 0.01758939557797618,
+              "WIS": 0.015025567468610713,
+              "CRPS": 0.01999464846899168,
+              "Brier": 0.006060606060606061,
+              "log_loss_nonzero": 0.1674608681094385,
+              "coverage80": 0.7333333333333333,
+              "coverage95": 0.8545454545454545,
+              "MAE_median": 0.02602923906587214,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "static_prior_nll": {
+              "MQS": 0.017679523828454738,
+              "WIS": 0.015064879195178713,
+              "CRPS": 0.02011662533821856,
+              "Brier": 0.03463664246787949,
+              "log_loss_nonzero": 0.20201954046885173,
+              "coverage80": 0.7484848484848485,
+              "coverage95": 0.8636363636363636,
+              "MAE_median": 0.025991201440663952,
+              "mean_nonzero_probability": 0.8247861862182617,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "static_prior_crps": {
+              "MQS": 0.01770609203266179,
+              "WIS": 0.015104924640037884,
+              "CRPS": 0.020130294366380152,
+              "Brier": 0.03463664246787949,
+              "log_loss_nonzero": 0.20201954046885173,
+              "coverage80": 0.7454545454545455,
+              "coverage95": 0.8606060606060606,
+              "MAE_median": 0.025991201440663952,
+              "mean_nonzero_probability": 0.8247861862182617,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "rolling_rule_prior_nll": {
+              "MQS": 0.017713403815875602,
+              "WIS": 0.015103751917107701,
+              "CRPS": 0.020142708524639428,
+              "Brier": 0.007385365239941745,
+              "log_loss_nonzero": 0.06264691323493467,
+              "coverage80": 0.7666666666666667,
+              "coverage95": 0.8696969696969697,
+              "MAE_median": 0.02638304256235326,
+              "mean_nonzero_probability": 0.9573381543159485,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "rolling_rule_prior_crps": {
+              "MQS": 0.01773658628607724,
+              "WIS": 0.015141315479285924,
+              "CRPS": 0.020152574254629615,
+              "Brier": 0.007385365239941745,
+              "log_loss_nonzero": 0.06264691323493467,
+              "coverage80": 0.7606060606060606,
+              "coverage95": 0.8666666666666667,
+              "MAE_median": 0.026379319729294592,
+              "mean_nonzero_probability": 0.9573381543159485,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "rolling_neural_prior_nll": {
+              "MQS": 0.017712466483376783,
+              "WIS": 0.015102843811400382,
+              "CRPS": 0.02014170547270806,
+              "Brier": 0.00741168658835412,
+              "log_loss_nonzero": 0.06295657107098536,
+              "coverage80": 0.7666666666666667,
+              "coverage95": 0.8696969696969697,
+              "MAE_median": 0.026378894349000512,
+              "mean_nonzero_probability": 0.9569957256317139,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "rolling_neural_prior_crps": {
+              "MQS": 0.01773525078798166,
+              "WIS": 0.015140173154820873,
+              "CRPS": 0.02015098290942718,
+              "Brier": 0.007462537752895024,
+              "log_loss_nonzero": 0.06356490558069763,
+              "coverage80": 0.7606060606060606,
+              "coverage95": 0.8666666666666667,
+              "MAE_median": 0.02637055481091888,
+              "mean_nonzero_probability": 0.9562986493110657,
+              "empirical_nonzero_rate": 0.9939393939393939
+            }
+          }
+        },
+        "10": {
+          "n": 327,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.02810462262311627,
+              "WIS": 0.024518791806331527,
+              "CRPS": 0.03143032681981785,
+              "Brier": 0.03462366412491319,
+              "log_loss_nonzero": 0.19453396198891812,
+              "coverage80": 0.5412844036697247,
+              "coverage95": 0.8165137614678899,
+              "MAE_median": 0.039676950678162924,
+              "mean_nonzero_probability": 0.8448275862068964,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "gaussian_constant": {
+              "MQS": 0.02782623442253147,
+              "WIS": 0.024211951422303056,
+              "CRPS": 0.031206514379220802,
+              "Brier": 0.01529051987767584,
+              "log_loss_nonzero": 0.4224930158709134,
+              "coverage80": 0.6207951070336392,
+              "coverage95": 0.7981651376146789,
+              "MAE_median": 0.03985886588265187,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "static_prior_nll": {
+              "MQS": 0.027682948699657282,
+              "WIS": 0.024001140933289096,
+              "CRPS": 0.03111422918136504,
+              "Brier": 0.03462366239989034,
+              "log_loss_nonzero": 0.1945339372945488,
+              "coverage80": 0.6299694189602446,
+              "coverage95": 0.7981651376146789,
+              "MAE_median": 0.039676950678162924,
+              "mean_nonzero_probability": 0.8448275327682495,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "static_prior_crps": {
+              "MQS": 0.0277426495723025,
+              "WIS": 0.024091487447643823,
+              "CRPS": 0.031147385595880483,
+              "Brier": 0.03462366239989034,
+              "log_loss_nonzero": 0.1945339372945488,
+              "coverage80": 0.6207951070336392,
+              "coverage95": 0.7889908256880734,
+              "MAE_median": 0.039676950678162924,
+              "mean_nonzero_probability": 0.8448275327682495,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "rolling_rule_prior_nll": {
+              "MQS": 0.027498523702882433,
+              "WIS": 0.0238240078357227,
+              "CRPS": 0.030943141328655596,
+              "Brier": 0.01600124096027981,
+              "log_loss_nonzero": 0.09263339925796614,
+              "coverage80": 0.6605504587155964,
+              "coverage95": 0.8073394495412844,
+              "MAE_median": 0.03965552026252953,
+              "mean_nonzero_probability": 0.9560456275939941,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "rolling_rule_prior_crps": {
+              "MQS": 0.027578607357585317,
+              "WIS": 0.02393249822917741,
+              "CRPS": 0.030994560400578578,
+              "Brier": 0.01600124096027981,
+              "log_loss_nonzero": 0.09263339925796614,
+              "coverage80": 0.6452599388379205,
+              "coverage95": 0.7951070336391437,
+              "MAE_median": 0.0396584959575124,
+              "mean_nonzero_probability": 0.9560456275939941,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "rolling_neural_prior_nll": {
+              "MQS": 0.02749815849915856,
+              "WIS": 0.023823764274469316,
+              "CRPS": 0.030942534848286792,
+              "Brier": 0.016035194976647963,
+              "log_loss_nonzero": 0.093023075092732,
+              "coverage80": 0.6605504587155964,
+              "coverage95": 0.8073394495412844,
+              "MAE_median": 0.03965374795551805,
+              "mean_nonzero_probability": 0.9557371735572815,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "rolling_neural_prior_crps": {
+              "MQS": 0.027579281105384667,
+              "WIS": 0.02393355394634694,
+              "CRPS": 0.030994617625045993,
+              "Brier": 0.01607058791939855,
+              "log_loss_nonzero": 0.09342914641997137,
+              "coverage80": 0.6452599388379205,
+              "coverage95": 0.7951070336391437,
+              "MAE_median": 0.03965969212617936,
+              "mean_nonzero_probability": 0.95508873462677,
+              "empirical_nonzero_rate": 0.9847094801223242
+            }
+          }
+        },
+        "20": {
+          "n": 322,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.04776616049028883,
+              "WIS": 0.04153763343545894,
+              "CRPS": 0.053864330553473484,
+              "Brier": 0.016514188657439362,
+              "log_loss_nonzero": 0.13285153447542722,
+              "coverage80": 0.4472049689440994,
+              "coverage95": 0.7732919254658385,
+              "MAE_median": 0.0683720261919509,
+              "mean_nonzero_probability": 0.8810572687224668,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "gaussian_constant": {
+              "MQS": 0.047262664641811405,
+              "WIS": 0.041164713776840424,
+              "CRPS": 0.05300071932188905,
+              "Brier": 0.003105590062111801,
+              "log_loss_nonzero": 0.08581069328637993,
+              "coverage80": 0.5186335403726708,
+              "coverage95": 0.7329192546583851,
+              "MAE_median": 0.06776705815058573,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "static_prior_nll": {
+              "MQS": 0.04698269446897586,
+              "WIS": 0.04069251394002012,
+              "CRPS": 0.05290512030553411,
+              "Brier": 0.01651419011740732,
+              "log_loss_nonzero": 0.13285154428171075,
+              "coverage80": 0.5434782608695652,
+              "coverage95": 0.7391304347826086,
+              "MAE_median": 0.06838410058728599,
+              "mean_nonzero_probability": 0.8810572624206543,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "static_prior_crps": {
+              "MQS": 0.04714493106571269,
+              "WIS": 0.040932762534078855,
+              "CRPS": 0.052996441885992056,
+              "Brier": 0.01651419011740732,
+              "log_loss_nonzero": 0.13285154428171075,
+              "coverage80": 0.5279503105590062,
+              "coverage95": 0.7236024844720497,
+              "MAE_median": 0.06838410058728599,
+              "mean_nonzero_probability": 0.8810572624206543,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "rolling_rule_prior_nll": {
+              "MQS": 0.046575062404869715,
+              "WIS": 0.0403087943678996,
+              "CRPS": 0.052480404077573976,
+              "Brier": 0.003958992609909684,
+              "log_loss_nonzero": 0.04345218477458317,
+              "coverage80": 0.5590062111801242,
+              "coverage95": 0.7453416149068323,
+              "MAE_median": 0.06818881933816481,
+              "mean_nonzero_probability": 0.9677731394767761,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "rolling_rule_prior_crps": {
+              "MQS": 0.04679275226988107,
+              "WIS": 0.0406076309016073,
+              "CRPS": 0.05262334865407612,
+              "Brier": 0.003958992609909684,
+              "log_loss_nonzero": 0.04345218477458317,
+              "coverage80": 0.5527950310559007,
+              "coverage95": 0.7391304347826086,
+              "MAE_median": 0.06819368995869847,
+              "mean_nonzero_probability": 0.9677731394767761,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "rolling_neural_prior_nll": {
+              "MQS": 0.04657467384383176,
+              "WIS": 0.040308796314083774,
+              "CRPS": 0.052479724556964785,
+              "Brier": 0.0039748952018047665,
+              "log_loss_nonzero": 0.04370290318052776,
+              "coverage80": 0.5590062111801242,
+              "coverage95": 0.7453416149068323,
+              "MAE_median": 0.06818445521324996,
+              "mean_nonzero_probability": 0.9675337672233582,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "rolling_neural_prior_crps": {
+              "MQS": 0.0467951003814778,
+              "WIS": 0.040610205989924715,
+              "CRPS": 0.052625648960606106,
+              "Brier": 0.004005931163554919,
+              "log_loss_nonzero": 0.044194156986586054,
+              "coverage80": 0.5527950310559007,
+              "coverage95": 0.7391304347826086,
+              "MAE_median": 0.06819611238225795,
+              "mean_nonzero_probability": 0.967033326625824,
+              "empirical_nonzero_rate": 0.9968944099378882
+            }
+          }
+        }
+      }
+    }
+  },
+  "summary": {
+    "rolling_rule_prior_crps_vs_static_prior_crps": {
+      "MQS": {
+        "cells": 4,
+        "wins": 2,
+        "median_ratio": 0.9979046245056673,
+        "geometric_gain_percent": -0.8320996714418216
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 2,
+        "median_ratio": 0.99810013321826,
+        "geometric_gain_percent": -0.7739082269826669
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 4,
+        "median_ratio": 0.35094016511643367,
+        "geometric_gain_percent": 66.12764291954873
+      }
+    },
+    "rolling_neural_prior_crps_vs_static_prior_crps": {
+      "MQS": {
+        "cells": 4,
+        "wins": 2,
+        "median_ratio": 0.9978790543672889,
+        "geometric_gain_percent": -0.8117868802166583
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 2,
+        "median_ratio": 0.9980615256976677,
+        "geometric_gain_percent": -0.7540955483305467
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 4,
+        "median_ratio": 0.3533627621420667,
+        "geometric_gain_percent": 65.88354581659189
+      }
+    },
+    "rolling_neural_prior_crps_vs_rolling_rule_prior_crps": {
+      "MQS": {
+        "cells": 4,
+        "wins": 2,
+        "median_ratio": 0.9999745669284761,
+        "geometric_gain_percent": 0.02014516338680883
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 2,
+        "median_ratio": 0.9999614407073197,
+        "geometric_gain_percent": 0.019660524237585797
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 0,
+        "median_ratio": 1.0073916161065846,
+        "geometric_gain_percent": -0.7206380777607713
+      }
+    },
+    "rolling_neural_prior_crps_vs_rolling_neural_prior_nll": {
+      "MQS": {
+        "cells": 4,
+        "wins": 1,
+        "median_ratio": 1.0021182266766115,
+        "geometric_gain_percent": -0.09724486415110256
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 1,
+        "median_ratio": 1.0010719090317268,
+        "geometric_gain_percent": -0.027582965352768163
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 0,
+        "median_ratio": 1.0045340737424846,
+        "geometric_gain_percent": -0.47111742015255587
+      }
+    },
+    "rolling_rule_prior_nll_vs_static_prior_nll": {
+      "MQS": {
+        "cells": 4,
+        "wins": 2,
+        "median_ratio": 0.9976271487076127,
+        "geometric_gain_percent": -0.8638004562109947
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 2,
+        "median_ratio": 0.9978989486003301,
+        "geometric_gain_percent": -0.7949767111209427
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 4,
+        "median_ratio": 0.35094016511643367,
+        "geometric_gain_percent": 66.12764291954873
+      }
+    },
+    "rolling_neural_prior_nll_vs_static_prior_nll": {
+      "MQS": {
+        "cells": 4,
+        "wins": 2,
+        "median_ratio": 0.9975940435362304,
+        "geometric_gain_percent": -0.854745438392257
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 2,
+        "median_ratio": 0.9978642716517473,
+        "geometric_gain_percent": -0.7862999142457472
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 4,
+        "median_ratio": 0.3519119774096523,
+        "geometric_gain_percent": 66.04352070581729
+      }
+    },
+    "static_prior_crps_vs_static_prior_nll": {
+      "MQS": {
+        "cells": 4,
+        "wins": 1,
+        "median_ratio": 1.0018296803258662,
+        "geometric_gain_percent": -0.13989893714976276
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 1,
+        "median_ratio": 1.0008725621094432,
+        "geometric_gain_percent": -0.059555113640130664
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 0,
+        "median_ratio": 1.0,
+        "geometric_gain_percent": 0.0
+      }
+    },
+    "rolling_rule_prior_crps_vs_rolling_rule_prior_nll": {
+      "MQS": {
+        "cells": 4,
+        "wins": 1,
+        "median_ratio": 1.0021105211149748,
+        "geometric_gain_percent": -0.10842566954876176
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 1,
+        "median_ratio": 1.0010757596128759,
+        "geometric_gain_percent": -0.03864034964513596
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 0,
+        "median_ratio": 1.0,
+        "geometric_gain_percent": 0.0
+      }
+    },
+    "static_prior_nll_vs_empirical_constant": {
+      "MQS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9842970822573008,
+        "geometric_gain_percent": 0.793549511611924
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.989995158898084,
+        "geometric_gain_percent": 0.6842716287731032
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 1,
+        "median_ratio": 1.0000001013807578,
+        "geometric_gain_percent": -8.550555730124643e-06
+      }
+    },
+    "static_prior_nll_vs_gaussian_constant": {
+      "MQS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9944634948596733,
+        "geometric_gain_percent": 1.236898195759617
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9976195140020566,
+        "geometric_gain_percent": 1.3598203062991088
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 0,
+        "median_ratio": 3.790978369378993,
+        "geometric_gain_percent": -230.72275534660974
+      }
+    },
+    "static_prior_crps_vs_empirical_constant": {
+      "MQS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9870574384202321,
+        "geometric_gain_percent": 0.6547607417946688
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9908589810743409,
+        "geometric_gain_percent": 0.6251240338790875
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 1,
+        "median_ratio": 1.0000001013807578,
+        "geometric_gain_percent": -8.550555730124643e-06
+      }
+    },
+    "static_prior_crps_vs_gaussian_constant": {
+      "MQS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9972525685774999,
+        "geometric_gain_percent": 1.0987296660393442
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9990122685299502,
+        "geometric_gain_percent": 1.3010750351876932
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 0,
+        "median_ratio": 3.790978369378993,
+        "geometric_gain_percent": -230.72275534660974
+      }
+    },
+    "rolling_rule_prior_nll_vs_empirical_constant": {
+      "MQS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9811326525974948,
+        "geometric_gain_percent": -0.06339626029749912
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9879153057086727,
+        "geometric_gain_percent": -0.10526528225829335
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 4,
+        "median_ratio": 0.350940164200872,
+        "geometric_gain_percent": 66.12764002327395
+      }
+    },
+    "rolling_rule_prior_nll_vs_gaussian_constant": {
+      "MQS": {
+        "cells": 4,
+        "wins": 2,
+        "median_ratio": 0.9961637225434397,
+        "geometric_gain_percent": 0.38378207180647106
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9908715913534365,
+        "geometric_gain_percent": 0.5756538499263386
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 1,
+        "median_ratio": 1.1325332116963436,
+        "geometric_gain_percent": -12.02359263731092
+      }
+    },
+    "rolling_rule_prior_crps_vs_empirical_constant": {
+      "MQS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9832011902369902,
+        "geometric_gain_percent": -0.17189066766596373
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9889760635481077,
+        "geometric_gain_percent": -0.1439463067765434
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 4,
+        "median_ratio": 0.350940164200872,
+        "geometric_gain_percent": 66.12764002327395
+      }
+    },
+    "rolling_rule_prior_crps_vs_gaussian_constant": {
+      "MQS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9953263954298958,
+        "geometric_gain_percent": 0.2757725205386752
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9930439583648958,
+        "geometric_gain_percent": 0.5372359349415601
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 1,
+        "median_ratio": 1.1325332116963436,
+        "geometric_gain_percent": -12.02359263731092
+      }
+    },
+    "rolling_neural_prior_nll_vs_empirical_constant": {
+      "MQS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9811001248974764,
+        "geometric_gain_percent": -0.05441309852842746
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9878809749040502,
+        "geometric_gain_percent": -0.09664785824239353
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 4,
+        "median_ratio": 0.3519119765122278,
+        "geometric_gain_percent": 66.04351780234961
+      }
+    },
+    "rolling_neural_prior_nll_vs_gaussian_constant": {
+      "MQS": {
+        "cells": 4,
+        "wins": 2,
+        "median_ratio": 0.9960143099797927,
+        "geometric_gain_percent": 0.39272508827318253
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9908554636608726,
+        "geometric_gain_percent": 0.5842126579556961
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 1,
+        "median_ratio": 1.1358150192756034,
+        "geometric_gain_percent": -12.301803940422108
+      }
+    },
+    "rolling_neural_prior_crps_vs_empirical_constant": {
+      "MQS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9831760887974029,
+        "geometric_gain_percent": -0.15171087662328997
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9889378145551988,
+        "geometric_gain_percent": -0.1242574819404263
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 4,
+        "median_ratio": 0.3533627613022514,
+        "geometric_gain_percent": 65.88354289944547
+      }
+    },
+    "rolling_neural_prior_crps_vs_gaussian_constant": {
+      "MQS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9949362450334582,
+        "geometric_gain_percent": 0.2958621291006436
+      },
+      "CRPS": {
+        "cells": 4,
+        "wins": 3,
+        "median_ratio": 0.9930665759427073,
+        "geometric_gain_percent": 0.5567908357779427
+      },
+      "Brier": {
+        "cells": 4,
+        "wins": 1,
+        "median_ratio": 1.141167589578172,
+        "geometric_gain_percent": -12.830877301930999
+      }
+    }
+  },
+  "elapsed_seconds": 4.731410400010645
+}

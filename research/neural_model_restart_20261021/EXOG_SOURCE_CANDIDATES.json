@@ -1,0 +1,35 @@
+{
+  "status": "located read-only; alignment, coverage and availability rules not yet verified",
+  "purpose": "Next model experiment: exogenous-group adaptive lag interactions; no reuse of old result claims",
+  "sources": {
+    "HUBEI": {
+      "path": "E:/Agent员工/碳价格预测研究/独立数据归档/_legacy_202605_archive/主要实验推进_审计加固版_CLEAN_20260528/01_实验/主要实验推进/07_原始数据/01_碳交易数据_完整版.csv",
+      "price_column": "hbea_close_t",
+      "observed_file_rows_including_header": 2793
+    },
+    "GUANGZHOU": {
+      "path": "E:/Agent员工/碳价格预测研究/独立数据归档/_legacy_202605_archive/主要实验推进_审计加固版_CLEAN_20260528/01_实验/主要实验推进/07_原始数据/01_广东碳交易数据_完整版.csv",
+      "price_column": "gdea_close_t",
+      "observed_file_rows_including_header": 2623
+    },
+    "EU": {
+      "path": "E:/Agent员工/碳价格预测研究/独立数据归档/_legacy_202605_archive/主要实验推进_审计加固版_CLEAN_20260528/01_实验/主要实验推进/07_原始数据/01_EUA碳交易数据_完整版_稳健性检验.csv",
+      "price_column": "eua_close_t",
+      "observed_file_rows_including_header": 3427
+    }
+  },
+  "candidate_daily_groups": {
+    "energy": ["brent_oil_lag1", "wti_oil_lag1", "natural_gas_lag1"],
+    "equity_risk": ["csi300_lag1", "dax_lag1", "sp500_lag1", "vix_VIXCLS_lag1"],
+    "fx": ["usdcny_lag1", "eurcny_lag1"]
+  },
+  "next_checks": [
+    "Inspect date ranges, duplicate dates, coverage and price equality on overlapping dates with canonical panel",
+    "Do not use target_date_t1, target_close_t1, target_return_t1 or target_direction_t1 as inputs",
+    "Reconstruct endogenous inputs from observed prices; old early moving-average entries visibly use padding",
+    "Check daily lag-column construction and late-market close timing before admitting factors",
+    "Do not backward-fill missing factors; expose missingness and exclude unsupported periods",
+    "Exclude monthly policy/macroeconomic indicators until release dates are verified",
+    "Preserve original files and all archived material; all new code and outputs stay in current repository"
+  ]
+}

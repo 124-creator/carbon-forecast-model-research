@@ -1,0 +1,84 @@
+{
+  "config": {
+    "epochs": 100,
+    "seeds": [
+      11,
+      22,
+      33
+    ],
+    "tag": "bridge_budget_round15_development"
+  },
+  "status": "DEVELOPMENT ONLY; no 2026 targets or forecasts",
+  "audit": {
+    "development_rows": 1362,
+    "first": "2020-07-31",
+    "last": "2025-12-31",
+    "validation_start": "2025-01-01",
+    "training_rows": 3008,
+    "validation_rows": 722,
+    "withheld_period_used": false,
+    "target": "3 future sums of Parkinson intraday range variance; bucket lengths 1/4/17",
+    "feature_names": [
+      "logrange1",
+      "logrange5",
+      "logrange22",
+      "r1",
+      "r5",
+      "r22",
+      "intraday",
+      "logovernightvar",
+      "logreturnvar",
+      "logvolume",
+      "volume_ratio",
+      "range_ratio"
+    ],
+    "all_horizons_common_origins": true,
+    "geometry": "eta=r/(u-l), xi=(u+l-r)/(u-l)",
+    "geometry_domain": "abs(eta)+abs(xi)<=1",
+    "background_information": "the prior 12 inputs already include range and body returns; not strictly shape-free; extra wick geometry is conditional on that information",
+    "total_risk": "frozen sum of 3 common-input HGB forecasts"
+  },
+  "source_sha256": "ff99c14e84153717be0d72506b0c8b581605495288849823e4bf219ab1462f11",
+  "script_sha256": "9c215c33e809eff765ed77138db3ea4d5d0671a5cebd2ef505ff49bedb46e576",
+  "checks": {
+    "zero_tilt_recovers_baseline": true,
+    "positive_conservative_operator": true,
+    "gradient_check": true
+  },
+  "background_trace": [
+    {
+      "prediction_year": 2022,
+      "training_targets": 237,
+      "last_training_label": "2021-12-31",
+      "predicted_origins": 251
+    },
+    {
+      "prediction_year": 2023,
+      "training_targets": 488,
+      "last_training_label": "2022-12-30",
+      "predicted_origins": 250
+    },
+    {
+      "prediction_year": 2024,
+      "training_targets": 738,
+      "last_training_label": "2023-12-29",
+      "predicted_origins": 230
+    },
+    {
+      "prediction_year": 2025,
+      "training_targets": 990,
+      "last_training_label": "2024-12-31",
+      "predicted_origins": 228
+    }
+  ],
+  "head_training_origins": 731,
+  "validation_origins": 228,
+  "selection": "2025 mean standard-direction QLIKE difference, h=1/5 only; h22 fixed",
+  "models": [
+    "bridge_transport",
+    "flat_shape",
+    "context_transport"
+  ],
+  "fits": {},
+  "scores": {}
+}

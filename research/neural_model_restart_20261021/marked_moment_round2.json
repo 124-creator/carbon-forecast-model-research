@@ -1,0 +1,5265 @@
+{
+  "status": "exploratory reused test periods; no success or novelty claim",
+  "config": {
+    "markets": [
+      "CEA",
+      "GUANGZHOU",
+      "SHANGHAI",
+      "HUBEI",
+      "EU"
+    ],
+    "seeds": [
+      11,
+      22
+    ],
+    "epochs": 48,
+    "tag": "marked_moment_round2"
+  },
+  "horizons": [
+    1,
+    5,
+    10,
+    20
+  ],
+  "quantiles": [
+    0.02500000037252903,
+    0.05000000074505806,
+    0.10000000149011612,
+    0.15000000596046448,
+    0.20000000298023224,
+    0.30000001192092896,
+    0.4000000059604645,
+    0.5,
+    0.6000000238418579,
+    0.699999988079071,
+    0.800000011920929,
+    0.8500000238418579,
+    0.8999999761581421,
+    0.949999988079071,
+    0.9750000238418579
+  ],
+  "sanity": {
+    "mean_identity_max_error": 5.551115123125783e-17,
+    "variance_identity_max_error": 5.551115123125783e-17,
+    "risk_budget_max_error": 5.551115123125783e-17,
+    "zerohead_distribution_max_error": 4.440892098500626e-16,
+    "gradients_finite": true,
+    "CRPS_sanity": {
+      "standard_normal_at_zero": 0.23369497725510913,
+      "point_mass_error": 2.0,
+      "gradcheck": true,
+      "CDF_integral": 0.24738031344461786,
+      "closed_form": 0.24738031344461797
+    }
+  },
+  "mechanism": "M=mu/p+s/sqrt(p)*U, E(U)=0 Var(U)=1; E(Y)=mu Var(Y)=s^2+(1-p)*mu^2/p",
+  "architecture": "same 24/16 MLP, 2 prior outputs and 5 mark outputs; unrestricted component centers",
+  "objective": "exact analytic CRPS on standardized returns; common validation MQS selection and full-precut refit",
+  "initialize": "strict equality to actual old static-p mixture, including +.025 component std floors",
+  "ensemble": "equal seed distribution mixture; CDF quantiles and exact mixture CRPS",
+  "horizon_unit": "observed daily-panel steps; direct endpoint marginal, not a path update model",
+  "empirical_baseline": "MQS linear sample quantiles, CRPS complete full-precut ECDF, Brier Beta-smoothed frequency; distinct representations",
+  "reused_direct_predictions": "marked_event_round2 rolling/static/rule CRPS; no retraining",
+  "panel_sha256": "d470238386e201e68f07b033f5a34591af89b57f1546ea79b699e763d228b56c",
+  "markets": {
+    "CEA": {
+      "audit": {
+        "cut_index": 597,
+        "validation_start_index": 447,
+        "lookback": 128,
+        "step": 2,
+        "train": 621,
+        "validation": 281,
+        "refit": 921,
+        "test": 1311,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 446,
+        "last_refit_target": 596,
+        "test_zero_share": {
+          "1": 0.08734939759036145,
+          "5": 0.006060606060606061,
+          "10": 0.01529051987767584,
+          "20": 0.003105590062111801
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "initialization_errors": {
+        "tr": 2.220446049250313e-16,
+        "rf": 2.220446049250313e-16
+      },
+      "aligned_with_saved_direct": true,
+      "fits": {
+        "moment_static_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5481484703498217,
+            "validation_history": [
+              [
+                1,
+                0.5481484703498217
+              ],
+              [
+                2,
+                0.5524704510661421
+              ],
+              [
+                4,
+                0.5638828180421164
+              ],
+              [
+                6,
+                0.5831635341359789
+              ],
+              [
+                8,
+                0.6098370160688309
+              ],
+              [
+                10,
+                0.6362371232621356
+              ],
+              [
+                12,
+                0.6499328397886591
+              ],
+              [
+                14,
+                0.6572325125882558
+              ],
+              [
+                16,
+                0.6623687099617391
+              ],
+              [
+                18,
+                0.662942572160642
+              ],
+              [
+                20,
+                0.6660199560213897
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.0,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.7978406100214938
+          },
+          {
+            "seed": 22,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5505440097201753,
+            "validation_history": [
+              [
+                1,
+                0.5505440097201753
+              ],
+              [
+                2,
+                0.5586121506456103
+              ],
+              [
+                4,
+                0.5835320077387993
+              ],
+              [
+                6,
+                0.6171129990002486
+              ],
+              [
+                8,
+                0.6423296974012521
+              ],
+              [
+                10,
+                0.6577209657384281
+              ],
+              [
+                12,
+                0.6669728866567372
+              ],
+              [
+                14,
+                0.6688319457277927
+              ],
+              [
+                16,
+                0.6635722946686072
+              ],
+              [
+                18,
+                0.661268663012576
+              ],
+              [
+                20,
+                0.6660343499160161
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.0,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.7978406100214938
+          }
+        ],
+        "moment_rule_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5484272103499764,
+            "validation_history": [
+              [
+                1,
+                0.5484272103499764
+              ],
+              [
+                2,
+                0.5533779304760151
+              ],
+              [
+                4,
+                0.5672029237394374
+              ],
+              [
+                6,
+                0.5903341864557806
+              ],
+              [
+                8,
+                0.6164676046961365
+              ],
+              [
+                10,
+                0.6388077740444175
+              ],
+              [
+                12,
+                0.6493113145779458
+              ],
+              [
+                14,
+                0.6552038941760508
+              ],
+              [
+                16,
+                0.6576775382044564
+              ],
+              [
+                18,
+                0.6544101071458027
+              ],
+              [
+                20,
+                0.6572183577635606
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.800000011920929,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.934879365947572
+          },
+          {
+            "seed": 22,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5504137666755444,
+            "validation_history": [
+              [
+                1,
+                0.5504137666755444
+              ],
+              [
+                2,
+                0.5586627268469055
+              ],
+              [
+                4,
+                0.5849431318036433
+              ],
+              [
+                6,
+                0.6178327641231551
+              ],
+              [
+                8,
+                0.638878968283948
+              ],
+              [
+                10,
+                0.6546991278510353
+              ],
+              [
+                12,
+                0.6681889778324749
+              ],
+              [
+                14,
+                0.6712829134096735
+              ],
+              [
+                16,
+                0.6625947563371182
+              ],
+              [
+                18,
+                0.6574724648941668
+              ],
+              [
+                20,
+                0.6605677244253939
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.800000011920929,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.934879365947572
+          }
+        ],
+        "moment_neural_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5484513519106705,
+            "validation_history": [
+              [
+                1,
+                0.5484513519106705
+              ],
+              [
+                2,
+                0.553407649553098
+              ],
+              [
+                4,
+                0.5673627704932922
+              ],
+              [
+                6,
+                0.5905729301118768
+              ],
+              [
+                8,
+                0.6165522516177878
+              ],
+              [
+                10,
+                0.6389807422926391
+              ],
+              [
+                12,
+                0.6493933831848202
+              ],
+              [
+                14,
+                0.656141673729839
+              ],
+              [
+                16,
+                0.6593830044998299
+              ],
+              [
+                18,
+                0.6568376298134452
+              ],
+              [
+                20,
+                0.6586210545924702
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.7961578369140625,
+            "mean_prior_logit_residual": -0.008384001441299915,
+            "mean_nonzero_probability": 0.9337290734120856
+          },
+          {
+            "seed": 22,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5504540138522305,
+            "validation_history": [
+              [
+                1,
+                0.5504540138522305
+              ],
+              [
+                2,
+                0.5587199438166789
+              ],
+              [
+                4,
+                0.585188427420056
+              ],
+              [
+                6,
+                0.6179369289947738
+              ],
+              [
+                8,
+                0.6386215178976994
+              ],
+              [
+                10,
+                0.654511702099854
+              ],
+              [
+                12,
+                0.6672549769417421
+              ],
+              [
+                14,
+                0.6706513509430602
+              ],
+              [
+                16,
+                0.6636468743160976
+              ],
+              [
+                18,
+                0.6587989694407608
+              ],
+              [
+                20,
+                0.6614729009062996
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.7971378564834595,
+            "mean_prior_logit_residual": -0.007367887068539858,
+            "mean_nonzero_probability": 0.9339105866048102
+          }
+        ],
+        "moment_neural_fixed_budget": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5444836961849621,
+            "validation_history": [
+              [
+                1,
+                0.5444836961849621
+              ],
+              [
+                2,
+                0.5446971173245468
+              ],
+              [
+                4,
+                0.5451712625451919
+              ],
+              [
+                6,
+                0.5460304754791022
+              ],
+              [
+                8,
+                0.5472316578517998
+              ],
+              [
+                10,
+                0.549521900107867
+              ],
+              [
+                12,
+                0.5532026401941842
+              ],
+              [
+                14,
+                0.5563620843810235
+              ],
+              [
+                16,
+                0.5575093463900751
+              ],
+              [
+                18,
+                0.5579210653890518
+              ],
+              [
+                20,
+                0.5577844505276699
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.7960994839668274,
+            "mean_prior_logit_residual": -0.008220676332712173,
+            "mean_nonzero_probability": 0.9337296757327065
+          },
+          {
+            "seed": 22,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.5446175873492862,
+            "validation_history": [
+              [
+                1,
+                0.5446175873492862
+              ],
+              [
+                2,
+                0.5448379185451167
+              ],
+              [
+                4,
+                0.5457927250440034
+              ],
+              [
+                6,
+                0.5476808846926886
+              ],
+              [
+                8,
+                0.5502335073900363
+              ],
+              [
+                10,
+                0.5540135275106333
+              ],
+              [
+                12,
+                0.5577879830635651
+              ],
+              [
+                14,
+                0.5600436127234987
+              ],
+              [
+                16,
+                0.5614217097742978
+              ],
+              [
+                18,
+                0.5616965066385166
+              ],
+              [
+                20,
+                0.5606827030085862
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.797128438949585,
+            "mean_prior_logit_residual": -0.007506652735173702,
+            "mean_nonzero_probability": 0.933897742690429
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 332,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.007446248463641177,
+              "WIS": 0.006530595919601538,
+              "CRPS": 0.008319426382135104,
+              "Brier": 0.151856221267538,
+              "log_loss_nonzero": 0.491755075393671,
+              "coverage80": 0.8554216867469879,
+              "coverage95": 0.9427710843373494,
+              "MAE_median": 0.010121543176566076,
+              "mean_nonzero_probability": 0.6440677642822266,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "direct_rule_prior": {
+              "MQS": 0.007785051721532469,
+              "WIS": 0.006875136934537306,
+              "CRPS": 0.00867035042952229,
+              "Brier": 0.08461941172439347,
+              "log_loss_nonzero": 0.3152828896754836,
+              "coverage80": 0.8855421686746988,
+              "coverage95": 0.9548192771084337,
+              "MAE_median": 0.010267398866616439,
+              "mean_nonzero_probability": 0.859805166721344,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "direct_neural_prior": {
+              "MQS": 0.007778319424196409,
+              "WIS": 0.006868949983770664,
+              "CRPS": 0.008663301953470674,
+              "Brier": 0.08482959027131438,
+              "log_loss_nonzero": 0.3160633921219283,
+              "coverage80": 0.8855421686746988,
+              "coverage95": 0.9548192771084337,
+              "MAE_median": 0.010255364367368418,
+              "mean_nonzero_probability": 0.8575738072395325,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "empirical_constant": {
+              "MQS": 0.007325421973395726,
+              "WIS": 0.006353508633553778,
+              "CRPS": 0.008239690035625018,
+              "Brier": 0.1518562039020777,
+              "log_loss_nonzero": 0.4917550430289901,
+              "coverage80": 0.7771084337349398,
+              "coverage95": 0.9307228915662651,
+              "MAE_median": 0.010121543176566076,
+              "mean_nonzero_probability": 0.6440677966101694,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "gaussian_constant": {
+              "MQS": 0.007792367212486881,
+              "WIS": 0.0067118877755137744,
+              "CRPS": 0.008807975213082924,
+              "Brier": 0.08734939759036145,
+              "log_loss_nonzero": 2.4135549816241277,
+              "coverage80": 0.8795180722891566,
+              "coverage95": 0.9457831325301205,
+              "MAE_median": 0.010374164565659994,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "moment_static_prior": {
+              "MQS": 0.007449009487403611,
+              "WIS": 0.00654186792839553,
+              "CRPS": 0.008311800399983114,
+              "Brier": 0.151856221267538,
+              "log_loss_nonzero": 0.49175508090440745,
+              "coverage80": 0.8554216867469879,
+              "coverage95": 0.9367469879518072,
+              "MAE_median": 0.010121543176566076,
+              "mean_nonzero_probability": 0.6440677642822266,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "moment_rule_prior": {
+              "MQS": 0.007578587443048107,
+              "WIS": 0.006670991989855967,
+              "CRPS": 0.008457727339856305,
+              "Brier": 0.08461941172439347,
+              "log_loss_nonzero": 0.31528288800158,
+              "coverage80": 0.8614457831325302,
+              "coverage95": 0.927710843373494,
+              "MAE_median": 0.010203977665855193,
+              "mean_nonzero_probability": 0.859805221478623,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "moment_neural_prior": {
+              "MQS": 0.007576292828189874,
+              "WIS": 0.0066690979298817555,
+              "CRPS": 0.00845497778982447,
+              "Brier": 0.08479131208082877,
+              "log_loss_nonzero": 0.31591530563860376,
+              "coverage80": 0.8614457831325302,
+              "coverage95": 0.927710843373494,
+              "MAE_median": 0.010197351496429474,
+              "mean_nonzero_probability": 0.8578741091741137,
+              "empirical_nonzero_rate": 0.9126506024096386
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.007612915046009484,
+              "WIS": 0.006685103278277947,
+              "CRPS": 0.008508221041950606,
+              "Brier": 0.0847921119402006,
+              "log_loss_nonzero": 0.31591805468725825,
+              "coverage80": 0.8644578313253012,
+              "coverage95": 0.927710843373494,
+              "MAE_median": 0.010280101053500785,
+              "mean_nonzero_probability": 0.8578611669770206,
+              "empirical_nonzero_rate": 0.9126506024096386
+            }
+          }
+        },
+        "5": {
+          "n": 330,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.017710401597805146,
+              "WIS": 0.015104613363681392,
+              "CRPS": 0.02013795625330529,
+              "Brier": 0.03463664246787949,
+              "log_loss_nonzero": 0.20201954046885173,
+              "coverage80": 0.7454545454545455,
+              "coverage95": 0.8606060606060606,
+              "MAE_median": 0.025991201440663952,
+              "mean_nonzero_probability": 0.8247861862182617,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "direct_rule_prior": {
+              "MQS": 0.017732736854514992,
+              "WIS": 0.015134415855873891,
+              "CRPS": 0.020153677482535742,
+              "Brier": 0.007385365239941745,
+              "log_loss_nonzero": 0.06264691323493467,
+              "coverage80": 0.7606060606060606,
+              "coverage95": 0.8666666666666667,
+              "MAE_median": 0.026399422508892652,
+              "mean_nonzero_probability": 0.9573381543159485,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "direct_neural_prior": {
+              "MQS": 0.01773142504137917,
+              "WIS": 0.015133229881318997,
+              "CRPS": 0.02015207656317144,
+              "Brier": 0.0074579441182456765,
+              "log_loss_nonzero": 0.06351396097152522,
+              "coverage80": 0.7606060606060606,
+              "coverage95": 0.8636363636363636,
+              "MAE_median": 0.02639141086090594,
+              "mean_nonzero_probability": 0.95634526014328,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "empirical_constant": {
+              "MQS": 0.018004516793989,
+              "WIS": 0.015493269696346327,
+              "CRPS": 0.02031885056359136,
+              "Brier": 0.03463663591868722,
+              "log_loss_nonzero": 0.2020195211328194,
+              "coverage80": 0.6333333333333333,
+              "coverage95": 0.8454545454545455,
+              "MAE_median": 0.025991201440663952,
+              "mean_nonzero_probability": 0.8247863247863247,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "gaussian_constant": {
+              "MQS": 0.01758939557797618,
+              "WIS": 0.015025567468610713,
+              "CRPS": 0.01999464846899168,
+              "Brier": 0.006060606060606061,
+              "log_loss_nonzero": 0.1674608681094385,
+              "coverage80": 0.7333333333333333,
+              "coverage95": 0.8545454545454545,
+              "MAE_median": 0.02602923906587214,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "moment_static_prior": {
+              "MQS": 0.017718447666863448,
+              "WIS": 0.015127790104456163,
+              "CRPS": 0.0201337309567306,
+              "Brier": 0.03463664246787949,
+              "log_loss_nonzero": 0.20201954379221262,
+              "coverage80": 0.7484848484848485,
+              "coverage95": 0.8606060606060606,
+              "MAE_median": 0.025991201440663952,
+              "mean_nonzero_probability": 0.8247863054275513,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "moment_rule_prior": {
+              "MQS": 0.01776478990841811,
+              "WIS": 0.015210170671781048,
+              "CRPS": 0.020142283913715118,
+              "Brier": 0.007385365239941745,
+              "log_loss_nonzero": 0.06264691307161234,
+              "coverage80": 0.7454545454545455,
+              "coverage95": 0.8545454545454545,
+              "MAE_median": 0.026265841211056008,
+              "mean_nonzero_probability": 0.9573381900787353,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "moment_neural_prior": {
+              "MQS": 0.017764219599260275,
+              "WIS": 0.015209300132524663,
+              "CRPS": 0.020141600779494284,
+              "Brier": 0.007450308908755055,
+              "log_loss_nonzero": 0.06342378929593613,
+              "coverage80": 0.7454545454545455,
+              "coverage95": 0.8575757575757575,
+              "MAE_median": 0.026260580113104327,
+              "mean_nonzero_probability": 0.9564439769044067,
+              "empirical_nonzero_rate": 0.9939393939393939
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.017755478790702595,
+              "WIS": 0.01517510938086187,
+              "CRPS": 0.020159431897807254,
+              "Brier": 0.007450611314297486,
+              "log_loss_nonzero": 0.06342735739400675,
+              "coverage80": 0.7515151515151515,
+              "coverage95": 0.8606060606060606,
+              "MAE_median": 0.02637638903660766,
+              "mean_nonzero_probability": 0.9564392602804935,
+              "empirical_nonzero_rate": 0.9939393939393939
+            }
+          }
+        },
+        "10": {
+          "n": 327,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.027748580912961902,
+              "WIS": 0.024090884141549744,
+              "CRPS": 0.031155271044360208,
+              "Brier": 0.03462366239989034,
+              "log_loss_nonzero": 0.1945339372945488,
+              "coverage80": 0.6207951070336392,
+              "coverage95": 0.7920489296636085,
+              "MAE_median": 0.039676950678162924,
+              "mean_nonzero_probability": 0.8448275327682495,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "direct_rule_prior": {
+              "MQS": 0.02757137446024354,
+              "WIS": 0.023920464487157227,
+              "CRPS": 0.03099101866094736,
+              "Brier": 0.01600124096027981,
+              "log_loss_nonzero": 0.09263339925796614,
+              "coverage80": 0.6513761467889908,
+              "coverage95": 0.7951070336391437,
+              "MAE_median": 0.03966919397771612,
+              "mean_nonzero_probability": 0.9560456275939941,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "direct_neural_prior": {
+              "MQS": 0.027571949445558793,
+              "WIS": 0.023921474060040405,
+              "CRPS": 0.030990906376179444,
+              "Brier": 0.01605788844172653,
+              "log_loss_nonzero": 0.09328114728953131,
+              "coverage80": 0.6513761467889908,
+              "coverage95": 0.7951070336391437,
+              "MAE_median": 0.0396711519331096,
+              "mean_nonzero_probability": 0.9551571011543274,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "empirical_constant": {
+              "MQS": 0.02810462262311627,
+              "WIS": 0.024518791806331527,
+              "CRPS": 0.03143032681981785,
+              "Brier": 0.03462366412491319,
+              "log_loss_nonzero": 0.19453396198891812,
+              "coverage80": 0.5412844036697247,
+              "coverage95": 0.8165137614678899,
+              "MAE_median": 0.039676950678162924,
+              "mean_nonzero_probability": 0.8448275862068964,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "gaussian_constant": {
+              "MQS": 0.02782623442253147,
+              "WIS": 0.024211951422303056,
+              "CRPS": 0.031206514379220802,
+              "Brier": 0.01529051987767584,
+              "log_loss_nonzero": 0.4224930158709134,
+              "coverage80": 0.6207951070336392,
+              "coverage95": 0.7981651376146789,
+              "MAE_median": 0.03985886588265187,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "moment_static_prior": {
+              "MQS": 0.02775109535569181,
+              "WIS": 0.02410217062145259,
+              "CRPS": 0.031155353351343368,
+              "Brier": 0.03462366239989034,
+              "log_loss_nonzero": 0.19453395540957924,
+              "coverage80": 0.6269113149847095,
+              "coverage95": 0.7920489296636085,
+              "MAE_median": 0.039676950678162924,
+              "mean_nonzero_probability": 0.8448275923728943,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "moment_rule_prior": {
+              "MQS": 0.02776592395855116,
+              "WIS": 0.02419484965352988,
+              "CRPS": 0.031109133911797312,
+              "Brier": 0.01600124096027981,
+              "log_loss_nonzero": 0.09263339787860296,
+              "coverage80": 0.6146788990825688,
+              "coverage95": 0.7767584097859327,
+              "MAE_median": 0.03968158308633739,
+              "mean_nonzero_probability": 0.9560456775379472,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "moment_neural_prior": {
+              "MQS": 0.027765578496285612,
+              "WIS": 0.02419429408729183,
+              "CRPS": 0.031108964886827985,
+              "Brier": 0.016051895499380353,
+              "log_loss_nonzero": 0.09321321771733075,
+              "coverage80": 0.6146788990825688,
+              "coverage95": 0.7767584097859327,
+              "MAE_median": 0.039681578985281823,
+              "mean_nonzero_probability": 0.9552482577092057,
+              "empirical_nonzero_rate": 0.9847094801223242
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.027693197789255303,
+              "WIS": 0.02408959663628287,
+              "CRPS": 0.031067352261487595,
+              "Brier": 0.0160520925149256,
+              "log_loss_nonzero": 0.09321537963935506,
+              "coverage80": 0.6299694189602446,
+              "coverage95": 0.7859327217125383,
+              "MAE_median": 0.039656844067686506,
+              "mean_nonzero_probability": 0.9552442559043931,
+              "empirical_nonzero_rate": 0.9847094801223242
+            }
+          }
+        },
+        "20": {
+          "n": 322,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.047156453881920406,
+              "WIS": 0.04093765746948748,
+              "CRPS": 0.05300986191185967,
+              "Brier": 0.01651419011740732,
+              "log_loss_nonzero": 0.13285154428171075,
+              "coverage80": 0.5248447204968945,
+              "coverage95": 0.7267080745341615,
+              "MAE_median": 0.06838410058728599,
+              "mean_nonzero_probability": 0.8810572624206543,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "direct_rule_prior": {
+              "MQS": 0.04677321508318422,
+              "WIS": 0.0405806196005465,
+              "CRPS": 0.052609157530391255,
+              "Brier": 0.003958992609909684,
+              "log_loss_nonzero": 0.04345218477458317,
+              "coverage80": 0.5559006211180124,
+              "coverage95": 0.7391304347826086,
+              "MAE_median": 0.06819573177289484,
+              "mean_nonzero_probability": 0.9677731394767761,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "direct_neural_prior": {
+              "MQS": 0.04677537917540901,
+              "WIS": 0.04058307018217674,
+              "CRPS": 0.052611196214073064,
+              "Brier": 0.003999661900641503,
+              "log_loss_nonzero": 0.04409685397740477,
+              "coverage80": 0.5559006211180124,
+              "coverage95": 0.7391304347826086,
+              "MAE_median": 0.0681971402597793,
+              "mean_nonzero_probability": 0.9671151041984558,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "empirical_constant": {
+              "MQS": 0.04776616049028883,
+              "WIS": 0.04153763343545894,
+              "CRPS": 0.053864330553473484,
+              "Brier": 0.016514188657439362,
+              "log_loss_nonzero": 0.13285153447542722,
+              "coverage80": 0.4472049689440994,
+              "coverage95": 0.7732919254658385,
+              "MAE_median": 0.0683720261919509,
+              "mean_nonzero_probability": 0.8810572687224668,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "gaussian_constant": {
+              "MQS": 0.047262664641811405,
+              "WIS": 0.041164713776840424,
+              "CRPS": 0.05300071932188905,
+              "Brier": 0.003105590062111801,
+              "log_loss_nonzero": 0.08581069328637993,
+              "coverage80": 0.5186335403726708,
+              "coverage95": 0.7329192546583851,
+              "MAE_median": 0.06776705815058573,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "moment_static_prior": {
+              "MQS": 0.047182981816517894,
+              "WIS": 0.040967687611871195,
+              "CRPS": 0.05303809549928486,
+              "Brier": 0.01651419011740732,
+              "log_loss_nonzero": 0.1328515414412316,
+              "coverage80": 0.5248447204968945,
+              "coverage95": 0.7329192546583851,
+              "MAE_median": 0.06838410058728599,
+              "mean_nonzero_probability": 0.8810572624206543,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "moment_rule_prior": {
+              "MQS": 0.04722750823343132,
+              "WIS": 0.041162234660754936,
+              "CRPS": 0.05294210653486967,
+              "Brier": 0.003958992609909684,
+              "log_loss_nonzero": 0.043452183728126245,
+              "coverage80": 0.5186335403726708,
+              "coverage95": 0.7018633540372671,
+              "MAE_median": 0.06823028400906286,
+              "mean_nonzero_probability": 0.967773217221965,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "moment_neural_prior": {
+              "MQS": 0.04722724891264055,
+              "WIS": 0.04116133308692624,
+              "CRPS": 0.05294247277937627,
+              "Brier": 0.0039956763459356075,
+              "log_loss_nonzero": 0.044033966578169985,
+              "coverage80": 0.5186335403726708,
+              "coverage95": 0.7018633540372671,
+              "MAE_median": 0.0682321471658146,
+              "mean_nonzero_probability": 0.967176708838214,
+              "empirical_nonzero_rate": 0.9968944099378882
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.0469909138087286,
+              "WIS": 0.040859939628810266,
+              "CRPS": 0.05277342431896207,
+              "Brier": 0.003995862705255412,
+              "log_loss_nonzero": 0.044036886208862154,
+              "coverage80": 0.5403726708074534,
+              "coverage95": 0.7142857142857143,
+              "MAE_median": 0.06815358838897281,
+              "mean_nonzero_probability": 0.967174030331351,
+              "empirical_nonzero_rate": 0.9968944099378882
+            }
+          }
+        }
+      }
+    },
+    "GUANGZHOU": {
+      "audit": {
+        "cut_index": 2178,
+        "validation_start_index": 1633,
+        "lookback": 128,
+        "step": 2,
+        "train": 2993,
+        "validation": 1071,
+        "refit": 4083,
+        "test": 1305,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 1632,
+        "last_refit_target": 2177,
+        "test_zero_share": {
+          "1": 0.18787878787878787,
+          "5": 0.012195121951219513,
+          "10": 0.006134969325153374,
+          "20": 0.009345794392523364
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "initialization_errors": {
+        "tr": 1.1102230246251565e-16,
+        "rf": 2.220446049250313e-16
+      },
+      "aligned_with_saved_direct": true,
+      "fits": {
+        "moment_static_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.4408742314181899,
+            "validation_history": [
+              [
+                1,
+                0.4408742314181899
+              ],
+              [
+                2,
+                0.44614354649204974
+              ],
+              [
+                4,
+                0.4623049302862112
+              ],
+              [
+                6,
+                0.4628868588415105
+              ],
+              [
+                8,
+                0.4639318835520441
+              ],
+              [
+                10,
+                0.4671812377153252
+              ],
+              [
+                12,
+                0.46955349798293994
+              ],
+              [
+                14,
+                0.47327412157766424
+              ],
+              [
+                16,
+                0.47265341588847265
+              ],
+              [
+                18,
+                0.47731294863415663
+              ],
+              [
+                20,
+                0.48298659321029247
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.0,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.9877176598114072
+          },
+          {
+            "seed": 22,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.44172401753977436,
+            "validation_history": [
+              [
+                1,
+                0.44172401753977436
+              ],
+              [
+                2,
+                0.4461893520741672
+              ],
+              [
+                4,
+                0.4644364882600821
+              ],
+              [
+                6,
+                0.4667746818307726
+              ],
+              [
+                8,
+                0.4667595095141464
+              ],
+              [
+                10,
+                0.46732420686537146
+              ],
+              [
+                12,
+                0.47101571667934866
+              ],
+              [
+                14,
+                0.47383201506103517
+              ],
+              [
+                16,
+                0.4746678984641448
+              ],
+              [
+                18,
+                0.48086646107457715
+              ],
+              [
+                20,
+                0.47997256123768506
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.0,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.9877176598114072
+          }
+        ],
+        "moment_rule_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.4410714209521221,
+            "validation_history": [
+              [
+                1,
+                0.4410714209521221
+              ],
+              [
+                2,
+                0.4463424238391453
+              ],
+              [
+                4,
+                0.4626998112058723
+              ],
+              [
+                6,
+                0.4632079984548569
+              ],
+              [
+                8,
+                0.46425716717229387
+              ],
+              [
+                10,
+                0.46750012095583826
+              ],
+              [
+                12,
+                0.4697277219793568
+              ],
+              [
+                14,
+                0.47341731991223207
+              ],
+              [
+                16,
+                0.47274988828581394
+              ],
+              [
+                18,
+                0.47739175586340044
+              ],
+              [
+                20,
+                0.48291395856705477
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8000001907348633,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.957172899821709
+          },
+          {
+            "seed": 22,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.44164852105451097,
+            "validation_history": [
+              [
+                1,
+                0.44164852105451097
+              ],
+              [
+                2,
+                0.44614398263317073
+              ],
+              [
+                4,
+                0.46446087604817443
+              ],
+              [
+                6,
+                0.466944972285177
+              ],
+              [
+                8,
+                0.4669218864628601
+              ],
+              [
+                10,
+                0.4674533979209875
+              ],
+              [
+                12,
+                0.47133626765937453
+              ],
+              [
+                14,
+                0.474377722383428
+              ],
+              [
+                16,
+                0.47479080682339675
+              ],
+              [
+                18,
+                0.4809042660487428
+              ],
+              [
+                20,
+                0.4806665253884687
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8000001907348633,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.957172899821709
+          }
+        ],
+        "moment_neural_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.441051436236592,
+            "validation_history": [
+              [
+                1,
+                0.441051436236592
+              ],
+              [
+                2,
+                0.44629311839509284
+              ],
+              [
+                4,
+                0.4626824447730203
+              ],
+              [
+                6,
+                0.46326396797225067
+              ],
+              [
+                8,
+                0.4644071960961168
+              ],
+              [
+                10,
+                0.46764259993321544
+              ],
+              [
+                12,
+                0.46992745993550433
+              ],
+              [
+                14,
+                0.4736628337926644
+              ],
+              [
+                16,
+                0.47304503411231424
+              ],
+              [
+                18,
+                0.47789080544807766
+              ],
+              [
+                20,
+                0.4833714685467658
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8103166818618774,
+            "mean_prior_logit_residual": -0.04038023203611374,
+            "mean_nonzero_probability": 0.9554038681746443
+          },
+          {
+            "seed": 22,
+            "best_epoch": 1,
+            "inner_epochs": 20,
+            "refit_epochs": 1,
+            "validation_MQS_standardized": 0.44162552770636243,
+            "validation_history": [
+              [
+                1,
+                0.44162552770636243
+              ],
+              [
+                2,
+                0.4461005251200031
+              ],
+              [
+                4,
+                0.46447667962016825
+              ],
+              [
+                6,
+                0.466951008945894
+              ],
+              [
+                8,
+                0.46690064578541496
+              ],
+              [
+                10,
+                0.46743694686984766
+              ],
+              [
+                12,
+                0.47131423500377584
+              ],
+              [
+                14,
+                0.47437579061227203
+              ],
+              [
+                16,
+                0.4748000326960948
+              ],
+              [
+                18,
+                0.4808688883877413
+              ],
+              [
+                20,
+                0.4808988159935897
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8126087188720703,
+            "mean_prior_logit_residual": -0.04081353545188904,
+            "mean_nonzero_probability": 0.9548725131371012
+          }
+        ],
+        "moment_neural_fixed_budget": [
+          {
+            "seed": 11,
+            "best_epoch": 2,
+            "inner_epochs": 20,
+            "refit_epochs": 2,
+            "validation_MQS_standardized": 0.4413627080032332,
+            "validation_history": [
+              [
+                1,
+                0.4418980302349097
+              ],
+              [
+                2,
+                0.4413627080032332
+              ],
+              [
+                4,
+                0.44289127666907613
+              ],
+              [
+                6,
+                0.4454370814762461
+              ],
+              [
+                8,
+                0.4461661558581626
+              ],
+              [
+                10,
+                0.44666471907243854
+              ],
+              [
+                12,
+                0.445060709185009
+              ],
+              [
+                14,
+                0.4458268646806576
+              ],
+              [
+                16,
+                0.44487761992648994
+              ],
+              [
+                18,
+                0.44529560105619376
+              ],
+              [
+                20,
+                0.4457968448567674
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8182469606399536,
+            "mean_prior_logit_residual": -0.06348876655101776,
+            "mean_nonzero_probability": 0.9552775999595379
+          },
+          {
+            "seed": 22,
+            "best_epoch": 2,
+            "inner_epochs": 20,
+            "refit_epochs": 2,
+            "validation_MQS_standardized": 0.4423751199043253,
+            "validation_history": [
+              [
+                1,
+                0.4426124926952676
+              ],
+              [
+                2,
+                0.4423751199043253
+              ],
+              [
+                4,
+                0.4436528661053804
+              ],
+              [
+                6,
+                0.44556193375967434
+              ],
+              [
+                8,
+                0.4454230976164693
+              ],
+              [
+                10,
+                0.4459043932369766
+              ],
+              [
+                12,
+                0.445267520820687
+              ],
+              [
+                14,
+                0.4457772491804254
+              ],
+              [
+                16,
+                0.4466341201304164
+              ],
+              [
+                18,
+                0.4447923606777132
+              ],
+              [
+                20,
+                0.4456370573059381
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8220486044883728,
+            "mean_prior_logit_residual": -0.09010400623083115,
+            "mean_nonzero_probability": 0.9522495184821644
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 330,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.016884608513771097,
+              "WIS": 0.014301020280748897,
+              "CRPS": 0.01929926395224822,
+              "Brier": 0.17593592012900533,
+              "log_loss_nonzero": 0.6585379055955193,
+              "coverage80": 0.8,
+              "coverage95": 0.8818181818181818,
+              "MAE_median": 0.02284845723182468,
+              "mean_nonzero_probability": 0.9649465680122375,
+              "empirical_nonzero_rate": 0.8121212121212121
+            },
+            "direct_rule_prior": {
+              "MQS": 0.01654020669746289,
+              "WIS": 0.014185332954906907,
+              "CRPS": 0.01880155376880762,
+              "Brier": 0.15128522724423185,
+              "log_loss_nonzero": 0.47649539991310147,
+              "coverage80": 0.7909090909090909,
+              "coverage95": 0.8818181818181818,
+              "MAE_median": 0.02284853406807659,
+              "mean_nonzero_probability": 0.8651010990142822,
+              "empirical_nonzero_rate": 0.8121212121212121
+            },
+            "direct_neural_prior": {
+              "MQS": 0.016520358060183548,
+              "WIS": 0.014176567669782994,
+              "CRPS": 0.018775731212006364,
+              "Brier": 0.1506044843846816,
+              "log_loss_nonzero": 0.47379317813073146,
+              "coverage80": 0.7909090909090909,
+              "coverage95": 0.8818181818181818,
+              "MAE_median": 0.022848794114866847,
+              "mean_nonzero_probability": 0.8589762449264526,
+              "empirical_nonzero_rate": 0.8121212121212121
+            },
+            "empirical_constant": {
+              "MQS": 0.016464158265310874,
+              "WIS": 0.01412448148791218,
+              "CRPS": 0.018725135345011402,
+              "Brier": 0.1759359010415917,
+              "log_loss_nonzero": 0.6585376057324503,
+              "coverage80": 0.8181818181818182,
+              "coverage95": 0.9181818181818182,
+              "MAE_median": 0.022850698401253523,
+              "mean_nonzero_probability": 0.9649464459591038,
+              "empirical_nonzero_rate": 0.8121212121212121
+            },
+            "gaussian_constant": {
+              "MQS": 0.016911744588398676,
+              "WIS": 0.01432293147290157,
+              "CRPS": 0.019348667221335082,
+              "Brier": 0.18787878787878787,
+              "log_loss_nonzero": 5.191286911362593,
+              "coverage80": 0.8121212121212121,
+              "coverage95": 0.9121212121212121,
+              "MAE_median": 0.02293577045317377,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.8121212121212121
+            },
+            "moment_static_prior": {
+              "MQS": 0.016876694462881522,
+              "WIS": 0.014291283106578956,
+              "CRPS": 0.01930576350475677,
+              "Brier": 0.17593592012900533,
+              "log_loss_nonzero": 0.6585378878838404,
+              "coverage80": 0.8,
+              "coverage95": 0.8878787878787879,
+              "MAE_median": 0.022978128895487344,
+              "mean_nonzero_probability": 0.9649465084075928,
+              "empirical_nonzero_rate": 0.8121212121212121
+            },
+            "moment_rule_prior": {
+              "MQS": 0.01660514243002472,
+              "WIS": 0.014224826914133114,
+              "CRPS": 0.018895044905158986,
+              "Brier": 0.15128522724423185,
+              "log_loss_nonzero": 0.47649539741960567,
+              "coverage80": 0.806060606060606,
+              "coverage95": 0.896969696969697,
+              "MAE_median": 0.022847386558428186,
+              "mean_nonzero_probability": 0.8651011902274508,
+              "empirical_nonzero_rate": 0.8121212121212121
+            },
+            "moment_neural_prior": {
+              "MQS": 0.01658749868683132,
+              "WIS": 0.014220204589490939,
+              "CRPS": 0.018872430109338874,
+              "Brier": 0.15058209301380984,
+              "log_loss_nonzero": 0.4736730643204048,
+              "coverage80": 0.806060606060606,
+              "coverage95": 0.896969696969697,
+              "MAE_median": 0.022847419903859467,
+              "mean_nonzero_probability": 0.858691271868619,
+              "empirical_nonzero_rate": 0.8121212121212121
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.016627036891195674,
+              "WIS": 0.014291051652435988,
+              "CRPS": 0.01890841363177025,
+              "Brier": 0.15032761552407647,
+              "log_loss_nonzero": 0.472705580339145,
+              "coverage80": 0.8181818181818182,
+              "coverage95": 0.9090909090909091,
+              "MAE_median": 0.022850200710903264,
+              "mean_nonzero_probability": 0.854626596515829,
+              "empirical_nonzero_rate": 0.8121212121212121
+            }
+          }
+        },
+        "5": {
+          "n": 328,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.026207105401879885,
+              "WIS": 0.022238723864912983,
+              "CRPS": 0.03001620643952878,
+              "Brier": 0.012099939707419235,
+              "log_loss_nonzero": 0.06974502199715595,
+              "coverage80": 0.8658536585365854,
+              "coverage95": 0.9420731707317073,
+              "MAE_median": 0.03692868024685802,
+              "mean_nonzero_probability": 0.9951218366622925,
+              "empirical_nonzero_rate": 0.9878048780487805
+            },
+            "direct_rule_prior": {
+              "MQS": 0.026192300924498212,
+              "WIS": 0.022262132487180158,
+              "CRPS": 0.02997280116431995,
+              "Brier": 0.01217988282502139,
+              "log_loss_nonzero": 0.06959684640339507,
+              "coverage80": 0.8658536585365854,
+              "coverage95": 0.9420731707317073,
+              "MAE_median": 0.03703778421556845,
+              "mean_nonzero_probability": 0.9845451712608337,
+              "empirical_nonzero_rate": 0.9878048780487805
+            },
+            "direct_neural_prior": {
+              "MQS": 0.026188494314528365,
+              "WIS": 0.02226052584436035,
+              "CRPS": 0.029967577518016705,
+              "Brier": 0.012192405999883683,
+              "log_loss_nonzero": 0.06970418638282842,
+              "coverage80": 0.8658536585365854,
+              "coverage95": 0.9420731707317073,
+              "MAE_median": 0.03704001279200895,
+              "mean_nonzero_probability": 0.9838446378707886,
+              "empirical_nonzero_rate": 0.9878048780487805
+            },
+            "empirical_constant": {
+              "MQS": 0.025349274823524972,
+              "WIS": 0.021652735400832426,
+              "CRPS": 0.028946782543482808,
+              "Brier": 0.012099940511600238,
+              "log_loss_nonzero": 0.06974510717034074,
+              "coverage80": 0.8262195121951219,
+              "coverage95": 0.9603658536585366,
+              "MAE_median": 0.03736157761584576,
+              "mean_nonzero_probability": 0.9951219512195125,
+              "empirical_nonzero_rate": 0.9878048780487805
+            },
+            "gaussian_constant": {
+              "MQS": 0.026597994425319377,
+              "WIS": 0.02265645758787722,
+              "CRPS": 0.03037753598717172,
+              "Brier": 0.012195121951219513,
+              "log_loss_nonzero": 0.33696394192651646,
+              "coverage80": 0.8658536585365854,
+              "coverage95": 0.9573170731707317,
+              "MAE_median": 0.03769340205705713,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9878048780487805
+            },
+            "moment_static_prior": {
+              "MQS": 0.026254515990819318,
+              "WIS": 0.022324539319200285,
+              "CRPS": 0.030019949489253912,
+              "Brier": 0.012099939707419235,
+              "log_loss_nonzero": 0.06974502433819064,
+              "coverage80": 0.8597560975609756,
+              "coverage95": 0.9451219512195121,
+              "MAE_median": 0.03689589000499354,
+              "mean_nonzero_probability": 0.9951218962669373,
+              "empirical_nonzero_rate": 0.9878048780487805
+            },
+            "moment_rule_prior": {
+              "MQS": 0.026254982101759184,
+              "WIS": 0.022357004005319602,
+              "CRPS": 0.029999729174919117,
+              "Brier": 0.01217988282502139,
+              "log_loss_nonzero": 0.06959684772480379,
+              "coverage80": 0.8597560975609756,
+              "coverage95": 0.9451219512195121,
+              "MAE_median": 0.03699462553559464,
+              "mean_nonzero_probability": 0.9845451043873299,
+              "empirical_nonzero_rate": 0.9878048780487805
+            },
+            "moment_neural_prior": {
+              "MQS": 0.026251760147856868,
+              "WIS": 0.022355971075374837,
+              "CRPS": 0.029995315386892877,
+              "Brier": 0.01219441888792242,
+              "log_loss_nonzero": 0.06974782315267515,
+              "coverage80": 0.8597560975609756,
+              "coverage95": 0.9451219512195121,
+              "MAE_median": 0.036994981797371214,
+              "mean_nonzero_probability": 0.9837982623678881,
+              "empirical_nonzero_rate": 0.9878048780487805
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.026884014331968825,
+              "WIS": 0.022941626536883645,
+              "CRPS": 0.03067358603285578,
+              "Brier": 0.012200153253256369,
+              "log_loss_nonzero": 0.06978773117123263,
+              "coverage80": 0.8719512195121951,
+              "coverage95": 0.9603658536585366,
+              "MAE_median": 0.03732614254162827,
+              "mean_nonzero_probability": 0.9832200176286988,
+              "empirical_nonzero_rate": 0.9878048780487805
+            }
+          }
+        },
+        "10": {
+          "n": 326,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.030518818404565606,
+              "WIS": 0.026703069130844154,
+              "CRPS": 0.034181764342661604,
+              "Brier": 0.006097401251878584,
+              "log_loss_nonzero": 0.03737200321801053,
+              "coverage80": 0.9079754601226994,
+              "coverage95": 0.9570552147239264,
+              "MAE_median": 0.038263044404177986,
+              "mean_nonzero_probability": 0.9941291213035583,
+              "empirical_nonzero_rate": 0.9938650306748467
+            },
+            "direct_rule_prior": {
+              "MQS": 0.03054207757225066,
+              "WIS": 0.02676286349557086,
+              "CRPS": 0.03417554270783433,
+              "Brier": 0.006119771236817654,
+              "log_loss_nonzero": 0.03833741087329351,
+              "coverage80": 0.9079754601226994,
+              "coverage95": 0.9570552147239264,
+              "MAE_median": 0.038311493716670635,
+              "mean_nonzero_probability": 0.9895575642585754,
+              "empirical_nonzero_rate": 0.9938650306748467
+            },
+            "direct_neural_prior": {
+              "MQS": 0.030537695583128757,
+              "WIS": 0.02676137576368868,
+              "CRPS": 0.034169153507267944,
+              "Brier": 0.006124321797832131,
+              "log_loss_nonzero": 0.03853742166370885,
+              "coverage80": 0.9079754601226994,
+              "coverage95": 0.9570552147239264,
+              "MAE_median": 0.03831417375637082,
+              "mean_nonzero_probability": 0.9891090393066406,
+              "empirical_nonzero_rate": 0.9938650306748467
+            },
+            "empirical_constant": {
+              "MQS": 0.02875845953457394,
+              "WIS": 0.02534485698893364,
+              "CRPS": 0.032058001847733615,
+              "Brier": 0.006097401240047541,
+              "log_loss_nonzero": 0.03737200249583831,
+              "coverage80": 0.8834355828220859,
+              "coverage95": 0.9631901840490797,
+              "MAE_median": 0.03941540431905518,
+              "mean_nonzero_probability": 0.9941291585127201,
+              "empirical_nonzero_rate": 0.9938650306748467
+            },
+            "gaussian_constant": {
+              "MQS": 0.03139403484156123,
+              "WIS": 0.027494257521634622,
+              "CRPS": 0.03518604373553314,
+              "Brier": 0.006134969325153374,
+              "log_loss_nonzero": 0.16951560268745616,
+              "coverage80": 0.9079754601226994,
+              "coverage95": 0.9570552147239264,
+              "MAE_median": 0.040936215139442275,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9938650306748467
+            },
+            "moment_static_prior": {
+              "MQS": 0.030591435939337587,
+              "WIS": 0.026911789899206923,
+              "CRPS": 0.034136239671300646,
+              "Brier": 0.006097401251878584,
+              "log_loss_nonzero": 0.03737200350940114,
+              "coverage80": 0.9049079754601227,
+              "coverage95": 0.9539877300613497,
+              "MAE_median": 0.03808353251540247,
+              "mean_nonzero_probability": 0.9941291809082031,
+              "empirical_nonzero_rate": 0.9938650306748467
+            },
+            "moment_rule_prior": {
+              "MQS": 0.030620649229453303,
+              "WIS": 0.0269665006949554,
+              "CRPS": 0.03414736521874846,
+              "Brier": 0.006119771236817654,
+              "log_loss_nonzero": 0.03833741144592406,
+              "coverage80": 0.9049079754601227,
+              "coverage95": 0.9539877300613497,
+              "MAE_median": 0.038139688047677506,
+              "mean_nonzero_probability": 0.9895574827135706,
+              "empirical_nonzero_rate": 0.9938650306748467
+            },
+            "moment_neural_prior": {
+              "MQS": 0.030616874175350313,
+              "WIS": 0.026965621696847398,
+              "CRPS": 0.03414164453823351,
+              "Brier": 0.006125140086837452,
+              "log_loss_nonzero": 0.038578162623886,
+              "coverage80": 0.9049079754601227,
+              "coverage95": 0.9539877300613497,
+              "MAE_median": 0.03814298382828381,
+              "mean_nonzero_probability": 0.9890817486983867,
+              "empirical_nonzero_rate": 0.9938650306748467
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.03171949657196609,
+              "WIS": 0.02799755576220133,
+              "CRPS": 0.03534748178191068,
+              "Brier": 0.006130541286482355,
+              "log_loss_nonzero": 0.038868159135476255,
+              "coverage80": 0.9141104294478528,
+              "coverage95": 0.9570552147239264,
+              "MAE_median": 0.03858722150252212,
+              "mean_nonzero_probability": 0.9886520305659874,
+              "empirical_nonzero_rate": 0.9938650306748467
+            }
+          }
+        },
+        "20": {
+          "n": 321,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.0420325131566754,
+              "WIS": 0.036790350640145325,
+              "CRPS": 0.047055423957420475,
+              "Brier": 0.009299358830702565,
+              "log_loss_nonzero": 0.05737524193702875,
+              "coverage80": 0.9003115264797508,
+              "coverage95": 0.940809968847352,
+              "MAE_median": 0.051763314172145615,
+              "mean_nonzero_probability": 0.9970501661300659,
+              "empirical_nonzero_rate": 0.9906542056074766
+            },
+            "direct_rule_prior": {
+              "MQS": 0.042043718791596775,
+              "WIS": 0.03685123371740935,
+              "CRPS": 0.04702555396328937,
+              "Brier": 0.009289005957805015,
+              "log_loss_nonzero": 0.0543681293685349,
+              "coverage80": 0.9003115264797508,
+              "coverage95": 0.940809968847352,
+              "MAE_median": 0.051658610820861664,
+              "mean_nonzero_probability": 0.9909679293632507,
+              "empirical_nonzero_rate": 0.9906542056074766
+            },
+            "direct_neural_prior": {
+              "MQS": 0.04203899814619967,
+              "WIS": 0.03684915771492501,
+              "CRPS": 0.04701880423541679,
+              "Brier": 0.009290260223469515,
+              "log_loss_nonzero": 0.054353888007316074,
+              "coverage80": 0.9003115264797508,
+              "coverage95": 0.940809968847352,
+              "MAE_median": 0.05165222352752747,
+              "mean_nonzero_probability": 0.9905617833137512,
+              "empirical_nonzero_rate": 0.9906542056074766
+            },
+            "empirical_constant": {
+              "MQS": 0.039862923426927384,
+              "WIS": 0.035063010112718444,
+              "CRPS": 0.044413151217012524,
+              "Brier": 0.009299358592294242,
+              "log_loss_nonzero": 0.05737520157484278,
+              "coverage80": 0.8785046728971962,
+              "coverage95": 0.956386292834891,
+              "MAE_median": 0.05454297750443206,
+              "mean_nonzero_probability": 0.9970501474926254,
+              "empirical_nonzero_rate": 0.9906542056074766
+            },
+            "gaussian_constant": {
+              "MQS": 0.043690562938899835,
+              "WIS": 0.03807585882384809,
+              "CRPS": 0.0491768296255996,
+              "Brier": 0.009345794392523364,
+              "log_loss_nonzero": 0.25823404895326496,
+              "coverage80": 0.9127725856697819,
+              "coverage95": 0.9626168224299065,
+              "MAE_median": 0.05925559640572335,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9906542056074766
+            },
+            "moment_static_prior": {
+              "MQS": 0.04219418110459254,
+              "WIS": 0.03722027694715529,
+              "CRPS": 0.04699294448998915,
+              "Brier": 0.009299358830702565,
+              "log_loss_nonzero": 0.05737524210473772,
+              "coverage80": 0.8940809968847352,
+              "coverage95": 0.940809968847352,
+              "MAE_median": 0.05127083161748139,
+              "mean_nonzero_probability": 0.9970501661300659,
+              "empirical_nonzero_rate": 0.9906542056074766
+            },
+            "moment_rule_prior": {
+              "MQS": 0.042241563277092796,
+              "WIS": 0.037306058513269534,
+              "CRPS": 0.04700440573954914,
+              "Brier": 0.009289005957805015,
+              "log_loss_nonzero": 0.05436812971823841,
+              "coverage80": 0.8940809968847352,
+              "coverage95": 0.9439252336448598,
+              "MAE_median": 0.05140639000718657,
+              "mean_nonzero_probability": 0.9909679373476735,
+              "empirical_nonzero_rate": 0.9906542056074766
+            },
+            "moment_neural_prior": {
+              "MQS": 0.04223791226961419,
+              "WIS": 0.03730541953598414,
+              "CRPS": 0.046998021158621034,
+              "Brier": 0.009290369898097341,
+              "log_loss_nonzero": 0.054352026570975605,
+              "coverage80": 0.8940809968847352,
+              "coverage95": 0.9439252336448598,
+              "MAE_median": 0.05141002238345085,
+              "mean_nonzero_probability": 0.9905318970620818,
+              "empirical_nonzero_rate": 0.9906542056074766
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.04379051185405789,
+              "WIS": 0.03873534361446954,
+              "CRPS": 0.04870457612826977,
+              "Brier": 0.00928987404206976,
+              "log_loss_nonzero": 0.054295188479766644,
+              "coverage80": 0.9065420560747663,
+              "coverage95": 0.9532710280373832,
+              "MAE_median": 0.05231031708817735,
+              "mean_nonzero_probability": 0.9901493463746484,
+              "empirical_nonzero_rate": 0.9906542056074766
+            }
+          }
+        }
+      }
+    },
+    "SHANGHAI": {
+      "audit": {
+        "cut_index": 1507,
+        "validation_start_index": 1130,
+        "lookback": 128,
+        "step": 2,
+        "train": 1987,
+        "validation": 737,
+        "refit": 2741,
+        "test": 503,
+        "boundary_rows_recovered_for_refit": 17,
+        "last_train_target": 1129,
+        "last_refit_target": 1506,
+        "test_zero_share": {
+          "1": 0.13076923076923078,
+          "5": 0.0703125,
+          "10": 0.008,
+          "20": 0.008333333333333333
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "initialization_errors": {
+        "tr": 2.220446049250313e-16,
+        "rf": 1.1102230246251565e-16
+      },
+      "aligned_with_saved_direct": true,
+      "fits": {
+        "moment_static_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 10,
+            "inner_epochs": 26,
+            "refit_epochs": 10,
+            "validation_MQS_standardized": 0.27573575181483895,
+            "validation_history": [
+              [
+                1,
+                0.3078012067965705
+              ],
+              [
+                2,
+                0.3003364002166383
+              ],
+              [
+                4,
+                0.2844343148703646
+              ],
+              [
+                6,
+                0.27860827442915553
+              ],
+              [
+                8,
+                0.2775487950447698
+              ],
+              [
+                10,
+                0.27573575181483895
+              ],
+              [
+                12,
+                0.27821053276911767
+              ],
+              [
+                14,
+                0.27890294586618214
+              ],
+              [
+                16,
+                0.2830036642643114
+              ],
+              [
+                18,
+                0.2843750453719222
+              ],
+              [
+                20,
+                0.2879198640877111
+              ],
+              [
+                22,
+                0.294976924266677
+              ],
+              [
+                24,
+                0.2973290664500579
+              ],
+              [
+                26,
+                0.3053667814926234
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.0,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.9489281897990415
+          },
+          {
+            "seed": 22,
+            "best_epoch": 6,
+            "inner_epochs": 22,
+            "refit_epochs": 6,
+            "validation_MQS_standardized": 0.27812747838334595,
+            "validation_history": [
+              [
+                1,
+                0.3067979057154127
+              ],
+              [
+                2,
+                0.2982956452019441
+              ],
+              [
+                4,
+                0.2839590264226003
+              ],
+              [
+                6,
+                0.27812747838334595
+              ],
+              [
+                8,
+                0.27999639239730634
+              ],
+              [
+                10,
+                0.28779852279185514
+              ],
+              [
+                12,
+                0.2921849694548009
+              ],
+              [
+                14,
+                0.29201831233411346
+              ],
+              [
+                16,
+                0.2906640146555168
+              ],
+              [
+                18,
+                0.29733835522560514
+              ],
+              [
+                20,
+                0.2954383086083811
+              ],
+              [
+                22,
+                0.3004792235875501
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.0,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.9489281897990415
+          }
+        ],
+        "moment_rule_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 10,
+            "inner_epochs": 26,
+            "refit_epochs": 10,
+            "validation_MQS_standardized": 0.2745882810906752,
+            "validation_history": [
+              [
+                1,
+                0.30632559487666494
+              ],
+              [
+                2,
+                0.299051091074715
+              ],
+              [
+                4,
+                0.28313597434939786
+              ],
+              [
+                6,
+                0.27779497775149564
+              ],
+              [
+                8,
+                0.27659999251998096
+              ],
+              [
+                10,
+                0.2745882810906752
+              ],
+              [
+                12,
+                0.27722477670166
+              ],
+              [
+                14,
+                0.27821709935335426
+              ],
+              [
+                16,
+                0.28224199072061895
+              ],
+              [
+                18,
+                0.2836999707093268
+              ],
+              [
+                20,
+                0.2874289200828829
+              ],
+              [
+                22,
+                0.2948516708327344
+              ],
+              [
+                24,
+                0.29770181077643676
+              ],
+              [
+                26,
+                0.30665402766916355
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8000001907348633,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.94113495003869
+          },
+          {
+            "seed": 22,
+            "best_epoch": 6,
+            "inner_epochs": 22,
+            "refit_epochs": 6,
+            "validation_MQS_standardized": 0.2773941784011178,
+            "validation_history": [
+              [
+                1,
+                0.3054420509692666
+              ],
+              [
+                2,
+                0.29724756848550227
+              ],
+              [
+                4,
+                0.28332284181067463
+              ],
+              [
+                6,
+                0.2773941784011178
+              ],
+              [
+                8,
+                0.27847949511800535
+              ],
+              [
+                10,
+                0.2859298468400557
+              ],
+              [
+                12,
+                0.2903336079034802
+              ],
+              [
+                14,
+                0.29044835515746215
+              ],
+              [
+                16,
+                0.28869173701223516
+              ],
+              [
+                18,
+                0.29506387624189584
+              ],
+              [
+                20,
+                0.29308544845166534
+              ],
+              [
+                22,
+                0.29808405236535346
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8000001907348633,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.94113495003869
+          }
+        ],
+        "moment_neural_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 10,
+            "inner_epochs": 26,
+            "refit_epochs": 10,
+            "validation_MQS_standardized": 0.27448582178817893,
+            "validation_history": [
+              [
+                1,
+                0.3062554690513135
+              ],
+              [
+                2,
+                0.29889730216946825
+              ],
+              [
+                4,
+                0.28286427858505697
+              ],
+              [
+                6,
+                0.27755758381550005
+              ],
+              [
+                8,
+                0.27644971882209207
+              ],
+              [
+                10,
+                0.27448582178817893
+              ],
+              [
+                12,
+                0.27686379011724
+              ],
+              [
+                14,
+                0.27761615345150326
+              ],
+              [
+                16,
+                0.28139168002219583
+              ],
+              [
+                18,
+                0.28258402726244736
+              ],
+              [
+                20,
+                0.28625547114354655
+              ],
+              [
+                22,
+                0.2936420267929793
+              ],
+              [
+                24,
+                0.2965134420899715
+              ],
+              [
+                26,
+                0.3058271196539559
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.7861328721046448,
+            "mean_prior_logit_residual": -0.32751837372779846,
+            "mean_nonzero_probability": 0.9184127756899915
+          },
+          {
+            "seed": 22,
+            "best_epoch": 6,
+            "inner_epochs": 22,
+            "refit_epochs": 6,
+            "validation_MQS_standardized": 0.277112099166461,
+            "validation_history": [
+              [
+                1,
+                0.3053404705520104
+              ],
+              [
+                2,
+                0.2970458959580342
+              ],
+              [
+                4,
+                0.28305395925793136
+              ],
+              [
+                6,
+                0.277112099166461
+              ],
+              [
+                8,
+                0.2780157837830884
+              ],
+              [
+                10,
+                0.285338714487808
+              ],
+              [
+                12,
+                0.28970024817639267
+              ],
+              [
+                14,
+                0.2895948982563617
+              ],
+              [
+                16,
+                0.287745290033648
+              ],
+              [
+                18,
+                0.29376154457729126
+              ],
+              [
+                20,
+                0.291638157709251
+              ],
+              [
+                22,
+                0.29637451784245694
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8217502236366272,
+            "mean_prior_logit_residual": -0.24456404149532318,
+            "mean_nonzero_probability": 0.9230848646780132
+          }
+        ],
+        "moment_neural_fixed_budget": [
+          {
+            "seed": 11,
+            "best_epoch": 12,
+            "inner_epochs": 28,
+            "refit_epochs": 12,
+            "validation_MQS_standardized": 0.2937398644163499,
+            "validation_history": [
+              [
+                1,
+                0.31147301233469793
+              ],
+              [
+                2,
+                0.31024682626956074
+              ],
+              [
+                4,
+                0.3066718160649468
+              ],
+              [
+                6,
+                0.30171135629216317
+              ],
+              [
+                8,
+                0.2970517094857228
+              ],
+              [
+                10,
+                0.2944965091267068
+              ],
+              [
+                12,
+                0.2937398644163499
+              ],
+              [
+                14,
+                0.2945141187969301
+              ],
+              [
+                16,
+                0.29642735350565896
+              ],
+              [
+                18,
+                0.29687730641749743
+              ],
+              [
+                20,
+                0.2968587507322985
+              ],
+              [
+                22,
+                0.2974769499896186
+              ],
+              [
+                24,
+                0.29790324548691755
+              ],
+              [
+                26,
+                0.2980261855285558
+              ],
+              [
+                28,
+                0.2980583615866418
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.6136191487312317,
+            "mean_prior_logit_residual": -0.38876768946647644,
+            "mean_nonzero_probability": 0.9137300356007949
+          },
+          {
+            "seed": 22,
+            "best_epoch": 12,
+            "inner_epochs": 28,
+            "refit_epochs": 12,
+            "validation_MQS_standardized": 0.2937223811986696,
+            "validation_history": [
+              [
+                1,
+                0.3115519792593852
+              ],
+              [
+                2,
+                0.31041034707730253
+              ],
+              [
+                4,
+                0.3074878257005686
+              ],
+              [
+                6,
+                0.30396315031631027
+              ],
+              [
+                8,
+                0.2990103539555555
+              ],
+              [
+                10,
+                0.29507013259552023
+              ],
+              [
+                12,
+                0.2937223811986696
+              ],
+              [
+                14,
+                0.29471183076608903
+              ],
+              [
+                16,
+                0.2959979481892675
+              ],
+              [
+                18,
+                0.2971931527554884
+              ],
+              [
+                20,
+                0.2975428620957264
+              ],
+              [
+                22,
+                0.29789444427089046
+              ],
+              [
+                24,
+                0.29828474107208275
+              ],
+              [
+                26,
+                0.2996731655798256
+              ],
+              [
+                28,
+                0.30028936049620525
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.6545488834381104,
+            "mean_prior_logit_residual": -0.4016879200935364,
+            "mean_nonzero_probability": 0.913326428140371
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 130,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.013788084269054927,
+              "WIS": 0.012003470536804065,
+              "CRPS": 0.015489571057096356,
+              "Brier": 0.11378213555685061,
+              "log_loss_nonzero": 0.388370207295968,
+              "coverage80": 0.7153846153846154,
+              "coverage95": 0.823076923076923,
+              "MAE_median": 0.019860136246896618,
+              "mean_nonzero_probability": 0.8798842430114746,
+              "empirical_nonzero_rate": 0.8692307692307693
+            },
+            "direct_rule_prior": {
+              "MQS": 0.013497711060663754,
+              "WIS": 0.011667767013901426,
+              "CRPS": 0.015247017348022748,
+              "Brier": 0.11517967170972751,
+              "log_loss_nonzero": 0.39340780159601796,
+              "coverage80": 0.7307692307692307,
+              "coverage95": 0.8384615384615385,
+              "MAE_median": 0.019673034975701224,
+              "mean_nonzero_probability": 0.8606631755828857,
+              "empirical_nonzero_rate": 0.8692307692307693
+            },
+            "direct_neural_prior": {
+              "MQS": 0.013433716375944295,
+              "WIS": 0.011580273031876961,
+              "CRPS": 0.015193486778578194,
+              "Brier": 0.12329809687302218,
+              "log_loss_nonzero": 0.4190920246908298,
+              "coverage80": 0.7230769230769231,
+              "coverage95": 0.8384615384615385,
+              "MAE_median": 0.019670284310223555,
+              "mean_nonzero_probability": 0.8118152618408203,
+              "empirical_nonzero_rate": 0.8692307692307693
+            },
+            "empirical_constant": {
+              "MQS": 0.013760715185290233,
+              "WIS": 0.012384842894849363,
+              "CRPS": 0.01508117786886689,
+              "Brier": 0.11378213518926973,
+              "log_loss_nonzero": 0.388370193039062,
+              "coverage80": 0.7846153846153846,
+              "coverage95": 0.8615384615384616,
+              "MAE_median": 0.017606065913047662,
+              "mean_nonzero_probability": 0.8798842257597685,
+              "empirical_nonzero_rate": 0.8692307692307693
+            },
+            "gaussian_constant": {
+              "MQS": 0.014408678893590626,
+              "WIS": 0.012621937289039943,
+              "CRPS": 0.016066124589557668,
+              "Brier": 0.13076923076923078,
+              "log_loss_nonzero": 3.6132902695715394,
+              "coverage80": 0.8,
+              "coverage95": 0.8615384615384616,
+              "MAE_median": 0.017669503760919626,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.8692307692307693
+            },
+            "moment_static_prior": {
+              "MQS": 0.013306662842846559,
+              "WIS": 0.011554970319742583,
+              "CRPS": 0.014999856041377126,
+              "Brier": 0.11378213555685061,
+              "log_loss_nonzero": 0.3883701947780531,
+              "coverage80": 0.7538461538461538,
+              "coverage95": 0.8384615384615385,
+              "MAE_median": 0.019356620223641444,
+              "mean_nonzero_probability": 0.8798842430114746,
+              "empirical_nonzero_rate": 0.8692307692307693
+            },
+            "moment_rule_prior": {
+              "MQS": 0.013271513721499872,
+              "WIS": 0.011526690475772598,
+              "CRPS": 0.01496641818285654,
+              "Brier": 0.11517967170972751,
+              "log_loss_nonzero": 0.39340780212718574,
+              "coverage80": 0.7538461538461538,
+              "coverage95": 0.8461538461538461,
+              "MAE_median": 0.019277595423051356,
+              "mean_nonzero_probability": 0.8606632287685688,
+              "empirical_nonzero_rate": 0.8692307692307693
+            },
+            "moment_neural_prior": {
+              "MQS": 0.013244696223987254,
+              "WIS": 0.011504701078414819,
+              "CRPS": 0.014920359149090423,
+              "Brier": 0.12295038031959712,
+              "log_loss_nonzero": 0.41701367386814014,
+              "coverage80": 0.7538461538461538,
+              "coverage95": 0.8461538461538461,
+              "MAE_median": 0.019245410368874262,
+              "mean_nonzero_probability": 0.813516111098803,
+              "empirical_nonzero_rate": 0.8692307692307693
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.013758461889001379,
+              "WIS": 0.012159928630096082,
+              "CRPS": 0.015287125095396613,
+              "Brier": 0.12711579682788765,
+              "log_loss_nonzero": 0.4326939137569805,
+              "coverage80": 0.7769230769230769,
+              "coverage95": 0.8846153846153846,
+              "MAE_median": 0.01779120106795214,
+              "mean_nonzero_probability": 0.8007389050263625,
+              "empirical_nonzero_rate": 0.8692307692307693
+            }
+          }
+        },
+        "5": {
+          "n": 128,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.02190751576951954,
+              "WIS": 0.018742814533508748,
+              "CRPS": 0.02489175477418302,
+              "Brier": 0.06608534564765378,
+              "log_loss_nonzero": 0.26175003763637505,
+              "coverage80": 0.765625,
+              "coverage95": 0.859375,
+              "MAE_median": 0.03231376297047747,
+              "mean_nonzero_probability": 0.9564588069915771,
+              "empirical_nonzero_rate": 0.9296875
+            },
+            "direct_rule_prior": {
+              "MQS": 0.021508876991465635,
+              "WIS": 0.018342951631849,
+              "CRPS": 0.024515824716755966,
+              "Brier": 0.06632297879365634,
+              "log_loss_nonzero": 0.2636349779495504,
+              "coverage80": 0.7578125,
+              "coverage95": 0.875,
+              "MAE_median": 0.031861358908791465,
+              "mean_nonzero_probability": 0.9447639584541321,
+              "empirical_nonzero_rate": 0.9296875
+            },
+            "direct_neural_prior": {
+              "MQS": 0.0214768222498654,
+              "WIS": 0.018290517402489197,
+              "CRPS": 0.02449756470284584,
+              "Brier": 0.0656679816405612,
+              "log_loss_nonzero": 0.2541722451278474,
+              "coverage80": 0.765625,
+              "coverage95": 0.875,
+              "MAE_median": 0.031789508199136216,
+              "mean_nonzero_probability": 0.9238176345825195,
+              "empirical_nonzero_rate": 0.9296875
+            },
+            "empirical_constant": {
+              "MQS": 0.021841575857894827,
+              "WIS": 0.01923774679850177,
+              "CRPS": 0.024324808469346988,
+              "Brier": 0.06608534605062763,
+              "log_loss_nonzero": 0.2617500441327385,
+              "coverage80": 0.7734375,
+              "coverage95": 0.890625,
+              "MAE_median": 0.029555951440876548,
+              "mean_nonzero_probability": 0.956458635703919,
+              "empirical_nonzero_rate": 0.9296875
+            },
+            "gaussian_constant": {
+              "MQS": 0.022542578700590052,
+              "WIS": 0.019613553887602574,
+              "CRPS": 0.025271338749936968,
+              "Brier": 0.0703125,
+              "log_loss_nonzero": 1.942807727665306,
+              "coverage80": 0.8046875,
+              "coverage95": 0.890625,
+              "MAE_median": 0.029635258279226244,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9296875
+            },
+            "moment_static_prior": {
+              "MQS": 0.021045106127387823,
+              "WIS": 0.01800486761910773,
+              "CRPS": 0.02393182290291939,
+              "Brier": 0.06608534564765378,
+              "log_loss_nonzero": 0.2617500392945966,
+              "coverage80": 0.7578125,
+              "coverage95": 0.859375,
+              "MAE_median": 0.031117826043642112,
+              "mean_nonzero_probability": 0.9564586281776428,
+              "empirical_nonzero_rate": 0.9296875
+            },
+            "moment_rule_prior": {
+              "MQS": 0.020994869332054897,
+              "WIS": 0.01796214581496363,
+              "CRPS": 0.023887355228646642,
+              "Brier": 0.06632297879365634,
+              "log_loss_nonzero": 0.2636349761459311,
+              "coverage80": 0.7578125,
+              "coverage95": 0.8671875,
+              "MAE_median": 0.031091665775409918,
+              "mean_nonzero_probability": 0.9447639863938093,
+              "empirical_nonzero_rate": 0.9296875
+            },
+            "moment_neural_prior": {
+              "MQS": 0.020990352284390966,
+              "WIS": 0.017951107728555057,
+              "CRPS": 0.023882861648890388,
+              "Brier": 0.06576183583928655,
+              "log_loss_nonzero": 0.25504002588519337,
+              "coverage80": 0.765625,
+              "coverage95": 0.875,
+              "MAE_median": 0.031022097613738107,
+              "mean_nonzero_probability": 0.9247973083984107,
+              "empirical_nonzero_rate": 0.9296875
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.021693572870670523,
+              "WIS": 0.018959085970825983,
+              "CRPS": 0.024227921855542595,
+              "Brier": 0.06529945080561411,
+              "log_loss_nonzero": 0.25024347713308703,
+              "coverage80": 0.796875,
+              "coverage95": 0.890625,
+              "MAE_median": 0.03002546224534383,
+              "mean_nonzero_probability": 0.918440300039947,
+              "empirical_nonzero_rate": 0.9296875
+            }
+          }
+        },
+        "10": {
+          "n": 125,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.026921083404710635,
+              "WIS": 0.02346335427450772,
+              "CRPS": 0.030196499261158,
+              "Brier": 0.008216402590655434,
+              "log_loss_nonzero": 0.054449064433574675,
+              "coverage80": 0.768,
+              "coverage95": 0.872,
+              "MAE_median": 0.03824442118049411,
+              "mean_nonzero_probability": 0.9752550721168518,
+              "empirical_nonzero_rate": 0.992
+            },
+            "direct_rule_prior": {
+              "MQS": 0.026139961247172345,
+              "WIS": 0.02264904717121585,
+              "CRPS": 0.02946636893193094,
+              "Brier": 0.008161864983378848,
+              "log_loss_nonzero": 0.05409471640735865,
+              "coverage80": 0.776,
+              "coverage95": 0.872,
+              "MAE_median": 0.037714650536263376,
+              "mean_nonzero_probability": 0.9816690683364868,
+              "empirical_nonzero_rate": 0.992
+            },
+            "direct_neural_prior": {
+              "MQS": 0.02608360985629594,
+              "WIS": 0.022590809253398937,
+              "CRPS": 0.02941243772791488,
+              "Brier": 0.00841964849570573,
+              "log_loss_nonzero": 0.057562528163194654,
+              "coverage80": 0.768,
+              "coverage95": 0.872,
+              "MAE_median": 0.037625810498297434,
+              "mean_nonzero_probability": 0.9745134115219116,
+              "empirical_nonzero_rate": 0.992
+            },
+            "empirical_constant": {
+              "MQS": 0.02789887807275388,
+              "WIS": 0.02471673524626922,
+              "CRPS": 0.03094712999364753,
+              "Brier": 0.008216404043485906,
+              "log_loss_nonzero": 0.054449094783967956,
+              "coverage80": 0.768,
+              "coverage95": 0.904,
+              "MAE_median": 0.038318697640324535,
+              "mean_nonzero_probability": 0.975254730713246,
+              "empirical_nonzero_rate": 0.992
+            },
+            "gaussian_constant": {
+              "MQS": 0.0288567239802069,
+              "WIS": 0.025516562484279432,
+              "CRPS": 0.03205793968191529,
+              "Brier": 0.008,
+              "log_loss_nonzero": 0.22104834590413863,
+              "coverage80": 0.84,
+              "coverage95": 0.888,
+              "MAE_median": 0.038333939823211635,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.992
+            },
+            "moment_static_prior": {
+              "MQS": 0.026166894456054485,
+              "WIS": 0.022731228529876888,
+              "CRPS": 0.029423493725770213,
+              "Brier": 0.008216402590655434,
+              "log_loss_nonzero": 0.054449064683373946,
+              "coverage80": 0.768,
+              "coverage95": 0.864,
+              "MAE_median": 0.037633013709611175,
+              "mean_nonzero_probability": 0.9752547740936279,
+              "empirical_nonzero_rate": 0.992
+            },
+            "moment_rule_prior": {
+              "MQS": 0.02617239554417083,
+              "WIS": 0.022725096960136786,
+              "CRPS": 0.02943554609556376,
+              "Brier": 0.008161864983378848,
+              "log_loss_nonzero": 0.05409471683292722,
+              "coverage80": 0.768,
+              "coverage95": 0.864,
+              "MAE_median": 0.03764516616948911,
+              "mean_nonzero_probability": 0.9816691703796386,
+              "empirical_nonzero_rate": 0.992
+            },
+            "moment_neural_prior": {
+              "MQS": 0.026170790941521176,
+              "WIS": 0.022720867023230618,
+              "CRPS": 0.02943218780203766,
+              "Brier": 0.00839443593733111,
+              "log_loss_nonzero": 0.05704828348810803,
+              "coverage80": 0.768,
+              "coverage95": 0.864,
+              "MAE_median": 0.03760113424282022,
+              "mean_nonzero_probability": 0.9749171967506409,
+              "empirical_nonzero_rate": 0.992
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.027846981486284596,
+              "WIS": 0.024619584097060852,
+              "CRPS": 0.03084433858583635,
+              "Brier": 0.008620548918849402,
+              "log_loss_nonzero": 0.05963410178878468,
+              "coverage80": 0.792,
+              "coverage95": 0.888,
+              "MAE_median": 0.038256665032697236,
+              "mean_nonzero_probability": 0.9682096593379974,
+              "empirical_nonzero_rate": 0.992
+            }
+          }
+        },
+        "20": {
+          "n": 120,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.03630266360237897,
+              "WIS": 0.030613886351194546,
+              "CRPS": 0.04154340942732572,
+              "Brier": 0.008275427551901278,
+              "log_loss_nonzero": 0.048747781796070436,
+              "coverage80": 0.7583333333333333,
+              "coverage95": 0.85,
+              "MAE_median": 0.05497117392382448,
+              "mean_nonzero_probability": 0.9882698059082031,
+              "empirical_nonzero_rate": 0.9916666666666667
+            },
+            "direct_rule_prior": {
+              "MQS": 0.035626807290439086,
+              "WIS": 0.03001685216510841,
+              "CRPS": 0.040788967186998606,
+              "Brier": 0.008526043976584496,
+              "log_loss_nonzero": 0.05663728900253773,
+              "coverage80": 0.75,
+              "coverage95": 0.85,
+              "MAE_median": 0.0541684583283184,
+              "mean_nonzero_probability": 0.9822184443473816,
+              "empirical_nonzero_rate": 0.9916666666666667
+            },
+            "direct_neural_prior": {
+              "MQS": 0.03553800481912058,
+              "WIS": 0.029917678757635017,
+              "CRPS": 0.04070535037435378,
+              "Brier": 0.00878898351655657,
+              "log_loss_nonzero": 0.059363301509680846,
+              "coverage80": 0.7583333333333333,
+              "coverage95": 0.85,
+              "MAE_median": 0.054053834594992065,
+              "mean_nonzero_probability": 0.9755180478096008,
+              "empirical_nonzero_rate": 0.9916666666666667
+            },
+            "empirical_constant": {
+              "MQS": 0.034825104717496884,
+              "WIS": 0.030281504691559324,
+              "CRPS": 0.03912072295531876,
+              "Brier": 0.00827542762790138,
+              "log_loss_nonzero": 0.048747785008092355,
+              "coverage80": 0.7583333333333333,
+              "coverage95": 0.875,
+              "MAE_median": 0.04980270488340474,
+              "mean_nonzero_probability": 0.9882697947214076,
+              "empirical_nonzero_rate": 0.9916666666666667
+            },
+            "gaussian_constant": {
+              "MQS": 0.035339556627778844,
+              "WIS": 0.03069773079089897,
+              "CRPS": 0.03974030425375137,
+              "Brier": 0.008333333333333333,
+              "log_loss_nonzero": 0.23025869365010282,
+              "coverage80": 0.775,
+              "coverage95": 0.8666666666666667,
+              "MAE_median": 0.04969153429740774,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9916666666666667
+            },
+            "moment_static_prior": {
+              "MQS": 0.03471943780698255,
+              "WIS": 0.029301896107503365,
+              "CRPS": 0.039682248909875824,
+              "Brier": 0.008275427551901278,
+              "log_loss_nonzero": 0.048747781730135525,
+              "coverage80": 0.7666666666666667,
+              "coverage95": 0.8416666666666667,
+              "MAE_median": 0.053290283257587626,
+              "mean_nonzero_probability": 0.9882698059082031,
+              "empirical_nonzero_rate": 0.9916666666666667
+            },
+            "moment_rule_prior": {
+              "MQS": 0.03466620568029769,
+              "WIS": 0.029268640667950787,
+              "CRPS": 0.039626720372339067,
+              "Brier": 0.008526043976584496,
+              "log_loss_nonzero": 0.05663728781975475,
+              "coverage80": 0.7666666666666667,
+              "coverage95": 0.85,
+              "MAE_median": 0.053262680007027455,
+              "mean_nonzero_probability": 0.9822185297807058,
+              "empirical_nonzero_rate": 0.9916666666666667
+            },
+            "moment_neural_prior": {
+              "MQS": 0.034663876038319254,
+              "WIS": 0.029244416208771405,
+              "CRPS": 0.039633022418744626,
+              "Brier": 0.008748932542407642,
+              "log_loss_nonzero": 0.05899412783104049,
+              "coverage80": 0.7666666666666667,
+              "coverage95": 0.85,
+              "MAE_median": 0.05327810186375535,
+              "mean_nonzero_probability": 0.9761738086740176,
+              "empirical_nonzero_rate": 0.9916666666666667
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.035023297696270536,
+              "WIS": 0.030133663065027235,
+              "CRPS": 0.03969259726876885,
+              "Brier": 0.00887046971748638,
+              "log_loss_nonzero": 0.05947881006606844,
+              "coverage80": 0.7833333333333333,
+              "coverage95": 0.875,
+              "MAE_median": 0.05315170699551737,
+              "mean_nonzero_probability": 0.9735173096259435,
+              "empirical_nonzero_rate": 0.9916666666666667
+            }
+          }
+        }
+      }
+    },
+    "HUBEI": {
+      "audit": {
+        "cut_index": 1173,
+        "validation_start_index": 879,
+        "lookback": 128,
+        "step": 2,
+        "train": 1485,
+        "validation": 569,
+        "refit": 2073,
+        "test": 567,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 878,
+        "last_refit_target": 1172,
+        "test_zero_share": {
+          "1": 0.0547945205479452,
+          "5": 0.006944444444444444,
+          "10": 0.014184397163120567,
+          "20": 0.007352941176470588
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "initialization_errors": {
+        "tr": 2.220446049250313e-16,
+        "rf": 2.220446049250313e-16
+      },
+      "aligned_with_saved_direct": true,
+      "fits": {
+        "moment_static_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 4,
+            "inner_epochs": 20,
+            "refit_epochs": 4,
+            "validation_MQS_standardized": 0.4717354408006879,
+            "validation_history": [
+              [
+                1,
+                0.4766688851989496
+              ],
+              [
+                2,
+                0.4741545410549079
+              ],
+              [
+                4,
+                0.4717354408006879
+              ],
+              [
+                6,
+                0.47787393439975306
+              ],
+              [
+                8,
+                0.49010333945558676
+              ],
+              [
+                10,
+                0.501101782896689
+              ],
+              [
+                12,
+                0.5048786240954237
+              ],
+              [
+                14,
+                0.5071743776651977
+              ],
+              [
+                16,
+                0.5103311419026418
+              ],
+              [
+                18,
+                0.5098530689667927
+              ],
+              [
+                20,
+                0.5154716153809383
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.0,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.981977671962987
+          },
+          {
+            "seed": 22,
+            "best_epoch": 2,
+            "inner_epochs": 20,
+            "refit_epochs": 2,
+            "validation_MQS_standardized": 0.47663543331739316,
+            "validation_history": [
+              [
+                1,
+                0.47783507154591576
+              ],
+              [
+                2,
+                0.47663543331739316
+              ],
+              [
+                4,
+                0.47744134977221414
+              ],
+              [
+                6,
+                0.4859378055675926
+              ],
+              [
+                8,
+                0.498357544500688
+              ],
+              [
+                10,
+                0.5063839108169218
+              ],
+              [
+                12,
+                0.512022515995569
+              ],
+              [
+                14,
+                0.5154590957156121
+              ],
+              [
+                16,
+                0.5196565244600376
+              ],
+              [
+                18,
+                0.521944556235401
+              ],
+              [
+                20,
+                0.5251972270234669
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.0,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.981977671962987
+          }
+        ],
+        "moment_rule_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 4,
+            "inner_epochs": 20,
+            "refit_epochs": 4,
+            "validation_MQS_standardized": 0.4717971234535653,
+            "validation_history": [
+              [
+                1,
+                0.4766191424438439
+              ],
+              [
+                2,
+                0.474138768121313
+              ],
+              [
+                4,
+                0.4717971234535653
+              ],
+              [
+                6,
+                0.4779947744641314
+              ],
+              [
+                8,
+                0.4901078451243554
+              ],
+              [
+                10,
+                0.5009027320757948
+              ],
+              [
+                12,
+                0.504555897561179
+              ],
+              [
+                14,
+                0.506832287532352
+              ],
+              [
+                16,
+                0.5099058560376197
+              ],
+              [
+                18,
+                0.5094271415282656
+              ],
+              [
+                20,
+                0.5148828682057853
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8000001311302185,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.975152174316386
+          },
+          {
+            "seed": 22,
+            "best_epoch": 2,
+            "inner_epochs": 20,
+            "refit_epochs": 2,
+            "validation_MQS_standardized": 0.4766463948778446,
+            "validation_history": [
+              [
+                1,
+                0.47781243998280726
+              ],
+              [
+                2,
+                0.4766463948778446
+              ],
+              [
+                4,
+                0.4774684395680674
+              ],
+              [
+                6,
+                0.48592389477343967
+              ],
+              [
+                8,
+                0.4983041036125178
+              ],
+              [
+                10,
+                0.5063915134910083
+              ],
+              [
+                12,
+                0.5119936970838853
+              ],
+              [
+                14,
+                0.5153774676982736
+              ],
+              [
+                16,
+                0.5195696266331701
+              ],
+              [
+                18,
+                0.5218968866783933
+              ],
+              [
+                20,
+                0.5252248009594468
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8000001311302185,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.975152174316386
+          }
+        ],
+        "moment_neural_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 4,
+            "inner_epochs": 20,
+            "refit_epochs": 4,
+            "validation_MQS_standardized": 0.4716510027579056,
+            "validation_history": [
+              [
+                1,
+                0.47659063464893936
+              ],
+              [
+                2,
+                0.4740747244972085
+              ],
+              [
+                4,
+                0.4716510027579056
+              ],
+              [
+                6,
+                0.477800992107361
+              ],
+              [
+                8,
+                0.48988404628354837
+              ],
+              [
+                10,
+                0.5006564247661639
+              ],
+              [
+                12,
+                0.5043199065944466
+              ],
+              [
+                14,
+                0.5066145543290546
+              ],
+              [
+                16,
+                0.509653435291402
+              ],
+              [
+                18,
+                0.5092693862791687
+              ],
+              [
+                20,
+                0.5147699998692343
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.818321168422699,
+            "mean_prior_logit_residual": -0.18457765877246857,
+            "mean_nonzero_probability": 0.9700161641236966
+          },
+          {
+            "seed": 22,
+            "best_epoch": 2,
+            "inner_epochs": 20,
+            "refit_epochs": 2,
+            "validation_MQS_standardized": 0.47658893199129176,
+            "validation_history": [
+              [
+                1,
+                0.4777847477462746
+              ],
+              [
+                2,
+                0.47658893199129176
+              ],
+              [
+                4,
+                0.4773311232637251
+              ],
+              [
+                6,
+                0.4857411862471921
+              ],
+              [
+                8,
+                0.49809162793954637
+              ],
+              [
+                10,
+                0.5061674560209222
+              ],
+              [
+                12,
+                0.5117876095646829
+              ],
+              [
+                14,
+                0.5151386495808947
+              ],
+              [
+                16,
+                0.5192799619475179
+              ],
+              [
+                18,
+                0.5216546652675962
+              ],
+              [
+                20,
+                0.5250506280953556
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8093967437744141,
+            "mean_prior_logit_residual": -0.07594241946935654,
+            "mean_nonzero_probability": 0.97298840019438
+          }
+        ],
+        "moment_neural_fixed_budget": [
+          {
+            "seed": 11,
+            "best_epoch": 20,
+            "inner_epochs": 36,
+            "refit_epochs": 20,
+            "validation_MQS_standardized": 0.4667932192647413,
+            "validation_history": [
+              [
+                1,
+                0.47853333242720136
+              ],
+              [
+                2,
+                0.4780810949382306
+              ],
+              [
+                4,
+                0.4768345706319781
+              ],
+              [
+                6,
+                0.4751411596254398
+              ],
+              [
+                8,
+                0.4728148230440353
+              ],
+              [
+                10,
+                0.47057523180363475
+              ],
+              [
+                12,
+                0.4685099653682879
+              ],
+              [
+                14,
+                0.46739569274797954
+              ],
+              [
+                16,
+                0.46714223767829705
+              ],
+              [
+                18,
+                0.4670723969272062
+              ],
+              [
+                20,
+                0.4667932192647413
+              ],
+              [
+                22,
+                0.46698939013666646
+              ],
+              [
+                24,
+                0.4678391317276774
+              ],
+              [
+                26,
+                0.46870764978938956
+              ],
+              [
+                28,
+                0.4695611163545139
+              ],
+              [
+                30,
+                0.4703179978363227
+              ],
+              [
+                32,
+                0.47123478464594615
+              ],
+              [
+                34,
+                0.47160385465928356
+              ],
+              [
+                36,
+                0.47202753373970263
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8353878855705261,
+            "mean_prior_logit_residual": -0.6030431389808655,
+            "mean_nonzero_probability": 0.9541281445947274
+          },
+          {
+            "seed": 22,
+            "best_epoch": 16,
+            "inner_epochs": 32,
+            "refit_epochs": 16,
+            "validation_MQS_standardized": 0.46667685424366273,
+            "validation_history": [
+              [
+                1,
+                0.4786102035670039
+              ],
+              [
+                2,
+                0.478195617206341
+              ],
+              [
+                4,
+                0.47702432243155846
+              ],
+              [
+                6,
+                0.47529208953574337
+              ],
+              [
+                8,
+                0.47275261306062466
+              ],
+              [
+                10,
+                0.4702221632668106
+              ],
+              [
+                12,
+                0.4684654082756359
+              ],
+              [
+                14,
+                0.4670851565461191
+              ],
+              [
+                16,
+                0.46667685424366273
+              ],
+              [
+                18,
+                0.4671270718723618
+              ],
+              [
+                20,
+                0.4675549145937365
+              ],
+              [
+                22,
+                0.46877898950054353
+              ],
+              [
+                24,
+                0.46946220678193623
+              ],
+              [
+                26,
+                0.4693949107818364
+              ],
+              [
+                28,
+                0.4696868564046873
+              ],
+              [
+                30,
+                0.46984568487754935
+              ],
+              [
+                32,
+                0.47009474051649786
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8688058853149414,
+            "mean_prior_logit_residual": -0.6186792850494385,
+            "mean_nonzero_probability": 0.9533001930835596
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 146,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.010748814727128835,
+              "WIS": 0.009256916955089213,
+              "CRPS": 0.012160912665082346,
+              "Brier": 0.051910920761765664,
+              "log_loss_nonzero": 0.21371362480806977,
+              "coverage80": 0.7671232876712328,
+              "coverage95": 0.8561643835616438,
+              "MAE_median": 0.015329097159958388,
+              "mean_nonzero_probability": 0.9561068415641785,
+              "empirical_nonzero_rate": 0.9452054794520548
+            },
+            "direct_rule_prior": {
+              "MQS": 0.01073461519903263,
+              "WIS": 0.009246306547823402,
+              "CRPS": 0.012142332875473895,
+              "Brier": 0.05136203363933497,
+              "log_loss_nonzero": 0.20694521396127466,
+              "coverage80": 0.7671232876712328,
+              "coverage95": 0.8561643835616438,
+              "MAE_median": 0.015282968857080609,
+              "mean_nonzero_probability": 0.9497883319854736,
+              "empirical_nonzero_rate": 0.9452054794520548
+            },
+            "direct_neural_prior": {
+              "MQS": 0.010726632834707655,
+              "WIS": 0.009242066156967701,
+              "CRPS": 0.012131236563273733,
+              "Brier": 0.05144026167452083,
+              "log_loss_nonzero": 0.2073068058194771,
+              "coverage80": 0.7671232876712328,
+              "coverage95": 0.8561643835616438,
+              "MAE_median": 0.015268339641645494,
+              "mean_nonzero_probability": 0.9398118257522583,
+              "empirical_nonzero_rate": 0.9452054794520548
+            },
+            "empirical_constant": {
+              "MQS": 0.010852571844236374,
+              "WIS": 0.009350194396272755,
+              "CRPS": 0.012304251235951913,
+              "Brier": 0.05191092138673784,
+              "log_loss_nonzero": 0.2137136317378604,
+              "coverage80": 0.7191780821917808,
+              "coverage95": 0.958904109589041,
+              "MAE_median": 0.01549152800060233,
+              "mean_nonzero_probability": 0.9561068702290074,
+              "empirical_nonzero_rate": 0.9452054794520548
+            },
+            "gaussian_constant": {
+              "MQS": 0.010949048065134836,
+              "WIS": 0.00934243114914455,
+              "CRPS": 0.01248816790178843,
+              "Brier": 0.0547945205479452,
+              "log_loss_nonzero": 1.514029766460855,
+              "coverage80": 0.8287671232876712,
+              "coverage95": 0.9383561643835616,
+              "MAE_median": 0.015485808375344948,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9452054794520548
+            },
+            "moment_static_prior": {
+              "MQS": 0.010699855139622865,
+              "WIS": 0.009194687275571121,
+              "CRPS": 0.01213327519506788,
+              "Brier": 0.051910920761765664,
+              "log_loss_nonzero": 0.2137136242917825,
+              "coverage80": 0.7808219178082192,
+              "coverage95": 0.8835616438356164,
+              "MAE_median": 0.01531955566905699,
+              "mean_nonzero_probability": 0.9561068415641785,
+              "empirical_nonzero_rate": 0.9452054794520548
+            },
+            "moment_rule_prior": {
+              "MQS": 0.010695160066072976,
+              "WIS": 0.009195044375302313,
+              "CRPS": 0.012122334570651316,
+              "Brier": 0.05136203363933497,
+              "log_loss_nonzero": 0.2069452134737435,
+              "coverage80": 0.7808219178082192,
+              "coverage95": 0.8835616438356164,
+              "MAE_median": 0.01527266489250717,
+              "mean_nonzero_probability": 0.9497882715643269,
+              "empirical_nonzero_rate": 0.9452054794520548
+            },
+            "moment_neural_prior": {
+              "MQS": 0.010689327400521033,
+              "WIS": 0.009191682282765032,
+              "CRPS": 0.012114907077672987,
+              "Brier": 0.05135560245004813,
+              "log_loss_nonzero": 0.2067752301137403,
+              "coverage80": 0.7808219178082192,
+              "coverage95": 0.8835616438356164,
+              "MAE_median": 0.015263788872517552,
+              "mean_nonzero_probability": 0.9421697060947549,
+              "empirical_nonzero_rate": 0.9452054794520548
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.010731215340810498,
+              "WIS": 0.009274687420934409,
+              "CRPS": 0.012130039212403819,
+              "Brier": 0.05303626216547982,
+              "log_loss_nonzero": 0.2163399840288518,
+              "coverage80": 0.7808219178082192,
+              "coverage95": 0.9315068493150684,
+              "MAE_median": 0.015411170787361619,
+              "mean_nonzero_probability": 0.9062967496375515,
+              "empirical_nonzero_rate": 0.9452054794520548
+            }
+          }
+        },
+        "5": {
+          "n": 144,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.014730745618006314,
+              "WIS": 0.012412974393886254,
+              "CRPS": 0.01694682456349715,
+              "Brier": 0.006916920129446187,
+              "log_loss_nonzero": 0.042493799035178706,
+              "coverage80": 0.8402777777777778,
+              "coverage95": 0.9236111111111112,
+              "MAE_median": 0.021785268243285368,
+              "mean_nonzero_probability": 0.9885057806968689,
+              "empirical_nonzero_rate": 0.9930555555555556
+            },
+            "direct_rule_prior": {
+              "MQS": 0.014724994384929083,
+              "WIS": 0.012406766006479594,
+              "CRPS": 0.016942457384727574,
+              "Brier": 0.00696515000568127,
+              "log_loss_nonzero": 0.04370661473108663,
+              "coverage80": 0.8402777777777778,
+              "coverage95": 0.9236111111111112,
+              "MAE_median": 0.02173171997752478,
+              "mean_nonzero_probability": 0.9830186367034912,
+              "empirical_nonzero_rate": 0.9930555555555556
+            },
+            "direct_neural_prior": {
+              "MQS": 0.014717844782558566,
+              "WIS": 0.012403105379976262,
+              "CRPS": 0.016933909486644392,
+              "Brier": 0.0070508335160989815,
+              "log_loss_nonzero": 0.04582610820135516,
+              "coverage80": 0.8402777777777778,
+              "coverage95": 0.9236111111111112,
+              "MAE_median": 0.02170914254831433,
+              "mean_nonzero_probability": 0.9796549677848816,
+              "empirical_nonzero_rate": 0.9930555555555556
+            },
+            "empirical_constant": {
+              "MQS": 0.014656527521390498,
+              "WIS": 0.012494947846099443,
+              "CRPS": 0.01673976999684026,
+              "Brier": 0.006916919892544147,
+              "log_loss_nonzero": 0.042493789736169796,
+              "coverage80": 0.7986111111111112,
+              "coverage95": 0.9722222222222222,
+              "MAE_median": 0.021403036354446577,
+              "mean_nonzero_probability": 0.9885057471264369,
+              "empirical_nonzero_rate": 0.9930555555555556
+            },
+            "gaussian_constant": {
+              "MQS": 0.01586009044658972,
+              "WIS": 0.013511605729844202,
+              "CRPS": 0.01811926878684139,
+              "Brier": 0.006944444444444444,
+              "log_loss_nonzero": 0.19188224470858573,
+              "coverage80": 0.8888888888888888,
+              "coverage95": 0.9791666666666666,
+              "MAE_median": 0.022229983968410656,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9930555555555556
+            },
+            "moment_static_prior": {
+              "MQS": 0.01477751002362778,
+              "WIS": 0.012468748967212154,
+              "CRPS": 0.017001116627207845,
+              "Brier": 0.006916920129446187,
+              "log_loss_nonzero": 0.04249380016122514,
+              "coverage80": 0.8611111111111112,
+              "coverage95": 0.9375,
+              "MAE_median": 0.021820636638046276,
+              "mean_nonzero_probability": 0.9885057210922241,
+              "empirical_nonzero_rate": 0.9930555555555556
+            },
+            "moment_rule_prior": {
+              "MQS": 0.014768689692236702,
+              "WIS": 0.012461816132173807,
+              "CRPS": 0.016989756308704758,
+              "Brier": 0.00696515000568127,
+              "log_loss_nonzero": 0.04370661330019649,
+              "coverage80": 0.8611111111111112,
+              "coverage95": 0.9375,
+              "MAE_median": 0.02176525680243776,
+              "mean_nonzero_probability": 0.9830186292529106,
+              "empirical_nonzero_rate": 0.9930555555555556
+            },
+            "moment_neural_prior": {
+              "MQS": 0.014765157952244522,
+              "WIS": 0.012460376852886777,
+              "CRPS": 0.01698509062127129,
+              "Brier": 0.007028762600849028,
+              "log_loss_nonzero": 0.04535348492885702,
+              "coverage80": 0.8611111111111112,
+              "coverage95": 0.9375,
+              "MAE_median": 0.021751262120311848,
+              "mean_nonzero_probability": 0.9804346522109376,
+              "empirical_nonzero_rate": 0.9930555555555556
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.014505325329042331,
+              "WIS": 0.012413242236880296,
+              "CRPS": 0.016499074701256312,
+              "Brier": 0.007537466482585908,
+              "log_loss_nonzero": 0.05445265651992004,
+              "coverage80": 0.8194444444444444,
+              "coverage95": 0.9861111111111112,
+              "MAE_median": 0.021089707732614222,
+              "mean_nonzero_probability": 0.9677093099388812,
+              "empirical_nonzero_rate": 0.9930555555555556
+            }
+          }
+        },
+        "10": {
+          "n": 141,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.016832988047316404,
+              "WIS": 0.013877869151606046,
+              "CRPS": 0.01966124463962955,
+              "Brier": 0.013990200782645585,
+              "log_loss_nonzero": 0.07473268428592818,
+              "coverage80": 0.8652482269503546,
+              "coverage95": 0.9574468085106383,
+              "MAE_median": 0.026165524689332455,
+              "mean_nonzero_probability": 0.9884615540504456,
+              "empirical_nonzero_rate": 0.9858156028368794
+            },
+            "direct_rule_prior": {
+              "MQS": 0.016841031778284356,
+              "WIS": 0.013871092392833923,
+              "CRPS": 0.019668026460265994,
+              "Brier": 0.014108564333795825,
+              "log_loss_nonzero": 0.07777071712498969,
+              "coverage80": 0.8652482269503546,
+              "coverage95": 0.9574468085106383,
+              "MAE_median": 0.026075338230946,
+              "mean_nonzero_probability": 0.98268723487854,
+              "empirical_nonzero_rate": 0.9858156028368794
+            },
+            "direct_neural_prior": {
+              "MQS": 0.016840996305802033,
+              "WIS": 0.013872825946555907,
+              "CRPS": 0.019664170010838367,
+              "Brier": 0.014157536683814068,
+              "log_loss_nonzero": 0.07810234898661679,
+              "coverage80": 0.8652482269503546,
+              "coverage95": 0.9574468085106383,
+              "MAE_median": 0.026043428895347203,
+              "mean_nonzero_probability": 0.9797437787055969,
+              "empirical_nonzero_rate": 0.9858156028368794
+            },
+            "empirical_constant": {
+              "MQS": 0.01670567589561366,
+              "WIS": 0.014089148762296687,
+              "CRPS": 0.019234514826113148,
+              "Brier": 0.013990201015569267,
+              "log_loss_nonzero": 0.07473269216608253,
+              "coverage80": 0.8156028368794326,
+              "coverage95": 1.0,
+              "MAE_median": 0.02535523362797787,
+              "mean_nonzero_probability": 0.9884615384615385,
+              "empirical_nonzero_rate": 0.9858156028368794
+            },
+            "gaussian_constant": {
+              "MQS": 0.018065030982732454,
+              "WIS": 0.015211223383216173,
+              "CRPS": 0.02079983156360267,
+              "Brier": 0.014184397163120567,
+              "log_loss_nonzero": 0.3919296913186219,
+              "coverage80": 0.9432624113475178,
+              "coverage95": 1.0,
+              "MAE_median": 0.02652582171656043,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9858156028368794
+            },
+            "moment_static_prior": {
+              "MQS": 0.016982928127580576,
+              "WIS": 0.01410052123318178,
+              "CRPS": 0.019744264881605217,
+              "Brier": 0.013990200782645585,
+              "log_loss_nonzero": 0.07473268195492107,
+              "coverage80": 0.8652482269503546,
+              "coverage95": 0.9716312056737588,
+              "MAE_median": 0.02595331024420895,
+              "mean_nonzero_probability": 0.9884614944458008,
+              "empirical_nonzero_rate": 0.9858156028368794
+            },
+            "moment_rule_prior": {
+              "MQS": 0.0169831874770333,
+              "WIS": 0.01409354378267035,
+              "CRPS": 0.019739983311114002,
+              "Brier": 0.014108564333795825,
+              "log_loss_nonzero": 0.0777707181031173,
+              "coverage80": 0.8723404255319149,
+              "coverage95": 0.9716312056737588,
+              "MAE_median": 0.025852662301278573,
+              "mean_nonzero_probability": 0.9826873058968402,
+              "empirical_nonzero_rate": 0.9858156028368794
+            },
+            "moment_neural_prior": {
+              "MQS": 0.016983205932398705,
+              "WIS": 0.014093950556510278,
+              "CRPS": 0.01973820100719479,
+              "Brier": 0.01414861607021161,
+              "log_loss_nonzero": 0.07812206938170174,
+              "coverage80": 0.8723404255319149,
+              "coverage95": 0.9716312056737588,
+              "MAE_median": 0.02582764009548093,
+              "mean_nonzero_probability": 0.9803438778464676,
+              "empirical_nonzero_rate": 0.9858156028368794
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.01655955171582216,
+              "WIS": 0.014101310690445257,
+              "CRPS": 0.01888739626919401,
+              "Brier": 0.014552170037628624,
+              "log_loss_nonzero": 0.08260741502001977,
+              "coverage80": 0.8723404255319149,
+              "coverage95": 0.9929078014184397,
+              "MAE_median": 0.025171170432704174,
+              "mean_nonzero_probability": 0.9683072560645164,
+              "empirical_nonzero_rate": 0.9858156028368794
+            }
+          }
+        },
+        "20": {
+          "n": 136,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.0208699686447458,
+              "WIS": 0.017686050264964667,
+              "CRPS": 0.02392189571423496,
+              "Brier": 0.007310912586263766,
+              "log_loss_nonzero": 0.04467878004481249,
+              "coverage80": 0.875,
+              "coverage95": 0.9338235294117647,
+              "MAE_median": 0.029752352729539303,
+              "mean_nonzero_probability": 0.9961165189743042,
+              "empirical_nonzero_rate": 0.9926470588235294
+            },
+            "direct_rule_prior": {
+              "MQS": 0.02086336099246805,
+              "WIS": 0.017676689445583475,
+              "CRPS": 0.023909820796413628,
+              "Brier": 0.007357707336080132,
+              "log_loss_nonzero": 0.04455034116365235,
+              "coverage80": 0.875,
+              "coverage95": 0.9338235294117647,
+              "MAE_median": 0.029480955493843414,
+              "mean_nonzero_probability": 0.9862397313117981,
+              "empirical_nonzero_rate": 0.9926470588235294
+            },
+            "direct_neural_prior": {
+              "MQS": 0.020854593460509715,
+              "WIS": 0.017673075415323244,
+              "CRPS": 0.02389728050905736,
+              "Brier": 0.007367512175504289,
+              "log_loss_nonzero": 0.04491773659966009,
+              "coverage80": 0.875,
+              "coverage95": 0.9338235294117647,
+              "MAE_median": 0.029430000644224377,
+              "mean_nonzero_probability": 0.9839556217193604,
+              "empirical_nonzero_rate": 0.9926470588235294
+            },
+            "empirical_constant": {
+              "MQS": 0.020605731884895888,
+              "WIS": 0.017899768243125214,
+              "CRPS": 0.023101202645605987,
+              "Brier": 0.007310912488286857,
+              "log_loss_nonzero": 0.04467876626216391,
+              "coverage80": 0.8897058823529411,
+              "coverage95": 0.9926470588235294,
+              "MAE_median": 0.029275966141497394,
+              "mean_nonzero_probability": 0.9961165048543689,
+              "empirical_nonzero_rate": 0.9926470588235294
+            },
+            "gaussian_constant": {
+              "MQS": 0.022921705411521217,
+              "WIS": 0.019693716893561114,
+              "CRPS": 0.026100479087665173,
+              "Brier": 0.007352941176470588,
+              "log_loss_nonzero": 0.2031694355737378,
+              "coverage80": 0.9411764705882353,
+              "coverage95": 0.9852941176470589,
+              "MAE_median": 0.03233887730782541,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9926470588235294
+            },
+            "moment_static_prior": {
+              "MQS": 0.02117448293954494,
+              "WIS": 0.018256640189609683,
+              "CRPS": 0.024027976987052058,
+              "Brier": 0.007310912586263766,
+              "log_loss_nonzero": 0.04467877892589289,
+              "coverage80": 0.875,
+              "coverage95": 0.9411764705882353,
+              "MAE_median": 0.02966919623406907,
+              "mean_nonzero_probability": 0.9961165189743042,
+              "empirical_nonzero_rate": 0.9926470588235294
+            },
+            "moment_rule_prior": {
+              "MQS": 0.02115472072925702,
+              "WIS": 0.018237246724935357,
+              "CRPS": 0.023998767938978927,
+              "Brier": 0.007357707336080132,
+              "log_loss_nonzero": 0.04455034006256765,
+              "coverage80": 0.875,
+              "coverage95": 0.9411764705882353,
+              "MAE_median": 0.02938417861118222,
+              "mean_nonzero_probability": 0.9862397238612175,
+              "empirical_nonzero_rate": 0.9926470588235294
+            },
+            "moment_neural_prior": {
+              "MQS": 0.021151621104437142,
+              "WIS": 0.018235452506138946,
+              "CRPS": 0.023994240758252947,
+              "Brier": 0.007374889764402311,
+              "log_loss_nonzero": 0.0450566544638451,
+              "coverage80": 0.875,
+              "coverage95": 0.9411764705882353,
+              "MAE_median": 0.0293457537978155,
+              "mean_nonzero_probability": 0.9843672073500997,
+              "empirical_nonzero_rate": 0.9926470588235294
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.02004784948689023,
+              "WIS": 0.01730833551655354,
+              "CRPS": 0.02254936220483722,
+              "Brier": 0.007667774108050875,
+              "log_loss_nonzero": 0.05077600534799086,
+              "coverage80": 0.8382352941176471,
+              "coverage95": 0.9779411764705882,
+              "MAE_median": 0.029299853930689568,
+              "mean_nonzero_probability": 0.9746701805030599,
+              "empirical_nonzero_rate": 0.9926470588235294
+            }
+          }
+        }
+      }
+    },
+    "EU": {
+      "audit": {
+        "cut_index": 1257,
+        "validation_start_index": 942,
+        "lookback": 128,
+        "step": 2,
+        "train": 1611,
+        "validation": 613,
+        "refit": 2241,
+        "test": 621,
+        "boundary_rows_recovered_for_refit": 17,
+        "last_train_target": 941,
+        "last_refit_target": 1256,
+        "test_zero_share": {
+          "1": 0.006289308176100629,
+          "5": 0.0,
+          "10": 0.0,
+          "20": 0.0
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false,
+        "local_prior": {
+          "lookback": 128,
+          "beta_alpha": 1,
+          "beta_beta": 1,
+          "history": "lp[t-W:t+1]; all h-return target endpoints <=t",
+          "observations_per_h": {
+            "1": 128,
+            "5": 124,
+            "10": 119,
+            "20": 109
+          },
+          "rule_local_weight": 0.8
+        }
+      },
+      "initialization_errors": {
+        "tr": 2.220446049250313e-16,
+        "rf": 2.220446049250313e-16
+      },
+      "aligned_with_saved_direct": true,
+      "fits": {
+        "moment_static_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 2,
+            "inner_epochs": 20,
+            "refit_epochs": 2,
+            "validation_MQS_standardized": 0.4797553427817073,
+            "validation_history": [
+              [
+                1,
+                0.4808397020954206
+              ],
+              [
+                2,
+                0.4797553427817073
+              ],
+              [
+                4,
+                0.48473280701109944
+              ],
+              [
+                6,
+                0.5015906601039004
+              ],
+              [
+                8,
+                0.5061027504289821
+              ],
+              [
+                10,
+                0.5093341876736801
+              ],
+              [
+                12,
+                0.5193540712162359
+              ],
+              [
+                14,
+                0.5305345186665515
+              ],
+              [
+                16,
+                0.5384015723172786
+              ],
+              [
+                18,
+                0.5453809533187461
+              ],
+              [
+                20,
+                0.5434374683845049
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.0,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.9964308587057387
+          },
+          {
+            "seed": 22,
+            "best_epoch": 2,
+            "inner_epochs": 20,
+            "refit_epochs": 2,
+            "validation_MQS_standardized": 0.47962247764701327,
+            "validation_history": [
+              [
+                1,
+                0.4808154076073932
+              ],
+              [
+                2,
+                0.47962247764701327
+              ],
+              [
+                4,
+                0.48401991330169125
+              ],
+              [
+                6,
+                0.49664939848473283
+              ],
+              [
+                8,
+                0.5156410106831124
+              ],
+              [
+                10,
+                0.5227517551221273
+              ],
+              [
+                12,
+                0.5264021947928528
+              ],
+              [
+                14,
+                0.5320444342454355
+              ],
+              [
+                16,
+                0.5319143731773022
+              ],
+              [
+                18,
+                0.5436928551353672
+              ],
+              [
+                20,
+                0.5524453690148657
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.0,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.9964308587057387
+          }
+        ],
+        "moment_rule_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 2,
+            "inner_epochs": 20,
+            "refit_epochs": 2,
+            "validation_MQS_standardized": 0.4796133838912302,
+            "validation_history": [
+              [
+                1,
+                0.48069574760416334
+              ],
+              [
+                2,
+                0.4796133838912302
+              ],
+              [
+                4,
+                0.48461259653254884
+              ],
+              [
+                6,
+                0.5015079467300061
+              ],
+              [
+                8,
+                0.5061080933017419
+              ],
+              [
+                10,
+                0.5094457647108753
+              ],
+              [
+                12,
+                0.5194711446794048
+              ],
+              [
+                14,
+                0.5306065756774139
+              ],
+              [
+                16,
+                0.538386054944202
+              ],
+              [
+                18,
+                0.545399644151784
+              ],
+              [
+                20,
+                0.5435787957789
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8000001907348633,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.9911365267159282
+          },
+          {
+            "seed": 22,
+            "best_epoch": 2,
+            "inner_epochs": 20,
+            "refit_epochs": 2,
+            "validation_MQS_standardized": 0.4794946136363302,
+            "validation_history": [
+              [
+                1,
+                0.48067090629593195
+              ],
+              [
+                2,
+                0.4794946136363302
+              ],
+              [
+                4,
+                0.4839224093758217
+              ],
+              [
+                6,
+                0.49664864798617553
+              ],
+              [
+                8,
+                0.5157300634582871
+              ],
+              [
+                10,
+                0.5228881523852759
+              ],
+              [
+                12,
+                0.526567792189023
+              ],
+              [
+                14,
+                0.5321550245293768
+              ],
+              [
+                16,
+                0.5320134310995591
+              ],
+              [
+                18,
+                0.5437620041317887
+              ],
+              [
+                20,
+                0.552481266773233
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8000001907348633,
+            "mean_prior_logit_residual": 0.0,
+            "mean_nonzero_probability": 0.9911365267159282
+          }
+        ],
+        "moment_neural_prior": [
+          {
+            "seed": 11,
+            "best_epoch": 2,
+            "inner_epochs": 20,
+            "refit_epochs": 2,
+            "validation_MQS_standardized": 0.47959801076145897,
+            "validation_history": [
+              [
+                1,
+                0.4806881915936048
+              ],
+              [
+                2,
+                0.47959801076145897
+              ],
+              [
+                4,
+                0.4845857764671922
+              ],
+              [
+                6,
+                0.5014769646532944
+              ],
+              [
+                8,
+                0.5060947412667414
+              ],
+              [
+                10,
+                0.5094614723945738
+              ],
+              [
+                12,
+                0.5195053743984178
+              ],
+              [
+                14,
+                0.5306593251489038
+              ],
+              [
+                16,
+                0.5384376888025372
+              ],
+              [
+                18,
+                0.5454700902732191
+              ],
+              [
+                20,
+                0.5437465909526262
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8157801032066345,
+            "mean_prior_logit_residual": -0.0774596706032753,
+            "mean_nonzero_probability": 0.9903111868626445
+          },
+          {
+            "seed": 22,
+            "best_epoch": 2,
+            "inner_epochs": 20,
+            "refit_epochs": 2,
+            "validation_MQS_standardized": 0.4794809183694576,
+            "validation_history": [
+              [
+                1,
+                0.48066264713651846
+              ],
+              [
+                2,
+                0.4794809183694576
+              ],
+              [
+                4,
+                0.4839042000942715
+              ],
+              [
+                6,
+                0.4966350578100481
+              ],
+              [
+                8,
+                0.5157430329215781
+              ],
+              [
+                10,
+                0.5229499435767597
+              ],
+              [
+                12,
+                0.5266787023326939
+              ],
+              [
+                14,
+                0.5322476548447364
+              ],
+              [
+                16,
+                0.5321262568949745
+              ],
+              [
+                18,
+                0.5439159667407649
+              ],
+              [
+                20,
+                0.5526294808587018
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8101169466972351,
+            "mean_prior_logit_residual": -0.048376332968473434,
+            "mean_nonzero_probability": 0.9906276497096064
+          }
+        ],
+        "moment_neural_fixed_budget": [
+          {
+            "seed": 11,
+            "best_epoch": 4,
+            "inner_epochs": 20,
+            "refit_epochs": 4,
+            "validation_MQS_standardized": 0.4806964232102041,
+            "validation_history": [
+              [
+                1,
+                0.4821039128193016
+              ],
+              [
+                2,
+                0.48141390567988024
+              ],
+              [
+                4,
+                0.4806964232102041
+              ],
+              [
+                6,
+                0.4820778846646303
+              ],
+              [
+                8,
+                0.4837515609473061
+              ],
+              [
+                10,
+                0.4841331425679668
+              ],
+              [
+                12,
+                0.4840144686590394
+              ],
+              [
+                14,
+                0.4847145092591981
+              ],
+              [
+                16,
+                0.4857482276033645
+              ],
+              [
+                18,
+                0.48621163524132366
+              ],
+              [
+                20,
+                0.486055294339298
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8365352749824524,
+            "mean_prior_logit_residual": -0.18615172803401947,
+            "mean_nonzero_probability": 0.9890151265738667
+          },
+          {
+            "seed": 22,
+            "best_epoch": 4,
+            "inner_epochs": 20,
+            "refit_epochs": 4,
+            "validation_MQS_standardized": 0.4800945601255668,
+            "validation_history": [
+              [
+                1,
+                0.4819049079688316
+              ],
+              [
+                2,
+                0.4809979685321272
+              ],
+              [
+                4,
+                0.4800945601255668
+              ],
+              [
+                6,
+                0.4811650836237843
+              ],
+              [
+                8,
+                0.48299090149268653
+              ],
+              [
+                10,
+                0.4841138554854702
+              ],
+              [
+                12,
+                0.4844504516557163
+              ],
+              [
+                14,
+                0.48566576328586386
+              ],
+              [
+                16,
+                0.4861371510145691
+              ],
+              [
+                18,
+                0.4867125176326215
+              ],
+              [
+                20,
+                0.4874321330348261
+              ]
+            ],
+            "allocated_parameters": 1215,
+            "mean_local_gate": 0.8224677443504333,
+            "mean_prior_logit_residual": -0.11363019049167633,
+            "mean_nonzero_probability": 0.9898479506973291
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 159,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.010701134445693683,
+              "WIS": 0.008628097564389373,
+              "CRPS": 0.01265356782472641,
+              "Brier": 0.00625035771448492,
+              "log_loss_nonzero": 0.038194155589964404,
+              "coverage80": 0.7861635220125787,
+              "coverage95": 0.9433962264150944,
+              "MAE_median": 0.0178575025150767,
+              "mean_nonzero_probability": 0.9929329752922058,
+              "empirical_nonzero_rate": 0.9937106918238994
+            },
+            "direct_rule_prior": {
+              "MQS": 0.010708779709125824,
+              "WIS": 0.008631546339873881,
+              "CRPS": 0.012663517443906312,
+              "Brier": 0.006277751791871474,
+              "log_loss_nonzero": 0.03951660600496725,
+              "coverage80": 0.7861635220125787,
+              "coverage95": 0.9433962264150944,
+              "MAE_median": 0.017867757632357387,
+              "mean_nonzero_probability": 0.9911943078041077,
+              "empirical_nonzero_rate": 0.9937106918238994
+            },
+            "direct_neural_prior": {
+              "MQS": 0.010708602220075837,
+              "WIS": 0.008631361570958097,
+              "CRPS": 0.012663006799472513,
+              "Brier": 0.006279447479548063,
+              "log_loss_nonzero": 0.03945310885941832,
+              "coverage80": 0.7861635220125787,
+              "coverage95": 0.9433962264150944,
+              "MAE_median": 0.017863097770113714,
+              "mean_nonzero_probability": 0.9905716776847839,
+              "empirical_nonzero_rate": 0.9937106918238994
+            },
+            "empirical_constant": {
+              "MQS": 0.010724129513051512,
+              "WIS": 0.008737300450642605,
+              "CRPS": 0.012596115768855023,
+              "Brier": 0.006250357797704772,
+              "log_loss_nonzero": 0.038194162201151,
+              "coverage80": 0.7421383647798742,
+              "coverage95": 0.9622641509433962,
+              "MAE_median": 0.017459892416004978,
+              "mean_nonzero_probability": 0.9929328621908128,
+              "empirical_nonzero_rate": 0.9937106918238994
+            },
+            "gaussian_constant": {
+              "MQS": 0.010640440067024408,
+              "WIS": 0.008662842115644028,
+              "CRPS": 0.012516525174555693,
+              "Brier": 0.006289308176100629,
+              "log_loss_nonzero": 0.1737801461512663,
+              "coverage80": 0.7924528301886793,
+              "coverage95": 0.9622641509433962,
+              "MAE_median": 0.017338808453656932,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 0.9937106918238994
+            },
+            "moment_static_prior": {
+              "MQS": 0.010671866021479555,
+              "WIS": 0.008609396672364565,
+              "CRPS": 0.012610237308769853,
+              "Brier": 0.00625035771448492,
+              "log_loss_nonzero": 0.03819415627141822,
+              "coverage80": 0.7735849056603774,
+              "coverage95": 0.9245283018867925,
+              "MAE_median": 0.017782759346642293,
+              "mean_nonzero_probability": 0.992932915687561,
+              "empirical_nonzero_rate": 0.9937106918238994
+            },
+            "moment_rule_prior": {
+              "MQS": 0.010673466364022562,
+              "WIS": 0.00860796032083803,
+              "CRPS": 0.012613358045189918,
+              "Brier": 0.006277751791871474,
+              "log_loss_nonzero": 0.03951660607912472,
+              "coverage80": 0.7735849056603774,
+              "coverage95": 0.9245283018867925,
+              "MAE_median": 0.01777885419900679,
+              "mean_nonzero_probability": 0.9911942084630331,
+              "empirical_nonzero_rate": 0.9937106918238994
+            },
+            "moment_neural_prior": {
+              "MQS": 0.010673592163077698,
+              "WIS": 0.00860774103339992,
+              "CRPS": 0.012613374372740144,
+              "Brier": 0.006280458183932288,
+              "log_loss_nonzero": 0.03951329543527704,
+              "coverage80": 0.7735849056603774,
+              "coverage95": 0.9245283018867925,
+              "MAE_median": 0.017775711230141277,
+              "mean_nonzero_probability": 0.9905574477318698,
+              "empirical_nonzero_rate": 0.9937106918238994
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.01072860836941403,
+              "WIS": 0.008672230095120205,
+              "CRPS": 0.012666571323591067,
+              "Brier": 0.006284075669279184,
+              "log_loss_nonzero": 0.03934141137822813,
+              "coverage80": 0.7987421383647799,
+              "coverage95": 0.9559748427672956,
+              "MAE_median": 0.01776731038882993,
+              "mean_nonzero_probability": 0.9893508189879123,
+              "empirical_nonzero_rate": 0.9937106918238994
+            }
+          }
+        },
+        "5": {
+          "n": 157,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.025131051031909907,
+              "WIS": 0.020060795234303076,
+              "CRPS": 0.029855523032030342,
+              "Brier": 3.1437395229261256e-06,
+              "log_loss_nonzero": 0.0017746330704540014,
+              "coverage80": 0.7643312101910829,
+              "coverage95": 0.9299363057324841,
+              "MAE_median": 0.04309798594795969,
+              "mean_nonzero_probability": 0.998227059841156,
+              "empirical_nonzero_rate": 1.0
+            },
+            "direct_rule_prior": {
+              "MQS": 0.02513233270626065,
+              "WIS": 0.020052282690742884,
+              "CRPS": 0.02985441637135989,
+              "Brier": 9.447874931288714e-05,
+              "log_loss_nonzero": 0.009258779240356889,
+              "coverage80": 0.7643312101910829,
+              "coverage95": 0.9299363057324841,
+              "MAE_median": 0.04300023903371997,
+              "mean_nonzero_probability": 0.9907887578010559,
+              "empirical_nonzero_rate": 1.0
+            },
+            "direct_neural_prior": {
+              "MQS": 0.025132147595455265,
+              "WIS": 0.020051575958520144,
+              "CRPS": 0.02985366442982863,
+              "Brier": 0.00010976875873592317,
+              "log_loss_nonzero": 0.00998248371954082,
+              "coverage80": 0.7643312101910829,
+              "coverage95": 0.9299363057324841,
+              "MAE_median": 0.04299022440644508,
+              "mean_nonzero_probability": 0.9900728464126587,
+              "empirical_nonzero_rate": 1.0
+            },
+            "empirical_constant": {
+              "MQS": 0.025507969520760822,
+              "WIS": 0.02060096846462515,
+              "CRPS": 0.03008334293403916,
+              "Brier": 3.1437050450177666e-06,
+              "log_loss_nonzero": 0.0017746233583684897,
+              "coverage80": 0.6942675159235668,
+              "coverage95": 0.9299363057324841,
+              "MAE_median": 0.04251252832526756,
+              "mean_nonzero_probability": 0.99822695035461,
+              "empirical_nonzero_rate": 1.0
+            },
+            "gaussian_constant": {
+              "MQS": 0.025116366559216625,
+              "WIS": 0.020222844945713733,
+              "CRPS": 0.029685656793620604,
+              "Brier": 0.0,
+              "log_loss_nonzero": 9.999778782803787e-13,
+              "coverage80": 0.7770700636942676,
+              "coverage95": 0.9363057324840764,
+              "MAE_median": 0.04225701093273183,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 1.0
+            },
+            "moment_static_prior": {
+              "MQS": 0.02510759636827048,
+              "WIS": 0.020024106187816314,
+              "CRPS": 0.029837287534689554,
+              "Brier": 3.1437395229261256e-06,
+              "log_loss_nonzero": 0.0017746330983815625,
+              "coverage80": 0.7579617834394905,
+              "coverage95": 0.9235668789808917,
+              "MAE_median": 0.04302137731515302,
+              "mean_nonzero_probability": 0.9982269406318665,
+              "empirical_nonzero_rate": 1.0
+            },
+            "moment_rule_prior": {
+              "MQS": 0.025113278237541836,
+              "WIS": 0.02001926330501776,
+              "CRPS": 0.029839424729149973,
+              "Brier": 9.447874931288714e-05,
+              "log_loss_nonzero": 0.009258779457217337,
+              "coverage80": 0.7579617834394905,
+              "coverage95": 0.9235668789808917,
+              "MAE_median": 0.042930313158367525,
+              "mean_nonzero_probability": 0.9907888166464058,
+              "empirical_nonzero_rate": 1.0
+            },
+            "moment_neural_prior": {
+              "MQS": 0.02511370116948892,
+              "WIS": 0.020018761058806615,
+              "CRPS": 0.029839537515958147,
+              "Brier": 0.00011028231058242932,
+              "log_loss_nonzero": 0.010003471487997012,
+              "coverage80": 0.7579617834394905,
+              "coverage95": 0.9235668789808917,
+              "MAE_median": 0.042921662603602105,
+              "mean_nonzero_probability": 0.9900521203211159,
+              "empirical_nonzero_rate": 1.0
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.025329734585283144,
+              "WIS": 0.020284326828651132,
+              "CRPS": 0.030019101816139104,
+              "Brier": 0.0001361064921542218,
+              "log_loss_nonzero": 0.011118780261838336,
+              "coverage80": 0.7834394904458599,
+              "coverage95": 0.9363057324840764,
+              "MAE_median": 0.04308819987848149,
+              "mean_nonzero_probability": 0.9889498931966769,
+              "empirical_nonzero_rate": 1.0
+            }
+          }
+        },
+        "10": {
+          "n": 155,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.0365838726120531,
+              "WIS": 0.029444411951060498,
+              "CRPS": 0.043243895841341896,
+              "Brier": 3.1661841468633156e-06,
+              "log_loss_nonzero": 0.00178096245508641,
+              "coverage80": 0.7548387096774194,
+              "coverage95": 0.8903225806451613,
+              "MAE_median": 0.06187422983086415,
+              "mean_nonzero_probability": 0.9982205033302307,
+              "empirical_nonzero_rate": 1.0
+            },
+            "direct_rule_prior": {
+              "MQS": 0.03658474303856745,
+              "WIS": 0.029440185865399936,
+              "CRPS": 0.04324700537955142,
+              "Brier": 4.8545015957301985e-05,
+              "log_loss_nonzero": 0.006991811096668243,
+              "coverage80": 0.7548387096774194,
+              "coverage95": 0.8838709677419355,
+              "MAE_median": 0.06179129339225865,
+              "mean_nonzero_probability": 0.9930325150489807,
+              "empirical_nonzero_rate": 1.0
+            },
+            "direct_neural_prior": {
+              "MQS": 0.036585052397648025,
+              "WIS": 0.029440288210216263,
+              "CRPS": 0.04324702966691427,
+              "Brier": 5.605421686413956e-05,
+              "log_loss_nonzero": 0.00751279350069742,
+              "coverage80": 0.7548387096774194,
+              "coverage95": 0.8838709677419355,
+              "MAE_median": 0.06178129890240175,
+              "mean_nonzero_probability": 0.9925153255462646,
+              "empirical_nonzero_rate": 1.0
+            },
+            "empirical_constant": {
+              "MQS": 0.0374427247554566,
+              "WIS": 0.030485299058817906,
+              "CRPS": 0.04387953469373032,
+              "Brier": 3.1661199832830634e-06,
+              "log_loss_nonzero": 0.001780944370994809,
+              "coverage80": 0.6709677419354839,
+              "coverage95": 0.9096774193548387,
+              "MAE_median": 0.061867060592080365,
+              "mean_nonzero_probability": 0.998220640569395,
+              "empirical_nonzero_rate": 1.0
+            },
+            "gaussian_constant": {
+              "MQS": 0.03667746002907178,
+              "WIS": 0.02968111900778509,
+              "CRPS": 0.043224951909227954,
+              "Brier": 0.0,
+              "log_loss_nonzero": 9.999778782803787e-13,
+              "coverage80": 0.7419354838709677,
+              "coverage95": 0.9225806451612903,
+              "MAE_median": 0.061314326353994884,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 1.0
+            },
+            "moment_static_prior": {
+              "MQS": 0.03656021573876487,
+              "WIS": 0.029384953476552903,
+              "CRPS": 0.04322896116988615,
+              "Brier": 3.1661841468633156e-06,
+              "log_loss_nonzero": 0.0017809624330084903,
+              "coverage80": 0.7354838709677419,
+              "coverage95": 0.8774193548387097,
+              "MAE_median": 0.06170140919198834,
+              "mean_nonzero_probability": 0.9982206225395203,
+              "empirical_nonzero_rate": 1.0
+            },
+            "moment_rule_prior": {
+              "MQS": 0.03656472047786695,
+              "WIS": 0.02938134771256657,
+              "CRPS": 0.04323728113578598,
+              "Brier": 4.8545015957301985e-05,
+              "log_loss_nonzero": 0.006991811191402442,
+              "coverage80": 0.7354838709677419,
+              "coverage95": 0.8838709677419355,
+              "MAE_median": 0.0616434043123243,
+              "mean_nonzero_probability": 0.9930325746536255,
+              "empirical_nonzero_rate": 1.0
+            },
+            "moment_neural_prior": {
+              "MQS": 0.03656519629823795,
+              "WIS": 0.029381245137201646,
+              "CRPS": 0.043237923646344385,
+              "Brier": 5.616003056504627e-05,
+              "log_loss_nonzero": 0.007520494472010775,
+              "coverage80": 0.7354838709677419,
+              "coverage95": 0.8838709677419355,
+              "MAE_median": 0.06163729238070501,
+              "mean_nonzero_probability": 0.992507726723148,
+              "empirical_nonzero_rate": 1.0
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.036838787782282514,
+              "WIS": 0.02977421703828994,
+              "CRPS": 0.04343990826035037,
+              "Brier": 6.980821296886644e-05,
+              "log_loss_nonzero": 0.008344066118842624,
+              "coverage80": 0.7548387096774194,
+              "coverage95": 0.9225806451612903,
+              "MAE_median": 0.061531747361715614,
+              "mean_nonzero_probability": 0.9916910369550028,
+              "empirical_nonzero_rate": 1.0
+            }
+          }
+        },
+        "20": {
+          "n": 150,
+          "scores": {
+            "direct_static_prior": {
+              "MQS": 0.04557938919973419,
+              "WIS": 0.03666544649480046,
+              "CRPS": 0.05390728398482634,
+              "Brier": 1.2892720068435892e-05,
+              "log_loss_nonzero": 0.0035971051547676325,
+              "coverage80": 0.78,
+              "coverage95": 0.9066666666666666,
+              "MAE_median": 0.07784229359590018,
+              "mean_nonzero_probability": 0.9964091777801514,
+              "empirical_nonzero_rate": 1.0
+            },
+            "direct_rule_prior": {
+              "MQS": 0.04556361080386702,
+              "WIS": 0.0366591232511091,
+              "CRPS": 0.05389268299622453,
+              "Brier": 0.00012263678981355497,
+              "log_loss_nonzero": 0.010581774190068245,
+              "coverage80": 0.78,
+              "coverage95": 0.9066666666666666,
+              "MAE_median": 0.07752935273325313,
+              "mean_nonzero_probability": 0.9894799590110779,
+              "empirical_nonzero_rate": 1.0
+            },
+            "direct_neural_prior": {
+              "MQS": 0.045561650833108834,
+              "WIS": 0.03665965978078598,
+              "CRPS": 0.05388876549555974,
+              "Brier": 0.0001409931446770448,
+              "log_loss_nonzero": 0.0113438266950349,
+              "coverage80": 0.78,
+              "coverage95": 0.9066666666666666,
+              "MAE_median": 0.07748358418880578,
+              "mean_nonzero_probability": 0.9887273907661438,
+              "empirical_nonzero_rate": 1.0
+            },
+            "empirical_constant": {
+              "MQS": 0.046465263213164326,
+              "WIS": 0.03781692203155434,
+              "CRPS": 0.05467819791887531,
+              "Brier": 1.2892869920611931e-05,
+              "log_loss_nonzero": 0.0035971261808494816,
+              "coverage80": 0.7333333333333333,
+              "coverage95": 0.9066666666666666,
+              "MAE_median": 0.07625600817671385,
+              "mean_nonzero_probability": 0.9964093357271098,
+              "empirical_nonzero_rate": 1.0
+            },
+            "gaussian_constant": {
+              "MQS": 0.04571296095323503,
+              "WIS": 0.03733072934119879,
+              "CRPS": 0.05359281835867949,
+              "Brier": 0.0,
+              "log_loss_nonzero": 9.999778782803787e-13,
+              "coverage80": 0.7933333333333333,
+              "coverage95": 0.9066666666666666,
+              "MAE_median": 0.07513706468674135,
+              "mean_nonzero_probability": 1.0,
+              "empirical_nonzero_rate": 1.0
+            },
+            "moment_static_prior": {
+              "MQS": 0.04560727031486786,
+              "WIS": 0.036655928131513575,
+              "CRPS": 0.053959573285604766,
+              "Brier": 1.2892720068435892e-05,
+              "log_loss_nonzero": 0.0035971052386772413,
+              "coverage80": 0.74,
+              "coverage95": 0.9066666666666666,
+              "MAE_median": 0.07749429084244551,
+              "mean_nonzero_probability": 0.9964093565940857,
+              "empirical_nonzero_rate": 1.0
+            },
+            "moment_rule_prior": {
+              "MQS": 0.04560533412483594,
+              "WIS": 0.03666126538003717,
+              "CRPS": 0.05395808160676109,
+              "Brier": 0.00012263678981355497,
+              "log_loss_nonzero": 0.010581774767779202,
+              "coverage80": 0.74,
+              "coverage95": 0.9066666666666666,
+              "MAE_median": 0.07725317137950652,
+              "mean_nonzero_probability": 0.9894800710678101,
+              "empirical_nonzero_rate": 1.0
+            },
+            "moment_neural_prior": {
+              "MQS": 0.045605180415069974,
+              "WIS": 0.03666214379487657,
+              "CRPS": 0.05395767381946205,
+              "Brier": 0.0001415794344754436,
+              "log_loss_nonzero": 0.011364819034363515,
+              "coverage80": 0.74,
+              "coverage95": 0.9066666666666666,
+              "MAE_median": 0.0772240804686759,
+              "mean_nonzero_probability": 0.9887066268920899,
+              "empirical_nonzero_rate": 1.0
+            },
+            "moment_neural_fixed_budget": {
+              "MQS": 0.04629637854757808,
+              "WIS": 0.03741361035324446,
+              "CRPS": 0.05456875685951456,
+              "Brier": 0.00016990913175366274,
+              "log_loss_nonzero": 0.012399422517392449,
+              "coverage80": 0.8066666666666666,
+              "coverage95": 0.9066666666666666,
+              "MAE_median": 0.07778860851813067,
+              "mean_nonzero_probability": 0.9876864087581635,
+              "empirical_nonzero_rate": 1.0
+            }
+          }
+        }
+      }
+    }
+  },
+  "summary": {
+    "moment_static_prior_vs_direct_static_prior": {
+      "MQS": {
+        "cells": 20,
+        "wins": 9,
+        "geometric_gain_percent": 0.6052887151191566
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 12,
+        "geometric_gain_percent": 0.69690347361826
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 0,
+        "geometric_gain_percent": 0.0
+      }
+    },
+    "moment_rule_prior_vs_direct_rule_prior": {
+      "MQS": {
+        "cells": 20,
+        "wins": 8,
+        "geometric_gain_percent": 0.2203701999771046
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 12,
+        "geometric_gain_percent": 0.4000753639744281
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 0,
+        "geometric_gain_percent": 0.0
+      }
+    },
+    "moment_neural_prior_vs_direct_neural_prior": {
+      "MQS": {
+        "cells": 20,
+        "wins": 8,
+        "geometric_gain_percent": 0.1700922168495489
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 11,
+        "geometric_gain_percent": 0.3663302220733189
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 11,
+        "geometric_gain_percent": 0.02596641731742455
+      }
+    },
+    "moment_neural_prior_vs_moment_rule_prior": {
+      "MQS": {
+        "cells": 20,
+        "wins": 16,
+        "geometric_gain_percent": 0.02503028455275169
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 15,
+        "geometric_gain_percent": 0.03192117194603661
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 3,
+        "geometric_gain_percent": -2.9939474007935507
+      }
+    },
+    "moment_neural_prior_vs_moment_static_prior": {
+      "MQS": {
+        "cells": 20,
+        "wins": 9,
+        "geometric_gain_percent": 0.028268898774763684
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 12,
+        "geometric_gain_percent": 0.10525750826926306
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 8,
+        "geometric_gain_percent": -25.595076137714123
+      }
+    },
+    "moment_neural_fixed_budget_vs_moment_neural_prior": {
+      "MQS": {
+        "cells": 20,
+        "wins": 6,
+        "geometric_gain_percent": -0.9104762383127518
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 5,
+        "geometric_gain_percent": -0.38294276211829903
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 3,
+        "geometric_gain_percent": -4.322920248949114
+      }
+    },
+    "moment_neural_fixed_budget_vs_direct_neural_prior": {
+      "MQS": {
+        "cells": 20,
+        "wins": 5,
+        "geometric_gain_percent": -0.738835372245572
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 7,
+        "geometric_gain_percent": -0.01520970497410623
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 7,
+        "geometric_gain_percent": -4.295831324119548
+      }
+    },
+    "moment_static_prior_vs_empirical_constant": {
+      "MQS": {
+        "cells": 20,
+        "wins": 12,
+        "geometric_gain_percent": 0.04528471561319192
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 10,
+        "geometric_gain_percent": -0.678947569971533
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 9,
+        "geometric_gain_percent": -9.9190883795508e-05
+      }
+    },
+    "moment_static_prior_vs_gaussian_constant": {
+      "MQS": {
+        "cells": 20,
+        "wins": 18,
+        "geometric_gain_percent": 3.050092674712035
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 14,
+        "geometric_gain_percent": 2.7610933917622926
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 12,
+        "geometric_gain_percent": -3462.15388531963
+      }
+    },
+    "moment_rule_prior_vs_empirical_constant": {
+      "MQS": {
+        "cells": 20,
+        "wins": 12,
+        "geometric_gain_percent": 0.04852267370808461
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 10,
+        "geometric_gain_percent": -0.6050897420906809
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 8,
+        "geometric_gain_percent": -21.944253896625042
+      }
+    },
+    "moment_rule_prior_vs_gaussian_constant": {
+      "MQS": {
+        "cells": 20,
+        "wins": 18,
+        "geometric_gain_percent": 3.0532332943049134
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 15,
+        "geometric_gain_percent": 2.8324276140692883
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 10,
+        "geometric_gain_percent": -4243.837669411689
+      }
+    },
+    "moment_neural_prior_vs_empirical_constant": {
+      "MQS": {
+        "cells": 20,
+        "wins": 12,
+        "geometric_gain_percent": 0.07354081289753234
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 10,
+        "geometric_gain_percent": -0.5729754184076397
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 8,
+        "geometric_gain_percent": -25.595200716580145
+      }
+    },
+    "moment_neural_prior_vs_gaussian_constant": {
+      "MQS": {
+        "cells": 20,
+        "wins": 18,
+        "geometric_gain_percent": 3.0774993458760447
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 15,
+        "geometric_gain_percent": 2.8634446419263937
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 10,
+        "geometric_gain_percent": -4373.889884409732
+      }
+    },
+    "moment_neural_fixed_budget_vs_empirical_constant": {
+      "MQS": {
+        "cells": 20,
+        "wins": 13,
+        "geometric_gain_percent": -0.8362658537883094
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 12,
+        "geometric_gain_percent": -0.9581123484194709
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 7,
+        "geometric_gain_percent": -31.024581080065495
+      }
+    },
+    "moment_neural_fixed_budget_vs_gaussian_constant": {
+      "MQS": {
+        "cells": 20,
+        "wins": 12,
+        "geometric_gain_percent": 2.195043007841735
+      },
+      "CRPS": {
+        "cells": 20,
+        "wins": 13,
+        "geometric_gain_percent": 2.491467233811606
+      },
+      "Brier": {
+        "cells": 20,
+        "wins": 8,
+        "geometric_gain_percent": -4567.292576138568
+      }
+    }
+  },
+  "elapsed_seconds": 56.76069250004366
+}

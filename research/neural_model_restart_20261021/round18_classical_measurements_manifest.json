@@ -1,0 +1,268 @@
+{
+  "created_utc": "2026-10-21T17:33:18.108644+00:00",
+  "status": "PRE2026 DEVELOPMENT;2025 per-asset epoch selection;2026 prices unread",
+  "protocol": {
+    "methods": [
+      "GK",
+      "RS"
+    ],
+    "seed": 11,
+    "epochs": 100,
+    "chunk": 128,
+    "underlying_filter_mode": "raw_constant",
+    "parameters_per_fit": 4,
+    "target": "UNCHANGED future mean Parkinson proxy; not trueIV or returnRV",
+    "variance_ddof": 1,
+    "selection": "B16.train_one per-asset2025 epoch0..100, patience15 min20 improvement1e-5; same as old raw comparator",
+    "only_D_fields_changed": [
+      "log_proxy",
+      "observed",
+      "global_b",
+      "global_R",
+      "initial_mu"
+    ],
+    "frame": "log(cP*sigma²); observation bias=b_estimator-log(cP); cP from512 TRAIN P only",
+    "no_theta_filter": "No angular/near-unit filtering; update iff estimator>EPS. All original label rows/origins retained."
+  },
+  "formulas": {
+    "GK": ".5*log(H/L)^2-(2log2-1)*log(C/O)^2",
+    "RS": "log(H/O)*(log(H/O)-log(C/O))+log(L/O)*(log(L/O)-log(C/O))"
+  },
+  "calibration": {
+    "source": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_reference_samples.npz",
+    "sha256": "67a9432b6fddadb56f504129195f81e5f1155908ae4f1592d01271316c151baa",
+    "keys_opened": [
+      "grid512_train__P",
+      "grid512_train__eta",
+      "grid512_train__xi",
+      "grid512_train__H",
+      "grid512_train__L",
+      "grid512_train__C"
+    ],
+    "samples": "grid512 TRAIN only; no heldout or grid2048 array opened",
+    "cP": 0.9427735381258473,
+    "log_cP": -0.058929175639207104,
+    "EPS": 1e-12,
+    "estimators": {
+      "GK": {
+        "n_synthetic_train": 60000,
+        "positive_gt_EPS": 60000,
+        "skipped_le_EPS": 0,
+        "negative_roundoff_count": 0,
+        "raw_min": 0.06655523715795153,
+        "b_log_estimator": -0.2194277460433659,
+        "global_R": 0.2798240949993747,
+        "variance_ddof": 1,
+        "observation_bias_for_log_cP_sigma2": -0.1604985704041588,
+        "frame_formula": "b_estimator - log(cP), NOT b_estimator-log(c_estimator)",
+        "positive_conditioning": "global moments of positive estimator only; zero/tiny values skipped"
+      },
+      "RS": {
+        "n_synthetic_train": 60000,
+        "positive_gt_EPS": 59880,
+        "skipped_le_EPS": 120,
+        "negative_roundoff_count": 0,
+        "raw_min": 0.0,
+        "b_log_estimator": -0.2738781144951019,
+        "global_R": 0.4491439096599402,
+        "variance_ddof": 1,
+        "observation_bias_for_log_cP_sigma2": -0.2149489388558948,
+        "frame_formula": "b_estimator - log(cP), NOT b_estimator-log(c_estimator)",
+        "positive_conditioning": "global moments of positive estimator only; zero/tiny values skipped"
+      }
+    }
+  },
+  "checks": {
+    "market_files_opened": false,
+    "same_path_OHLC_direct_vs_geometry": true,
+    "calibration_only_512train": true,
+    "cP_from_512train_P_only": true,
+    "reflection_and_degree2_homogeneity": true,
+    "flat_bar_GK_RS_skipped": true,
+    "monotone_nonzero_range_RS_skipped": true,
+    "near_unit_geometry_retained_when_estimator_positive": true,
+    "zero_RS_not_logEPS": true,
+    "missing_update_K_zero_and_prediction_step_only": true,
+    "frame_bias_parentheses_checked": true,
+    "variance_ddof": 1
+  },
+  "sources_hashes": {
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements.py": "31e7af243b9aff045a366700cb3e5137e2841b1bd1ea7d4f16abe603cfc7b2cb",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_round16.py": "9ac2704711779ace771c64a6807a074c006850d294c96d2fdd48f3fbe95a273a",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\range_clock_round14.py": "08e4e6f23e426b6a84ab6913881ae43666ef6b0ca4fa929cc4d48bbdeac4dc7a",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_shape_models.json": "edd1de40ec9732ed1ad927370ce7293fdf162479f88b8f4dce16135b6fc36542",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\brownian_reference_round16\\brownian_reference_samples.npz": "67a9432b6fddadb56f504129195f81e5f1155908ae4f1592d01271316c151baa",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_frozen_moments_development_results.json": "f44bd6b93483d989d4ec91c4e4617ee74a42bb3a62bdbb401e87bfae5adb91fb",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_frozen_moments_development_validation_predictions.npz": "946f46a0459188e7e005cfb8eef863a1f0c5f34c4a31e71b9f588d9f8c1c0e9c",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_proxy_round16_KRBN_grid512_development_results.json": "1d99cb92a1dc11436ce1f32a11301b351e9041162420b19daad87dec7c4d586b",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_proxy_round16_KRBN_grid512_development_validation_predictions.npz": "d56edfc6d38466692ed2ad200f8e34b8c94028420f3ea8d1358c39136d72ccfe",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_proxy_round16_KCCA_grid512_development_results.json": "eb7bad38fdba47b5e6b9b7797f09a9b8e22dbce682db24feef14142ed0e2ac87",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\bridge_precision_proxy_round16_KCCA_grid512_development_validation_predictions.npz": "6be1da0ac8c76ed110be8054f12368e5b3b865b5dcac0ad972fe0deae980d095",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_inputs\\KRBN_pre2026.csv": "801e88c6263a9063c6281cd30a7401f9f8b4c9b7bbcf1c21449f9388b4d5b725",
+    "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_inputs\\KCCA_pre2026.csv": "926418551bb5d6a98a1468ad3599b511b8cafb384845cdd1eaad5ffcfb3b6452"
+  },
+  "development_prefix_audit": {
+    "KRBN": {
+      "original_path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\data_acquisition_round13\\KRBN_ETF_USD_daily_completed_20200731_20261020.csv",
+      "development_prefix_path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_inputs\\KRBN_pre2026.csv",
+      "rows": 1362,
+      "first": "2020-07-31",
+      "last": "2025-12-31",
+      "boundary_date_prefix_only": "2026-01-02",
+      "no2026_OHLC_bytes_read": true,
+      "verbatim_source_byte_prefix": true,
+      "prefix_bytes": 160595,
+      "source_prefix_end_byte_offset": 160595,
+      "prefix_sha256": "801e88c6263a9063c6281cd30a7401f9f8b4c9b7bbcf1c21449f9388b4d5b725",
+      "original_full_CSV_rehashed": false,
+      "note": "Original full-file hash not recomputed because that would read reserved2026 OHLC bytes",
+      "original_acquisition_declared_hash": "ff99c14e84153717be0d72506b0c8b581605495288849823e4bf219ab1462f11"
+    },
+    "KCCA": {
+      "original_path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\data_acquisition_round13\\KCCA_ETF_USD_daily_completed_20211005_20261020.csv",
+      "development_prefix_path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_inputs\\KCCA_pre2026.csv",
+      "rows": 1065,
+      "first": "2021-10-05",
+      "last": "2025-12-31",
+      "boundary_date_prefix_only": "2026-01-02",
+      "no2026_OHLC_bytes_read": true,
+      "verbatim_source_byte_prefix": true,
+      "prefix_bytes": 126712,
+      "source_prefix_end_byte_offset": 126712,
+      "prefix_sha256": "926418551bb5d6a98a1468ad3599b511b8cafb384845cdd1eaad5ffcfb3b6452",
+      "original_full_CSV_rehashed": false,
+      "note": "Original full-file hash not recomputed because that would read reserved2026 OHLC bytes",
+      "original_acquisition_declared_hash": "17c93aeca744b91b041a419413fae105c80aca8c9b214c625c7ab6b47d2cae68"
+    }
+  },
+  "prepare_audit": {
+    "KRBN": {
+      "development_rows": 1362,
+      "first": "2020-07-31",
+      "last": "2025-12-31",
+      "validation_start": "2025-01-01",
+      "training_rows": 3008,
+      "validation_rows": 722,
+      "withheld_period_used": false,
+      "target": "future mean Parkinson intraday-range proxy; not true QV or return RV",
+      "feature_names": [
+        "logrange1",
+        "logrange5",
+        "logrange22",
+        "r1",
+        "r5",
+        "r22",
+        "intraday",
+        "logovernightvar",
+        "logreturnvar",
+        "logvolume",
+        "volume_ratio",
+        "range_ratio"
+      ],
+      "common_h22_origins": true,
+      "train_common_origins": 990,
+      "validation_common_origins": 228,
+      "last_training_origin": "2024-11-27",
+      "last_training_label": "2024-12-31",
+      "first_validation_origin": "2025-01-02",
+      "last_validation_label": "2025-12-31",
+      "initial_mu": -9.450057101002354,
+      "initialization_observations": 1108,
+      "neural_features": [
+        "abs_eta",
+        "abs_xi/(1-abs_eta)",
+        "log(volume/past22_mean_volume)"
+      ],
+      "neural_mean": [
+        0.47492727538873963,
+        0.5867042385811942,
+        -0.15583254511968794
+      ],
+      "neural_std": [
+        0.27447969473988865,
+        0.3487824417030357,
+        0.6347206963029088
+      ],
+      "normalization": "pre2025 nonzero-range observations only; missing feature becomes normalized zero",
+      "imputed_feature_entries": 21,
+      "zero_range_observations": 4,
+      "reference_grid": 512,
+      "reference_label": "grid512_train",
+      "global_b": -0.238660878921314,
+      "global_R": 0.35199231725707575,
+      "shape_bias_constant_R": 0.2747201728687599,
+      "calibration": "fixed synthetic table; no real-data fitting of b_cell or R_cell"
+    },
+    "KCCA": {
+      "development_rows": 1065,
+      "first": "2021-10-05",
+      "last": "2025-12-31",
+      "validation_start": "2025-01-01",
+      "training_rows": 2117,
+      "validation_rows": 722,
+      "withheld_period_used": false,
+      "target": "future mean Parkinson intraday-range proxy; not true QV or return RV",
+      "feature_names": [
+        "logrange1",
+        "logrange5",
+        "logrange22",
+        "r1",
+        "r5",
+        "r22",
+        "intraday",
+        "logovernightvar",
+        "logreturnvar",
+        "logvolume",
+        "volume_ratio",
+        "range_ratio"
+      ],
+      "common_h22_origins": true,
+      "train_common_origins": 693,
+      "validation_common_origins": 228,
+      "last_training_origin": "2024-11-27",
+      "last_training_label": "2024-12-31",
+      "first_validation_origin": "2025-01-02",
+      "last_validation_label": "2025-12-31",
+      "initial_mu": -9.383784578340691,
+      "initialization_observations": 814,
+      "neural_features": [
+        "abs_eta",
+        "abs_xi/(1-abs_eta)",
+        "log(volume/past22_mean_volume)"
+      ],
+      "neural_mean": [
+        0.5118988029213476,
+        0.6362360274115957,
+        -0.4818584878180489
+      ],
+      "neural_std": [
+        0.28491792707069413,
+        0.3645565237334495,
+        1.0076351541044055
+      ],
+      "normalization": "pre2025 nonzero-range observations only; missing feature becomes normalized zero",
+      "imputed_feature_entries": 21,
+      "zero_range_observations": 1,
+      "reference_grid": 512,
+      "reference_label": "grid512_train",
+      "global_b": -0.238660878921314,
+      "global_R": 0.35199231725707575,
+      "shape_bias_constant_R": 0.2747201728687599,
+      "calibration": "fixed synthetic table; no real-data fitting of b_cell or R_cell"
+    }
+  },
+  "fits": {},
+  "observation_audit": {},
+  "comparisons": {},
+  "environment": {
+    "python": "C:\\Users\\Dreamboat\\AppData\\Local\\hermes\\hermes-agent-v0.21.5\\venv\\Scripts\\python.exe",
+    "numpy": "2.4.6",
+    "torch": "2.14.1+cpu"
+  },
+  "original_CSV_full_hash_note": "Declared acquisition hash retained, never rehashed or parsed reserved rows",
+  "outputs": {
+    "manifest": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_manifest.json",
+    "results": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_results.json",
+    "predictions": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\neural_model_restart_20261021\\round18_classical_measurements_validation_predictions.npz"
+  }
+}

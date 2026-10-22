@@ -1,0 +1,373 @@
+{
+  "status": "exploratory candidate; no novelty or publication success established",
+  "config": {
+    "markets": [
+      "CEA"
+    ],
+    "seeds": [
+      11
+    ],
+    "epochs": 8,
+    "tag": "marked_event_round1_smoke"
+  },
+  "horizons": [
+    1,
+    5,
+    10,
+    20
+  ],
+  "quantiles": [
+    0.02500000037252903,
+    0.05000000074505806,
+    0.10000000149011612,
+    0.15000000596046448,
+    0.20000000298023224,
+    0.30000001192092896,
+    0.4000000059604645,
+    0.5,
+    0.6000000238418579,
+    0.699999988079071,
+    0.800000011920929,
+    0.8500000238418579,
+    0.8999999761581421,
+    0.949999988079071,
+    0.9750000238418579
+  ],
+  "horizon_unit": "observed daily-panel steps, not event steps or elapsed civil days",
+  "target": "direct marginal log return; endpoint zero does not imply no intervening updates",
+  "loss": "mixed-measure NLL for atom models, continuous NLL for no-zero; same validation MQS",
+  "architecture": "shared 24/16 MLP, update head + 5-parameter signed-center two-normal mark head",
+  "seeds_combination": "arithmetic quantile ensemble, not distribution mixture",
+  "panel_sha256": "d470238386e201e68f07b033f5a34591af89b57f1546ea79b699e763d228b56c",
+  "torch": "2.14.1+cpu",
+  "python": "3.11.15",
+  "markets": {
+    "CEA": {
+      "audit": {
+        "cut_index": 597,
+        "validation_start_index": 447,
+        "lookback": 128,
+        "step": 2,
+        "train": 621,
+        "validation": 281,
+        "refit": 921,
+        "test": 1311,
+        "boundary_rows_recovered_for_refit": 19,
+        "last_train_target": 446,
+        "last_refit_target": 596,
+        "test_zero_share": {
+          "1": 0.08734939759036145,
+          "5": 0.006060606060606061,
+          "10": 0.01529051987767584,
+          "20": 0.003105590062111801
+        },
+        "observed_daily_panel_horizon": true,
+        "target_clipping": false
+      },
+      "fits": {
+        "dual_head": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 8,
+            "validation_MQS_standardized": 0.5451905353664114,
+            "refit_epochs": 1,
+            "allocated_parameters": 1174,
+            "active_parameters": 1174,
+            "mean_predicted_nonzero_probability": 0.7973427772521973,
+            "validation_history": [
+              [
+                1,
+                0.5451905353664114
+              ],
+              [
+                2,
+                0.5464530868495836
+              ],
+              [
+                4,
+                0.5510117215294077
+              ],
+              [
+                6,
+                0.5588631896713828
+              ],
+              [
+                8,
+                0.569249416796992
+              ]
+            ]
+          }
+        ],
+        "fixed_probability": [
+          {
+            "seed": 11,
+            "best_epoch": 1,
+            "inner_epochs": 8,
+            "validation_MQS_standardized": 0.5452606967618792,
+            "refit_epochs": 1,
+            "allocated_parameters": 1174,
+            "active_parameters": 1157,
+            "mean_predicted_nonzero_probability": 0.7978405952453613,
+            "validation_history": [
+              [
+                1,
+                0.5452606967618792
+              ],
+              [
+                2,
+                0.5466524551226344
+              ],
+              [
+                4,
+                0.551774440169006
+              ],
+              [
+                6,
+                0.5607584729358484
+              ],
+              [
+                8,
+                0.572625536604815
+              ]
+            ]
+          }
+        ],
+        "no_zero_mass": [
+          {
+            "seed": 11,
+            "best_epoch": 4,
+            "inner_epochs": 8,
+            "validation_MQS_standardized": 0.5487177334800313,
+            "refit_epochs": 4,
+            "allocated_parameters": 1174,
+            "active_parameters": 1157,
+            "mean_predicted_nonzero_probability": 1.0,
+            "validation_history": [
+              [
+                1,
+                0.5494913885867087
+              ],
+              [
+                2,
+                0.5491154787342909
+              ],
+              [
+                4,
+                0.5487177334800313
+              ],
+              [
+                6,
+                0.5501807359681911
+              ],
+              [
+                8,
+                0.5541464845953087
+              ]
+            ]
+          }
+        ]
+      },
+      "by_horizon": {
+        "1": {
+          "n": 332,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.007325421973395726,
+              "WIS": 0.006353508633553778,
+              "coverage80": 0.7771084337349398,
+              "coverage95": 0.9307228915662651,
+              "MAE_median": 0.010121543176566076
+            },
+            "gaussian_constant": {
+              "MQS": 0.007792367212486881,
+              "WIS": 0.0067118877755137744,
+              "coverage80": 0.8795180722891566,
+              "coverage95": 0.9457831325301205,
+              "MAE_median": 0.010374164565659994
+            },
+            "dual_head": {
+              "MQS": 0.007463796054064021,
+              "WIS": 0.006552708873917566,
+              "coverage80": 0.858433734939759,
+              "coverage95": 0.9457831325301205,
+              "MAE_median": 0.010121543176566076
+            },
+            "fixed_probability": {
+              "MQS": 0.0074644415572832,
+              "WIS": 0.006552917654138953,
+              "coverage80": 0.858433734939759,
+              "coverage95": 0.9457831325301205,
+              "MAE_median": 0.010121543176566076
+            },
+            "no_zero_mass": {
+              "MQS": 0.00823364060135681,
+              "WIS": 0.007290172023617038,
+              "coverage80": 0.9156626506024096,
+              "coverage95": 0.9578313253012049,
+              "MAE_median": 0.011094410254915902
+            }
+          }
+        },
+        "5": {
+          "n": 330,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.018004516793989,
+              "WIS": 0.015493269696346327,
+              "coverage80": 0.6333333333333333,
+              "coverage95": 0.8454545454545455,
+              "MAE_median": 0.025991201440663952
+            },
+            "gaussian_constant": {
+              "MQS": 0.01758939557797618,
+              "WIS": 0.015025567468610713,
+              "coverage80": 0.7333333333333333,
+              "coverage95": 0.8545454545454545,
+              "MAE_median": 0.02602923906587214
+            },
+            "dual_head": {
+              "MQS": 0.017690433459779248,
+              "WIS": 0.015073568240093493,
+              "coverage80": 0.7484848484848485,
+              "coverage95": 0.8666666666666667,
+              "MAE_median": 0.025991201440663952
+            },
+            "fixed_probability": {
+              "MQS": 0.01768925190995132,
+              "WIS": 0.015072393458676652,
+              "coverage80": 0.7484848484848485,
+              "coverage95": 0.8666666666666667,
+              "MAE_median": 0.025991201440663952
+            },
+            "no_zero_mass": {
+              "MQS": 0.017704883660846236,
+              "WIS": 0.015114482536805368,
+              "coverage80": 0.7696969696969697,
+              "coverage95": 0.8727272727272727,
+              "MAE_median": 0.026520403082591338
+            }
+          }
+        },
+        "10": {
+          "n": 327,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.02810462262311627,
+              "WIS": 0.024518791806331527,
+              "coverage80": 0.5412844036697247,
+              "coverage95": 0.8165137614678899,
+              "MAE_median": 0.039676950678162924
+            },
+            "gaussian_constant": {
+              "MQS": 0.02782623442253147,
+              "WIS": 0.024211951422303056,
+              "coverage80": 0.6207951070336392,
+              "coverage95": 0.7981651376146789,
+              "MAE_median": 0.03985886588265187
+            },
+            "dual_head": {
+              "MQS": 0.02770052044220788,
+              "WIS": 0.02401705137014275,
+              "coverage80": 0.6299694189602446,
+              "coverage95": 0.7981651376146789,
+              "MAE_median": 0.039676950678162924
+            },
+            "fixed_probability": {
+              "MQS": 0.02769883142724819,
+              "WIS": 0.024015916079022356,
+              "coverage80": 0.6299694189602446,
+              "coverage95": 0.7981651376146789,
+              "MAE_median": 0.039676950678162924
+            },
+            "no_zero_mass": {
+              "MQS": 0.0275247222553502,
+              "WIS": 0.02383869115278142,
+              "coverage80": 0.654434250764526,
+              "coverage95": 0.8165137614678899,
+              "MAE_median": 0.039696622191829026
+            }
+          }
+        },
+        "20": {
+          "n": 322,
+          "scores": {
+            "empirical_constant": {
+              "MQS": 0.04776616049028883,
+              "WIS": 0.04153763343545894,
+              "coverage80": 0.4472049689440994,
+              "coverage95": 0.7732919254658385,
+              "MAE_median": 0.0683720261919509
+            },
+            "gaussian_constant": {
+              "MQS": 0.047262664641811405,
+              "WIS": 0.041164713776840424,
+              "coverage80": 0.5186335403726708,
+              "coverage95": 0.7329192546583851,
+              "MAE_median": 0.06776705815058573
+            },
+            "dual_head": {
+              "MQS": 0.04702901384857519,
+              "WIS": 0.040748578050599435,
+              "coverage80": 0.5434782608695652,
+              "coverage95": 0.7391304347826086,
+              "MAE_median": 0.06838410058728599
+            },
+            "fixed_probability": {
+              "MQS": 0.04702649935539075,
+              "WIS": 0.04074668942709899,
+              "coverage80": 0.5434782608695652,
+              "coverage95": 0.7391304347826086,
+              "MAE_median": 0.06838410058728599
+            },
+            "no_zero_mass": {
+              "MQS": 0.04661113228193119,
+              "WIS": 0.040317839156160426,
+              "coverage80": 0.562111801242236,
+              "coverage95": 0.7484472049689441,
+              "MAE_median": 0.06813751583788712
+            }
+          }
+        }
+      }
+    }
+  },
+  "summary": {
+    "dual_head_vs_fixed_probability": {
+      "cells": 4,
+      "wins": 1,
+      "median_MQS_ratio": 1.0000572237748333,
+      "mean_log_MQS_ratio": 2.3688996064109917e-05,
+      "geometric_MQS_gain_percent": -0.0023689276650529223
+    },
+    "dual_head_vs_no_zero_mass": {
+      "cells": 4,
+      "wins": 2,
+      "median_MQS_ratio": 1.0027853746039772,
+      "mean_log_MQS_ratio": -0.02092217615532943,
+      "geometric_MQS_gain_percent": 2.0704825880521693
+    },
+    "dual_head_vs_empirical_constant": {
+      "cells": 4,
+      "wins": 3,
+      "median_MQS_ratio": 0.9850945508760705,
+      "mean_log_MQS_ratio": -0.007230214815950615,
+      "geometric_MQS_gain_percent": 0.7204139693566036
+    },
+    "dual_head_vs_gaussian_constant": {
+      "cells": 4,
+      "wins": 3,
+      "median_MQS_ratio": 0.9952692562578083,
+      "mean_log_MQS_ratio": -0.011709180598175948,
+      "geometric_MQS_gain_percent": 1.1640894925985634
+    },
+    "fixed_probability_vs_empirical_constant": {
+      "cells": 4,
+      "wins": 3,
+      "median_MQS_ratio": 0.9850381813087552,
+      "mean_log_MQS_ratio": -0.007253903812014745,
+      "geometric_MQS_gain_percent": 0.7227657752232552
+    }
+  },
+  "elapsed_seconds": 5.175525000086054
+}

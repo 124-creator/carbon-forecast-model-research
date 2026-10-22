@@ -1,0 +1,412 @@
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html xmlns:ng="http://angularjs.org" class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7 ie" id="ng-app" ng-app="barx.invsol"> <![endif]-->
+<!--[if IE 7]>         <html xmlns:ng="http://angularjs.org" class="no-js lt-ie10 lt-ie9 lt-ie8 ie" ng-app="barx.invsol" id="ng-app"> <![endif]-->
+<!--[if IE 8]>         <html xmlns:ng="http://angularjs.org" class="no-js lt-ie10 lt-ie9 ie" ng-app="barx.invsol" id="ng-app"> <![endif]-->
+<!--[if IE 9]>    	   <html xmlns:ng="http://angularjs.org" class="no-js lt-ie10 ie" ng-app="barx.invsol" id="ng-app"> <![endif]-->
+<!--[if gt IE 9]><!--> <html xmlns:ng="http://angularjs.org" class="no-js" ng-app="barx.invsol" id="ng-app"> <!--<![endif]-->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="Content-Language" content="en, de, fr, it, nl"/>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	
+	
+	<title>BARX Investor Solutions</title>
+
+	
+	<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+
+	<meta name="viewport" content="width=device-width">
+     <script>
+     	// we create the custom components
+     	var __components = [
+     	    'ng-include', 'ng-pluralize', 'ng-view', 'tabs', 
+     	    'pane', 'highchart', 'instrumentchart', 'extratab',
+     	    'dropdown', 'dditem', 'extgrid', 'datepicker', 
+     	    'collapsible', 'combobox'
+     	]
+		for (var __i = 0, __len = __components.length; __i < __len; __i++) {
+			document.createElement(__components[__i]);
+		}
+     </script>
+     
+	
+	<link rel="stylesheet" type="text/css" media="all" href="/css/N618530766/theme-barclays.css" />
+
+
+	 
+    
+	<script type="text/javascript" src="/js/1260753396/theme-barclays.js" ></script>
+
+</head>
+<body ng-controller="GlobalController" ng-init="initialize()" class=" ng-scope  globalcontroller en">
+	<script>
+		barx.invsol.sgifUrl = Ext.BLANK_IMAGE_URL = "/images/theme/default/s.gif";
+    	barx.invsol.rootUrl = "/";
+    	barx.invsol.buildVersion = "-version-2026.2.6-48";
+    	barx.invsol.currentLocaleLanguage = 'en';
+    	
+    	
+        
+        g_changeTableColumn 		= 'Change Table Columns';
+        g_showRows					= 'Show rows:';
+        g_goTo						= 'Go to page:';
+        g_exportToExcel				= 'Export to Excel (XLS)';
+        g_columnChangeDescription	= 'Select, deselect or switch columns of data you wish to view in the table';
+        g_paginationOf				= 'of';
+        g_productSearchText 		= 'Enter CUSIP/Ticker/Underlyer';
+        g_noItemFound				= 'No Items found';
+        g_highchartMonths			= ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        g_highchartWeekdays			= ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        g_highchartShortMonth		= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        g_highchartPrice			= 'Price';
+        g_highchartDateFormat		= '%m-%d-%Y';
+        
+        
+        
+	        
+	    	    gbl_sDecimalSeparator = ".";
+	    	    gbl_sGroupingSeparator = ",";
+	        
+	        
+        
+
+        
+        
+
+	</script>
+	<div class="gu18 container">
+		<div class="header" id="headerdiv" ng-controller="HeaderController">
+			
+
+
+
+
+
+
+
+
+
+
+
+<div class="row navcontainer">
+    <div class="col gu18">
+       	<div class="nav toplevel">
+			<ul>
+				<li class="header-linkdrop" ng-cloak>		
+					<label>
+						<span ng-init="selected_language='English';defLangCode='en';" ng-bind="selected_language"></span>
+					</label>
+					<div class="overlay language">
+						<div class="col">
+							<ul class="list">
+								
+									<li ng-click="setLanguage('en')">English</li>
+								
+									<li ng-click="setLanguage('de')">Deutsch</li>
+								
+									<li ng-click="setLanguage('it')">Italiano</li>
+								
+									<li ng-click="setLanguage('es')">Castellano</li>
+								
+									<li ng-click="setLanguage('fr')">Français</li>
+								
+									<li ng-click="setLanguage('cs')">Česky</li>
+								
+									<li ng-click="setLanguage('pl')">Polski</li>
+								
+									<li ng-click="setLanguage('nl')">Nederlands</li>
+								
+									<li ng-click="setLanguage('zh')">繁體中文</li>
+								
+									<li ng-click="setLanguage('sh')">简体中文</li>
+								
+									<li ng-click="setLanguage('ja')">日本語</li>
+								
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+			
+
+
+
+
+
+
+
+
+
+
+<div class="row logos">
+	<div class="col gu5">
+		
+		<a href="/"><div class="logo"></div></a>
+  	</div>
+  	<div class="col gu13">
+  	</div>
+</div>
+			<div class="row">
+	<div class="col gu18">
+		<div class="">&nbsp;</div>
+	</div>
+</div>
+			
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+	<div class="col gu18">
+		<div class="breadcrumb">
+			<a class="home_link" href="/home.app"><div class="home"></div></a>
+			
+			<div ng-class="{separator: extraBreadcrumb != ''}"></div>
+			<div class="breadcrumb_item" ng-cloak ng-bind-html-unsafe="extraBreadcrumb"></div>
+		</div>
+	</div>
+</div>
+			
+		</div>
+		<div class="bc_main">
+			<div class="backdrop"></div>
+			
+
+
+
+
+
+
+
+
+
+
+
+<div class="staticpage">
+    <div class="row">
+        <div class="col gu12">
+            <div class="page_type">
+                <h1>
+                    
+                        
+                        
+                        
+                            
+                        
+                    
+                </h1>
+            </div>
+            <div class="fifteen_margin">
+                
+                
+                    
+                    
+                    
+                        
+                    
+                
+            </div>
+        </div>
+        <div class="col gu6">
+            <div class="box">
+                
+
+
+
+
+
+
+	
+	
+	
+
+<h2>
+	Contact Us
+</h2>
+<div class="description">
+	<h3>
+		BARX Client Services - EMEA
+	</h3>
+	<p>If you require assistance please email us at <a href="mailto:barxissupport@barclays.com">barxissupport@barclays.com</a></p>
+</div>
+<div class="forward">
+	
+
+
+
+
+
+
+
+
+	
+	
+		<a href="/static/contactus.app" >
+		More Contacts
+	</a>
+	
+
+
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+			<div class="footer">
+				<div class="row">
+					<div class="col gu18">
+						<div class="ul_line"></div>
+					</div>
+				</div>
+				
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+	<div class="col gu12">
+		<ul class="nav">
+			
+				
+				
+					<li><a href="static/contactus.app">Contact Us</a></li>
+				
+			
+			<li><a href="/static/aboutus.app">About Us</a></li>
+			<li><a href="/static/disclaimer.app">Disclaimer</a></li>
+			<li><a href="/static/privacy.app">Privacy & Cookies</a></li>
+			<li><a href="/static/accessibility.app">Accessibility<style>.search_items input[type="text"]{margin-top:8px!important}.search_items .search_button{margin-top:8px}.header .links_info > *, .search_items > *{vertical-align:top}</style></a></li>
+		</ul>
+	</div>
+	<div class="col gu6">
+		<div class="copyright">&copy; Barclays Bank PLC 2026</div>
+	</div>
+</div>
+			</div>
+		</div>
+	</div>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://live.barcap.com/BC_S/PECR/dist/barclays.cookie.consent.min.js"></script>
+<link rel="stylesheet" href="https://live.barcap.com/BC_S/PECR/src/barclays.cookie.consent.css">
+
+
+<script>
+    var cookieConfigObject = {
+        "name": "barclaysConsent",
+        "consentExpiry": 365,
+        "declineExpiry": 365,
+        "saveOnSubmit": true,
+        "httpOnly": true,
+        "sameSite": true,
+        "secure": true,
+        "site": "BARXIS",
+        "environment": 'PROD',
+        "consentHTML": {
+            "primaryView": {
+                "title": "Cookies",
+                "description": "Barclays uses cookies on this website. Some cookies are essential to provide our services to you. Other cookies help us to analyse how you use the site, so we can improve your experience on our site. Cookies are stored locally on your computer or mobile device. Please select 'Accept all cookies' to consent to cookies, or select 'Manage cookies' to change your preferences. For more information, please visit our <a href='https://www.cib.barclays/disclosures/cookie-policy.html' target='_blank' style='font-size:18px;'><u>Cookie Policy</u></a> page.",
+                "externalLink": "/link-to-page",
+                "buttons": [
+                    {"type": "primary", "label": "Accept All"},
+                    {"type": "secondary", "label": "Preferences"}
+                ]
+            },
+            "manageCookieView": {
+                "title": "Cookie preferences",
+                "description": "Please review and manage your cookie settings below. For more information, or to change your preferences at any time, please visit our <a href='https://www.cib.barclays/disclosures/cookie-policy.html' target='_blank' style='font-size:18px;'><u>Cookie Policy</u></a> page. Please select 'Save and close' to remember your preferences for future visits.",
+                "externalLink": "/link-to-page",
+                "sections": [
+                    [
+                        {
+                            "title": "Strictly necessary cookies",
+                            "description": "These cookies are essential to provide our services to you. The data collected by these cookies is necessary for the website to operate and to maintain your security and privacy while using the website.  Data collected by these cookies is not used for marketing purposes or for the purposes covered by the other three categories. This category cannot be disabled.",
+                            "type": "checkbox",
+                            "checked": true,
+                            "enabled": false,
+                            "name": "StrictlyNecessaryCookies"
+                        },
+                        {
+                            "title": "Functionality cookies",
+                            "description": "Data collected by these cookies enables the website to remember choices you make while browsing. This means a more personalised experience related to features of the website that can be customized based on your settings and preferences while browsing.",
+                            "type": "checkbox",
+                            "checked": true,
+                            "enabled": true,
+                            "name": "FunctionalityCookies"
+                        }
+                    ],
+                    [
+                        {
+                            "title": "Targeting cookies",
+                            "description": "Data collected by these cookies is used to tailor our marketing to your interests. These cookies remember that you have visited a website and this information may be shared with third-party advertising platforms. They are also used to limit the number of times you see an advertisement and measure the effectiveness of marketing campaigns. Without these cookies, online service messages or advertisements you receive will be less relevant to you and your interests.",
+                            "type": "checkbox",
+                            "checked": true,
+                            "enabled": true,
+                            "name": "TargetingCookies"
+                        }
+                    ]
+                ],
+                "buttons": [
+                    { "type": "primary", "label": "Save and Close"}
+                ]
+            }
+        }
+    }
+    $(document).ready(function() {
+        $.PECR(cookieConfigObject);
+    });
+
+</script>
+	
+</body>
+</html>

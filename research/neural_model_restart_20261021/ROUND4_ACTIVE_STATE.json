@@ -1,0 +1,36 @@
+{
+  "status": "ongoing",
+  "goal_round": 4,
+  "objective_complete": false,
+  "frozen_candidate": "empirical_tilt_round3_followup full five-seed probability mixture",
+  "completed": {
+    "deep_seq_round4": "100 fits complete; LSTM/GRU outperform frozen candidate MQS by 0.87035/0.43051 percent; TCN slightly worse, Transformer slightly better",
+    "qrf_round4": "QRF outperforms frozen candidate MQS 1.35001 percent and exact CRPS 1.50635 percent",
+    "qrf_round4_probability_control": "same p_rule does not remove QRF advantage: rule-QRF beats frozen candidate MQS 1.52204 percent and CRPS 1.65943 percent",
+    "rolling_tilt_round4": "15 periods complete, 3780 forecast keys; candidate vs uniform_static MQS +1.40398 percent, CRPS +1.04148; vs KNN MQS -0.85271 percent, CRPS -0.47909",
+    "tilt_basis_round4": "full five-factor tilt vs two-factor MQS -0.22381 percent, CRPS -0.33897; extra higher-order factors not supported",
+    "kernel_memory_round4": "100 learned configs plus fixed controls complete, 1078.4 seconds; state_kernel_fixed_p vs frozen tilt MQS +0.09375 percent; vs QRF MQS -1.27346 percent, CRPS -1.37844; vs response_only_fixed_p MQS -0.16040 percent",
+    "verify_empirical_affine_round4": "independent mean/variance, zerohead restoration, exact CRPS/CDF, gradients and differing-support mixture checks passed",
+    "seq_transport_round4": "100 configs complete and verified; beats LSTM MQS .13663%, still behind rule-QRF .52423%",
+    "mixed_cdf_forest_round4": "175 forests complete; all four variants behind QRF; zero-CDF internal small improvement .1816%, excessive crossh borrowing 64-75%"
+  },
+  "parent_jobs": {
+    "pwsh-fe418632c06d45b4": "complete and collected: rolling full",
+    "pwsh-0e783f9934774c91": "complete and collected: response basis",
+    "pwsh-a6ee87739ecf41b2": "complete and collected: full conditional kernel memory",
+    "pwsh-f736c1431ecc4cd4": "complete and collected: affine geometry verification"
+  },
+  "next": "forest-conditioned reference plus sequence residual empirical transport; optional horizon borrowing kernel",
+  "completed_children": {
+    "911fc401-f6fd-4413-b13a-4157a8b8c759": {
+      "prefix": "seq_transport_round4",
+      "task": "Actually implement and train four variants x five markets x five seeds. LSTM16 + context16 + shared16 -> 4 zerohead: conditional mean residual, log-scale, two shape coefficients. Matured nonzero empirical support; weighted shape centered/unit-variance, then affine to predicted conditional mean and scale. Same fixed p_rule, exact O(M) CRPS. Controls no-sequence, location-scale only, raw-support reweight only. True five-seed mixture merges query-specific affine supports. Independent geometry parent verified; child must verify its actual functions. Do not confuse conditional-moment transport with prior failed unconditional variance budget. Record transformed mark zero collisions for effective nonzero probability."
+    },
+    "4bafa75d-aec3-4ff0-b9f8-e4da9c9a4501": {
+      "prefix": "mixed_cdf_forest_round4",
+      "task": "Actually implement four ML candidates with same canonical context/targets. per_h_CDF depth6; pooled_MSE depth8; pooled_CDF depth8; pooled_zero_CDF depth8. Fixed leaf25, 80 trees/seed, five seeds. CDF target map sqrt(delta between 33 training quantile knots)*I[z<=midpoint], multioutput MSE split approximates integrated-CDF criterion; zero variant adds sqrt(.5)*I[y==0]. Leaf probabilities over actual scalar historical z define exact forecast distribution. Pooled models borrow mature normalized responses across h and include h context; every label t_i+h_i strictly before fit boundary. No test hyperparameter selection. Compare against stronger val-selected QRF, rule-QRF and LSTM cached outputs. Not claim exact CRPS split, only exact ECDF evaluation."
+    }
+  },
+  "active_children": {},
+  "next_plan": "ROUND5_FOREST_TRANSPORT_PLAN_ZH.md"
+}

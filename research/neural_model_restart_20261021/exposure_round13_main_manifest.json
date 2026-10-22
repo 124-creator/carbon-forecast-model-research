@@ -1,0 +1,45 @@
+{
+  "config": {
+    "markets": [
+      "CEA",
+      "GUANGZHOU",
+      "SHANGHAI",
+      "HUBEI",
+      "EU"
+    ],
+    "seeds": [
+      11,
+      22,
+      33
+    ],
+    "epochs": 50,
+    "models": [
+      "observation_gate",
+      "event_count",
+      "stale_clock",
+      "no_carry",
+      "hurdle"
+    ],
+    "tag": "exposure_round13_main"
+  },
+  "status": "EXPLORATORY; all historical tests reused",
+  "horizons": [
+    1,
+    5,
+    20
+  ],
+  "mechanism": "last observed price-change time mixture versus event-count mixture; hypotheses, not proven nontrading states",
+  "horizon_unit": "subsequent observed panel rows, not guaranteed consecutive business days",
+  "no_trade_assumption": "zero price changes are observed indicators, not proven absence of trading; zero endpoint can arise from cancellation",
+  "selection": "validation CRPS on standardized returns; epoch selection followed by pre-cut refit",
+  "training_objective": "mean standardized CRPS + 0.1 BCE of one-step observed price-change probability",
+  "ablation_no_carry": "removes explicit age from stale mixture component exposures; age context features remain available",
+  "source_sha256": "ac8f1fb9cdf1652a03fc7217fc5c3244439fcc2b26f480115f2875b6f49791c7",
+  "panel_sha256": "d470238386e201e68f07b033f5a34591af89b57f1546ea79b699e763d228b56c",
+  "checks": {
+    "CRPS_known_cases": true,
+    "last_refresh_variance_MC": 6.00955,
+    "analytic": 6.0102525
+  },
+  "markets": {}
+}

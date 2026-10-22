@@ -1,0 +1,65 @@
+{
+  "instrument": {
+    "symbol": "KCCA",
+    "official_name": "KraneShares California Carbon Allowance Strategy ETF",
+    "instrument_type": "ETF",
+    "exchange_vendor": "NYSEArca",
+    "currency": "USD",
+    "price_unit": "USD per ETF share",
+    "volume_unit": "ETF shares",
+    "exchange_timezone": "America/New_York",
+    "exposure": "Single carbon allowance program: California Carbon Allowance (CCA) futures strategy; issuer states S&P Carbon Credit CCA Excess Return Index, which tracks the most traded CCA futures contracts.",
+    "not_equivalent_to": "CCA spot, a physical CCA allowance, EUA, or a directly traded single futures-contract price",
+    "overlap_with_KRBN": "Possible and economically expected CCA exposure overlap with multi-market KRBN. A separately listed instrument does not establish independent underlying risk or statistically independent evidence.",
+    "issuer_inception_date": "2021-10-04",
+    "vendor_first_trade_date": "2021-10-05",
+    "inception_vs_trading_date_note": "Issuer fund inception and first available exchange trading day differ by one day. No data invented for 2021-10-04."
+  },
+  "issuer_identity": {
+    "url": "https://kraneshares.com/etf/kcca/",
+    "retrieved_utc": "2026-10-21T14:53:18.606363+00:00",
+    "http_status": 200,
+    "raw_file": "kraneshares_KCCA_identity_raw.html",
+    "sha256": "962a667b12c68c5b74c3fc6ffd5ada8fd154c281b81e1154a5c35d2e865077cb",
+    "evidence_locations": {
+      "official_name": "line 939",
+      "CCA_futures_strategy_and_excess_return_index": "line 943",
+      "inception_date": "lines 1144-1145",
+      "index_short_label": "line 1158 (S&P Carbon Credit CCA Index)",
+      "current_futures_holding_example": "lines 2598-2602: California Carbon Allowance (CCA) Vintage 2026 Future, KBCZ26 Comdty, 100.03% NAV",
+      "distribution_explanation": "line 2941: capital gains, dividends and PFIC-related factors"
+    }
+  },
+  "dataset": {
+    "file": "KCCA_ETF_USD_daily_completed_20211005_20261020.csv",
+    "rows": 1266,
+    "first_date": "2021-10-05",
+    "last_date": "2026-10-20",
+    "frequency": "Trading-day daily",
+    "source_url": "https://query1.finance.yahoo.com/v8/finance/chart/KCCA?period1=1577836800&period2=1792540800&interval=1d&events=div%2Csplits%2CcapitalGains",
+    "retrieved_utc": "2026-10-21T14:53:18.603787+00:00",
+    "raw_file": "yahoo_KCCA_since2020_raw.json",
+    "sha256": "17c93aeca744b91b041a419413fae105c80aca8c9b214c625c7ab6b47d2cae68",
+    "columns": ["date", "timestamp_utc", "open", "high", "low", "close", "volume", "adj_close"],
+    "completion_rule": "API period2=2026-10-21T00:00:00Z exclusive; retain America/New_York dates <=2026-10-20 and strictly earlier than retrieval exchange-local date. No 2026-10-21 session included.",
+    "adjustment": "Yahoo quote OHLCV values retained without repair or manual reconstruction. adj_close is a separate vendor adjustment field, not to be mixed with raw OHLC geometry.",
+    "corporate_actions_file": "KCCA_corporate_actions.json",
+    "corporate_actions_returned": "6 dividends records; no split or capitalGains record returned. This is a statement about this response, not independently verified absence of other historical events.",
+    "distribution_caution": "Yahoo dividends on 2024-06-27 = 5.028 USD per share. Raw close changes across distributions are not total returns. 1058 rows have adj_close differing from close."
+  },
+  "availability": {
+    "status": "Available for separate CCA-futures ETF OHLCV experiment after usual research protocol checks",
+    "basic_geometry_quality_passed": true,
+    "rows_complete": 1266,
+    "missing_or_nonfinite": 0,
+    "duplicate_dates": 0,
+    "weekend_rows": 0,
+    "ohlc_order_violations": 0,
+    "nonpositive_prices_or_volume_rows": 0,
+    "zero_high_low_range_rows": 1,
+    "zero_high_low_range_dates": ["2023-05-11"],
+    "zero_range_treatment": "Original valid zero range retained; no artificial widening or row removal.",
+    "limitations": "No exchange-calendar completeness proof or second-vendor reconciliation. Data-quality pass does not imply predictive efficacy, causal identification, or independence from KRBN."
+  },
+  "scope": "KCCA only; Yahoo and corresponding issuer page only. All outputs are new files in the authorized research directory. No other ticker, model target/score calculation or reading, package installation, login, payment, verification bypass, or legacy modification."
+}
