@@ -1,0 +1,81 @@
+{
+  "stage": "G",
+  "source_commit": "fddf3e691083463b0f08ecac09b9998d435d8654",
+  "prior_model_commit": "725d00adbf1f46b7c3b4b4bb12de813cc45afbad",
+  "status": "ONE_UNTESTED_ARCHITECTURE_NOT_ESTABLISHED_NOVELTY",
+  "hypothesis": "Jointly learning ordered mixtures of fixed stable memory modes and a small signed interaction readout improves direct carbon-price prediction beyond identical-memory simple models. Stable poles and multiplicative units themselves are not new.",
+  "memory": {
+    "half_lives": [0,1,2,4,8,16,32,64,128],
+    "poles": "rho=0 for half-life zero; otherwise exp(-log(2)/half_life)",
+    "recursion": "b[j,t]=rho[j]*b[j,t-1]+sqrt(1-rho[j]^2)*delta_price[t], initial zero",
+    "mixing": "8 channels use adjacent modes. w_j=sigmoid(gamma_j), gamma_j in [-3,3]. z_j=((1-w_j)*b_j+w_j*b_(j+1))/sqrt((1-w_j)^2+w_j^2+2*w_j*(1-w_j)*R_j); R_j=sqrt((1-rho_j^2)*(1-rho_(j+1)^2))/(1-rho_j*rho_(j+1)).",
+    "local_scale": "past 60 increments RMS only. x=z/scale. zero scale implies zero normalized input and zero predicted change",
+    "scope": "linear stable causal modes, not recovered economic latent states; Gram normalization is exact filter-energy normalization, not a claim that actual increments are white noise"
+  },
+  "model": {
+    "features": "[x, (u_k dot x)*tanh((v_k dot x)*(w_k dot x)), k=1..4]",
+    "parameter_count": 140,
+    "norm_bounds": "each of the 12 eight-dimensional interaction vectors has norm<=1",
+    "prediction": "p_t+local_scale_t*features_t dot B_h, h=1,5,20 observation steps",
+    "head": "exact 3-horizon ridge output solve in training-only horizon scales",
+    "objective": "mean standardized raw price squared loss + alpha/3*sum(B^2)+1e-4*sum(interaction_parameters^2)+1e-4*sum(gamma^2)",
+    "training": "Adam lr .02, 160 steps, gradient clipping1, projection after updates, retain best training objective including initialization; gamma starts0",
+    "alpha_grid": [0.01,0.1,1.0],
+    "model_seeds": [7,17,29]
+  },
+  "same_information_controls": [
+    "MEM_FIXED: same 9 modes, gamma=0, train signed interactions",
+    "MEM_MLP: same trainable 8 mixtures, conventional 9-unit tanh MLP plus linear skip, 143 parameters",
+    "MEM_FROZEN: fixed random signed-interaction vectors, train gamma and ridge head",
+    "MEM_LINEAR: same trainable gamma and linear head only",
+    "BLOCK_INTERACTION: previous 132-parameter finite 60-lag block model refit fresh, not reused scores",
+    "MEM_RIDGE: fixed mixtures, linear ridge head"
+  ],
+  "synthetic": {
+    "seeds": [400,401,402,403],
+    "n": 1400,
+    "burnin": 400,
+    "processes": {
+      "null": "iid Gaussian increments variance1",
+      "local_level": "p=m+z; m random walk q=.15, z AR(.65) innovation variance .85",
+      "memory_interaction": "r_(t+1)=.7*tanh(b8_t)*tanh(b32_t)*tanh(b1_t)+epsilon, epsilon N(0,1); b are unit-energy stable filters of r, half-lives1,8,32",
+      "asymmetric_control": "r_(t+1)=.35*r_t+.4*tanh(b8_t^2-1)+epsilon"
+    },
+    "fit1_end_exclusive": 600,
+    "tuning_origins": [600,880],
+    "fit2_end_exclusive": 900,
+    "evaluation_origins": [920,1380],
+    "past_window": 480,
+    "scope": "16 finite artificial paths, not broad simulation certification; only prices observed by learned methods. Designed memory interaction explicitly tests representation and is not independent evidence of market suitability.",
+    "minimum_gate": "finite predictions; candidate null relative_MSE<=1.03, local_level<=1.00, memory_interaction<=1.00. Candidate may enter already-exposed development only after this gate; beating a same-memory baseline is separately required for any confirmation.",
+    "baselines": "all same-information controls, RW, CORE_ML240 and linear block ridge; three-seed average loss, no ensembling"
+  },
+  "market": {
+    "gate": "minimum synthetic gate passes",
+    "only_market": "Guangzhou existing Figshare author snapshot",
+    "initial": "2018-2019",
+    "development": "2020-2021",
+    "cutoff": "2021-12-31 hard truncation at model input",
+    "later_data": "Do not score2022-2024 or Hubei/EU in this run even if development passes",
+    "refit": "every40 observation steps, exclusive fit end t, latest training target t-1, last480 complete mature origins",
+    "same_features": "only price increments; no source row, Excel type or release-time inference",
+    "additional_baselines": "RW; drift120/240/480; Stage D CORE_ML120/240/480; finite-block and 60-lag Ridge each alpha=.01,.1,1; HistGradientBoosting same fixed-memory features leaves7/15 x lr.05/.1 x l2.1/1, 80 rounds no random early stopping",
+    "primary": "equal-year equal-horizon MSE/RW MSE. Save pooled RMSE/MAE but never switch primary aggregation after results.",
+    "Cstar": "best development method in complete predeclared noncandidate pool including all simple structural controls",
+    "continuation": "candidate improves primary by >=2% vs RW and Cstar and >=1% vs MEM_FIXED,MEM_MLP,MEM_FROZEN,MEM_LINEAR; no year relativeMSE>1.05; otherwise stop. A positive old-development result still does not establish publication readiness.",
+    "uncertainty": "paired moving blocks within each year, lengths20/40/60,2000 draws; equal seed losses; postselection exploratory intervals, not confirmatory",
+    "no_posthoc_expansion": true
+  },
+  "equivalence_and_tests": [
+    "exact causal recurrence and convolution agreement",
+    "ordered effective mean lags stay inside adjacent-mode intervals",
+    "gamma zero exactly recovers fixed-memory architecture",
+    "nonlinear head zero yields a fixed-pole linear filter at deployment, not a novel linear method",
+    "fixed encoder equals finite-feature kernel ridge; entire trainable model not claimed to be a new universal function class",
+    "constant-history, scale, sign and translation tests",
+    "mature target support; future perturbation invariance; metadata exclusion; hard date cutoff",
+    "gradients through mixtures and profiled output checked by finite differences"
+  ],
+  "delivery": "new branch/PR, no main merge; publish code and all outcomes. No prior restricted payload retry. No new price downloads are needed.",
+  "literature": "Primary sources separated by full method sections vs abstracts vs unverified leads. Restricted earlier PDFs remain excluded. No promise of publication or improvement."
+}
