@@ -1,0 +1,46 @@
+{
+  "runtime_seconds": 52.51586556434631,
+  "script_sha256": "250b480e28dd54673c036f21b8387dc78e8e155ebaf713ddc43fd89070d6d499",
+  "base_script_sha256": "789df44ca18ab0530bc09751942e491ac87e40249c0d936f5e1e4eb65039e1fe",
+  "input_base_predictions_sha256": "ff9669a6330e15f8493664d8779fba8660d6b04b89bb8a5bc8902cc24e3a6cb5",
+  "outputs": {
+    "gate_predictions_all.csv": "cfee8b43667ad17d11d5ecc531276fab9054852389be2cf2bcaa14e9cb5a6d99",
+    "gate_comparison_predictions_common.csv": "2b7da36b80246e3dc96d8a7bdecdce9c69584a9c9e7ec91110e8f59af96e469a",
+    "gate_summary.csv": "fae8bc4ebbc8af0bf41626a6944c614a3a8ccb482e1f3d9b9fc38daa8580495a",
+    "gate_pairwise.csv": "3caca62f700013dd31838a74c5a391fe2a7cf406b7bf19208f9ceb00a0b6b9a8",
+    "gate_fit_diagnostics.csv": "580bf56a624e7b5fb96e4171422c98500ca206e9f4e522002aceb352d442d111",
+    "gate_parameters.csv": "fcb95837e94894bdc78c2069ee0f24cb0a4a9aae8ec3c63b66843129dea99118",
+    "gate_weights.csv": "1392f14f763779d069099cad6fb1cf596e8d2983efe73cd68a577f460f7f5835",
+    "gate_weight_summary.csv": "bc9217658fdb4974bc479cf1496ae36ea8050df793c29b1503869edb3e3a326d",
+    "gate_pairwise_equal_asset.csv": "dc1e334d7cb917e64ae569618912b8793cd3c3d3b287be361da4e3819af0fde9",
+    "gate_optimization_flags.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "equation": "log f=b0+sum b_k*((1-w)*own_k+w*range_k)+bg*gap+bq*rel+bf*flat; w=sigmoid(a0+a1*rel+a2*flat); static ablation a1=a2=0 with learned a0",
+  "standardization": "training-only own/range share center and sd at each scale, computed from stacked own and range values; gap,rel,flat use separate training centers/sds; standardized rel/flat enter both gate and direct terms",
+  "ridge": "mean QLIKE + 0.01/2*(sum b_slopes^2+sum gate_covariate_slopes^2); b0 and a0 unpenalized",
+  "optimization": "scipy analytic gradient L-BFGS-B; .2/.5/.8 deterministic initial constant gates, lowest training penalized objective selected; failure flags with BFGS retry; abort if any start still fails",
+  "protocol": "exactly original experiment targets, training labels, common scoring origins, cross-year exclusion, horizons and 22-origin refit cadence; no original nine-model retraining",
+  "checks": {
+    "analytic_gradient_finite_difference_errors": {
+      "True": 1.6403000878308429e-07,
+      "False": 2.458190754039654e-07
+    },
+    "all_11_models_same_origins": true,
+    "base_targets_unchanged": true,
+    "base_scoring_flags_identical": true
+  },
+  "counts": {
+    "new_prediction_rows": 10650,
+    "all_scored_rows": 55803,
+    "fit_starts": 1476,
+    "selected_fits": 492,
+    "flags": 0
+  },
+  "limits": [
+    "Exploratory parameter-constrained candidate, no established novelty or untouched test",
+    "Gate is predictive mixing weight, not identification of measurement error",
+    "Nonconvex optimization; three deterministic starts do not guarantee global optimum",
+    "All years already viewed; NW t exploratory, no multiple-testing correction",
+    "MSE percentages are ratios times 100; subtract 100 for percent change; QLIKE comparisons use differences only"
+  ]
+}

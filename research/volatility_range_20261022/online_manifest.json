@@ -1,0 +1,117 @@
+{
+  "protocol": "Fixed-protocol online combination of four saved variance experts.\nNo base-model refits, parameter search, or claim of a new aggregation family.\nFull feedback uses s+h<=t; partial feedback only uses observed native returns.\n",
+  "input": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\volatility_range_20261022\\normalized_comparison_predictions_common.csv",
+  "input_sha256": "4b017a36be66e616320aa3b3e630b29655db27f473e48a0210124ffcf9e5853c",
+  "script_sha256": "f7e592b6edb57b4e514e41635ac7ab4a095b87d88b82c17cc210054d43c546fa",
+  "experts_fixed": [
+    "EWMA97",
+    "HAR_return",
+    "QHAR_joint",
+    "QHAR_liquidity_plus_scale"
+  ],
+  "max_source_target_serialization_spread": 3.3881317890172014e-21,
+  "models": [
+    "Online_dynamic",
+    "PartialFeedback_dynamic",
+    "LeadBalanced_partial",
+    "Online_expanding",
+    "Equal_geometric",
+    "Equal_arithmetic",
+    "Frozen2024"
+  ],
+  "half_life_origin_trading_days": 22,
+  "dynamic_max_shared_published_origins": 252,
+  "minimum_feedback": 44,
+  "ridge": 0.01,
+  "objective": "weighted mean(log f + Y/f) + .01/2*||w-uniform||^2",
+  "forecast": "exp(sum w_k log saved_forecast_k), except fixed arithmetic mean",
+  "feedback": "full/partial share last252 scored_common published s<t origins; full uses s+h<=t, partial uses m=min(h,t-s) native daily squared returns; both start only with >=44 full labels in shared window",
+  "partial_objective": "sum decay*((m/h)*eta+knownsum/h*exp(-eta))/sum decay*(m/h) + .01/2||w-uniform||^2",
+  "lead_balanced": "For each lead j normalize decay over observed origins to mass1/h; use a_s=sum_j mass_sj and response sum_j mass_sj*r2_sj/a_s. Same shared window/startup/ridge; h1 independently optimizes then verifies weights rtol/atol1e-9 and forecasts rtol1e-10/atol1e-15 against full/partial",
+  "native_return_sources": [
+    {
+      "asset": "KRBN",
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KRBN_ohlc.csv",
+      "sha256": "fbc1f4dba56feb3e573b9927306fd99eee4b6b3e3355c651274419b80737d271",
+      "rows": 1470,
+      "start": "2020-07-31",
+      "end": "2026-06-08",
+      "epsilon": 4.26947636318035e-08,
+      "zero_returns": 8,
+      "flat_rows": 4
+    },
+    {
+      "asset": "KEUA",
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KEUA_ohlc.csv",
+      "sha256": "023b3c514472fbee7cc23cb1b4dc4d2c3af44100bdf3803b069035a3f7401d52",
+      "rows": 1122,
+      "start": "2021-09-29",
+      "end": "2026-03-20",
+      "epsilon": 2.0445586047860272e-07,
+      "zero_returns": 70,
+      "flat_rows": 79
+    },
+    {
+      "asset": "KCCA",
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KCCA_ohlc.csv",
+      "sha256": "7c0fd06dea424cb5995341474b321ecf3288048753ac00023409e302cb03ab27",
+      "rows": 1173,
+      "start": "2021-10-05",
+      "end": "2026-06-08",
+      "epsilon": 2.751805907193114e-08,
+      "zero_returns": 16,
+      "flat_rows": 1
+    }
+  ],
+  "base_script_sha256": "789df44ca18ab0530bc09751942e491ac87e40249c0d936f5e1e4eb65039e1fe",
+  "label_precision": "Mature training labels recomputed from identical native r2, checked against saved targets to atol1e-15/rtol1e-10; evaluation targets unchanged",
+  "Frozen2024": "equal in 2024; at first 2025 common origin use all mature 2024 feedback, equal training weights; then freeze through 2026",
+  "decision_periods": "2025 and partial 2026; 2024 warmup/exploration; all years already seen",
+  "gradient_check_error": 1.3260475250740752e-06,
+  "checks": {
+    "no_future_labels": true,
+    "historical_origin_excludes_current": true,
+    "target_end_date_mature": true,
+    "identical_common_samples": true,
+    "frozen_weights_constant_2025_2026": true,
+    "input_unchanged": true,
+    "h1_partial_full_exact_forecast_weights_startup": true,
+    "partial_observed_days_only": true,
+    "lead_balanced_mass_each_lead_one_over_h": true,
+    "h1_balanced_independent_optimization_tight_tolerance": true,
+    "all_components_mature_balanced_reduces_full_objective_gradient_random_and_actual": true
+  },
+  "counts": {
+    "source_models": 18,
+    "common_origins": 5073,
+    "new_predictions": 35511,
+    "optimizations": 18417,
+    "failures": 0
+  },
+  "max_simplex_first_order_gap": 2.8730186927838908e-06,
+  "outputs": {
+    "online_predictions.csv": "3f4855f2747c22bda78efc30a1efc4922c3a553267b2e6aa783599185a6ced70",
+    "online_comparison_predictions_common.csv": "ee037a8175188f88a1e328412edfb256867b94f5b61abaf2c605f625cbcc80f5",
+    "online_weights.csv": "9097b353f66ad933848a36da2119dc547bee0ce35bfbc2b3398da81c963dcf88",
+    "online_weight_summary.csv": "5a8e66c4932fcee0a2ffc67b037950e829f5b403ac67cad8c93e42c23ef208c2",
+    "online_summary.csv": "40c71dd38ca787f254eee03b4cccc39f2cbdde8f9a708546604651192b0764e7",
+    "online_pairwise.csv": "2a443ccb8d05d0a0af4d9a93e473d399d4636f48910889f633dcc67c29a69fb8",
+    "online_pairwise_equal_asset.csv": "05718ab1c1e9232acbe2f3edceaab6b7fb45874888b3b2a4ad3e78a915b3a4f3",
+    "online_fit_diagnostics.csv": "380ad6996a6d6f871fb19062fd5c18cf17eafcff3329dbedf0b3fef011efe8c2",
+    "online_optimization_flags.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "environment": {
+    "python": "3.11.15 (main, Jun 23 2026, 15:20:37) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scipy": "1.17.1"
+  },
+  "runtime_seconds": 31.82851266860962,
+  "limitations": [
+    "Exploratory mechanism diagnostic; experts and years already seen",
+    "No hyperparameter changes or novelty claim",
+    "2026 coverage partial and differs across assets",
+    "Newey-West lag max(5,h-1); approximate unadjusted tests, overlapping labels",
+    "Frozen2024 equal in 2024 is warmup only; its fitted 2024 training performance is never backfilled"
+  ]
+}

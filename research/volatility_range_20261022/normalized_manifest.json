@@ -1,0 +1,67 @@
+{
+  "runtime_seconds": 69.85239458084106,
+  "script_sha256": "1f050c08661d4890eaa9628de2e869a0e5341f4f6a60a240f8652685cff490d9",
+  "base_script_sha256": "789df44ca18ab0530bc09751942e491ac87e40249c0d936f5e1e4eb65039e1fe",
+  "gate_script_sha256": "250b480e28dd54673c036f21b8387dc78e8e155ebaf713ddc43fd89070d6d499",
+  "old_predictions_sha256": "ff9669a6330e15f8493664d8779fba8660d6b04b89bb8a5bc8902cc24e3a6cb5",
+  "old_gate_predictions_sha256": "cfee8b43667ad17d11d5ecc531276fab9054852389be2cf2bcaa14e9cb5a6d99",
+  "outputs": {
+    "normalized_predictions_all.csv": "2e9276f6a26faa8b49cec03de67cd0410db0d50a49dbf18034590e76ccb61992",
+    "normalized_comparison_predictions_common.csv": "4b017a36be66e616320aa3b3e630b29655db27f473e48a0210124ffcf9e5853c",
+    "normalized_summary.csv": "d4fe47dbef4299d375f1f89d54341b4dc1ec7d4339b68f04c1ef7eda3923de16",
+    "normalized_pairwise.csv": "c6471838ee0647b05d831b97b52443c9a68c2888ade237aaff1daf8a5027c39f",
+    "normalized_pairwise_equal_asset.csv": "52d679a6da8456154e59784adf284c347481018a438db4c3aaf9aa19cbd6995f",
+    "normalized_regression_fit_diagnostics.csv": "5d697d78e2be20ef8f93d9781b94c652e0e6fbd5faac4b236b793c4868ae6313",
+    "normalized_regression_parameters.csv": "d3b066aa08d5e7a05a7d49b2aca41ffdc27581e19d02c39f9bc0401861e37139",
+    "normalized_gate_fit_diagnostics.csv": "643cb8f8ba1bd8bb937d8f1396b5c775661126aa5013af84c10c46f6a48a28e7",
+    "normalized_gate_parameters.csv": "c06e7eff1ef599fb43d3ac163d5da32e853a90677fddcb7b6739f147e54d3478",
+    "normalized_gate_weights.csv": "5401d260bd6dd73b5e5aba32ac8f6ead5a7b6f9f616d68cbe6e36a0417d9e719",
+    "normalized_gate_weight_summary.csv": "4f55c70d6c43df9cdd10109f3b237d928c969c25f3984c6a19593c71189fadbe",
+    "normalized_optimization_flags.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "models": [
+    "NQHAR_return",
+    "NQHAR_joint",
+    "NQHAR_liquidity",
+    "NQHAR_interaction",
+    "N_gate_dynamic",
+    "N_gate_static",
+    "QHAR_liquidity_plus_scale"
+  ],
+  "corresponding_original_models": {
+    "NQHAR_return": "QHAR_return",
+    "NQHAR_joint": "QHAR_joint",
+    "NQHAR_liquidity": "QHAR_liquidity",
+    "NQHAR_interaction": "QHAR_interaction",
+    "N_gate_dynamic": "QHAR_gate_dynamic",
+    "N_gate_static": "QHAR_gate_static",
+    "QHAR_liquidity_plus_scale": "QHAR_liquidity"
+  },
+  "normalization": "s_s=causal EWMA97 variance at each historical origin s; train response Y_s/s_s; subtract log(s_s) from first3 own log-features and first7 own/range/gap log-features, respectively; rel,flat,range-minus-own interactions unchanged; final forecast s_t*exp(g_t). Original stored targets and scoring remain unmodified.",
+  "control": "QHAR_liquidity_plus_scale has original nine liquidity features plus log(s_t), trains on original Y, no fixed offset. Separates added EWMA information from homogeneity/coefficient constraints, but standardization/ridge geometry also differs.",
+  "constraint": "Normalized linear QHAR expands to a log-scale offset with coefficient 1-minus-sum of proxy slopes on log(s). It is not identical to unnormalized QHAR; unchanged QLIKE loss does not imply identical hypothesis class.",
+  "training": "Same original expanding 22-origin refit, s+h<=refit_t, cross-year training/scoring exclusion, epsilon, standardization and ridge convention; QLIKE mean loss+.01/2 slope norm squared; fixed hyperparameters; gate initial .2/.5/.8 selected on training only",
+  "checks": {
+    "original_targets_unchanged": true,
+    "all18_models_identical_scoring_origins": true,
+    "normalized_QLIKE_equals_original_minus_logscale": true,
+    "scale_strictly_positive_no_floor_no_target_fill": true
+  },
+  "counts": {
+    "new_prediction_rows": 37275,
+    "all_scored_rows": 91314,
+    "common_asset_horizon_date_origins": 5073,
+    "regression_fits": 1230,
+    "gate_start_fits": 1476,
+    "selected_gate_fits": 492,
+    "flags": 0
+  },
+  "limits": [
+    "All years seen; no untouched test",
+    "No novelty claim; prior art remains to be checked",
+    "Gate nonconvex with deterministic local multistarts",
+    "NW t exploratory with overlap and multiple comparisons; no multiplicity adjustment",
+    "Scaling changes constraints and penalty geometry, not only numeric units",
+    "Original raw data and coverage limitations persist"
+  ]
+}

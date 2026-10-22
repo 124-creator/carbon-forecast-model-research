@@ -1,0 +1,96 @@
+{
+  "script_sha256": "0a9db49545bb9a3e9467f8d622cb82ef16136ad12848699f2f8e2e4fa403379f",
+  "helper_script_sha256": "f7e592b6edb57b4e514e41635ac7ab4a095b87d88b82c17cc210054d43c546fa",
+  "plan_sha256": "bb48c753a76e9955689079414a6d22aeef0b625d9ec027dfcbd358e9d0f86b80",
+  "input_hashes": {
+    "online_full25_predictions_common.csv": "2c68fa5b5ba8bf409eece38b0b187533caa8b842d6f937c2823b51572b8cf4fb",
+    "online_weights.csv": "9097b353f66ad933848a36da2119dc547bee0ce35bfbc2b3398da81c963dcf88",
+    "online_risk_combination_report.md": "11d25b1f388b508676cc048945ecc209df22d6391658013f51d6fb9910b3ddd2"
+  },
+  "models": [
+    "PartialFeedback_expanding",
+    "LeadBalanced_expanding"
+  ],
+  "experts": [
+    "EWMA97",
+    "HAR_return",
+    "QHAR_joint",
+    "QHAR_liquidity_plus_scale"
+  ],
+  "ridge": 0.01,
+  "minimum_full_feedback": 44,
+  "window": "All scored_common published origins s<t; no truncation, no decay",
+  "full_comparator": "Unchanged saved Online_expanding predictions and weights; no refit",
+  "partial": "Response knownsum/m, importance m/H; use observed daily r2 only",
+  "lead_balanced": "Z_j=count origins with s+j<=t, mass_sj=1/(H*Z_j); a=sum mass, response=sum mass*r2/a",
+  "h1_independent_fit_max_errors": {
+    "weight_absolute": 4.229602779126651e-14,
+    "forecast_absolute": 3.903127820947816e-18,
+    "forecast_relative": 1.9539925233402755e-14
+  },
+  "checks": {
+    "no_future_returns": true,
+    "shared_startup_with_saved_expanding": true,
+    "h1_matches_saved_expanding_tight_tolerance": true,
+    "lead_mass_one_over_h": true,
+    "a_sums_one": true,
+    "all_mature_objective_gradient_equivalence": true,
+    "common_27_model_origins": true,
+    "old_outputs_unchanged": true
+  },
+  "counts": {
+    "common_origins": 5073,
+    "new_predictions": 10146,
+    "all_predictions": 136971,
+    "optimizations": 9204,
+    "failures": 0
+  },
+  "native_inputs": [
+    {
+      "asset": "KRBN",
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KRBN_ohlc.csv",
+      "sha256": "fbc1f4dba56feb3e573b9927306fd99eee4b6b3e3355c651274419b80737d271",
+      "rows": 1470,
+      "start": "2020-07-31",
+      "end": "2026-06-08",
+      "epsilon": 4.26947636318035e-08,
+      "zero_returns": 8,
+      "flat_rows": 4
+    },
+    {
+      "asset": "KEUA",
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KEUA_ohlc.csv",
+      "sha256": "023b3c514472fbee7cc23cb1b4dc4d2c3af44100bdf3803b069035a3f7401d52",
+      "rows": 1122,
+      "start": "2021-09-29",
+      "end": "2026-03-20",
+      "epsilon": 2.0445586047860272e-07,
+      "zero_returns": 70,
+      "flat_rows": 79
+    },
+    {
+      "asset": "KCCA",
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KCCA_ohlc.csv",
+      "sha256": "7c0fd06dea424cb5995341474b321ecf3288048753ac00023409e302cb03ab27",
+      "rows": 1173,
+      "start": "2021-10-05",
+      "end": "2026-06-08",
+      "epsilon": 2.751805907193114e-08,
+      "zero_returns": 16,
+      "flat_rows": 1
+    }
+  ],
+  "max_simplex_first_order_gap": 2.2767047930805084e-06,
+  "outputs": {
+    "online_expanding_transfer_predictions.csv": "d97ec66e2184e1cd4b61b3d9bb6204e27788e2a26eead3da726cfe5ae0f3616b",
+    "online_expanding_transfer_full27_predictions.csv": "7434f89bade29863037d28f6092e9cafd72b171972ed1529d14447d7bdc8b7ab",
+    "online_expanding_transfer_weights.csv": "8c3a78de85d9944a9bf50b48d435491ee610a2f87b412aa6033492d1ef98a825",
+    "online_expanding_transfer_weight_summary.csv": "70bc7c11fb686549332d4cfbdcecfeef75ed6196b2a7d4c57652cdf42226534e",
+    "online_expanding_transfer_summary.csv": "1f6198bf7f2f088afc1f73a7d8f98328556fd20dc9ae26b4bbcf892f3dafccdc",
+    "online_expanding_transfer_pairwise.csv": "a4b39f845637cdb891f60c5b61433395bfc6d0a4395527f135cee8405860c420",
+    "online_expanding_transfer_equal_asset.csv": "523e4939c72c81ecf95acb83190ec3564ecd1ba78798b10e79b0313148550d8f",
+    "online_expanding_transfer_fit_diagnostics.csv": "de9a8ef138f89719a4654e172ede8b9a08a52be82d6bee212a0f8aab0b0a2b51"
+  },
+  "runtime_seconds": 18.58882737159729,
+  "evaluation": "2024 warmup; 2025 and partial2026 already seen exploratory mechanism/transfer checks, no novel method claim"
+}

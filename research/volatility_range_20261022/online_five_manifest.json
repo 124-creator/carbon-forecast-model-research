@@ -1,0 +1,119 @@
+{
+  "script_sha256": "1d84d500897391d2b896dcac97df1842664e66d9444917e992c84ad525f15f09",
+  "plan_sha256": "8af3854b8f1b081ef052ccf850bca442dc77339e3e41e4d295b1adab321d8496",
+  "helper_script_sha256": "f7e592b6edb57b4e514e41635ac7ab4a095b87d88b82c17cc210054d43c546fa",
+  "input_hashes": {
+    "online_expanding_transfer_full27_predictions.csv": "7434f89bade29863037d28f6092e9cafd72b171972ed1529d14447d7bdc8b7ab",
+    "online_expanding_transfer_report.md": "f60db784572d99f5089fa0179e857d946333ba41e3fac0cce8621a072c501fd7",
+    "online_risk_combination_report.md": "11d25b1f388b508676cc048945ecc209df22d6391658013f51d6fb9910b3ddd2"
+  },
+  "experts": [
+    "EWMA97",
+    "HAR_return",
+    "QHAR_joint",
+    "QHAR_liquidity_plus_scale",
+    "GARCH11_t"
+  ],
+  "models": [
+    "Five_expanding_full",
+    "Five_expanding_partial",
+    "Five_expanding_LB",
+    "Five_dynamic_full",
+    "Five_dynamic_partial",
+    "Five_dynamic_LB",
+    "Five_equal_geometric",
+    "Five_equal_arithmetic"
+  ],
+  "parameters": {
+    "ridge": 0.01,
+    "uniform_weight": 0.2,
+    "minimum_full_feedback": 44,
+    "dynamic_shared_published_window": 252,
+    "dynamic_half_life_native_origin_days": 22
+  },
+  "feedback": "Full/partial/LB share published origins and startup within each learner; full uses only complete labels, partial uses observed daily components, LB gives each lead mass1/H",
+  "checks": {
+    "no_future_observations": true,
+    "same_common_origins_all35": true,
+    "h1_independent_solver_identity": true,
+    "shared_startup": true,
+    "balanced_mass_each_lead_one_over_h": true,
+    "balanced_a_sums_one": true,
+    "all_mature_balanced_objective_gradient_equals_full": true,
+    "old_outputs_unchanged": true
+  },
+  "gradient_check_error": 1.72393526383432e-06,
+  "h1_max_errors": {
+    "expanding": {
+      "max_weight_absolute": 5.144495940356819e-14,
+      "max_forecast_relative": 1.2545520178264269e-14
+    },
+    "dynamic": {
+      "max_weight_absolute": 4.677369602745785e-13,
+      "max_forecast_relative": 5.3179682879545e-14
+    }
+  },
+  "native_inputs": [
+    {
+      "asset": "KRBN",
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KRBN_ohlc.csv",
+      "sha256": "fbc1f4dba56feb3e573b9927306fd99eee4b6b3e3355c651274419b80737d271",
+      "rows": 1470,
+      "start": "2020-07-31",
+      "end": "2026-06-08",
+      "epsilon": 4.26947636318035e-08,
+      "zero_returns": 8,
+      "flat_rows": 4
+    },
+    {
+      "asset": "KEUA",
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KEUA_ohlc.csv",
+      "sha256": "023b3c514472fbee7cc23cb1b4dc4d2c3af44100bdf3803b069035a3f7401d52",
+      "rows": 1122,
+      "start": "2021-09-29",
+      "end": "2026-03-20",
+      "epsilon": 2.0445586047860272e-07,
+      "zero_returns": 70,
+      "flat_rows": 79
+    },
+    {
+      "asset": "KCCA",
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KCCA_ohlc.csv",
+      "sha256": "7c0fd06dea424cb5995341474b321ecf3288048753ac00023409e302cb03ab27",
+      "rows": 1173,
+      "start": "2021-10-05",
+      "end": "2026-06-08",
+      "epsilon": 2.751805907193114e-08,
+      "zero_returns": 16,
+      "flat_rows": 1
+    }
+  ],
+  "counts": {
+    "common_origins": 5073,
+    "new_predictions": 40584,
+    "all_predictions": 177555,
+    "optimizations": 27612,
+    "failures": 0
+  },
+  "max_simplex_first_order_gap": 2.826047499460138e-06,
+  "outputs": {
+    "online_five_predictions.csv": "cde6499e4103328659e1b9ca6ba6aee821ce062fc1b7c7e3490e5c319ab004d2",
+    "online_five_full35_predictions.csv": "8732096f57f7042bd29c0eca2c1cee564a6f87a6c1e6374e34f782e6b8b778ac",
+    "online_five_weights.csv": "c78df37778be9fb48f911985d797cf3830296dfbbe64f68432896cb910c83340",
+    "online_five_weight_summary.csv": "41d540e5667290f93003b86141d2a42fef9599b767e5fc89fcb5aec295f1d485",
+    "online_five_summary.csv": "6c33a19f0328957a28d4d9cde5c24948adcad02a20fe83efda9e5fa303e22f05",
+    "online_five_pairwise.csv": "ed9ad2b6f5d881846129623b90b88ea8a36c47639986cb93918e61e252862198",
+    "online_five_equal_asset.csv": "a1880e2189050a121233d5ffa3e38ed4803ff46eabcd30838525c2d34f039f16",
+    "online_five_fit_diagnostics.csv": "986e62efcbed8724e2b011c8fbb75e3521e5c6cdd334d502420525f9ef687389",
+    "online_five_report.md": "be7c1fb9cd4dfdf27788dc4bc407eb9361f2c81592dd0a5e9e43f7ce7b2bd858"
+  },
+  "runtime_seconds": 53.079344272613525,
+  "scope": "Last fixed ETF expert-pool alteration; exactly eight configurations; no pool/temperature/decay search; 2024 warmup and 2025/partial2026 already-seen mechanism diagnostic",
+  "fit_script_sha256": "ec2530ac64b37d7a5b198357ea071703f6db2f64960fc22faa0a909f3cc923a3",
+  "finalizer_sha256": "2bf0f97dc3f95498c1dd634af6596995860016f6da90bbac1613e942f98dee2d",
+  "numerical_tie_postprocessing": {
+    "rule": "max absolute daily QLIKE difference <=1e-12: statistic0 p1, raw retained",
+    "predictions_weights_fits_unchanged": true,
+    "reason": "Floating-point ties otherwise generated false small p values; no refit or parameter change"
+  }
+}

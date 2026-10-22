@@ -1,0 +1,125 @@
+{
+  "created_utc": "2026-10-22T07:33:23.863365+00:00",
+  "runtime_seconds": 26.008753061294556,
+  "python": "C:\\Users\\Dreamboat\\AppData\\Local\\hermes\\hermes-agent-v0.21.5\\venv\\Scripts\\python.exe",
+  "versions": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scipy": "1.17.1",
+    "arch": "8.0.0"
+  },
+  "script": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\volatility_range_20261022\\corrected_risk_experiment.py",
+  "script_sha256": "789df44ca18ab0530bc09751942e491ac87e40249c0d936f5e1e4eb65039e1fe",
+  "inputs": [
+    {
+      "asset": "KRBN",
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KRBN_ohlc.csv",
+      "sha256": "fbc1f4dba56feb3e573b9927306fd99eee4b6b3e3355c651274419b80737d271",
+      "rows": 1470,
+      "start": "2020-07-31",
+      "end": "2026-06-08",
+      "epsilon": 4.26947636318035e-08,
+      "zero_returns": 8,
+      "flat_rows": 4
+    },
+    {
+      "asset": "KEUA",
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KEUA_ohlc.csv",
+      "sha256": "023b3c514472fbee7cc23cb1b4dc4d2c3af44100bdf3803b069035a3f7401d52",
+      "rows": 1122,
+      "start": "2021-09-29",
+      "end": "2026-03-20",
+      "epsilon": 2.0445586047860272e-07,
+      "zero_returns": 70,
+      "flat_rows": 79
+    },
+    {
+      "asset": "KCCA",
+      "path": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KCCA_ohlc.csv",
+      "sha256": "7c0fd06dea424cb5995341474b321ecf3288048753ac00023409e302cb03ab27",
+      "rows": 1173,
+      "start": "2021-10-05",
+      "end": "2026-06-08",
+      "epsilon": 2.751805907193114e-08,
+      "zero_returns": 16,
+      "flat_rows": 1
+    }
+  ],
+  "outputs": {
+    "predictions_all.csv": "ff9669a6330e15f8493664d8779fba8660d6b04b89bb8a5bc8902cc24e3a6cb5",
+    "predictions_scored_common.csv": "1aed145cb10d2bedd3f48811def9774cc06dcf586939e4b7640f440df21e680c",
+    "summary.csv": "bc89b678d353eac997f265f755c00897dc66b5533837372ddf7c4550c9d05793",
+    "summary_equal_asset.csv": "3987e59343f24423c5c8f6585d78c6fd37f94d169cadf6858c1419767203badf",
+    "fit_diagnostics.csv": "e8dd8b9bad23bf3716dca55681f23a86e1d06394dc8c9e7ea956cc1fb088ca0b",
+    "sample_audit.csv": "6e2f07a50ab7bf8ada68a9bc3380b983bffe8476107bb7b708b79b9488effaab",
+    "optimization_flags.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "models": [
+    "MA22",
+    "EWMA94",
+    "EWMA97",
+    "GARCH11_t",
+    "HAR_return",
+    "QHAR_return",
+    "QHAR_joint",
+    "QHAR_liquidity",
+    "QHAR_interaction"
+  ],
+  "horizons": [
+    1,
+    5,
+    22
+  ],
+  "stages": {
+    "2024": "validation_seen",
+    "2025": "development_seen",
+    "2026": "diagnostic_seen"
+  },
+  "protocol": {
+    "target": "mean_{k=1..h} log(adjclose[t+k]/adjclose[t+k-1])^2; original zeros retained; no fill or replacement",
+    "origin": "asset-specific observed dates from 2024-01-01; row t fully available; no date union",
+    "refit": "expanding every 22 asset origins, including origins excluded from scoring; each horizon same refit dates",
+    "train": "finite common features; s+h <= refit_t; cross-calendar-year labels excluded from training as well as scoring",
+    "MA22": "exact r2[t-21:t+1] mean, includes t",
+    "EWMA": "lambda=.94/.97; recursive initial r[1]^2, update including r[t]^2; h-step IGARCH variance constant",
+    "GARCH": "arch zero-mean GARCH(1,1) Student-t on return*100; parameters fixed between refits; recursive variance filter updated each day; analytical mean of h future variances; divided by 10000",
+    "epsilon": "asset-specific pre2024 mean(r^2)*1e-4, frozen; applied only inside logarithms; targets unmodified",
+    "HAR": "OLS log(y+eps), training-residual Duan smearing; exp(xb)*smear-eps; nonpositive forecasts machine-tiny floored with flag",
+    "QHAR": "mean(log(f)+y/f) + 0.01/2 sum(standardized slope^2); log link; unpenalized intercept; training-only standardization",
+    "features_return": "log(rolling mean r^2 + eps), windows 1,5,22, includes t",
+    "features_joint": "return features + log(rolling mean Parkinson + eps), windows 1,5,22 + log(rolling5 adjusted overnight gap^2 + eps)",
+    "features_liquidity": "joint + tanh(log((volume+1)/(rolling22median(volume)+1))) + exact high==low indicator",
+    "features_interaction": "liquidity + rel*(logmeanParkinson-logmeanr2), three scales",
+    "qlike": "log(f)+y/f; y=0 is valid; no log(y)",
+    "common_sample": "all 9 methods scored on identical asset/horizon/year origin sets; no model-specific deletion",
+    "NW": "Bartlett HAC mean loss difference t statistic, lag max(5,h-1), no finite sample or multiple testing correction; negative favors named model",
+    "deltas": "model minus MA22 / model minus QHAR_liquidity; negative better",
+    "MSE_pct": "100*MSE_model/MSE_MA22; below 100 better"
+  },
+  "limits": [
+    "All 2024/2025/2026 stages have been viewed; no clean test, exploratory mechanism probe, no novelty claim",
+    "Adjusted-close revision history is unavailable; downloaded adjustment factors are not proven historical point-in-time",
+    "Daily squared returns are noisy variance proxies; no intraday realized variance",
+    "Flat means high==low, not a zero close-to-close return; gap and Parkinson features are logged",
+    "Ridge is averaged-loss convention, 0.01/2 times squared slopes; no hyperparameter search",
+    "Cross-year exclusion also applied to training by conservative explicit convention",
+    "NW t statistics are exploratory with overlapping labels and no multiplicity adjustment"
+  ],
+  "checks": {
+    "unique_prediction_keys": true,
+    "all_models_common": true,
+    "target_alignment_direct_slice": true,
+    "MA22_exact22": true,
+    "GARCH_analytic_arch_equivalence_at_refit": true,
+    "training_end_le_refit": true,
+    "no_cross_year_scoring": true
+  },
+  "counts": {
+    "prediction_rows_all": 47925,
+    "prediction_rows_scored": 45657,
+    "summary_rows": 243,
+    "flags": 0,
+    "fits": 1312
+  }
+}

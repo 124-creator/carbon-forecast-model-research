@@ -1,0 +1,64 @@
+{
+  "protocol": "Corrected daily Parkinson HAR experiment (exploratory reanalysis).\n\nEach asset uses its own sorted source trading dates. At close t, all predictors\ninclude t and forecasts target the next source trading date t+1. No pooled panel,\nreturn-square replacement, positive-target deletion, or test-selected settings.\n\nTarget: log(high / low)^2 / (4 log 2), including exact zeros.\nTest: target date >= 2024-01-01. Expanding estimation, every 22 test origins.\nEpsilon = max(1e-12, 1e-4 * median(positive pre-2024 target)); also forecast floor.\nLog HAR uses averages of log(y+epsilon) over exactly 1/5/22 days through t.\nLog-OLS corrections use only estimation residuals; forecasts subtract epsilon\nbefore applying the positive floor. Level HAR uses averages of y itself.\nQLIKE loglink uses the same log-HAR regressors but fits conditional E[y] directly\nby log(f)+y/f, with no offset subtraction or smearing needed.\n\nAll models are scored on exactly the same targets, including zero. Report loss\ndifference MODEL-MA22 (negative better); HAC t uses MA22-MODEL (positive better).\nTraditional QLIKE is secondary and uses one identical positive-target subset.\nNo percentage comparisons of log(f)+y/f: the additive level is scale-dependent.\nRW at a zero current target is floored, so its scores are epsilon-dependent.\n",
+  "sources": {
+    "KRBN": {
+      "source": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KRBN_ohlc.csv",
+      "source_sha256": "fbc1f4dba56feb3e573b9927306fd99eee4b6b3e3355c651274419b80737d271",
+      "source_rows": 1470,
+      "source_start": "2020-07-31",
+      "source_end": "2026-06-08",
+      "source_zero_targets": 4,
+      "pre2024_rows": 860,
+      "epsilon": 6.3841989018608065e-09,
+      "pre2024_positive_median": 6.384198901860806e-05,
+      "test_origins": 610,
+      "test_start": "2024-01-02",
+      "test_end": "2026-06-08",
+      "refits": 28
+    },
+    "KEUA": {
+      "source": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KEUA_ohlc.csv",
+      "source_sha256": "023b3c514472fbee7cc23cb1b4dc4d2c3af44100bdf3803b069035a3f7401d52",
+      "source_rows": 1122,
+      "source_start": "2021-09-29",
+      "source_end": "2026-03-20",
+      "source_zero_targets": 79,
+      "pre2024_rows": 567,
+      "epsilon": 6.977198529829542e-09,
+      "pre2024_positive_median": 6.977198529829542e-05,
+      "test_origins": 555,
+      "test_start": "2024-01-02",
+      "test_end": "2026-03-20",
+      "refits": 26
+    },
+    "KCCA": {
+      "source": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\_legacy_202605_archive\\主要实验推进_审计加固版_CLEAN_20260528\\08-新实验\\22_structural_ohlc_q2_route_20260609\\03_raw_data\\normalized_yahoo_ohlc\\KCCA_ohlc.csv",
+      "source_sha256": "7c0fd06dea424cb5995341474b321ecf3288048753ac00023409e302cb03ab27",
+      "source_rows": 1173,
+      "source_start": "2021-10-05",
+      "source_end": "2026-06-08",
+      "source_zero_targets": 1,
+      "pre2024_rows": 563,
+      "epsilon": 5.748178500523541e-09,
+      "pre2024_positive_median": 5.7481785005235404e-05,
+      "test_origins": 610,
+      "test_start": "2024-01-02",
+      "test_end": "2026-06-08",
+      "refits": 28
+    }
+  },
+  "python": "3.11.15 (main, Jun 23 2026, 15:20:37) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.4.6",
+  "pandas": "3.0.6",
+  "script": "E:\\Agent员工\\碳价格预测研究\\独立数据归档\\carbon-forecast-model-research\\research\\volatility_range_20261022\\probe_har_fixed.py",
+  "script_sha256": "3a8763c122df119dd11e701365ac3203c83d20f3dcc0bf5000f51f4f804b7996",
+  "outputs": {
+    "CORRECTED_RANGE_HAR_PREDICTIONS.csv": "d9fa88bfbe6f607df16fdf534134fb06df788c095af995e0d87eef02e4fc8762",
+    "CORRECTED_RANGE_HAR_SUMMARY.csv": "a6585c53cdf344b29fee54ee54b4d4b6a882faad051381ddf660cb4289068b8e"
+  },
+  "validation": "passed: native trading dates, target t+1, exact 22-day mean, shared samples, zero targets retained, HAC sign",
+  "inference": "HAC normal approximation, lag 5; exploratory unadjusted comparisons; no post-test model selection",
+  "forecast_floor": "fixed epsilon for every model; RW on zero current range is explicitly epsilon-dependent",
+  "qlike_loglink_features": "1/5/22 averages of log(y+epsilon), same as log-OLS HAR; forecast E[y] directly",
+  "target": "pure daily Parkinson including zero; no return-square substitution"
+}
