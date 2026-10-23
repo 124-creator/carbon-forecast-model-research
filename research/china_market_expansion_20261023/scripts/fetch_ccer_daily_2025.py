@@ -44,7 +44,7 @@ def download_notice(row, output):
             content = " ".join(html.unescape(re.sub(r"<[^>]*>", " ", cleaned)).split())
             # Deliberately do not treat cumulative totals as daily turnover.
             patterns = {
-                "volume_text": r"(?:(?:核证自愿减排量|CCER|当日)\\s*成交量)\s*([\d,]+)\s*吨",
+                "volume_text": r"(?:(?:核证自愿减排量|CCER|当日)\s*成交量)\s*([\d,]+)\s*吨",
                 "amount_text": r"(?<!累计)成交额\s*([\d,]+(?:\.\d+)?)\s*元",
                 "mean_price_text": r"(?:成交均价)\s*([\d,]+(?:\.\d+)?)\s*元/吨",
             }
