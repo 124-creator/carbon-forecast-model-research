@@ -44,7 +44,7 @@ def verify(data, license_present=False):
 
     require(len(documents) == 15 == policy["candidate_document_count"], "policy_base_count")
     require(sum(d["download_status"] == "http_200" for d in documents) == 13, "policy_base_http200")
-    require(sum(d["download_status"] == "http_412" for d in documents) == 2, "policy_base_http412")
+    require(sum(d["download_status"] == "http_412_blocked" for d in documents) == 2, "policy_base_http412")
     require(all(d["point_in_time_model_eligible"] is False for d in documents), "policy_base_pit_false")
     require(len(extras) == 1 and extras[0]["http_status"] == 200, "policy_extra_one_http200")
     require(all(d["point_in_time_model_eligible"] is False for d in extras), "policy_extra_pit_false")
