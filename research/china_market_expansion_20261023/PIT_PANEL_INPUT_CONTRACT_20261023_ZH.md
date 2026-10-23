@@ -8,7 +8,9 @@
 2. **价格与金额**：`open, high, low, reported_mean, reported_close, quantity, turnover` 是不同字段。只有量额原单位和同一成交集合得到官方认证，才衍生 `transaction_vwap = turnover / quantity`；`reported_close` 永不默认等于它。
 3. **首次可得**：任何外生政策在对应预测原点前须有可复查的确切版本、首次公开时间和适用市场/配额年份；页面当前写的发布日期、签署日、生效日、履约截止日不能相互代替。
 
-## B. 观察状态与异常（互斥地存储，不删除）
+## B. 观察状态与并行异常标签（不删除）
+
+一个原始行可以同时具有交易值状态与一项或多项异常标签（如 `DUPLICATE_KEY` + `SCHEMA_CONFLICT`）；不强迫这些标签互斥，也不因其重叠而丢行。
 
 - `OBSERVED_POSITIVE`：来源记录真实可解析的正价格/成交量，仍不代表渠道资格已认证。
 - `REPORTED_ZERO`：来源字面为零；不能自动解释为该市场休市，且不计算零量的比值。
