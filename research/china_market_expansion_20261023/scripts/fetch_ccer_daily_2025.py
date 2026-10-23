@@ -44,7 +44,7 @@ def download_notice(row, output):
             content = " ".join(html.unescape(re.sub(r"<[^>]*>", " ", cleaned)).split())
             # Deliberately do not treat cumulative totals as daily turnover.
             patterns = {
-                "volume_text": r"(?:核证自愿减排量成交量|当日成交量)\s*([\d,]+)\s*吨",
+                "volume_text": r"(?:(?:核证自愿减排量|CCER|当日)\\s*成交量)\s*([\d,]+)\s*吨",
                 "amount_text": r"(?<!累计)成交额\s*([\d,]+(?:\.\d+)?)\s*元",
                 "mean_price_text": r"(?:成交均价)\s*([\d,]+(?:\.\d+)?)\s*元/吨",
             }
@@ -101,7 +101,7 @@ def main():
         "retrieved_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
         "year": args.year,
         "eligible_document_count": len(candidates),
-        "completed": len(records) == len(candidates),
+        "completed": len(records) == len(candidates) and all(x.get("http_status") == 200 for x in records),
         "download_success_count": sum(x.get("http_status") == 200 for x in records),
         "download_error_count": sum(x.get("http_status") != 200 for x in records),
         "numeric_daily_volume_count": sum(x.get("observed", {}).get("volume_text") is not None for x in records),
