@@ -118,10 +118,28 @@ def run():
            "evaluation":{"model_fits":0,"scored_origins":0,"future_targets":0,
                          "deleted_source_rows":0,"imputed_source_values":0,
                          "confirmation_2026":False}}
-    (dest/"audit.json").write_text(json.dumps(audit,ensure_ascii=False,indent=2),encoding="utf-8")
     if allrows:
         with (dest/"all_rows_local_only.csv").open("w",encoding="utf-8",newline="") as f:
             w=csv.DictWriter(f,fieldnames=list(allrows[0]));w.writeheader();w.writerows(allrows)
+        # A matching SHA-256 does not prove a canonical file contains every
+        # page: a previous archive recorded a SHA for a 6,026-row truncation
+        # although the 22 source pages contained 21,430 rows. Re-open and
+        # verify the complete output before issuing a successful audit.
+        with (dest/"all_rows_local_only.csv").open(encoding="utf-8",newline="") as verify:
+            reader=csv.DictReader(verify)
+            saved=list(reader)
+        if len(saved)!=len(allrows) or any(
+                any(saved[i][key]!=str(original[key]) for key in allrows[0])
+                for i,original in enumerate(allrows)):
+            raise RuntimeError("CANONICAL_CSV_INTEGRITY_FAILURE: full-row readback mismatch")
+        by_page=collections.Counter(int(record["source_page"]) for record in saved)
+        declared=collections.Counter({p["page"]:p["rows"] for p in pages if "rows" in p})
+        if by_page!=declared:
+            raise RuntimeError("CANONICAL_CSV_INTEGRITY_FAILURE: source-page count mismatch")
+        audit["local_csv_readback"]={"verified":True,"row_count":len(saved),
+               "sha256":hashlib.sha256((dest/"all_rows_local_only.csv").read_bytes()).hexdigest(),
+               "per_page_rows":dict(by_page)}
+    (dest/"audit.json").write_text(json.dumps(audit,ensure_ascii=False,indent=2),encoding="utf-8")
     print(json.dumps({"complete":audit["complete"],"rows":len(allrows),"markets":len(counter),
                       "duplicate_excess":audit["duplicate_market_date_instrument_excess"],
                       "error_count":len(errors)}),flush=True)
