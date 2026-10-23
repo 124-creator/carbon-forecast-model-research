@@ -47,7 +47,7 @@ class Tables(HTMLParser):
             self.level -= 1
 
 def dec(value):
-    if not re.fullmatch(r"[+-]?(?:[0-9]+(?:\.[0-9]+)?|\.[0-9]+)", value.replace(",", "")):
+    if not re.fullmatch(r"[+-]?(?:(?:[0-9]{1,3}(?:,[0-9]{3})+|[0-9]+)(?:\.[0-9]+)?|\.[0-9]+)", value):
         return None
     try:
         return Decimal(value.replace(",", ""))
@@ -67,7 +67,7 @@ def audit(raw):
     counts = collections.Counter()
     duplicate_keys = collections.Counter((x["trade_date"], x["product"], x["mode"]) for x in vals)
     flags = []
-    for x in vals:
+    for row_index, x in enumerate(vals, 1):
         if not re.fullmatch(r"\d{8}", x["trade_date"]):
             counts["invalid_date"] += 1
         volume = dec(x["volume_text"])
@@ -84,7 +84,7 @@ def audit(raw):
             ratio = amount / volume
             if abs(price - ratio) > max(Decimal("0.05"), Decimal("0.001") * abs(ratio)):
                 flags.append({"trade_date": x["trade_date"], "product": x["product"],
-                              "source_table_row_index": vals.index(x) + 1,
+                              "source_table_row_index": row_index,
                               "type": "daily_yield_price_vs_amount_over_volume"})
     return {
         "source": "https://www.hbggzyfwpt.cn/jyxx/tpfq/ggxx",
