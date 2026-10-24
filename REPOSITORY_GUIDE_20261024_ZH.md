@@ -47,7 +47,7 @@
 
 - 该 `main` 快照：共 **7,959 个已提交文件**（其中 `research/` **7,772 个**），`research/` 有 **64 个一级子目录**，根目录 **103 个文件**，含大量 `SCRIPTS_*.py` 历史可执行脚本。
 - PR 总数 **32**；**2 merged（#14、#15），30 open（29 Draft、1 非 Draft）**。#16—#31 是连续以前一个研究分支为 base 的**链式 PR**，#32 则独立面向 `main` 的中国数据 Draft；**不进行批量合并/关闭**。
-- 目录清单：[64 个实验目录逐项索引](docs/RESEARCH_DIRECTORY_INDEX_20261024_ZH.md)。PR 精确 base/head：[PR 状态图](docs/PR_BRANCH_MAP_20261024_ZH.md)。新提交规则：[维护与归档约束](docs/REPOSITORY_MAINTENANCE_20261024_ZH.md)。
+- 目录清单：[64 个实验目录逐项索引](docs/RESEARCH_DIRECTORY_INDEX_20261024_ZH.md)；按时间线与研究线的结果归类总表：[全部实验总整理](docs/EXPERIMENT_OVERVIEW_20261024_ZH.md)。PR 精确 base/head：[PR 状态图](docs/PR_BRANCH_MAP_20261024_ZH.md)。新提交规则：[维护与归档约束](docs/REPOSITORY_MAINTENANCE_20261024_ZH.md)。
 - `README.md` 中较早入口、手稿构想、历史拟合介绍仅为**时间顺序史料**；后来的 `START_HERE_PRO_20261022_ZH.md` 与冻结判定优先。2026-10-22 结项不是 2026-10-21 之前所有不同目标研究的数值总表。
 
 ## 5 数据尚需什么，何时停止
